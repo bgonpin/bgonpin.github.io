@@ -5,815 +5,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benito González Piñeiro - Especialista en Sistemas e IA</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <!-- Navegación -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home">BGP</a>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">Sobre Mí</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#experience" class="nav-link">Experiencia</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#certifications" class="nav-link">Certificaciones</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#courses" class="nav-link">Cursos</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#skills" class="nav-link">Habilidades</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contacto</a>
-                </li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">BGP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">Sobre Mí</a></li>
+                    <li class="nav-item"><a class="nav-link" href="experience.html">Experiencia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="studies.html">Estudios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="certifications.html">Certificaciones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Cursos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="skills.html">Habilidades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contacto</a></li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Sección Hero -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">Benito González Piñeiro</h1>
-                <h2 class="hero-subtitle">Especialista en Sistemas e Inteligencia Artificial</h2>
-                <p class="hero-description">
-                    Profesional serio y responsable con experiencia en sistemas microinformáticos, ciberseguridad e IA
-                </p>
-                <div class="hero-buttons">
-                    <a href="#experience" class="btn btn-primary">Ver Experiencia</a>
-                    <a href="#contact" class="btn btn-secondary">Contactar</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="profile-card">
-                    <div class="profile-img"></div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
-
-    <!-- Sección Sobre Mí -->
-    <section id="about" class="about">
+    <!-- Hero Section - Simplified -->
+    <section class="hero d-flex align-items-center" style="margin-top: 56px; min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
         <div class="container">
-            <h2 class="section-title">Sobre Mí</h2>
-            <div class="about-content">
-                <div class="about-main">
-                    <div class="about-intro">
-                        <div class="intro-card">
-                            <div class="intro-icon">
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                            <h3>Perfil Profesional</h3>
-                            <p>
-                                Soy una persona seria, responsable y con capacidad tanto para realizar cualquier tipo de
-                                tarea
-                                en equipo como de forma individual. Con alta resistencia al estrés y a la presión.
-                            </p>
-                        </div>
-
-                        <div class="intro-card">
-                            <div class="intro-icon">
-                                <i class="fas fa-briefcase"></i>
-                            </div>
-                            <h3>Trayectoria</h3>
-                            <p>
-                                Mi trayectoria profesional incluye más de 20 años como Militar Profesional en el
-                                Ministerio de
-                                Defensa, seguido de experiencia en el sector privado.
-                            </p>
-                        </div>
-
-                        <div class="intro-card">
-                            <div class="intro-icon">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <h3>Especialización Actual</h3>
-                            <p>
-                                Actualmente me especializo en sistemas microinformáticos, ciberseguridad e inteligencia
-                                artificial, con múltiples certificaciones profesionales.
-                            </p>
-                        </div>
+            <div class="row justify-content-center text-center text-white">
+                <div class="col-lg-8">
+                    <!-- Profile Image -->
+                    <div class="profile-img bg-white rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center shadow-lg" 
+                         style="width: 120px; height: 120px;">
+                        <i class="fas fa-user text-primary" style="font-size: 3rem;"></i>
                     </div>
-
-                    <div class="about-skills-highlight">
-                        <h3>Aptitudes Clave</h3>
-                        <div class="skills-list">
-                            <div class="skill-badge">
-                                <i class="fas fa-users"></i>
-                                <span>Trabajo en Equipo</span>
-                            </div>
-                            <div class="skill-badge">
-                                <i class="fas fa-tasks"></i>
-                                <span>Gestión</span>
-                            </div>
-                            <div class="skill-badge">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>Resilencia</span>
-                            </div>
-                            <div class="skill-badge">
-                                <i class="fas fa-clock"></i>
-                                <span>Resistencia al Estrés</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stats">
-                    <div class="stat">
-                        <div class="stat-icon">
-                            <i class="fas fa-certificate"></i>
-                        </div>
-                        <h3>15+</h3>
-                        <p>Certificaciones</p>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-icon">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <h3>25+</h3>
-                        <p>Años de Experiencia</p>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3>6+</h3>
-                        <p>Cursos Especializados</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Sección Experiencia -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <h2 class="section-title">Experiencia Profesional</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>ASM (Administrador de Sistemas Microinformáticos)</h3>
-                        <h4>Grupo OMBUDS</h4>
-                        <span class="timeline-date">Diciembre 2016 - Agosto 2018</span>
-                        <p>Administración y mantenimiento de sistemas microinformáticos, soporte técnico
-                            y gestión de infraestructura IT empresarial.</p>
-                        <div class="timeline-tags">
-                            <span class="tag">Sistemas Microinformáticos</span>
-                            <span class="tag">Soporte Técnico</span>
-                            <span class="tag">Administración</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Militar Profesional</h3>
-                        <h4>Ministerio de Defensa España</h4>
-                        <span class="timeline-date">Junio 1994 - Mayo 2016</span>
-                        <p>Más de 20 años de servicio militar profesional, desarrollando habilidades de liderazgo,
-                            trabajo en equipo, resistencia al estrés y capacidad de adaptación en entornos exigentes.
-                        </p>
-                        <div class="timeline-tags">
-                            <span class="tag">Liderazgo</span>
-                            <span class="tag">Trabajo en Equipo</span>
-                            <span class="tag">Disciplina</span>
-                            <span class="tag">Gestión</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Formación Académica</h3>
-                        <h4>CEIP Universidad Laboral</h4>
-                        <span class="timeline-date">Septiembre 1985 - Junio 1989</span>
-                        <p>Curso de Orientación Universitaria (COU), completando la formación preuniversitaria
-                            que sentó las bases para el desarrollo profesional posterior.</p>
-                        <div class="timeline-tags">
-                            <span class="tag">COU</span>
-                            <span class="tag">Formación Base</span>
-                            <span class="tag">Educación</span>
-                        </div>
+                    
+                    <!-- Name and Title -->
+                    <h1 class="display-4 fw-bold mb-3">Benito González Piñeiro</h1>
+                    <h2 class="h5 mb-4 text-light">Especialista en Sistemas e Inteligencia Artificial</h2>
+                    
+                    <!-- Brief Description -->
+                    <p class="lead mb-4">
+                        Profesional con más de 23 años de experiencia en sistemas microinformáticos, ciberseguridad e IA
+                    </p>
+                    
+                    <!-- Location -->
+                    <p class="mb-4">
+                        <i class="fas fa-map-marker-alt me-2"></i>Valladolid, España
+                    </p>
+                    
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="about.html" class="btn btn-light btn-lg">
+                            <i class="fas fa-user me-2"></i>Sobre Mí
+                        </a>
+                        <a href="experience.html" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-briefcase me-2"></i>Experiencia
+                        </a>
+                        <a href="contact.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-envelope me-2"></i>Contacto
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Certificaciones -->
-    <section id="certifications" class="projects">
+    <!-- Bootstrap Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
         <div class="container">
-            <h2 class="section-title">Certificaciones y Licencias</h2>
-            <div class="projects-grid">
-                <!-- 2025 Certificaciones -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Certificado Excel</h3>
-                        <p>Santander Open Academy - ID: OA-2025-08050015347272</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Agosto 2025</span>
-                            <span class="tech-tag">Excel</span>
-                            <span class="tech-tag">Santander</span>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-md-6 text-md-start mb-2 mb-md-0">
+                    <p class="mb-0">&copy; 2025 Benito González Piñeiro. Todos los derechos reservados.</p>
                 </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Python con IA</h3>
-                        <p>Cursor con Python: desarrollo inteligente con IA - Santander Open Academy</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Agosto 2025</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">IA</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Python</h3>
-                        <p>Santander Open Academy - ID: OA-2025-08100015637074</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Agosto 2025</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Santander</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Sistemas Microinformáticos</h3>
-                        <p>Certificado de Profesionalidad Nivel 2 (IFCT0209) - Ministerio de Educación</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Julio 2025</span>
-                            <span class="tech-tag">Nivel 2</span>
-                            <span class="tech-tag">Hardware</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Montaje y Reparación</h3>
-                        <p>Certificado de Profesionalidad Nivel 2 (IFCT0309) - Ministerio de Educación</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Julio 2024</span>
-                            <span class="tech-tag">Nivel 2</span>
-                            <span class="tech-tag">Hardware</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2024 Certificaciones -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Power BI Visualizaciones</h3>
-                        <p>Creación de visualizaciones y medidas en Power BI - CyL Digital</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Septiembre 2024</span>
-                            <span class="tech-tag">Power BI</span>
-                            <span class="tech-tag">Analytics</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Power BI Modelado</h3>
-                        <p>Modelado de datos con Power BI y primeros pasos para la creación de un dashboard - CyL
-                            Digital</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Septiembre 2024</span>
-                            <span class="tech-tag">Power BI</span>
-                            <span class="tech-tag">Modelado</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Fake News</h3>
-                        <p>¿Qué son y cómo funcionan las fake news? La verdad de las mentiras (Webinar) - CyL Digital
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Marzo 2024</span>
-                            <span class="tech-tag">Webinar</span>
-                            <span class="tech-tag">Desinformación</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2023 Certificaciones -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>MongoDB Data Modeling</h3>
-                        <p>MongoDB Data Modeling Intro</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Diciembre 2023</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">NoSQL</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>MongoDB CRUD Operations</h3>
-                        <p>MongoDB CRUD Operations: Insert and Find Documents</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Noviembre 2023</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">CRUD</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>MongoDB Document Model</h3>
-                        <p>MongoDB and the Document Model</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Noviembre 2023</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">Document Model</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Cisco Learn-A-Thon</h3>
-                        <p>Networking Academy Learn-A-Thon 2023</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Noviembre 2023</span>
-                            <span class="tech-tag">Cisco</span>
-                            <span class="tech-tag">Networking</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Ciberseguridad INCIBE</h3>
-                        <p>Curso básico técnico de ciberseguridad II Convocatoria - INCIBE</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Noviembre 2023</span>
-                            <span class="tech-tag">INCIBE</span>
-                            <span class="tech-tag">Ciberseguridad</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Introduction to Cybersecurity</h3>
-                        <p>Introduction to Cybersecurity - Cisco</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Octubre 2023</span>
-                            <span class="tech-tag">Cisco</span>
-                            <span class="tech-tag">Ciberseguridad</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2022 Certificaciones -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-certificate"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Seguridad Informática</h3>
-                        <p>Certificado de Profesionalidad Nivel 3 (IFCT0109) - Ministerio de Educación</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Junio 2022</span>
-                            <span class="tech-tag">Nivel 3</span>
-                            <span class="tech-tag">Ciberseguridad</span>
-                        </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-links">
+                        <a href="mailto:bgonpin@gmail.com" class="text-white me-3" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/benitogonzálezpiñeiro" target="_blank" class="text-white me-3" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/bgonpin" target="_blank" class="text-white" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Sección Cursos -->
-    <section id="courses" class="projects">
-        <div class="container">
-            <h2 class="section-title">Cursos Especializados</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-graduation-cap"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>UC2493_3</h3>
-                        <p>Entrenar modelos en sistemas de Inteligencia Artificial basados en aprendizaje automático</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">IA</span>
-                            <span class="tech-tag">Machine Learning</span>
-                            <span class="tech-tag">Nivel 3</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-graduation-cap"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>UC0486_3</h3>
-                        <p>ASEGURAR EQUIPOS INFORMATICOS: REVOLUCION DIGITAL 2.0 CIBERSEGURIDAD</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Ciberseguridad</span>
-                            <span class="tech-tag">Equipos Informáticos</span>
-                            <span class="tech-tag">Nivel 3</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-graduation-cap"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>IFCT155PO</h3>
-                        <p>Introducción a la Inteligencia Artificial y los algoritmos</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">IA</span>
-                            <span class="tech-tag">Algoritmos</span>
-                            <span class="tech-tag">Introducción</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-graduation-cap"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>IFCT128PO</h3>
-                        <p>BIG DATA - Análisis y procesamiento de grandes volúmenes de datos</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Big Data</span>
-                            <span class="tech-tag">Análisis de Datos</span>
-                            <span class="tech-tag">Procesamiento</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-graduation-cap"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>IFCT050PO</h3>
-                        <p>Gestión de la seguridad informática en la empresa</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Seguridad</span>
-                            <span class="tech-tag">Gestión</span>
-                            <span class="tech-tag">Empresa</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-graduation-cap"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>IFCT101PO</h3>
-                        <p>Planificación de la Seguridad en la Empresa</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Planificación</span>
-                            <span class="tech-tag">Seguridad</span>
-                            <span class="tech-tag">Estrategia</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Habilidades -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Habilidades Técnicas</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Sistemas & Hardware</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Sistemas Microinformáticos</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="95"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Montaje y Reparación</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="90"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Soporte Técnico</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="92"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Excel Avanzado</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="88"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Programación & IA</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Python</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Inteligencia Artificial</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="80"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Machine Learning</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="75"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Big Data</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="70"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Base de Datos & Analytics</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">MongoDB</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Power BI</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="88"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Modelado de Datos</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="82"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Visualización de Datos</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Ciberseguridad & Redes</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Seguridad Informática</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="90"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Cisco Networking</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="80"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Gestión de Seguridad</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Planificación Seguridad</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="82"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Contacto -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Contacto</h2>
-            <div class="contact-content">
-                <div class="contact-info-centered"></div>
-                <h3>¡Hablemos!</h3>
-                <p>Estoy siempre abierto a nuevas oportunidades y proyectos interesantes.
-                    No dudes en contactarme si quieres colaborar o simplemente charlar sobre tecnología.</p>
-
-                <div class="contact-items">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>bgonpin@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>47012 - Valladolid, España</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-user"></i>
-                        <span>Benito (Nitisimo) González Piñeiro</span>
-                    </div>
-                </div>
-
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/benitogonzálezpiñeiro" target="_blank" class="social-link"><i
-                            class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/bgonpin" target="_blank" class="social-link"><i
-                            class="fab fa-github"></i></a>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Benito González Piñeiro. Todos los derechos reservados.</p>
         </div>
     </footer>
 
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 
 </html>
+

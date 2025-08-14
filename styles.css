@@ -224,7 +224,7 @@ body {
     background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(177, 35, 35, 0.3);
     border: 4px solid rgba(148, 163, 184, 0.3);
 }
 

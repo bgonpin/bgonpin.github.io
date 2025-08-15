@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticación F2B con Google Authenticator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #1a1a1a;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-left: 3px solid #007bff;
+            color: #666;
+            page-break-inside: avoid;
+            font-family: monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 1.6em;
+            max-width: 100%;
+            overflow: auto;
+            padding: 1em 1.5em;
+            display: block;
+            word-wrap: break-word;
+        }
+        code {
+            font-family: monospace;
+            background-color: #e9e9e9;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+        ul {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Autenticación F2B en Linux con Google Authenticator</h1>
+    <p>La autenticación de doble factor (2FA) con Google Authenticator y Fail2ban en Linux es una combinación de seguridad muy potente. Fail2ban protege contra ataques de fuerza bruta, mientras que Google Authenticator agrega una capa de seguridad adicional que requiere un código de un solo uso.</p>
+
+    <h2>¿Cómo funcionan en conjunto?</h2>
+    <ul>
+        <li><strong>Google Authenticator (2FA):</strong> Es un módulo PAM (Pluggable Authentication Module) que, al ser configurado para SSH, solicita un código de un solo uso (TOTP - Time-based One-Time Password) además de la contraseña.</li>
+        <li><strong>Fail2ban:</strong> Es una herramienta que monitorea los archivos de registro (logs) para detectar intentos de acceso fallidos. Cuando se detectan intentos de fuerza bruta, Fail2ban bloquea la dirección IP del atacante en el cortafuegos.</li>
+    </ul>
+    <p>La combinación de ambos es ideal: Fail2ban se encarga de los ataques a gran escala, y Google Authenticator asegura que, incluso si un atacante consigue una contraseña, no pueda acceder sin el código de 2FA.</p>
+
+    <h2>Guía de configuración</h2>
+    <p>La configuración se realiza en dos partes principales: primero, la configuración de Google Authenticator para 2FA y, segundo, la configuración de Fail2ban.</p>
+
+    <h3>1. Configuración de Google Authenticator (2FA) para SSH</h3>
+
+    <h4>Paso 1: Instalar el módulo PAM</h4>
+    <p>En sistemas basados en Debian/Ubuntu:</p>
+    <pre><code>sudo apt update
+sudo apt install libpam-google-authenticator</code></pre>
+    <p>En sistemas basados en RHEL/CentOS/Fedora:</p>
+    <pre><code>sudo dnf install google-authenticator</code></pre>
+
+    <h4>Paso 2: Configurar el usuario</h4>
+    <p>Ejecuta el siguiente comando como el usuario para el que quieres habilitar la 2FA:</p>
+    <pre><code>google-authenticator</code></pre>
+    <p>Responde "y" a las preguntas. Se te mostrará un código QR y una "clave secreta". <strong>Escanéalo con tu aplicación de Google Authenticator</strong> y guarda los códigos de emergencia en un lugar seguro.</p>
+
+    <h4>Paso 3: Modificar la configuración de PAM para SSH</h4>
+    <p>Edita el archivo de configuración de PAM para SSH:</p>
+    <pre><code>sudo nano /etc/pam.d/sshd</code></pre>
+    <p>Añade la siguiente línea al principio del archivo:</p>
+    <pre><code>auth required pam_google_authenticator.so</code></pre>
+
+    <h4>Paso 4: Modificar la configuración de SSH</h4>
+    <p>Edita el archivo de configuración del demonio SSH:</p>
+    <pre><code>sudo nano /etc/ssh/sshd_config</code></pre>
+    <p>Busca y asegúrate de que las siguientes líneas estén configuradas de esta manera:</p>
+    <pre><code>ChallengeResponseAuthentication yes
+UsePAM yes</code></pre>
+    <p>O, en versiones recientes:</p>
+    <pre><code>KbdInteractiveAuthentication yes
+UsePAM yes</code></pre>
+    <p>Guarda los cambios y reinicia el servicio:</p>
+    <pre><code>sudo systemctl restart sshd</code></pre>
+
+    <h3>2. Configuración de Fail2ban</h3>
+
+    <h4>Paso 1: Instalar Fail2ban</h4>
+    <p>En sistemas basados en Debian/Ubuntu:</p>
+    <pre><code>sudo apt install fail2ban</code></pre>
+    <p>En sistemas basados en RHEL/CentOS/Fedora:</p>
+    <pre><code>sudo dnf install fail2ban</code></pre>
+
+    <h4>Paso 2: Configurar un archivo local</h4>
+    <pre><code>sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local</code></pre>
+
+    <h4>Paso 3: Editar el archivo de configuración de SSH</h4>
+    <p>Abre el archivo <code>jail.local</code>:</p>
+    <pre><code>sudo nano /etc/fail2ban/jail.local</code></pre>
+    <p>Busca la sección <code>[sshd]</code> y asegúrate de que esté configurada así:</p>
+    <pre><code>[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+bantime = 3600
+findtime = 600</code></pre>
+
+    <h4>Paso 4: Reiniciar el servicio Fail2ban</h4>
+    <pre><code>sudo systemctl restart fail2ban</code></pre>
+
+    <h4>Paso 5: Verificar el estado</h4>
+    <pre><code>sudo fail2ban-client status sshd</code></pre>
+    <p>Con esto, tendrás un sistema SSH mucho más seguro, combinando la protección contra fuerza bruta de Fail2ban con la autenticación de doble factor de Google Authenticator.</p>
+
+</body>
+</html>

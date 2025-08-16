@@ -11,20 +11,20 @@
             margin: 0 auto;
             max-width: 800px;
             padding: 20px;
-            color: #333;
-            background-color: #f9f9f9;
+            color: #e0e0e0;
+            background-color: #121212;
         }
         h1, h2, h3 {
-            color: #1a1a1a;
-            border-bottom: 2px solid #ddd;
+            color: #f0f0f0;
+            border-bottom: 2px solid #444;
             padding-bottom: 5px;
             margin-top: 30px;
         }
         pre {
-            background-color: #f4f4f4;
-            border: 1px solid #ddd;
-            border-left: 3px solid #007bff;
-            color: #666;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-left: 3px solid #42a5f5;
+            color: #d4d4d4;
             page-break-inside: avoid;
             font-family: monospace;
             font-size: 15px;
@@ -38,15 +38,37 @@
         }
         code {
             font-family: monospace;
-            background-color: #e9e9e9;
+            background-color: #2d2d2d;
+            color: #d4d4d4;
             padding: 2px 4px;
             border-radius: 4px;
         }
         p {
             margin-bottom: 1em;
+            color: #c0c0c0;
         }
         ul {
             padding-left: 20px;
+        }
+        ul li {
+            color: #c0c0c0;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            text-align: center;
+            color: #888;
+        }
+        .footer-link {
+            color: #42a5f5;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .footer-link:hover {
+            color: #64b5f6;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -127,6 +149,10 @@ findtime = 600</code></pre>
     <h4>Paso 5: Verificar el estado</h4>
     <pre><code>sudo fail2ban-client status sshd</code></pre>
     <p>Con esto, tendrás un sistema SSH mucho más seguro, combinando la protección contra fuerza bruta de Fail2ban con la autenticación de doble factor de Google Authenticator.</p>
+
+    <footer>
+        <p>Volver a <a href="../pildoras/pildoras.html" class="footer-link">píldoras</a>.</p>
+    </footer>
 
 </body>
 </html>

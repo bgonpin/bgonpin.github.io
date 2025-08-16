@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tres consejos para identificar archivos PDF maliciosos</title>
+  <style>
+    :root { --bg:#0f172a; --fg:#e5e7eb; --muted:#94a3b8; --accent:#22d3ee; }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.6}
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:920px;margin:0 auto;padding:40px 20px}
+    header{margin-bottom:24px}
+    h1{font-size:clamp(28px, 4vw, 40px);line-height:1.2;margin:0 0 8px 0}
+    h2{font-size:clamp(22px, 3vw, 28px);margin-top:32px}
+    p.lead{color:var(--muted);font-size:1.1rem;margin-top:0}
+    .card{background:#111827;padding:24px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    ul,ol{padding-left:22px}
+    footer{margin-top:40px;color:var(--muted);font-size:.9rem}
+    .badge{display:inline-block;background:#0ea5e9;color:#002233;padding:4px 10px;border-radius:999px;font-weight:700;font-size:.75rem;letter-spacing:.02em}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:8px}
+    .tip{background:#0b1220;border:1px solid #1f2937;border-radius:12px;padding:16px}
+    code{kbd,code}{background:#0b1220;padding:2px 6px;border-radius:6px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Seguridad</span>
+      <h1>Tres consejos para identificar archivos PDF maliciosos y proteger tu equipo</h1>
+      <p class="lead">Guía práctica basada en una nota publicada por Infobae el 15 de agosto de 2025 sobre cómo reconocer y evitar PDFs peligrosos.</p>
+    </header>
+
+    <main class="card">
+      <p>
+        Un archivo PDF, a primera vista inofensivo, puede ser un vehículo peligroso si contiene código oculto, comandos del sistema o elementos incrustados. 
+        Muchos lectores y navegadores permiten ejecutar JavaScript dentro del documento, algo que actores maliciosos explotan para instalar malware o robar datos.
+      </p>
+
+      <h2>1) Verifica siempre el origen</h2>
+      <ul>
+        <li>Abre o descarga el PDF únicamente si proviene de una fuente confiable.</li>
+        <li>Desconfía de documentos enviados por remitentes desconocidos o enlazados desde correos, mensajería o redes sociales.</li>
+        <li>Evita hacer clic en enlaces acortados o que no muestren claramente el dominio de destino.</li>
+      </ul>
+
+      <h2>2) Analiza el archivo antes de abrirlo</h2>
+      <ul>
+        <li>Escanéalo con tu antivirus actualizado.</li>
+        <li>Apóyate en servicios en línea de reputación (por ejemplo, plataformas de análisis de archivos) para detectar código malicioso.</li>
+        <li>Si es posible, visualízalo primero en un entorno aislado (sandbox) o con el visor integrado del navegador.</li>
+      </ul>
+
+      <h2>3) Desconfía de señales inusuales</h2>
+      <ul>
+        <li>El PDF solicita activar JavaScript, permisos especiales o la descarga de contenido adicional.</li>
+        <li>Tiene un tamaño inusualmente grande, un nombre extraño o extensiones dobles (p. ej., <code>documento.pdf.exe</code>).</li>
+        <li>Incluye códigos QR o enlaces que dirigen a páginas que piden credenciales.</li>
+      </ul>
+
+      <h2>Riesgos potenciales</h2>
+      <div class="grid">
+        <div class="tip">
+          <strong>Infección del sistema</strong>
+          <p>Descarga de troyanos, ransomware u otros tipos de malware.</p>
+        </div>
+        <div class="tip">
+          <strong>Robo de información</strong>
+          <p>Exfiltración de contraseñas, datos bancarios, fotos o documentos.</p>
+        </div>
+        <div class="tip">
+          <strong>Control remoto</strong>
+          <p>El atacante podría tomar control total o parcial del dispositivo.</p>
+        </div>
+        <div class="tip">
+          <strong>Daño o pérdida de datos</strong>
+          <p>Archivos corruptos o cifrados para solicitar rescate.</p>
+        </div>
+      </div>
+
+      <h2>Buenas prácticas adicionales</h2>
+      <ul>
+        <li>Mantén actualizado el sistema operativo, el lector de PDF y las soluciones de seguridad.</li>
+        <li>Desactiva JavaScript en el lector de PDFs salvo necesidad justificada.</li>
+        <li>Activa la visualización de extensiones de archivo en el sistema para detectar engaños.</li>
+        <li>Ante sospechas, aísla el archivo, desconéctate de Internet y realiza un análisis completo.</li>
+      </ul>
+
+      <h2>Conclusión</h2>
+      <p>
+        Los PDF maliciosos representan una amenaza real por su uso masivo y apariencia confiable. Verificar el origen, analizar el archivo y detectar señales
+        sospechosas reduce significativamente el riesgo. Incorpora estas prácticas a tu rutina y mantén tu equipo y tus datos a salvo.
+      </p>
+
+      <hr style="border:none;border-top:1px solid #1f2937;margin:28px 0">
+      <p style="font-size:.95rem;color:#94a3b8;">
+        Fuente base: Nota informativa de Infobae (15/08/2025). Este artículo es una síntesis y reorganización con fines educativos.
+      </p>
+    </main>
+
+    <footer>
+      <p>© 2025 • Guía rápida de ciberseguridad • Licencia CC BY-NC 4.0</p>
+      <p><a href="../pildoras/pildoras.html">Volver a todas las píldoras</a></p>
+    </footer>
+  </div>
+</body>
+</html>

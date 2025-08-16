@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>auditd: Guía para Estudiantes de Ciberseguridad</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e6e6fa;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #4fc3f7, #29b6f6, #03a9f4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #b0bec5;
+            font-weight: 300;
+        }
+        
+        .section {
+            background: rgba(0, 0, 0, 0.2);
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #4fc3f7;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            font-size: 2.2em;
+            color: #4fc3f7;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            color: #81c784;
+            margin: 25px 0 15px 0;
+            border-bottom: 2px solid #81c784;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            color: #f0f6fc;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: "Terminal";
+            position: absolute;
+            top: -1px;
+            right: 10px;
+            background: #21262d;
+            color: #7d8590;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .command {
+            color: #79c0ff;
+        }
+        
+        .comment {
+            color: #8b949e;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, rgba(79, 195, 247, 0.2) 0%, rgba(129, 199, 132, 0.2) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        ul {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+            position: relative;
+        }
+        
+        li::marker {
+            color: #4fc3f7;
+        }
+        
+        .warning {
+            background: rgba(255, 152, 0, 0.1);
+            border: 1px solid #ff9800;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #ffcc02;
+        }
+        
+        .warning::before {
+            content: "⚠️ ";
+            font-size: 1.2em;
+        }
+        
+        .info {
+            background: rgba(33, 150, 243, 0.1);
+            border: 1px solid #2196f3;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #90caf9;
+        }
+        
+        .info::before {
+            content: "ℹ️ ";
+            font-size: 1.2em;
+        }
+        
+        .icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            display: inline-block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        th {
+            background: rgba(79, 195, 247, 0.2);
+            color: #4fc3f7;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>auditd</h1>
+            <div class="subtitle">Sistema de Auditoría del Kernel Linux para Ciberseguridad</div>
+        </header>
+
+        <div class="section">
+            <h2>🔍 ¿Qué es auditd?</h2>
+            <p><span class="highlight">auditd</span> es el demonio (daemon) del sistema de auditoría del kernel Linux que proporciona capacidades de registro y monitoreo de eventos del sistema en tiempo real. Forma parte del <strong>Linux Audit Framework</strong>, un conjunto de herramientas diseñadas para ayudar a los administradores de sistemas a crear un rastro de auditoría de prácticamente todas las acciones realizadas en el sistema.</p>
+            
+            <p>Este sistema permite rastrear accesos a archivos, ejecución de comandos, cambios en configuraciones del sistema, intentos de autenticación, modificaciones de permisos, y muchos otros eventos críticos para la seguridad. auditd opera a nivel del kernel, lo que significa que puede capturar eventos que ocurren incluso antes de que las aplicaciones de espacio de usuario puedan intervenir.</p>
+
+            <div class="info">
+                auditd es fundamental para cumplir con estándares de seguridad como PCI DSS, HIPAA, SOX, y requisitos de certificación como Common Criteria.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏢 Dónde se emplea auditd</h2>
+            
+            <h3>Entornos Empresariales</h3>
+            <p>auditd es ampliamente utilizado en:</p>
+            <ul>
+                <li><strong>Centros de datos corporativos</strong> - Para monitorear servidores críticos y cumplir con políticas de seguridad internas</li>
+                <li><strong>Instituciones financieras</strong> - Cumplimiento de regulaciones PCI DSS y auditorías de transacciones</li>
+                <li><strong>Organizaciones sanitarias</strong> - Cumplimiento de HIPAA para proteger información médica sensible</li>
+                <li><strong>Agencias gubernamentales</strong> - Monitoreo de sistemas clasificados y cumplimiento de estándares como FISMA</li>
+                <li><strong>Proveedores de servicios cloud</strong> - Auditoría de accesos y actividades en infraestructura compartida</li>
+            </ul>
+
+            <h3>Casos de Uso Específicos</h3>
+            <ul>
+                <li><strong>Detección de intrusiones</strong> - Identificar actividades sospechosas o no autorizadas</li>
+                <li><strong>Análisis forense</strong> - Reconstruir secuencias de eventos durante incidentes de seguridad</li>
+                <li><strong>Monitoreo de privilegios</strong> - Rastrear uso de comandos sudo y cambios de usuario</li>
+                <li><strong>Auditoría de archivos sensibles</strong> - Monitorear accesos a datos confidenciales</li>
+                <li><strong>Cumplimiento normativo</strong> - Generar informes para auditorías externas</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>⚙️ Configuración de auditd</h2>
+
+            <h3>Instalación</h3>
+            <div class="code-block">
+<span class="comment"># En sistemas basados en Red Hat/CentOS</span>
+<span class="command">sudo yum install audit</span>
+
+<span class="comment"># En sistemas basados en Debian/Ubuntu</span>
+<span class="command">sudo apt-get install auditd audispd-plugins</span>
+
+<span class="comment"># Iniciar y habilitar el servicio</span>
+<span class="command">sudo systemctl start auditd</span>
+<span class="command">sudo systemctl enable auditd</span>
+            </div>
+
+            <h3>Archivos de Configuración Principales</h3>
+            <table>
+                <tr>
+                    <th>Archivo</th>
+                    <th>Propósito</th>
+                    <th>Ubicación</th>
+                </tr>
+                <tr>
+                    <td><code>/etc/audit/auditd.conf</code></td>
+                    <td>Configuración del demonio auditd</td>
+                    <td>Parámetros de logging y almacenamiento</td>
+                </tr>
+                <tr>
+                    <td><code>/etc/audit/audit.rules</code></td>
+                    <td>Reglas de auditoría permanentes</td>
+                    <td>Define qué eventos auditar</td>
+                </tr>
+                <tr>
+                    <td><code>/etc/audit/rules.d/</code></td>
+                    <td>Directorio de reglas modulares</td>
+                    <td>Organización de reglas por categorías</td>
+                </tr>
+            </table>
+
+            <h3>Configuración Básica del Demonio</h3>
+            <div class="code-block">
+<span class="comment"># Ejemplo de /etc/audit/auditd.conf</span>
+log_file = /var/log/audit/audit.log
+log_format = RAW
+log_group = root
+priority_boost = 4
+flush = INCREMENTAL_ASYNC
+freq = 50
+num_logs = 5
+max_log_file = 50
+max_log_file_action = ROTATE
+space_left = 75
+space_left_action = SYSLOG
+admin_space_left = 50
+admin_space_left_action = SUSPEND
+            </div>
+
+            <h3>Reglas de Auditoría Esenciales</h3>
+            <div class="code-block">
+<span class="comment"># Reglas básicas de seguridad en /etc/audit/rules.d/audit.rules</span>
+
+<span class="comment"># Auditar cambios en archivos de autenticación</span>
+<span class="command">-w /etc/passwd -p wa -k identity</span>
+<span class="command">-w /etc/group -p wa -k identity</span>
+<span class="command">-w /etc/shadow -p wa -k identity</span>
+<span class="command">-w /etc/sudoers -p wa -k identity</span>
+
+<span class="comment"># Auditar intentos de login</span>
+<span class="command">-w /var/log/lastlog -p wa -k logins</span>
+<span class="command">-w /var/log/faillog -p wa -k logins</span>
+
+<span class="comment"># Auditar cambios en configuración de red</span>
+<span class="command">-w /etc/hosts -p wa -k network</span>
+<span class="command">-w /etc/network/ -p wa -k network</span>
+
+<span class="comment"># Auditar syscalls críticos</span>
+<span class="command">-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change</span>
+<span class="command">-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -k perm_mod</span>
+<span class="command">-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -k delete</span>
+
+<span class="comment"># Auditar ejecutables privilegiados</span>
+<span class="command">-w /bin/su -p x -k privileged</span>
+<span class="command">-w /usr/bin/sudo -p x -k privileged</span>
+<span class="command">-w /usr/bin/ssh -p x -k privileged</span>
+            </div>
+
+            <h3>Comandos de Gestión</h3>
+            <div class="code-block">
+<span class="comment"># Ver estado del sistema de auditoría</span>
+<span class="command">sudo auditctl -s</span>
+
+<span class="comment"># Listar reglas activas</span>
+<span class="command">sudo auditctl -l</span>
+
+<span class="comment"># Agregar regla temporal</span>
+<span class="command">sudo auditctl -w /etc/hosts -p wa -k network-config</span>
+
+<span class="comment"># Buscar eventos en logs</span>
+<span class="command">sudo ausearch -k identity</span>
+<span class="command">sudo ausearch -m USER_LOGIN</span>
+
+<span class="comment"># Generar reportes</span>
+<span class="command">sudo aureport --auth</span>
+<span class="command">sudo aureport --file</span>
+            </div>
+
+            <div class="warning">
+                Las reglas de auditd pueden impactar el rendimiento del sistema. Es importante equilibrar la seguridad con el rendimiento, especialmente en sistemas de alta carga.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔗 Integración con SIEM</h2>
+            
+            <p>La integración de auditd con un Sistema de Gestión de Eventos e Información de Seguridad (SIEM) es crucial para el análisis centralizado, correlación de eventos y respuesta automatizada a incidentes.</p>
+
+            <h3>Métodos de Integración</h3>
+
+            <h3>1. Envío directo via Syslog</h3>
+            <div class="code-block">
+<span class="comment"># Configurar audisp-syslog en /etc/audisp/plugins.d/syslog.conf</span>
+active = yes
+direction = out
+path = /sbin/audisp-syslog
+type = always
+format = string
+
+<span class="comment"># Configuración en /etc/rsyslog.conf</span>
+<span class="command">*.* @@siem-server.empresa.com:514</span>
+
+<span class="comment"># Reiniciar servicios</span>
+<span class="command">sudo systemctl restart auditd rsyslog</span>
+            </div>
+
+            <h3>2. Usando Agentes Especializados</h3>
+            
+            <h4>Integración con Splunk</h4>
+            <div class="code-block">
+<span class="comment"># Configurar Splunk Universal Forwarder</span>
+<span class="comment"># En /opt/splunkforwarder/etc/system/local/inputs.conf</span>
+[monitor:///var/log/audit/audit.log]
+disabled = false
+sourcetype = linux_audit
+index = security
+
+<span class="comment"># Reiniciar Splunk Forwarder</span>
+<span class="command">sudo /opt/splunkforwarder/bin/splunk restart</span>
+            </div>
+
+            <h4>Integración con Elastic Stack (ELK)</h4>
+            <div class="code-block">
+<span class="comment"># Configurar Filebeat para auditd</span>
+<span class="comment"># En /etc/filebeat/filebeat.yml</span>
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/audit/audit.log
+  fields:
+    logtype: auditd
+  fields_under_root: true
+
+output.elasticsearch:
+  hosts: ["elasticsearch.empresa.com:9200"]
+  index: "auditd-%{+yyyy.MM.dd}"
+            </div>
+
+            <h3>3. Transformación y Enriquecimiento</h3>
+            <div class="code-block">
+<span class="comment"># Ejemplo de pipeline de Logstash para auditd</span>
+filter {
+  if [logtype] == "auditd" {
+    grok {
+      match => { "message" => "type=%{WORD:audit_type}.*msg=audit\(%{NUMBER:timestamp}:%{NUMBER:serial}\): %{GREEDYDATA:audit_message}" }
+    }
+    
+    if [audit_type] == "SYSCALL" {
+      grok {
+        match => { "audit_message" => ".*syscall=%{NUMBER:syscall}.*uid=%{NUMBER:uid}.*exe=\"%{NOTSPACE:executable}\"" }
+      }
+    }
+    
+    date {
+      match => [ "timestamp", "UNIX" ]
+    }
+    
+    mutate {
+      add_field => { "severity" => "info" }
+    }
+    
+    if [audit_type] in ["USER_LOGIN", "USER_AUTH"] {
+      mutate {
+        replace => { "severity" => "medium" }
+      }
+    }
+  }
+}
+            </div>
+
+            <h3>Configuración de Alertas SIEM</h3>
+            <div class="code-block">
+<span class="comment"># Ejemplo de regla de correlación para múltiples fallos de autenticación</span>
+rule_name: "Múltiples fallos de autenticación auditd"
+query: |
+  audit_type:"USER_AUTH" AND res:"failed"
+  | stats count by uid, hostname
+  | where count > 5
+timeframe: 300s
+action: alert
+severity: high
+
+<span class="comment"># Regla para detección de escalación de privilegios</span>
+rule_name: "Escalación de privilegios detectada"
+query: |
+  audit_type:"SYSCALL" AND (syscall:"setuid" OR syscall:"setgid")
+  AND uid!=0 AND success:"yes"
+timeframe: 60s
+action: alert
+severity: critical
+            </div>
+
+            <h3>Mejores Prácticas para Integración SIEM</h3>
+            <ul>
+                <li><strong>Normalización</strong> - Convertir eventos auditd a formato común (CEF, LEEF, JSON)</li>
+                <li><strong>Filtrado inteligente</strong> - Enviar solo eventos relevantes para reducir ruido</li>
+                <li><strong>Etiquetado</strong> - Usar campos consistentes para facilitar correlación</li>
+                <li><strong>Retención</strong> - Configurar políticas apropiadas de almacenamiento</li>
+                <li><strong>Monitoreo</strong> - Verificar que los logs lleguen correctamente al SIEM</li>
+                <li><strong>Respuesta automatizada</strong> - Configurar playbooks para eventos críticos</li>
+            </ul>
+
+            <div class="info">
+                Un SIEM bien configurado puede reducir el tiempo de detección de amenazas de días a minutos, utilizando la riqueza de datos que proporciona auditd.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Casos de Uso Avanzados</h2>
+            
+            <h3>Detección de Amenazas Persistentes Avanzadas (APT)</h3>
+            <p>auditd puede identificar patrones sutiles de actividad maliciosa que caracterizan a las APT:</p>
+            <ul>
+                <li>Movimiento lateral entre sistemas</li>
+                <li>Accesos fuera de horarios normales</li>
+                <li>Uso inusual de herramientas del sistema</li>
+                <li>Modificaciones de logs y herramientas de auditoría</li>
+            </ul>
+
+            <h3>Análisis de Comportamiento de Usuario y Entidad (UEBA)</h3>
+            <p>Los datos de auditd alimentan algoritmos de machine learning para establecer líneas base de comportamiento normal y detectar anomalías.</p>
+
+            <div class="warning">
+                La implementación efectiva de auditd requiere planificación cuidadosa, especialmente en entornos de alta escala donde el volumen de eventos puede ser abrumador.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Conclusiones</h2>
+            <p>auditd representa una herramienta fundamental en el arsenal de ciberseguridad de cualquier organización que utilice sistemas Linux. Su capacidad para proporcionar visibilidad completa a nivel del kernel, combinada con su flexibilidad de configuración y facilidad de integración con sistemas SIEM, lo convierte en un componente esencial para:</p>
+            
+            <ul>
+                <li>Cumplimiento normativo y auditorías</li>
+                <li>Detección temprana de amenazas</li>
+                <li>Análisis forense post-incidente</li>
+                <li>Monitoreo continuo de la postura de seguridad</li>
+            </ul>
+
+            <p>La correcta implementación y gestión de auditd requiere un equilibrio entre seguridad, rendimiento y manejabilidad de datos. Los profesionales de ciberseguridad deben dominar no solo su configuración técnica, sino también su integración estratégica en el ecosistema de seguridad más amplio de la organización.</p>
+        </div>
+    </div>
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container">
+            <p class="mb-0">Volver a <a href="../pildoras/pildoras.html" class="text-white">Píldoras</a></p>
+        </div>
+    </footer>
+</body>

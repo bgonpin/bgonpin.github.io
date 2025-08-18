@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extractor de Emails Gmail a MongoDB - Análisis Técnico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, #2c2c2c 0%, #404040 100%);
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .section {
+            background: rgba(45, 45, 45, 0.8);
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #4CAF50;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #d0d0d0;
+            text-align: justify;
+        }
+
+        code {
+            background: #1e1e1e;
+            color: #f8f8f2;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #404040;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            color: #f8f8f2;
+        }
+
+        .function-signature {
+            color: #66d9ef;
+            font-weight: bold;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #d0d0d0;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .warning {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            background: rgba(76, 175, 80, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #4CAF50;
+            text-align: center;
+        }
+
+        .flow-diagram {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .flow-step {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .arrow {
+            color: #4CAF50;
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #808080;
+            border-top: 1px solid #404040;
+        }
+
+        .code-container {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .copy-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+
+        .copy-button:active {
+            transform: translateY(0);
+        }
+
+        .copy-success {
+            background: #2196F3 !important;
+        }
+
+        .full-script {
+            background: #1e1e1e;
+            border: 1px solid #404040;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            color: #f8f8f2;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .full-script::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        .full-script::-webkit-scrollbar-track {
+            background: #2c2c2c;
+        }
+
+        .full-script::-webkit-scrollbar-thumb {
+            background: #4CAF50;
+            border-radius: 6px;
+        }
+
+        .full-script::-webkit-scrollbar-thumb:hover {
+            background: #45a049;
+        }
+
+        .python-keyword { color: #66d9ef; }
+        .python-string { color: #a6e22e; }
+        .python-comment { color: #75715e; }
+        .python-function { color: #f92672; }
+        .python-number { color: #ae81ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Script de Extracción de Emails Gmail a MongoDB</h1>
+            <p class="subtitle">Análisis técnico y documentación completa</p>
+        </header>
+
+        <div class="section">
+            <h2>Código Fuente Completo</h2>
+            <p>
+                A continuación se presenta el script completo de Python para la extracción de emails de Gmail a MongoDB. 
+                El código incluye todas las funciones documentadas y la lógica principal de ejecución.
+            </p>
+            
+            <div class="code-container">
+                <button class="copy-button" onclick="copyToClipboard('full-script-code')">Copiar Código</button>
+                <pre class="full-script" id="full-script-code">import imaplib
+import email
+import email.header
+from email.header import decode_header
+import pymongo
+
+
+def contarMensajesEnMongodb(username):
+    """
+    Cuenta el número de correos almacenados en la base de datos MongoDB
+    para la cuenta de correo especificada
+
+    :param username: La cuenta de correo de Gmail
+    :type username: str
+    :return: El número de correos almacenados en MongoDB
+    :rtype: int
+    """
+    # Conectar a la base de datos MongoDB
+    client = pymongo.MongoClient("mongodb://localhost:2018")
+
+    # Seleccionar la base de datos "correos"
+    db = client["correos"]
+
+    # Seleccionar la colección que se indica en username en la base de datos "correos"
+    # La coleccion toma el mismo nombre que la cuenta de correo de Gmail
+    collection = db[username]
+
+    # Devuelve el número de correos en la coleccion
+    # El método estimated_document_count() devuelve una estimación de la cantidad de documentos en la colección
+    # Esto es más rápido que contar todos los documentos manualmente
+    return collection.estimated_document_count()
+
+def insertarMongoDB(message, cuenta_correo):
+    """
+    Inserta un mensaje de correo en una base de datos MongoDB
+
+    :param message: Un diccionario con los campos del mensaje de correo
+    :type message: dict
+
+    :param cuenta_correo: La cuenta de correo de Gmail que se va a insertar el mensaje
+    :type cuenta_correo: str
+    """
+    # Conectar a la base de datos MongoDB
+    # El string de conexión es "mongodb://localhost:2018"
+    # El 2018 es el puerto en el que está escuchando el servidor MongoDB
+    # Lo que se hace es crear una conexión a la base de datos MongoDB
+    # y asignarla a una variable llamada "client"
+    try:
+        client = pymongo.MongoClient("mongodb://localhost:2018")
+
+        # Seleccionar la base de datos "correos"
+        # La base de datos se llama "correos"
+        # La variable "db" es la base de datos seleccionada
+        db = client["correos"]
+
+        # Seleccionar la colección que se indica en cuenta_correo en la base de datos "correos"
+        # La coleccion toma el mismo nombre que la cuenta de correo de Gmail
+        # La variable "collection" es la colección seleccionada
+        collection = db[cuenta_correo]
+
+        # Insertar el mensaje en la colección
+        # La variable "message" es el mensaje que se va a insertar
+        # La función "insert_one" es la función que se utiliza para insertar el mensaje en la colección
+        collection.insert_one(message)
+    except Exception as e:
+        # Imprimir cualquier error que suceda
+        # La variable "e" es el error que se produce
+        print(e)
+
+
+def decode_mime_words(s):
+    """
+    Toma un string codificado en MIME y lo decodifica
+
+    El string puede contener palabras codificadas en diferentes formatos
+    como el formato "=?utf-8?q?Hola?= " que es un string que se codificó
+    en UTF-8 y se codificó en quoted-printable
+
+    :param s: El string codificado en MIME
+    :type s: str
+    :return: El string decodificado
+    :rtype: str
+    """
+    # La función decode_header() devuelve una lista de tuplas
+    # Donde cada tupla contiene una palabra codificada y su codificación
+    # Por ejemplo, si el string es "=?utf-8?q?Hola?= "
+    # La función devuelve [("Hola", "utf-8")]
+    # La lista de tuplas se itera y se decodifica cada palabra
+    # La palabra se decodifica como bytes y se convierte a string
+    # Si la palabra no tiene codificación, se devuelve como string
+    return "".join(
+        word.decode(encoding or "utf8") if isinstance(word, bytes) else word
+        for word, encoding in decode_header(s)
+    )
+
+def get_message_dict(email_message):
+    """
+    Toma un mensaje de correo electrónico y lo convierte en un diccionario
+    que contiene los campos del mensaje, como el asunto, el remitente, el
+    destinatario, la fecha y el cuerpo del mensaje
+
+    :param email_message: El mensaje de correo electrónico a convertir
+    :type email_message: email.message.Message
+    :return: El diccionario con los campos del mensaje
+    :rtype: dict
+    """
+    message_dict = {}
+
+    # Extrae el asunto del mensaje
+    message_dict["subject"] = decode_mime_words(email_message["subject"])
+
+    # Extrae el remitente del mensaje
+    message_dict["from"] = decode_mime_words(email_message["from"])
+
+    # Extrae el destinatario del mensaje
+    message_dict["to"] = decode_mime_words(email_message["to"])
+
+    # Extrae la fecha del mensaje
+    message_dict["date"] = email_message["date"]
+
+    # Extrae el cuerpo del mensaje
+    message_dict["body"] = {}
+
+    # Verifica si el mensaje tiene partes (por ejemplo, texto plano y HTML)
+    if email_message.is_multipart():
+        # Itera sobre las partes del mensaje
+        for part in email_message.walk():
+            # Extrae el tipo de contenido de la parte
+            content_type = part.get_content_type()
+
+            # Verifica si la parte es un archivo adjunto
+            content_disposition = str(part.get("Content-Disposition"))
+
+            # Si la parte es texto plano y no es un archivo adjunto, extrae el texto
+            if (
+                content_type == "text/plain"
+                and "attachment" not in content_disposition
+            ):
+                body = part.get_payload(decode=True).decode("utf-8", errors="ignore")
+                message_dict["body"]["plain"] = body
+            # Si la parte es HTML y no es un archivo adjunto, extrae el texto
+            elif (
+                content_type == "text/html"
+                and "attachment" not in content_disposition
+            ):
+                body = part.get_payload(decode=True).decode("utf-8", errors="ignore")
+                message_dict["body"]["html"] = body
+            # Si la parte es un archivo adjunto, extrae el nombre del archivo
+            elif "attachment" in content_disposition:
+                filename = part.get_filename()
+                if filename:
+                    message_dict.setdefault("attachments", []).append(filename)
+    else:
+        # Si el mensaje no tiene partes, extrae el cuerpo del mensaje
+        content_type = email_message.get_content_type()
+        body = email_message.get_payload(decode=True).decode("utf-8", errors="ignore")
+        message_dict["body"][content_type] = body
+
+    return message_dict
+
+def fetch_email_by_id(email_id, username, password):
+    """
+    Extrae el correo con el ID especificado de la cuenta de correo de Gmail
+
+    :param email_id: El ID del correo que se va a extraer
+    :type email_id: str
+    :param username: La cuenta de correo de Gmail
+    :type username: str
+    :param password: La contraseña de la cuenta de correo de Gmail
+    :type password: str
+    :return: El correo extraido como un diccionario
+    :rtype: dict
+    """
+    # Configura la conexión IMAP
+    imap_server = "imap.gmail.com"
+    imap_port = 993
+
+    # Conéctate al servidor IMAP
+    mail = imaplib.IMAP4_SSL(imap_server, imap_port)
+    mail.login(username, password)
+    mail.select("INBOX")
+
+    # Busca el correo por ID
+    # La función fetch() devuelve una tupla con dos elementos
+    # El primer elemento es una cadena que indica el resultado de la búsqueda
+    # El segundo elemento es una lista de tuplas que contiene los datos del correo
+    # Cada tupla contiene el ID del correo y el contenido del correo
+    # Itera sobre la lista de tuplas y extrae el contenido del correo
+    # La variable "email_body" es el contenido del correo
+    _, msg_data = mail.fetch(str(email_id), "(RFC822)")
+
+    for response_part in msg_data:
+        if isinstance(response_part, tuple):
+            email_body = response_part[1]
+            # Convierte el contenido del correo en un objeto Message
+            # La función message_from_bytes() devuelve un objeto Message
+            # El objeto Message contiene los campos del correo como atributos
+            # Por ejemplo, el atributo "subject" contiene el asunto del correo
+            email_message = email.message_from_bytes(email_body)
+            # Extrae los campos del correo en un diccionario
+            message_dict = get_message_dict(email_message)
+
+    # Cierra la conexión
+    mail.close()
+    mail.logout()
+
+    return message_dict
+
+
+def get_email_ids(username, password):
+    """
+    Obtiene una lista de los IDs de correo de la cuenta de correo de Gmail
+
+    :param username: La cuenta de correo de Gmail
+    :type username: str
+    :param password: La contraseña de la cuenta de correo de Gmail
+    :type password: str
+    :return: Una lista de los IDs de correo de la cuenta de correo
+    :rtype: list[int]
+    """
+    # Configura la conexión IMAP
+    # La variable "imap_server" es el servidor IMAP de Gmail
+    # La variable "imap_port" es el puerto en el que se encuentra el servidor IMAP
+    imap_server = "imap.gmail.com"
+    imap_port = 993
+
+    # Conéctate al servidor IMAP
+    # La función login() se utiliza para conectarse al servidor IMAP
+    # La función select() se utiliza para seleccionar la carpeta de correo que se va a examinar
+    # En este caso, se selecciona la carpeta "INBOX"
+    mail = imaplib.IMAP4_SSL(imap_server, imap_port)
+    mail.login(username, password)
+    mail.select("INBOX")
+
+    # Obtén los IDs de correo
+    # La función search() se utiliza para buscar correos en la carpeta seleccionada
+    # El primer parámetro es None, lo que indica que se va a buscar todos los correos
+    # El segundo parámetro es 'ALL', lo que indica que se va a buscar todos los correos
+    # La función search() devuelve una tupla con dos elementos
+    # El primer elemento es una cadena que indica el resultado de la búsqueda
+    # El segundo elemento es una lista de tuplas que contiene los IDs de correo
+    # Cada tupla contiene un ID de correo
+    # Itera sobre la lista de tuplas y extrae los IDs de correo
+    # La variable "email_ids" es una lista de los IDs de correo de la cuenta de correo
+    _, msg_ids = mail.search(None, "ALL")
+
+    # Extrae los IDs de correo de la lista de tuplas
+    # La variable "email_ids" es una lista de los IDs de correo
+    email_ids = [int(id.split()[0]) for id in msg_ids[0].split()]
+
+    # Cierra la conexión
+    # La función close() se utiliza para cerrar la conexión con el servidor IMAP
+    # La función logout() se utiliza para desconectarse del servidor IMAP
+    mail.close()
+    mail.logout()
+
+    return email_ids
+
+
+def main():
+    """
+    Función principal del script.
+    
+    Solicita al usuario su correo y contraseña de Gmail,
+    luego extrae los correos de Gmail y los inserta en una base de datos MongoDB.
+    """
+    username = input("Introduce tu correo: ")
+    password = input("Introduce tu contraseña: ")
+
+    # Recupera los IDs de correo y los contamos
+    email_ids = get_email_ids(username, password)
+    total_mensajes_en_servidor = len(email_ids)
+    total_mensajes_en_mongodb = contarMensajesEnMongodb(username)
+
+    # Si hay correos en el servidor que no están en MongoDB, extráelos y los inserta
+    if total_mensajes_en_mongodb < total_mensajes_en_servidor:
+        # Extrae los correos y insértalos en MongoDB
+        # Por cada correo, extrae los campos y los inserta en MongoDB
+        # Extrae los correos que no están en MongoDB y los inserta
+        for i, email_id in enumerate(
+            range(total_mensajes_en_mongodb, total_mensajes_en_servidor),
+            total_mensajes_en_mongodb,
+        ):
+            try:
+                # Extrae el correo por ID
+                # La función fetch_email_by_id() extrae el correo por ID
+                # y devuelve un diccionario con los campos del correo
+                message_dict = fetch_email_by_id(email_id, username, password)
+                # Agrega el ID como campo _id
+                # Se agrega el ID del correo como campo "_id"
+                # para que se pueda identificar el correo en MongoDB
+                message_dict["_id"] = email_id
+                # Inserta en MongoDB
+                # La función insertarMongoDB() inserta el correo en MongoDB
+                # y devuelve el resultado de la inserción
+                insertarMongoDB(message_dict, username)
+
+            except Exception as e:
+                # Imprime cualquier error que suceda
+                # Si sucede un error al extraer o insertar el correo
+                # se imprime el error para que se pueda depurar
+                print(f"Error al extraer el correo {email_id}: {e}")
+
+            # Imprime el progreso
+            # Se imprime el progreso para que se pueda ver cómo va la extracción
+            # de correos
+            print(f"Email {i+1}/{total_mensajes_en_servidor} extraído e insertado en MongoDB")
+
+if __name__ == "__main__":
+    main()</pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Descripción General</h2>
+            <p>
+                Este script de Python implementa un sistema automatizado para la <span class="highlight">extracción, procesamiento y almacenamiento</span> 
+                de correos electrónicos desde cuentas de Gmail hacia una base de datos MongoDB. La aplicación utiliza el protocolo IMAP 
+                para establecer conexión segura con los servidores de Gmail y extraer metadatos junto con el contenido completo de los mensajes.
+            </p>
+            <p>
+                El sistema está diseñado para realizar <strong>sincronización incremental</strong>, evitando la duplicación de datos 
+                mediante la comparación del número de mensajes almacenados en MongoDB versus los disponibles en el servidor de correo.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Stack Tecnológico</h2>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <h3>Python IMAP</h3>
+                    <p>Protocolo para acceso a servidores de correo</p>
+                </div>
+                <div class="tech-item">
+                    <h3>MongoDB</h3>
+                    <p>Base de datos NoSQL para almacenamiento</p>
+                </div>
+                <div class="tech-item">
+                    <h3>PyMongo</h3>
+                    <p>Driver oficial de MongoDB para Python</p>
+                </div>
+                <div class="tech-item">
+                    <h3>Email Parser</h3>
+                    <p>Procesamiento y decodificación MIME</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Arquitectura del Sistema</h2>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">Autenticación IMAP</div>
+                <span class="arrow">→</span>
+                <div class="flow-step">Conteo de Mensajes</div>
+                <span class="arrow">→</span>
+                <div class="flow-step">Extracción Incremental</div>
+                <span class="arrow">→</span>
+                <div class="flow-step">Procesamiento MIME</div>
+                <span class="arrow">→</span>
+                <div class="flow-step">Inserción MongoDB</div>
+            </div>
+
+            <p>
+                El sistema implementa una arquitectura modular donde cada función tiene una responsabilidad específica, 
+                siguiendo los principios de <strong>separación de responsabilidades</strong> y <strong>reutilización de código</strong>.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Análisis de Funciones Principales</h2>
+
+            <h3>1. Gestión de Conexión MongoDB</h3>
+            <div class="code-block">
+                <button class="copy-button" onclick="copyToClipboard('count-function')">Copiar</button>
+                <pre id="count-function"><span class="function-signature">def contarMensajesEnMongodb(username):</span>
+    client = pymongo.MongoClient("mongodb://localhost:2018")
+    db = client["correos"]
+    collection = db[username]
+    return collection.estimated_document_count()</pre>
+            </div>
+            <p>
+                Esta función implementa un <strong>contador eficiente</strong> utilizando <code>estimated_document_count()</code> 
+                en lugar de contar manualmente todos los documentos, lo que proporciona mejor rendimiento en colecciones grandes.
+            </p>
+
+            <h3>2. Procesamiento MIME y Decodificación</h3>
+            <div class="code-block">
+                <button class="copy-button" onclick="copyToClipboard('decode-function')">Copiar</button>
+                <pre id="decode-function"><span class="function-signature">def decode_mime_words(s):</span>
+    return "".join(
+        word.decode(encoding or "utf8") if isinstance(word, bytes) else word
+        for word, encoding in decode_header(s)
+    )</pre>
+            </div>
+            <p>
+                Implementa un <strong>decodificador robusto</strong> para headers MIME que maneja múltiples codificaciones 
+                (UTF-8, ISO-8859-1, etc.) y diferentes esquemas de codificación (quoted-printable, base64).
+            </p>
+
+            <h3>3. Extracción y Estructuración de Datos</h3>
+            <div class="code-block">
+                <button class="copy-button" onclick="copyToClipboard('message-function')">Copiar</button>
+                <pre id="message-function"><span class="function-signature">def get_message_dict(email_message):</span>
+    message_dict = {}
+    message_dict["subject"] = decode_mime_words(email_message["subject"])
+    message_dict["from"] = decode_mime_words(email_message["from"])
+    # Procesamiento de contenido multipart...</pre>
+            </div>
+            <p>
+                Esta función realiza el <strong>parsing completo</strong> de mensajes de correo, extrayendo metadatos, 
+                contenido en múltiples formatos (texto plano, HTML) y manejo de archivos adjuntos.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Características Técnicas Avanzadas</h2>
+
+            <h3>Manejo de Mensajes Multipart</h3>
+            <p>
+                El sistema implementa un parser sofisticado capaz de procesar mensajes con <strong>múltiples partes MIME</strong>, 
+                distinguiendo entre contenido de texto, HTML y archivos adjuntos. Utiliza el método <code>walk()</code> para 
+                recorrer recursivamente todas las partes del mensaje.
+            </p>
+
+            <h3>Sincronización Incremental</h3>
+            <p>
+                La lógica de sincronización compara el número de mensajes en MongoDB con los disponibles en el servidor, 
+                procesando únicamente los <strong>mensajes nuevos</strong>. Esto optimiza significativamente el tiempo 
+                de ejecución y reduce la carga en el servidor de correo.
+            </p>
+
+            <div class="code-block">
+                <button class="copy-button" onclick="copyToClipboard('enumerate-code')">Copiar</button>
+                <pre id="enumerate-code">for i, email_id in enumerate(
+    range(total_mensajes_en_mongodb, total_mensajes_en_servidor),
+    total_mensajes_en_mongodb,
+):</pre>
+            </div>
+
+            <h3>Gestión Robusta de Errores</h3>
+            <p>
+                El sistema implementa <strong>manejo de excepciones</strong> en puntos críticos, especialmente durante 
+                las operaciones de red y base de datos, asegurando que fallos individuales no interrumpan el proceso completo.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Consideraciones de Configuración</h2>
+
+            <div class="warning">
+                <strong>Configuración de MongoDB:</strong> El script asume una instancia de MongoDB ejecutándose en 
+                <code>localhost:2018</code>. Esta configuración debe ajustarse según el entorno de despliegue.
+            </div>
+
+            <h3>Estructura de Base de Datos</h3>
+            <ul>
+                <li><strong>Base de datos:</strong> <code>correos</code></li>
+                <li><strong>Colecciones:</strong> Una por cuenta de correo (nombrada con el email del usuario)</li>
+                <li><strong>Documentos:</strong> Cada email como documento JSON con estructura normalizada</li>
+            </ul>
+
+            <h3>Autenticación Gmail</h3>
+            <p>
+                El sistema requiere credenciales de Gmail y, dependiendo de la configuración de seguridad de la cuenta, 
+                puede necesitar <strong>contraseñas de aplicación</strong> o configuración de acceso para aplicaciones menos seguras.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Flujo de Ejecución Principal</h2>
+            <p>
+                La función <code>main()</code> orquesta todo el proceso de extracción:
+            </p>
+            <ol>
+                <li><strong>Autenticación:</strong> Solicitud de credenciales al usuario</li>
+                <li><strong>Inventario:</strong> Obtención de IDs de correos del servidor</li>
+                <li><strong>Comparación:</strong> Verificación de mensajes ya almacenados</li>
+                <li><strong>Procesamiento:</strong> Extracción e inserción de mensajes nuevos</li>
+                <li><strong>Monitoreo:</strong> Reporte de progreso en tiempo real</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Optimizaciones y Mejores Prácticas</h2>
+            <p>
+                El código implementa varias <strong>optimizaciones de rendimiento</strong>:
+            </p>
+            <ul>
+                <li>Uso de <code>estimated_document_count()</code> para conteo eficiente</li>
+                <li>Conexión IMAP SSL para seguridad y rendimiento</li>
+                <li>Procesamiento por lotes con manejo individual de errores</li>
+                <li>Decodificación robusta con fallback a UTF-8</li>
+                <li>Manejo de memoria eficiente para mensajes grandes</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Casos de Uso y Aplicaciones</h2>
+            <p>
+                Este sistema es particularmente útil para:
+            </p>
+            <ul>
+                <li><strong>Migración de datos:</strong> Transferencia de historiales de correo a sistemas propios</li>
+                <li><strong>Análisis de datos:</strong> Procesamiento y análisis de patrones de comunicación</li>
+                <li><strong>Backup automatizado:</strong> Respaldo incremental de correspondencia importante</li>
+                <li><strong>Indexación y búsqueda:</strong> Creación de índices personalizados para búsqueda avanzada</li>
+                <li><strong>Compliance:</strong> Archivado de comunicaciones para cumplimiento regulatorio</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 - Documentación técnica para desarrolladores</p>
+            <p>Sistema de extracción de emails Gmail a MongoDB</p>
+            <div class="text-center mt-3">
+                <a href="../proyectos/proyectos.html" class="btn btn-outline-light">Volver a Proyectos</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent || element.innerText;
+            
+            // Crear un elemento de texto temporal
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            
+            // Seleccionar y copiar el texto
+            textarea.select();
+            document.execCommand('copy');
+            
+            // Remover el elemento temporal
+            document.body.removeChild(textarea);
+            
+            // Mostrar feedback visual
+            const button = element.parentNode.querySelector('.copy-button');
+            const originalText = button.textContent;
+            button.textContent = '¡Copiado!';
+            button.classList.add('copy-success');
+            
+            // Restaurar el botón después de 2 segundos
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('copy-success');
+            }, 2000);
+        }
+
+        // Funcionalidad adicional: Copiar con Ctrl+C cuando se selecciona código
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeBlocks = document.querySelectorAll('pre');
+            
+            codeBlocks.forEach(block => {
+                block.addEventListener('dblclick', function() {
+                    const selection = window.getSelection();
+                    const range = document.createRange();
+                    range.selectNodeContents(this);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                });
+            });
+        });
+
+        // Scroll suave para navegación interna
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

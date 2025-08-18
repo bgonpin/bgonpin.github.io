@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pipeline completa para procesar PDFs con Python: extracción, limpieza, traducción e imágenes</title>
+<meta name="description" content="Cómo construir una pipeline completa en Python para procesar PDFs: extraer texto, limpiar, traducir y extraer imágenes. Incluye código listo para usar." />
+<style>
+  :root{
+    --bg:#0b0c10;
+    --panel:#111217;
+    --ink:#e8e8e8;
+    --muted:#b7b7b7;
+    --accent:#7c9cff;
+    --accent-2:#69e6a6;
+    --border:#22242e;
+    --code:#0f111a;
+    --kbd:#20222b;
+  }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";line-height:1.65}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .container{max-width:1000px;margin:0 auto;padding:56px 20px}
+  header{background:linear-gradient(135deg, rgba(124,156,255,.15), rgba(105,230,166,.08));border-bottom:1px solid var(--border)}
+  header .container{padding-top:72px;padding-bottom:72px}
+  h1{font-size:2.2rem;line-height:1.2;margin:0 0 10px 0}
+  h2{font-size:1.6rem;margin-top:42px;border-top:1px solid var(--border);padding-top:28px}
+  h3{font-size:1.2rem;margin-top:28px;color:var(--accent-2)}
+  p{color:var(--ink);margin:14px 0}
+  .lead{color:var(--muted);font-size:1.05rem}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:22px;margin:18px 0;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+  .toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+  .toc a{display:block;background:var(--panel);border:1px solid var(--border);padding:12px 14px;border-radius:14px}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+  pre{background:var(--code);color:#e6e6e6;border:1px solid var(--border);border-radius:16px;padding:16px;overflow:auto}
+  .kbd{display:inline-block;background:var(--kbd);border:1px solid var(--border);padding:2px 6px;border-radius:6px}
+  ul{padding-left:22px}
+  .footer{color:var(--muted);font-size:.9rem;margin-top:48px;padding-top:24px;border-top:1px dashed var(--border)}
+  .tag{display:inline-block;font-size:.8rem;color:#0b0c10;background:var(--accent-2);padding:2px 8px;border-radius:999px;margin-right:6px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+</style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <span class="tag">Python</span>
+      <span class="tag">PDF</span>
+      <span class="tag">IA Local</span>
+      <h1>Procesamiento completo de PDFs con Python: extracción, limpieza, traducción y exportación de imágenes</h1>
+      <p class="lead">Construye una pipeline práctica para trabajar con documentos PDF: separa y guarda el texto por página, limpia saltos innecesarios, traduce de forma automática con Ollama y exporta todas las imágenes incrustadas.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h2 id="resumen">Resumen</h2>
+      <p>En este artículo implementamos una solución integral para procesar PDFs en cuatro etapas:</p>
+      <ol>
+        <li><strong>Extracción de texto</strong> por página con <span class="kbd">PyPDF2</span>.</li>
+        <li><strong>Limpieza</strong> de saltos de línea y normalización con <span class="kbd">re</span>.</li>
+        <li><strong>Traducción</strong> del inglés al español usando <span class="kbd">Ollama</span> y un modelo local (<span class="kbd">llama3.1:8b</span>).</li>
+        <li><strong>Extracción de imágenes</strong> incrustadas con <span class="kbd">PyMuPDF / fitz</span>.</li>
+      </ol>
+      <div class="grid">
+        <div>
+          <h3>Requisitos</h3>
+          <pre><code class="language-bash">pip install PyPDF2 pymupdf ollama</code></pre>
+          <p>Además, instala y levanta <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> y ten disponible el modelo <span class="kbd">llama3.1:8b</span>.</p>
+        </div>
+        <div>
+          <h3>Estructura de carpetas (resultado)</h3>
+          <pre><code class="language-text">./paginas/              # Texto por página (crudo)
+./paginas_limpias/      # Texto limpio
+./paginas_traducidas/   # Texto traducido
+./imagen_pdf/           # Imágenes extraídas</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 id="toc">Índice</h2>
+      <nav class="toc">
+        <a href="#paso1">Paso 1 · Extraer texto con PyPDF2</a>
+        <a href="#paso2">Paso 2 · Limpiar y normalizar texto</a>
+        <a href="#paso3">Paso 3 · Traducir con Ollama</a>
+        <a href="#paso4">Paso 4 · Extraer imágenes con PyMuPDF</a>
+        <a href="#mejoras">Mejoras y buenas prácticas</a>
+      </nav>
+    </div>
+
+    <section class="card" id="paso1">
+      <h2>Paso 1 · Extraer texto con PyPDF2</h2>
+      <p>Extraemos el texto de cada página y lo guardamos en archivos <span class="kbd">.txt</span> independientes dentro de <span class="kbd">./paginas</span>.</p>
+      <pre><code class="language-python">import PyPDF2
+import os
+
+
+def crearTxt(numero: int, texto: str) -&gt; bool:
+    &quot;&quot;&quot;
+    Crea un archivo de texto con el contenido dado.
+
+    Args:
+        numero (int): El número de página para el nombre del archivo.
+        texto (str): El texto a escribir en el archivo.
+
+    Returns:
+        bool: True si el archivo se creó correctamente.
+    &quot;&quot;&quot;
+    with open(f'./paginas/{numero}.txt', 'w', encoding='utf-8') as f:
+        f.write(texto)
+    return True
+
+
+def extraerTexto(pdf: str) -&gt; str:
+    &quot;&quot;&quot;
+    Extrae el texto de un archivo PDF y lo guarda en archivos de texto individuales.
+
+    Args:
+        pdf (str): La ruta al archivo PDF.
+
+    Returns:
+        str: El texto concatenado de todas las páginas del PDF.
+    &quot;&quot;&quot;
+    texto = ''
+    contador = 1
+    with open(pdf, 'rb') as f:
+        pdf_reader = PyPDF2.PdfReader(f)
+        for page in pdf_reader.pages:
+            texto_pagina = page.extract_text()
+            crearTxt(contador, texto_pagina)
+            texto += texto_pagina
+            contador += 1
+    return texto
+
+
+def main():
+    &quot;&quot;&quot;
+    Función principal del programa.
+    Extrae el texto de un PDF y lo guarda en archivos de texto.
+    &quot;&quot;&quot;
+    pdf = 'a-christmas-carol-charles-dickens.pdf'
+    extraerTexto(pdf)
+
+
+if __name__ == '__main__':
+    main()</code></pre>
+      <p><strong>Salida esperada:</strong> archivos numerados <span class="kbd">1.txt</span>, <span class="kbd">2.txt</span>, … en <span class="kbd">./paginas</span>.</p>
+    </section>
+
+    <section class="card" id="paso2">
+      <h2>Paso 2 · Limpiar y normalizar texto</h2>
+      <p>Eliminamos saltos de línea problemáticos y conservamos una versión más legible en <span class="kbd">./paginas_limpias</span>.</p>
+      <pre><code class="language-python">import os
+import re
+
+RUTA_ORIGEN = './paginas'
+RUTA_DESTINO = './paginas_limpias'
+
+
+os.makedirs(RUTA_DESTINO, exist_ok=True)
+
+
+def guardarTexto(texto: str, nombre_archivo: str) -&gt; None:
+    &quot;&quot;&quot;
+    Guarda el texto en un archivo.
+
+    Args:
+        texto (str): El texto a guardar.
+        nombre_archivo (str): El nombre del archivo.
+    &quot;&quot;&quot;
+    with open(os.path.join(RUTA_DESTINO, nombre_archivo), 'w', encoding='utf-8') as f:
+        f.write(texto)
+def limparTexto(texto: str, file: str) -&gt; None:
+    &quot;&quot;&quot;
+    Limpia el texto eliminando saltos de línea innecesarios y guarda el resultado.
+
+    Args:
+        texto (str): El texto a limpiar.
+        file (str): El nombre del archivo.
+    &quot;&quot;&quot;
+    texto = re.sub(r&quot; \n&quot;, &quot; &quot;, texto)
+    guardarTexto(texto, file)
+
+
+def main():
+    &quot;&quot;&quot;
+    Función principal del programa.
+    Recorre los archivos de texto en la ruta de origen, los limpia y los guarda en la ruta de destino.
+    &quot;&quot;&quot;
+    for root, _, files in os.walk(RUTA_ORIGEN):
+        for file in files:
+            if file.endswith('.txt'):
+                file_path = os.path.join(root, file)
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    texto = f.read()
+                    limparTexto(texto, file)
+
+
+if __name__ == '__main__':
+    main()</code></pre>
+      <p><strong>Salida esperada:</strong> mismos nombres de archivo, pero en <span class="kbd">./paginas_limpias</span>.</p>
+    </section>
+
+    <section class="card" id="paso3">
+      <h2>Paso 3 · Traducir con Ollama</h2>
+      <p>Traducimos línea por línea usando el modelo local <span class="kbd">llama3.1:8b</span> con <span class="kbd">Ollama</span>, y guardamos el resultado en <span class="kbd">./paginas_traducidas</span>.</p>
+      <pre><code class="language-python">import os
+import ollama
+
+RUTA_ORIGEN = './paginas_limpias'
+RUTA_DESTINO = './paginas_traducidas'
+
+os.makedirs(RUTA_DESTINO, exist_ok=True)
+
+
+def traducir(texto: str) -&gt; str:
+    &quot;&quot;&quot;
+    Traduce un texto del inglés al español utilizando el modelo de Ollama.
+
+    Args:
+        texto (str): El texto a traducir.
+
+    Returns:
+        str: El texto traducido.
+    &quot;&quot;&quot;
+    response = ollama.chat(
+        model='llama3.1:8b',
+        messages=[
+            {
+                'role': 'user',
+                'content': 'Te voy a proporciona un texto para traducir del ingles al espanol. Solo traduce. No respondas ni hagas comentarios. El texto es posible que contenga errores o fragmentos de codigo. En ese caso, ignora los mismos.' + texto,
+            },
+        ],
+    )
+    return response['message']['content']
+
+
+def main():
+    &quot;&quot;&quot;
+    Función principal del programa.
+    Recorre los archivos de texto en la ruta de origen, los traduce y los guarda en la ruta de destino.
+    &quot;&quot;&quot;
+    for root, _, files in os.walk(RUTA_ORIGEN):
+        for file in files:
+            texto_a_insertar = &quot;&quot;
+            if file.endswith('.txt'):
+                file_path = os.path.join(root, file)
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    texto = f.readlines()
+                    for linea in texto:
+                        traduccion = traducir(linea)
+                        texto_a_insertar += traduccion
+
+                with open(os.path.join(RUTA_DESTINO, file), 'w', encoding='utf-8') as f:
+                    f.write(texto_a_insertar)
+
+
+if __name__ == '__main__':
+    main()</code></pre>
+      <p><strong>Salida esperada:</strong> un archivo traducido por cada entrada en <span class="kbd">./paginas_traducidas</span>.</p>
+    </section>
+
+    <section class="card" id="paso4">
+      <h2>Paso 4 · Extraer imágenes con PyMuPDF (fitz)</h2>
+      <p>Exportamos todas las imágenes incrustadas del PDF a <span class="kbd">.png</span>, guardándolas en <span class="kbd">./imagen_pdf</span>.</p>
+      <pre><code class="language-python">import fitz
+import os
+
+RUTA_DESTINO_IMAGENES = './imagen_pdf'
+
+os.makedirs(RUTA_DESTINO_IMAGENES, exist_ok=True)
+
+
+def extraerImagenesPdf(pdf: str) -&gt; None:
+    &quot;&quot;&quot;
+    Extrae las imágenes de un archivo PDF y las guarda como archivos PNG.
+
+    Args:
+        pdf (str): La ruta al archivo PDF.
+    &quot;&quot;&quot;
+    pdf_document = fitz.open(pdf)
+    for page_index in range(len(pdf_document)):
+        page = pdf_document[page_index]
+        image_list = page.get_images()
+        for image_index, img in enumerate(image_list, start=1):
+            xref = img[0]
+            base_image = pdf_document.extract_image(xref)
+            image_data = base_image[&quot;image&quot;]
+            if len(image_list) &gt; 1:
+                nombre_archivo = f&quot;imagen_{page_index}_{image_index}.png&quot;
+            else:
+                nombre_archivo = f&quot;imagen_{page_index}.png&quot;
+            ruta_archivo = os.path.join(RUTA_DESTINO_IMAGENES, nombre_archivo)
+            with open(ruta_archivo, &quot;wb&quot;) as fp:
+                fp.write(image_data)
+
+
+def main():
+    &quot;&quot;&quot;
+    Función principal del programa.
+    Extrae las imágenes de un PDF específico.
+    &quot;&quot;&quot;
+    extraerImagenesPdf(&quot;Deep Reinforcement Learning with Python (2024).pdf&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre>
+      <p><strong>Salida esperada:</strong> un conjunto de archivos <span class="kbd">PNG</span> por cada página o imagen encontrada.</p>
+    </section>
+
+    <section class="card" id="mejoras">
+      <h2>Mejoras y buenas prácticas</h2>
+      <ul>
+        <li>Verificar la existencia de las carpetas de salida antes de escribir (ya cubierto con <span class="kbd">os.makedirs(..., exist_ok=True)</span>).</li>
+        <li>Manejar PDFs con páginas que contienen solo imágenes (la extracción de texto puede devolver <span class="kbd">None</span>).</li>
+        <li>Agregar <em>logging</em> y manejo de excepciones para diagnósticos en producción.</li>
+        <li>Permitir parámetros por CLI: rutas de entrada/salida, nombre de archivo PDF, modelo de traducción, etc.</li>
+        <li>Unir páginas en un solo archivo final si se desea una salida consolidada post-limpieza o post-traducción.</li>
+      </ul>
+    </section>
+
+    <p style="text-align: center; margin-top: 20px;"><a href="https://github.com/bgonpin/TraductorIA" target="_blank" rel="noopener">Repositorio del proyecto en GitHub</a></p>
+    <p class="footer" style="text-align: center;"><a href="../proyectos/proyectos.html">Volver a todos los proyectos</a></p>
+  </main>
+</body>
+</html>

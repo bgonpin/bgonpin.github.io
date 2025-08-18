@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información sobre Rsyslog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        code, pre {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>¿Qué es Rsyslog?</h1>
+    <p><strong>Rsyslog</strong> es un software de código abierto utilizado en sistemas Unix y similares (como Linux) para la gestión de mensajes de registro (logs). Es una implementación moderna y mejorada del protocolo <strong>syslog</strong> tradicional.</p>
+    <p>El protocolo syslog es un estándar que permite a los sistemas enviar mensajes de registro a un servidor central. Rsyslog toma este concepto y lo lleva a un nuevo nivel, ofreciendo una serie de características avanzadas que lo hacen más potente y flexible.</p>
+
+    <h2>¿Qué hace Rsyslog?</h2>
+    <p>La función principal de Rsyslog es recopilar, filtrar, procesar y almacenar o reenviar mensajes de registro generados por el sistema operativo, las aplicaciones y los servicios.</p>
+    <ul>
+        <li><strong>Recopilación:</strong> Puede recibir logs de diferentes fuentes.</li>
+        <li><strong>Filtrado:</strong> Permite aplicar reglas detalladas para decidir qué hacer con cada mensaje.</li>
+        <li><strong>Procesamiento:</strong> Puede reestructurar y preparar los mensajes para su destino.</li>
+        <li><strong>Almacenamiento y Reenvío:</strong> Los mensajes se pueden almacenar localmente o reenviar a un servidor central.</li>
+    </ul>
+
+    <h2>Características Clave de Rsyslog</h2>
+    <p>Entre sus características más importantes se incluyen:</p>
+    <ul>
+        <li><strong>Registro centralizado:</strong> Facilita la monitorización de logs de múltiples máquinas en un solo servidor.</li>
+        <li><strong>Protocolos de red:</strong> Soporta TCP, UDP y RELP para una entrega confiable de mensajes.</li>
+        <li><strong>Módulos de entrada y salida:</strong> Acepta logs de diversas fuentes y puede enviarlos a destinos como bases de datos (MariaDB, MySQL) o sistemas de análisis (Elasticsearch).</li>
+        <li><strong>Filtrado avanzado:</strong> Permite reglas complejas para el enrutamiento de mensajes.</li>
+        <li><strong>Manejo de colas:</strong> Evita la pérdida de mensajes si el servidor de destino no está disponible.</li>
+    </ul>
+
+    <hr>
+
+    <h1>¿Cómo leo Rsyslog?</h1>
+    <p>Leer los logs de <strong>rsyslog</strong> es fundamental para la administración de sistemas. La mayoría de los logs se encuentran en el directorio <code>/var/log/</code>.</p>
+
+    <h2>Comandos básicos para leer logs</h2>
+    <p>Estos comandos son las herramientas principales para interactuar con los archivos de log desde la terminal:</p>
+    <ul>
+        <li><code>cat /var/log/syslog</code>: Muestra todo el contenido del archivo.</li>
+        <li><code>less /var/log/syslog</code>: Un visor interactivo para archivos grandes.</li>
+        <li><code>tail /var/log/syslog</code>: Muestra las últimas 10 líneas.</li>
+        <li><code>tail -f /var/log/syslog</code>: Sigue el archivo en tiempo real, mostrando las nuevas líneas a medida que se escriben.</li>
+    </ul>
+
+    <h2>Filtrar información específica con grep</h2>
+    <p>Puedes usar el comando <code>grep</code> para buscar líneas que coincidan con un patrón:</p>
+    <pre><code>grep "error" /var/log/syslog</code></pre>
+    <p>Para buscar en tiempo real, combina <code>tail -f</code> con <code>grep</code>:</p>
+    <pre><code>tail -f /var/log/syslog | grep "failed"</code></pre>
+
+    <h2>Ubicaciones comunes de los archivos de log</h2>
+    <p>Rsyslog organiza los logs por tipo de evento en diferentes archivos:</p>
+    <ul>
+        <li><code>/var/log/syslog</code> o <code>/var/log/messages</code>: Logs principales del sistema.</li>
+        <li><code>/var/log/auth.log</code>: Eventos de autenticación de usuarios.</li>
+        <li><code>/var/log/kern.log</code>: Mensajes del kernel de Linux.</li>
+        <li><code>/var/log/cron.log</code>: Mensajes de los trabajos programados con <code>cron</code>.</li>
+    </ul>
+    
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
+    </footer>
+</div>
+
+</body>
+</html>

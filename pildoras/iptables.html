@@ -315,10 +315,10 @@
                 
                 <div class="code-block">
                     <code>
-INPUT    → Paquetes dirigidos al sistema local
-OUTPUT   → Paquetes originados en el sistema local  
-FORWARD  → Paquetes que atraviesan el sistema (routing)
-PREROUTING  → Procesamiento antes del routing
+INPUT    → Paquetes dirigidos al sistema local<br>
+OUTPUT   → Paquetes originados en el sistema local<br>
+FORWARD  → Paquetes que atraviesan el sistema (routing)<br>
+PREROUTING  → Procesamiento antes del routing<br>
 POSTROUTING → Procesamiento después del routing
                     </code>
                 </div>
@@ -447,7 +447,7 @@ iptables [-t tabla] [acción] [cadena] [criterios] -j [target]
                 <h3>Ver Reglas Actuales</h3>
                 <div class="code-block">
                     <code>
-# Listar todas las reglas con números de línea
+# Listar todas las reglas con números de línea</br>
 sudo iptables -L -n --line-numbers
 
 # Ver reglas con estadísticas
@@ -463,10 +463,10 @@ sudo iptables -t nat -L -n
                 
                 <div class="code-block">
                     <code>
-# Establecer política por defecto
-sudo iptables -P INPUT DROP
-sudo iptables -P FORWARD DROP
-sudo iptables -P OUTPUT ACCEPT
+# Establecer política por defecto<br>
+sudo iptables -P INPUT DROP<br>
+sudo iptables -P FORWARD DROP<br>
+sudo iptables -P OUTPUT ACCEPT<br>
 
 # Ver políticas actuales
 sudo iptables -L | grep policy
@@ -486,48 +486,48 @@ sudo iptables -L | grep policy
                 <h3>Permitir SSH</h3>
                 <div class="code-block">
                     <code>
-# Permitir SSH entrante en puerto 22
-sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-
-# Permitir SSH solo desde una IP específica
-sudo iptables -A INPUT -p tcp -s 192.168.1.100 --dport 22 -j ACCEPT
+# Permitir SSH entrante en puerto 22<br>
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT<br>
+<br>
+# Permitir SSH solo desde una IP específica<br>
+sudo iptables -A INPUT -p tcp -s 192.168.1.100 --dport 22 -j ACCEPT<br>
                     </code>
                 </div>
 
                 <h3>Configurar Servidor Web</h3>
                 <div class="code-block">
                     <code>
-# Permitir HTTP (puerto 80)
-sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-
-# Permitir HTTPS (puerto 443)
-sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-
-# Permitir solo conexiones establecidas y relacionadas
-sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+# Permitir HTTP (puerto 80)<br>
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT<br>
+<br>
+# Permitir HTTPS (puerto 443)<br>
+sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT<br>
+<br>
+# Permitir solo conexiones establecidas y relacionadas<br>
+sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT<br>
                     </code>
                 </div>
 
                 <h3>Bloquear IP Específica</h3>
                 <div class="code-block">
                     <code>
-# Bloquear una IP específica
-sudo iptables -A INPUT -s 192.168.1.50 -j DROP
-
-# Bloquear un rango de IPs
-sudo iptables -A INPUT -s 192.168.1.0/24 -j DROP
+# Bloquear una IP específica<br>
+sudo iptables -A INPUT -s 192.168.1.50 -j DROP<br>
+<br>
+# Bloquear un rango de IPs<br>
+sudo iptables -A INPUT -s 192.168.1.0/24 -j DROP<br>
                     </code>
                 </div>
 
                 <h3>Límite de Conexiones</h3>
                 <div class="code-block">
                     <code>
-# Limitar conexiones SSH (máximo 3 por minuto)
-sudo iptables -A INPUT -p tcp --dport 22 -m limit --limit 3/min -j ACCEPT
-
-# Protección contra ataques de fuerza bruta
-sudo iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --set
-sudo iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 -j DROP
+# Limitar conexiones SSH (máximo 3 por minuto)<br>
+sudo iptables -A INPUT -p tcp --dport 22 -m limit --limit 3/min -j ACCEPT<br>
+<br>
+# Protección contra ataques de fuerza bruta<br>
+sudo iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --set<br>
+sudo iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 -j DROP<br>
                     </code>
                 </div>
             </section>
@@ -538,34 +538,34 @@ sudo iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --update
                 <h3>NAT (Network Address Translation)</h3>
                 <div class="code-block">
                     <code>
-# SNAT - Cambiar IP origen (para salida a Internet)
-sudo iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source 203.0.113.1
-
-# MASQUERADE - Para IPs dinámicas
-sudo iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
-
-# DNAT - Redirección de puertos
-sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.1.100:8080
+# SNAT - Cambiar IP origen (para salida a Internet)<br>
+sudo iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source 203.0.113.1<br>
+<br>
+# MASQUERADE - Para IPs dinámicas<br>
+sudo iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE<br>
+<br>
+# DNAT - Redirección de puertos<br>
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.1.100:8080<br>
                     </code>
                 </div>
 
                 <h3>Port Forwarding</h3>
                 <div class="code-block">
                     <code>
-# Redirigir puerto 8080 externo al 80 interno
-sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 192.168.1.10:80
-sudo iptables -t nat -A POSTROUTING -p tcp -d 192.168.1.10 --dport 80 -j SNAT --to-source 192.168.1.1
+# Redirigir puerto 8080 externo al 80 interno<br>
+sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 192.168.1.10:80<br>
+sudo iptables -t nat -A POSTROUTING -p tcp -d 192.168.1.10 --dport 80 -j SNAT --to-source 192.168.1.1<br>
                     </code>
                 </div>
 
                 <h3>Logging Avanzado</h3>
                 <div class="code-block">
                     <code>
-# Log de paquetes dropped con prefix personalizado
-sudo iptables -A INPUT -j LOG --log-prefix "IPTABLES-DROPPED: " --log-level 4
-
-# Log con límite de velocidad para evitar spam
-sudo iptables -A INPUT -m limit --limit 2/min -j LOG --log-prefix "IPTABLES-DROPPED: "
+# Log de paquetes dropped con prefix personalizado<br>
+sudo iptables -A INPUT -j LOG --log-prefix "IPTABLES-DROPPED: " --log-level 4<br>
+<br>
+# Log con límite de velocidad para evitar spam<br>
+sudo iptables -A INPUT -m limit --limit 2/min -j LOG --log-prefix "IPTABLES-DROPPED: "<br>
                     </code>
                 </div>
 
@@ -616,29 +616,29 @@ sudo iptables -A INPUT -m limit --limit 2/min -j LOG --log-prefix "IPTABLES-DROP
                 <h3>Ubuntu/Debian</h3>
                 <div class="code-block">
                     <code>
-# Instalar iptables-persistent
-sudo apt install iptables-persistent
+# Instalar iptables-persistent<br>
+sudo apt install iptables-persistent<br>
 
-# Guardar reglas actuales
-sudo iptables-save > /etc/iptables/rules.v4
-sudo ip6tables-save > /etc/iptables/rules.v6
-
-# Restaurar reglas
-sudo iptables-restore < /etc/iptables/rules.v4
+# Guardar reglas actuales<br>
+sudo iptables-save > /etc/iptables/rules.v4<br>
+sudo ip6tables-save > /etc/iptables/rules.v6<br>
+<br>
+# Restaurar reglas<br>
+sudo iptables-restore < /etc/iptables/rules.v4<br>
                     </code>
                 </div>
 
                 <h3>CentOS/RHEL</h3>
                 <div class="code-block">
                     <code>
-# Guardar reglas
-sudo service iptables save
+# Guardar reglas<br>
+sudo service iptables save<br>
+<br>
+# O manualmente<br>
+sudo iptables-save > /etc/sysconfig/iptables<br>
+<br>
+# Habilitar servicio<br>
 
-# O manualmente
-sudo iptables-save > /etc/sysconfig/iptables
-
-# Habilitar servicio
-sudo systemctl enable iptables
 sudo systemctl start iptables
                     </code>
                 </div>
@@ -646,30 +646,30 @@ sudo systemctl start iptables
                 <h3>Script de Inicio Personalizado</h3>
                 <div class="code-block">
                     <code>
-#!/bin/bash
-# /etc/init.d/iptables-rules
-
-# Limpiar reglas existentes
-iptables -F
-iptables -X
-iptables -t nat -F
-iptables -t nat -X
-
-# Políticas por defecto
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
-iptables -P OUTPUT ACCEPT
-
-# Permitir loopback
-iptables -A INPUT -i lo -j ACCEPT
-
-# Permitir conexiones establecidas
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-# Permitir SSH
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-
-# Agregar más reglas según necesidades...
+#!/bin/bash<br>
+# /etc/init.d/iptables-rules<br>
+<br>
+# Limpiar reglas existentes<br>
+iptables -F<br>
+iptables -X<br>
+iptables -t nat -F<br>
+iptables -t nat -X<br>
+<br>
+# Políticas por defecto<br>
+iptables -P INPUT DROP<br>
+iptables -P FORWARD DROP<br>
+iptables -P OUTPUT ACCEPT<br>
+<br>
+# Permitir loopback<br>
+iptables -A INPUT -i lo -j ACCEPT<br>
+<br>
+# Permitir conexiones establecidas<br>
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT<br>
+<br>
+# Permitir SSH<br>
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT<br>
+<br>
+# Agregar más reglas según necesidades...<br>
                     </code>
                 </div>
             </section>
@@ -700,57 +700,57 @@ iptables -A INPUT -p tcp --dport 22 -j ACCEPT
                 <h3>Script de Configuración Típica</h3>
                 <div class="code-block">
                     <code>
-#!/bin/bash
-# Configuración básica de iptables para servidor web
-
-# Limpiar reglas existentes
-iptables -F
-iptables -X
-iptables -t nat -F
-iptables -t nat -X
-
-# Políticas por defecto
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
-iptables -P OUTPUT ACCEPT
-
-# Permitir loopback
-iptables -I INPUT 1 -i lo -j ACCEPT
-
-# Permitir conexiones establecidas y relacionadas
-iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-
-# SSH (puerto 22) - SIEMPRE PRIMERO
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-
-# HTTP y HTTPS
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-
-# Ping (ICMP)
-iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
-
-# Log paquetes rechazados (opcional)
-iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
-
-echo "Configuración de iptables aplicada correctamente"
+#!/bin/bash<br>
+# Configuración básica de iptables para servidor web<br>
+<br>
+# Limpiar reglas existentes<br>
+iptables -F<br>
+iptables -X<br>
+iptables -t nat -F<br>
+iptables -t nat -X<br>
+<br>
+# Políticas por defecto<br>
+iptables -P INPUT DROP<br>
+iptables -P FORWARD DROP<br>
+iptables -P OUTPUT ACCEPT<br>
+<br>
+# Permitir loopback<br>
+iptables -I INPUT 1 -i lo -j ACCEPT<br>
+<br>
+# Permitir conexiones establecidas y relacionadas<br>
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT<br>
+<br>
+# SSH (puerto 22) - SIEMPRE PRIMERO<br>
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT<br>
+<br>
+# HTTP y HTTPS<br>
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT<br>
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT<br>
+<br>
+# Ping (ICMP)<br>
+iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT<br>
+<br>
+# Log paquetes rechazados (opcional)<br>
+iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7<br>
+<br>
+echo "Configuración de iptables aplicada correctamente"<br>
                     </code>
                 </div>
 
                 <h3>Monitoreo y Mantenimiento</h3>
                 <div class="code-block">
                     <code>
-# Ver estadísticas de reglas
-sudo iptables -L -v -n
-
-# Resetear contadores
-sudo iptables -Z
-
-# Monitoreo en tiempo real de logs
-sudo tail -f /var/log/syslog | grep iptables
-
-# Ver conexiones activas
-sudo netstat -tupln
+# Ver estadísticas de reglas<br>
+sudo iptables -L -v -n<br>
+<br>
+# Resetear contadores<br>
+sudo iptables -Z<br>
+<br>
+# Monitoreo en tiempo real de logs<br>
+sudo tail -f /var/log/syslog | grep iptables<br>
+<br>
+# Ver conexiones activas<br>
+sudo netstat -tupln<br>
                     </code>
                 </div>
             </section>

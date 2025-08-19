@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Cómo instalar, configurar y usar Graylog para la centralización, análisis y alertado de registros. Incluye Docker Compose, pipelines, extractores, streams, dashboards y buenas prácticas." />
+  <style>
+    :root{
+      --bg:#0b1020; --panel:#121a2e; --muted:#9fb3c8; --text:#eaf1f9; --accent:#60a5fa; --accent2:#22d3ee;
+      --ok:#16a34a; --warn:#eab308; --err:#ef4444; --code:#0f172a;
+    }
+    html,body{background:var(--bg); color:var(--text); font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Inter,sans-serif; line-height:1.6; margin:0}
+    main{max-width:1100px; margin:auto; padding:2.5rem 1.25rem}
+    h1,h2,h3{line-height:1.2}
+    h1{font-size:2.1rem; margin:.2rem 0 1rem}
+    h2{font-size:1.6rem; margin:2rem 0 .6rem}
+    h3{font-size:1.2rem; margin:1.4rem 0 .4rem}
+    p,li{color:var(--muted)}
+    .lead{font-size:1.125rem; color:var(--text)}
+    .callout{background: linear-gradient(135deg, rgba(96,165,250,.08), rgba(34,211,238,.08)); border:1px solid rgba(96,165,250,.25); padding:1rem 1.2rem; border-radius:14px}
+    .grid{display:grid; gap:1rem}
+    .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    code,kbd{background:var(--code); color:#e2e8f0; padding:.15rem .35rem; border-radius:8px}
+    pre{background:var(--code); color:#e2e8f0; padding:1rem; overflow:auto; border-radius:14px; border:1px solid rgba(148,163,184,.15)}
+    .tag{display:inline-block; font-size:.85rem; padding:.1rem .55rem; border-radius:999px; background:rgba(34,211,238,.1); color:var(--accent2); border:1px solid rgba(34,211,238,.25); margin-right:.35rem}
+    .step{background:var(--panel); border:1px solid rgba(148,163,184,.15); border-radius:16px; padding:1rem 1.1rem}
+    .ok{color:var(--ok)} .warn{color:var(--warn)} .err{color:var(--err)}
+    a{color:var(--accent)}
+    .footer{font-size:.9rem; opacity:.9}
+    .table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:14px}
+    .table th,.table td{border-bottom:1px solid rgba(148,163,184,.15); padding:.6rem .8rem; text-align:left}
+    .kbd{border:1px solid rgba(148,163,184,.25); background:var(--panel); padding:.15rem .45rem; border-radius:6px}
+    .muted{opacity:.85}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Graylog: Guía práctica de configuración y empleo</h1>
+    <p class="lead">Centraliza, analiza y alerta sobre tus logs con una plataforma rápida, extensible y amigable. Esta guía parte del artículo de <em>DesdeLinux</em> y lo actualiza con prácticas modernas (Docker Compose, pipelines, seguridad y operación).</p>
+    <p>
+      <span class="tag">Graylog</span>
+      <span class="tag">Logs</span>
+      <span class="tag">SIEM ligero</span>
+      <span class="tag">DevOps</span>
+      <span class="tag">Observabilidad</span>
+    </p>
+  </header>
+
+  <section>
+    <h2>1) ¿Qué es Graylog y cómo funciona?</h2>
+    <div class="grid cols-2">
+      <div class="step">
+        <h3>Componentes básicos</h3>
+        <ul>
+          <li><strong>Graylog Server</strong>: ingesta, procesamiento, reglas/pipelines y API/UI.</li>
+          <li><strong>Data node</strong>: <em>OpenSearch</em> o <em>Elasticsearch</em> para indexar/buscar mensajes.</li>
+          <li><strong>MongoDB</strong>: metadatos y configuración (no almacena los logs).</li>
+        </ul>
+        <p class="muted">Diseño escalable: CPU para Graylog; RAM/IO para el data node; MongoDB con requisitos modestos.</p>
+      </div>
+      <div class="step">
+        <h3>Flujo de procesamiento</h3>
+        <ol>
+          <li><strong>Inputs</strong> reciben mensajes (Syslog, GELF, Beats, HTTP…)</li>
+          <li><strong>Extractores</strong> y <strong>pipelines</strong> normalizan/enriquecen campos.</li>
+          <li><strong>Streams</strong> enrutan en tiempo real a categorías (por app, entorno, severidad, etc.).</li>
+          <li><strong>Dashboards</strong> y <strong>alertas</strong> para visualización y respuesta.</li>
+        </ol>
+      </div>
+    </div>
+    <p class="muted">Graylog destaca como centro único de logs (syslog crudo o estructuras personalizadas) con búsquedas potentes y depuración fina en entornos distribuidos.</p>
+  </section>
+
+  <section>
+    <h2>2) Despliegue recomendado (Docker Compose)</h2>
+    <p class="callout"><strong>Recomendación actual</strong>: usa <strong>Docker Compose</strong> para entornos de prueba/piloto y como base de producción (ajustando volúmenes, memoria, TLS y alta disponibilidad).</p>
+
+<pre><code># docker-compose.yml (ejemplo mínimo educativo)
+services:
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+
+  opensearch:
+    image: opensearchproject/opensearch:2
+    environment:
+      - discovery.type=single-node
+      - "OPENSEARCH_JAVA_OPTS=-Xms2g -Xmx2g"
+    ulimits:
+      memlock: { soft: -1, hard: -1 }
+      nofile: { soft: 65536, hard: 65536 }
+    restart: unless-stopped
+    volumes:
+      - os_data:/usr/share/opensearch/data
+
+  graylog:
+    image: graylog/graylog:5
+    depends_on: [mongo, opensearch]
+    environment:
+      GRAYLOG_NODE_ID_FILE: /usr/share/graylog/data/config/node-id
+      GRAYLOG_PASSWORD_SECRET: "$(openssl rand -base64 32)"
+      GRAYLOG_ROOT_PASSWORD_SHA2: "$(echo -n "TuPasswordFuerte" | sha256sum | cut -d" " -f1)"
+      GRAYLOG_HTTP_EXTERNAL_URI: http://<IP-o-FQDN>:9000/
+      GRAYLOG_ELASTICSEARCH_HOSTS: http://opensearch:9200
+    ports:
+      - "9000:9000"   # UI/API
+      - "12201:12201/udp" # GELF UDP (opcional)
+      - "1514:1514/udp"   # Syslog UDP (opcional)
+    restart: unless-stopped
+    volumes:
+      - gl_data:/usr/share/graylog/data
+
+volumes:
+  mongo_data:
+  os_data:
+  gl_data:
+</code></pre>
+
+<pre><code># Levantar el stack
+docker compose up -d
+
+# Acceso
+# Navega a: http://<IP-o-FQDN>:9000
+# Usuario: admin  (cambia la contraseña tras el primer login)
+</code></pre>
+
+    <p class="muted">Para producción: separa nodos (Graylog / OpenSearch / MongoDB), configura TLS, ajusta JVM/heap y prepara copias de seguridad y retenciones.</p>
+  </section>
+
+  <section>
+    <h2>3) (Opcional) Instalación clásica en Linux</h2>
+    <p>El artículo de <em>DesdeLinux</em> describe una instalación tradicional (paquetes + Java + MongoDB + Elasticsearch + Graylog). Si necesitas este enfoque, valida versiones soportadas y repositorios actuales antes de instalar. En general:</p>
+    <ol>
+      <li>Instala Java (JRE/JDK actualizado).</li>
+      <li>Instala y habilita <strong>MongoDB</strong>.</li>
+      <li>Instala y configura <strong>OpenSearch</strong> o <strong>Elasticsearch</strong> (asigna nombre de clúster, heap, almacenamiento rápido).</li>
+      <li>Instala <strong>graylog-server</strong>, genera <code>password_secret</code> y <code>root_password_sha2</code>, adapta <code>rest_listen_uri</code>/<code>http_external_uri</code> y abre puertos UI/inputs.</li>
+    </ol>
+    <p class="warn"><strong>Nota:</strong> los comandos y versiones del artículo original pueden estar desactualizados (p. ej., ES 5.x y MongoDB 3.6). Emplea versiones soportadas por tu release de Graylog y distribución.</p>
+  </section>
+
+  <section>
+    <h2>4) Configuración inicial de Graylog</h2>
+    <div class="grid cols-2">
+      <div class="step">
+        <h3>4.1 Crear <em>inputs</em></h3>
+        <ol>
+          <li>Menú <kbd class="kbd">System → Inputs</kbd> → <em>Launch new input</em>.</li>
+          <li>Elige un tipo (p. ej., <strong>Syslog UDP</strong>, <strong>GELF TCP/UDP</strong>, <strong>Beats</strong>, <strong>HTTP</strong>).</li>
+          <li>Define puerto/codec y <em>bind address</em>; guarda.</li>
+        </ol>
+        <p class="muted">Para agentes: usa <strong>Graylog Sidecar</strong> (gestiona Filebeat/Winlogbeat a escala) o envía <strong>GELF</strong> desde tus aplicaciones.</p>
+      </div>
+      <div class="step">
+        <h3>4.2 Streams (enrutado)</h3>
+        <p>Los <strong>streams</strong> clasifican mensajes en tiempo real mediante reglas (ej.: <code>source:api-*</code>, <code>env:prod</code>, <code>level&gt;=ERROR</code>). Úsalos para aislar apps/entornos y disparar alertas.</p>
+      </div>
+      <div class="step">
+        <h3>4.3 Extractores (en el input)</h3>
+        <p>Permiten extraer campos a partir de texto crudo (grok/regex, corte delimitado, JSON, key=value). Ideales para normalizar syslog o logs heredados.</p>
+      </div>
+      <div class="step">
+        <h3>4.4 Pipelines (reglas)</h3>
+<pre><code>// Ejemplo: normaliza severidad y enriquece con ambiente
+rule "normaliza_severidad"
+when has_field("level")
+then
+  let lvl = to_long($message.level);
+  set_field("severity", case(
+    lvl >= 50, "CRITICAL",
+    lvl >= 40, "ERROR",
+    lvl >= 30, "WARN",
+    lvl >= 20, "INFO",
+    "DEBUG"));
+  set_field("env", "prod");
+end</code></pre>
+        <p>Asocia la pipeline a un stream para que se aplique sólo a sus mensajes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>5) Búsqueda, paneles y alertas</h2>
+    <div class="grid cols-2">
+      <div class="step">
+        <h3>5.1 Búsquedas</h3>
+        <ul>
+          <li>Consulta rápida: <code>env:prod AND severity:ERROR</code></li>
+          <li>Rangos de tiempo relativos/absolutos, guardado de búsquedas.</li>
+          <li>Agregaciones: <em>group by</em> campos, percentiles, conteos.</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h3>5.2 Dashboards</h3>
+        <ul>
+          <li>Widgets: histogramas por severidad, top <code>source</code>, <em>latency percentiles</em>.</li>
+          <li>Filtros y variables (app, entorno) para paneles reutilizables.</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h3>5.3 Alertas</h3>
+        <ul>
+          <li>Define <em>event definitions</em> (umbral, ausencia de logs, patrón de error).</li>
+          <li>Notificaciones: email, webhooks, Slack, etc.</li>
+          <li>Corrige ruido con agregación por ventanas (p. ej., “&gt;=50 errores/5min”).</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h3>5.4 Buenas prácticas de consultas</h3>
+        <ul>
+          <li>Prefiere campos <em>keyword</em> para igualdad; usa <code>.text</code> para full-text.</li>
+          <li>Limita el tiempo y el número de resultados; apóyate en agregaciones.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>6) Retención, archivado y costes</h2>
+    <ul>
+      <li>Define <strong>índices</strong> por criticidad/tiempo (prod vs. dev) y tamaños de segmento prudentes.</li>
+      <li>Políticas de <strong>retención</strong> por días o por tamaño; rota y elimina automáticamente.</li>
+      <li>Exporta a almacenamiento económico (archivado) si requieres retención prolongada.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>7) Seguridad y cumplimiento</h2>
+    <ul>
+      <li><strong>TLS en todo</strong>: UI/API y entradas (GELF/Beats/HTTP) con certificados válidos.</li>
+      <li><strong>RBAC</strong> y <strong>carpetas</strong> por equipo/área; evita cuentas compartidas.</li>
+      <li><strong>Hardening</strong>: restringe puertos de inputs, red interna para OpenSearch/MongoDB.</li>
+      <li><strong>Auditoría</strong>: registra cambios de configuración y accesos.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>8) Operación y escalado</h2>
+    <table class="table">
+      <thead><tr><th>Tarea</th><th>Consejo</th></tr></thead>
+      <tbody>
+        <tr><td>Tamaño de heap</td><td>Graylog: ~60–80% de la RAM del contenedor/vm asignada al proceso; Data node: ~50% (deja caché al SO).</td></tr>
+        <tr><td>Almacenamiento</td><td>NVMe/SSD para índices; separa volúmenes de datos y logs del sistema.</td></tr>
+        <tr><td>Alta disponibilidad</td><td>&ge;2 nodos Graylog detrás de balanceador; data node en clúster; MongoDB replicaset.</td></tr>
+        <tr><td>Throughput</td><td>Divide inputs por tipo/fuente; usa pipelines ligeras; evita regex costosos.</td></tr>
+        <tr><td>Backups</td><td>Respalda MongoDB (metadatos) y <em>snapshots</em> del data node; documenta recuperación.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>9) Ejemplos rápidos</h2>
+
+    <h3>9.1 Input GELF UDP (aplicaciones)</h3>
+    <ol>
+      <li><kbd class="kbd">System → Inputs</kbd> → <em>GELF UDP</em> (puerto <code>12201</code>).</li>
+      <li>En tu app (ej. <em>logger</em> GELF): apunta a <code>graylog:12201</code>.</li>
+    </ol>
+
+    <h3>9.2 Extractor grok (Nginx)</h3>
+<pre><code>%{IPORHOST:clientip} - %{DATA:user} \[%{HTTPDATE:timestamp}\] "%{WORD:verb} %{DATA:request} HTTP/%{NUMBER:http_version}" %{NUMBER:response} %{NUMBER:bytes}
+</code></pre>
+
+    <h3>9.3 Reglas de pipeline (enriquecimiento simple)</h3>
+<pre><code>rule "marca_errores_5xx"
+when to_int($message.response) >= 500
+then
+  set_field("is_error", true);
+  set_field("service", "nginx");
+end
+</code></pre>
+  </section>
+
+  <section>
+    <h2>10) Checklist de producción</h2>
+    <ul>
+      <li>☑ Cambiaste <code>password_secret</code> y la contraseña de <code>admin</code>.</li>
+      <li>☑ Configuraste <strong>TLS</strong> (UI e inputs).</li>
+      <li>☑ Definiste <strong>streams</strong>, <strong>pipelines</strong> y <strong>alertas</strong> básicas.</li>
+      <li>☑ Estableciste <strong>retención</strong> y <strong>backups</strong>.</li>
+      <li>☑ Monitorizas uso de disco/heap y salud del clúster.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Referencias y lecturas</h2>
+    <ul>
+      <li>Artículo base: <a href="https://blog.desdelinux.net/graylog-una-herramienta-para-la-administracion-y-analisis-de-registros/">DesdeLinux: Graylog – administración y análisis de registros</a></li>
+      <li>Documentación oficial de Graylog (instalación, arquitectura, conceptos).</li>
+    </ul>
+    <p class="footer" style="text-align: center; margin-top: 20px;">
+      <a href="../pildoras/pildoras.html" style="color: #60a5fa; text-decoration: none;">Volver a todas las píldoras</a>
+    </p>
+  </section>
+</main>
+</body>
+</html>

@@ -10,23 +10,24 @@
             line-height: 1.6;
             margin: 0;
             padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
             min-height: 100vh;
+            color: #e0e0e0;
         }
         
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 30, 46, 0.95);
             border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             overflow: hidden;
             backdrop-filter: blur(10px);
         }
         
         .header {
-            background: linear-gradient(135deg, #2c3e50, #3498db);
-            color: white;
+            background: linear-gradient(135deg, #0f3460, #1a5ca3);
+            color: #ffffff;
             padding: 40px 30px;
             text-align: center;
             position: relative;
@@ -49,6 +50,7 @@
             font-weight: 300;
             position: relative;
             z-index: 1;
+            color: #ffffff;
         }
         
         .subtitle {
@@ -57,6 +59,7 @@
             margin-top: 10px;
             position: relative;
             z-index: 1;
+            color: #a0c4ff;
         }
         
         .content {
@@ -64,8 +67,8 @@
         }
         
         h2 {
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
+            color: #64b5f6;
+            border-bottom: 3px solid #4fc3f7;
             padding-bottom: 10px;
             margin-top: 40px;
             font-size: 1.8em;
@@ -73,20 +76,20 @@
         }
         
         h3 {
-            color: #34495e;
+            color: #4fc3f7;
             margin-top: 30px;
             font-size: 1.4em;
         }
         
         .code-block {
-            background: #2c3e50;
-            color: #ecf0f1;
+            background: #1e1e2e;
+            color: #f0f0f0;
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
             overflow-x: auto;
             position: relative;
-            border-left: 4px solid #3498db;
+            border-left: 4px solid #4fc3f7;
         }
         
         .code-block::before {
@@ -106,69 +109,72 @@
         }
         
         .warning {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-left: 4px solid #fdcb6e;
+            background: rgba(251, 188, 4, 0.15);
+            border: 1px solid #ffb74d;
+            border-left: 4px solid #ffb74d;
             padding: 15px;
             margin: 20px 0;
             border-radius: 5px;
+            color: #ffd54f;
         }
         
         .tip {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            border-left: 4px solid #28a745;
+            background: rgba(76, 175, 80, 0.15);
+            border: 1px solid #81c784;
+            border-left: 4px solid #81c784;
             padding: 15px;
             margin: 20px 0;
             border-radius: 5px;
+            color: #a5d6a7;
         }
         
         .info {
-            background: #d1ecf1;
-            border: 1px solid #bee5eb;
-            border-left: 4px solid #17a2b8;
+            background: rgba(33, 150, 243, 0.15);
+            border: 1px solid #64b5f6;
+            border-left: 4px solid #64b5f6;
             padding: 15px;
             margin: 20px 0;
             border-radius: 5px;
+            color: #90caf9;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            background: white;
+            background: #1e1e2e;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
         
         th, td {
             padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #444;
         }
         
         th {
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background: linear-gradient(135deg, #1e88e5, #1565c0);
             color: white;
             font-weight: 600;
         }
         
         tr:hover {
-            background-color: #f8f9fa;
+            background-color: #333;
         }
         
         .toc {
-            background: #f8f9fa;
+            background: rgba(30, 30, 46, 0.7);
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
-            border-left: 4px solid #3498db;
+            border-left: 4px solid #4fc3f7;
         }
         
         .toc h3 {
             margin-top: 0;
-            color: #2c3e50;
+            color: #64b5f6;
         }
         
         .toc ul {
@@ -181,26 +187,27 @@
         }
         
         .toc ul li a {
-            color: #3498db;
+            color: #4fc3f7;
             text-decoration: none;
             transition: color 0.3s;
         }
         
         .toc ul li a:hover {
-            color: #2980b9;
+            color: #81d4fa;
             text-decoration: underline;
         }
         
         .highlight {
-            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            background: linear-gradient(120deg, #29b6f6 0%, #00bcd4 100%);
             padding: 2px 6px;
             border-radius: 4px;
             font-weight: 600;
+            color: #000;
         }
         
         .footer {
-            background: #34495e;
-            color: white;
+            background: #1a237e;
+            color: #bbdefb;
             text-align: center;
             padding: 20px;
             margin-top: 40px;
@@ -319,7 +326,7 @@ INPUT    → Paquetes dirigidos al sistema local<br>
 OUTPUT   → Paquetes originados en el sistema local<br>
 FORWARD  → Paquetes que atraviesan el sistema (routing)<br>
 PREROUTING  → Procesamiento antes del routing<br>
-POSTROUTING → Procesamiento después del routing
+POSTROUTING → Procesamiento después del routing<br>
                     </code>
                 </div>
 
@@ -342,27 +349,27 @@ POSTROUTING → Procesamiento después del routing
                 
                 <div class="code-block">
                     <code>
-# Ubuntu/Debian
-sudo apt update && sudo apt install iptables
-
-# CentOS/RHEL/Fedora
-sudo yum install iptables
-# o
-sudo dnf install iptables
-
-# Arch Linux
-sudo pacman -S iptables
+# Ubuntu/Debian<br>
+sudo apt update && sudo apt install iptables<br>
+<br>
+# CentOS/RHEL/Fedora<br>
+sudo yum install iptables<br>
+# o<br>
+sudo dnf install iptables<br>
+<br>
+# Arch Linux<br>
+sudo pacman -S iptables<br>
                     </code>
                 </div>
 
                 <h3>Verificar Estado</h3>
                 <div class="code-block">
                     <code>
-# Verificar si iptables está funcionando
-sudo iptables -L -v -n
-
-# Verificar versión
-iptables --version
+# Verificar si iptables está funcionando<br>
+sudo iptables -L -v -n<br>
+<br>
+# Verificar versión<br>
+iptables --version<br>
                     </code>
                 </div>
 
@@ -378,7 +385,7 @@ iptables --version
                 
                 <div class="code-block">
                     <code>
-iptables [-t tabla] [acción] [cadena] [criterios] -j [target]
+iptables [-t tabla] [acción] [cadena] [criterios] -j [target]</br>
                     </code>
                 </div>
 
@@ -448,13 +455,14 @@ iptables [-t tabla] [acción] [cadena] [criterios] -j [target]
                 <div class="code-block">
                     <code>
 # Listar todas las reglas con números de línea</br>
-sudo iptables -L -n --line-numbers
-
-# Ver reglas con estadísticas
-sudo iptables -L -v -n
-
-# Ver reglas de una tabla específica
-sudo iptables -t nat -L -n
+sudo iptables -L -n --line-numbers</br>
+</br>
+# Ver reglas con estadísticas</br>
+sudo iptables -L -v -n</br>
+</br>
+# Ver reglas de una tabla específica</br>
+sudo iptables -t nat -L -n</br>
+<br>
                     </code>
                 </div>
 
@@ -467,9 +475,9 @@ sudo iptables -t nat -L -n
 sudo iptables -P INPUT DROP<br>
 sudo iptables -P FORWARD DROP<br>
 sudo iptables -P OUTPUT ACCEPT<br>
-
-# Ver políticas actuales
-sudo iptables -L | grep policy
+# Ver políticas actuales<br>
+sudo iptables -L | grep policy<br>
+<br>
                     </code>
                 </div>
 
@@ -766,5 +774,3 @@ sudo netstat -tupln<br>
                     <li>Su estabilidad y confiabilidad probada</li>
                     <li>La compatibilidad hacia atrás que mantienen las nuevas herramientas</li>
                 </ul>
-
-               

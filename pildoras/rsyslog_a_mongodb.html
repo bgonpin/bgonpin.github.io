@@ -1,0 +1,141 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Enviar salidas de rsyslog a MongoDB</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #121a2b;
+      --text: #e6edf3;
+      --muted: #9fb0c0;
+      --accent: #5fb3ff;
+      --code: #0e1729;
+      --code-border: #1d2942;
+      --kbd: #0f1b30;
+    }
+    html, body { background: var(--bg); color: var(--text); margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; line-height: 1.6; }
+    .wrap { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    h1, h2, h3 { line-height: 1.25; }
+    h1 { font-size: 2rem; margin: 0 0 1rem; }
+    h2 { font-size: 1.35rem; margin-top: 2rem; }
+    p, li { color: var(--text); }
+    .card { background: var(--card); border: 1px solid #1a2540; border-radius: 14px; padding: 1.1rem 1.2rem; margin: 1rem 0; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    pre { background: var(--code); border: 1px solid var(--code-border); border-radius: 12px; padding: 1rem; overflow-x: auto; }
+    pre code { color: #cde4ff; }
+    code.inline { background: var(--kbd); border: 1px solid var(--code-border); border-radius: 6px; padding: 0.15rem 0.35rem; }
+    .muted { color: var(--muted); }
+    .tip { border-left: 4px solid var(--accent); padding-left: 12px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>¿Cómo enviar las salidas de rsyslog a una base de datos MongoDB?</h1>
+    <p class="muted">Guía rápida para almacenar eventos de syslog en MongoDB usando el módulo <code class="inline">ommongodb</code> de rsyslog.</p>
+
+    <div class="card">
+      <h2>1) Requisitos previos</h2>
+      <ul>
+        <li>Linux con <strong>rsyslog</strong> (ideal &ge; 8.0).</li>
+        <li>Un servidor <strong>MongoDB</strong> en ejecución.</li>
+        <li>El módulo de salida <code class="inline">ommongodb</code> para rsyslog.</li>
+      </ul>
+      <p>Instalación en Debian/Ubuntu:</p>
+      <pre><code>sudo apt-get update
+sudo apt-get install rsyslog-mongodb</code></pre>
+      <p>Instalación en RHEL/CentOS/Fedora:</p>
+      <pre><code>sudo yum install rsyslog-mongodb</code></pre>
+    </div>
+
+    <div class="card">
+      <h2>2) Cargar el módulo <code class="inline">ommongodb</code></h2>
+      <p>Edita <code class="inline">/etc/rsyslog.d/mongodb.conf</code> (o <code class="inline">/etc/rsyslog.conf</code>) y añade:</p>
+      <pre><code># Cargar el módulo de salida a MongoDB
+module(load="ommongodb")
+
+# Enviar todos los eventos a MongoDB
+action(type="ommongodb"
+       server="127.0.0.1"           # IP/host de MongoDB
+       serverport="27017"           # Puerto de MongoDB
+       db="rsyslog"                 # Base de datos destino
+       collection="syslog"          # Colección destino
+)</code></pre>
+    </div>
+
+    <div class="card">
+      <h2>3) Estructura de los documentos</h2>
+      <p>Por defecto, <code class="inline">ommongodb</code> inserta documentos similares a:</p>
+      <pre><code>{
+  "timestamp": "2025-08-20T10:45:30Z",
+  "host": "mi-servidor",
+  "sys": "authpriv",
+  "severity": "notice",
+  "msg": "Usuario root ha iniciado sesión"
+}</code></pre>
+    </div>
+
+    <div class="card">
+      <h2>4) Probar la configuración</h2>
+      <ol>
+        <li>Reinicia rsyslog:</li>
+      </ol>
+      <pre><code>sudo systemctl restart rsyslog</code></pre>
+      <ol start="2">
+        <li>Genera un evento de prueba:</li>
+      </ol>
+      <pre><code>logger "Prueba de envío a MongoDB desde rsyslog"</code></pre>
+      <ol start="3">
+        <li>Verifica en MongoDB:</li>
+      </ol>
+      <pre><code>mongosh
+use rsyslog
+db.syslog.find().pretty()</code></pre>
+    </div>
+
+    <div class="card">
+      <h2>5) (Opcional) Plantillas y filtros</h2>
+      <p>Puedes definir una plantilla para controlar los campos enviados:</p>
+      <pre><code>template(name="MongoTemplate" type="list") {
+    property(name="timereported" dateFormat="rfc3339")
+    constant(value=" ")
+    property(name="hostname")
+    constant(value=" ")
+    property(name="syslogtag")
+    constant(value=" ")
+    property(name="msg")
+}
+
+action(type="ommongodb"
+       server="127.0.0.1"
+       db="rsyslog"
+       collection="syslog"
+       template="MongoTemplate")</code></pre>
+    </div>
+
+    <div class="card">
+      <h2>6) Consideraciones</h2>
+      <ul>
+        <li><strong>Crecimiento</strong>: los logs pueden crecer muy rápido; considera índices TTL o políticas de retención.</li>
+        <li><strong>Índices</strong>: crear un índice en <code class="inline">timestamp</code> mejora las consultas:</li>
+      </ul>
+      <pre><code>db.syslog.createIndex({ "timestamp": 1 })</code></pre>
+      <ul>
+        <li><strong>Seguridad</strong>: usa autenticación/SSL en MongoDB en entornos productivos.</li>
+        <li><strong>Alternativas</strong>: para análisis/SIEM es común rsyslog → Wazuh/Elasticsearch, pero MongoDB es útil para almacenamiento flexible.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <p><strong>Extra</strong>: si quieres, puedo prepararte un ejemplo con Docker (rsyslog + MongoDB) listo para laboratorio.</p>
+    </div>
+
+    <p class="muted">© 2025 — Guía breve.</p>
+  </div>
+</body>
+</html>

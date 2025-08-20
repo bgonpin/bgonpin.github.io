@@ -4,95 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zeek - Pildoras</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        code, pre {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header class="py-4" style="background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); border-radius: 15px; margin-bottom: 20px;">
-        <div class="container">
-            <h1 class="text-center fw-bold" style="color: #4CAF50;">Zeek - Pildoras</h1>
-        </div>
-    </header>
-    <main class="container py-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-network-wired fa-2x" style="color: #4CAF50;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4CAF50;">¿Qué es Zeek?</h2>
-                        <p class="card-text">Zeek, antes conocido como Bro, es un <strong>analizador de red de código abierto</strong> muy potente. A diferencia de un sistema de detección de intrusiones (IDS) tradicional que solo busca firmas de ataques conocidos, Zeek hace algo más profundo: <strong>analiza el tráfico de la red para construir un registro detallado de todo lo que está sucediendo</strong>.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-network-wired fa-2x" style="color: #4A90E2;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4A90E2;">Características y Funcionalidades</h2>
-                        <p class="card-text">Piensa en Zeek como un forense digital que documenta cada conversación en tu red. No solo dice "hubo una conexión", sino que te dice <strong>quién habló con quién, cuándo, por cuánto tiempo, qué protocolo usaron y, en muchos casos, el contenido de la comunicación</strong>. Por ejemplo, si alguien visita una página web, Zeek no solo registra la conexión, sino también la URL, el servidor, el navegador utilizado, etc.</p>
-                        <p class="card-text">Esto lo hace invaluable para la seguridad de la red por varias razones:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Detección de amenazas</strong>: Puede identificar comportamientos anómalos o maliciosos que no tienen una firma conocida, como escaneos de puertos inusuales, conexiones a servidores sospechosos o tráfico cifrado que de repente cambia de patrón.</li>
-                            <li class="mb-2"><strong>Análisis forense</strong>: Si ocurre un incidente de seguridad, los registros de Zeek son una fuente de información esencial para entender qué pasó exactamente, cómo se movió el atacante y qué datos pudo haber comprometido.</li>
-                            <li class="mb-2"><strong>Solución de problemas</strong>: Sus registros detallados también son muy útiles para los administradores de sistemas que necesitan diagnosticar problemas de rendimiento o de red.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <h1>Zeek - Pildoras</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Qué es Zeek?</h2>
+            <p>Zeek, antes conocido como Bro, es un <strong>analizador de red de código abierto</strong> muy potente. A diferencia de un sistema de detección de intrusiones (IDS) tradicional que solo busca firmas de ataques conocidos, Zeek hace algo más profundo: <strong>analiza el tráfico de la red para construir un registro detallado de todo lo que está sucediendo</strong>.</p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-exclamation-triangle fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">Importancia en Ciberseguridad</h2>
-                        <p class="card-text">En resumen, Zeek es una herramienta fundamental para la seguridad y la visibilidad de la red, ya que proporciona una imagen completa y detallada de la actividad en tu infraestructura, yendo más allá de la simple detección de amenazas.</p>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Características y Funcionalidades</h2>
+            <p>Piensa en Zeek como un forense digital que documenta cada conversación en tu red. No solo dice "hubo una conexión", sino que te dice <strong>quién habló con quién, cuándo, por cuánto tiempo, qué protocolo usaron y, en muchos casos, el contenido de la comunicación</strong>. Por ejemplo, si alguien visita una página web, Zeek no solo registra la conexión, sino también la URL, el servidor, el navegador utilizado, etc.</p>
+            <p>Esto lo hace invaluable para la seguridad de la red por varias razones:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Detección de amenazas</strong>: Puede identificar comportamientos anómalos o maliciosos que no tienen una firma conocida, como escaneos de puertos inusuales, conexiones a servidores sospechosos o tráfico cifrado que de repente cambia de patrón.</li>
+                <li class="mb-2"><strong>Análisis forense</strong>: Si ocurre un incidente de seguridad, los registros de Zeek son una fuente de información esencial para entender qué pasó exactamente, cómo se movió el atacante y qué datos pudo haber comprometido.</li>
+                <li class="mb-2"><strong>Solución de problemas</strong>: Sus registros detallados también son muy útiles para los administradores de sistemas que necesitan diagnosticar problemas de rendimiento o de red.</li>
+            </ul>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-network-wired fa-2x" style="color: #4A90E2;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4A90E2;">¿Cómo se utiliza en la práctica?</h2>
-                        <p class="card-text">Zeek se utiliza en entornos de ciberseguridad para:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Monitoreo continuo</strong>: Analiza el tráfico en tiempo real y genera registros detallados que ayudan a detectar amenazas y anomalías.</li>
-                            <li class="mb-2"><strong>Análisis forense post-incidente</strong>: Proporciona información valiosa para investigar incidentes de seguridad al ofrecer registros completos del tráfico de red.</li>
-                            <li class="mb-2"><strong>Identificación de vulnerabilidades</strong>: Puede detectar patrones inusuales en el tráfico que podrían indicar intentos de explotación o escaneo de puertos.</li>
-                            <li class="mb-2"><strong>Compliance y auditoría</strong>: Los registros detallados pueden ser utilizados para cumplir con regulaciones de seguridad y auditorías de red.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Importancia en Ciberseguridad</h2>
+            <p>En resumen, Zeek es una herramienta fundamental para la seguridad y la visibilidad de la red, ya que proporciona una imagen completa y detallada de la actividad en tu infraestructura, yendo más allá de la simple detección de amenazas.</p>
         </div>
-    </main>
-    <footer class="py-4 mt-5" style="background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); border-radius: 15px; margin-top: 20px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0 fw-bold">&copy; 2025. Benito González Piñeiro.</p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <a href="pildoras.html" class="btn btn-dark">Ir a Pildoras</a>
-                </div>
-            </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Cómo se utiliza en la práctica?</h2>
+            <p>Zeek se utiliza en entornos de ciberseguridad para:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Monitoreo continuo</strong>: Analiza el tráfico en tiempo real y genera registros detallados que ayudan a detectar amenazas y anomalías.</li>
+                <li class="mb-2"><strong>Análisis forense post-incidente</strong>: Proporciona información valiosa para investigar incidentes de seguridad al ofrecer registros completos del tráfico de red.</li>
+                <li class="mb-2"><strong>Identificación de vulnerabilidades</strong>: Puede detectar patrones inusuales en el tráfico que podrían indicar intentos de explotación o escaneo de puertos.</li>
+                <li class="mb-2"><strong>Compliance y auditoría</strong>: Los registros detallados pueden ser utilizados para cumplir con regulaciones de seguridad y auditorías de red.</li>
+            </ul>
         </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
     </footer>
+</div>
+
 </body>
 </html>

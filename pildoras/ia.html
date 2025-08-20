@@ -4,103 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inteligencia Artificial - Pildoras</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        code, pre {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header class="py-4" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; margin-bottom: 20px;">
-        <div class="container">
-            <h1 class="text-center fw-bold" style="color: #4A90E2;">Inteligencia Artificial - Pildoras</h1>
-        </div>
-    </header>
-    <main class="container py-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-robot fa-2x" style="color: #4A90E2;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4A90E2;">¿Qué es la Inteligencia Artificial?</h2>
-                        <p class="card-text">La IA, o <strong>inteligencia artificial</strong>, es una rama de la informática que se enfoca en crear máquinas que pueden imitar la inteligencia humana. Esto incluye la capacidad de aprender, razonar, resolver problemas, percibir y comprender el lenguaje. En lugar de ser programadas con reglas específicas para cada tarea, las máquinas de IA usan algoritmos para <strong>aprender de los datos y mejorar su rendimiento</strong> con el tiempo.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-robot fa-2x" style="color: #4CAF50;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4CAF50;">Aplicaciones de la IA en Ciberseguridad</h2>
-                        <p class="card-text">La aplicación de la IA en ciberseguridad es una de las áreas más prometedoras para fortalecer las defensas contra las amenazas digitales. Aquí te mostramos cómo se usa:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Detección de amenazas avanzada:</strong> La IA puede analizar grandes volúmenes de datos de red en tiempo real para identificar patrones inusuales que podrían indicar un ataque. A diferencia de los sistemas tradicionales basados en firmas, la IA puede detectar <strong>amenazas nuevas o desconocidas</strong> (zero-day) al reconocer comportamientos anómalos, como un software que intenta acceder a archivos sensibles de manera inusual.</li>
-                            <li class="mb-2"><strong>Análisis de vulnerabilidades:</strong> Los sistemas de IA pueden escanear redes y aplicaciones para encontrar puntos débiles. Pueden simular ataques y predecir dónde un adversario podría explotar una vulnerabilidad. Esto ayuda a los equipos de seguridad a <strong>priorizar las correcciones</strong> de manera más eficiente.</li>
-                            <li class="mb-2"><strong>Automatización de respuestas:</strong> Cuando se detecta un ataque, la IA puede automatizar la respuesta. Por ejemplo, si identifica un malware, puede aislar el dispositivo afectado de la red, bloquear el tráfico malicioso y notificar al equipo de seguridad, <strong>reduciendo el tiempo de reacción</strong> y minimizando los daños.</li>
-                            <li class="mb-2"><strong>Análisis del comportamiento de usuarios y entidades (UEBA):</strong> La IA crea perfiles de comportamiento para cada usuario y dispositivo en una red. Si una cuenta se comporta de una manera que no concuerda con su perfil (por ejemplo, un empleado que intenta acceder a datos que normalmente no usa), la IA puede marcar esa actividad como sospechosa y tomar medidas para investigar.</li>
-                            <li class="mb-2"><strong>Protección contra el phishing y el spam:</strong> Los algoritmos de IA pueden analizar el contenido, la estructura y los metadatos de los correos electrónicos para identificar mensajes de phishing con una alta precisión. Aprenden a reconocer tácticas engañosas y <strong>bloquear correos maliciosos</strong> antes de que lleguen a la bandeja de entrada de los usuarios.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <h1>Inteligencia Artificial - Pildoras</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Qué es la Inteligencia Artificial?</h2>
+            <p>La IA, o <strong>inteligencia artificial</strong>, es una rama de la informática que se enfoca en crear máquinas que pueden imitar la inteligencia humana. Esto incluye la capacidad de aprender, razonar, resolver problemas, percibir y comprender el lenguaje. En lugar de ser programadas con reglas específicas para cada tarea, las máquinas de IA usan algoritmos para <strong>aprender de los datos y mejorar su rendimiento</strong> con el tiempo.</p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-exclamation-triangle fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">Vulnerabilidades de la IA en Ciberseguridad</h2>
-                        <p class="card-text">Aunque la IA ofrece poderosas capacidades para proteger sistemas, también presenta vulnerabilidades que los atacantes pueden explotar:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Ataques de adversarial:</strong> Los atacantes pueden manipular entradas de IA para hacer que produzca resultados incorrectos. Por ejemplo, añadir pequeños cambios imperceptibles a una imagen puede hacer que un sistema de reconocimiento facial lo reconozca como otra persona.</li>
-                            <li class="mb-2"><strong>Ataques de inyección de datos:</strong> Si los sistemas de IA se entrenan con datos maliciosos, pueden aprender comportamientos incorrectos. Esto puede resultar en decisiones erróneas o vulnerabilidades en la defensa.</li>
-                            <li class="mb-2"><strong>Ataques a modelos preentrenados:</strong> Los modelos de IA preentrenados pueden ser vulnerables a ataques específicos si no se protegen adecuadamente. Estos modelos pueden tener puntos débiles que los atacantes pueden explotar.</li>
-                            <li class="mb-2"><strong>Falta de transparencia:</strong> La "caja negra" de muchos modelos de IA dificulta entender cómo toman decisiones, lo cual puede ocultar vulnerabilidades o comportamientos no deseados.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Aplicaciones de la IA en Ciberseguridad</h2>
+            <p>La aplicación de la IA en ciberseguridad es una de las áreas más prometedoras para fortalecer las defensas contra las amenazas digitales. Aquí te mostramos cómo se usa:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Detección de amenazas avanzada:</strong> La IA puede analizar grandes volúmenes de datos de red en tiempo real para identificar patrones inusuales que podrían indicar un ataque. A diferencia de los sistemas tradicionales basados en firmas, la IA puede detectar <strong>amenazas nuevas o desconocidas</strong> (zero-day) al reconocer comportamientos anómalos, como un software que intenta acceder a archivos sensibles de manera inusual.</li>
+                <li class="mb-2"><strong>Análisis de vulnerabilidades:</strong> Los sistemas de IA pueden escanear redes y aplicaciones para encontrar puntos débiles. Pueden simular ataques y predecir dónde un adversario podría explotar una vulnerabilidad. Esto ayuda a los equipos de seguridad a <strong>priorizar las correcciones</strong> de manera más eficiente.</li>
+                <li class="mb-2"><strong>Automatización de respuestas:</strong> Cuando se detecta un ataque, la IA puede automatizar la respuesta. Por ejemplo, si identifica un malware, puede aislar el dispositivo afectado de la red, bloquear el tráfico malicioso y notificar al equipo de seguridad, <strong>reduciendo el tiempo de reacción</strong> y minimizando los daños.</li>
+                <li class="mb-2"><strong>Análisis del comportamiento de usuarios y entidades (UEBA):</strong> La IA crea perfiles de comportamiento para cada usuario y dispositivo en una red. Si una cuenta se comporta de una manera que no concuerda con su perfil (por ejemplo, un empleado que intenta acceder a datos que normalmente no usa), la IA puede marcar esa actividad como sospechosa y tomar medidas para investigar.</li>
+                <li class="mb-2"><strong>Protección contra el phishing y el spam:</strong> Los algoritmos de IA pueden analizar el contenido, la estructura y los metadatos de los correos electrónicos para identificar mensajes de phishing con una alta precisión. Aprenden a reconocer tácticas engañosas y <strong>bloquear correos maliciosos</strong> antes de que lleguen a la bandeja de entrada de los usuarios.</li>
+            </ul>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-robot fa-2x" style="color: #4A90E2;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4A90E2;">¿Cómo mitigar estas vulnerabilidades?</h2>
-                        <p class="card-text">Para proteger los sistemas de IA en ciberseguridad, se pueden implementar varias estrategias:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Protección contra ataques adversariales:</strong> Implementar técnicas de defensa como el entrenamiento robusto o la detección de entradas adversariales para identificar y prevenir intentos de manipulación.</li>
-                            <li class="mb-2"><strong>Validación de datos:</strong> Asegurar que los conjuntos de datos utilizados para entrenar modelos sean confiables y no contengan información maliciosa o sesgada.</li>
-                            <li class="mb-2"><strong>Implementar técnicas de privacidad:</strong> Utilizar técnicas como el aprendizaje federado o la privacidad diferencial para proteger los datos durante el entrenamiento de modelos.</li>
-                            <li class="mb-2"><strong>Monitoreo continuo:</strong> Supervisar el comportamiento de los modelos en tiempo real para detectar posibles desviaciones o ataques.</li>
-                            <li class="mb-2"><strong>Pruebas de seguridad:</strong> Realizar pruebas regulares de penetración y evaluaciones de riesgos específicas para sistemas de IA.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Vulnerabilidades de la IA en Ciberseguridad</h2>
+            <p>Aunque la IA ofrece poderosas capacidades para proteger sistemas, también presenta vulnerabilidades que los atacantes pueden explotar:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Ataques de adversarial:</strong> Los atacantes pueden manipular entradas de IA para hacer que produzca resultados incorrectos. Por ejemplo, añadir pequeños cambios imperceptibles a una imagen puede hacer que un sistema de reconocimiento facial lo reconozca como otra persona.</li>
+                <li class="mb-2"><strong>Ataques de inyección de datos:</strong> Si los sistemas de IA se entrenan con datos maliciosos, pueden aprender comportamientos incorrectos. Esto puede resultar en decisiones erróneas o vulnerabilidades en la defensa.</li>
+                <li class="mb-2"><strong>Ataques a modelos preentrenados:</strong> Los modelos de IA preentrenados pueden ser vulnerables a ataques específicos si no se protegen adecuadamente. Estos modelos pueden tener puntos débiles que los atacantes pueden explotar.</li>
+                <li class="mb-2"><strong>Falta de transparencia:</strong> La "caja negra" de muchos modelos de IA dificulta entender cómo toman decisiones, lo cual puede ocultar vulnerabilidades o comportamientos no deseados.</li>
+            </ul>
         </div>
-    </main>
-    <footer class="py-4 mt-5" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; margin-top: 20px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0 fw-bold">&copy; 2025 Benito González Piñeiro.</p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <a href="pildoras.html" class="btn btn-dark">Ir a Pildoras</a>
-                </div>
-            </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Cómo mitigar estas vulnerabilidades?</h2>
+            <p>Para proteger los sistemas de IA en ciberseguridad, se pueden implementar varias estrategias:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Protección contra ataques adversariales:</strong> Implementar técnicas de defensa como el entrenamiento robusto o la detección de entradas adversariales para identificar y prevenir intentos de manipulación.</li>
+                <li class="mb-2"><strong>Validación de datos:</strong> Asegurar que los conjuntos de datos utilizados para entrenar modelos sean confiables y no contengan información maliciosa o sesgada.</li>
+                <li class="mb-2"><strong>Implementar técnicas de privacidad:</strong> Utilizar técnicas como el aprendizaje federado o la privacidad diferencial para proteger los datos durante el entrenamiento de modelos.</li>
+                <li class="mb-2"><strong>Monitoreo continuo:</strong> Supervisar el comportamiento de los modelos en tiempo real para detectar posibles desviaciones o ataques.</li>
+                <li class="mb-2"><strong>Pruebas de seguridad:</strong> Realizar pruebas regulares de penetración y evaluaciones de riesgos específicas para sistemas de IA.</li>
+            </ul>
         </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
     </footer>
+</div>
+
 </body>
 </html>

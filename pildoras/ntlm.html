@@ -4,152 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NTLM - Pildoras</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        code, pre {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header class="py-4" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; margin-bottom: 20px;">
-        <div class="container">
-            <h1 class="text-center fw-bold" style="color: #FF6B6B;">NTLM - Pildoras</h1>
-        </div>
-    </header>
-    <main class="container py-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-shield-alt fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">¿Qué es NTLM?</h2>
-                        <p class="card-text">NTLM (NT LAN Manager) es un conjunto de protocolos de seguridad de Microsoft que se utiliza para la autenticación, integridad y confidencialidad en entornos de red de Windows. Fue introducido con Windows NT como sucesor del protocolo de autenticación de Microsoft LAN Manager.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-shield-alt fa-2x" style="color: #4A90E2;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4A90E2;">¿Cómo funciona NTLM?</h2>
-                        <p class="card-text">NTLM utiliza un mecanismo de "desafío-respuesta" para autenticar a los usuarios. El proceso general se puede resumir en los siguientes pasos:</p>
-                        <ol class="ps-4">
-                            <li class="mb-2"><strong>El cliente solicita autenticación:</strong> Un usuario intenta acceder a un recurso en un servidor de la red.</li>
-                            <li class="mb-2"><strong>El servidor envía un desafío (Challenge):</strong> El servidor responde con un número aleatorio de 8 bytes, conocido como "desafío" (o *nonce*).</li>
-                            <li class="mb-2"><strong>El cliente responde (Response):</strong>
-                                <ul class="ps-4 mt-2">
-                                    <li class="mb-1">El cliente toma el desafío.</li>
-                                    <li class="mb-1">Cifra el desafío utilizando un *hash* criptográfico de la contraseña del usuario.</li>
-                                    <li class="mb-1">Envía el resultado (la "respuesta") de vuelta al servidor.</li>
-                                </ul>
-                            </li>
-                            <li class="mb-2"><strong>El servidor verifica la autenticación:</strong>
-                                <ul class="ps-4 mt-2">
-                                    <li class="mb-1">El servidor envía el nombre de usuario, el desafío original y la respuesta del cliente a un controlador de dominio.</li>
-                                    <li class="mb-1">El controlador de dominio usa el nombre de usuario para recuperar el *hash* de la contraseña de la base de datos de cuentas.</li>
-                                    <li class="mb-1">Cifra el desafío original con ese *hash* y compara el resultado con la respuesta que envió el cliente.</li>
-                                    <li class="mb-1">Si los dos resultados son idénticos, la autenticación se considera exitosa.</li>
-                                </ul>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <h1>NTLM - Pildoras</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Qué es NTLM?</h2>
+            <p>NTLM (NT LAN Manager) es un conjunto de protocolos de seguridad de Microsoft que se utiliza para la autenticación, integridad y confidencialidad en entornos de red de Windows. Fue introducido con Windows NT como sucesor del protocolo de autenticación de Microsoft LAN Manager.</p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-shield-alt fa-2x" style="color: #4CAF50;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4CAF50;">Versiones de NTLM</h2>
-                        <p class="card-text">Existen varias versiones de NTLM, siendo las más comunes NTLMv1 y NTLMv2. NTLMv2 es una versión mejorada y más segura que NTLMv1, ya que incorpora características adicionales para prevenir ciertos tipos de ataques.</p>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Cómo funciona NTLM?</h2>
+            <p>NTLM utiliza un mecanismo de "desafío-respuesta" para autenticar a los usuarios. El proceso general se puede resumir en los siguientes pasos:</p>
+            <ol class="ps-4">
+                <li class="mb-2"><strong>El cliente solicita autenticación:</strong> Un usuario intenta acceder a un recurso en un servidor de la red.</li>
+                <li class="mb-2"><strong>El servidor envía un desafío (Challenge):</strong> El servidor responde con un número aleatorio de 8 bytes, conocido como "desafío" (o *nonce*).</li>
+                <li class="mb-2"><strong>El cliente responde (Response):</strong>
+                    <ul class="ps-4 mt-2">
+                        <li class="mb-1">El cliente toma el desafío.</li>
+                        <li class="mb-1">Cifra el desafío utilizando un *hash* criptográfico de la contraseña del usuario.</li>
+                        <li class="mb-1">Envía el resultado (la "respuesta") de vuelta al servidor.</li>
+                    </ul>
+                </li>
+                <li class="mb-2"><strong>El servidor verifica la autenticación:</strong>
+                    <ul class="ps-4 mt-2">
+                        <li class="mb-1">El servidor envía el nombre de usuario, el desafío original y la respuesta del cliente a un controlador de dominio.</li>
+                        <li class="mb-1">El controlador de dominio usa el nombre de usuario para recuperar el *hash* de la contraseña de la base de datos de cuentas.</li>
+                        <li class="mb-1">Cifra el desafío original con ese *hash* y compara el resultado con la respuesta que envió el cliente.</li>
+                        <li class="mb-1">Si los dos resultados son idénticos, la autenticación se considera exitosa.</li>
+                    </ul>
+                </li>
+            </ol>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-exclamation-triangle fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">Debilidades de NTLM</h2>
-                        <p class="card-text">A pesar de su uso extendido, NTLM tiene varias vulnerabilidades de seguridad que lo hacen susceptible a ataques como:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Ataques Pass-the-Hash:</strong> Si un atacante consigue el *hash* de la contraseña de un usuario, puede usarlo para autenticarse en la red sin necesidad de conocer la contraseña en texto claro.</li>
-                            <li class="mb-2"><strong>Ataques de retransmisión (Relay Attacks):</strong> Un atacante puede interceptar el *hash* NTLM enviado a través de la red y retransmitirlo a otro servidor para obtener acceso.</li>
-                            <li class="mb-2"><strong>Algoritmos de cifrado obsoletos:</strong> Las primeras versiones de NTLM utilizan algoritmos de cifrado que se consideran inseguros y pueden ser fácilmente descifrados con el hardware moderno.</li>
-                        </ul>
-                        <p class="card-text">Debido a estas vulnerabilidades, Microsoft ha recomendado el uso de Kerberos, un protocolo de autenticación más moderno y seguro, como la opción principal en entornos de Active Directory. Sin embargo, NTLM todavía se utiliza en muchos sistemas, especialmente en situaciones donde Kerberos no es compatible o en entornos más antiguos.</p>
-                        <p class="card-text"><strong>Las vulnerabilidades de NTLM provienen principalmente de su diseño, que es una tecnología de autenticación antigua. La mitigación principal es <em>reemplazarlo con Kerberos</em> siempre que sea posible.</strong></p>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Versiones de NTLM</h2>
+            <p>Existen varias versiones de NTLM, siendo las más comunes NTLMv1 y NTLMv2. NTLMv2 es una versión mejorada y más segura que NTLMv1, ya que incorpora características adicionales para prevenir ciertos tipos de ataques.</p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-exclamation-triangle fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">Vulnerabilidades de NTLM</h2>
-                        <p class="card-text">Las principales debilidades de NTLM lo hacen susceptible a varios tipos de ataques:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Ataques de retransmisión (*Relay Attacks*):</strong> Un atacante puede interceptar el *hash* NTLM de un usuario en un servidor y "retransmitirlo" a otro servidor para autenticarse como si fuera ese usuario. Esto es posible porque, por defecto, NTLM no enlaza la sesión de autenticación a un canal específico.</li>
-                            <li class="mb-2"><strong>Ataques de paso de *hash* (*Pass-the-Hash*):</strong> En lugar de robar una contraseña en texto claro, un atacante puede robar directamente el *hash* de la contraseña del usuario. Como el proceso de autenticación de NTLM se basa en este *hash*, el atacante puede usarlo para autenticarse en otros sistemas de la red sin necesidad de descifrar la contraseña real.</li>
-                            <li class="mb-2"><strong>Ataques de fuerza bruta y de diccionario:</strong> Aunque NTLMv2 es más seguro que NTLMv1, el *hash* aún puede ser vulnerable a ataques de fuerza bruta si la contraseña del usuario es débil. Los atacantes pueden capturar el *hash* y luego intentar descifrarlo sin conexión.</li>
-                            <li class="mb-2"><strong>Vulnerabilidades en versiones antiguas (NTLMv1):</strong> La versión NTLMv1 utiliza algoritmos criptográficos débiles que se consideran obsoletos y son muy fáciles de romper.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Debilidades de NTLM</h2>
+            <p>A pesar de su uso extendido, NTLM tiene varias vulnerabilidades de seguridad que lo hacen susceptible a ataques como:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Ataques Pass-the-Hash:</strong> Si un atacante consigue el *hash* de la contraseña de un usuario, puede usarlo para autenticarse en la red sin necesidad de conocer la contraseña en texto claro.</li>
+                <li class="mb-2"><strong>Ataques de retransmisión (Relay Attacks):</strong> Un atacante puede interceptar el *hash* NTLM enviado a través de la red y retransmitirlo a otro servidor para obtener acceso.</li>
+                <li class="mb-2"><strong>Algoritmos de cifrado obsoletos:</strong> Las primeras versiones de NTLM utilizan algoritmos de cifrado que se consideran inseguros y pueden ser fácilmente descifrados con el hardware moderno.</li>
+            </ul>
+            <p>Debido a estas vulnerabilidades, Microsoft ha recomendado el uso de Kerberos, un protocolo de autenticación más moderno y seguro, como la opción principal en entornos de Active Directory. Sin embargo, NTLM todavía se utiliza en muchos sistemas, especialmente en situaciones donde Kerberos no es compatible o en entornos más antiguos.</p>
+            <p><strong>Las vulnerabilidades de NTLM provienen principalmente de su diseño, que es una tecnología de autenticación antigua. La mitigación principal es <em>reemplazarlo con Kerberos</em> siempre que sea posible.</strong></p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-shield-alt fa-2x" style="color: #4A90E2;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4A90E2;">¿Cómo mitigar estas vulnerabilidades?</h2>
-                        <p class="card-text">La mejor estrategia es eliminar el uso de NTLM y adoptar protocolos más modernos, pero si su uso es inevitable, hay medidas que puede tomar:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Priorizar Kerberos:</strong> La solución más eficaz es deshabilitar NTLM en su red y utilizar <strong>Kerberos</strong> para la autenticación en entornos de Active Directory. Kerberos es un protocolo más robusto que incluye protecciones integradas contra ataques de retransmisión y robo de credenciales.</li>
-                            <li class="mb-2"><strong>Implementar la firma SMB (*SMB Signing*):</strong> Habilitar la firma de bloques de mensajes del servidor (SMB) obliga a que cada mensaje sea firmado digitalmente. Esto ayuda a prevenir ataques de retransmisión al asegurar que los mensajes no han sido modificados en tránsito.</li>
-                            <li class="mb-2"><strong>Usar NTLMv2 y deshabilitar NTLMv1:</strong> Asegúrese de que todos los sistemas de su red están configurados para usar NTLMv2 o superior y desactive NTLMv1 por completo, ya que es la versión más vulnerable.</li>
-                            <li class="mb-2"><strong>Habilitar la Protección Ampliada para la Autenticación (EPA):</strong> EPA añade seguridad al garantizar que las solicitudes de autenticación están enlazadas a un canal de comunicación específico, lo que frustra los ataques de retransmisión.</li>
-                            <li class="mb-2"><strong>Restringir el tráfico de NTLM:</strong> Use políticas de grupo (GPO) para restringir dónde y cómo se usa la autenticación NTLM dentro de su dominio. Esto puede incluir bloquear el tráfico NTLM entrante en servidores críticos.</li>
-                            <li class="mb-2"><strong>Implementar la segmentación de la red:</strong> Aislar los sistemas críticos del resto de la red puede limitar el movimiento lateral de un atacante, incluso si logra comprometer una cuenta NTLM.</li>
-                            <li class="mb-2"><strong>Habilitar Credential Guard:</strong> En sistemas Windows 10 y Server 2016 o posteriores, Credential Guard protege los hashes NTLM en la memoria, dificultando su robo.</li>
-                            <li class="mb-2"><strong>Uso de contraseñas fuertes y monitoreo:</strong> Aplique políticas de contraseñas robustas y monitoree el tráfico de autenticación NTLM en busca de actividad inusual que pueda indicar un ataque.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Vulnerabilidades de NTLM</h2>
+            <p>Las principales debilidades de NTLM lo hacen susceptible a varios tipos de ataques:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Ataques de retransmisión (*Relay Attacks*):</strong> Un atacante puede interceptar el *hash* NTLM de un usuario en un servidor y "retransmitirlo" a otro servidor para autenticarse como si fuera ese usuario. Esto es posible porque, por defecto, NTLM no enlaza la sesión de autenticación a un canal específico.</li>
+                <li class="mb-2"><strong>Ataques de paso de *hash* (*Pass-the-Hash*):</strong> En lugar de robar una contraseña en texto claro, un atacante puede robar directamente el *hash* de la contraseña del usuario. Como el proceso de autenticación de NTLM se basa en este *hash*, el atacante puede usarlo para autenticarse en otros sistemas de la red sin necesidad de descifrar la contraseña real.</li>
+                <li class="mb-2"><strong>Ataques de fuerza bruta y de diccionario:</strong> Aunque NTLMv2 es más seguro que NTLMv1, el *hash* aún puede ser vulnerable a ataques de fuerza bruta si la contraseña del usuario es débil. Los atacantes pueden capturar el *hash* y luego intentar descifrarlo sin conexión.</li>
+                <li class="mb-2"><strong>Vulnerabilidades en versiones antiguas (NTLMv1):</strong> La versión NTLMv1 utiliza algoritmos criptográficos débiles que se consideran obsoletos y son muy fáciles de romper.</li>
+            </ul>
         </div>
-    </main>
-    <footer class="py-4 mt-5" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; margin-top: 20px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0 fw-bold">&copy; 2025 Benito González Piñeiro</p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <a href="pildoras.html" class="btn btn-dark">Ir a Pildoras</a>
-                </div>
-            </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Cómo mitigar estas vulnerabilidades?</h2>
+            <p>La mejor estrategia es eliminar el uso de NTLM y adoptar protocolos más modernos, pero si su uso es inevitable, hay medidas que puede tomar:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Priorizar Kerberos:</strong> La solución más eficaz es deshabilitar NTLM en su red y utilizar <strong>Kerberos</strong> para la autenticación en entornos de Active Directory. Kerberos es un protocolo más robusto que incluye protecciones integradas contra ataques de retransmisión y robo de credenciales.</li>
+                <li class="mb-2"><strong>Implementar la firma SMB (*SMB Signing*):</strong> Habilitar la firma de bloques de mensajes del servidor (SMB) obliga a que cada mensaje sea firmado digitalmente. Esto ayuda a prevenir ataques de retransmisión al asegurar que los mensajes no han sido modificados en tránsito.</li>
+                <li class="mb-2"><strong>Usar NTLMv2 y deshabilitar NTLMv1:</strong> Asegúrese de que todos los sistemas de su red están configurados para usar NTLMv2 o superior y desactive NTLMv1 por completo, ya que es la versión más vulnerable.</li>
+                <li class="mb-2"><strong>Habilitar la Protección Ampliada para la Autenticación (EPA):</strong> EPA añade seguridad al garantizar que las solicitudes de autenticación están enlazadas a un canal de comunicación específico, lo que frustra los ataques de retransmisión.</li>
+                <li class="mb-2"><strong>Restringir el tráfico de NTLM:</strong> Use políticas de grupo (GPO) para restringir dónde y cómo se usa la autenticación NTLM dentro de su dominio. Esto puede incluir bloquear el tráfico NTLM entrante en servidores críticos.</li>
+                <li class="mb-2"><strong>Implementar la segmentación de la red:</strong> Aislar los sistemas críticos del resto de la red puede limitar el movimiento lateral de un atacante, incluso si logra comprometer una cuenta NTLM.</li>
+                <li class="mb-2"><strong>Habilitar Credential Guard:</strong> En sistemas Windows 10 y Server 2016 o posteriores, Credential Guard protege los hashes NTLM en la memoria, dificultando su robo.</li>
+                <li class="mb-2"><strong>Uso de contraseñas fuertes y monitoreo:</strong> Aplique políticas de contraseñas robustas y monitoree el tráfico de autenticación NTLM en busca de actividad inusual que pueda indicar un ataque.</li>
+            </ul>
         </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
     </footer>
+</div>
+
 </body>

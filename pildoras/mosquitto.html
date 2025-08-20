@@ -4,151 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mosquitto - Píldora Benito González Piñeiro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        code, pre {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header class="py-4" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; margin-bottom: 20px;">
-        <div class="container">
-            <h1 class="text-center fw-bold" style="color: #FF6B6B;">Mosquitto - Píldora</h1>
-        </div>
-    </header>
-    <main class="container py-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-cloud fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">¿Qué es Mosquitto?</h2>
-                        <p class="card-text">Mosquitto es un broker MQTT (Message Queuing Telemetry Transport) de código abierto desarrollado por the Eclipse Foundation. Es una implementación ligera del protocolo MQTT que permite la comunicación entre dispositivos IoT (Internet of Things) de forma eficiente y segura.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-star fa-2x" style="color: #4A90E2;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4A90E2;">Características principales</h2>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Protocolo MQTT:</strong> Utiliza el protocolo MQTT, ideal para comunicaciones en entornos con baja conectividad y ancho de banda limitado.</li>
-                            <li class="mb-2"><strong>Escalabilidad:</strong> Puede manejar miles de conexiones simultáneas.</li>
-                            <li class="mb-2"><strong>Seguridad:</strong> Soporta autenticación y cifrado TLS/SSL para proteger la comunicación.</li>
-                            <li class="mb-2"><strong>Facilidad de uso:</strong> Fácil de instalar y configurar en diversos sistemas operativos.</li>
-                            <li class="mb-2"><strong>Compatibilidad:</strong> Compatible con múltiples clientes MQTT en diferentes lenguajes de programación.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <h1>Mosquitto - Píldora</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Qué es Mosquitto?</h2>
+            <p>Mosquitto es un broker MQTT (Message Queuing Telemetry Transport) de código abierto desarrollado por the Eclipse Foundation. Es una implementación ligera del protocolo MQTT que permite la comunicación entre dispositivos IoT (Internet of Things) de forma eficiente y segura.</p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-home fa-2x" style="color: #4CAF50;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4CAF50;">Casos de uso comunes</h2>
-                        <p class="card-text">Mosquitto es ampliamente utilizado en aplicaciones IoT, como:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2">Sistemas de automatización residencial (smart home)</li>
-                            <li class="mb-2">Monitoreo y control de sensores</li>
-                            <li class="mb-2">Aplicaciones de industria 4.0</li>
-                            <li class="mb-2">Sistemas de alerta y notificación</li>
-                            <li class="mb-2">Comunicación entre dispositivos en entornos remotos</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Características principales</h2>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Protocolo MQTT:</strong> Utiliza el protocolo MQTT, ideal para comunicaciones en entornos con baja conectividad y ancho de banda limitado.</li>
+                <li class="mb-2"><strong>Escalabilidad:</strong> Puede manejar miles de conexiones simultáneas.</li>
+                <li class="mb-2"><strong>Seguridad:</strong> Soporta autenticación y cifrado TLS/SSL para proteger la comunicación.</li>
+                <li class="mb-2"><strong>Facilidad de uso:</strong> Fácil de instalar y configurar en diversos sistemas operativos.</li>
+                <li class="mb-2"><strong>Compatibilidad:</strong> Compatible con múltiples clientes MQTT en diferentes lenguajes de programación.</li>
+            </ul>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-download fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">Instalación</h2>
-                        <p class="card-text">Mosquitto puede instalarse en diferentes sistemas operativos:</p>
-                        <pre><code class="language-bash">sudo apt update
+    <div class="card">
+        <div class="card-body">
+            <h2>Casos de uso comunes</h2>
+            <p>Mosquitto es ampliamente utilizado en aplicaciones IoT, como:</p>
+            <ul class="ps-4">
+                <li class="mb-2">Sistemas de automatización residencial (smart home)</li>
+                <li class="mb-2">Monitoreo y control de sensores</li>
+                <li class="mb-2">Aplicaciones de industria 4.0</li>
+                <li class="mb-2">Sistemas de alerta y notificación</li>
+                <li class="mb-2">Comunicación entre dispositivos en entornos remotos</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Instalación</h2>
+            <p>Mosquitto puede instalarse en diferentes sistemas operativos:</p>
+            <pre><code class="language-bash">sudo apt update
 sudo apt install mosquitto mosquitto-clients</code></pre>
-                    </div>
-                </div>
-            </div>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-cog fa-2x" style="color: #4A90E2;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4A90E2;">Configuración básica</h2>
-                        <p class="card-text">La configuración básica se realiza en el archivo <code>/etc/mosquitto/mosquitto.conf</code>:</p>
-                        <pre><code class="language-conf"># Puerto de escucha
+    <div class="card">
+        <div class="card-body">
+            <h2>Configuración básica</h2>
+            <p>La configuración básica se realiza en el archivo <code>/etc/mosquitto/mosquitto.conf</code>:</p>
+            <pre><code class="language-conf"># Puerto de escucha
 port 1883
 
 # Configuración de seguridad (opcional)
 # password_file /etc/mosquitto/passwd
 # allow_anonymous false</code></pre>
-                    </div>
-                </div>
-            </div>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-play-circle fa-2x" style="color: #4CAF50;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4CAF50;">Prueba básica</h2>
-                        <p class="card-text">Para probar Mosquitto, puedes publicar y suscribir mensajes:</p>
-                        <pre><code class="language-bash"># Suscribirse a un tema
+    <div class="card">
+        <div class="card-body">
+            <h2>Prueba básica</h2>
+            <p>Para probar Mosquitto, puedes publicar y suscribir mensajes:</p>
+            <pre><code class="language-bash"># Suscribirse a un tema
 mosquitto_sub -h localhost -t test/topic
 
 # Publicar un mensaje
 mosquitto_pub -h localhost -t test/topic -m "Hola Mosquitto"</code></pre>
-                    </div>
-                </div>
-            </div>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-check-circle fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">Conclusión</h2>
-                        <p class="card-text">Mosquitto es una herramienta fundamental para desarrolladores y profesionales que trabajan con IoT. Su simplicidad, eficiencia y compatibilidad lo convierten en una opción popular para implementar soluciones de comunicación entre dispositivos.</p>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Conclusión</h2>
+            <p>Mosquitto es una herramienta fundamental para desarrolladores y profesionales que trabajan con IoT. Su simplicidad, eficiencia y compatibilidad lo convierten en una opción popular para implementar soluciones de comunicación entre dispositivos.</p>
         </div>
-    </main>
-    <footer class="py-4 mt-5" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; margin-top: 20px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0 fw-bold">&copy; 2025 Benito González Piñeiro.</p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <a href="pildoras.html" class="btn btn-dark">Ir a Pildoras</a>
-                </div>
-            </div>
-        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
     </footer>
+</div>
+
 </body>
 </html>

@@ -6,122 +6,116 @@
     <title>¿Qué es SSH?</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 40px;
+            margin: 2em;
+            color: #e0e0e0;
             background-color: #121212;
-            color: #f0f0f0;
+        }
+        h1, h2 {
+            color: #ffffff;
+        }
+        h1 {
+            border-bottom: 2px solid #bb86fc;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
         }
         .container {
             max-width: 800px;
-            margin: auto;
+            margin: 0 auto;
             background: #1e1e1e;
-            padding: 20px 40px;
+            padding: 2em;
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 1px solid #333;
         }
-        h1, h2 {
-            color: #bb86fc;
+        code, pre {
+            background-color: #2d2d2d;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #f44336;
+            font-family: "Courier New", Courier, monospace;
+            border: 1px solid #444;
         }
-        strong {
-            color: #03dac6;
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
         }
         ul {
-            list-style-type: none;
-            padding: 0;
+            list-style-type: disc;
+            padding-left: 20px;
         }
-        li::before {
-            content: "•";
+        .card {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            margin-bottom: 1.5em;
+            padding: 1.5em;
+        }
+        .card-body {
+            color: #e0e0e0;
+        }
+        footer {
+            color: #b0b0b0;
+            border-top: 1px solid #444;
+        }
+        a {
             color: #bb86fc;
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
-        /* Estilo para botón oscuro (btn-dark) */
-        .btn-dark {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
             text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #475569 0%, #64748b 100%);
-            color: #f1f5f9;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        .btn-dark:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(135deg, #334155 0%, #475569 100%);
+        a:hover {
+            color: #9d4edd;
         }
-        /* Estilo para row justify-content-center */
-        .row.justify-content-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        /* Estilos para clases Bootstrap no definidas */
-        .py-4 {
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-        }
-        .mt-5 {
-            margin-top: 3rem;
-        }
-        .fw-bold {
-            font-weight: bold;
-        }
-        .text-md-end {
-            text-align: right;
-        }
-        .mb-0 {
-            margin-bottom: 0;
+        strong {
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>¿Qué es SSH?</h1>
-        <p>SSH, que significa "Secure Shell" (en español, "Consola Segura"), es un protocolo de red y un conjunto de utilidades que permiten a los usuarios acceder de forma segura a un sistema informático remoto a través de una red no segura, como Internet.</p>
-        <p>A diferencia de protocolos más antiguos como Telnet o FTP, que enviaban la información en texto plano, <strong>SSH</strong> cifra toda la comunicación entre el cliente (el ordenador desde el que te conectas) y el servidor (el ordenador al que te conectas). Esto significa que incluso si alguien intercepta los datos, no podrá leer la información, incluyendo nombres de usuario, contraseñas y los comandos que se ejecutan.</p>
+<div class="container">
+    <h1>¿Qué es SSH?</h1>
 
-        <h2>¿Para qué se utiliza SSH?</h2>
-        <ul>
-            <li><strong>Administración remota de servidores:</strong> Es la herramienta principal para que los administradores de sistemas se conecten a servidores Linux, Unix y otros sistemas para realizar tareas de mantenimiento, configuración y solución de problemas.</li>
-            <li><strong>Transferencia segura de archivos:</strong> A través de SSH se pueden utilizar protocolos como SCP (Secure Copy Protocol) y SFTP (SSH File Transfer Protocol) para copiar archivos de forma segura entre ordenadores.</li>
-            <li><strong>Automatización de tareas:</strong> Se pueden crear scripts para automatizar la ejecución de comandos en servidores remotos.</li>
-            <li><strong>Creación de túneles seguros:</strong> Permite crear "túneles" cifrados para proteger el tráfico de otras aplicaciones, como navegadores web o bases de datos, que de otro modo no estarían cifrados.</li>
-        </ul>
+    <div class="card">
+        <div class="card-body">
+            <p>SSH, que significa "Secure Shell" (en español, "Consola Segura"), es un protocolo de red y un conjunto de utilidades que permiten a los usuarios acceder de forma segura a un sistema informático remoto a través de una red no segura, como Internet.</p>
+            <p>A diferencia de protocolos más antiguos como Telnet o FTP, que enviaban la información en texto plano, <strong>SSH</strong> cifra toda la comunicación entre el cliente (el ordenador desde el que te conectas) y el servidor (el ordenador al que te conectas). Esto significa que incluso si alguien intercepta los datos, no podrá leer la información, incluyendo nombres de usuario, contraseñas y los comandos que se ejecutan.</p>
+        </div>
+    </div>
 
-        <h2>¿Cómo funciona SSH?</h2>
-        <p>El protocolo SSH utiliza una arquitectura de cliente-servidor.</p>
-        <ul>
-            <li><strong>Cliente SSH:</strong> Es el programa que se ejecuta en tu ordenador para iniciar la conexión. Ejemplos populares son OpenSSH (incluido en la mayoría de los sistemas Linux y macOS) y PuTTY (para Windows).</li>
-            <li><strong>Servidor SSH:</strong> Es el servicio que se ejecuta en el ordenador remoto y que está a la espera de conexiones entrantes.</li>
-        </ul>
-        <p>Cuando te conectas, el cliente y el servidor se autentican mutuamente y establecen una conexión segura mediante el uso de criptografía de clave pública. La autenticación se puede realizar de varias maneras, siendo las más comunes:</p>
-        <ul>
-            <li><strong>Contraseña:</strong> El usuario introduce su nombre de usuario y contraseña.</li>
-            <li><strong>Claves SSH:</strong> Es el método más seguro. Implica un par de claves: una clave pública que se almacena en el servidor y una clave privada que se mantiene en el ordenador del usuario. El servidor utiliza la clave pública para verificar que el cliente es quien dice ser, sin necesidad de enviar la contraseña a través de la red.</li>
-        </ul>
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Para qué se utiliza SSH?</h2>
+            <ul>
+                <li><strong>Administración remota de servidores:</strong> Es la herramienta principal para que los administradores de sistemas se conecten a servidores Linux, Unix y otros sistemas para realizar tareas de mantenimiento, configuración y solución de problemas.</li>
+                <li><strong>Transferencia segura de archivos:</strong> A través de SSH se pueden utilizar protocolos como SCP (Secure Copy Protocol) y SFTP (SSH File Transfer Protocol) para copiar archivos de forma segura entre ordenadores.</li>
+                <li><strong>Automatización de tareas:</strong> Se pueden crear scripts para automatizar la ejecución de comandos en servidores remotos.</li>
+                <li><strong>Creación de túneles seguros:</strong> Permite crear "túneles" cifrados para proteger el tráfico de otras aplicaciones, como navegadores web o bases de datos, que de otro modo no estarían cifrados.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Cómo funciona SSH?</h2>
+            <p>El protocolo SSH utiliza una arquitectura de cliente-servidor.</p>
+            <ul>
+                <li><strong>Cliente SSH:</strong> Es el programa que se ejecuta en tu ordenador para iniciar la conexión. Ejemplos populares son OpenSSH (incluido en la mayoría de los sistemas Linux y macOS) y PuTTY (para Windows).</li>
+                <li><strong>Servidor SSH:</strong> Es el servicio que se ejecuta en el ordenador remoto y que está a la espera de conexiones entrantes.</li>
+            </ul>
+            <p>Cuando te conectas, el cliente y el servidor se autentican mutuamente y establecen una conexión segura mediante el uso de criptografía de clave pública. La autenticación se puede realizar de varias maneras, siendo las más comunes:</p>
+            <ul>
+                <li><strong>Contraseña:</strong> El usuario introduce su nombre de usuario y contraseña.</li>
+                <li><strong>Claves SSH:</strong> Es el método más seguro. Implica un par de claves: una clave pública que se almacena en el servidor y una clave privada que se mantiene en el ordenador del usuario. El servidor utiliza la clave pública para verificar que el cliente es quien dice ser, sin necesidad de enviar la contraseña a través de la red.</li>
+            </ul>
+        </div>
     </div>
     
-    <footer class="py-4 mt-5" >        
-        <div class="container">
-            <div class="row justify-content-center">                
-                <div class="col-md-6 text-center">
-                    <a href="pildoras.html" class="btn btn-dark">Ir a Pildoras</a>
-                </div>
-            </div>
-        </div>
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #444;">
+        <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
     </footer>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</div>
 </body>
 </html>

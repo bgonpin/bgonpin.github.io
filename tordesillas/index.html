@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Álbum Fotográfico 🎉</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-camera-retro"></i>
+            </div>
+            <h1 class="loading-title">Tordesillas 2025</h1>
+            <p class="loading-subtitle">Cargando experiencias inolvidables...</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-camera-retro"></i>
+                <h1>Tordesillas 2025</h1>
+            </div>
+            <nav class="nav">
+                <a href="#gallery" class="nav-link active">Galería</a>
+                <a href="#search" class="nav-link">Buscar</a>
+                <a href="#about" class="nav-link">Acerca de</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2 class="hero-title">Capturando Momentos <span class="highlight">Inolvidables</span></h2>
+            <p class="hero-subtitle">Descubre la magia de Tordesillas a través de nuestras fotos</p>
+            <a href="#gallery" class="hero-cta">Explorar Galería</a>
+        </div>
+        <div class="hero-particles"></div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Nuestra Galería</h2>
+
+            <!-- Carousel Container -->
+            <div class="gallery-carousel">
+                <!-- Images will be dynamically inserted here by JavaScript -->
+            </div>
+
+            <!-- Navigation Info -->
+            <div class="navigation-info">
+                <div class="nav-info-left">
+                    <button class="nav-btn prev-btn" onclick="prevSlide()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="nav-btn next-btn" onclick="nextSlide()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="nav-info-center">
+                    <div class="slide-counter">
+                        <span class="current-slide">1</span> de <span class="total-slides">1</span>
+                    </div>
+                    <div class="carousel-indicators">
+                        <!-- Indicators will be dynamically inserted here -->
+                    </div>
+                </div>
+
+                <div class="nav-info-right">
+                    <button class="nav-btn auto-play-btn" onclick="toggleAutoPlay()">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section" id="search">
+        <div class="container">
+            <h2 class="section-title">🔍 Buscar en la Galería</h2>
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <input type="text" id="searchInput" placeholder="Escribe palabras clave..." class="search-input">
+                    <button class="search-btn" onclick="performSearch()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-filters">
+                    <button class="filter-btn active" data-filter="all" onclick="filterByType('all')">Todas</button>
+                    <button class="filter-btn" data-filter="title" onclick="filterByType('title')">Por Título</button>
+                    <button class="filter-btn" data-filter="description" onclick="filterByType('description')">Por Descripción</button>
+                </div>
+            </div>
+            <div id="searchResults" class="search-results">
+                <!-- Search results will be displayed here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="section-title">📖 Acerca de</h2>
+            <div class="about-content">
+                <div class="about-card">
+                    <h3>🎉 Tordesillas 2025</h3>
+                    <p class="about-text">
+                        Visita por Tordesillas. Cyl. Agosto de año 2025 de nuestro Señor.
+                    </p>
+                    <div class="about-details">
+                        <p><strong>📍 Ubicación:</strong> Tordesillas, Castilla y León</p>
+                        <p><strong>📅 Fecha:</strong> Agosto 2025</p>
+                        <p><strong>🎯 Propósito:</strong> Capturar los momentos inolvidables de nuestra visita</p>
+                    </div>
+                </div>
+                <div class="about-gallery-info">
+                    <h4>📸 Sobre esta Galería</h4>
+                    <p>
+                        Esta colección de fotografías representa los momentos más especiales y memorables
+                        de nuestro viaje a Tordesillas. Cada imagen cuenta una historia única de amistad,
+                        aventura y diversión.
+                    </p>
+                    <p>
+                        ¡Gracias por acompañarnos en este viaje visual a través de los recuerdos que
+                        atesoraremos para siempre! 💫
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDesc"></p>
+            </div>
+            <div class="modal-controls">
+                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>💫 Creado con mucho ❤️ y un poco de código mágico 💫</p>
+            <div class="footer-emojis">
+                <span>🎈🎉🎊</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

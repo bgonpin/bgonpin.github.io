@@ -8,15 +8,14 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            background-color: #121212;
             margin: 2em;
-            color: #e0e0e0;
+            color: #333;
         }
         h1, h2 {
-            color: #ffffff;
+            color: #2c3e50;
         }
         h1 {
-            border-bottom: 2px solid #bb86fc;
+            border-bottom: 2px solid #3498db;
             padding-bottom: 0.5em;
         }
         h2 {
@@ -25,18 +24,16 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: #1e1e1e;
+            background: #f9f9f9;
             padding: 2em;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            border: 1px solid #333;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         code, pre {
-            background-color: #2d2d2d;
+            background-color: #ecf0f1;
             padding: 2px 6px;
-            border: 1px solid #444;
             border-radius: 4px;
-            color: #f44336;
+            color: #c0392b;
             font-family: "Courier New", Courier, monospace;
         }
         pre {

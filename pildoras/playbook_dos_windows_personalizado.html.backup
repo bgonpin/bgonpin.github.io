@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Playbook DoS/DDoS — Versión Personalizada</title>
+<style>
+  :root { --bg:#0c111c; --card:#121826; --ink:#e9efff; --muted:#a6b4d0; --accent:#6db4ff; --ok:#52c41a; --warn:#faad14; --bad:#ff4d4f; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu}
+  header{padding:28px 20px;border-bottom:1px solid #1d2740;background:linear-gradient(180deg,#0c111c,#0f1626)}
+  .wrap{max-width:1050px;margin:0 auto;padding:18px}
+  h1{margin:0 0 6px;font-size:28px}
+  h2{margin:26px 0 12px;font-size:22px;border-left:4px solid var(--accent);padding-left:10px}
+  h3{margin:18px 0 10px;font-size:18px;color:#d7e3ff}
+  p{color:var(--muted)}
+  .grid{display:grid;gap:14px}
+  .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .card{background:var(--card);border:1px solid #1b2540;border-radius:14px;padding:16px}
+  .small{font-size:13px;color:#98a7c6}
+  pre{background:#0e1528;border:1px solid #1f294a;border-radius:12px;padding:14px;overflow:auto}
+  .table{width:100%;border-collapse:collapse}
+  .table th,.table td{border:1px solid #213050;padding:8px 10px;text-align:left}
+  .table th{background:#0f1936}
+  .tag{display:inline-block;padding:3px 8px;border:1px solid #27365d;border-radius:999px;color:#cfe0ff;font-size:12px;margin:2px 6px 2px 0}
+  .callout{border-left:4px solid var(--accent);background:#101a34;padding:12px;border-radius:10px;margin:10px 0}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
+  .ok{background:#133417;color:#baf5c3;border:1px solid #265d2c}
+  .warn{background:#3b2a0b;color:#ffe3a3;border:1px solid #6a4a11}
+  .bad{background:#3a0e12;color:#ffc1c7;border:1px solid #6a1d25}
+  footer{opacity:.85;margin-top:30px;padding:20px;border-top:1px solid #1b2540}
+  .kbd{display:inline-block;border:1px solid #2b3b66;border-bottom-width:2px;border-radius:6px;padding:1px 6px;font-family:ui-monospace}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Playbook DoS/DDoS — Windows Server (Personalizado)</h1>
+    <p class="small">Incluye bloque de configuración para tu entorno, perfiles por servicio y comandos listos.</p>
+  </div>
+</header>
+
+<main class="wrap grid">
+  <section class="card">
+    <h2>Bloque de Configuración — Edita aquí</h2>
+    <p>Actualiza estos valores y usa los comandos tal cual. Si un campo no aplica, déjalo vacío o comenta la línea en PowerShell.</p>
+<pre><code># === CONFIGURACIÓN ORGANIZACIÓN ===
+$Empresa             = "Contoso S.A."
+$ContactoIncidentes  = "incidentes@contoso.local"
+$ZonaHoraria         = "Europe/Madrid"
+
+# === REDES DE ADMINISTRACIÓN (permitidas) ===
+$AdminRanges         = @("10.10.0.0/16","192.168.50.0/24","2001:db8::/48")
+
+# === SERVICIOS EXPUESTOS ===
+$TieneIIS            = $true
+$PuertosWeb          = @(80,443)
+$TieneRDP            = $true
+$RDPLimitadoA        = @("10.10.0.0/16","192.168.50.0/24")
+$TieneSQL            = $true
+$SQLPort             = 1433
+$SQLAllowedSubnets   = @("10.20.0.0/16")
+
+# === CLOUD / ISP ===
+$Proveedor           = "Azure"   # Azure | AWS | OnPrem
+$DDOSProtection      = "Standard" # Standard/Enabled si aplica
+$ContactoISP         = "soporte-isp@proveedor.com"
+
+# === UMBRALES ===
+$TopCount            = 200        # top IPs a analizar
+$BlockTop            = 50         # top IPs a bloquear si no se alcanza umbral
+$ConnThreshold       = 300        # conexiones por IP para considerarla sospechosa</code></pre>
+
+    <div class="callout">
+      <strong>Cómo usar:</strong> copia el bloque de configuración al inicio de tus sesiones/script y ejecuta los comandos de cada perfil.
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Perfiles por Servicio (elige los que apliquen)</h2>
+    <h3>Perfil Web (IIS en 80/443)</h3>
+    <p class="small">Incluye bloqueo de IPs, restricción dinámica y recordatorio de módulo <em>Dynamic IP Restrictions</em>.</p>
+<pre><code># Bloqueo rápido por IPs top/sospechosas
+$grouped = Get-NetTCPConnection | Where-Object { $_.State -in @("SynReceived","Established") } |
+  Group-Object -Property RemoteAddress | Sort-Object Count -Descending
+$top     = $grouped | Select-Object -First $TopCount
+$mal     = ($top | Where-Object { $_.Count -ge $ConnThreshold } | Select -Expand Name)
+if(-not $mal){ $mal = ($top | Select -First $BlockTop | Select -Expand Name) }
+
+# Crear regla de bloqueo inbound para IIS
+if($mal){
+  $label = "DDoS-Web-Block " + (Get-Date -Format yyyyMMdd-HHmm)
+  New-NetFirewallRule -DisplayName $label -Direction Inbound -RemoteAddress ($mal -join ",") -Action Block | Out-Null
+}
+
+# Restringir temporalmente tráfico a IIS por geografía/redes (opcional)
+# Ejemplo: permitir solo España + admin ranges (reemplazar por listas IP válidas si usas GeoIP en perimetral/WAF)
+
+# Dynamic IP Restrictions (IIS): habilitar en el servidor web
+# Recordatorio: Agregar característica: Web-Dyn-Compression + Web-IP-Security + módulo Dynamic IP Restrictions (si aplica)
+# Establecer límites con appcmd o UI de IIS (solicitudes/s, conexiones/s, bloqueo temporal).
+</code></pre>
+
+    <h3>Perfil RDP (3389)</h3>
+<pre><code># Deshabilitar reglas RDP abiertas y permitir solo rangos de admin
+Disable-NetFirewallRule -DisplayGroup "Remote Desktop"
+New-NetFirewallRule -DisplayName "RDP Solo Admin" -Direction Inbound -Protocol TCP -LocalPort 3389 -RemoteAddress ($RDPLimitadoA -join ",") -Action Allow
+
+# Sugerencia: mover RDP detrás de VPN/Bastion, activar MFA y registro de NLA obligatorio.</code></pre>
+
+    <h3>Perfil SQL Server (1433)</h3>
+<pre><code># Cortafuegos: permitir solo subredes de apps/backend
+New-NetFirewallRule -DisplayName "SQL Permitido AppSubnets" -Direction Inbound -Protocol TCP -LocalPort $SQLPort -RemoteAddress ($SQLAllowedSubnets -join ",") -Action Allow
+
+# Bloquear resto de orígenes hacia 1433 (capa host; ideal reforzar en perimetral)
+New-NetFirewallRule -DisplayName "SQL Bloqueo Internet" -Direction Inbound -Protocol TCP -LocalPort $SQLPort -RemoteAddress Any -Action Block</code></pre>
+  </section>
+
+  <section class="card">
+    <h2>Contención y Mitigación — Comandos Listos</h2>
+<pre><code># 1) Reducir temporalmente timeouts (reversible)
+netsh int tcp set global autotuninglevel=disabled
+netsh advfirewall set global tcptimeouttcp 60
+
+# 2) Bloqueo expres de IPs concretas (ejemplo, añade IPs vistas)
+New-NetFirewallRule -DisplayName "Block DDoS Manual" -Direction Inbound -RemoteAddress "203.0.113.0,198.51.100.45" -Action Block
+
+# 3) Lista de permitidos (admin) de forma explícita (útil si pasas a modo estricto)
+New-NetFirewallRule -DisplayName "Allow Admin Ranges (All)" -Direction Inbound -RemoteAddress ($AdminRanges -join ",") -Action Allow
+
+# 4) Revisión rápida de estados/puertos
+netstat -ano | findstr SYN
+Get-NetTCPConnection | Group-Object -Property State | Sort-Object Count -Desc
+Get-NetTCPConnection | Group-Object -Property RemoteAddress | Sort-Object Count -Desc | Select -First 40</code></pre>
+  </section>
+
+  <section class="card">
+    <h2>Script Auxiliar — Mitigar-DoS.ps1 (personalizado)</h2>
+    <p class="small">Copia el bloque de configuración, luego el script. Bloquea top IPs, respeta listas de permitidos y etiqueta la regla.</p>
+<pre><code>param(
+  [int]$TopCount = $TopCount,
+  [int]$BlockTop = $BlockTop,
+  [int]$ConnThreshold = $ConnThreshold,
+  [string[]]$AllowList = $AdminRanges
+)
+
+Write-Host "Recolectando conexiones..." -ForegroundColor Cyan
+$grouped = Get-NetTCPConnection |
+  Where-Object { $_.State -in @("SynReceived","Established") -and $_.RemoteAddress -notin @("::","127.0.0.1") } |
+  Group-Object -Property RemoteAddress |
+  Sort-Object Count -Descending
+
+$top = $grouped | Select-Object -First $TopCount
+$mal = $top | Where-Object { $_.Count -ge $ConnThreshold } | Select-Object -ExpandProperty Name
+if(-not $mal -or $mal.Count -eq 0){ $mal = ($top | Select-Object -First $BlockTop).Name }
+
+# Excluir allowlist
+$blockList = $mal | Where-Object { $AllowList -notcontains $_ }
+if($blockList.Count -gt 0){
+  $label = "DDoS-TempBlock " + (Get-Date -Format yyyyMMdd-HHmm)
+  New-NetFirewallRule -DisplayName $label -Direction Inbound -RemoteAddress ($blockList -join ",") -Action Block -Enabled True | Out-Null
+  Write-Host ("Bloqueadas: " + ($blockList -join ", " )) -ForegroundColor Red
+}else{
+  Write-Host "Sin candidatos a bloqueo." -ForegroundColor Green
+}</code></pre>
+  </section>
+
+  <section class="card">
+    <h2>Recuperación — Revertir Cambios Temporales</h2>
+<pre><code># Revertir autotuning y timeouts
+netsh int tcp set global autotuninglevel=normal
+# (Opcional) netsh advfirewall set global tcptimeouttcp 240
+
+# Eliminar reglas temporales por prefijo
+Get-NetFirewallRule | Where-Object {$_.DisplayName -like "DDoS-*"} | Remove-NetFirewallRule -Confirm:$false
+Get-NetFirewallRule | Where-Object {$_.DisplayName -like "DDoS-Web-Block*"} | Remove-NetFirewallRule -Confirm:$false
+Get-NetFirewallRule | Where-Object {$_.DisplayName -like "Block DDoS Manual*"} | Remove-NetFirewallRule -Confirm:$false</code></pre>
+  </section>
+
+  <section class="card">
+    <h2>Checklist de Validación (rápido)</h2>
+    <ul>
+      <li><span class="tag">Firewall host</span> Reglas temporales aplicadas y auditadas.</li>
+      <li><span class="tag">Perímetro/WAF</span> Rate limiting / scrubbing activado con el ISP/Cloud.</li>
+      <li><span class="tag">IIS</span> Dynamic IP Restrictions configurado; logs revisados.</li>
+      <li><span class="tag">RDP</span> Restringido a redes de administración o VPN/Bastion.</li>
+      <li><span class="tag">SQL</span> 1433 solo para subredes permitidas.</li>
+      <li><span class="tag">Reversión</span> Timeouts de TCP y reglas temporales revertidos tras estabilizar.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Registro de Cambios (para completar)</h2>
+    <table class="table">
+      <thead><tr><th>Fecha/Hora</th><th>Acción</th><th>Comando/Regla</th><th>Responsable</th><th>Rollback</th></tr></thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<footer class="wrap small">
+  <p><strong>Personalización aplicada:</strong> rangos de administración de ejemplo (10.10.0.0/16, 192.168.50.0/24), servicios IIS/RDP/SQL, proveedor Azure. Ajusta cada valor a tu entorno.</p>
+  <p style="text-align: center; margin-top: 10px;"><a href="../pildoras/pildoras.html" class="btn btn-primary">Volver a todas las píldoras</a></p>
+</footer>
+</body>
+</html>

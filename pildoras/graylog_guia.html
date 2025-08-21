@@ -6,32 +6,132 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Cómo instalar, configurar y usar Graylog para la centralización, análisis y alertado de registros. Incluye Docker Compose, pipelines, extractores, streams, dashboards y buenas prácticas." />
   <style>
-    :root{
-      --bg:#0b1020; --panel:#121a2e; --muted:#9fb3c8; --text:#eaf1f9; --accent:#60a5fa; --accent2:#22d3ee;
-      --ok:#16a34a; --warn:#eab308; --err:#ef4444; --code:#0f172a;
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 2em;
+        color: #333;
+        background: #f9f9f9;
     }
-    html,body{background:var(--bg); color:var(--text); font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Inter,sans-serif; line-height:1.6; margin:0}
-    main{max-width:1100px; margin:auto; padding:2.5rem 1.25rem}
-    h1,h2,h3{line-height:1.2}
-    h1{font-size:2.1rem; margin:.2rem 0 1rem}
-    h2{font-size:1.6rem; margin:2rem 0 .6rem}
-    h3{font-size:1.2rem; margin:1.4rem 0 .4rem}
-    p,li{color:var(--muted)}
-    .lead{font-size:1.125rem; color:var(--text)}
-    .callout{background: linear-gradient(135deg, rgba(96,165,250,.08), rgba(34,211,238,.08)); border:1px solid rgba(96,165,250,.25); padding:1rem 1.2rem; border-radius:14px}
-    .grid{display:grid; gap:1rem}
-    .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-    code,kbd{background:var(--code); color:#e2e8f0; padding:.15rem .35rem; border-radius:8px}
-    pre{background:var(--code); color:#e2e8f0; padding:1rem; overflow:auto; border-radius:14px; border:1px solid rgba(148,163,184,.15)}
-    .tag{display:inline-block; font-size:.85rem; padding:.1rem .55rem; border-radius:999px; background:rgba(34,211,238,.1); color:var(--accent2); border:1px solid rgba(34,211,238,.25); margin-right:.35rem}
-    .step{background:var(--panel); border:1px solid rgba(148,163,184,.15); border-radius:16px; padding:1rem 1.1rem}
-    .ok{color:var(--ok)} .warn{color:var(--warn)} .err{color:var(--err)}
-    a{color:var(--accent)}
-    .footer{font-size:.9rem; opacity:.9}
-    .table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:14px}
-    .table th,.table td{border-bottom:1px solid rgba(148,163,184,.15); padding:.6rem .8rem; text-align:left}
-    .kbd{border:1px solid rgba(148,163,184,.25); background:var(--panel); padding:.15rem .45rem; border-radius:6px}
-    .muted{opacity:.85}
+    main {
+        max-width: 1100px;
+        margin: 0 auto;
+        background: #f9f9f9;
+        padding: 2em;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3 {
+        color: #2c3e50;
+        line-height: 1.2;
+    }
+    h1 {
+        font-size: 2.1rem;
+        margin: .2rem 0 1rem;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5em;
+    }
+    h2 {
+        font-size: 1.6rem;
+        margin: 2rem 0 .6rem;
+    }
+    h3 {
+        font-size: 1.2rem;
+        margin: 1.4rem 0 .4rem;
+    }
+    p, li {
+        color: #666;
+    }
+    .lead {
+        font-size: 1.125rem;
+        color: #333;
+    }
+    .callout {
+        background: linear-gradient(135deg, rgba(52,152,219,.08), rgba(52,152,219,.08));
+        border: 1px solid rgba(52,152,219,.25);
+        padding: 1rem 1.2rem;
+        border-radius: 14px;
+    }
+    .grid {
+        display: grid;
+        gap: 1rem;
+    }
+    .grid.cols-2 {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    code, kbd {
+        background: #ecf0f1;
+        color: #c0392b;
+        padding: .15rem .35rem;
+        border-radius: 8px;
+        font-family: "Courier New", Courier, monospace;
+    }
+    pre {
+        background: #ecf0f1;
+        color: #c0392b;
+        padding: 1rem;
+        overflow: auto;
+        border-radius: 14px;
+        border: 1px solid rgba(0,0,0,0.1);
+        font-family: "Courier New", Courier, monospace;
+        white-space: pre-wrap;
+    }
+    .tag {
+        display: inline-block;
+        font-size: .85rem;
+        padding: .1rem .55rem;
+        border-radius: 999px;
+        background: rgba(52,152,219,.1);
+        color: #3498db;
+        border: 1px solid rgba(52,152,219,.25);
+        margin-right: .35rem;
+    }
+    .step {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 16px;
+        padding: 1rem 1.1rem;
+    }
+    .ok {
+        color: #28a745;
+    }
+    .warn {
+        color: #ffc107;
+    }
+    .err {
+        color: #dc3545;
+    }
+    a {
+        color: #3498db;
+    }
+    .footer {
+        font-size: .9rem;
+        opacity: .9;
+    }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 14px;
+    }
+    .table th, .table td {
+        border-bottom: 1px solid #dee2e6;
+        padding: .6rem .8rem;
+        text-align: left;
+    }
+    .kbd {
+        border: 1px solid #adb5bd;
+        background: #f8f9fa;
+        padding: .15rem .45rem;
+        border-radius: 6px;
+    }
+    .muted {
+        opacity: .85;
+    }
+    ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
   </style>
 </head>
 <body>
@@ -292,9 +392,9 @@ end
       <li>Artículo base: <a href="https://blog.desdelinux.net/graylog-una-herramienta-para-la-administracion-y-analisis-de-registros/">DesdeLinux: Graylog – administración y análisis de registros</a></li>
       <li>Documentación oficial de Graylog (instalación, arquitectura, conceptos).</li>
     </ul>
-    <p class="footer" style="text-align: center; margin-top: 20px;">
-      <a href="../pildoras/pildoras.html" style="color: #60a5fa; text-decoration: none;">Volver a todas las píldoras</a>
-    </p>
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="../pildoras/pildoras.html">Volver a todas las píldoras</a></p>
+    </footer>
   </section>
 </main>
 </body>

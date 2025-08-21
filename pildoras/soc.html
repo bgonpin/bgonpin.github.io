@@ -2,229 +2,200 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    
     <title>Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro</title>
-   
     <style>
-        /* Dark and serious color scheme */
         body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .article-section {
-            background-color: #1e1e1e;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
-            margin-top: 56px;
-            padding: 20px;
-        }
-        
-        .article-section article {
-            background-color: #252525;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            padding: 30px;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            color: #ffffff;
-            font-weight: 700;
-        }
-        
-        p, li {
-            color: #d0d0d0;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
+            margin: 2em;
+            color: #333;
         }
-        
-        .lead {
-            color: #b0b0b0;
-            font-weight: 400;
+        h1, h2 {
+            color: #2c3e50;
         }
-        
-        strong {
-            color: #ffffff;
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5em;
         }
-        
-        ul {
-            padding-left: 20px;
+        h2 {
+            margin-top: 1.5em;
         }
-        
-        li {
-            margin-bottom: 10px;
-        }
-        
-        /* Footer styling */
-        footer {
-            background-color: #0a0a0a;
-            border-top: 1px solid #333;
-        }
-        
-        .footer-section {
-            background-color: #1e1e1e;
-            padding: 20px 0;
-            margin-top: 40px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
             border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        
-        /* Code blocks styling (if any) */
-        pre, code {
-            background-color: #2d2d2d;
-            color: #f8f8f2;
+        code, pre {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
             border-radius: 4px;
-            padding: 10px;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
         }
     </style>
 </head>
 <body>
-    
 
-    <!-- Article Section -->
-    <section class="article-section py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <article class="bg-white rounded shadow p-4 p-md-5">
-                        <h1 class="fw-bold text-center mb-4">Centro de Operaciones de Seguridad (SOC) del Blue Team</h1>
+<div class="container">
+    <h1>Centro de Operaciones de Seguridad (SOC) del Blue Team</h1>
                         
-                        <p class="lead">
-                            En un Centro de Operaciones de Seguridad (SOC) del Blue Team, la gestión de amenazas de ciberseguridad es un proceso multifacético que implica detección, respuesta, investigación proactiva y prevención constante.
-                        </p>
-                        
-                        <p>
-                            Aquí te detallo cómo se gestionan las amenazas:
-                        </p>
+    <div class="card">
+        <div class="card-body">
+            <p>En un Centro de Operaciones de Seguridad (SOC) del Blue Team, la gestión de amenazas de ciberseguridad es un proceso multifacético que implica detección, respuesta, investigación proactiva y prevención constante.</p>
 
-                        <h2 class="fw-bold mt-4">Detección Inicial con SIEM</h2>
-                        <ul>
-                            <li>
-                                Al comenzar el día, el analista del Blue Team revisa el <strong>SIEM (Security Information and Event Management)</strong>, que actúa como el "cerebro" de las operaciones.
-                            </li>
-                            <li>
-                                El SIEM recopila y <strong>correlaciona datos de seguridad</strong> de toda la organización, incluyendo registros de servidores, firewalls, aplicaciones y dispositivos de red.
-                            </li>
-                            <li>
-                                Es capaz de analizar patrones entre millones de eventos para identificar actividades sospechosas que, vistas de forma aislada, podrían pasar desapercibidas. Por ejemplo, puede correlacionar intentos de inicio de sesión fallidos desde múltiples países simultáneamente para detectar un ataque de fuerza bruta distribuido.
-                            </li>
-                            <li>
-                                El SIEM prioriza las alertas, desde rutinarias (intentos de login fallidos, escaneos de puertos) hasta críticas.
-                            </li>
-                        </ul>
-
-                        <h2 class="fw-bold mt-4">Respuesta a Incidentes y Uso de Playbooks</h2>
-                        <ul>
-                            <li>
-                                Una vez que se detecta una alerta crítica, como un ataque de fuerza bruta distribuido, el analista levanta la vista y avisa al compañero de monitoreo de redes.
-                            </li>
-                            <li>
-                                Se consultan logs detallados en el SIEM para identificar usuarios y direcciones IP atacantes.
-                            </li>
-                            <li>
-                                Se activa un <strong>playbook</strong>, que es un conjunto de pasos predefinidos para responder a un tipo específico de amenaza. Esto evita perder tiempo en decidir qué hacer durante un ataque.
-                            </li>
-                            <li>
-                                Para un ataque de fuerza bruta, el playbook puede incluir:
-                                <ul>
-                                    <li>
-                                        <strong>Bloquear direcciones IP ofensivas</strong> en el firewall o WAF (Web Application Firewall).
-                                    </li>
-                                    <li>
-                                        Habilitar <strong>autenticación multifactor (MFA)</strong> obligatoria en las cuentas atacadas.
-                                    </li>
-                                    <li>
-                                        Revisar si hubo éxito en algún intento y, de ser así, forzar el cambio de credenciales y revisar la actividad posterior.
-                                    </li>
-                                    <li>
-                                        Generar un reporte de incidente para seguimiento.
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                La actividad sospechosa disminuye rápidamente tras aplicar estas medidas.
-                            </li>
-                        </ul>
-
-                        <h2 class="fw-bold mt-4">Thread Hunting (Caza de Amenazas) Proactiva</h2>
-                        <ul>
-                            <li>
-                                Aunque un ataque parezca controlado, el Blue Team realiza <strong>thread hunting</strong>, una investigación proactiva para buscar lo que podría estar mal incluso si no hay una alerta activa.
-                            </li>
-                            <li>
-                                Se basa en hipótesis sobre posibles vectores de ataque, inteligencia de amenazas (TTPs de atacantes reales) y análisis de grandes volúmenes de logs y telemetría.
-                            </li>
-                            <li>
-                                Las herramientas utilizadas incluyen el SIEM (para patrones históricos), EDR (Endpoint Detection and Response) para revisar comportamientos en equipos específicos, feeds de inteligencia de amenazas (IPs maliciosas, dominios comprometidos) y Packet Capture (para analizar tráfico de red).
-                            </li>
-                            <li>
-                                Un ejemplo de thread hunting es buscar conexiones salientes inusuales o a dominios sospechosos, como un servidor de pruebas conectándose a un posible servidor de comando y control (C2).
-                            </li>
-                            <li>
-                                Si se confirma una amenaza durante el thread hunting, se aísla el equipo comprometido de la red y se bloquean los dominios maliciosos. Esto permite detectar amenazas antes de que escalen.
-                            </li>
-                        </ul>
-
-                        <h2 class="fw-bold mt-4">Comunicación y Reporte de Incidentes</h2>
-                        <ul>
-                            <li>
-                                La <strong>colaboración con otros equipos es fundamental</strong> para cerrar incidentes y prevenir futuros. Se trabaja con:
-                                <ul>
-                                    <li>
-                                        El equipo de redes para aplicar bloqueos y segmentar el tráfico.
-                                    </li>
-                                    <li>
-                                        El equipo de sistemas para aislar y limpiar servidores o estaciones comprometidas.
-                                    </li>
-                                    <li>
-                                        El equipo de gestión de identidades para reforzar credenciales y MFA.
-                                    </li>
-                                    <li>
-                                        La gerencia y directivos para informar del impacto y las medidas tomadas.
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                Se redacta un <strong>reporte de incidente</strong> que incluye un resumen, cronología de eventos, acciones tomadas, medidas preventivas sugeridas y métricas clave como el MTTD (tiempo promedio en detectar) y MTTR (tiempo promedio en contener). El reporte también debe indicar cómo evitar que el incidente se repita.
-                            </li>
-                        </ul>
-
-                        <h2 class="fw-bold mt-4">Prevención y Mejora Continua</h2>
-                        <ul>
-                            <li>
-                                El trabajo del Blue Team no termina con la contención de un incidente; una gran parte de su labor es <strong>prevenir</strong>.
-                            </li>
-                            <li>
-                                Se documentan patrones de ataque detectados y se <strong>crean nuevas reglas de correlación en el SIEM</strong> para que el sistema avise más rápido en el futuro.
-                            </li>
-                            <li>
-                                Se revisan y ajustan los <strong>falsos positivos</strong> (alertas que parecen peligrosas pero no lo son) para afinar la lógica del SIEM y evitar distracciones.
-                            </li>
-                            <li>
-                                Periódicamente se realizan <strong>ejercicios internos</strong> que simulan ataques reales (ransomware, intrusiones) para medir la velocidad y eficacia de la respuesta y mejorar la coordinación entre equipos.
-                            </li>
-                            <li>
-                                El equipo dedica tiempo a la <strong>formación continua</strong>, leyendo reportes de amenazas, asistiendo a cursos y compartiendo hallazgos, ya que el panorama de amenazas cambia diariamente.
-                            </li>
-                        </ul>
-
-                        <p class="fw-bold mt-4">
-                            El Blue Team es la primera y última línea de defensa en ciberseguridad, y su trabajo es una vigilancia constante, operando 24/7 para proteger la información y los sistemas.
-                        </p>
-                    </article>
-                </div>
-            </div>
+            <p>Aquí te detallo cómo se gestionan las amenazas:</p>
         </div>
-    </section>
+    </div>
 
-    <!-- Bootstrap Footer -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <div class="container">
-            <div class="row">
-                <a href="./pildoras.html" class="text-white text-decoration-none">Volver a Píldoras de Seguridad</a>
-                    
-                
+    <div class="card">
+        <div class="card-body">
+            <h2>Detección Inicial con SIEM</h2>
+            <ul>
+                <li>
+                    Al comenzar el día, el analista del Blue Team revisa el <strong>SIEM (Security Information and Event Management)</strong>, que actúa como el "cerebro" de las operaciones.
+                </li>
+                <li>
+                    El SIEM recopila y <strong>correlaciona datos de seguridad</strong> de toda la organización, incluyendo registros de servidores, firewalls, aplicaciones y dispositivos de red.
+                </li>
+                <li>
+                    Es capaz de analizar patrones entre millones de eventos para identificar actividades sospechosas que, vistas de forma aislada, podrían pasar desapercibidas. Por ejemplo, puede correlacionar intentos de inicio de sesión fallidos desde múltiples países simultáneamente para detectar un ataque de fuerza bruta distribuido.
+                </li>
+                <li>
+                    El SIEM prioriza las alertas, desde rutinarias (intentos de login fallidos, escaneos de puertos) hasta críticas.
+                </li>
+            </ul>
         </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Respuesta a Incidentes y Uso de Playbooks</h2>
+            <ul>
+                <li>
+                    Una vez que se detecta una alerta crítica, como un ataque de fuerza bruta distribuido, el analista levanta la vista y avisa al compañero de monitoreo de redes.
+                </li>
+                <li>
+                    Se consultan logs detallados en el SIEM para identificar usuarios y direcciones IP atacantes.
+                </li>
+                <li>
+                    Se activa un <strong>playbook</strong>, que es un conjunto de pasos predefinidos para responder a un tipo específico de amenaza. Esto evita perder tiempo en decidir qué hacer durante un ataque.
+                </li>
+                <li>
+                    Para un ataque de fuerza bruta, el playbook puede incluir:
+                    <ul>
+                        <li>
+                            <strong>Bloquear direcciones IP ofensivas</strong> en el firewall o WAF (Web Application Firewall).
+                        </li>
+                        <li>
+                            Habilitar <strong>autenticación multifactor (MFA)</strong> obligatoria en las cuentas atacadas.
+                        </li>
+                        <li>
+                            Revisar si hubo éxito en algún intento y, de ser así, forzar el cambio de credenciales y revisar la actividad posterior.
+                        </li>
+                        <li>
+                            Generar un reporte de incidente para seguimiento.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    La actividad sospechosa disminuye rápidamente tras aplicar estas medidas.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Thread Hunting (Caza de Amenazas) Proactiva</h2>
+            <ul>
+                <li>
+                    Aunque un ataque parezca controlado, el Blue Team realiza <strong>thread hunting</strong>, una investigación proactiva para buscar lo que podría estar mal incluso si no hay una alerta activa.
+                </li>
+                <li>
+                    Se basa en hipótesis sobre posibles vectores de ataque, inteligencia de amenazas (TTPs de atacantes reales) y análisis de grandes volúmenes de logs y telemetría.
+                </li>
+                <li>
+                    Las herramientas utilizadas incluyen el SIEM (para patrones históricos), EDR (Endpoint Detection and Response) para revisar comportamientos en equipos específicos, feeds de inteligencia de amenazas (IPs maliciosas, dominios comprometidos) y Packet Capture (para analizar tráfico de red).
+                </li>
+                <li>
+                    Un ejemplo de thread hunting es buscar conexiones salientes inusuales o a dominios sospechosos, como un servidor de pruebas conectándose a un posible servidor de comando y control (C2).
+                </li>
+                <li>
+                    Si se confirma una amenaza durante el thread hunting, se aísla el equipo comprometido de la red y se bloquean los dominios maliciosos. Esto permite detectar amenazas antes de que escalen.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Comunicación y Reporte de Incidentes</h2>
+            <ul>
+                <li>
+                    La <strong>colaboración con otros equipos es fundamental</strong> para cerrar incidentes y prevenir futuros. Se trabaja con:
+                    <ul>
+                        <li>
+                            El equipo de redes para aplicar bloqueos y segmentar el tráfico.
+                        </li>
+                        <li>
+                            El equipo de sistemas para aislar y limpiar servidores o estaciones comprometidas.
+                        </li>
+                        <li>
+                            El equipo de gestión de identidades para reforzar credenciales y MFA.
+                        </li>
+                        <li>
+                            La gerencia y directivos para informar del impacto y las medidas tomadas.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Se redacta un <strong>reporte de incidente</strong> que incluye un resumen, cronología de eventos, acciones tomadas, medidas preventivas sugeridas y métricas clave como el MTTD (tiempo promedio en detectar) y MTTR (tiempo promedio en contener). El reporte también debe indicar cómo evitar que el incidente se repita.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Prevención y Mejora Continua</h2>
+            <ul>
+                <li>
+                    El trabajo del Blue Team no termina con la contención de un incidente; una gran parte de su labor es <strong>prevenir</strong>.
+                </li>
+                <li>
+                    Se documentan patrones de ataque detectados y se <strong>crean nuevas reglas de correlación en el SIEM</strong> para que el sistema avise más rápido en el futuro.
+                </li>
+                <li>
+                    Se revisan y ajustan los <strong>falsos positivos</strong> (alertas que parecen peligrosas pero no lo son) para afinar la lógica del SIEM y evitar distracciones.
+                </li>
+                <li>
+                    Periódicamente se realizan <strong>ejercicios internos</strong> que simulan ataques reales (ransomware, intrusiones) para medir la velocidad y eficacia de la respuesta y mejorar la coordinación entre equipos.
+                </li>
+                <li>
+                    El equipo dedica tiempo a la <strong>formación continua</strong>, leyendo reportes de amenazas, asistiendo a cursos y compartiendo hallazgos, ya que el panorama de amenazas cambia diariamente.
+                </li>
+            </ul>
+
+            <p>El Blue Team es la primera y última línea de defensa en ciberseguridad, y su trabajo es una vigilancia constante, operando 24/7 para proteger la información y los sistemas.</p>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a Píldoras de Seguridad</a></p>
     </footer>
+</div>
 
     
 </body>

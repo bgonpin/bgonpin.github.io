@@ -6,102 +6,98 @@
     <title>Archivos de Registro en Linux</title>
     <style>
         body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 20px;
+            margin: 2em;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
         }
         h1 {
-            color: #bb86fc;
-            border-bottom: 2px solid #bb86fc;
-            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5em;
         }
         h2 {
-            color: #03dac6;
-            margin-top: 30px;
+            margin-top: 1.5em;
         }
-        p {
-            margin-bottom: 15px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        ul, ol {
-            margin-bottom: 15px;
-            padding-left: 30px;
-        }
-        li {
-            margin-bottom: 8px;
-        }
-        code {
-            background-color: #1e1e1e;
-            color: #4fc3f7;
+        code, pre {
+            background-color: #ecf0f1;
             padding: 2px 6px;
             border-radius: 4px;
-            font-family: 'Courier New', monospace;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
         }
         pre {
-            background-color: #1e1e1e;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 1em;
             overflow-x: auto;
-            border-left: 4px solid #bb86fc;
+            white-space: pre-wrap;
         }
-        strong {
-            color: #03dac6;
-        }
-        a {
-            color: #bb86fc;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
         }
     </style>
 </head>
 <body>
+
+<div class="container">
     <h1>Archivos de Registro en Linux</h1>
-    
-    <p>Un <strong>archivo de registro</strong> o <strong>archivo log</strong> en Linux es un archivo de texto que almacena un registro de eventos, operaciones y mensajes generados por el sistema operativo, las aplicaciones y los servicios. Su función principal es ayudar a los administradores de sistemas y a los desarrolladores a depurar problemas, monitorear el rendimiento y auditar la seguridad.</p>
 
-    <h2>¿Dónde se guardan los archivos log?</h2>
-    
-    <p>En la mayoría de las distribuciones de Linux, los archivos de registro se encuentran en el directorio <strong>/var/log/</strong>. Este directorio es el lugar central para todos los logs del sistema. Dentro de él, encontrarás diferentes archivos, cada uno dedicado a un tipo específico de información. Algunos ejemplos comunes son:</p>
-    
-    <ul>
-        <li><strong><code>auth.log</code></strong>: Registra los intentos de autenticación de usuarios, como inicios de sesión correctos o fallidos, y el uso de comandos con privilegios (<code>sudo</code>).</li>
-        <li><strong><code>syslog</code></strong>: Contiene mensajes generales del sistema, incluyendo eventos del kernel y actividades de los demonios del sistema (servicios en segundo plano).</li>
-        <li><strong><code>kern.log</code></strong>: Exclusivo para mensajes del kernel de Linux, muy útil para diagnosticar problemas de hardware o controladores.</li>
-        <li><strong><code>dmesg</code></strong>: Muestra los mensajes del búfer de anillo del kernel, que son cruciales para resolver problemas durante el arranque del sistema.</li>
-    </ul>
+    <div class="card">
+        <div class="card-body">
+            <p>Un <strong>archivo de registro</strong> o <strong>archivo log</strong> en Linux es un archivo de texto que almacena un registro de eventos, operaciones y mensajes generados por el sistema operativo, las aplicaciones y los servicios. Su función principal es ayudar a los administradores de sistemas y a los desarrolladores a depurar problemas, monitorear el rendimiento y auditar la seguridad.</p>
+        </div>
+    </div>
 
-    <h2>¿Cuál es la estructura de un archivo log?</h2>
-    
-    <p>La estructura de los archivos de registro es simple y fácil de leer para los humanos. Cada línea o entrada de registro suele seguir un formato estándar que incluye:</p>
-    
-    <ol>
-        <li><strong>Fecha y hora</strong>: El momento exacto en que ocurrió el evento.</li>
-        <li><strong>Nombre del host</strong>: El nombre de la máquina donde se generó el mensaje.</li>
-        <li><strong>Aplicación o servicio</strong>: El nombre del programa o servicio que produjo el mensaje.</li>
-        <li><strong>Mensaje</strong>: La descripción detallada del evento.</li>
-    </ol>
-    
-    <p>Aquí tienes un ejemplo de una entrada de registro típica:</p>
-    
-    <pre><code>Aug 18 14:30:34 mi-servidor sshd[1234]: Accepted publickey for usuario from 192.168.1.100 port 54321 ssh2</code></pre>
-    
-    <p>En este ejemplo:</p>
-    
-    <ul>
-        <li><strong><code>Aug 18 14:30:34</code></strong>: La fecha y hora.</li>
-        <li><strong><code>mi-servidor</code></strong>: El nombre del host.</li>
-        <li><strong><code>sshd[1234]</code></strong>: El servicio (el demonio SSH) y su ID de proceso (1234).</li>
-        <li><strong><code>Accepted publickey...</code></strong>: El mensaje que describe el evento (un usuario se conectó a través de SSH).</li>
-    </ul>
-    
-    <p>Puedes ver el contenido de estos archivos usando comandos de terminal como <code>cat</code>, <code>less</code>, o <code>tail -f</code> para ver los logs en tiempo real. En sistemas que usan <code>systemd</code>, el comando <strong><code>journalctl</code></strong> es una herramienta moderna y poderosa para ver y gestionar los logs del sistema.</p>
-    
-    <footer style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #333;">
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Dónde se guardan los archivos log?</h2>
+            <p>En la mayoría de las distribuciones de Linux, los archivos de registro se encuentran en el directorio <strong>/var/log/</strong>. Este directorio es el lugar central para todos los logs del sistema. Dentro de él, encontrarás diferentes archivos, cada uno dedicado a un tipo específico de información. Algunos ejemplos comunes son:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong><code>auth.log</code></strong>: Registra los intentos de autenticación de usuarios, como inicios de sesión correctos o fallidos, y el uso de comandos con privilegios (<code>sudo</code>).</li>
+                <li class="mb-2"><strong><code>syslog</code></strong>: Contiene mensajes generales del sistema, incluyendo eventos del kernel y actividades de los demonios del sistema (servicios en segundo plano).</li>
+                <li class="mb-2"><strong><code>kern.log</code></strong>: Exclusivo para mensajes del kernel de Linux, muy útil para diagnosticar problemas de hardware o controladores.</li>
+                <li class="mb-2"><strong><code>dmesg</code></strong>: Muestra los mensajes del búfer de anillo del kernel, que son cruciales para resolver problemas durante el arranque del sistema.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Cuál es la estructura de un archivo log?</h2>
+            <p>La estructura de los archivos de registro es simple y fácil de leer para los humanos. Cada línea o entrada de registro suele seguir un formato estándar que incluye:</p>
+            <ol class="ps-4">
+                <li class="mb-2"><strong>Fecha y hora</strong>: El momento exacto en que ocurrió el evento.</li>
+                <li class="mb-2"><strong>Nombre del host</strong>: El nombre de la máquina donde se generó el mensaje.</li>
+                <li class="mb-2"><strong>Aplicación o servicio</strong>: El nombre del programa o servicio que produjo el mensaje.</li>
+                <li class="mb-2"><strong>Mensaje</strong>: La descripción detallada del evento.</li>
+            </ol>
+            <p>Aquí tienes un ejemplo de una entrada de registro típica:</p>
+            <pre><code>Aug 18 14:30:34 mi-servidor sshd[1234]: Accepted publickey for usuario from 192.168.1.100 port 54321 ssh2</code></pre>
+            <p>En este ejemplo:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong><code>Aug 18 14:30:34</code></strong>: La fecha y hora.</li>
+                <li class="mb-2"><strong><code>mi-servidor</code></strong>: El nombre del host.</li>
+                <li class="mb-2"><strong><code>sshd[1234]</code></strong>: El servicio (el demonio SSH) y su ID de proceso (1234).</li>
+                <li class="mb-2"><strong><code>Accepted publickey...</code></strong>: El mensaje que describe el evento (un usuario se conectó a través de SSH).</li>
+            </ul>
+            <p>Puedes ver el contenido de estos archivos usando comandos de terminal como <code>cat</code>, <code>less</code>, o <code>tail -f</code> para ver los logs en tiempo real. En sistemas que usan <code>systemd</code>, el comando <strong><code>journalctl</code></strong> es una herramienta moderna y poderosa para ver y gestionar los logs del sistema.</p>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
         <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
     </footer>
+</div>
+
 </body>
 </html>

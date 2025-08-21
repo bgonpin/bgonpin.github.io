@@ -2,793 +2,282 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iptables: El Cortafuegos de Linux - Guía Completa</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
-            min-height: 100vh;
-            color: #e0e0e0;
+            margin: 2em;
+            color: #333;
         }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: rgba(30, 30, 46, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
+        h1, h2 {
+            color: #2c3e50;
         }
-        
-        .header {
-            background: linear-gradient(135deg, #0f3460, #1a5ca3);
-            color: #ffffff;
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="20"><stop offset="0" stop-color="%23ffffff" stop-opacity=".1"/><stop offset="1" stop-color="%23ffffff" stop-opacity="0"/></linearGradient></defs><rect width="11" height="20" fill="url(%23a)" x="0"/><rect width="11" height="20" fill="url(%23a)" x="20"/><rect width="11" height="20" fill="url(%23a)" x="40"/><rect width="11" height="20" fill="url(%23a)" x="60"/><rect width="11" height="20" fill="url(%23a)" x="80"/></svg>') repeat-x;
-            opacity: 0.1;
-        }
-        
         h1 {
-            margin: 0;
-            font-size: 2.5em;
-            font-weight: 300;
-            position: relative;
-            z-index: 1;
-            color: #ffffff;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5em;
         }
-        
-        .subtitle {
-            font-size: 1.2em;
-            opacity: 0.9;
-            margin-top: 10px;
-            position: relative;
-            z-index: 1;
-            color: #a0c4ff;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
         h2 {
-            color: #64b5f6;
-            border-bottom: 3px solid #4fc3f7;
-            padding-bottom: 10px;
-            margin-top: 40px;
-            font-size: 1.8em;
-            position: relative;
+            margin-top: 1.5em;
         }
-        
-        h3 {
-            color: #4fc3f7;
-            margin-top: 30px;
-            font-size: 1.4em;
-        }
-        
-        .code-block {
-            background: #1e1e2e;
-            color: #f0f0f0;
-            padding: 20px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
             border-radius: 8px;
-            margin: 20px 0;
-            overflow-x: auto;
-            position: relative;
-            border-left: 4px solid #4fc3f7;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        
-        .code-block::before {
-            content: "Terminal";
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            font-size: 0.8em;
-            opacity: 0.6;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        code {
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-        }
-        
-        .warning {
-            background: rgba(251, 188, 4, 0.15);
-            border: 1px solid #ffb74d;
-            border-left: 4px solid #ffb74d;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-            color: #ffd54f;
-        }
-        
-        .tip {
-            background: rgba(76, 175, 80, 0.15);
-            border: 1px solid #81c784;
-            border-left: 4px solid #81c784;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-            color: #a5d6a7;
-        }
-        
-        .info {
-            background: rgba(33, 150, 243, 0.15);
-            border: 1px solid #64b5f6;
-            border-left: 4px solid #64b5f6;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-            color: #90caf9;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: #1e1e2e;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-        
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #444;
-        }
-        
-        th {
-            background: linear-gradient(135deg, #1e88e5, #1565c0);
-            color: white;
-            font-weight: 600;
-        }
-        
-        tr:hover {
-            background-color: #333;
-        }
-        
-        .toc {
-            background: rgba(30, 30, 46, 0.7);
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid #4fc3f7;
-        }
-        
-        .toc h3 {
-            margin-top: 0;
-            color: #64b5f6;
-        }
-        
-        .toc ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .toc ul li {
-            padding: 5px 0;
-        }
-        
-        .toc ul li a {
-            color: #4fc3f7;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .toc ul li a:hover {
-            color: #81d4fa;
-            text-decoration: underline;
-        }
-        
-        .highlight {
-            background: linear-gradient(120deg, #29b6f6 0%, #00bcd4 100%);
+        code, pre {
+            background-color: #ecf0f1;
             padding: 2px 6px;
             border-radius: 4px;
-            font-weight: 600;
-            color: #000;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
         }
-        
-        .footer {
-            background: #1a237e;
-            color: #bbdefb;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
         }
-        
-        .footer a {
-            color: #4fc3f7;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        .footer a:hover {
-            color: #81d4fa;
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 2em;
-            }
-            
-            h2 {
-                font-size: 1.5em;
-            }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>iptables</h1>
-            <div class="subtitle">El Cortafuegos Definitivo de Linux</div>
+
+<div class="container">
+    <h1>iptables: El Cortafuegos de Linux</h1>
+    <p>El Cortafuegos Definitivo de Linux</p>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Introducción a iptables</h2>
+            <p><strong>iptables</strong> es el cortafuegos estándar de facto en sistemas Linux, proporcionando un framework robusto para el filtrado de paquetes, traducción de direcciones de red (NAT) y manipulación de paquetes. Forma parte del proyecto Netfilter del kernel de Linux y ha sido la herramienta principal para la seguridad de red en Linux durante más de dos décadas.</p>
+
+            <p><strong>Datos Interesantes:</strong></p>
+            <ul>
+                <li>iptables fue desarrollado por Rusty Russell en 1998</li>
+                <li>Reemplazó a ipchains e ipfwadm en versiones anteriores de Linux</li>
+                <li>Actualmente está siendo gradualmente reemplazado por nftables en distribuciones modernas</li>
+            </ul>
+
+            <h3>¿Por qué usar iptables?</h3>
+            <p>iptables ofrece ventajas significativas para la administración de la seguridad de red:</p>
+            <ul>
+                <li><strong>Control granular:</strong> Permite definir reglas específicas para diferentes tipos de tráfico</li>
+                <li><strong>Flexibilidad:</strong> Soporta múltiples criterios de filtrado y acciones</li>
+                <li><strong>Rendimiento:</strong> Procesamiento a nivel de kernel para máxima eficiencia</li>
+                <li><strong>Estabilidad:</strong> Probado en entornos de producción durante años</li>
+            </ul>
         </div>
-        
-        <div class="content">
-            <div class="toc">
-                <h3>📋 Índice de Contenidos</h3>
-                <ul>
-                    <li><a href="#introduccion">1. Introducción a iptables</a></li>
-                    <li><a href="#conceptos">2. Conceptos Fundamentales</a></li>
-                    <li><a href="#instalacion">3. Instalación y Configuración Inicial</a></li>
-                    <li><a href="#sintaxis">4. Sintaxis Básica</a></li>
-                    <li><a href="#reglas-basicas">5. Reglas Básicas</a></li>
-                    <li><a href="#ejemplos">6. Ejemplos Prácticos</a></li>
-                    <li><a href="#configuraciones">7. Configuraciones Avanzadas</a></li>
-                    <li><a href="#persistencia">8. Persistencia de Reglas</a></li>
-                    <li><a href="#mejores-practicas">9. Mejores Prácticas</a></li>
-                    <li><a href="#conclusion">10. Conclusión</a></li>
-                </ul>
-            </div>
+    </div>
 
-            <section id="introduccion">
-                <h2>1. Introducción a iptables</h2>
-                <p><span class="highlight">iptables</span> es el cortafuegos estándar de facto en sistemas Linux, proporcionando un framework robusto para el filtrado de paquetes, traducción de direcciones de red (NAT) y manipulación de paquetes. Forma parte del proyecto Netfilter del kernel de Linux y ha sido la herramienta principal para la seguridad de red en Linux durante más de dos décadas.</p>
-                
-                <div class="info">
-                    <strong>💡 Datos Interesantes:</strong>
-                    <ul>
-                        <li>iptables fue desarrollado por Rusty Russell en 1998</li>
-                        <li>Reemplazó a ipchains e ipfwadm en versiones anteriores de Linux</li>
-                        <li>Actualmente está siendo gradualmente reemplazado por nftables en distribuciones modernas</li>
-                    </ul>
-                </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Instalación y Configuración Inicial</h2>
 
-                <h3>¿Por qué usar iptables?</h3>
-                <p>iptables ofrece ventajas significativas para la administración de la seguridad de red:</p>
-                <ul>
-                    <li><strong>Control granular:</strong> Permite definir reglas específicas para diferentes tipos de tráfico</li>
-                    <li><strong>Flexibilidad:</strong> Soporta múltiples criterios de filtrado y acciones</li>
-                    <li><strong>Rendimiento:</strong> Procesamiento a nivel de kernel para máxima eficiencia</li>
-                    <li><strong>Estabilidad:</strong> Probado en entornos de producción durante años</li>
-                </ul>
-            </section>
+            <h3>Instalación</h3>
+            <p>En la mayoría de las distribuciones Linux, iptables viene preinstalado. Si no es el caso:</p>
 
-            <section id="conceptos">
-                <h2>2. Conceptos Fundamentales</h2>
-                
-                <h3>Tablas</h3>
-                <p>iptables organiza las reglas en diferentes <strong>tablas</strong>, cada una con un propósito específico:</p>
-                
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tabla</th>
-                            <th>Propósito</th>
-                            <th>Uso Principal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>filter</strong></td>
-                            <td>Filtrado de paquetes</td>
-                            <td>Permitir/denegar tráfico (tabla por defecto)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>nat</strong></td>
-                            <td>Traducción de direcciones</td>
-                            <td>NAT, redirección de puertos</td>
-                        </tr>
-                        <tr>
-                            <td><strong>mangle</strong></td>
-                            <td>Modificación de paquetes</td>
-                            <td>Alterar headers, QoS</td>
-                        </tr>
-                        <tr>
-                            <td><strong>raw</strong></td>
-                            <td>Procesamiento temprano</td>
-                            <td>Configuraciones especiales, bypass</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h4>Ubuntu/Debian</h4>
+            <pre><code>sudo apt update && sudo apt install iptables</code></pre>
 
-                <h3>Cadenas (Chains)</h3>
-                <p>Dentro de cada tabla existen <strong>cadenas</strong> que representan diferentes puntos en el procesamiento de paquetes:</p>
-                
-                <div class="code-block">
-                    <code>
-INPUT    → Paquetes dirigidos al sistema local<br>
-OUTPUT   → Paquetes originados en el sistema local<br>
-FORWARD  → Paquetes que atraviesan el sistema (routing)<br>
-PREROUTING  → Procesamiento antes del routing<br>
-POSTROUTING → Procesamiento después del routing<br>
-                    </code>
-                </div>
+            <h4>CentOS/RHEL/Fedora</h4>
+            <pre><code>sudo yum install iptables
+# o
+sudo dnf install iptables</code></pre>
 
-                <h3>Targets y Acciones</h3>
-                <p>Cuando un paquete coincide con una regla, se ejecuta una <strong>acción</strong> o <strong>target</strong>:</p>
-                <ul>
-                    <li><strong>ACCEPT:</strong> Permite el paso del paquete</li>
-                    <li><strong>DROP:</strong> Descarta el paquete silenciosamente</li>
-                    <li><strong>REJECT:</strong> Rechaza el paquete y envía respuesta de error</li>
-                    <li><strong>LOG:</strong> Registra información del paquete</li>
-                    <li><strong>DNAT/SNAT:</strong> Traduce direcciones de destino/origen</li>
-                </ul>
-            </section>
+            <h4>Arch Linux</h4>
+            <pre><code>sudo pacman -S iptables</code></pre>
 
-            <section id="instalacion">
-                <h2>3. Instalación y Configuración Inicial</h2>
-                
-                <h3>Instalación</h3>
-                <p>En la mayoría de las distribuciones Linux, iptables viene preinstalado. Si no es el caso:</p>
-                
-                <div class="code-block">
-                    <code>
-# Ubuntu/Debian<br>
-sudo apt update && sudo apt install iptables<br>
-<br>
-# CentOS/RHEL/Fedora<br>
-sudo yum install iptables<br>
-# o<br>
-sudo dnf install iptables<br>
-<br>
-# Arch Linux<br>
-sudo pacman -S iptables<br>
-                    </code>
-                </div>
+            <h3>Verificar Estado</h3>
+            <pre><code># Verificar si iptables está funcionando
+sudo iptables -L -v -n
 
-                <h3>Verificar Estado</h3>
-                <div class="code-block">
-                    <code>
-# Verificar si iptables está funcionando<br>
-sudo iptables -L -v -n<br>
-<br>
-# Verificar versión<br>
-iptables --version<br>
-                    </code>
+# Verificar versión
+iptables --version</code></pre>
         </div>
+    </div>
 
-        <div class="footer">
-            <p>© 2023 Guía Completa de Seguridad Informática. Todos los derechos reservados.</p>
-            <p><a href="../pildoras.html">Volver a todas las píldoras</a></p>
+    <div class="card">
+        <div class="card-body">
+            <h2>Sintaxis Básica</h2>
+
+            <p>La sintaxis general de iptables sigue este patrón:</p>
+
+            <pre><code>iptables [-t tabla] [acción] [cadena] [criterios] -j [target]</code></pre>
+
+            <h3>Parámetros Principales</h3>
+            <p>Los parámetros más comunes incluyen:</p>
+            <ul>
+                <li><code>-t</code>: Especifica la tabla (-t filter por defecto)</li>
+                <li><code>-A</code>: Agregar regla al final</li>
+                <li><code>-I</code>: Insertar regla en posición específica</li>
+                <li><code>-D</code>: Eliminar regla</li>
+                <li><code>-s</code>: Dirección IP origen</li>
+                <li><code>-d</code>: Dirección IP destino</li>
+                <li><code>-p</code>: Protocolo (tcp, udp, icmp)</li>
+                <li><code>--dport</code>: Puerto destino</li>
+                <li><code>--sport</code>: Puerto origen</li>
+            </ul>
         </div>
-            </section>
+    </div>
 
-            <section id="sintaxis">
-                <h2>4. Sintaxis Básica</h2>
-                
-                <p>La sintaxis general de iptables sigue este patrón:</p>
-                
-                <div class="code-block">
-                    <code>
-iptables [-t tabla] [acción] [cadena] [criterios] -j [target]</br>
-                    </code>
-                </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Ejemplos Prácticos</h2>
 
-                <h3>Parámetros Principales</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Parámetro</th>
-                            <th>Descripción</th>
-                            <th>Ejemplo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>-t</td>
-                            <td>Especifica la tabla</td>
-                            <td>-t filter (por defecto)</td>
-                        </tr>
-                        <tr>
-                            <td>-A</td>
-                            <td>Agregar regla al final</td>
-                            <td>-A INPUT</td>
-                        </tr>
-                        <tr>
-                            <td>-I</td>
-                            <td>Insertar regla en posición</td>
-                            <td>-I INPUT 1</td>
-                        </tr>
-                        <tr>
-                            <td>-D</td>
-                            <td>Eliminar regla</td>
-                            <td>-D INPUT 3</td>
-                        </tr>
-                        <tr>
-                            <td>-s</td>
-                            <td>Dirección IP origen</td>
-                            <td>-s 192.168.1.100</td>
-                        </tr>
-                        <tr>
-                            <td>-d</td>
-                            <td>Dirección IP destino</td>
-                            <td>-d 10.0.0.1</td>
-                        </tr>
-                        <tr>
-                            <td>-p</td>
-                            <td>Protocolo</td>
-                            <td>-p tcp</td>
-                        </tr>
-                        <tr>
-                            <td>--dport</td>
-                            <td>Puerto destino</td>
-                            <td>--dport 80</td>
-                        </tr>
-                        <tr>
-                            <td>--sport</td>
-                            <td>Puerto origen</td>
-                            <td>--sport 1024:65535</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+            <h3>Permitir SSH</h3>
+            <pre><code># Permitir SSH entrante en puerto 22
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 
-            <section id="reglas-basicas">
-                <h2>5. Reglas Básicas</h2>
-                
-                <h3>Ver Reglas Actuales</h3>
-                <div class="code-block">
-                    <code>
-# Listar todas las reglas con números de línea</br>
-sudo iptables -L -n --line-numbers</br>
-</br>
-# Ver reglas con estadísticas</br>
-sudo iptables -L -v -n</br>
-</br>
-# Ver reglas de una tabla específica</br>
-sudo iptables -t nat -L -n</br>
-<br>
-                    </code>
-                </div>
+# Permitir SSH solo desde una IP específica
+sudo iptables -A INPUT -p tcp -s 192.168.1.100 --dport 22 -j ACCEPT</code></pre>
 
-                <h3>Políticas por Defecto</h3>
-                <p>Las políticas definen qué hacer con paquetes que no coinciden con ninguna regla:</p>
-                
-                <div class="code-block">
-                    <code>
-# Establecer política por defecto<br>
-sudo iptables -P INPUT DROP<br>
-sudo iptables -P FORWARD DROP<br>
-sudo iptables -P OUTPUT ACCEPT<br>
-# Ver políticas actuales<br>
-sudo iptables -L | grep policy<br>
-<br>
-                    </code>
-                </div>
+            <h3>Configurar Servidor Web</h3>
+            <pre><code># Permitir HTTP (puerto 80)
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 
-                <div class="tip">
-                    <strong>💡 Consejo:</strong> Siempre permite el tráfico de loopback antes de establecer políticas restrictivas:
-                    <br>
-                    <code>sudo iptables -A INPUT -i lo -j ACCEPT</code>
-                </div>
-            </section>
+# Permitir HTTPS (puerto 443)
+sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 
-            <section id="ejemplos">
-                <h2>6. Ejemplos Prácticos</h2>
-                
-                <h3>Permitir SSH</h3>
-                <div class="code-block">
-                    <code>
-# Permitir SSH entrante en puerto 22<br>
-sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT<br>
-<br>
-# Permitir SSH solo desde una IP específica<br>
-sudo iptables -A INPUT -p tcp -s 192.168.1.100 --dport 22 -j ACCEPT<br>
-                    </code>
-                </div>
+# Permitir solo conexiones establecidas y relacionadas
+sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</code></pre>
 
-                <h3>Configurar Servidor Web</h3>
-                <div class="code-block">
-                    <code>
-# Permitir HTTP (puerto 80)<br>
-sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT<br>
-<br>
-# Permitir HTTPS (puerto 443)<br>
-sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT<br>
-<br>
-# Permitir solo conexiones establecidas y relacionadas<br>
-sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT<br>
-                    </code>
-                </div>
+            <h3>Bloquear IP Específica</h3>
+            <pre><code># Bloquear una IP específica
+sudo iptables -A INPUT -s 192.168.1.50 -j DROP
 
-                <h3>Bloquear IP Específica</h3>
-                <div class="code-block">
-                    <code>
-# Bloquear una IP específica<br>
-sudo iptables -A INPUT -s 192.168.1.50 -j DROP<br>
-<br>
-# Bloquear un rango de IPs<br>
-sudo iptables -A INPUT -s 192.168.1.0/24 -j DROP<br>
-                    </code>
-                </div>
-
-                <h3>Límite de Conexiones</h3>
-                <div class="code-block">
-                    <code>
-# Limitar conexiones SSH (máximo 3 por minuto)<br>
-sudo iptables -A INPUT -p tcp --dport 22 -m limit --limit 3/min -j ACCEPT<br>
-<br>
-# Protección contra ataques de fuerza bruta<br>
-sudo iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --set<br>
-sudo iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 -j DROP<br>
-                    </code>
-                </div>
-            </section>
-
-            <section id="configuraciones">
-                <h2>7. Configuraciones Avanzadas</h2>
-                
-                <h3>NAT (Network Address Translation)</h3>
-                <div class="code-block">
-                    <code>
-# SNAT - Cambiar IP origen (para salida a Internet)<br>
-sudo iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source 203.0.113.1<br>
-<br>
-# MASQUERADE - Para IPs dinámicas<br>
-sudo iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE<br>
-<br>
-# DNAT - Redirección de puertos<br>
-sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.1.100:8080<br>
-                    </code>
-                </div>
-
-                <h3>Port Forwarding</h3>
-                <div class="code-block">
-                    <code>
-# Redirigir puerto 8080 externo al 80 interno<br>
-sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 192.168.1.10:80<br>
-sudo iptables -t nat -A POSTROUTING -p tcp -d 192.168.1.10 --dport 80 -j SNAT --to-source 192.168.1.1<br>
-                    </code>
-                </div>
-
-                <h3>Logging Avanzado</h3>
-                <div class="code-block">
-                    <code>
-# Log de paquetes dropped con prefix personalizado<br>
-sudo iptables -A INPUT -j LOG --log-prefix "IPTABLES-DROPPED: " --log-level 4<br>
-<br>
-# Log con límite de velocidad para evitar spam<br>
-sudo iptables -A INPUT -m limit --limit 2/min -j LOG --log-prefix "IPTABLES-DROPPED: "<br>
-                    </code>
-                </div>
-
-                <h3>Módulos Útiles</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Módulo</th>
-                            <th>Función</th>
-                            <th>Ejemplo de Uso</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>conntrack</td>
-                            <td>Seguimiento de conexiones</td>
-                            <td>-m conntrack --ctstate ESTABLISHED</td>
-                        </tr>
-                        <tr>
-                            <td>multiport</td>
-                            <td>Múltiples puertos</td>
-                            <td>-m multiport --dports 80,443,8080</td>
-                        </tr>
-                        <tr>
-                            <td>recent</td>
-                            <td>Tracking de IPs</td>
-                            <td>-m recent --set --name SSH</td>
-                        </tr>
-                        <tr>
-                            <td>string</td>
-                            <td>Búsqueda de texto</td>
-                            <td>-m string --string "malware"</td>
-                        </tr>
-                        <tr>
-                            <td>time</td>
-                            <td>Restricciones temporales</td>
-                            <td>-m time --timestart 09:00 --timestop 17:00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <section id="persistencia">
-                <h2>8. Persistencia de Reglas</h2>
-                
-                <p>Por defecto, las reglas de iptables se pierden al reiniciar el sistema. Para hacerlas persistentes:</p>
-
-                <h3>Ubuntu/Debian</h3>
-                <div class="code-block">
-                    <code>
-# Instalar iptables-persistent<br>
-sudo apt install iptables-persistent<br>
-
-# Guardar reglas actuales<br>
-sudo iptables-save > /etc/iptables/rules.v4<br>
-sudo ip6tables-save > /etc/iptables/rules.v6<br>
-<br>
-# Restaurar reglas<br>
-sudo iptables-restore < /etc/iptables/rules.v4<br>
-                    </code>
-                </div>
-
-                <h3>CentOS/RHEL</h3>
-                <div class="code-block">
-                    <code>
-# Guardar reglas<br>
-sudo service iptables save<br>
-<br>
-# O manualmente<br>
-sudo iptables-save > /etc/sysconfig/iptables<br>
-<br>
-# Habilitar servicio<br>
-
-sudo systemctl start iptables
-                    </code>
-                </div>
-
-                <h3>Script de Inicio Personalizado</h3>
-                <div class="code-block">
-                    <code>
-#!/bin/bash<br>
-# /etc/init.d/iptables-rules<br>
-<br>
-# Limpiar reglas existentes<br>
-iptables -F<br>
-iptables -X<br>
-iptables -t nat -F<br>
-iptables -t nat -X<br>
-<br>
-# Políticas por defecto<br>
-iptables -P INPUT DROP<br>
-iptables -P FORWARD DROP<br>
-iptables -P OUTPUT ACCEPT<br>
-<br>
-# Permitir loopback<br>
-iptables -A INPUT -i lo -j ACCEPT<br>
-<br>
-# Permitir conexiones establecidas<br>
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT<br>
-<br>
-# Permitir SSH<br>
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT<br>
-<br>
-# Agregar más reglas según necesidades...<br>
-                    </code>
-                </div>
-            </section>
-
-            <section id="mejores-practicas">
-                <h2>9. Mejores Prácticas</h2>
-                
-                <div class="tip">
-                    <h3>🛡️ Seguridad</h3>
-                    <ul>
-                        <li><strong>Principio de menor privilegio:</strong> Denegar todo por defecto, permitir solo lo necesario</li>
-                        <li><strong>Orden de reglas:</strong> Las reglas más específicas primero</li>
-                        <li><strong>Logging:</strong> Registrar tráfico rechazado para análisis</li>
-                        <li><strong>Rate limiting:</strong> Proteger contra ataques de denegación de servicio</li>
-                    </ul>
-                </div>
-
-                <div class="warning">
-                    <h3>⚠️ Precauciones</h3>
-                    <ul>
-                        <li>Siempre mantener una regla de acceso SSH antes de aplicar políticas restrictivas</li>
-                        <li>Probar reglas en entorno de desarrollo antes de producción</li>
-                        <li>Mantener respaldos de configuraciones funcionales</li>
-                        <li>Documentar cambios y propósito de cada regla</li>
-                    </ul>
-                </div>
-
-                <h3>Script de Configuración Típica</h3>
-                <div class="code-block">
-                    <code>
-#!/bin/bash<br>
-# Configuración básica de iptables para servidor web<br>
-<br>
-# Limpiar reglas existentes<br>
-iptables -F<br>
-iptables -X<br>
-iptables -t nat -F<br>
-iptables -t nat -X<br>
-<br>
-# Políticas por defecto<br>
-iptables -P INPUT DROP<br>
-iptables -P FORWARD DROP<br>
-iptables -P OUTPUT ACCEPT<br>
-<br>
-# Permitir loopback<br>
-iptables -I INPUT 1 -i lo -j ACCEPT<br>
-<br>
-# Permitir conexiones establecidas y relacionadas<br>
-iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT<br>
-<br>
-# SSH (puerto 22) - SIEMPRE PRIMERO<br>
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT<br>
-<br>
-# HTTP y HTTPS<br>
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT<br>
-iptables -A INPUT -p tcp --dport 443 -j ACCEPT<br>
-<br>
-# Ping (ICMP)<br>
-iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT<br>
-<br>
-# Log paquetes rechazados (opcional)<br>
-iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7<br>
-<br>
-echo "Configuración de iptables aplicada correctamente"<br>
-                    </code>
-                </div>
-
-                <h3>Monitoreo y Mantenimiento</h3>
-                <div class="code-block">
-                    <code>
-# Ver estadísticas de reglas<br>
-sudo iptables -L -v -n<br>
-<br>
-# Resetear contadores<br>
-sudo iptables -Z<br>
-<br>
-# Monitoreo en tiempo real de logs<br>
-sudo tail -f /var/log/syslog | grep iptables<br>
-<br>
-# Ver conexiones activas<br>
-sudo netstat -tupln<br>
-                    </code>
-                </div>
-            </section>
-
-            <section id="conclusion">
-                <h2>10. Conclusión</h2>
-                
-                <p>iptables sigue siendo una herramienta fundamental para la seguridad en Linux, ofreciendo un control granular sobre el tráfico de red. Aunque las distribuciones más modernas están migrando hacia <strong>nftables</strong>, el conocimiento de iptables permanece relevante debido a:</p>
-                
-                <ul>
-                    <li>Su amplia adopción en sistemas existentes</li>
-                    <li>La abundante documentación y ejemplos disponibles</li>
-                    <li>Su estabilidad y confiabilidad probada</li>
-                    <li>La compatibilidad hacia atrás que mantienen las nuevas herramientas</li>
-                </ul>
-
-        <div class="footer">
-            <p>Documento técnico sobre Iptables - Seguridad de Redes<br>
-            Actualizado: Agosto 2025</p>
-            <p><a href="../pildoras/pildoras.html" style="text-decoration: none; color: #7f8c8d;">Volver a todas las píldoras</a></p>
+# Bloquear un rango de IPs
+sudo iptables -A INPUT -s 192.168.1.0/24 -j DROP</code></pre>
         </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Configuraciones Avanzadas</h2>
+
+            <h3>NAT (Network Address Translation)</h3>
+            <pre><code># SNAT - Cambiar IP origen (para salida a Internet)
+sudo iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source 203.0.113.1
+
+# MASQUERADE - Para IPs dinámicas
+sudo iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
+
+# DNAT - Redirección de puertos
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.1.100:8080</code></pre>
+
+            <h3>Port Forwarding</h3>
+            <pre><code># Redirigir puerto 8080 externo al 80 interno
+sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 192.168.1.10:80
+sudo iptables -t nat -A POSTROUTING -p tcp -d 192.168.1.10 --dport 80 -j SNAT --to-source 192.168.1.1</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Persistencia de Reglas</h2>
+
+            <h3>Ubuntu/Debian</h3>
+            <pre><code># Instalar iptables-persistent
+sudo apt install iptables-persistent
+
+# Guardar reglas actuales
+sudo iptables-save > /etc/iptables/rules.v4
+sudo ip6tables-save > /etc/iptables/rules.v6
+
+# Restaurar reglas
+sudo iptables-restore < /etc/iptables/rules.v4</code></pre>
+
+            <h3>CentOS/RHEL</h3>
+            <pre><code># Guardar reglas
+sudo service iptables save
+
+# O manualmente
+sudo iptables-save > /etc/sysconfig/iptables
+
+# Habilitar servicio
+sudo systemctl start iptables</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Mejores Prácticas</h2>
+
+            <h3>Seguridad</h3>
+            <ul>
+                <li><strong>Principio de menor privilegio:</strong> Denegar todo por defecto, permitir solo lo necesario</li>
+                <li><strong>Orden de reglas:</strong> Las reglas más específicas primero</li>
+                <li><strong>Logging:</strong> Registrar tráfico rechazado para análisis</li>
+                <li><strong>Rate limiting:</strong> Proteger contra ataques de denegación de servicio</li>
+            </ul>
+
+            <h3>Precauciones</h3>
+            <ul>
+                <li>Siempre mantener una regla de acceso SSH antes de aplicar políticas restrictivas</li>
+                <li>Probar reglas en entorno de desarrollo antes de producción</li>
+                <li>Mantener respaldos de configuraciones funcionales</li>
+                <li>Documentar cambios y propósito de cada regla</li>
+            </ul>
+
+            <h3>Configuración Típica</h3>
+            <pre><code>#!/bin/bash
+# Configuración básica de iptables para servidor web
+
+# Limpiar reglas existentes
+iptables -F
+iptables -X
+iptables -t nat -F
+iptables -t nat -X
+
+# Políticas por defecto
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT ACCEPT
+
+# Permitir loopback
+iptables -I INPUT 1 -i lo -j ACCEPT
+
+# Permitir conexiones establecidas y relacionadas
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# SSH (puerto 22) - SIEMPRE PRIMERO
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# HTTP y HTTPS
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+
+# Ping (ICMP)
+iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+
+echo "Configuración de iptables aplicada correctamente"</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Conclusión</h2>
+
+            <p>iptables sigue siendo una herramienta fundamental para la seguridad en Linux, ofreciendo un control granular sobre el tráfico de red. Aunque las distribuciones más modernas están migrando hacia <strong>nftables</strong>, el conocimiento de iptables permanece relevante debido a:</p>
+
+            <ul>
+                <li>Su amplia adopción en sistemas existentes</li>
+                <li>La abundante documentación y ejemplos disponibles</li>
+                <li>Su estabilidad y confiabilidad probada</li>
+                <li>La compatibilidad hacia atrás que mantienen las nuevas herramientas</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a Píldoras de Seguridad</a></p>
+    </footer>
+</div>
+
+</body>
+</html>

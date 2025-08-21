@@ -6,50 +6,44 @@
     <title>Archivos Log en Microsoft Windows</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
+            margin: 2em;
             color: #333;
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            background-color: #f9f9f9;
         }
         h1, h2 {
             color: #2c3e50;
         }
         h1 {
             border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+            padding-bottom: 0.5em;
         }
         h2 {
-            margin-top: 30px;
-            border-bottom: 1px solid #bdc3c7;
-            padding-bottom: 5px;
-        }
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        li {
-            background: #ecf0f1;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-left: 4px solid #3498db;
-        }
-        strong {
-            color: #2980b9;
-        }
-        pre {
-            background: #e9ecef;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
+            margin-top: 1.5em;
         }
         .container {
-            background-color: #fff;
-            padding: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        code, pre {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
         }
     </style>
 </head>
@@ -57,49 +51,60 @@
 
 <div class="container">
     <h1>Archivos Log en Microsoft Windows</h1>
-    <p>Los archivos de registro, o <strong>log files</strong>, en Microsoft Windows son registros de eventos del sistema operativo y de los programas instalados. Funcionan como un diario digital, documentando actividades, errores y advertencias. Estos archivos son esenciales para la <strong>solución de problemas</strong>, el <strong>diagnóstico de fallos</strong> y el <strong>monitoreo del rendimiento</strong> del sistema.</p>
 
-    ---
+    <div class="card">
+        <div class="card-body">
+            <p>Los archivos de registro, o <strong>log files</strong>, en Microsoft Windows son registros de eventos del sistema operativo y de los programas instalados. Funcionan como un diario digital, documentando actividades, errores y advertencias. Estos archivos son esenciales para la <strong>solución de problemas</strong>, el <strong>diagnóstico de fallos</strong> y el <strong>monitoreo del rendimiento</strong> del sistema.</p>
+        </div>
+    </div>
 
-    <h2>¿Dónde se encuentran los archivos de registro en Windows?</h2>
-    <p>La ubicación principal para los registros del sistema y de aplicaciones en Windows es el <strong>Visor de eventos</strong>. Puedes acceder a él de las siguientes maneras:</p>
-    <ul>
-        <li><strong>Menú de inicio:</strong> Escribe <strong>"Visor de eventos"</strong> en la barra de búsqueda y ábrelo.</li>
-        <li><strong>Ejecutar:</strong> Presiona la tecla <code>Windows</code> + <code>R</code>, escribe <code>eventvwr.msc</code> y presiona <code>Enter</code>.</li>
-    </ul>
-    <p>Dentro del Visor de eventos, los registros se organizan en las siguientes categorías principales:</p>
-    <ul>
-        <li><strong>Registros de Windows:</strong> Contienen los registros del sistema, seguridad, instalación y aplicaciones.
-            <ul>
-                <li><strong>Aplicación:</strong> Eventos relacionados con los programas instalados.</li>
-                <li><strong>Seguridad:</strong> Registros de intentos de inicio de sesión, cambios de permisos y otros eventos de seguridad.</li>
-                <li><strong>Sistema:</strong> Eventos del sistema operativo, como el inicio o apagado del sistema y fallos de controladores.</li>
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Dónde se encuentran los archivos de registro en Windows?</h2>
+            <p>La ubicación principal para los registros del sistema y de aplicaciones en Windows es el <strong>Visor de eventos</strong>. Puedes acceder a él de las siguientes maneras:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Menú de inicio:</strong> Escribe <strong>"Visor de eventos"</strong> en la barra de búsqueda y ábrelo.</li>
+                <li class="mb-2"><strong>Ejecutar:</strong> Presiona la tecla <code>Windows</code> + <code>R</code>, escribe <code>eventvwr.msc</code> y presiona <code>Enter</code>.</li>
             </ul>
-        </li>
-        <li><strong>Registros de aplicaciones y servicios:</strong> Registros específicos de programas o servicios, como Microsoft Office o el navegador.</li>
-    </ul>
+            <p>Dentro del Visor de eventos, los registros se organizan en las siguientes categorías principales:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Registros de Windows:</strong> Contienen los registros del sistema, seguridad, instalación y aplicaciones.
+                    <ul class="ps-4">
+                        <li class="mb-2"><strong>Aplicación:</strong> Eventos relacionados con los programas instalados.</li>
+                        <li class="mb-2"><strong>Seguridad:</strong> Registros de intentos de inicio de sesión, cambios de permisos y otros eventos de seguridad.</li>
+                        <li class="mb-2"><strong>Sistema:</strong> Eventos del sistema operativo, como el inicio o apagado del sistema y fallos de controladores.</li>
+                    </ul>
+                </li>
+                <li class="mb-2"><strong>Registros de aplicaciones y servicios:</strong> Registros específicos de programas o servicios, como Microsoft Office o el navegador.</li>
+            </ul>
+        </div>
+    </div>
 
-    ---
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Por qué son importantes los archivos de registro?</h2>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Diagnóstico de errores:</strong> Cuando una aplicación se cierra inesperadamente o el sistema se congela, el Visor de eventos puede mostrar un registro de error con detalles que te ayudarán a identificar la causa.</li>
+                <li class="mb-2"><strong>Solución de problemas de hardware:</strong> Si un controlador de dispositivo no funciona correctamente, el registro del sistema puede mostrar advertencias o errores relacionados.</li>
+                <li class="mb-2"><strong>Monitoreo de seguridad:</strong> El registro de seguridad te permite rastrear accesos no autorizados, inicios de sesión fallidos y cambios críticos en la configuración del sistema.</li>
+                <li class="mb-2"><strong>Análisis del rendimiento:</strong> Aunque no es su función principal, los registros pueden ofrecer pistas sobre cuellos de botella o procesos que consumen muchos recursos.</li>
+            </ul>
+        </div>
+    </div>
 
-    <h2>¿Por qué son importantes los archivos de registro?</h2>
-    <ul>
-        <li><strong>Diagnóstico de errores:</strong> Cuando una aplicación se cierra inesperadamente o el sistema se congela, el Visor de eventos puede mostrar un registro de error con detalles que te ayudarán a identificar la causa.</li>
-        <li><strong>Solución de problemas de hardware:</strong> Si un controlador de dispositivo no funciona correctamente, el registro del sistema puede mostrar advertencias o errores relacionados.</li>
-        <li><strong>Monitoreo de seguridad:</strong> El registro de seguridad te permite rastrear accesos no autorizados, inicios de sesión fallidos y cambios críticos en la configuración del sistema.</li>
-        <li><strong>Análisis del rendimiento:</strong> Aunque no es su función principal, los registros pueden ofrecer pistas sobre cuellos de botella o procesos que consumen muchos recursos.</li>
-    </ul>
+    <div class="card">
+        <div class="card-body">
+            <h2>Mantenimiento de los archivos de registro</h2>
+            <p>Normalmente, no es necesario gestionar manualmente los archivos de registro, ya que Windows se encarga de ello. Sin embargo, si notas que el Visor de eventos está muy lleno de entradas, puedes:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Filtrar:</strong> Utilizar la opción "Filtrar registro actual" para buscar eventos específicos por fecha, nivel de gravedad (Error, Advertencia, Información), palabra clave o ID de evento.</li>
+                <li class="mb-2"><strong>Borrar:</strong> Puedes borrar los registros para liberar espacio o comenzar de cero, pero ten en cuenta que se perderá toda la información histórica. Para hacer esto, haz clic derecho en el registro que desees borrar (por ejemplo, "Sistema") y selecciona <strong>"Vaciar registro"</strong>.</li>
+            </ul>
+            <p>En resumen, los archivos de registro son una herramienta fundamental para el mantenimiento y la resolución de problemas en Windows, proporcionando una visión detallada de lo que sucede bajo el capó del sistema operativo.</p>
+        </div>
+    </div>
 
-    ---
-
-    <h2>Mantenimiento de los archivos de registro</h2>
-    <p>Normalmente, no es necesario gestionar manualmente los archivos de registro, ya que Windows se encarga de ello. Sin embargo, si notas que el Visor de eventos está muy lleno de entradas, puedes:</p>
-    <ul>
-        <li><strong>Filtrar:</strong> Utilizar la opción "Filtrar registro actual" para buscar eventos específicos por fecha, nivel de gravedad (Error, Advertencia, Información), palabra clave o ID de evento.</li>
-        <li><strong>Borrar:</strong> Puedes borrar los registros para liberar espacio o comenzar de cero, pero ten en cuenta que se perderá toda la información histórica. Para hacer esto, haz clic derecho en el registro que desees borrar (por ejemplo, "Sistema") y selecciona <strong>"Vaciar registro"</strong>.</li>
-    </ul>
-    <p>En resumen, los archivos de registro son una herramienta fundamental para el mantenimiento y la resolución de problemas en Windows, proporcionando una visión detallada de lo que sucede bajo el capó del sistema operativo.</p>
-    
-    <footer style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ccc;">
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
         <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
     </footer>
 </div>

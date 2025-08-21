@@ -4,238 +4,197 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        code, pre {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header class="py-4" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; margin-bottom: 20px;">
-        <div class="container">
-            <h1 class="text-center fw-bold" style="color: #FF6B6B;">LameHug: El Primer Malware Potenciado por Inteligencia Artificial</h1>
-        </div>
-    </header>
-    <main class="container py-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-bug fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">Un Hito Preocupante en la Evolución del Cibercrimen</h2>
-                        <p class="card-text">En el panorama actual de la ciberseguridad, ha surgido una amenaza que marca un punto de inflexión significativo: <strong>LameHug</strong>, el primer malware conocido que integra capacidades de inteligencia artificial para potenciar sus ataques. Este software malicioso, descubierto por el Equipo de Respuesta a Emergencias Informáticas de Ucrania (CERT-UA), representa una evolución peligrosa en las tácticas de los ciberdelincuentes.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-bug fa-2x" style="color: #4A90E2;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4A90E2;">¿Qué es LameHug?</h2>
-                        <p class="card-text">LameHug es un malware sofisticado que utiliza modelos de lenguaje de gran escala (LLM, por sus siglas en inglés) para generar comandos de forma autónoma en sistemas Windows comprometidos. A diferencia del malware tradicional que opera con comandos preestablecidos, LameHug puede adaptar dinámicamente sus operaciones utilizando inteligencia artificial.</p>
-                        <p class="card-text">El malware ha sido vinculado al grupo de amenazas persistentes avanzadas <strong>APT28</strong> (también conocido como Fancy Bear, Forest Blizzard o UAC-0001), un actor de amenazas respaldado por Rusia que ha estado activo durante años en operaciones de ciberespionaje y guerra cibernética.</p>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <h1>LameHug: El Primer Malware Potenciado por Inteligencia Artificial</h1>
+    <div class="card">
+        <div class="card-body">
+            <h2>Un Hito Preocupante en la Evolución del Cibercrimen</h2>
+            <p>En el panorama actual de la ciberseguridad, ha surgido una amenaza que marca un punto de inflexión significativo: <strong>LameHug</strong>, el primer malware conocido que integra capacidades de inteligencia artificial para potenciar sus ataques. Este software malicioso, descubierto por el Equipo de Respuesta a Emergencias Informáticas de Ucrania (CERT-UA), representa una evolución peligrosa en las tácticas de los ciberdelincuentes.</p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-cogs fa-2x" style="color: #4CAF50;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4CAF50;">Características Técnicas Innovadoras</h2>
-                        <h3 class="card-title fw-bold" style="color: #4CAF50;">Integración con Modelos de IA</h3>
-                        <p class="card-text">Lo que hace único a LameHug es su capacidad de:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Generar comandos dinámicos:</strong> Utiliza LLM para crear comandos de sistema adaptados a situaciones específicas</li>
-                            <li class="mb-2"><strong>Automatización inteligente:</strong> Puede tomar decisiones sobre qué acciones realizar basándose en el contexto del sistema infectado</li>
-                            <li class="mb-2"><strong>Adaptabilidad:</strong> Su comportamiento puede evolucionar según las condiciones del entorno objetivo</li>
-                        </ul>
-                        <h3 class="card-title fw-bold" style="color: #4CAF50;">Infraestructura Tecnológica</h3>
-                        <p class="card-text">Según las investigaciones, LameHug aprovecha servicios de nube, incluyendo <strong>Alibaba Cloud's LLM</strong>, para sus operaciones de procesamiento de lenguaje natural. Esta dependencia de servicios externos le permite acceder a capacidades de IA avanzadas sin necesidad de incorporar modelos complejos en el propio malware.</p>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Qué es LameHug?</h2>
+            <p>LameHug es un malware sofisticado que utiliza modelos de lenguaje de gran escala (LLM, por sus siglas en inglés) para generar comandos de forma autónoma en sistemas Windows comprometidos. A diferencia del malware tradicional que opera con comandos preestablecidos, LameHug puede adaptar dinámicamente sus operaciones utilizando inteligencia artificial.</p>
+            <p>El malware ha sido vinculado al grupo de amenazas persistentes avanzadas <strong>APT28</strong> (también conocido como Fancy Bear, Forest Blizzard o UAC-0001), un actor de amenazas respaldado por Rusia que ha estado activo durante años en operaciones de ciberespionaje y guerra cibernética.</p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-globe-europe fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">Contexto Geopolítico y Objetivos</h2>
-                        <h3 class="card-title fw-bold" style="color: #FF6B6B;">Campaña Dirigida</h3>
-                        <p class="card-text">LameHug ha sido utilizado principalmente en campañas de phishing dirigidas contra:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Funcionarios gubernamentales ucranianos</strong></li>
-                            <li class="mb-2"><strong>Organizaciones del sector de seguridad y defensa</strong></li>
-                            <li class="mb-2"><strong>Entidades críticas relacionadas con la infraestructura nacional</strong></li>
-                        </ul>
-                        <h3 class="card-title fw-bold" style="color: #FF6B6B;">Relación con el Conflicto Ruso-Ucraniano</h3>
-                        <p class="card-text">El descubrimiento de LameHug no es coincidencial. Se enmarca dentro del contexto más amplio del conflicto entre Rusia y Ucrania, donde la guerra cibernética ha sido un componente constante. APT28 ha mantenido una campaña sostenida contra objetivos ucranianos desde el inicio del conflicto, utilizando diversas herramientas y tácticas.</p>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Características Técnicas Innovadoras</h2>
+            <h3>Integración con Modelos de IA</h3>
+            <p>Lo que hace único a LameHug es su capacidad de:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Generar comandos dinámicos:</strong> Utiliza LLM para crear comandos de sistema adaptados a situaciones específicas</li>
+                <li class="mb-2"><strong>Automatización inteligente:</strong> Puede tomar decisiones sobre qué acciones realizar basándose en el contexto del sistema infectado</li>
+                <li class="mb-2"><strong>Adaptabilidad:</strong> Su comportamiento puede evolucionar según las condiciones del entorno objetivo</li>
+            </ul>
+            <h3>Infraestructura Tecnológica</h3>
+            <p>Según las investigaciones, LameHug aprovecha servicios de nube, incluyendo <strong>Alibaba Cloud's LLM</strong>, para sus operaciones de procesamiento de lenguaje natural. Esta dependencia de servicios externos le permite acceder a capacidades de IA avanzadas sin necesidad de incorporar modelos complejos en el propio malware.</p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-user-shield fa-2x" style="color: #4A90E2;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4A90E2;">Análisis de Expertos y Perspectivas de la Industria</h2>
-                        <h3 class="card-title fw-bold" style="color: #4A90E2;">Evaluación de MITRE</h3>
-                        <p class="card-text">Expertos de MITRE, presentando en Black Hat USA 2025, caracterizaron a LameHug como "fairly primitive" pero significativo como campo de pruebas para futuros ataques potenciados por IA. Esta evaluación sugiere que, aunque LameHug representa un primer paso, probablemente veremos evoluciones más sofisticadas de esta tecnología.</p>
-                        <h3 class="card-title fw-bold" style="color: #4A90E2;">Implicaciones para la Ciberseguridad</h3>
-                        <p class="card-text">La aparición de LameHug plantea varias preocupaciones importantes:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Evolución de las Amenazas:</strong> Marca el comienzo de una nueva era donde la IA no solo se usa para defenderse, sino también para atacar</li>
-                            <li class="mb-2"><strong>Desafíos de Detección:</strong> Los sistemas de seguridad tradicionales pueden tener dificultades para identificar comportamientos generados por IA</li>
-                            <li class="mb-2"><strong>Escalabilidad:</strong> La automatización inteligente podría permitir ataques más eficientes y de mayor escala</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Contexto Geopolítico y Objetivos</h2>
+            <h3>Campaña Dirigida</h3>
+            <p>LameHug ha sido utilizado principalmente en campañas de phishing dirigidas contra:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Funcionarios gubernamentales ucranianos</strong></li>
+                <li class="mb-2"><strong>Organizaciones del sector de seguridad y defensa</strong></li>
+                <li class="mb-2"><strong>Entidades críticas relacionadas con la infraestructura nacional</strong></li>
+            </ul>
+            <h3>Relación con el Conflicto Ruso-Ucraniano</h3>
+            <p>El descubrimiento de LameHug no es coincidencial. Se enmarca dentro del contexto más amplio del conflicto entre Rusia y Ucrania, donde la guerra cibernética ha sido un componente constante. APT28 ha mantenido una campaña sostenida contra objetivos ucranianos desde el inicio del conflicto, utilizando diversas herramientas y tácticas.</p>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-paper-plane fa-2x" style="color: #4CAF50;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4CAF50;">Métodos de Distribución y Vectores de Ataque</h2>
-                        <h3 class="card-title fw-bold" style="color: #4CAF50;">Campañas de Phishing</h3>
-                        <p class="card-text">LameHug se distribuye principalmente a través de sofisticadas campañas de phishing que:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Utilizan señuelos temáticos relevantes para los objetivos</strong></li>
-                            <li class="mb-2"><strong>Emplean técnicas de ingeniería social avanzadas</strong></li>
-                            <li class="mb-2"><strong>Se adaptan según el perfil de la víctima potencial</strong></li>
-                        </ul>
-                        <h3 class="card-title fw-bold" style="color: #4CAF50;">Técnicas de Evasión</h3>
-                        <p class="card-text">El malware incorpora capacidades para:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Evadir sistemas de detección tradicionales</strong></li>
-                            <li class="mb-2"><strong>Adaptarse a diferentes entornos de sistemas</strong></li>
-                            <li class="mb-2"><strong>Minimizar su huella digital en los sistemas comprometidos</strong></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Análisis de Expertos y Perspectivas de la Industria</h2>
+            <h3>Evaluación de MITRE</h3>
+            <p>Expertos de MITRE, presentando en Black Hat USA 2025, caracterizaron a LameHug como "fairly primitive" pero significativo como campo de pruebas para futuros ataques potenciados por IA. Esta evaluación sugiere que, aunque LameHug representa un primer paso, probablemente veremos evoluciones más sofisticadas de esta tecnología.</p>
+            <h3>Implicaciones para la Ciberseguridad</h3>
+            <p>La aparición de LameHug plantea varias preocupaciones importantes:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Evolución de las Amenazas:</strong> Marca el comienzo de una nueva era donde la IA no solo se usa para defenderse, sino también para atacar</li>
+                <li class="mb-2"><strong>Desafíos de Detección:</strong> Los sistemas de seguridad tradicionales pueden tener dificultades para identificar comportamientos generados por IA</li>
+                <li class="mb-2"><strong>Escalabilidad:</strong> La automatización inteligente podría permitir ataques más eficientes y de mayor escala</li>
+            </ul>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-database fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">Capacidades de Recolección de Datos</h2>
-                        <p class="card-text">Una vez establecido en un sistema, LameHug puede:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Extraer información sensible</strong> de documentos y comunicaciones</li>
-                            <li class="mb-2"><strong>Monitorear actividades del usuario</strong> para identificar datos de valor</li>
-                            <li class="mb-2"><strong>Transmitir información</strong> de manera sigilosa a servidores de comando y control</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Métodos de Distribución y Vectores de Ataque</h2>
+            <h3>Campañas de Phishing</h3>
+            <p>LameHug se distribuye principalmente a través de sofisticadas campañas de phishing que:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Utilizan señuelos temáticos relevantes para los objetivos</strong></li>
+                <li class="mb-2"><strong>Emplean técnicas de ingeniería social avanzadas</strong></li>
+                <li class="mb-2"><strong>Se adaptan según el perfil de la víctima potencial</strong></li>
+            </ul>
+            <h3>Técnicas de Evasión</h3>
+            <p>El malware incorpora capacidades para:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Evadir sistemas de detección tradicionales</strong></li>
+                <li class="mb-2"><strong>Adaptarse a diferentes entornos de sistemas</strong></li>
+                <li class="mb-2"><strong>Minimizar su huella digital en los sistemas comprometidos</strong></li>
+            </ul>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-shield-alt fa-2x" style="color: #4A90E2;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4A90E2;">Respuesta de la Comunidad de Ciberseguridad</h2>
-                        <h3 class="card-title fw-bold" style="color: #4A90E2;">Desarrollo de Contramedidas</h3>
-                        <p class="card-text">La industria de la ciberseguridad ha respondido rápidamente con:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Reglas de detección Sigma</strong> desarrolladas por plataformas como SOC Prime</li>
-                            <li class="mb-2"><strong>Actualizaciones de firmas</strong> en sistemas de detección y prevención</li>
-                            <li class="mb-2"><strong>Análisis forense</strong> detallado para comprender mejor las capacidades del malware</li>
-                        </ul>
-                        <h3 class="card-title fw-bold" style="color: #4A90E2;">Colaboración Internacional</h3>
-                        <p class="card-text">El descubrimiento ha fomentado una mayor colaboración entre:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Equipos de respuesta a incidentes nacionales</strong></li>
-                            <li class="mb-2"><strong>Proveedores de seguridad privados</strong></li>
-                            <li class="mb-2"><strong>Investigadores académicos especializados en IA y ciberseguridad</strong></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Capacidades de Recolección de Datos</h2>
+            <p>Una vez establecido en un sistema, LameHug puede:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Extraer información sensible</strong> de documentos y comunicaciones</li>
+                <li class="mb-2"><strong>Monitorear actividades del usuario</strong> para identificar datos de valor</li>
+                <li class="mb-2"><strong>Transmitir información</strong> de manera sigilosa a servidores de comando y control</li>
+            </ul>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-chart-line fa-2x" style="color: #4CAF50;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #4CAF50;">Perspectivas de Futuro</h2>
-                        <h3 class="card-title fw-bold" style="color: #4CAF50;">Evolución Esperada</h3>
-                        <p class="card-text">LameHug probablemente representa solo el comienzo de una nueva categoría de amenazas. Los expertos anticipan:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Malware más sofisticado</strong> con capacidades de IA mejoradas</li>
-                            <li class="mb-2"><strong>Integración de múltiples tecnologías</strong> de aprendizaje automático</li>
-                            <li class="mb-2"><strong>Ataques más personalizados</strong> y difíciles de detectar</li>
-                        </ul>
-                        <h3 class="card-title fw-bold" style="color: #4CAF50;">Preparación Defensiva</h3>
-                        <p class="card-text">Para enfrentar esta nueva generación de amenazas, las organizaciones deben:</p>
-                        <ul class="ps-4">
-                            <li class="mb-2"><strong>Implementar sistemas de detección basados en IA</strong></li>
-                            <li class="mb-2"><strong>Desarrollar estrategias de defensa adaptativas</strong></li>
-                            <li class="mb-2"><strong>Invertir en formación especializada</strong> para equipos de seguridad</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Respuesta de la Comunidad de Ciberseguridad</h2>
+            <h3>Desarrollo de Contramedidas</h3>
+            <p>La industria de la ciberseguridad ha respondido rápidamente con:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Reglas de detección Sigma</strong> desarrolladas por plataformas como SOC Prime</li>
+                <li class="mb-2"><strong>Actualizaciones de firmas</strong> en sistemas de detección y prevención</li>
+                <li class="mb-2"><strong>Análisis forense</strong> detallado para comprender mejor las capacidades del malware</li>
+            </ul>
+            <h3>Colaboración Internacional</h3>
+            <p>El descubrimiento ha fomentado una mayor colaboración entre:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Equipos de respuesta a incidentes nacionales</strong></li>
+                <li class="mb-2"><strong>Proveedores de seguridad privados</strong></li>
+                <li class="mb-2"><strong>Investigadores académicos especializados en IA y ciberseguridad</strong></li>
+            </ul>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow-lg mb-4 pildora-card" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; border: none; transform: translateY(0); transition: all 0.3s ease;">
-                    <div class="card-body">
-                        <div class="pildora-icon mb-3">
-                            <i class="fas fa-check-circle fa-2x" style="color: #FF6B6B;"></i>
-                        </div>
-                        <h2 class="card-title fw-bold" style="color: #FF6B6B;">Conclusiones</h2>
-                        <p class="card-text">LameHug marca un momento decisivo en la evolución de las amenazas cibernéticas. Aunque los expertos lo consideran relativamente primitivo en su forma actual, su significado radica en lo que representa: la democratización de las capacidades de IA para uso malicioso.</p>
-                        <p class="card-text">Este desarrollo subraya la urgente necesidad de que la comunidad de ciberseguridad se adapte y evolucione sus defensas. La carrera entre atacantes y defensores ha entrado en una nueva fase donde la inteligencia artificial será un factor determinante en ambos lados del conflicto.</p>
-                        <p class="card-text">La aparición de LameHug no debe verse como un evento aislado, sino como el presagio de una nueva era en la guerra cibernética donde la inteligencia artificial jugará un papel central tanto en las amenazas como en las defensas. La preparación proactiva y la colaboración internacional serán claves para mantener la seguridad en este nuevo panorama digital.</p>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Perspectivas de Futuro</h2>
+            <h3>Evolución Esperada</h3>
+            <p>LameHug probablemente representa solo el comienzo de una nueva categoría de amenazas. Los expertos anticipan:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Malware más sofisticado</strong> con capacidades de IA mejoradas</li>
+                <li class="mb-2"><strong>Integración de múltiples tecnologías</strong> de aprendizaje automático</li>
+                <li class="mb-2"><strong>Ataques más personalizados</strong> y difíciles de detectar</li>
+            </ul>
+            <h3>Preparación Defensiva</h3>
+            <p>Para enfrentar esta nueva generación de amenazas, las organizaciones deben:</p>
+            <ul class="ps-4">
+                <li class="mb-2"><strong>Implementar sistemas de detección basados en IA</strong></li>
+                <li class="mb-2"><strong>Desarrollar estrategias de defensa adaptativas</strong></li>
+                <li class="mb-2"><strong>Invertir en formación especializada</strong> para equipos de seguridad</li>
+            </ul>
         </div>
-    </main>
-    <footer class="py-4 mt-5" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; margin-top: 20px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0 fw-bold">&copy; 2025 Benito González Piñeiro.</p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <a href="pildoras.html" class="btn btn-dark">Ir a Pildoras</a>
-                </div>
-            </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Conclusiones</h2>
+            <p>LameHug marca un momento decisivo en la evolución de las amenazas cibernéticas. Aunque los expertos lo consideran relativamente primitivo en su forma actual, su significado radica en lo que representa: la democratización de las capacidades de IA para uso malicioso.</p>
+            <p>Este desarrollo subraya la urgente necesidad de que la comunidad de ciberseguridad se adapte y evolucione sus defensas. La carrera entre atacantes y defensores ha entrado en una nueva fase donde la inteligencia artificial será un factor determinante en ambos lados del conflicto.</p>
+            <p>La aparición de LameHug no debe verse como un evento aislado, sino como el presagio de una nueva era en la guerra cibernética donde la inteligencia artificial jugará un papel central tanto en las amenazas como en las defensas. La preparación proactiva y la colaboración internacional serán claves para mantener la seguridad en este nuevo panorama digital.</p>
         </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
     </footer>
+</div>
 </body>
 </html>

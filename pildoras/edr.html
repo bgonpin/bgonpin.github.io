@@ -2,222 +2,185 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    
     <title>EDR (Endpoint Detection and Response) - Benito González Piñeiro</title>
-   
     <style>
-        /* Dark and serious color scheme */
         body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .article-section {
-            background-color: #1e1e1e;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
-            margin-top: 56px;
-            padding: 20px;
-        }
-        
-        .article-section article {
-            background-color: #252525;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            padding: 30px;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            color: #ffffff;
-            font-weight: 700;
-        }
-        
-        p, li {
-            color: #d0d0d0;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
+            margin: 2em;
+            color: #333;
         }
-        
-        .lead {
-            color: #b0b0b0;
-            font-weight: 400;
+        h1, h2 {
+            color: #2c3e50;
         }
-        
-        strong {
-            color: #ffffff;
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5em;
         }
-        
-        ul {
-            padding-left: 20px;
+        h2 {
+            margin-top: 1.5em;
         }
-        
-        li {
-            margin-bottom: 10px;
-        }
-        
-        /* Footer styling */
-        footer {
-            background-color: #0a0a0a;
-            border-top: 1px solid #333;
-        }
-        
-        .footer-section {
-            background-color: #1e1e1e;
-            padding: 20px 0;
-            margin-top: 40px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
             border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        
-        /* Code blocks styling (if any) */
-        pre, code {
-            background-color: #2d2d2d;
-            color: #f8f8f2;
+        code, pre {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
             border-radius: 4px;
-            padding: 10px;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
         }
     </style>
 </head>
 <body>
-    
 
-    <!-- Article Section -->
-    <section class="article-section py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <article class="bg-white rounded shadow p-4 p-md-5">
-                        <h1 class="fw-bold text-center mb-4">EDR (Endpoint Detection and Response)</h1>
+<div class="container">
+    <h1>EDR (Endpoint Detection and Response)</h1>
                         
-                        <p class="lead">
-                            Un <strong>EDR (Endpoint Detection and Response)</strong> es un tipo de <strong>solución de ciberseguridad diseñada para monitorizar, detectar y responder a actividades malintencionadas en los _endpoints_</strong> de una organización. Los _endpoints_ son cualquier dispositivo informático conectado a la red, como ordenadores de escritorio, portátiles, servidores, máquinas virtuales y dispositivos móviles.
-                        </p>
-                        
-                        <p>
-                            A diferencia de los antivirus tradicionales (también conocidos como EPP - Endpoint Protection Platform), que se basan en firmas para detectar amenazas conocidas, el EDR se enfoca en el <strong>comportamiento y la respuesta en tiempo real</strong>. Es una solución de <strong>seguridad activa</strong> que complementa al antivirus, ofreciendo una protección adicional si se produce una infracción al habilitar la detección y corrección.
-                        </p>
+    <div class="card">
+        <div class="card-body">
+            <p>Un <strong>EDR (Endpoint Detection and Response)</strong> es un tipo de <strong>solución de ciberseguridad diseñada para monitorizar, detectar y responder a actividades malintencionadas en los _endpoints_</strong> de una organización. Los _endpoints_ son cualquier dispositivo informático conectado a la red, como ordenadores de escritorio, portátiles, servidores, máquinas virtuales y dispositivos móviles.</p>
 
-                        <h2 class="fw-bold mt-4">¿Cómo funciona un EDR?</h2>
-                        <p>
-                            El funcionamiento de un EDR se basa en un proceso de tres etapas principales:
-                        </p>
-                        <ol>
-                            <li>
-                                <strong>Recopilación de datos:</strong> Las soluciones EDR instalan un <strong>agente de software</strong> en cada dispositivo a monitorizar (_endpoint_). Este agente recopila continuamente información de diversas fuentes, incluyendo registros del sistema, datos de actividad de los usuarios, patrones de comportamiento de las aplicaciones, cambios o eliminaciones de archivos, intentos de autenticación, y telemetría relevante para la seguridad. Esta información se envía a la solución EDR, que puede estar en la nube o en el entorno local.
-                            </li>
-                            <li>
-                                <strong>Análisis de datos:</strong> Una vez recopilados, los datos se analizan mediante <strong>análisis avanzados, algoritmos de inteligencia artificial (IA) y aprendizaje automático (ML)</strong> para detectar anomalías, comportamientos sospechosos o <strong>indicadores de compromiso (IoC)</strong>. Esto permite identificar rápidamente amenazas potenciales, incluso aquellas desconocidas o complejas, antes de que se conviertan en ataques a gran escala.
-                            </li>
-                            <li>
-                                <strong>Respuesta:</strong> Cuando se detecta una amenaza potencial, el EDR puede generar <strong>alertas prioritarias</strong> para el equipo de seguridad y/o iniciar <strong>acciones de corrección automáticas</strong>. Ejemplos de acciones incluyen el aislamiento del _endpoint_ afectado de la red, el bloqueo de procesos malintencionados o la ejecución de scripts de contención o limpieza.
-                            </li>
-                        </ol>
-
-                        <h2 class="fw-bold mt-4">Componentes clave de la tecnología EDR:</h2>
-                        <p>
-                            Un EDR completo proporciona varias funcionalidades esenciales:
-                        </p>
-                        <ul>
-                            <li>
-                                <strong>Monitoreo continuo y detección de amenazas:</strong> Vigilancia constante de los _endpoints_ en busca de actividades anómalas o sospechosas. Utiliza IA y ML para reconocer rápidamente posibles amenazas.
-                            </li>
-                            <li>
-                                <strong>Recopilación y análisis de datos:</strong> Recopila grandes volúmenes de datos de diversas fuentes para crear una visión holística del entorno y los analiza para identificar patrones de actividad maliciosa.
-                            </li>
-                            <li>
-                                <strong>Respuesta automatizada y a incidentes:</strong> Implementa acciones correctivas sin intervención manual, como el aislamiento de dispositivos comprometidos, o alerta a los equipos de seguridad para que intervengan manualmente.
-                            </li>
-                            <li>
-                                <strong>Análisis forense:</strong> Ofrece herramientas para investigar incidentes, comprender la causa raíz de las amenazas, identificar las TTP (Tácticas, Técnicas y Procedimientos) de los atacantes y reunir pruebas para acciones futuras.
-                            </li>
-                            <li>
-                                <strong>Búsqueda proactiva de amenazas (Threat Hunting):</strong> Permite a los equipos de seguridad buscar proactivamente signos de ciberamenazas sofisticadas que, de otro modo, podrían haber pasado desapercibidas, examinando la actividad sospechosa desde las primeras señales.
-                            </li>
-                            <li>
-                                <strong>Integración:</strong> Puede integrarse sin problemas con soluciones SIEM (Security Information and Event Management) y otras herramientas de seguridad existentes, como _firewalls_ y software antivirus.
-                            </li>
-                        </ul>
-
-                        <h2 class="fw-bold mt-4">Importancia y ventajas de implementar EDR:</h2>
-                        <p>
-                            La implementación de una solución EDR es crucial en el panorama de ciberseguridad actual debido a varios factores:
-                        </p>
-                        <ul>
-                            <li>
-                                <strong>Detección de amenazas avanzadas:</strong> Las soluciones antivirus tradicionales pueden no detectar _malware_ sofisticado, _ransomware_ o amenazas persistentes avanzadas (APT). El EDR utiliza análisis avanzados y aprendizaje automático para identificar ataques complejos.
-                            </li>
-                            <li>
-                                <strong>Reducción del tiempo de respuesta:</strong> La detección y corrección rápidas son esenciales para minimizar el impacto de una brecha. El EDR permite a los equipos de TI responder rápidamente a comportamientos sospechosos, reduciendo el "tiempo de permanencia" de la amenaza.
-                            </li>
-                            <li>
-                                <strong>Mayor visibilidad:</strong> Proporciona una visibilidad exhaustiva del estado de seguridad en los _endpoints_ y ayuda a identificar dispositivos no administrados o mal configurados que introducen vulnerabilidades.
-                            </li>
-                            <li>
-                                <strong>Cumplimiento normativo y ciberseguro:</strong> Ayuda a las organizaciones a cumplir con las normativas y los requisitos para contratar un ciberseguro, ya que identifica activamente accesos no autorizados y actividades maliciosas.
-                            </li>
-                            <li>
-                                <strong>Optimización de recursos y reducción de costos:</strong> Al consolidar herramientas de seguridad y automatizar tareas, el EDR puede reducir los costos y la complejidad asociados con la gestión de múltiples soluciones puntuales, especialmente para pymes con recursos limitados.
-                            </li>
-                        </ul>
-
-                        <h2 class="fw-bold mt-4">EDR vs. Otras soluciones:</h2>
-                        <ul>
-                            <li>
-                                <strong>EDR vs. Antivirus (EPP):</strong> El antivirus se basa en firmas para detectar amenazas conocidas, actuando como una primera línea de defensa. El EDR va más allá, enfocándose en el comportamiento y la respuesta en tiempo real, detectando amenazas aún desconocidas que logran evadir el perímetro inicial del antivirus. El EDR es el "guardaespaldas digital" de los equipos.
-                            </li>
-                            <li>
-                                <strong>EDR vs. XDR (Extended Detection and Response):</strong> XDR es una evolución del EDR que amplía las capacidades de detección y respuesta al integrar datos de múltiples vectores (no solo _endpoints_), como redes, servidores, aplicaciones en la nube, correo electrónico y dispositivos IoT, proporcionando una vista unificada de las amenazas en toda la pila de seguridad. Aunque XDR ofrece una solución más holística, EDR sigue siendo una herramienta valiosa y ambas pueden usarse conjuntamente para una protección mejorada.
-                            </li>
-                            <li>
-                                <strong>EDR vs. MDR (Managed Detection and Response):</strong> MDR es un servicio externalizado donde un proveedor gestiona la detección y mitigación de amenazas utilizando su propia tecnología y expertos, ideal para organizaciones con recursos o conocimientos de seguridad limitados.
-                            </li>
-                        </ul>
-
-                        <h2 class="fw-bold mt-4">Soluciones EDR destacadas en las fuentes:</h2>
-                        <p>
-                            Algunas de las soluciones EDR mencionadas incluyen:
-                        </p>
-                        <ul>
-                            <li>
-                                <strong>Microsoft Defender for Endpoint:</strong> Se integra bien con el ecosistema de Microsoft 365 y es una opción rentable para usuarios de licencias E5.
-                            </li>
-                            <li>
-                                <strong>CrowdStrike Falcon:</strong> Ampliamente recomendado por su eficacia en detección y bloqueo, bajos falsos positivos y facilidad de administración, aunque es considerado más caro.
-                            </li>
-                            <li>
-                                <strong>SentinelOne Singularity Complete:</strong> También bien valorado por su buen equilibrio entre eficacia y costo, con menos problemas de agentes.
-                            </li>
-                            <li>
-                                <strong>VMware Carbon Black EDR:</strong> Aunque fue una solución destacada en el pasado, varias fuentes indican que se está volviendo obsoleta, tiene problemas y muchos usuarios están migrando de ella, especialmente tras la adquisición por Broadcom.
-                            </li>
-                            <li>
-                                <strong>Palo Alto Networks Cortex XDR:</strong> Destacado por su eficacia, especialmente si se utilizan _firewalls_ de Palo Alto. Es considerado caro pero a la vanguardia.
-                            </li>
-                            <li>
-                                <strong>ESET Inspect (XDR):</strong> Se menciona en el contexto de la gestión de la complejidad y la compatibilidad con sistemas heredados, ofreciendo soluciones con bajo consumo de recursos.
-                            </li>
-                            <li>
-                                <strong>Elastic Security:</strong> Mencionada como una solución que funciona bien, con muchas formas de personalizar reglas y una interfaz agradable, aunque se debate su rendimiento en pruebas MITRE.
-                            </li>
-                        </ul>
-
-                        <p class="fw-bold mt-4">
-                            En resumen, un EDR es una herramienta fundamental para la <strong>detección y respuesta proactiva y automatizada</strong> a amenazas sofisticadas en los _endpoints_, proporcionando visibilidad, análisis forense y agilizando la respuesta a incidentes de seguridad.
-                        </p>
-                    </article>
-                </div>
-            </div>
+            <p>A diferencia de los antivirus tradicionales (también conocidos como EPP - Endpoint Protection Platform), que se basan en firmas para detectar amenazas conocidas, el EDR se enfoca en el <strong>comportamiento y la respuesta en tiempo real</strong>. Es una solución de <strong>seguridad activa</strong> que complementa al antivirus, ofreciendo una protección adicional si se produce una infracción al habilitar la detección y corrección.</p>
         </div>
-    </section>
+    </div>
 
-    <!-- Bootstrap Footer -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <div class="container">
-            <div class="row">
-                <a href="./pildoras.html" class="text-white text-decoration-none">Volver a Píldoras de Seguridad</a>
-                    
-                
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Cómo funciona un EDR?</h2>
+            <p>El funcionamiento de un EDR se basa en un proceso de tres etapas principales:</p>
+            <ol>
+                <li>
+                    <strong>Recopilación de datos:</strong> Las soluciones EDR instalan un <strong>agente de software</strong> en cada dispositivo a monitorizar (_endpoint_). Este agente recopila continuamente información de diversas fuentes, incluyendo registros del sistema, datos de actividad de los usuarios, patrones de comportamiento de las aplicaciones, cambios o eliminaciones de archivos, intentos de autenticación, y telemetría relevante para la seguridad. Esta información se envía a la solución EDR, que puede estar en la nube o en el entorno local.
+                </li>
+                <li>
+                    <strong>Análisis de datos:</strong> Una vez recopilados, los datos se analizan mediante <strong>análisis avanzados, algoritmos de inteligencia artificial (IA) y aprendizaje automático (ML)</strong> para detectar anomalías, comportamientos sospechosos o <strong>indicadores de compromiso (IoC)</strong>. Esto permite identificar rápidamente amenazas potenciales, incluso aquellas desconocidas o complejas, antes de que se conviertan en ataques a gran escala.
+                </li>
+                <li>
+                    <strong>Respuesta:</strong> Cuando se detecta una amenaza potencial, el EDR puede generar <strong>alertas prioritarias</strong> para el equipo de seguridad y/o iniciar <strong>acciones de corrección automáticas</strong>. Ejemplos de acciones incluyen el aislamiento del _endpoint_ afectado de la red, el bloqueo de procesos malintencionados o la ejecución de scripts de contención o limpieza.
+                </li>
+            </ol>
         </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Componentes clave de la tecnología EDR:</h2>
+            <p>Un EDR completo proporciona varias funcionalidades esenciales:</p>
+            <ul>
+                <li>
+                    <strong>Monitoreo continuo y detección de amenazas:</strong> Vigilancia constante de los _endpoints_ en busca de actividades anómalas o sospechosas. Utiliza IA y ML para reconocer rápidamente posibles amenazas.
+                </li>
+                <li>
+                    <strong>Recopilación y análisis de datos:</strong> Recopila grandes volúmenes de datos de diversas fuentes para crear una visión holística del entorno y los analiza para identificar patrones de actividad maliciosa.
+                </li>
+                <li>
+                    <strong>Respuesta automatizada y a incidentes:</strong> Implementa acciones correctivas sin intervención manual, como el aislamiento de dispositivos comprometidos, o alerta a los equipos de seguridad para que intervengan manualmente.
+                </li>
+                <li>
+                    <strong>Análisis forense:</strong> Ofrece herramientas para investigar incidentes, comprender la causa raíz de las amenazas, identificar las TTP (Tácticas, Técnicas y Procedimientos) de los atacantes y reunir pruebas para acciones futuras.
+                </li>
+                <li>
+                    <strong>Búsqueda proactiva de amenazas (Threat Hunting):</strong> Permite a los equipos de seguridad buscar proactivamente signos de ciberamenazas sofisticadas que, de otro modo, podrían haber pasado desapercibidas, examinando la actividad sospechosa desde las primeras señales.
+                </li>
+                <li>
+                    <strong>Integración:</strong> Puede integrarse sin problemas con soluciones SIEM (Security Information and Event Management) y otras herramientas de seguridad existentes, como _firewalls_ y software antivirus.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Importancia y ventajas de implementar EDR:</h2>
+            <p>La implementación de una solución EDR es crucial en el panorama de ciberseguridad actual debido a varios factores:</p>
+            <ul>
+                <li>
+                    <strong>Detección de amenazas avanzadas:</strong> Las soluciones antivirus tradicionales pueden no detectar _malware_ sofisticado, _ransomware_ o amenazas persistentes avanzadas (APT). El EDR utiliza análisis avanzados y aprendizaje automático para identificar ataques complejos.
+                </li>
+                <li>
+                    <strong>Reducción del tiempo de respuesta:</strong> La detección y corrección rápidas son esenciales para minimizar el impacto de una brecha. El EDR permite a los equipos de TI responder rápidamente a comportamientos sospechosos, reduciendo el "tiempo de permanencia" de la amenaza.
+                </li>
+                <li>
+                    <strong>Mayor visibilidad:</strong> Proporciona una visibilidad exhaustiva del estado de seguridad en los _endpoints_ y ayuda a identificar dispositivos no administrados o mal configurados que introducen vulnerabilidades.
+                </li>
+                <li>
+                    <strong>Cumplimiento normativo y ciberseguro:</strong> Ayuda a las organizaciones a cumplir con las normativas y los requisitos para contratar un ciberseguro, ya que identifica activamente accesos no autorizados y actividades maliciosas.
+                </li>
+                <li>
+                    <strong>Optimización de recursos y reducción de costos:</strong> Al consolidar herramientas de seguridad y automatizar tareas, el EDR puede reducir los costos y la complejidad asociados con la gestión de múltiples soluciones puntuales, especialmente para pymes con recursos limitados.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>EDR vs. Otras soluciones:</h2>
+            <ul>
+                <li>
+                    <strong>EDR vs. Antivirus (EPP):</strong> El antivirus se basa en firmas para detectar amenazas conocidas, actuando como una primera línea de defensa. El EDR va más allá, enfocándose en el comportamiento y la respuesta en tiempo real, detectando amenazas aún desconocidas que logran evadir el perímetro inicial del antivirus. El EDR es el "guardaespaldas digital" de los equipos.
+                </li>
+                <li>
+                    <strong>EDR vs. XDR (Extended Detection and Response):</strong> XDR es una evolución del EDR que amplía las capacidades de detección y respuesta al integrar datos de múltiples vectores (no solo _endpoints_), como redes, servidores, aplicaciones en la nube, correo electrónico y dispositivos IoT, proporcionando una vista unificada de las amenazas en toda la pila de seguridad. Aunque XDR ofrece una solución más holística, EDR sigue siendo una herramienta valiosa y ambas pueden usarse conjuntamente para una protección mejorada.
+                </li>
+                <li>
+                    <strong>EDR vs. MDR (Managed Detection and Response):</strong> MDR es un servicio externalizado donde un proveedor gestiona la detección y mitigación de amenazas utilizando su propia tecnología y expertos, ideal para organizaciones con recursos o conocimientos de seguridad limitados.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Soluciones EDR destacadas en las fuentes:</h2>
+            <p>Algunas de las soluciones EDR mencionadas incluyen:</p>
+            <ul>
+                <li>
+                    <strong>Microsoft Defender for Endpoint:</strong> Se integra bien con el ecosistema de Microsoft 365 y es una opción rentable para usuarios de licencias E5.
+                </li>
+                <li>
+                    <strong>CrowdStrike Falcon:</strong> Ampliamente recomendado por su eficacia en detección y bloqueo, bajos falsos positivos y facilidad de administración, aunque es considerado más caro.
+                </li>
+                <li>
+                    <strong>SentinelOne Singularity Complete:</strong> También bien valorado por su buen equilibrio entre eficacia y costo, con menos problemas de agentes.
+                </li>
+                <li>
+                    <strong>VMware Carbon Black EDR:</strong> Aunque fue una solución destacada en el pasado, varias fuentes indican que se está volviendo obsoleta, tiene problemas y muchos usuarios están migrando de ella, especialmente tras la adquisición por Broadcom.
+                </li>
+                <li>
+                    <strong>Palo Alto Networks Cortex XDR:</strong> Destacado por su eficacia, especialmente si se utilizan _firewalls_ de Palo Alto. Es considerado caro pero a la vanguardia.
+                </li>
+                <li>
+                    <strong>ESET Inspect (XDR):</strong> Se menciona en el contexto de la gestión de la complejidad y la compatibilidad con sistemas heredados, ofreciendo soluciones con bajo consumo de recursos.
+                </li>
+                <li>
+                    <strong>Elastic Security:</strong> Mencionada como una solución que funciona bien, con muchas formas de personalizar reglas y una interfaz agradable, aunque se debate su rendimiento en pruebas MITRE.
+                </li>
+            </ul>
+
+            <p>En resumen, un EDR es una herramienta fundamental para la <strong>detección y respuesta proactiva y automatizada</strong> a amenazas sofisticadas en los _endpoints_, proporcionando visibilidad, análisis forense y agilizando la respuesta a incidentes de seguridad.</p>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a Píldoras de Seguridad</a></p>
     </footer>
+</div>
 
     
 </body>

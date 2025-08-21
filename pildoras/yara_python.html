@@ -4,249 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Detección de Malware con YARA</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --text-primary: #f0f6fc;
-            --text-secondary: #8b949e;
-            --accent-blue: #58a6ff;
-            --accent-green: #3fb950;
-            --accent-red: #f85149;
-            --border-color: #30363d;
-        }
-
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
+            margin: 2em;
+            color: #333;
         }
-
-        .navbar {
-            background-color: var(--bg-secondary) !important;
-            border-bottom: 1px solid var(--border-color);
+        h1, h2 {
+            color: #2c3e50;
         }
-
-        .navbar-brand, .nav-link {
-            color: var(--text-primary) !important;
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5em;
         }
-
-        .nav-link:hover {
-            color: var(--accent-blue) !important;
+        h2 {
+            margin-top: 1.5em;
         }
-
-        .container-fluid {
-            background-color: var(--bg-secondary);
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 2em;
             border-radius: 8px;
-            border: 1px solid var(--border-color);
-            margin-top: 2rem;
-            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-
-        .card {
-            background-color: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
+        code, pre {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #c0392b;
+            font-family: "Courier New", Courier, monospace;
         }
-
-        .card-header {
-            background-color: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
-
-        .card-body {
-            color: var(--text-primary);
-        }
-
-        .badge {
-            font-size: 0.75rem;
-            margin-right: 0.5rem;
-        }
-
-        .badge.bg-primary {
-            background-color: var(--accent-blue) !important;
-        }
-
-        .badge.bg-success {
-            background-color: var(--accent-green) !important;
-        }
-
-        .badge.bg-danger {
-            background-color: var(--accent-red) !important;
-        }
-
-        .alert {
-            background-color: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-        }
-
-        .alert-info {
-            border-left: 4px solid var(--accent-blue);
-        }
-
-        .alert-warning {
-            border-left: 4px solid #f1c40f;
-        }
-
-        .list-group-item {
-            background-color: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-        }
-
-        .text-muted {
-            color: var(--text-secondary) !important;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--text-primary);
-        }
-
-        .code-section {
-            background-color: var(--bg-dark);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1rem;
-            margin: 1rem 0;
-            overflow-x: auto;
-        }
-
         pre {
-            background-color: transparent !important;
-            border: none !important;
-            margin: 0;
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
         }
-
-        code {
-            background-color: var(--bg-tertiary);
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-            font-size: 0.875rem;
-        }
-
-        .feature-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 0.5rem;
-            vertical-align: middle;
-        }
-
-        .function-card {
-            transition: transform 0.2s ease;
-        }
-
-        .function-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .tech-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            margin: 0.25rem;
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            font-size: 0.875rem;
-        }
-
-        .workflow-step {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .workflow-step::before {
-            content: counter(step-counter);
-            counter-increment: step-counter;
-            position: absolute;
-            left: 0;
-            top: 0;
-            background-color: var(--accent-blue);
-            color: white;
-            width: 1.5rem;
-            height: 1.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        .workflow-container {
-            counter-reset: step-counter;
-        }
-
-        @media (max-width: 768px) {
-            .container-fluid {
-                margin-top: 1rem;
-                padding: 1rem;
-            }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <strong>🛡️ Sistema de Detección de Malware</strong>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#codigo">Código</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#funcionalidad">Funcionalidad</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tecnologias">Tecnologías</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#flujo">Flujo de Trabajo</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="text-center mb-4">
-                    <h1 class="display-4 mb-3">Sistema de Detección de Malware con YARA</h1>
-                    <p class="lead text-muted">Análisis automatizado de archivos mediante reglas YARA y base de datos MongoDB</p>
-                    <div class="mt-3">
-                        <span class="badge bg-primary">Python 3.x</span>
-                        <span class="badge bg-success">YARA Engine</span>
-                        <span class="badge bg-danger">MongoDB</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <h1>Sistema de Detección de Malware con YARA</h1>
+    <p>Análisis automatizado de archivos mediante reglas YARA y base de datos MongoDB</p>
 
-        <!-- Código Fuente -->
-        <div class="row" id="codigo">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>📄 Código Fuente Completo</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="code-section">
-                            <pre><code class="language-python">import yara
+    <div class="card">
+        <div class="card-body">
+            <h2>Código Fuente Completo</h2>
+            <pre><code>import yara
 import os
 import pymongo
 
@@ -260,21 +70,21 @@ def obtener_archivosde_mongodb():
     listado_archivos = []
     """
     Conecta a MongoDB y obtiene la lista de archivos en la colección.
-    
+
     Returns:
         list: Lista de archivos en la colección
     """
     client = pymongo.MongoClient(MONGO_URI)
     db = client[DB_NAME]
     collection = db[COLLECTION_NAME]
-    
+
     # Obtener todos los documentos en la colección
     archivos = list(collection.find({}))
-    
+
     for archivo in archivos:
         listado_archivos.append(archivo["ruta"])
-        print(archivo["ruta"])        
-    
+        print(archivo["ruta"])
+
     client.close()
     return listado_archivos
 
@@ -284,16 +94,16 @@ def obtener_lista_reglas_yara(ruta):
         for filename in filenames:
             if filename.endswith('.yar') or filename.endswith('.yara'):
                 lista.append(os.path.join(root, filename))
-    return lista    
+    return lista
 
 def scan_file_with_yara(filepath, rules_filepath):
     """
     Escanea un archivo dado utilizando un conjunto de reglas YARA.
-    
+
     Args:
         filepath (str): La ruta al archivo que se desea escanear.
         rules_filepath (str): La ruta al archivo que contiene las reglas YARA (.yar).
-    
+
     Returns:
         list: Una lista de objetos Match que representan las reglas que coincidieron.
               Devuelve una lista vacía si no hay coincidencias o si hay un error.
@@ -301,20 +111,20 @@ def scan_file_with_yara(filepath, rules_filepath):
     if not os.path.exists(filepath):
         print(f"Error: El archivo '{filepath}' no existe.")
         return []
-    
+
     if not os.path.exists(rules_filepath):
         print(f"Error: El archivo de reglas YARA '{rules_filepath}' no existe.")
         return []
-    
+
     try:
         # Compila las reglas YARA desde el archivo
-        rules = yara.compile(filepath=rules_filepath)       
-        
+        rules = yara.compile(filepath=rules_filepath)
+
         # Escanea el archivo y obtiene las coincidencias
         matches = rules.match(filepath=filepath)
-        
+
         return matches
-    
+
     except yara.Error as e:
         print(f"Error al compilar las reglas YARA o al escanear: {e}")
         return []
@@ -322,263 +132,138 @@ def scan_file_with_yara(filepath, rules_filepath):
         print(f"Ocurrió un error inesperado: {e}")
         return []
 
-if __name__ == "__main__":   
+if __name__ == "__main__":
     archivos_a_escanear = obtener_archivosde_mongodb()
-    
+
     for archivo_a_escanear in archivos_a_escanear:
         print(f"Escaneando archivo: {archivo_a_escanear}")
         rules_files = obtener_lista_reglas_yara(RUTA_REGLAS)
-        
+
         for rule in rules_files:
             #print(f"Escaneando {archivo_a_escanear} con reglas {rule}")
             results = scan_file_with_yara(archivo_a_escanear, rule)
-            
+
             if results:
                 print(f"¡Malware detectado en '{archivo_a_escanear}' con la regla '{rule}'!")
                 for match in results:
                     print(f"  - Regla: {match.rule}")
                     print(f"  - Meta: {match.meta}")
-                    print(f"  - Cadenas coincidentes: {match.strings}")                    
+                    print(f"  - Cadenas coincidentes: {match.strings}")
             else:
                 #print(f"No se detectó malware en '{archivo_a_escanear}' con la regla '{rule}'.")
                 pass
-    
+
     print("Escaneo completado.")</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Funcionalidad -->
-        <div class="row" id="funcionalidad">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>⚙️ Funcionalidad del Sistema</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="alert alert-info">
-                            <strong>Descripción General:</strong> Este script implementa un sistema automatizado de detección de malware que utiliza el motor de análisis YARA para escanear archivos almacenados en una base de datos MongoDB.
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card function-card">
-                                    <div class="card-body">
-                                        <h5>🗃️ obtener_archivosde_mongodb()</h5>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">Conecta con la base de datos MongoDB</li>
-                                            <li class="list-group-item">Obtiene la lista de rutas de archivos desde la colección 'metadata'</li>
-                                            <li class="list-group-item">Retorna una lista con las rutas de todos los archivos</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card function-card">
-                                    <div class="card-body">
-                                        <h5>📋 obtener_lista_reglas_yara()</h5>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">Escanea recursivamente el directorio de reglas</li>
-                                            <li class="list-group-item">Identifica archivos con extensiones .yar y .yara</li>
-                                            <li class="list-group-item">Retorna una lista con todas las reglas disponibles</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <div class="card function-card">
-                                    <div class="card-body">
-                                        <h5>🔍 scan_file_with_yara()</h5>
-                                        <p class="text-muted">Función principal de análisis que:</p>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Valida la existencia del archivo objetivo</li>
-                                                    <li class="list-group-item">Verifica la disponibilidad de las reglas YARA</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Compila las reglas YARA dinámicamente</li>
-                                                    <li class="list-group-item">Ejecuta el análisis del archivo</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Gestiona errores de compilación y ejecución</li>
-                                                    <li class="list-group-item">Retorna los resultados de coincidencias</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tecnologías -->
-        <div class="row" id="tecnologias">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>🔧 Tecnologías Empleadas</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <h5>🐍 Python 3.x</h5>
-                                        <p class="text-muted">Lenguaje de programación principal del sistema</p>
-                                        <div class="tech-badge">Lenguaje Base</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <h5>🛡️ YARA Engine</h5>
-                                        <p class="text-muted">Motor de análisis de malware mediante patrones y reglas</p>
-                                        <div class="tech-badge">Análisis de Malware</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <h5>🗄️ MongoDB</h5>
-                                        <p class="text-muted">Base de datos NoSQL para almacenar metadatos de archivos</p>
-                                        <div class="tech-badge">Base de Datos</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="alert alert-warning mt-4">
-                            <h6><strong>Dependencias del Sistema:</strong></h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <code>pip install yara-python</code><br>
-                                    <small class="text-muted">Motor YARA para Python</small>
-                                </div>
-                                <div class="col-md-4">
-                                    <code>pip install pymongo</code><br>
-                                    <small class="text-muted">Cliente MongoDB para Python</small>
-                                </div>
-                                <div class="col-md-4">
-                                    <code>import os</code><br>
-                                    <small class="text-muted">Biblioteca estándar de Python</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Flujo de Trabajo -->
-        <div class="row" id="flujo">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>🔄 Flujo de Trabajo del Sistema</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="workflow-container">
-                            <div class="workflow-step">
-                                <h6><strong>Inicialización del Sistema</strong></h6>
-                                <p class="text-muted">El script establece la conexión con MongoDB usando la URI configurada y define las rutas de trabajo.</p>
-                            </div>
-                            <div class="workflow-step">
-                                <h6><strong>Obtención de Archivos</strong></h6>
-                                <p class="text-muted">Se consulta la colección 'metadata' en la base de datos 'memes' para obtener la lista de archivos a analizar.</p>
-                            </div>
-                            <div class="workflow-step">
-                                <h6><strong>Carga de Reglas YARA</strong></h6>
-                                <p class="text-muted">El sistema escanea recursivamente el directorio './reglas' buscando archivos .yar y .yara.</p>
-                            </div>
-                            <div class="workflow-step">
-                                <h6><strong>Análisis Cruzado</strong></h6>
-                                <p class="text-muted">Cada archivo se analiza contra todas las reglas YARA disponibles de forma sistemática.</p>
-                            </div>
-                            <div class="workflow-step">
-                                <h6><strong>Detección y Reporte</strong></h6>
-                                <p class="text-muted">Si se detecta malware, se muestran los detalles de la regla coincidente, metadatos y cadenas detectadas.</p>
-                            </div>
-                            <div class="workflow-step">
-                                <h6><strong>Finalización</strong></h6>
-                                <p class="text-muted">Una vez completado el análisis de todos los archivos, el sistema muestra un mensaje de confirmación.</p>
-                            </div>
-                        </div>
-
-                        <div class="alert alert-info mt-4">
-                            <h6><strong>Características de Seguridad:</strong></h6>
-                            <ul class="mb-0">
-                                <li><strong>Validación de Archivos:</strong> Verifica la existencia de archivos antes del análisis</li>
-                                <li><strong>Gestión de Errores:</strong> Captura excepciones de YARA y errores generales</li>
-                                <li><strong>Análisis Exhaustivo:</strong> Cada archivo se evalúa contra múltiples reglas</li>
-                                <li><strong>Reporte Detallado:</strong> Proporciona información específica sobre cada detección</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Información Adicional -->
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>📊 Configuración y Uso</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h5>⚙️ Configuración</h5>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><code>MONGO_URI</code>: URI de conexión a MongoDB</li>
-                                    <li class="list-group-item"><code>DB_NAME</code>: Base de datos "memes"</li>
-                                    <li class="list-group-item"><code>COLLECTION_NAME</code>: Colección "metadata"</li>
-                                    <li class="list-group-item"><code>RUTA_REGLAS</code>: Directorio "./reglas"</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <h5>🚀 Ejecución</h5>
-                                <div class="code-section">
-                                    <pre><code>python malware_scanner.py</code></pre>
-                                </div>
-                                <p class="text-muted">El script se ejecuta automáticamente al ser invocado, realizando un análisis completo de todos los archivos registrados en MongoDB.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
-    <footer class="py-4 mt-5" style="background: linear-gradient(135deg, #080505 0%, #09090f 100%); border-radius: 15px; margin-top: 20px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0 fw-bold">&copy; 2025 Benito González Piñeiro.</p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <a href="pildoras.html" class="btn btn-dark">Ir a Pildoras</a>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2>Funcionalidad del Sistema</h2>
+            <p><strong>Descripción General:</strong> Este script implementa un sistema automatizado de detección de malware que utiliza el motor de análisis YARA para escanear archivos almacenados en una base de datos MongoDB.</p>
+
+            <h3>obtener_archivosde_mongodb()</h3>
+            <ul>
+                <li>Conecta con la base de datos MongoDB</li>
+                <li>Obtiene la lista de rutas de archivos desde la colección 'metadata'</li>
+                <li>Retorna una lista con las rutas de todos los archivos</li>
+            </ul>
+
+            <h3>obtener_lista_reglas_yara()</h3>
+            <ul>
+                <li>Escanea recursivamente el directorio de reglas</li>
+                <li>Identifica archivos con extensiones .yar y .yara</li>
+                <li>Retorna una lista con todas las reglas disponibles</li>
+            </ul>
+
+            <h3>scan_file_with_yara()</h3>
+            <p>Función principal de análisis que:</p>
+            <ul>
+                <li>Valida la existencia del archivo objetivo</li>
+                <li>Verifica la disponibilidad de las reglas YARA</li>
+                <li>Compila las reglas YARA dinámicamente</li>
+                <li>Ejecuta el análisis del archivo</li>
+                <li>Gestiona errores de compilación y ejecución</li>
+                <li>Retorna los resultados de coincidencias</li>
+            </ul>
         </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Tecnologías Empleadas</h2>
+
+            <h3>Python 3.x</h3>
+            <p>Lenguaje de programación principal del sistema</p>
+
+            <h3>YARA Engine</h3>
+            <p>Motor de análisis de malware mediante patrones y reglas</p>
+
+            <h3>MongoDB</h3>
+            <p>Base de datos NoSQL para almacenar metadatos de archivos</p>
+
+            <h3>Dependencias del Sistema:</h3>
+            <ul>
+                <li><code>pip install yara-python</code> - Motor YARA para Python</li>
+                <li><code>pip install pymongo</code> - Cliente MongoDB para Python</li>
+                <li><code>import os</code> - Biblioteca estándar de Python</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Flujo de Trabajo del Sistema</h2>
+
+            <h3>1. Inicialización del Sistema</h3>
+            <p>El script establece la conexión con MongoDB usando la URI configurada y define las rutas de trabajo.</p>
+
+            <h3>2. Obtención de Archivos</h3>
+            <p>Se consulta la colección 'metadata' en la base de datos 'memes' para obtener la lista de archivos a analizar.</p>
+
+            <h3>3. Carga de Reglas YARA</h3>
+            <p>El sistema escanea recursivamente el directorio './reglas' buscando archivos .yar y .yara.</p>
+
+            <h3>4. Análisis Cruzado</h3>
+            <p>Cada archivo se analiza contra todas las reglas YARA disponibles de forma sistemática.</p>
+
+            <h3>5. Detección y Reporte</h3>
+            <p>Si se detecta malware, se muestran los detalles de la regla coincidente, metadatos y cadenas detectadas.</p>
+
+            <h3>6. Finalización</h3>
+            <p>Una vez completado el análisis de todos los archivos, el sistema muestra un mensaje de confirmación.</p>
+
+            <h3>Características de Seguridad:</h3>
+            <ul>
+                <li><strong>Validación de Archivos:</strong> Verifica la existencia de archivos antes del análisis</li>
+                <li><strong>Gestión de Errores:</strong> Captura excepciones de YARA y errores generales</li>
+                <li><strong>Análisis Exhaustivo:</strong> Cada archivo se evalúa contra múltiples reglas</li>
+                <li><strong>Reporte Detallado:</strong> Proporciona información específica sobre cada detección</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Configuración y Uso</h2>
+
+            <h3>Configuración</h3>
+            <ul>
+                <li><code>MONGO_URI</code>: URI de conexión a MongoDB</li>
+                <li><code>DB_NAME</code>: Base de datos "memes"</li>
+                <li><code>COLLECTION_NAME</code>: Colección "metadata"</li>
+                <li><code>RUTA_REGLAS</code>: Directorio "./reglas"</li>
+            </ul>
+
+            <h3>Ejecución</h3>
+            <pre><code>python malware_scanner.py</code></pre>
+            <p>El script se ejecuta automáticamente al ser invocado, realizando un análisis completo de todos los archivos registrados en MongoDB.</p>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</div>
 </body>
 </html>

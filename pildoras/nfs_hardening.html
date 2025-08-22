@@ -474,10 +474,10 @@
                     </p>
                     
                     <div class="code-block">
-# Configuración segura básica
-/home/shared 192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)
-/var/data 192.168.1.100(ro,sync,no_subtree_check,root_squash)
-/backup 10.0.0.0/8(rw,sync,no_subtree_check,all_squash,anonuid=1001,anongid=1001)
+# Configuración segura básica<br>
+/home/shared 192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)<br>
+/var/data 192.168.1.100(ro,sync,no_subtree_check,root_squash)<br>
+/backup 10.0.0.0/8(rw,sync,no_subtree_check,all_squash,anonuid=1001,anongid=1001)<br>
                     </div>
                     
                     <h3>Opciones de Seguridad Importantes</h3>
@@ -506,34 +506,34 @@
                     
                     <h3>Configuración de Kerberos</h3>
                     <div class="code-block">
-# /etc/krb5.conf
-[libdefaults]
-    default_realm = EXAMPLE.COM
-    dns_lookup_realm = false
-    dns_lookup_kdc = false
-    
-[realms]
-    EXAMPLE.COM = {
-        kdc = kdc.example.com
-        admin_server = kdc.example.com
-    }
-    
-[domain_realm]
-    .example.com = EXAMPLE.COM
-    example.com = EXAMPLE.COM
+# /etc/krb5.conf<br>
+[libdefaults]<br>
+    default_realm = EXAMPLE.COM<br>
+    dns_lookup_realm = false<br>
+    dns_lookup_kdc = false<br>
+    <br>
+[realms]<br>
+    EXAMPLE.COM = {<br>
+        kdc = kdc.example.com<br>
+        admin_server = kdc.example.com<br>
+    }<br>
+    <br>
+[domain_realm]<br>
+    .example.com = EXAMPLE.COM<br>
+    example.com = EXAMPLE.COM<br>
                     </div>
-                    
-                    <h3>Configuración del Servidor NFS con Kerberos</h3>
+                    <br>
+                    <h3>Configuración del Servidor NFS con Kerberos</h3><br>
                     <div class="code-block">
-# /etc/exports
-/secure/data gss/krb5p(rw,sync,no_subtree_check)
-/public/docs gss/krb5i(ro,sync,no_subtree_check)
-
-# Iniciar servicios necesarios
-systemctl enable rpc-gssd
-systemctl start rpc-gssd
-systemctl enable nfs-server
-systemctl start nfs-server
+# /etc/exports<br>
+/secure/data gss/krb5p(rw,sync,no_subtree_check)<br>
+/public/docs gss/krb5i(ro,sync,no_subtree_check)<br>
+<br>
+# Iniciar servicios necesarios<br>
+systemctl enable rpc-gssd<br>
+systemctl start rpc-gssd<br>
+systemctl enable nfs-server<br>
+systemctl start nfs-server<br>
                     </div>
                     
                     <div class="info">
@@ -556,37 +556,37 @@ systemctl start nfs-server
                     </p>
                     
                     <div class="code-block">
-# /etc/sysconfig/nfs (Red Hat/CentOS)
-RQUOTAD_PORT=875
-LOCKD_TCPPORT=32803
-LOCKD_UDPPORT=32769
-MOUNTD_PORT=892
-STATD_PORT=662
-
-# Reiniciar servicios después de cambiar configuración
-systemctl restart nfs-config
-systemctl restart nfs-server
+# /etc/sysconfig/nfs (Red Hat/CentOS)<br>
+RQUOTAD_PORT=875<br>
+LOCKD_TCPPORT=32803<br>
+LOCKD_UDPPORT=32769<br>
+MOUNTD_PORT=892<br>
+STATD_PORT=662<br>
+<br>
+# Reiniciar servicios después de cambiar configuración<br>
+systemctl restart nfs-config<br>
+systemctl restart nfs-server<br>
                     </div>
                     
                     <h3>Configuración de iptables</h3>
                     <div class="code-block">
-#!/bin/bash
-# Script de configuración de firewall para NFS
-
-# Permitir tráfico NFS desde redes específicas
-iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 2049 -j ACCEPT
-iptables -A INPUT -s 192.168.1.0/24 -p udp --dport 2049 -j ACCEPT
-
-# Permitir servicios auxiliares (puertos fijos)
-iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 111 -j ACCEPT
-iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 892 -j ACCEPT
-iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 32803 -j ACCEPT
-
-# Denegar todo lo demás
-iptables -A INPUT -j DROP
-
-# Guardar configuración
-iptables-save > /etc/iptables/rules.v4
+#!/bin/bash<br>
+# Script de configuración de firewall para NFS<br>
+<br>
+# Permitir tráfico NFS desde redes específicas<br>
+iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 2049 -j ACCEPT<br>
+iptables -A INPUT -s 192.168.1.0/24 -p udp --dport 2049 -j ACCEPT<br>
+<br>
+# Permitir servicios auxiliares (puertos fijos)<br>
+iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 111 -j ACCEPT<br>
+iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 892 -j ACCEPT<br>
+iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 32803 -j ACCEPT<br>
+<br>
+# Denegar todo lo demás<br>
+iptables -A INPUT -j DROP<br>
+<br>
+# Guardar configuración<br>
+iptables-save > /etc/iptables/rules.v4<br>
                     </div>
                 </section>
 
@@ -600,39 +600,39 @@ iptables-save > /etc/iptables/rules.v4
                     </p>
                     
                     <div class="code-block">
-# /etc/rsyslog.conf - Configuración para NFS logging
-# Capturar logs de NFS en archivo separado
-daemon.info                     /var/log/nfs.log
-
-# Configuración del kernel para auditoría de NFS
-# /etc/audit/audit.rules
--a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts
--w /etc/exports -p wa -k nfs_exports
--w /etc/fstab -p wa -k nfs_mounts
+# /etc/rsyslog.conf - Configuración para NFS logging<br>
+# Capturar logs de NFS en archivo separado<br>
+daemon.info                     /var/log/nfs.log<br>
+<br>
+# Configuración del kernel para auditoría de NFS<br>
+# /etc/audit/audit.rules<br>
+-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts<br>
+-w /etc/exports -p wa -k nfs_exports<br>
+-w /etc/fstab -p wa -k nfs_mounts<br>
                     </div>
                     
                     <h3>Script de Monitoreo</h3>
                     <div class="code-block">
-#!/bin/bash
-# Script de monitoreo NFS - nfs_monitor.sh
-
-LOG_FILE="/var/log/nfs_security.log"
-DATE=$(date '+%Y-%m-%d %H:%M:%S')
-
-# Verificar conexiones activas
-echo "[$DATE] Conexiones NFS activas:" >> $LOG_FILE
-netstat -an | grep :2049 >> $LOG_FILE
-
-# Verificar montajes anómalos
-echo "[$DATE] Montajes NFS actuales:" >> $LOG_FILE
-showmount -a >> $LOG_FILE
-
-# Verificar intentos de conexión desde IPs no autorizadas
-echo "[$DATE] Verificando accesos no autorizados:" >> $LOG_FILE
-grep "refused" /var/log/messages | tail -10 >> $LOG_FILE
-
-# Ejecutar cada 5 minutos via cron
-# */5 * * * * /usr/local/bin/nfs_monitor.sh
+#!/bin/bash<br>
+# Script de monitoreo NFS - nfs_monitor.sh<br>
+<br>
+LOG_FILE="/var/log/nfs_security.log"<br>
+DATE=$(date '+%Y-%m-%d %H:%M:%S')<br>
+<br>
+# Verificar conexiones activas<br>
+echo "[$DATE] Conexiones NFS activas:" >> $LOG_FILE<br>
+netstat -an | grep :2049 >> $LOG_FILE<br>
+<br>
+# Verificar montajes anómalos<br>
+echo "[$DATE] Montajes NFS actuales:" >> $LOG_FILE<br>
+showmount -a >> $LOG_FILE<br>
+<br>
+# Verificar intentos de conexión desde IPs no autorizadas<br>
+echo "[$DATE] Verificando accesos no autorizados:" >> $LOG_FILE<br>
+grep "refused" /var/log/messages | tail -10 >> $LOG_FILE<br>
+<br>
+# Ejecutar cada 5 minutos via cron<br>
+# */5 * * * * /usr/local/bin/nfs_monitor.sh<br>
                     </div>
                 </section>
 
@@ -675,11 +675,11 @@ grep "refused" /var/log/messages | tail -10 >> $LOG_FILE
                     
                     <h3>Cifrado a Nivel de Sistema de Archivos</h3>
                     <div class="code-block">
-# Ejemplo de cifrado con LUKS para particiones NFS
-cryptsetup luksFormat /dev/sdb1
-cryptsetup open /dev/sdb1 encrypted_nfs
-mkfs.ext4 /dev/mapper/encrypted_nfs
-mount /dev/mapper/encrypted_nfs /nfs/encrypted_data
+# Ejemplo de cifrado con LUKS para particiones NFS<br>
+cryptsetup luksFormat /dev/sdb1<br>
+cryptsetup open /dev/sdb1 encrypted_nfs<br>
+mkfs.ext4 /dev/mapper/encrypted_nfs<br>
+mount /dev/mapper/encrypted_nfs /nfs/encrypted_data<br>
                     </div>
                     
                     <div class="warning">

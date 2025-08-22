@@ -6,38 +6,279 @@
 <title>Pipeline completa para procesar PDFs con Python: extracción, limpieza, traducción e imágenes</title>
 <meta name="description" content="Cómo construir una pipeline completa en Python para procesar PDFs: extraer texto, limpiar, traducir y extraer imágenes. Incluye código listo para usar." />
 <style>
-  :root{
-    --bg:#0b0c10;
-    --panel:#111217;
-    --ink:#e8e8e8;
-    --muted:#b7b7b7;
-    --accent:#7c9cff;
-    --accent-2:#69e6a6;
-    --border:#22242e;
-    --code:#0f111a;
-    --kbd:#20222b;
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
   }
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";line-height:1.65}
-  a{color:var(--accent);text-decoration:none}
-  a:hover{text-decoration:underline}
-  .container{max-width:1000px;margin:0 auto;padding:56px 20px}
-  header{background:linear-gradient(135deg, rgba(124,156,255,.15), rgba(105,230,166,.08));border-bottom:1px solid var(--border)}
-  header .container{padding-top:72px;padding-bottom:72px}
-  h1{font-size:2.2rem;line-height:1.2;margin:0 0 10px 0}
-  h2{font-size:1.6rem;margin-top:42px;border-top:1px solid var(--border);padding-top:28px}
-  h3{font-size:1.2rem;margin-top:28px;color:var(--accent-2)}
-  p{color:var(--ink);margin:14px 0}
-  .lead{color:var(--muted);font-size:1.05rem}
-  .card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:22px;margin:18px 0;box-shadow:0 10px 30px rgba(0,0,0,.18)}
-  .toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
-  .toc a{display:block;background:var(--panel);border:1px solid var(--border);padding:12px 14px;border-radius:14px}
-  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-  pre{background:var(--code);color:#e6e6e6;border:1px solid var(--border);border-radius:16px;padding:16px;overflow:auto}
-  .kbd{display:inline-block;background:var(--kbd);border:1px solid var(--border);padding:2px 6px;border-radius:6px}
-  ul{padding-left:22px}
-  .footer{color:var(--muted);font-size:.9rem;margin-top:48px;padding-top:24px;border-top:1px dashed var(--border)}
-  .tag{display:inline-block;font-size:.8rem;color:#0b0c10;background:var(--accent-2);padding:2px 8px;border-radius:999px;margin-right:6px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+
+  body {
+      background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      animation: gradientShift 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes gradientShift {
+      0% { background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%); }
+      100% { background: linear-gradient(135deg, #0f0f0f 0%, #1e1e1e 100%); }
+  }
+
+  .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 56px 20px;
+  }
+
+  header {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+      border-bottom: 1px solid #333;
+      animation: headerGlow 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes headerGlow {
+      0% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); }
+      100% { box-shadow: 0 8px 32px rgba(187, 134, 252, 0.1); }
+  }
+
+  header .container {
+      padding-top: 72px;
+      padding-bottom: 72px;
+  }
+
+  h1 {
+      font-size: 2.2rem;
+      line-height: 1.2;
+      margin: 0 0 10px 0;
+      animation: titlePulse 3s ease-in-out infinite;
+  }
+
+  @keyframes titlePulse {
+      0%, 100% { color: #ffffff; }
+      50% { color: #bb86fc; }
+  }
+
+  h2 {
+      font-size: 1.6rem;
+      margin-top: 42px;
+      border-top: 1px solid #333;
+      padding-top: 28px;
+      animation: headingShimmer 5s ease-in-out infinite;
+  }
+
+  @keyframes headingShimmer {
+      0%, 100% { color: #bb86fc; }
+      50% { color: #9d4edd; }
+  }
+
+  h3 {
+      font-size: 1.2rem;
+      margin-top: 28px;
+      color: #bb86fc;
+  }
+
+  p {
+      color: #e0e0e0;
+      margin: 14px 0;
+  }
+
+  .lead {
+      color: #a0a0a0;
+      font-size: 1.05rem;
+  }
+
+  .card {
+      background: rgba(30, 30, 30, 0.9);
+      border: 1px solid #333;
+      border-radius: 20px;
+      padding: 22px;
+      margin: 18px 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #bb86fc;
+      transition: all 0.3s ease;
+      animation: sectionFloat 6s ease-in-out infinite;
+  }
+
+  .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(187, 134, 252, 0.2);
+  }
+
+  @keyframes sectionFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-1px); }
+  }
+
+  .toc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px;
+  }
+
+  .toc a {
+      display: block;
+      background: rgba(30, 30, 30, 0.9);
+      border: 1px solid #333;
+      padding: 12px 14px;
+      border-radius: 14px;
+      transition: all 0.3s ease;
+      animation: tocFloat 4s ease-in-out infinite;
+  }
+
+  .toc a:hover {
+      background: rgba(187, 134, 252, 0.1);
+      transform: translateY(-2px);
+      border-color: #bb86fc;
+  }
+
+  @keyframes tocFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-1px); }
+  }
+
+  code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      animation: codeGlow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes codeGlow {
+      0% { box-shadow: 0 0 5px rgba(244, 67, 54, 0.3); }
+      100% { box-shadow: 0 0 10px rgba(244, 67, 54, 0.5); }
+  }
+
+  pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      border: 1px solid #444;
+      border-radius: 16px;
+      padding: 16px;
+      overflow: auto;
+      transition: all 0.3s ease;
+  }
+
+  pre:hover {
+      background: #333;
+      border-color: #bb86fc;
+  }
+
+  code {
+      background: #2d2d2d;
+      color: #f44336;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #444;
+  }
+
+  .kbd {
+      display: inline-block;
+      background: #2d2d2d;
+      border: 1px solid #444;
+      padding: 2px 6px;
+      border-radius: 6px;
+      animation: kbdGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes kbdGlow {
+      0%, 100% { background: #2d2d2d; }
+      50% { background: #3a3a3a; }
+  }
+
+  ul {
+      padding-left: 22px;
+  }
+
+  .footer {
+      color: #a0a0a0;
+      font-size: .9rem;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px dashed #333;
+  }
+
+  .tag {
+      display: inline-block;
+      font-size: .8rem;
+      color: #0c0c0c;
+      background: #bb86fc;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-right: 6px;
+      animation: tagPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes tagPulse {
+      0%, 100% { background: #bb86fc; }
+      50% { background: #9d4edd; }
+  }
+
+  .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+  }
+
+  a {
+      color: #bb86fc;
+      text-decoration: none;
+      transition: all 0.3s ease;
+  }
+
+  a:hover {
+      color: #9d4edd;
+      text-decoration: underline;
+  }
+
+  .full-script {
+      background: #2d2d2d;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      color: #f8f8f2;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      max-height: 600px;
+      overflow-y: auto;
+      transition: all 0.3s ease;
+  }
+
+  .full-script:hover {
+      background: #333;
+      border-color: #bb86fc;
+  }
+
+  .full-script::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+  }
+
+  .full-script::-webkit-scrollbar-track {
+      background: #2c2c2c;
+  }
+
+  .full-script::-webkit-scrollbar-thumb {
+      background: #bb86fc;
+      border-radius: 6px;
+  }
+
+  .full-script::-webkit-scrollbar-thumb:hover {
+      background: #9d4edd;
+  }
+
+  .python-keyword { color: #66d9ef; animation: keywordGlow 4s ease-in-out infinite; }
+  .python-string { color: #a6e22e; animation: stringGlow 3s ease-in-out infinite; }
+  .python-comment { color: #75715e; }
+  .python-function { color: #f92672; animation: functionGlow 5s ease-in-out infinite; }
+  .python-number { color: #ae81ff; animation: numberGlow 2s ease-in-out infinite; }
+
+  @keyframes keywordGlow { 0%, 100% { color: #66d9ef; } 50% { color: #4fc3f7; } }
+  @keyframes stringGlow { 0%, 100% { color: #a6e22e; } 50% { color: #c8e6c9; } }
+  @keyframes functionGlow { 0%, 100% { color: #f92672; } 50% { color: #ff6b8a; } }
+  @keyframes numberGlow { 0%, 100% { color: #ae81ff; } 50% { color: #ce93d8; } }
 </style>
 </head>
 <body>
@@ -319,8 +560,12 @@ if __name__ == &quot;__main__&quot;:
       </ul>
     </section>
 
-    <p style="text-align: center; margin-top: 20px;"><a href="https://github.com/bgonpin/TraductorIA" target="_blank" rel="noopener">Repositorio del proyecto en GitHub</a></p>
-    <p class="footer" style="text-align: center;"><a href="../proyectos/proyectos.html">Volver a todos los proyectos</a></p>
+    <p style="text-align: center; margin-top: 20px; animation: linkGlow 2s ease-in-out infinite;">
+        <a href="https://github.com/bgonpin/TraductorIA" target="_blank" rel="noopener">Repositorio del proyecto en GitHub</a>
+    </p>
+    <p class="footer" style="text-align: center;">
+        <a href="../proyectos/proyectos.html">Volver a todos los proyectos</a>
+    </p>
   </main>
 </body>
 </html>

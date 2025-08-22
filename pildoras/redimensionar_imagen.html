@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Script de Redimensionado de Imágenes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            color: #e0e0e0;
+            background-color: #121212;
+        }
+        h1, h2 {
+            color: #ffffff;
+        }
+        h1 {
+            border-bottom: 2px solid #bb86fc;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 1px solid #333;
+        }
+        code, pre {
+            background-color: #2d2d2d;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #f44336;
+            font-family: "Courier New", Courier, monospace;
+            border: 1px solid #444;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .card {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            margin-bottom: 1.5em;
+            padding: 1.5em;
+        }
+        .card-body {
+            color: #e0e0e0;
+        }
+        footer {
+            color: #b0b0b0;
+            border-top: 1px solid #444;
+        }
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #9d4edd;
+        }
+        strong {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🖼️ Script de Redimensionado de Imágenes</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>📋 Descripción General</h2>
+            <p>Este script automatiza el proceso de redimensionado de imágenes, optimizándolas para uso web. Procesa todas las imágenes de una carpeta <code>ORIGINALES</code> y las guarda redimensionadas en la carpeta <code>MODIFICADAS</code>.</p>
+            <div style="text-align: center; margin-top: 2rem; padding: 1rem; background: #2a2a2a; border-radius: 8px; border: 1px solid #444;">
+                <h4 style="color: #ffffff; margin-bottom: 1rem;">📥 Descargar Script</h4>
+                <a href="../codigo/redimensionar_imagen.py" download style="display: inline-block; background: #bb86fc; color: #121212; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 6px; font-weight: bold; transition: background 0.3s ease;" onmouseover="this.style.background='#9d4edd'" onmouseout="this.style.background='#bb86fc'">
+                    <i class="fas fa-download" style="margin-right: 0.5rem;"></i>Descargar redimensionar_imagen.py
+                </a>
+                <p style="color: #e0e0e0; font-size: 0.9rem; margin-top: 0.5rem;">Script en Python para redimensionar imágenes automáticamente</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>🎯 Características Principales</h2>
+            <ul>
+                <li><strong>Redimensionado proporcional</strong></li>
+                <li><strong>Ancho fijo de 1024px</strong></li>
+                <li><strong>Optimización automática para web</strong></li>
+                <li><strong>Soporte múltiple de formatos</strong></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>📁 Formatos Soportados</h2>
+            <ul>
+                <li>JPG, JPEG</li>
+                <li>PNG</li>
+                <li>BMP</li>
+                <li>TIFF, TIF</li>
+                <li>WebP</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>⚡ Optimizaciones</h2>
+            <ul>
+                <li>Calidad 85% para web</li>
+                <li>JPEG progresivo</li>
+                <li>Compresión automática</li>
+                <li>Conversión a RGB</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>⚙️ Requisitos Previos</h2>
+            <h3>Sistema Operativo</h3>
+            <p><strong>Compatible con:</strong> Windows, macOS, Linux</p>
+
+            <h3>Python</h3>
+            <pre>python --version</pre>
+            <p>Se requiere Python 3.6 o superior. Descárgalo desde <a href="https://www.python.org" target="_blank">python.org</a></p>
+
+            <h3>Pillow (PIL)</h3>
+            <p><strong>Importante:</strong> La librería Pillow es necesaria para el procesamiento de imágenes.</p>
+            <pre>pip install Pillow</pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>🚀 Instalación y Configuración</h2>
+            <ol>
+                <li><strong>Instalar Pillow:</strong><pre>pip install Pillow</pre></li>
+                <li><strong>Verificar instalación:</strong><pre>python -c "from PIL import Image; print('Pillow instalado correctamente')"</pre></li>
+                <li><strong>Descargar el script:</strong> Guarda el archivo <code>redimensionar_imagen.py</code> en tu directorio de trabajo</li>
+                <li><strong>Crear estructura de carpetas:</strong><pre>📁 Directorio de trabajo/
+├── 📄 redimensionar_imagen.py
+├── 📁 ORIGINALES/          ← Coloca aquí tus imágenes
+└── 📁 MODIFICADAS/         ← Se creará automáticamente</pre></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>📸 Preparación de Imágenes</h2>
+            <h3>Formato de Archivos</h3>
+            <p><strong>Formatos válidos:</strong> JPG, JPEG, PNG, BMP, TIFF, TIF, WebP</p>
+
+            <h3>Estructura Recomendada</h3>
+            <pre>📁 ORIGINALES/
+├── foto1.jpg
+├── imagen2.png
+├── captura3.bmp
+├── documento4.tiff
+└── web5.webp</pre>
+
+            <p><strong>Recomendaciones:</strong></p>
+            <ul>
+                <li>Usa nombres descriptivos para las imágenes</li>
+                <li>Evita caracteres especiales en los nombres</li>
+                <li>Verifica que las imágenes no estén corruptas</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>▶️ Ejecución del Script</h2>
+            <h3>Método 1: Ejecutar directamente</h3>
+            <pre>python redimensionar_imagen.py</pre>
+
+            <h3>Método 2: Usando Python específico</h3>
+            <pre>python3 redimensionar_imagen.py</pre>
+
+            <h3>Salida Esperada</h3>
+            <pre>🖼️  Script de Redimensionado de Imágenes
+Redimensiona imágenes a 1024px de ancho manteniendo proporción
+
+📁 Encontradas 5 imágenes para procesar
+✓ foto1.jpg -> foto1_1024.jpg
+  Dimensiones: 2048x1536 -> 1024x768
+  Tamaño: 2456.8KB -> 234.2KB (90.5% reducción)
+
+✓ imagen2.png -> imagen2_1024.jpg
+  Dimensiones: 1920x1080 -> 1024x576
+  Tamaño: 1876.5KB -> 156.8KB (91.6% reducción)
+
+✓ captura3.bmp -> captura3_1024.jpg
+  Dimensiones: 2560x1440 -> 1024x576
+  Tamaño: 8912.3KB -> 345.6KB (96.1% reducción)
+
+✓ documento4.tiff -> documento4_1024.jpg
+  Dimensiones: 2480x3508 -> 1024x1448
+  Tamaño: 15678.9KB -> 456.2KB (97.1% reducción)
+
+✓ web5.webp -> web5_1024.jpg
+  Dimensiones: 1280x720 -> 1024x576
+  Tamaño: 234.1KB -> 89.3KB (61.9% reducción)
+
+✅ Procesamiento completado: 5 imágenes redimensionadas
+📂 Imágenes guardadas en la carpeta 'MODIFICADAS'
+🎉 ¡Proceso completado con éxito!</pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>� Interpretación de Resultados</h2>
+            <h3>Información Mostrada</h3>
+            <ul>
+                <li><strong>✓ Éxito:</strong> Imagen procesada correctamente</li>
+                <li><strong>❌ Error:</strong> Problema procesando la imagen</li>
+                <li><strong>Dimensiones:</strong> Tamaño original → nuevo tamaño</li>
+                <li><strong>Tamaño:</strong> Peso original → peso optimizado</li>
+                <li><strong>Reducción:</strong> Porcentaje de compresión logrado</li>
+            </ul>
+
+            <h3>Archivos de Salida</h3>
+            <p><strong>Características de las imágenes procesadas:</strong></p>
+            <ul>
+                <li>Formato: JPEG optimizado</li>
+                <li>Ancho: 1024 píxeles fijo</li>
+                <li>Alto: Proporcional al original</li>
+                <li>Calidad: 85% (balance óptimo)</li>
+                <li>Nombre: [original]_1024.jpg</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>🔧 Solución de Problemas</h2>
+            <h3>Error: "No module named 'PIL'"</h3>
+            <pre>pip install Pillow</pre>
+
+            <h3>Error: "No se encontró la carpeta 'ORIGINALES'"</h3>
+            <p>Crea la carpeta <code>ORIGINALES</code> y coloca las imágenes dentro.</p>
+
+            <h3>Error: "No se encontraron imágenes"</h3>
+            <p>Verifica que las imágenes tengan extensiones válidas: .jpg, .jpeg, .png, .bmp, .tiff, .tif, .webp</p>
+
+            <h3>El script no responde</h3>
+            <p><strong>Posibles causas:</strong></p>
+            <ul>
+                <li>Imágenes muy grandes</li>
+                <li>Demasiadas imágenes</li>
+                <li>Disco duro lleno</li>
+            </ul>
+            <p><strong>Solución:</strong> Interrumpe con Ctrl+C y procesa menos imágenes</p>
+
+            <h3>Imágenes de salida corruptas</h3>
+            <pre>python -c "from PIL import Image; print(Image.__version__)"</pre>
+            <p>Si el problema persiste, reinstala Pillow: <code>pip uninstall Pillow && pip install Pillow</code></p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>🎯 Consejos y Mejores Prácticas</h2>
+            <h3>📁 Organización</h3>
+            <ul>
+                <li>Usa nombres descriptivos</li>
+                <li>Organiza por proyectos</li>
+                <li>Respaldar originales</li>
+                <li>Limpiar carpeta MODIFICADAS</li>
+            </ul>
+
+            <h3>⚡ Optimización</h3>
+            <ul>
+                <li>Procesa lotes pequeños</li>
+                <li>Verifica espacio en disco</li>
+                <li>Monitoriza el progreso</li>
+                <li>Valida resultados</li>
+            </ul>
+
+            <h3>� Seguridad</h3>
+            <ul>
+                <li>No procesar archivos sospechosos</li>
+                <li>Revisar permisos de carpetas</li>
+                <li>Mantener backups</li>
+                <li>Usar en entorno seguro</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>📝 Personalización del Script</h2>
+            <h3>Cambiar el ancho de redimensionado</h3>
+            <pre># En la función redimensionar_imagen(), línea ~95
+ancho_nuevo = 1024  # Cambia este valor</pre>
+
+            <h3>Modificar calidad de compresión</h3>
+            <pre># En la función redimensionar_imagen(), línea ~115
+quality=85,  # Cambia este valor (1-100)</pre>
+
+            <h3>Cambiar carpetas de entrada/salida</h3>
+            <pre># Modifica estas líneas en procesar_imagenes()
+if not os.path.exists("ORIGINALES"):  # Cambia "ORIGINALES"
+os.path.join("MODIFICADAS", nombre_salida)  # Cambia "MODIFICADAS"</pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>👨‍💻 Autor</h2>
+            <p><strong>Benito González Piñeiro</strong></p>
+            <p>Script desarrollado en Agosto 2025</p>
+            <p>Versión 1.0</p>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
+    </footer>
+    </div>
+</body>
+</html>

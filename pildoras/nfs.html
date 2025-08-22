@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFS: Sistema de Archivos de Red - Guía Completa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            color: #e0e0e0;
+            background-color: #121212;
+        }
+        h1, h2 {
+            color: #ffffff;
+        }
+        h1 {
+            border-bottom: 2px solid #bb86fc;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 1px solid #333;
+        }
+        code, pre {
+            background-color: #2d2d2d;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #f44336;
+            font-family: "Courier New", Courier, monospace;
+            border: 1px solid #444;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .card {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            margin-bottom: 1.5em;
+            padding: 1.5em;
+        }
+        .card-body {
+            color: #e0e0e0;
+        }
+        footer {
+            color: #b0b0b0;
+            border-top: 1px solid #444;
+        }
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #9d4edd;
+        }
+        strong {
+            color: #ffffff;
+        }
+
+        .article-header {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 2em;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        .article-header h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            border-bottom: 2px solid #bb86fc;
+            padding-bottom: 0.5em;
+        }
+
+        .article-header .subtitle {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+
+        .article-header .date {
+            color: #b0b0b0;
+            font-size: 0.9em;
+        }
+
+        .content-section {
+            background: #1e1e1e;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            padding: 2em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 1px solid #333;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            border-bottom: 2px solid #bb86fc;
+            padding-bottom: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 1.3em;
+            margin: 25px 0 15px 0;
+            color: #bb86fc;
+        }
+
+        .highlight-box {
+            background: #2a2a2a;
+            border-left: 5px solid #bb86fc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+            border: 1px solid #444;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            border: 1px solid #444;
+        }
+
+        .code-block::before {
+            content: "Terminal";
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            font-size: 0.8em;
+            color: #a0aec0;
+        }
+
+        .command {
+            color: #68d391;
+        }
+
+        .comment {
+            color: #9ca3af;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1e1e1e;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 1px solid #333;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+
+        th {
+            background: #2a2a2a;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #2a2a2a;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .pros, .cons {
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #444;
+        }
+
+        .pros {
+            background: #2a2a2a;
+            border-left: 5px solid #4caf50;
+        }
+
+        .cons {
+            background: #2a2a2a;
+            border-left: 5px solid #f44336;
+        }
+
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .check::before {
+            content: "✓";
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .cross::before {
+            content: "✗";
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        .toc {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 2em;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .toc h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: #bb86fc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: #9d4edd;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1em;
+            }
+
+            .article-header h1 {
+                font-size: 1.5em;
+            }
+
+            .content-section {
+                padding: 1em;
+            }
+
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .architecture-diagram {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 6px;
+            border: 1px solid #444;
+        }
+
+        .diagram-box {
+            display: inline-block;
+            background: #bb86fc;
+            color: #121212;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin: 10px;
+            font-weight: bold;
+        }
+
+        .arrow {
+            font-size: 2em;
+            color: #bb86fc;
+            margin: 0 20px;
+        }
+
+        .pros h3, .cons h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .pros ul li, .cons ul li {
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="article-header">
+            <h1>NFS: Network File System</h1>
+            <p class="subtitle">Sistema de Archivos de Red - Guía Completa y Técnica</p>
+            <p class="date">Actualizado: Agosto 2025</p>
+        </header>
+
+        <div class="toc">
+            <h3>Índice de Contenidos</h3>
+            <ul>
+                <li><a href="#introduccion">1. Introducción a NFS</a></li>
+                <li><a href="#como-funciona">2. ¿Cómo funciona NFS?</a></li>
+                <li><a href="#versiones">3. Versiones de NFS</a></li>
+                <li><a href="#configuracion">4. Configuración e Instalación</a></li>
+                <li><a href="#ventajas-desventajas">5. Ventajas y Desventajas</a></li>
+                <li><a href="#seguridad">6. Aspectos de Seguridad</a></li>
+                <li><a href="#casos-uso">7. Casos de Uso</a></li>
+                <li><a href="#conclusion">8. Conclusión</a></li>
+            </ul>
+        </div>
+
+        <section id="introduccion" class="content-section">
+            <h2 class="section-title">1. Introducción a NFS</h2>
+            
+            <p>El <strong>Network File System (NFS)</strong> es un protocolo de sistema de archivos distribuido que permite a los usuarios de una red acceder a archivos y directorios ubicados en servidores remotos como si estuvieran almacenados localmente en su máquina. Desarrollado originalmente por Sun Microsystems en 1984, NFS se ha convertido en uno de los estándares más utilizados para el intercambio de archivos en redes Unix y Linux.</p>
+
+            <div class="highlight-box">
+                <h4>📝 Definición Técnica</h4>
+                <p>NFS es un protocolo cliente-servidor que utiliza llamadas de procedimiento remoto (RPC) para permitir que múltiples clientes accedan simultáneamente a archivos almacenados en un servidor de archivos centralizado, manteniendo la transparencia de ubicación para el usuario final.</p>
+            </div>
+
+            <h3 class="section-subtitle">Características Principales</h3>
+            <ul>
+                <li><strong>Transparencia de ubicación:</strong> Los archivos remotos aparecen como locales</li>
+                <li><strong>Acceso concurrente:</strong> Múltiples clientes pueden acceder simultáneamente</li>
+                <li><strong>Independencia de plataforma:</strong> Funciona en diferentes sistemas operativos</li>
+                <li><strong>Escalabilidad:</strong> Soporta desde pequeñas redes hasta infraestructuras empresariales</li>
+                <li><strong>Sin estado (stateless):</strong> El servidor no mantiene información sobre las conexiones</li>
+            </ul>
+        </section>
+
+        <section id="como-funciona" class="content-section">
+            <h2 class="section-title">2. ¿Cómo funciona NFS?</h2>
+
+            <div class="architecture-diagram">
+                <div class="diagram-box">Cliente NFS</div>
+                <span class="arrow">→</span>
+                <div class="diagram-box">Red TCP/IP</div>
+                <span class="arrow">→</span>
+                <div class="diagram-box">Servidor NFS</div>
+                <br><br>
+                <div class="diagram-box">RPC Calls</div>
+                <span class="arrow">↔</span>
+                <div class="diagram-box">Sistema de Archivos</div>
+            </div>
+
+            <h3 class="section-subtitle">Arquitectura del Sistema</h3>
+            
+            <p>NFS implementa una arquitectura cliente-servidor distribuida que consta de varios componentes clave:</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Función</th>
+                            <th>Ubicación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>NFS Daemon (nfsd)</strong></td>
+                            <td>Procesa las solicitudes de los clientes</td>
+                            <td>Servidor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mount Daemon (mountd)</strong></td>
+                            <td>Gestiona las operaciones de montaje</td>
+                            <td>Servidor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Portmapper (rpcbind)</strong></td>
+                            <td>Mapea servicios RPC a puertos</td>
+                            <td>Ambos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lock Manager (lockd)</strong></td>
+                            <td>Gestiona el bloqueo de archivos</td>
+                            <td>Ambos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status Monitor (statd)</strong></td>
+                            <td>Monitorea el estado de la red</td>
+                            <td>Ambos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="section-subtitle">Proceso de Comunicación</h3>
+            
+            <p>El funcionamiento de NFS sigue este flujo básico:</p>
+
+            <ol>
+                <li><strong>Solicitud de montaje:</strong> El cliente solicita montar un directorio remoto</li>
+                <li><strong>Autenticación:</strong> El servidor verifica los permisos del cliente</li>
+                <li><strong>Concesión del handle:</strong> El servidor proporciona un identificador único</li>
+                <li><strong>Operaciones de archivo:</strong> El cliente realiza operaciones como si fueran locales</li>
+                <li><strong>Traducción RPC:</strong> Las llamadas se convierten en solicitudes de red</li>
+                <li><strong>Respuesta del servidor:</strong> El servidor procesa y responde la solicitud</li>
+            </ol>
+        </section>
+
+        <section id="versiones" class="content-section">
+            <h2 class="section-title">3. Versiones de NFS</h2>
+
+            <p>A lo largo de los años, NFS ha evolucionado significativamente. Cada versión ha introducido mejoras importantes en rendimiento, seguridad y funcionalidad:</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Versión</th>
+                            <th>Año</th>
+                            <th>Características Principales</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>NFSv1</strong></td>
+                            <td>1984</td>
+                            <td>Versión experimental inicial</td>
+                            <td>Obsoleta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NFSv2</strong></td>
+                            <td>1989</td>
+                            <td>Primera versión estándar, UDP, archivos ≤2GB</td>
+                            <td>Obsoleta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NFSv3</strong></td>
+                            <td>1995</td>
+                            <td>Archivos grandes (64-bit), TCP, escritura asíncrona</td>
+                            <td>Ampliamente usado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NFSv4</strong></td>
+                            <td>2003</td>
+                            <td>Seguridad integrada, solo TCP, compuesto de operaciones</td>
+                            <td>Estándar actual</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NFSv4.1</strong></td>
+                            <td>2010</td>
+                            <td>pNFS (Parallel NFS), sesiones</td>
+                            <td>Recomendado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NFSv4.2</strong></td>
+                            <td>2016</td>
+                            <td>Etiquetas de seguridad, copy offload</td>
+                            <td>Más reciente</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🔍 Comparación NFSv3 vs NFSv4</h4>
+                <p><strong>NFSv3:</strong> Más simple, mejor rendimiento en redes locales, amplia compatibilidad.</p>
+                <p><strong>NFSv4:</strong> Mayor seguridad, mejor en WANs, funciones avanzadas como delegación y leases.</p>
+            </div>
+        </section>
+
+        <section id="configuracion" class="content-section">
+            <h2 class="section-title">4. Configuración e Instalación</h2>
+
+            <h3 class="section-subtitle">Instalación en el Servidor (Ubuntu/Debian)</h3>
+
+            <div class="code-block">
+<span class="comment"># Instalar el servidor NFS</span>
+<span class="command">sudo apt update</span>
+<span class="command">sudo apt install nfs-kernel-server</span>
+
+<span class="comment"># Iniciar y habilitar el servicio</span>
+<span class="command">sudo systemctl start nfs-kernel-server</span>
+<span class="command">sudo systemctl enable nfs-kernel-server</span>
+            </div>
+
+            <h3 class="section-subtitle">Configuración del Servidor</h3>
+
+            <p>El archivo principal de configuración es <code>/etc/exports</code>:</p>
+
+            <div class="code-block">
+<span class="comment"># Ejemplo de /etc/exports</span>
+<span class="command">/home/shared    192.168.1.0/24(rw,sync,no_subtree_check)</span>
+<span class="command">/var/nfs/data   *(ro,sync,no_subtree_check)</span>
+<span class="command">/opt/files      client1.example.com(rw,sync) client2.example.com(ro,sync)</span>
+            </div>
+
+            <h3 class="section-subtitle">Opciones de Exportación</h3>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Opción</th>
+                            <th>Descripción</th>
+                            <th>Uso Recomendado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>rw/ro</strong></td>
+                            <td>Lectura-escritura / Solo lectura</td>
+                            <td>rw para datos, ro para recursos compartidos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>sync/async</strong></td>
+                            <td>Escritura síncrona / asíncrona</td>
+                            <td>sync para integridad, async para rendimiento</td>
+                        </tr>
+                        <tr>
+                            <td><strong>no_subtree_check</strong></td>
+                            <td>Desactiva verificación de subdirectorios</td>
+                            <td>Recomendado para mejor rendimiento</td>
+                        </tr>
+                        <tr>
+                            <td><strong>root_squash</strong></td>
+                            <td>Mapea root remoto a nobody</td>
+                            <td>Seguridad por defecto</td>
+                        </tr>
+                        <tr>
+                            <td><strong>all_squash</strong></td>
+                            <td>Mapea todos los usuarios a nobody</td>
+                            <td>Máxima seguridad</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="section-subtitle">Configuración del Cliente</h3>
+
+            <div class="code-block">
+<span class="comment"># Instalar cliente NFS</span>
+<span class="command">sudo apt install nfs-common</span>
+
+<span class="comment"># Crear punto de montaje</span>
+<span class="command">sudo mkdir -p /mnt/nfs-share</span>
+
+<span class="comment"># Montar manualmente</span>
+<span class="command">sudo mount -t nfs server.example.com:/home/shared /mnt/nfs-share</span>
+
+<span class="comment"># Montaje automático en /etc/fstab</span>
+<span class="command">server.example.com:/home/shared /mnt/nfs-share nfs defaults 0 0</span>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡 Mejores Prácticas</h4>
+                <ul>
+                    <li>Usa NFSv4 para nuevas implementaciones</li>
+                    <li>Configura firewalls apropiadamente (puerto 2049)</li>
+                    <li>Implementa autenticación Kerberos en entornos de producción</li>
+                    <li>Monitorea el rendimiento con herramientas como <code>nfsstat</code></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="ventajas-desventajas" class="content-section">
+            <h2 class="section-title">5. Ventajas y Desventajas</h2>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h3>✅ Ventajas</h3>
+                    <ul>
+                        <li><span class="icon check"></span><strong>Simplicidad:</strong> Fácil de configurar y mantener</li>
+                        <li><span class="icon check"></span><strong>Transparencia:</strong> Los archivos remotos parecen locales</li>
+                        <li><span class="icon check"></span><strong>Escalabilidad:</strong> Soporta múltiples clientes simultáneos</li>
+                        <li><span class="icon check"></span><strong>Estándar abierto:</strong> No depende de fabricantes específicos</li>
+                        <li><span class="icon check"></span><strong>Rendimiento:</strong> Optimizado para redes locales</li>
+                        <li><span class="icon check"></span><strong>Compatibilidad:</strong> Funciona en múltiples sistemas operativos</li>
+                    </ul>
+                </div>
+                
+                <div class="cons">
+                    <h3>❌ Desventajas</h3>
+                    <ul>
+                        <li><span class="icon cross"></span><strong>Seguridad:</strong> Tradicionalmente débil (mejorado en NFSv4)</li>
+                        <li><span class="icon cross"></span><strong>Rendimiento en WAN:</strong> No optimizado para redes lentas</li>
+                        <li><span class="icon cross"></span><strong>Punto único de fallo:</strong> Dependencia del servidor central</li>
+                        <li><span class="icon cross"></span><strong>Consistencia:</strong> Problemas con caché en escrituras concurrentes</li>
+                        <li><span class="icon cross"></span><strong>Complejidad de troubleshooting:</strong> Diagnóstico de problemas de red</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="seguridad" class="content-section">
+            <h2 class="section-title">6. Aspectos de Seguridad</h2>
+
+            <p>La seguridad en NFS ha evolucionado significativamente desde las primeras versiones. Es crucial entender los diferentes niveles de seguridad disponibles:</p>
+
+            <h3 class="section-subtitle">Métodos de Autenticación</h3>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Método</th>
+                            <th>Seguridad</th>
+                            <th>Complejidad</th>
+                            <th>Caso de Uso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>AUTH_SYS</strong></td>
+                            <td>Baja</td>
+                            <td>Simple</td>
+                            <td>Redes internas confiables</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AUTH_GSS/Kerberos</strong></td>
+                            <td>Alta</td>
+                            <td>Compleja</td>
+                            <td>Entornos empresariales</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RPCSEC_GSS</strong></td>
+                            <td>Muy Alta</td>
+                            <td>Muy Compleja</td>
+                            <td>Datos críticos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="section-subtitle">Configuración Segura</h3>
+
+            <div class="code-block">
+<span class="comment"># Configuración segura en /etc/exports</span>
+<span class="command">/secure/data 192.168.1.0/24(rw,sync,sec=krb5p,no_subtree_check)</span>
+
+<span class="comment"># Opciones de seguridad:</span>
+<span class="comment"># sec=sys     - Autenticación básica (por defecto)</span>
+<span class="comment"># sec=krb5    - Autenticación Kerberos</span>
+<span class="comment"># sec=krb5i   - Kerberos + verificación de integridad</span>
+<span class="comment"># sec=krb5p   - Kerberos + cifrado completo</span>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🔒 Recomendaciones de Seguridad</h4>
+                <ul>
+                    <li>Usa NFSv4 con autenticación Kerberos en producción</li>
+                    <li>Configura firewalls para limitar acceso a puertos NFS</li>
+                    <li>Implementa VPNs para acceso remoto</li>
+                    <li>Audita regularmente los logs de acceso</li>
+                    <li>Usa túneles SSH para conexiones no seguras</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="casos-uso" class="content-section">
+            <h2 class="section-title">7. Casos de Uso</h2>
+
+            <h3 class="section-subtitle">Entornos Típicos de Implementación</h3>
+
+            <div class="highlight-box">
+                <h4>🏢 Empresas y Organizaciones</h4>
+                <ul>
+                    <li><strong>Directorios de usuario:</strong> Perfiles móviles y datos personales</li>
+                    <li><strong>Aplicaciones centralizadas:</strong> Software compartido entre estaciones</li>
+                    <li><strong>Backups centralizados:</strong> Almacenamiento unificado de respaldos</li>
+                    <li><strong>Desarrollo colaborativo:</strong> Repositorios de código compartidos</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🎓 Instituciones Educativas</h4>
+                <ul>
+                    <li><strong>Laboratorios de computación:</strong> Acceso uniforme desde cualquier estación</li>
+                    <li><strong>Proyectos estudiantiles:</strong> Colaboración en trabajos grupales</li>
+                    <li><strong>Recursos educativos:</strong> Bibliotecas digitales compartidas</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>⚙️ Centros de Datos y HPC</h4>
+                <ul>
+                    <li><strong>Clusters de cómputo:</strong> Sistema de archivos distribuido</li>
+                    <li><strong>Contenedores:</strong> Almacenamiento persistente para Docker/Kubernetes</li>
+                    <li><strong>Virtualización:</strong> Almacenamiento compartido para VMs</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="conclusion" class="content-section">
+            <h2 class="section-title">8. Conclusión</h2>
+
+            <p>NFS sigue siendo una solución robusta y ampliamente adoptada para el intercambio de archivos en red, especialmente en entornos Unix/Linux. Su evolución a lo largo de más de tres décadas demuestra su capacidad de adaptación a las necesidades cambiantes de la industria.</p>
+
+            <h3 class="section-subtitle">Consideraciones para la Implementación</h3>
+
+            <ul>
+                <li><strong>Para redes locales:</strong> NFSv3 puede ser suficiente y ofrecer mejor rendimiento</li>
+                <li><strong>Para entornos de producción:</strong> NFSv4 con autenticación Kerberos es recomendable</li>
+                <li><strong>Para alta disponibilidad:</strong> Considera soluciones como clustering o replicación</li>
+                <li><strong>Para rendimiento crítico:</strong> Evalúa alternativas como Lustre o GlusterFS</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>🚀 Futuro de NFS</h4>
+                <p>Con el desarrollo continuo de NFSv4.2 y las mejoras en pNFS (Parallel NFS), el protocolo sigue evolucionando para satisfacer las demandas de los entornos modernos de computación en la nube y big data. La integración con tecnologías como containers y microservicios asegura su relevancia futura.</p>
+            </div>
+
+            <p>En resumen, NFS ofrece una solución equilibrada entre simplicidad, rendimiento y funcionalidad para la mayoría de casos de uso empresariales, convirtiéndolo en una herramienta esencial para el intercambio de archivos en redes modernas.</p>
+        </section>
+
+        <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #444;">
+            <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
+        </footer>
+    </div>
+
+</body>
+</html>

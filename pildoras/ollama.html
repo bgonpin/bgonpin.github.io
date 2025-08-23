@@ -44,6 +44,74 @@
             overflow-x: auto;
             white-space: pre-wrap;
         }
+        .code-block {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.5em;
+            margin: 1em 0;
+            font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #f8f8f2;
+            overflow-x: auto;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .code-block::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            border-radius: 8px 8px 0 0;
+            opacity: 0.8;
+        }
+        .code-block > br {
+            display: block;
+            content: "";
+            margin-top: 0.5em;
+        }
+        /* Colores específicos para bash/terminal Linux */
+        .code-block .bash-comment {
+            color: #6272a4;
+            font-style: italic;
+        }
+        .code-block .bash-command {
+            color: #50fa7b;
+            font-weight: bold;
+        }
+        .code-block .bash-option {
+            color: #ff6b6b;
+        }
+        .code-block .bash-path {
+            color: #8be9fd;
+        }
+        .code-block .bash-string {
+            color: #f1fa8c;
+        }
+        .code-block .bash-variable {
+            color: #ffb86c;
+        }
+        .code-block .bash-number {
+            color: #bd93f9;
+        }
+        .code-block .bash-symbol {
+            color: #ff79c6;
+        }
+        .code-block .bash-user {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        .code-block .bash-prompt {
+            color: #6272a4;
+        }
+        .code-block .bash-error {
+            color: #ff5555;
+            font-weight: bold;
+        }
         ul {
             list-style-type: disc;
             padding-left: 20px;
@@ -263,7 +331,7 @@
                 <div class="step-number">1</div>
                 <h3>Instalación Automática</h3>
                 <p>La forma más sencilla de instalar Ollama en Linux es usando el script oficial:</p>
-                <div class="code-block">curl -fsSL https://ollama.com/install.sh | sh</div>
+                <div class="code-block"><span class="bash-command">curl</span> <span class="bash-option">-fsSL</span> <span class="bash-string">https://ollama.com/install.sh</span> <span class="bash-symbol">|</span> <span class="bash-command">sh</span></div>
                 <div class="info">
                     <strong>Nota:</strong> Este script detectará automáticamente tu distribución de Linux e instalará Ollama adecuadamente.
                 </div>
@@ -274,14 +342,14 @@
                 <h3>Instalación Manual (Ubuntu/Debian)</h3>
                 <p>Si prefieres una instalación manual:</p>
                 <div class="code-block">
-# Descargar el paquete<br>
-sudo curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o /tmp/ollama.tgz<br>
+<span class="bash-comment"># Descargar el paquete</span><br>
+<span class="bash-command">sudo</span> <span class="bash-command">curl</span> <span class="bash-option">-L</span> <span class="bash-string">https://ollama.com/download/ollama-linux-amd64.tgz</span> <span class="bash-option">-o</span> <span class="bash-path">/tmp/ollama.tgz</span><br>
 <br>
-# Extraer a /usr/local/bin<br>
-sudo tar -C /usr/local/bin -xzf /tmp/ollama.tgz<br>
+<span class="bash-comment"># Extraer a /usr/local/bin</span><br>
+<span class="bash-command">sudo</span> <span class="bash-command">tar</span> <span class="bash-option">-C</span> <span class="bash-path">/usr/local/bin</span> <span class="bash-option">-xzf</span> <span class="bash-path">/tmp/ollama.tgz</span><br>
 <br>
-# Hacer ejecutable<br>
-sudo chmod +x /usr/local/bin/ollama<br>
+<span class="bash-comment"></span># Hacer ejecutable</span><br>
+<span class="bash-command">sudo</span> <span class="bash-command">chmod</span> <span class="bash-option">+x</span> <span class="bash-path">/usr/local/bin/ollama</span><br>
                 </div>
             </div>
 
@@ -290,32 +358,32 @@ sudo chmod +x /usr/local/bin/ollama<br>
                 <h3>Crear Servicio del Sistema</h3>
                 <p>Para que Ollama se ejecute como servicio:</p>
                 <div class="code-block">
-# Crear usuario para ollama<br>
-sudo useradd -r -s /bin/false -m -d /usr/share/ollama ollama<br>
+<span class="bash-comment"># Crear usuario para ollama</span><br>
+<span class="bash-command">sudo</span> <span class="bash-command">useradd</span> <span class="bash-option">-r</span> <span class="bash-option">-s</span> <span class="bash-path">/bin/false</span> <span class="bash-option">-m</span> <span class="bash-option">-d</span> <span class="bash-path">/usr/share/ollama</span> <span class="bash-variable">ollama</span><br>
 <br>
-# Crear archivo de servicio<br>
-sudo tee /etc/systemd/system/ollama.service &lt;&lt;EOF<br>
-[Unit]<br>
-Description=Ollama Service<br>
-After=network-online.target<br>
+<span class="bash-comment"># Crear archivo de servicio</span><br>
+<span class="bash-command">sudo</span> <span class="bash-command">tee</span> <span class="bash-path">/etc/systemd/system/ollama.service</span> <span class="bash-symbol"><<</span><span class="bash-variable">EOF</span><br>
+<span class="bash-symbol">[</span><span class="bash-variable">Unit</span><span class="bash-symbol">]</span><br>
+<span class="bash-variable">Description</span><span class="bash-symbol">=</span><span class="bash-string">Ollama Service</span><br>
+<span class="bash-variable">After</span><span class="bash-symbol">=</span><span class="bash-string">network-online.target</span><br>
 <br>
-[Service]<br>
-ExecStart=/usr/local/bin/ollama serve<br>
-User=ollama<br>
-Group=ollama<br>
-Restart=always<br>
-RestartSec=3<br>
-Environment="HOME=/usr/share/ollama"<br>
-Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"<br>
+<span class="bash-symbol">[</span><span class="bash-variable">Service</span><span class="bash-symbol">]</span><br>
+<span class="bash-variable">ExecStart</span><span class="bash-symbol">=</span><span class="bash-path">/usr/local/bin/ollama serve</span><br>
+<span class="bash-variable">User</span><span class="bash-symbol">=</span><span class="bash-variable">ollama</span><br>
+<span class="bash-variable">Group</span><span class="bash-symbol">=</span><span class="bash-variable">ollama</span><br>
+<span class="bash-variable">Restart</span><span class="bash-symbol">=</span><span class="bash-string">always</span><br>
+<span class="bash-variable">RestartSec</span><span class="bash-symbol">=</span><span class="bash-number">3</span><br>
+<span class="bash-variable">Environment</span><span class="bash-symbol">=</span><span class="bash-string">"HOME=/usr/share/ollama"</span><br>
+<span class="bash-variable">Environment</span><span class="bash-symbol">=</span><span class="bash-string">"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span><br>
 <br>
-[Install]<br>
-WantedBy=default.target<br>
-EOF<br>
+<span class="bash-symbol">[</span><span class="bash-variable">Install</span><span class="bash-symbol">]</span><br>
+<span class="bash-variable">WantedBy</span><span class="bash-symbol">=</span><span class="bash-string">default.target</span><br>
+<span class="bash-variable">EOF</span><br>
 <br>
-# Recargar y habilitar el servicio<br>
-sudo systemctl daemon-reload<br>
-sudo systemctl enable ollama<br>
-sudo systemctl start ollama<br>
+<span class="bash-comment"># Recargar y habilitar el servicio</span><br>
+<span class="bash-command">sudo</span> <span class="bash-command">systemctl</span> <span class="bash-command">daemon-reload</span><br>
+<span class="bash-command">sudo</span> <span class="bash-command">systemctl</span> <span class="bash-command">enable</span> <span class="bash-variable">ollama</span><br>
+<span class="bash-command">sudo</span> <span class="bash-command">systemctl</span> <span class="bash-command">start</span> <span class="bash-variable">ollama</span><br>
                 </div>
             </div>
 
@@ -324,11 +392,11 @@ sudo systemctl start ollama<br>
                 <h3>Verificar Instalación</h3>
                 <p>Comprueba que Ollama está funcionando correctamente:</p>
                 <div class="code-block">
-# Verificar estado del servicio<br>
-sudo systemctl status ollama<br>
+<span class="bash-comment"></span># Verificar estado del servicio</span><br>
+<span class="bash-command">sudo</span> <span class="bash-command">systemctl</span> <span class="bash-command">status</span> <span class="bash-variable">ollama</span><br>
 <br>
-# Verificar que responde<br>
-curl http://localhost:11434/api/tags<br>
+<span class="bash-comment"># Verificar que responde</span><br>
+<span class="bash-command">curl</span> <span class="bash-string">http://localhost:11434/api/tags</span><br>
                 </div>
             </div>
         </section>
@@ -340,7 +408,7 @@ curl http://localhost:11434/api/tags<br>
                 <div class="step-number">1</div>
                 <h3>Descargar tu Primer Modelo</h3>
                 <p>Comencemos descargando un modelo popular como Llama 3.2:</p>
-                <div class="code-block">ollama pull llama3.2</div>
+                <div class="code-block"><span class="bash-command">ollama</span> <span class="bash-command">pull</span> <span class="bash-variable">llama3.2</span></div>
                 <div class="info">
                     <strong>Tip:</strong> Este comando descargará automáticamente la versión más pequeña (3B) si no especificas el tamaño.
                 </div>
@@ -350,7 +418,7 @@ curl http://localhost:11434/api/tags<br>
                 <div class="step-number">2</div>
                 <h3>Ejecutar el Modelo</h3>
                 <p>Una vez descargado, puedes chatear con el modelo:</p>
-                <div class="code-block">ollama run llama3.2</div>
+                <div class="code-block"><span class="bash-command">ollama</span> <span class="bash-command">run</span> <span class="bash-variable">llama3.2</span></div>
                 <p>Esto abrirá una sesión de chat interactiva. ¡Prueba a hacerle una pregunta!</p>
             </div>
 
@@ -358,7 +426,7 @@ curl http://localhost:11434/api/tags<br>
                 <div class="step-number">3</div>
                 <h3>Listar Modelos Disponibles</h3>
                 <p>Para ver qué modelos tienes instalados:</p>
-                <div class="code-block">ollama list</div>
+                <div class="code-block"><span class="bash-command">ollama</span> <span class="bash-command">list</span></div>
             </div>
 
             <h3>Modelos Populares para Comenzar</h3>
@@ -409,14 +477,14 @@ curl http://localhost:11434/api/tags<br>
                 <h3>Modificar Ventana de Contexto</h3>
                 <p>Por defecto, Ollama usa una ventana de contexto de 2048 tokens, que suele ser insuficiente para tareas complejas de programación. Puedes aumentarla:</p>
                 <div class="code-block">
-# Ejecutar el modelo<br>
-ollama run deepseek-r1:14b<br>
+<span class="bash-comment"># Ejecutar el modelo</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">run</span> <span class="bash-variable">deepseek-r1:14b</span><br>
 <br>
-# Dentro del chat, cambiar el parámetro<br>
-/set parameter num_ctx 8192<br>
+<span class="bash-comment"># Dentro del chat, cambiar el parámetro</span><br>
+<span class="bash-string">/set parameter num_ctx 8192</span><br>
 <br>
-# Guardar el modelo modificado<br>
-/save deepseek-r1:14b-8k<br>
+<span class="bash-comment"># Guardar el modelo modificado</span><br>
+<span class="bash-string">/save deepseek-r1:14b-8k</span><br>
                 </div>
                 <div class="warning">
                     <strong>Importante:</strong> Aumentar la ventana de contexto requiere más RAM. Una ventana de 8192 tokens puede necesitar 2-3GB adicionales de memoria.
@@ -428,23 +496,23 @@ ollama run deepseek-r1:14b<br>
                 <h3>Crear Modelos Personalizados con Modelfile</h3>
                 <p>Puedes crear variaciones personalizadas usando un archivo Modelfile:</p>
                 <div class="code-block">
-# Crear un archivo llamado Modelfile<br>
-FROM llama3.2:7b<br>
+<span class="bash-comment"># Crear un archivo llamado Modelfile</span><br>
+<span class="bash-variable">FROM</span> <span class="bash-variable">llama3.2:7b</span><br>
 <br>
-# Establecer parámetros<br>
-PARAMETER temperature 0.7<br>
-PARAMETER num_ctx 4096<br>
-PARAMETER top_k 40<br>
-PARAMETER top_p 0.9<br>
+<span class="bash-comment"># Establecer parámetros</span><br>
+<span class="bash-variable">PARAMETER</span> <span class="bash-variable">temperature</span> <span class="bash-number">0.7</span><br>
+<span class="bash-variable">PARAMETER</span> <span class="bash-variable">num_ctx</span> <span class="bash-number">4096</span><br>
+<span class="bash-variable">PARAMETER</span> <span class="bash-variable">top_k</span> <span class="bash-number">40</span><br>
+<span class="bash-variable">PARAMETER</span> <span class="bash-variable">top_p</span> <span class="bash-number">0.9</span><br>
 <br>
-# Establecer el prompt del sistema<br>
-SYSTEM """<br>
-Eres un asistente de programación experto.<br> 
+<span class="bash-comment"># Establecer el prompt del sistema</span><br>
+<span class="bash-variable">SYSTEM</span> <span class="bash-string">"""<br>
+Eres un asistente de programación experto.<br>
 Siempre proporcionas código limpio, bien comentado y siguiendo las mejores prácticas.<br>
-"""<br>
+"""</span><br>
                 </div>
                 <p>Luego crear el modelo personalizado:</p>
-                <div class="code-block">ollama create mi-programador -f ./Modelfile</div>
+                <div class="code-block"><span class="bash-command">ollama</span> <span class="bash-command">create</span> <span class="bash-variable">mi-programador</span> <span class="bash-option">-f</span> <span class="bash-path">./Modelfile</span></div>
             </div>
 
             <div class="step">
@@ -496,16 +564,16 @@ Siempre proporcionas código limpio, bien comentado y siguiendo las mejores prá
 
             <div class="step">
                 <div class="step-number">4</div>
-                <h3>Comandos de Chat Útiles</h3>
-                <p>Cuando estés chateando con un modelo, puedes usar estos comandos:</p>
-                <div class="code-block">
-/set parameter num_ctx 8192    # Cambiar ventana de contexto<br>
-/set parameter temperature 0.3  # Cambiar creatividad<br>
-/save mi-modelo-modificado      # Guardar configuración actual<br>
-/show                          # Mostrar información del modelo<br>
-/load                          # Cargar imagen (modelos multimodales)<br>
-/bye                          # Salir del chat<br>
-                </div>
+            <h3>Comandos de Chat Útiles</h3>
+            <p>Cuando estés chateando con un modelo, puedes usar estos comandos:</p>
+            <div class="code-block">
+<span class="bash-string">/set parameter num_ctx 8192</span>    <span class="bash-comment"># Cambiar ventana de contexto</span><br>
+<span class="bash-string">/set parameter temperature 0.3</span>  <span class="bash-comment"># Cambiar creatividad</span><br>
+<span class="bash-string">/save mi-modelo-modificado</span>      <span class="bash-comment"># Guardar configuración actual</span><br>
+<span class="bash-string">/show</span>                          <span class="bash-comment"># Mostrar información del modelo</span><br>
+<span class="bash-string">/load</span>                          <span class="bash-comment"># Cargar imagen (modelos multimodales)</span><br>
+<span class="bash-string">/bye</span>                          <span class="bash-comment"># Salir del chat</span><br>
+            </div>
             </div>
         </section>
 
@@ -517,7 +585,7 @@ Siempre proporcionas código limpio, bien comentado y siguiendo las mejores prá
                 <div class="step-number">1</div>
                 <h3>Configurar el Servidor</h3>
                 <p>Primero, asegúrate de que el servidor esté ejecutándose:</p>
-                <div class="code-block">ollama serve</div>
+                <div class="code-block"><span class="bash-command">ollama</span> <span class="bash-command">serve</span></div>
                 <p>Por defecto, el servidor se ejecuta en <span class="command">http://localhost:11434</span></p>
             </div>
 
@@ -526,14 +594,14 @@ Siempre proporcionas código limpio, bien comentado y siguiendo las mejores prá
                 <h3>Ejemplo de Integración con 16x Prompt</h3>
                 <p>Basado en la guía proporcionada, aquí está el proceso para integrar con 16x Prompt:</p>
                 <div class="code-block">
-# 1. Descargar y configurar un modelo con mayor contexto<br>
-ollama pull deepseek-r1:14b<br>
-ollama run deepseek-r1:14b<br>
-/set parameter num_ctx 8192<br>
-/save deepseek-r1:14b-8k<br>
+<span class="bash-comment"># 1. Descargar y configurar un modelo con mayor contexto</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">pull</span> <span class="bash-variable">deepseek-r1:14b</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">run</span> <span class="bash-variable">deepseek-r1:14b</span><br>
+<span class="bash-string">/set parameter num_ctx 8192</span><br>
+<span class="bash-string"></span>/save deepseek-r1:14b-8k</span><br>
 <br>
-# 2. Servir el modelo<br>
-ollama serve<br>
+<span class="bash-comment"># 2. Servir el modelo</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">serve</span><br>
                 </div>
                 <p>En 16x Prompt, configura:</p>
                 <ul>
@@ -547,19 +615,19 @@ ollama serve<br>
                 <div class="step-number">3</div>
                 <h3>Ejemplo de API con curl</h3>
                 <div class="code-block">
-# Chat completion<br>
-curl http://localhost:11434/api/chat -d '{<br>
-  "model": "llama3.2",<br>
-  "messages": [<br>
-    {"role": "user", "content": "¿Por qué el cielo es azul?"}<br>
-  ]<br>
-}'<br>
+<span class="bash-comment"># Chat completion</span><br>
+<span class="bash-command">curl</span> <span class="bash-string">http://localhost:11434/api/chat</span> <span class="bash-option">-d</span> <span class="bash-string">'{
+  "model": "llama3.2",
+  "messages": [
+    {"role": "user", "content": "¿Por qué el cielo es azul?"}
+  ]
+}'</span><br>
 <br>
-# Generación simple<br>
-curl http://localhost:11434/api/generate -d '{<br>
-  "model": "llama3.2",<br>
-  "prompt": "Explica la fotosíntesis en términos simples"<br>
-}'<br>
+<span class="bash-comment"># Generación simple</span><br>
+<span class="bash-command">curl</span> <span class="bash-string">http://localhost:11434/api/generate</span> <span class="bash-option">-d</span> <span class="bash-string">'{
+  "model": "llama3.2",
+  "prompt": "Explica la fotosíntesis en términos simples"
+}'</span><br>
                 </div>
             </div>
         </section>
@@ -569,17 +637,17 @@ curl http://localhost:11434/api/generate -d '{<br>
 
             <h3>Gestión de Modelos</h3>
             <div class="code-block">
-# Listar modelos instalados<br>
-ollama list<br>
+<span class="bash-comment"># Listar modelos instalados</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">list</span><br>
 <br>
-# Descargar un modelo<br>
-ollama pull model_name<br>
+<span class="bash-comment"># Descargar un modelo</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">pull</span> <span class="bash-variable">model_name</span><br>
 <br>
-# Eliminar un modelo<br>
-ollama rm model_name<br>
+<span class="bash-comment"></span># Eliminar un modelo</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">rm</span> <span class="bash-variable">model_name</span><br>
 <br>
-# Mostrar información detallada<br>
-ollama show model_name<br>
+<span class="bash-comment"># Mostrar información detallada</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">show</span> <span class="bash-variable">model_name</span><br>
 <br>
 # Copiar un modelo<br>
 ollama cp source_model new_model<br>
@@ -587,17 +655,17 @@ ollama cp source_model new_model<br>
 
             <h3>Ejecución y Chat</h3>
             <div class="code-block">
-# Ejecutar modelo interactivamente<br>
-ollama run model_name<br>
+<span class="bash-comment"># Ejecutar modelo interactivamente</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">run</span> <span class="bash-variable">model_name</span><br>
 <br>
-# Ejecutar con prompt directo<br>
-ollama run model_name "Tu pregunta aquí"<br>
+<span class="bash-comment"># Ejecutar con prompt directo</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">run</span> <span class="bash-variable">model_name</span> <span class="bash-string">"Tu pregunta aquí"</span><br>
 <br>
-# Servir la API<br>
-ollama serve<br>
+<span class="bash-comment"># Servir la API</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">serve</span><br>
 <br>
-# Servir en puerto específico<br>
-OLLAMA_HOST=0.0.0.0:8080 ollama serve<br>
+<span class="bash-comment"># Servir en puerto específico</span><br>
+<span class="bash-variable">OLLAMA_HOST</span><span class="bash-symbol">=</span><span class="bash-number">0.0.0.0:8080</span> <span class="bash-command">ollama</span> <span class="bash-command">serve</span><br>
             </div>
 
             <h3>Variables de Entorno Útiles</h3>
@@ -655,11 +723,11 @@ OLLAMA_HOST=0.0.0.0:8080 ollama serve<br>
                 <p><strong>Causa:</strong> El servidor Ollama no está ejecutándose.</p>
                 <p><strong>Solución:</strong></p>
                 <div class="code-block">
-# Iniciar el servidor<br>
-ollama serve<br>
+<span class="bash-comment"></span># Iniciar el servidor</span><br>
+<span class="bash-command">ollama</span> <span class="bash-command">serve</span><br>
 <br>
-# O si tienes el servicio del sistema<br>
-sudo systemctl start ollama<br>
+<span class="bash-comment"># O si tienes el servicio del sistema</span><br>
+<span class="bash-command">sudo</span> <span class="bash-command">systemctl</span> <span class="bash-command">start</span> <span class="bash-variable">ollama</span><br>
                 </div>
             </div>
 
@@ -676,17 +744,17 @@ sudo systemctl start ollama<br>
 
             <h3>Verificación del Sistema</h3>
             <div class="code-block">
-# Ver logs del sistema<br>
-sudo journalctl -u ollama -f<br>
+<span class="bash-comment"># Ver logs del sistema</span><br>
+<span class="bash-command">sudo</span> <span class="bash-command">journalctl</span> <span class="bash-option">-u</span> <span class="bash-variable">ollama</span> <span class="bash-option">-f</span><br>
 <br>
-# Ver procesos de Ollama<br>
-ps aux | grep ollama<br>
+<span class="bash-comment"># Ver procesos de Ollama</span><br>
+<span class="bash-command">ps</span> <span class="bash-command">aux</span> <span class="bash-symbol">|</span> <span class="bash-command">grep</span> <span class="bash-variable">ollama</span><br>
 <br>
-# Verificar uso de memoria<br>
-free -h<br>
+<span class="bash-comment"># Verificar uso de memoria</span><br>
+<span class="bash-command">free</span> <span class="bash-option">-h</span><br>
 <br>
-# Verificar conexión API<br>
-curl http://localhost:11434/api/tags<br>
+<span class="bash-comment"># Verificar conexión API</span><br>
+<span class="bash-command">curl</span> <span class="bash-string">http://localhost:11434/api/tags</span><br>
             </div>
 
             <h3>Optimización del Rendimiento</h3>

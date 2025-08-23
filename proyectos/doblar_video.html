@@ -166,9 +166,9 @@
         <div class="flow-diagram">
             <h3>Flujo de Trabajo del Script</h3>
             <pre class="code-block">
-Video Original (Inglés) → Extraer Audio → Dividir en Segmentos → Transcribir
-                                                                 ↓
-Traducir al Español → Generar Voz en Español → Combinar Audio → Video Final
+Video Original (Inglés) → Extraer Audio → Dividir en Segmentos → Transcribir<br>
+       <br>                                                          ↓
+Traducir al Español → Generar Voz en Español → Combinar Audio → Video Final<br>
             </pre>
         </div>
 
@@ -184,7 +184,7 @@ Traducir al Español → Generar Voz en Español → Combinar Audio → Video Fi
 
             <h3>📦 Dependencias de Python</h3>
             <div class="command">
-pip install moviepy speechrecognition googletrans==4.0.0rc1 gtts pydub
+pip install moviepy speechrecognition googletrans==4.0.0rc1 gtts pydub<br>
             </div>
 
             <h3>💾 Requisitos de Hardware</h3>
@@ -230,16 +230,16 @@ pip install moviepy speechrecognition googletrans==4.0.0rc1 gtts pydub
         <p>El script espera la siguiente estructura de carpetas:</p>
 
         <div class="file-structure">
-📁 Directorio de Trabajo
-├── 📄 doblar.py
-├── 📁 original/          # ← Coloca aquí tus videos en inglés
-│   ├── video1.mp4
-│   ├── video2.avi
-│   └── ...
-└── 📁 doblada/           # ← Aquí se guardarán los videos doblados
-    ├── video1_doblado.mp4
-    ├── video2_doblado.mp4
-    └── ...
+📁 Directorio de Trabajo<br>
+├── 📄 doblar.py<br>
+├── 📁 original/          # ← Coloca aquí tus videos en inglés<br>
+│   ├── video1.mp4<br>
+│   ├── video2.avi<br>
+│   └── ...<br>
+└── 📁 doblada/           # ← Aquí se guardarán los videos doblados<br>
+    ├── video1_doblado.mp4<br>
+    ├── video2_doblado.mp4<br>
+    └── ...<br>
         </div>
 
         <div class="warning">
@@ -277,46 +277,46 @@ pip install moviepy speechrecognition googletrans==4.0.0rc1 gtts pydub
         <h3>1. Extracción de Audio</h3>
         <p>El script utiliza <strong>MoviePy</strong> para extraer la pista de audio del video original:</p>
         <div class="code-block">
-video = VideoFileClip(video_path)
-audio = video.audio
-audio.write_audiofile("audio_original.wav")
+video = VideoFileClip(video_path)<br>
+audio = video.audio<br>
+audio.write_audiofile("audio_original.wav")<br>
         </div>
 
         <h3>2. Segmentación por Silencios</h3>
         <p>Divide el audio en fragmentos basados en silencios para mejorar la precisión:</p>
         <div class="code-block">
-chunks = split_on_silence(audio, min_silence_len=1000, silence_thresh=-40)
+chunks = split_on_silence(audio, min_silence_len=1000, silence_thresh=-40)<br>
         </div>
 
         <h3>3. Transcripción de Voz a Texto</h3>
         <p>Utiliza <strong>SpeechRecognition</strong> con Google Speech API:</p>
         <div class="code-block">
 with sr.AudioFile(chunk) as source:
-    audio_data = recognizer.record(source)
-    text = recognizer.recognize_google(audio_data, language='en-US')
+    audio_data = recognizer.record(source)<br>
+    text = recognizer.recognize_google(audio_data, language='en-US')<br>
         </div>
 
         <h3>4. Traducción Automática</h3>
         <p>Traduce el texto usando <strong>Google Translate</strong>:</p>
         <div class="code-block">
-translated = translator.translate(text, dest='es')
-spanish_text = translated.text
+translated = translator.translate(text, dest='es')<br>
+spanish_text = translated.text<br>
         </div>
 
         <h3>5. Síntesis de Voz en Español</h3>
         <p>Genera audio en español con <strong>gTTS (Google Text-to-Speech)</strong>:</p>
         <div class="code-block">
-tts = gTTS(text=spanish_text, lang='es')
-tts.save("audio_espanol.mp3")
+tts = gTTS(text=spanish_text, lang='es')<br>
+tts.save("audio_espanol.mp3")<br>
         </div>
 
         <h3>6. Reemplazo de Audio en Video</h3>
         <p>Combina el video original con el nuevo audio:</p>
         <div class="code-block">
-video = VideoFileClip(video_path)
-new_audio = AudioFileClip(audio_espanol_path)
-final_video = video.set_audio(new_audio)
-final_video.write_videofile(output_path)
+video = VideoFileClip(video_path)<br>
+new_audio = AudioFileClip(audio_espanol_path)<br>
+final_video = video.set_audio(new_audio)<br>
+final_video.write_videofile(output_path)<br>
         </div>
 
         <h2>📊 Formatos de Video Soportados</h2>
@@ -363,17 +363,17 @@ final_video.write_videofile(output_path)
 
         <h3>Parámetros de Segmentación</h3>
         <div class="code-block">
-# En el método split_audio_on_silence()
-min_silence_len=1000,     # Duración mínima de silencio (ms)
-silence_thresh=-40        # Umbral de silencio (dB)
+# En el método split_audio_on_silence()<br>
+min_silence_len=1000,     # Duración mínima de silencio (ms)<br>
+silence_thresh=-40        # Umbral de silencio (dB)<br>
         </div>
 
         <h3>Idiomas Soportados</h3>
         <div class="code-block">
-# Para cambiar el idioma de destino
-translated_text = self.translate_text(text, target_language='es')
-
-# Idiomas disponibles: 'es', 'fr', 'de', 'it', 'pt', etc.
+# Para cambiar el idioma de destino<br>
+translated_text = self.translate_text(text, target_language='es')<br>
+<br>
+# Idiomas disponibles: 'es', 'fr', 'de', 'it', 'pt', etc.<br>
         </div>
 
         <h2>🚨 Solución de Problemas</h2>

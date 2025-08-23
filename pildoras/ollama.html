@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Completo de Ollama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            color: #e0e0e0;
+            background-color: #121212;
+        }
+        h1, h2 {
+            color: #ffffff;
+        }
+        h1 {
+            border-bottom: 2px solid #bb86fc;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 1px solid #333;
+        }
+        code, pre {
+            background-color: #2d2d2d;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #f44336;
+            font-family: "Courier New", Courier, monospace;
+            border: 1px solid #444;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .card {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            margin-bottom: 1.5em;
+            padding: 1.5em;
+        }
+        .card-body {
+            color: #e0e0e0;
+        }
+        footer {
+            color: #b0b0b0;
+            border-top: 1px solid #444;
+        }
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #9d4edd;
+        }
+        strong {
+            color: #ffffff;
+        }
+        .intro {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #f39c12;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border: 1px solid #b8daff;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #17a2b8;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            border: 1px solid #444;
+        }
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        .step {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            position: relative;
+            border: 1px solid #444;
+        }
+        .step-number {
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            background: #28a745;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .command {
+            background: #e8f5e8;
+            color: #155724;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: monospace;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #2a2a2a;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #444;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+            color: #e0e0e0;
+        }
+        th {
+            background: #333;
+            color: white;
+            font-weight: 600;
+        }
+        .toc {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #444;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #ffffff;
+        }
+        .toc ul {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🦙 Tutorial Completo de Ollama</h1>
+        
+        <div class="intro">
+            <h2 style="border: none; padding: 0; margin: 0 0 15px 0;">¿Qué es Ollama?</h2>
+            <p>Ollama es una herramienta que te permite ejecutar modelos de lenguaje grandes (LLMs) localmente en tu máquina de forma sencilla y eficiente. Piensa en ello como tu propio ChatGPT personal que funciona sin internet y mantiene toda tu información privada.</p>
+        </div>
+
+        <div class="toc">
+            <h3>📋 Tabla de Contenidos</h3>
+            <ul>
+                <li><a href="#que-es-ollama">¿Qué es Ollama?</a></li>
+                <li><a href="#caracteristicas">Características Principales</a></li>
+                <li><a href="#instalacion-linux">Instalación en Linux</a></li>
+                <li><a href="#primeros-pasos">Primeros Pasos</a></li>
+                <li><a href="#modificacion-modelos">Modificación de Modelos</a></li>
+                <li><a href="#integracion">Integración con Aplicaciones</a></li>
+                <li><a href="#comandos">Comandos Útiles</a></li>
+                <li><a href="#troubleshooting">Resolución de Problemas</a></li>
+            </ul>
+        </div>
+
+        <section id="que-es-ollama">
+            <h2>🤔 ¿Qué es Ollama?</h2>
+            <p>Ollama es una aplicación de código abierto que simplifica la ejecución de modelos de lenguaje grandes en tu computadora local. Desarrollada para ser fácil de usar, Ollama abstrae la complejidad técnica que normalmente conlleva ejecutar estos modelos.</p>
+            
+            <h3>¿Por qué usar Ollama?</h3>
+            <ul>
+                <li><strong>Privacidad Total:</strong> Tus datos nunca salen de tu computadora</li>
+                <li><strong>Sin Conexión a Internet:</strong> Funciona completamente offline</li>
+                <li><strong>Gratuito:</strong> No hay costos por uso o tokens</li>
+                <li><strong>Personalizable:</strong> Puedes modificar y ajustar los modelos según tus necesidades</li>
+                <li><strong>Múltiples Modelos:</strong> Soporte para cientos de modelos diferentes</li>
+            </ul>
+        </section>
+
+        <section id="caracteristicas">
+            <h2>✨ Características Principales</h2>
+            
+            <div class="feature-list">
+                <div class="feature-card">
+                    <h4>🚀 Fácil Instalación</h4>
+                    <p>Instalación con un solo comando en múltiples sistemas operativos.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📦 Gestión de Modelos</h4>
+                    <p>Descarga, actualiza y gestiona modelos con comandos simples.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔧 API REST</h4>
+                    <p>API completa para integrar con tus aplicaciones.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>💻 Multiplataforma</h4>
+                    <p>Funciona en Linux, macOS y Windows.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎯 Optimización</h4>
+                    <p>Optimizado para diferentes tipos de hardware.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔄 Streaming</h4>
+                    <p>Respuestas en tiempo real con streaming de tokens.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="instalacion-linux">
+            <h2>🐧 Instalación en Linux</h2>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Instalación Automática</h3>
+                <p>La forma más sencilla de instalar Ollama en Linux es usando el script oficial:</p>
+                <div class="code-block">curl -fsSL https://ollama.com/install.sh | sh</div>
+                <div class="info">
+                    <strong>Nota:</strong> Este script detectará automáticamente tu distribución de Linux e instalará Ollama adecuadamente.
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Instalación Manual (Ubuntu/Debian)</h3>
+                <p>Si prefieres una instalación manual:</p>
+                <div class="code-block">
+# Descargar el paquete<br>
+sudo curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o /tmp/ollama.tgz<br>
+<br>
+# Extraer a /usr/local/bin<br>
+sudo tar -C /usr/local/bin -xzf /tmp/ollama.tgz<br>
+<br>
+# Hacer ejecutable<br>
+sudo chmod +x /usr/local/bin/ollama<br>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Crear Servicio del Sistema</h3>
+                <p>Para que Ollama se ejecute como servicio:</p>
+                <div class="code-block">
+# Crear usuario para ollama<br>
+sudo useradd -r -s /bin/false -m -d /usr/share/ollama ollama<br>
+<br>
+# Crear archivo de servicio<br>
+sudo tee /etc/systemd/system/ollama.service &lt;&lt;EOF<br>
+[Unit]<br>
+Description=Ollama Service<br>
+After=network-online.target<br>
+<br>
+[Service]<br>
+ExecStart=/usr/local/bin/ollama serve<br>
+User=ollama<br>
+Group=ollama<br>
+Restart=always<br>
+RestartSec=3<br>
+Environment="HOME=/usr/share/ollama"<br>
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"<br>
+<br>
+[Install]<br>
+WantedBy=default.target<br>
+EOF<br>
+<br>
+# Recargar y habilitar el servicio<br>
+sudo systemctl daemon-reload<br>
+sudo systemctl enable ollama<br>
+sudo systemctl start ollama<br>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Verificar Instalación</h3>
+                <p>Comprueba que Ollama está funcionando correctamente:</p>
+                <div class="code-block">
+# Verificar estado del servicio<br>
+sudo systemctl status ollama<br>
+<br>
+# Verificar que responde<br>
+curl http://localhost:11434/api/tags<br>
+                </div>
+            </div>
+        </section>
+
+        <section id="primeros-pasos">
+            <h2>🚀 Primeros Pasos</h2>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Descargar tu Primer Modelo</h3>
+                <p>Comencemos descargando un modelo popular como Llama 3.2:</p>
+                <div class="code-block">ollama pull llama3.2</div>
+                <div class="info">
+                    <strong>Tip:</strong> Este comando descargará automáticamente la versión más pequeña (3B) si no especificas el tamaño.
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Ejecutar el Modelo</h3>
+                <p>Una vez descargado, puedes chatear con el modelo:</p>
+                <div class="code-block">ollama run llama3.2</div>
+                <p>Esto abrirá una sesión de chat interactiva. ¡Prueba a hacerle una pregunta!</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Listar Modelos Disponibles</h3>
+                <p>Para ver qué modelos tienes instalados:</p>
+                <div class="code-block">ollama list</div>
+            </div>
+
+            <h3>Modelos Populares para Comenzar</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Tamaño</th>
+                        <th>RAM Requerida</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>llama3.2:3b</td>
+                        <td>2GB</td>
+                        <td>4GB</td>
+                        <td>Modelo pequeño y rápido para tareas generales</td>
+                    </tr>
+                    <tr>
+                        <td>llama3.2:7b</td>
+                        <td>4GB</td>
+                        <td>8GB</td>
+                        <td>Buen equilibrio entre rendimiento y recursos</td>
+                    </tr>
+                    <tr>
+                        <td>codellama:7b</td>
+                        <td>4GB</td>
+                        <td>8GB</td>
+                        <td>Especializado en programación</td>
+                    </tr>
+                    <tr>
+                        <td>deepseek-r1:14b</td>
+                        <td>8GB</td>
+                        <td>16GB</td>
+                        <td>Excelente para razonamiento complejo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="modificacion-modelos">
+            <h2>🔧 Modificación de Modelos</h2>
+            <p>Una de las características más potentes de Ollama es la capacidad de modificar y personalizar modelos existentes.</p>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Modificar Ventana de Contexto</h3>
+                <p>Por defecto, Ollama usa una ventana de contexto de 2048 tokens, que suele ser insuficiente para tareas complejas de programación. Puedes aumentarla:</p>
+                <div class="code-block">
+# Ejecutar el modelo<br>
+ollama run deepseek-r1:14b<br>
+<br>
+# Dentro del chat, cambiar el parámetro<br>
+/set parameter num_ctx 8192<br>
+<br>
+# Guardar el modelo modificado<br>
+/save deepseek-r1:14b-8k<br>
+                </div>
+                <div class="warning">
+                    <strong>Importante:</strong> Aumentar la ventana de contexto requiere más RAM. Una ventana de 8192 tokens puede necesitar 2-3GB adicionales de memoria.
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Crear Modelos Personalizados con Modelfile</h3>
+                <p>Puedes crear variaciones personalizadas usando un archivo Modelfile:</p>
+                <div class="code-block">
+# Crear un archivo llamado Modelfile<br>
+FROM llama3.2:7b<br>
+<br>
+# Establecer parámetros<br>
+PARAMETER temperature 0.7<br>
+PARAMETER num_ctx 4096<br>
+PARAMETER top_k 40<br>
+PARAMETER top_p 0.9<br>
+<br>
+# Establecer el prompt del sistema<br>
+SYSTEM """<br>
+Eres un asistente de programación experto.<br> 
+Siempre proporcionas código limpio, bien comentado y siguiendo las mejores prácticas.<br>
+"""<br>
+                </div>
+                <p>Luego crear el modelo personalizado:</p>
+                <div class="code-block">ollama create mi-programador -f ./Modelfile</div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Parámetros Comunes para Modificar</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parámetro</th>
+                            <th>Descripción</th>
+                            <th>Rango Típico</th>
+                            <th>Efecto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>temperature</td>
+                            <td>Creatividad de las respuestas</td>
+                            <td>0.1 - 1.0</td>
+                            <td>Más alto = más creativo</td>
+                        </tr>
+                        <tr>
+                            <td>num_ctx</td>
+                            <td>Ventana de contexto (tokens)</td>
+                            <td>1024 - 32768</td>
+                            <td>Más alto = más memoria de conversación</td>
+                        </tr>
+                        <tr>
+                            <td>top_k</td>
+                            <td>Número de tokens candidatos</td>
+                            <td>10 - 100</td>
+                            <td>Más alto = más variedad</td>
+                        </tr>
+                        <tr>
+                            <td>top_p</td>
+                            <td>Probabilidad acumulativa</td>
+                            <td>0.1 - 1.0</td>
+                            <td>Más alto = más diversidad</td>
+                        </tr>
+                        <tr>
+                            <td>repeat_penalty</td>
+                            <td>Penalización por repetición</td>
+                            <td>1.0 - 1.3</td>
+                            <td>Más alto = menos repetitivo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Comandos de Chat Útiles</h3>
+                <p>Cuando estés chateando con un modelo, puedes usar estos comandos:</p>
+                <div class="code-block">
+/set parameter num_ctx 8192    # Cambiar ventana de contexto<br>
+/set parameter temperature 0.3  # Cambiar creatividad<br>
+/save mi-modelo-modificado      # Guardar configuración actual<br>
+/show                          # Mostrar información del modelo<br>
+/load                          # Cargar imagen (modelos multimodales)<br>
+/bye                          # Salir del chat<br>
+                </div>
+            </div>
+        </section>
+
+        <section id="integracion">
+            <h2>🔗 Integración con Aplicaciones</h2>
+            <p>Ollama proporciona una API REST que permite integrarlo fácilmente con otras aplicaciones.</p>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Configurar el Servidor</h3>
+                <p>Primero, asegúrate de que el servidor esté ejecutándose:</p>
+                <div class="code-block">ollama serve</div>
+                <p>Por defecto, el servidor se ejecuta en <span class="command">http://localhost:11434</span></p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Ejemplo de Integración con 16x Prompt</h3>
+                <p>Basado en la guía proporcionada, aquí está el proceso para integrar con 16x Prompt:</p>
+                <div class="code-block">
+# 1. Descargar y configurar un modelo con mayor contexto<br>
+ollama pull deepseek-r1:14b<br>
+ollama run deepseek-r1:14b<br>
+/set parameter num_ctx 8192<br>
+/save deepseek-r1:14b-8k<br>
+<br>
+# 2. Servir el modelo<br>
+ollama serve<br>
+                </div>
+                <p>En 16x Prompt, configura:</p>
+                <ul>
+                    <li><strong>API Endpoint:</strong> <span class="command">http://127.0.0.1:11434/v1</span></li>
+                    <li><strong>Model ID:</strong> <span class="command">deepseek-r1:14b-8k</span></li>
+                    <li><strong>API Type:</strong> <span class="command">ollama</span></li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Ejemplo de API con curl</h3>
+                <div class="code-block">
+# Chat completion<br>
+curl http://localhost:11434/api/chat -d '{<br>
+  "model": "llama3.2",<br>
+  "messages": [<br>
+    {"role": "user", "content": "¿Por qué el cielo es azul?"}<br>
+  ]<br>
+}'<br>
+<br>
+# Generación simple<br>
+curl http://localhost:11434/api/generate -d '{<br>
+  "model": "llama3.2",<br>
+  "prompt": "Explica la fotosíntesis en términos simples"<br>
+}'<br>
+                </div>
+            </div>
+        </section>
+
+        <section id="comandos">
+            <h2>⌨️ Comandos Útiles</h2>
+
+            <h3>Gestión de Modelos</h3>
+            <div class="code-block">
+# Listar modelos instalados<br>
+ollama list<br>
+<br>
+# Descargar un modelo<br>
+ollama pull model_name<br>
+<br>
+# Eliminar un modelo<br>
+ollama rm model_name<br>
+<br>
+# Mostrar información detallada<br>
+ollama show model_name<br>
+<br>
+# Copiar un modelo<br>
+ollama cp source_model new_model<br>
+            </div>
+
+            <h3>Ejecución y Chat</h3>
+            <div class="code-block">
+# Ejecutar modelo interactivamente<br>
+ollama run model_name<br>
+<br>
+# Ejecutar con prompt directo<br>
+ollama run model_name "Tu pregunta aquí"<br>
+<br>
+# Servir la API<br>
+ollama serve<br>
+<br>
+# Servir en puerto específico<br>
+OLLAMA_HOST=0.0.0.0:8080 ollama serve<br>
+            </div>
+
+            <h3>Variables de Entorno Útiles</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>OLLAMA_HOST</td>
+                        <td>Dirección y puerto del servidor</td>
+                        <td>0.0.0.0:11434</td>
+                    </tr>
+                    <tr>
+                        <td>OLLAMA_MODELS</td>
+                        <td>Directorio de modelos</td>
+                        <td>/custom/models/path</td>
+                    </tr>
+                    <tr>
+                        <td>OLLAMA_NUM_PARALLEL</td>
+                        <td>Requests paralelos máximos</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>OLLAMA_MAX_LOADED_MODELS</td>
+                        <td>Modelos cargados simultáneamente</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>🔍 Resolución de Problemas</h2>
+
+            <h3>Problemas Comunes y Soluciones</h3>
+
+            <div class="warning">
+                <h4>Error: "Out of Memory"</h4>
+                <p><strong>Causa:</strong> El modelo es demasiado grande para tu RAM disponible.</p>
+                <p><strong>Solución:</strong></p>
+                <ul>
+                    <li>Usa un modelo más pequeño (ej: 3B en lugar de 7B)</li>
+                    <li>Cierra otras aplicaciones que consuman memoria</li>
+                    <li>Reduce la ventana de contexto: <span class="command">/set parameter num_ctx 1024</span></li>
+                </ul>
+            </div>
+
+            <div class="warning">
+                <h4>Error: "Connection Refused"</h4>
+                <p><strong>Causa:</strong> El servidor Ollama no está ejecutándose.</p>
+                <p><strong>Solución:</strong></p>
+                <div class="code-block">
+# Iniciar el servidor<br>
+ollama serve<br>
+<br>
+# O si tienes el servicio del sistema<br>
+sudo systemctl start ollama<br>
+                </div>
+            </div>
+
+            <div class="warning">
+                <h4>Respuestas Muy Lentas</h4>
+                <p><strong>Causas y soluciones:</strong></p>
+                <ul>
+                    <li><strong>CPU lenta:</strong> Considera usar modelos más pequeños</li>
+                    <li><strong>Falta de GPU:</strong> Ollama puede usar GPU para acelerar</li>
+                    <li><strong>Ventana de contexto grande:</strong> Reduce num_ctx</li>
+                    <li><strong>Múltiples modelos:</strong> Descarga solo los que uses</li>
+                </ul>
+            </div>
+
+            <h3>Verificación del Sistema</h3>
+            <div class="code-block">
+# Ver logs del sistema<br>
+sudo journalctl -u ollama -f<br>
+<br>
+# Ver procesos de Ollama<br>
+ps aux | grep ollama<br>
+<br>
+# Verificar uso de memoria<br>
+free -h<br>
+<br>
+# Verificar conexión API<br>
+curl http://localhost:11434/api/tags<br>
+            </div>
+
+            <h3>Optimización del Rendimiento</h3>
+            <div class="info">
+                <h4>Consejos para Mejor Rendimiento</h4>
+                <ul>
+                    <li><strong>GPU:</strong> Si tienes NVIDIA GPU, asegúrate de tener CUDA instalado</li>
+                    <li><strong>RAM:</strong> Más RAM permite modelos más grandes y mejor rendimiento</li>
+                    <li><strong>SSD:</strong> Instala modelos en SSD para carga más rápida</li>
+                    <li><strong>Ventana de contexto:</strong> Usa solo el tamaño que necesites</li>
+                    <li><strong>Modelos quantizados:</strong> Los modelos Q4 y Q5 son más eficientes</li>
+                </ul>
+            </div>
+        </section>
+
+        <h2>🎯 Conclusión</h2>
+        <p>Ollama es una herramienta poderosa que democratiza el acceso a los modelos de lenguaje grandes. Con este tutorial, tienes todo lo necesario para:</p>
+        <ul>
+            <li>Instalar y configurar Ollama en Linux</li>
+            <li>Descargar y ejecutar diferentes modelos</li>
+            <li>Personalizar modelos según tus necesidades</li>
+            <li>Integrar Ollama con otras aplicaciones</li>
+            <li>Resolver problemas comunes</li>
+        </ul>
+        
+        <div class="info">
+            <p><strong>Próximos Pasos:</strong> Experimenta con diferentes modelos, prueba distintas configuraciones de parámetros, y explora las posibilidades de integración con tus herramientas favoritas.</p>
+        </div>
+
+        <p style="text-align: center; margin-top: 40px; color: #6c757d; font-style: italic;">
+            ¡Disfruta explorando el mundo de la IA local con Ollama! 🚀
+        </p>
+
+        <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #444;">
+            <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
+        </footer>
+    </div>
+</body>
+</html>

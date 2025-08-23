@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Empleo - Generador de Subtítulos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            color: #e0e0e0;
+            background-color: #121212;
+        }
+        h1, h2, h3 {
+            color: #ffffff;
+        }
+        h1 {
+            border-bottom: 2px solid #bb86fc;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 1px solid #333;
+        }
+        code, pre {
+            background-color: #2d2d2d;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #f44336;
+            font-family: "Courier New", Courier, monospace;
+            border: 1px solid #444;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .code {
+            background: #2d2d2d;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: "Courier New", Courier, monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .terminal {
+            background: #2d2d2d;
+            color: #f44336;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: "Courier New", Courier, monospace;
+            margin: 10px 0;
+            border: 1px solid #444;
+        }
+        .warning {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            margin-bottom: 1.5em;
+            padding: 1.5em;
+            color: #ff9800;
+        }
+        .info {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            margin-bottom: 1.5em;
+            padding: 1.5em;
+            color: #e0e0e0;
+        }
+        .success {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            margin-bottom: 1.5em;
+            padding: 1.5em;
+            color: #4caf50;
+        }
+        .toc {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            margin-bottom: 1.5em;
+            padding: 1.5em;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        .toc a {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            color: #9d4edd;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 12px;
+            text-align: left;
+            color: #e0e0e0;
+        }
+        th {
+            background-color: #333;
+            color: #ffffff;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #9d4edd;
+        }
+        strong {
+            color: #ffffff;
+        }
+        footer {
+            color: #b0b0b0;
+            border-top: 1px solid #444;
+            margin-top: 2em;
+            padding-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Manual de Empleo - Generador de Subtítulos</h1>
+
+        <div class="toc">
+            <h3>📚 Tabla de Contenidos</h3>
+            <ul>
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#funcionalidades">Funcionalidades Principales</a></li>
+                <li><a href="#requisitos">Requisitos del Sistema</a></li>
+                <li><a href="#instalacion">Instalación</a></li>
+                <li><a href="#instrucciones">Instrucciones de Uso</a></li>
+                <li><a href="#ejemplos">Ejemplos Prácticos</a></li>
+                <li><a href="#configuracion">Configuración Avanzada</a></li>
+                <li><a href="#solución">Solución de Problemas</a></li>
+                <li><a href="#referencia">Referencia Técnica</a></li>
+            </ul>
+        </div>
+
+        <section id="introduccion">
+            <h2>🎯 Introducción</h2>
+            <p>Este proyecto es un <strong>generador automático de subtítulos</strong> para archivos de video desarrollado en Python. El script procesa videos de manera inteligente, extrayendo el audio, transcribiéndolo a texto y generando archivos de subtítulos en formato SRT (SubRip).</p>
+
+            <div class="info">
+                <strong>¿Qué hace exactamente?</strong>
+                <ul>
+                    <li>🔊 <strong>Extracción de Audio:</strong> Usa FFmpeg para extraer audio de cualquier formato de video</li>
+                    <li>📝 <strong>Transcripción:</strong> Convierte audio a texto usando modelos de IA (Whisper)</li>
+                    <li>🌐 <strong>Traducción (Opcional):</strong> Traduce subtítulos a múltiples idiomas</li>
+                    <li>📁 <strong>Generación SRT:</strong> Crea archivos de subtítulos compatibles con reproductores multimedia</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="funcionalidades">
+            <h2>⚡ Funcionalidades Principales</h2>
+
+            <h3>Transcripción Inteligente</h3>
+            <ul>
+                <li><strong>Whisper Local:</strong> Usa modelos de OpenAI Whisper para transcripción de alta calidad</li>
+                <li><strong>Ollama Integration:</strong> Soporte para modelos de IA locales vía Ollama</li>
+                <li><strong>Formato SRT:</strong> Genera subtítulos con timestamps precisos</li>
+                <li><strong>Procesamiento por Lotes:</strong> Procesa múltiples videos automáticamente</li>
+            </ul>
+
+            <h3>Traducción Multilingüe</h3>
+            <ul>
+                <li><strong>Google Translate:</strong> Traducción automática a 10+ idiomas</li>
+                <li><strong>Ollama Translation:</strong> Traducción usando modelos de lenguaje locales</li>
+                <li><strong>Idiomas Soportados:</strong> Español, Inglés, Francés, Alemán, Italiano, Portugués, Ruso, Japonés, Coreano, Chino</li>
+            </ul>
+
+            <h3>Gestión Automática de Archivos</h3>
+            <ul>
+                <li><strong>Carpetas Organizadas:</strong> videos_entrada/ para entrada, videos_salida/ para salida</li>
+                <li><strong>Limpieza Automática:</strong> Elimina archivos temporales automáticamente</li>
+                <li><strong>Sobrescritura Inteligente:</strong> Pregunta antes de sobrescribir archivos existentes</li>
+            </ul>
+        </section>
+
+        <section id="requisitos">
+            <h2>🔧 Requisitos del Sistema</h2>
+
+            <h3>Dependencias Obligatorias</h3>
+            <table>
+                <tr>
+                    <th>Software</th>
+                    <th>Propósito</th>
+                    <th>Instalación</th>
+                </tr>
+                <tr>
+                    <td><strong>Python 3.7+</strong></td>
+                    <td>Ejecutar el script</td>
+                    <td>python.org</td>
+                </tr>
+                <tr>
+                    <td><strong>FFmpeg</strong></td>
+                    <td>Extraer audio de videos</td>
+                    <td>ffmpeg.org</td>
+                </tr>
+            </table>
+
+            <h3>Dependencias Opcionales</h3>
+            <table>
+                <tr>
+                    <th>Software</th>
+                    <th>Propósito</th>
+                    <th>Comando de Instalación</th>
+                </tr>
+                <tr>
+                    <td><strong>OpenAI Whisper</strong></td>
+                    <td>Transcripción local de alta calidad</td>
+                    <td><code>pip install openai-whisper</code></td>
+                </tr>
+                <tr>
+                    <td><strong>PyTorch</strong></td>
+                    <td>Soporte para Whisper</td>
+                    <td><code>pip install torch torchvision torchaudio</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Googletrans</strong></td>
+                    <td>Traducción automática</td>
+                    <td><code>pip install googletrans==4.0.0rc1</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Ollama</strong></td>
+                    <td>Modelos de IA locales</td>
+                    <td>ollama.ai</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="instalacion">
+            <h2>🚀 Instalación</h2>
+
+            <h3>1. Instalar Dependencias Básicas</h3>
+            <div class="terminal">
+nito@linux:~$ sudo apt update<br>
+nito@linux:~$ sudo apt install ffmpeg python3 python3-pip<br>
+            </div>
+
+            <h3>2. Instalar Dependencias de Python</h3>
+            <div class="terminal">
+nito@linux:~$ pip install openai-whisper torch torchvision torchaudio<br>
+nito@linux:~$ pip install googletrans==4.0.0rc1<br>
+            </div>
+
+            <h3>3. Verificar Instalación</h3>
+            <div class="terminal">
+nito@linux:~$ python generar.py --help<br>
+            </div>
+        </section>
+
+        <section id="instrucciones">
+            <h2>📖 Instrucciones de Uso</h2>
+
+            <div class="info">
+                <strong>📋 Contenido del Archivo "empleo":</strong>
+            </div>
+
+            <h3>1. Uso Básico (Recomendado)</h3>
+            <div class="code">
+python generar.py
+            </div>
+            <p><strong>Qué hace:</strong> Procesa todos los videos en la carpeta <code>videos_entrada/</code> usando Whisper local para transcripción.</p>
+
+            <h3>2. Transcripción y Traducción al Español</h3>
+            <div class="code">
+python generar.py --translate
+            </div>
+            <p><strong>Qué hace:</strong> Genera subtítulos y los traduce automáticamente al español usando Google Translate.</p>
+
+            <h3>3. Traducción a Otros Idiomas</h3>
+            <div class="terminal">
+# Traducción al inglés<br>
+python generar.py --translate --target-lang en<br>
+<br>
+# Traducción al francés<br>
+python generar.py --translate --target-lang fr<br>
+<br>
+# Traducción al alemán<br>
+python generar.py --translate --target-lang de<br>
+            </div>
+
+            <h3>4. Usar Ollama para Traducción</h3>
+            <div class="code">
+python generar.py --translate --translation-method ollama<br>
+            </div>
+            <p><strong>Nota:</strong> Requiere tener modelos de Ollama instalados y ejecutándose.</p>
+
+            <h3>5. Especificar Modelo de Ollama</h3>
+            <div class="code">
+python generar.py --translate --translation-method ollama --translation-model mistral<br>
+            </div>
+
+            <h3>6. Usar Ollama para Transcripción</h3>
+            <div class="warning">
+⚠️ <strong>Advertencia:</strong> Ollama no está optimizado para transcripción. Se recomienda usar Whisper local.<br>
+            </div>
+            <div class="code">
+python generar.py --use-ollama<br>
+            </div>
+
+            <h3>7. Combinar Opciones</h3>
+            <div class="code">
+python generar.py --translate --target-lang en --translation-method ollama<br>
+            </div>
+            <p>Combina múltiples opciones para personalizar el procesamiento.</p>
+        </section>
+
+        <section id="ejemplos">
+            <h2>💡 Ejemplos Prácticos</h2>
+
+            <h3>Ejemplo 1: Procesamiento Básico</h3>
+            <div class="terminal">
+nito@linux:~/GENERAR_SUBTITULOS$ ls videos_entrada/<br>
+01_Introduction.mp4  02_Chapter1.mp4<br>
+<br>
+nito@linux:~/GENERAR_SUBTITULOS$ python generar.py<br>
+
+=============================================<br>
+Procesando: 01_Introduction.mp4<br>
+=============================================<br>
+Extrayendo audio de videos_entrada/01_Introduction.mp4...<br>
+✓ Audio extraído correctamente<br>
+Usando Whisper local para transcripción...<br>
+✓ Modelo cargado en CPU<br>
+Transcribiendo audio...<br>
+Creando archivo SRT: videos_salida/01_Introduction.srt<br>
+<br>
+✅ ¡Subtítulos generados exitosamente!<br>
+📁 Archivo: videos_salida/01_Introduction.srt<br>
+            </div>
+
+            <h3>Ejemplo 2: Con Traducción</h3>
+            <div class="terminal">
+nito@linux:~/GENERAR_SUBTITULOS$ python generar.py --translate --target-lang en<br>
+
+=============================================<br>
+Procesando: 01_Introduction.mp4<br>
+=============================================<br>
+Extrayendo audio de videos_entrada/01_Introduction.mp4...<br>
+✓ Audio extraído correctamente<br>
+Usando Whisper local para transcripción...<br>
+Traduciendo subtítulos a en usando googletrans...<br>
+Traduciendo segmento 1/15...<br>
+Traduciendo segmento 2/15...<br>
+...<br>
+Creando archivo SRT: videos_salida/01_Introduction.srt<br>
+<br>
+✅ ¡Subtítulos generados exitosamente!<br>
+🌐 Subtítulos traducidos a en usando googletrans<br>
+📁 Archivo: videos_salida/01_Introduction.srt<br>
+            </div>
+
+            <h3>Ejemplo 3: Archivo Específico</h3>
+            <div class="code">
+python generar.py --video videos_entrada/01_Introduction.mp4<br>
+            </div>
+        </section>
+
+        <section id="configuracion">
+            <h2>⚙️ Configuración Avanzada</h2>
+
+            <h3>Parámetros del Script</h3>
+            <table>
+                <tr>
+                    <th>Parámetro</th>
+                    <th>Descripción</th>
+                    <th>Valor por Defecto</th>
+                </tr>
+                <tr>
+                    <td><code>-v, --video</code></td>
+                    <td>Procesar archivo específico</td>
+                    <td>Todos los archivos</td>
+                </tr>
+                <tr>
+                    <td><code>-m, --model</code></td>
+                    <td>Modelo de Ollama para transcripción</td>
+                    <td>dimavz/whisper-tiny</td>
+                </tr>
+                <tr>
+                    <td><code>--keep-audio</code></td>
+                    <td>Mantener archivo de audio temporal</td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td><code>--use-ollama</code></td>
+                    <td>Usar Ollama para transcripción</td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td><code>--use-whisper</code></td>
+                    <td>Usar Whisper local</td>
+                    <td>true (por defecto)</td>
+                </tr>
+                <tr>
+                    <td><code>--translate</code></td>
+                    <td>Habilitar traducción</td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td><code>--translation-method</code></td>
+                    <td>Método de traducción</td>
+                    <td>googletrans</td>
+                </tr>
+                <tr>
+                    <td><code>--target-lang</code></td>
+                    <td>Idioma destino</td>
+                    <td>es (español)</td>
+                </tr>
+                <tr>
+                    <td><code>--translation-model</code></td>
+                    <td>Modelo de Ollama para traducción</td>
+                    <td>llama3.2</td>
+                </tr>
+            </table>
+
+            <h3>Estructura de Carpetas</h3>
+            <div class="code">
+GENERAR_SUBTITULOS/<br>
+├── <a href="../../codigo/generar_subtitulos.py" target="_blank">generar_subtitulos.py</a>              # Script principal
+├── empleo                  # Instrucciones de uso<br>
+├── manual.html            # Este manual<br>
+├── videos_entrada/        # 📥 Colocar videos aquí<br>
+│   ├── video1.mp4<br>
+│   └── video2.mp4<br>
+└── videos_salida/         # 📤 Subtítulos generados<br>
+    ├── video1.srt<br>
+    └── video2.srt<br>
+            </div>
+        </section>
+
+        <section id="solución">
+            <h2>🔍 Solución de Problemas</h2>
+
+            <h3>Errores Comunes</h3>
+
+            <div class="warning">
+                <strong>❌ FFmpeg no encontrado</strong>
+                <div class="code">
+Error: Faltan dependencias: ffmpeg<br>
+                </div>
+                <strong>Solución:</strong>
+                <div class="terminal">
+sudo apt install ffmpeg  # Ubuntu/Debian<br>
+# o<br>
+sudo yum install ffmpeg  # CentOS/RHEL<br>
+# o<br>
+brew install ffmpeg      # macOS<br>
+                </div>
+            </div>
+
+            <div class="warning">
+                <strong>❌ Whisper no instalado</strong>
+                <div class="code">
+Whisper no está instalado. Instala con: pip install openai-whisper<br>
+                </div>
+                <strong>Solución:</strong>
+                <div class="terminal">
+pip install openai-whisper torch torchvision torchaudio<br>
+                </div>
+            </div>
+
+            <div class="warning">
+                <strong>❌ Problemas con PyTorch</strong>
+                <div class="code">
+Error en transcripción con Whisper: [PyTorch error]<br>
+                </div>
+                <strong>Solución:</strong>
+                <div class="terminal">
+# Para CPU only (recomendado)<br>
+pip uninstall torch torchvision torchaudio<br>
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu<br>
+<br>
+# Para GPU (si tienes CUDA)<br>
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121<br>
+                </div>
+            </div>
+
+            <div class="info">
+                <strong>💡 Consejos Útiles</strong>
+                <ul>
+                    <li>Usa <code>--keep-audio</code> para inspeccionar archivos de audio si hay problemas</li>
+                    <li>Verifica que los videos estén en formato compatible (.mp4, .avi, .mkv, etc.)</li>
+                    <li>Asegúrate de tener suficiente espacio en disco para archivos temporales</li>
+                    <li>Para mejor rendimiento, instala PyTorch con soporte GPU</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="referencia">
+            <h2>📚 Referencia Técnica</h2>
+
+            <h3>Formato SRT</h3>
+            <div class="info">
+                Los archivos SRT (SubRip) tienen la siguiente estructura:<br>
+            </div>
+            <div class="code">
+1<br>
+00:00:01,500 --> 00:00:04,000<br>
+Hola, bienvenidos al tutorial<br>
+<br>
+2<br>
+00:00:04,500 --> 00:00:07,200<br>
+En este video aprenderemos...<br>
+            </div>
+
+            <h3>Flujo de Trabajo Interno</h3>
+            <ol>
+                <li><strong>Validación:</strong> Verifica dependencias y archivos de entrada</li>
+                <li><strong>Extracción:</strong> FFmpeg extrae audio del video</li>
+                <li><strong>Transcripción:</strong> Whisper convierte audio a texto con timestamps</li>
+                <li><strong>Traducción (Opcional):</strong> Traduce segmentos usando Google Translate u Ollama</li>
+                <li><strong>Formateo:</strong> Convierte a formato SRT con timestamps precisos</li>
+                <li><strong>Guardado:</strong> Almacena archivo en carpeta de salida</li>
+                <li><strong>Limpieza:</strong> Elimina archivos temporales</li>
+            </ol>
+
+            <h3>Códigos de Idioma</h3>
+            <table>
+                <tr>
+                    <th>Código</th>
+                    <th>Idioma</th>
+                    <th>Código</th>
+                    <th>Idioma</th>
+                </tr>
+                <tr>
+                    <td><code>es</code></td>
+                    <td>Español</td>
+                    <td><code>en</code></td>
+                    <td>Inglés</td>
+                </tr>
+                <tr>
+                    <td><code>fr</code></td>
+                    <td>Francés</td>
+                    <td><code>de</code></td>
+                    <td>Alemán</td>
+                </tr>
+                <tr>
+                    <td><code>it</code></td>
+                    <td>Italiano</td>
+                    <td><code>pt</code></td>
+                    <td>Portugués</td>
+                </tr>
+                <tr>
+                    <td><code>ru</code></td>
+                    <td>Ruso</td>
+                    <td><code>ja</code></td>
+                    <td>Japonés</td>
+                </tr>
+                <tr>
+                    <td><code>ko</code></td>
+                    <td>Coreano</td>
+                    <td><code>zh</code></td>
+                    <td>Chino</td>
+                </tr>
+            </table>
+        </section>
+
+        <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #666;">
+            <p><strong>Generador de Subtítulos</strong> - Documentación Técnica</p>
+            <p>Desarrollado con Python | Última actualización: Diciembre 2024</p>
+            <p>Para más información, consulte el <a href="../../codigo/generar_subtitulos.py" target="_blank">código fuente</a></p>
+            <p><a href="./proyectos.html">← Volver a Proyectos</a></p>
+        </footer>
+    </div>
+</body>
+</html>

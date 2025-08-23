@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Script de Doblaje Automático de Videos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #2980b9;
+            margin-top: 30px;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .info {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .success {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .step {
+            background: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .step-number {
+            font-weight: bold;
+            color: #17a2b8;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .requirements {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .highlight {
+            background: #ffffd0;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .file-structure {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .command {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .flow-diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .flow-diagram img {
+            max-width: 100%;
+            height: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .troubleshooting {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Tutorial: Script de Doblaje Automático de Videos</h1>
+
+        <div class="info">
+            <h3>📋 Resumen Ejecutivo</h3>
+            <p>Este script automatiza el proceso de doblaje de videos del inglés al español. Utiliza inteligencia artificial para transcribir, traducir y generar voz, permitiendo crear versiones dobladas de videos de manera automática.</p>
+        </div>
+
+        <h2>🔍 ¿Qué Hace Este Script?</h2>
+
+        <p>El script <strong><code>doblar.py</code></strong> es una herramienta completa que:</p>
+
+        <ul>
+            <li>🎧 <strong>Extrae el audio</strong> de videos en inglés</li>
+            <li>📝 <strong>Transcribe</strong> el audio a texto usando reconocimiento de voz</li>
+            <li>🌐 <strong>Traduce</strong> el texto del inglés al español</li>
+            <li>🔊 <strong>Genera audio</strong> en español usando síntesis de voz</li>
+            <li>🎬 <strong>Reemplaza</strong> el audio original con el doblado</li>
+            <li>💾 <strong>Guarda</strong> el video final en una carpeta específica</li>
+        </ul>
+
+        <div class="flow-diagram">
+            <h3>Flujo de Trabajo del Script</h3>
+            <pre class="code-block">
+Video Original (Inglés) → Extraer Audio → Dividir en Segmentos → Transcribir
+                                                                 ↓
+Traducir al Español → Generar Voz en Español → Combinar Audio → Video Final
+            </pre>
+        </div>
+
+        <h2>📋 Requisitos del Sistema</h2>
+
+        <div class="requirements">
+            <h3>🔧 Software Requerido</h3>
+            <ul>
+                <li><strong>Python 3.7+</strong> - Lenguaje de programación base</li>
+                <li><strong>FFmpeg</strong> - Para procesamiento de video/audio</li>
+                <li><strong>Conexión a Internet</strong> - Para servicios de traducción y síntesis de voz</li>
+            </ul>
+
+            <h3>📦 Dependencias de Python</h3>
+            <div class="command">
+pip install moviepy speechrecognition googletrans==4.0.0rc1 gtts pydub
+            </div>
+
+            <h3>💾 Requisitos de Hardware</h3>
+            <ul>
+                <li><strong>CPU:</strong> Procesador moderno (recomendado 4+ núcleos)</li>
+                <li><strong>RAM:</strong> Mínimo 4GB (recomendado 8GB+)</li>
+                <li><strong>Almacenamiento:</strong> Espacio suficiente para videos originales y procesados</li>
+            </ul>
+        </div>
+
+        <h2>🚀 Instalación y Configuración</h2>
+
+        <div class="step">
+            <div class="step-number">Paso 1:</div>
+            <strong>Instalar Python</strong><br>
+            Descarga Python 3.7 o superior desde <a href="https://python.org" target="_blank">python.org</a>
+        </div>
+
+        <div class="step">
+            <div class="step-number">Paso 2:</div>
+            <strong>Instalar FFmpeg</strong><br>
+            <div class="command">sudo apt-get install ffmpeg  # Ubuntu/Debian</div>
+            <div class="command">brew install ffmpeg  # macOS</div>
+            <div class="command">choco install ffmpeg  # Windows (con Chocolatey)</div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">Paso 3:</div>
+            <strong>Instalar dependencias</strong><br>
+            <div class="command">pip install moviepy speechrecognition googletrans==4.0.0rc1 gtts pydub</div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">Paso 4:</div>
+            <strong>Descargar el script</strong><br>
+            <a href="../codigo/doblar_video.py" download="doblar_video.py" style="color: #3498db; text-decoration: none; font-weight: bold; padding: 8px 16px; border: 2px solid #3498db; border-radius: 5px; display: inline-block; margin-top: 10px;">
+                <i class="fas fa-download" style="margin-right: 8px;"></i>Descargar doblar_video.py
+            </a>
+        </div>
+
+        <h2>📁 Estructura de Carpetas</h2>
+
+        <p>El script espera la siguiente estructura de carpetas:</p>
+
+        <div class="file-structure">
+📁 Directorio de Trabajo
+├── 📄 doblar.py
+├── 📁 original/          # ← Coloca aquí tus videos en inglés
+│   ├── video1.mp4
+│   ├── video2.avi
+│   └── ...
+└── 📁 doblada/           # ← Aquí se guardarán los videos doblados
+    ├── video1_doblado.mp4
+    ├── video2_doblado.mp4
+    └── ...
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> Las carpetas <code>original</code> y <code>doblada</code> se crearán automáticamente si no existen.
+        </div>
+
+        <h2>🎯 Cómo Usar el Script</h2>
+
+        <div class="step">
+            <div class="step-number">Paso 1:</div>
+            <strong>Preparar videos</strong><br>
+            Copia todos los videos en inglés que quieres doblar a la carpeta <code>original/</code>
+        </div>
+
+        <div class="step">
+            <div class="step-number">Paso 2:</div>
+            <strong>Ejecutar el script</strong><br>
+            <div class="command">python doblar.py</div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">Paso 3:</div>
+            <strong>Esperar el procesamiento</strong><br>
+            El script procesará automáticamente todos los videos. El tiempo depende de la duración y cantidad de videos.
+        </div>
+
+        <div class="step">
+            <div class="step-number">Paso 4:</div>
+            <strong>Revisar resultados</strong><br>
+            Los videos doblados estarán en la carpeta <code>doblada/</code> con el sufijo "_doblado"
+        </div>
+
+        <h2>⚙️ Funcionamiento Técnico Detallado</h2>
+
+        <h3>1. Extracción de Audio</h3>
+        <p>El script utiliza <strong>MoviePy</strong> para extraer la pista de audio del video original:</p>
+        <div class="code-block">
+video = VideoFileClip(video_path)
+audio = video.audio
+audio.write_audiofile("audio_original.wav")
+        </div>
+
+        <h3>2. Segmentación por Silencios</h3>
+        <p>Divide el audio en fragmentos basados en silencios para mejorar la precisión:</p>
+        <div class="code-block">
+chunks = split_on_silence(audio, min_silence_len=1000, silence_thresh=-40)
+        </div>
+
+        <h3>3. Transcripción de Voz a Texto</h3>
+        <p>Utiliza <strong>SpeechRecognition</strong> con Google Speech API:</p>
+        <div class="code-block">
+with sr.AudioFile(chunk) as source:
+    audio_data = recognizer.record(source)
+    text = recognizer.recognize_google(audio_data, language='en-US')
+        </div>
+
+        <h3>4. Traducción Automática</h3>
+        <p>Traduce el texto usando <strong>Google Translate</strong>:</p>
+        <div class="code-block">
+translated = translator.translate(text, dest='es')
+spanish_text = translated.text
+        </div>
+
+        <h3>5. Síntesis de Voz en Español</h3>
+        <p>Genera audio en español con <strong>gTTS (Google Text-to-Speech)</strong>:</p>
+        <div class="code-block">
+tts = gTTS(text=spanish_text, lang='es')
+tts.save("audio_espanol.mp3")
+        </div>
+
+        <h3>6. Reemplazo de Audio en Video</h3>
+        <p>Combina el video original con el nuevo audio:</p>
+        <div class="code-block">
+video = VideoFileClip(video_path)
+new_audio = AudioFileClip(audio_espanol_path)
+final_video = video.set_audio(new_audio)
+final_video.write_videofile(output_path)
+        </div>
+
+        <h2>📊 Formatos de Video Soportados</h2>
+
+        <table>
+            <tr>
+                <th>Formato</th>
+                <th>Extensión</th>
+                <th>Compatibilidad</th>
+            </tr>
+            <tr>
+                <td>MP4</td>
+                <td>.mp4</td>
+                <td>✅ Total</td>
+            </tr>
+            <tr>
+                <td>AVI</td>
+                <td>.avi</td>
+                <td>✅ Total</td>
+            </tr>
+            <tr>
+                <td>QuickTime</td>
+                <td>.mov</td>
+                <td>✅ Total</td>
+            </tr>
+            <tr>
+                <td>MKV</td>
+                <td>.mkv</td>
+                <td>✅ Total</td>
+            </tr>
+            <tr>
+                <td>Windows Media</td>
+                <td>.wmv</td>
+                <td>✅ Total</td>
+            </tr>
+            <tr>
+                <td>Flash Video</td>
+                <td>.flv</td>
+                <td>✅ Total</td>
+            </tr>
+        </table>
+
+        <h2>🔧 Configuración Avanzada</h2>
+
+        <h3>Parámetros de Segmentación</h3>
+        <div class="code-block">
+# En el método split_audio_on_silence()
+min_silence_len=1000,     # Duración mínima de silencio (ms)
+silence_thresh=-40        # Umbral de silencio (dB)
+        </div>
+
+        <h3>Idiomas Soportados</h3>
+        <div class="code-block">
+# Para cambiar el idioma de destino
+translated_text = self.translate_text(text, target_language='es')
+
+# Idiomas disponibles: 'es', 'fr', 'de', 'it', 'pt', etc.
+        </div>
+
+        <h2>🚨 Solución de Problemas</h2>
+
+        <div class="troubleshooting">
+            <h3>Error: "Module not found"</h3>
+            <p><strong>Solución:</strong> Instala las dependencias faltantes:</p>
+            <div class="command">pip install moviepy speechrecognition googletrans==4.0.0rc1 gtts pydub</div>
+        </div>
+
+        <div class="troubleshooting">
+            <h3>Error: "FFmpeg not found"</h3>
+            <p><strong>Solución:</strong> Instala FFmpeg en tu sistema:</p>
+            <div class="command">sudo apt-get install ffmpeg  # Linux</div>
+            <div class="command">brew install ffmpeg  # macOS</div>
+        </div>
+
+        <div class="troubleshooting">
+            <h3>Error de conexión a Internet</h3>
+            <p><strong>Solución:</strong> Verifica tu conexión. Los servicios de Google requieren internet para traducción y síntesis de voz.</p>
+        </div>
+
+        <div class="troubleshooting">
+            <h3>Audio de mala calidad o inexistente</h3>
+            <p><strong>Solución:</strong> Asegúrate de que el video tenga una pista de audio clara en inglés. Videos con audio de baja calidad pueden no transcribirse correctamente.</p>
+        </div>
+
+        <div class="troubleshooting">
+            <h3>El video doblado es más largo/corto</h3>
+            <p><strong>Solución:</strong> El script ajusta automáticamente las duraciones, pero si persiste, verifica que el video original tenga audio sincronizado.</p>
+        </div>
+
+        <h2>⚡ Optimizaciones y Mejores Prácticas</h2>
+
+        <div class="info">
+            <h3>💡 Consejos para Mejor Rendimiento</h3>
+            <ul>
+                <li><strong>Divide videos largos:</strong> Videos de más de 30 minutos pueden ser problemáticos</li>
+                <li><strong>Audio de calidad:</strong> Mejor transcripción con audio claro y sin ruido de fondo</li>
+                <li><strong>Conexión estable:</strong> Los servicios de Google requieren buena conexión</li>
+                <li><strong>Espacio en disco:</strong> Los archivos temporales requieren espacio adicional</li>
+            </ul>
+        </div>
+
+        <div class="success">
+            <h3>🎯 Casos de Uso Recomendados</h3>
+            <ul>
+                <li>🎬 Doblaje de tutoriales y cursos</li>
+                <li>📚 Contenido educativo</li>
+                <li>🎥 Videos corporativos</li>
+                <li>📹 Contenido para redes sociales</li>
+                <li>🎮 Videos de juegos y entretenimiento</li>
+            </ul>
+        </div>
+
+        <h2>📈 Métricas y Rendimiento</h2>
+
+        <table>
+            <tr>
+                <th>Tipo de Video</th>
+                <th>Tiempo de Procesamiento</th>
+                <th>Precisión Esperada</th>
+            </tr>
+            <tr>
+                <td>Video corto (5-10 min)</td>
+                <td>2-5 minutos</td>
+                <td>85-95%</td>
+            </tr>
+            <tr>
+                <td>Video mediano (10-30 min)</td>
+                <td>5-15 minutos</td>
+                <td>80-90%</td>
+            </tr>
+            <tr>
+                <td>Video largo (30+ min)</td>
+                <td>15-45+ minutos</td>
+                <td>75-85%</td>
+            </tr>
+        </table>
+
+        <h2>🔒 Limitaciones y Consideraciones</h2>
+
+        <div class="warning">
+            <h3>⚠️ Limitaciones Técnicas</h3>
+            <ul>
+                <li><strong>Dependencia de Internet:</strong> Requiere conexión para servicios de Google</li>
+                <li><strong>Precisión del Reconocimiento:</strong> La transcripción puede tener errores con audio de baja calidad</li>
+                <li><strong>Idioma Limitado:</strong> Actualmente solo del inglés al español</li>
+                <li><strong>Procesamiento por Segmentos:</strong> Videos muy largos pueden ser problemáticos</li>
+            </ul>
+        </div>
+
+        <h2>🚀 Próximas Mejoras</h2>
+
+        <div class="info">
+            <p>Versiones futuras podrían incluir:</p>
+            <ul>
+                <li>🌍 Soporte para múltiples idiomas</li>
+                <li>🎭 Múltiples voces y acentos</li>
+                <li>⚡ Procesamiento en paralelo</li>
+                <li>🎯 Interfaz gráfica de usuario</li>
+                <li>🔧 Configuración personalizable avanzada</li>
+            </ul>
+        </div>
+
+        <h2>📞 Soporte y Comunidad</h2>
+
+        <div class="info">
+            <p>Si encuentras problemas o tienes sugerencias:</p>
+            <ul>
+                <li>📋 Revisa la sección de solución de problemas</li>
+                <li>🐛 Verifica que todas las dependencias estén instaladas</li>
+                <li>🔍 Busca en logs detallados del script</li>
+                <li>💬 Comparte tu experiencia y mejoras</li>
+            </ul>
+        </div>
+
+        <div class="success">
+            <h3>🎉 ¡Listo para Empezar!</h3>
+            <p>Con este tutorial tienes todo lo necesario para comenzar a doblar videos automáticamente. El script es fácil de usar y produce resultados sorprendentemente buenos para su simplicidad.</p>
+
+            <p><strong>¡Que disfrutes creando contenido doblado! 🎬✨</strong></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 20px; margin-top: 40px; background-color: #2c3e50; color: white; border-top: 3px solid #3498db;">
+        <div class="container">
+            <p style="margin: 0; font-size: 1.1em;">
+                <strong>¿Te interesa este proyecto?</strong>
+                <br>
+                <a href="proyectos.html" style="color: #3498db; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; padding: 8px 16px; border: 2px solid #3498db; border-radius: 5px; transition: all 0.3s ease;">
+                    <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>Ver Todos mis Proyectos
+                </a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

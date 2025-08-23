@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial de instalación de Perplexica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2em;
+            color: #e0e0e0;
+            background-color: #121212;
+        }
+        h1, h2 {
+            color: #ffffff;
+        }
+        h1 {
+            border-bottom: 2px solid #bb86fc;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 1px solid #333;
+        }
+        code, pre {
+            background-color: #2d2d2d;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #f44336;
+            font-family: "Courier New", Courier, monospace;
+            border: 1px solid #444;
+        }
+        pre {
+            padding: 1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .card {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            margin-bottom: 1.5em;
+            padding: 1.5em;
+        }
+        .card-body {
+            color: #e0e0e0;
+        }
+        footer {
+            color: #b0b0b0;
+            border-top: 1px solid #444;
+        }
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #9d4edd;
+        }
+        strong {
+            color: #ffffff;
+        }
+        .step { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Tutorial de instalación de Perplexica en Linux con Docker y Ollama</h1>
+    <p>Este tutorial detalla la instalación de la aplicación Perplexica en un entorno Linux, utilizando Docker para la orquestación y Ollama como proveedor del modelo de lenguaje, en concreto el <code>deepseek-r1:14b</code>.</p>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Qué es Perplexica?</h2>
+            <p><strong>Perplexica</strong> es una herramienta de búsqueda y respuesta potenciada por inteligencia artificial que combina la capacidad de los modelos de lenguaje grandes con un motor de búsqueda avanzado. A diferencia de los motores de búsqueda tradicionales, Perplexica puede proporcionar respuestas más contextuales, precisas y detalladas mediante el uso de modelos de IA como <code>deepseek-r1:14b</code>.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>¿Dónde se utiliza Perplexica?</h2>
+            <p>Perplexica es ideal para profesionales y organizaciones que necesitan:</p>
+            <ul>
+                <li><strong>Investigación y análisis:</strong> Búsqueda de información técnica, científica o académica con respuestas detalladas y fuentes verificables.</li>
+                <li><strong>Ciberseguridad:</strong> Análisis de vulnerabilidades, investigación de malware y búsqueda de información sobre amenazas emergentes.</li>
+                <li><strong>Desarrollo de software:</strong> Búsqueda de documentación, APIs, librerías y soluciones técnicas específicas.</li>
+                <li><strong>Educación y formación:</strong> Aprendizaje autodidacta con explicaciones detalladas y ejemplos prácticos.</li>
+                <li><strong>Entornos empresariales:</strong> Búsqueda interna de documentos y conocimientos organizacionales.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Ventajas sobre soluciones en la nube</h2>
+            <p>Perplexica ofrece varias ventajas significativas sobre las soluciones de búsqueda en la nube:</p>
+            <ul>
+                <li><strong>Privacidad y seguridad:</strong> Al ejecutarse localmente, todos los datos permanecen en tu infraestructura, eliminando riesgos de exposición de información sensible.</li>
+                <li><strong>Sin límites de uso:</strong> No hay restricciones de cuotas, límites de consultas o costos por uso excesivo como en servicios en la nube.</li>
+                <li><strong>Control total:</strong> Personaliza modelos, configuraciones y comportamientos según tus necesidades específicas.</li>
+                <li><strong>Independencia de conectividad:</strong> Funciona sin conexión a internet una vez configurado, ideal para entornos aislados o con conectividad limitada.</li>
+                <li><strong>Costo-efectividad:</strong> Sin suscripciones mensuales o costos por consulta. La inversión inicial en hardware es el único gasto recurrente.</li>
+                <li><strong>Personalización avanzada:</strong> Adapta el sistema para dominios específicos con modelos especializados y configuraciones personalizadas.</li>
+                <li><strong>Integración con sistemas locales:</strong> Se integra perfectamente con tu infraestructura existente sin depender de APIs externas.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h2>Requisitos previos</h2>
+    <ul>
+        <li><b>Docker y Docker Compose:</b> Asegúrate de que Docker está instalado y en ejecución en tu sistema Linux.</li>
+        <li><b>Git:</b> La herramienta de control de versiones Git debe estar instalada para clonar el repositorio.</li>
+        <li><b>Ollama:</b> El servidor de Ollama debe estar instalado y en funcionamiento. Asegúrate de haber descargado el modelo <code>deepseek-r1:14b</code> ejecutando <code>ollama run deepseek-r1:14b</code> una vez en tu terminal.</li>
+    </ul>
+
+    <h2>Instrucciones de instalación</h2>
+    <div class="step">
+        <h3>Paso 1: Clonar el repositorio de Perplexica</h3>
+        <p>Abre una terminal y clona el repositorio oficial de GitHub de Perplexica ejecutando el siguiente comando:</p>
+        <pre><code>git clone https://github.com/ItzCrazyKns/Perplexica.git</code></pre>
+        <p>A continuación, navega al directorio del proyecto:</p>
+        <pre><code>cd Perplexica</code></pre>
+    </div>
+
+    <div class="step">
+        <h3>Paso 2: Configurar el archivo <code>config.toml</code></h3>
+        <p>El archivo de configuración es crucial para conectar Perplexica con Ollama. Renombra el archivo de muestra y ábrelo con tu editor de texto preferido:</p>
+        <pre><code>mv sample.config.toml config.toml</code></pre>
+        <p>Edita el archivo <code>config.toml</code> para configurar la sección de Ollama. Debes descomentar las líneas correspondientes y rellenar la URL y el modelo de la siguiente manera:</p>
+        <pre><code>[ollama]
+url = "http://host.docker.internal:11434"
+model = "deepseek-r1:14b"</code></pre>
+        <p><b>Nota:</b> La URL <code>http://host.docker.internal:11434</code> permite que el contenedor de Docker se comunique con el servidor de Ollama que se ejecuta en la máquina host (tu Linux). El puerto <code>11434</code> es el puerto por defecto de Ollama.</p>
+    </div>
+
+    <div class="step">
+        <h3>Paso 3: Iniciar Perplexica con Docker Compose</h3>
+        <p>Una vez configurado el archivo, puedes levantar la aplicación con Docker Compose. Ejecuta el siguiente comando en la misma terminal donde te encuentras:</p>
+        <pre><code>docker compose up -d</code></pre>
+        <p>Este comando descargará las imágenes necesarias y construirá los contenedores de Perplexica en segundo plano.</p>
+    </div>
+
+    <div class="step">
+        <h3>Paso 4: Acceder a Perplexica</h3>
+        <p>Una vez que el proceso de Docker Compose haya finalizado, Perplexica estará accesible. Abre tu navegador web y navega a la siguiente dirección:</p>
+        <pre><code>http://localhost:3000</code></pre>
+        <p>Si la configuración se ha realizado correctamente, deberías ver la interfaz de Perplexica lista para ser utilizada.</p>
+    </div>
+
+    <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
+    </footer>
+</div>
+
+</body>
+</html>

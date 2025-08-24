@@ -1,0 +1,5532 @@
+{
+  "files": [
+    {
+      "archivo": "2fa_linux",
+      "titulo": "Autenticación F2B con Google Authenticator",
+      "descripcion": "La autenticación de doble factor (2FA) con Google Authenticator y Fail2ban en Linux es una combinación de seguridad muy potente. Fail2ban protege contra ataques de fuerza bruta, mientras que Google Authenticator agrega una capa de seguridad adicional que requiere un código de un solo uso. La combinación de ambos es ideal: Fail2ban se encarga de los ataques a gran escala, y Google Authenticator asegura que, incluso si un atacante consigue una contraseña, no pueda acceder sin el código de 2FA. La ",
+      "palabrasClave": [
+        "fail2ban",
+        "google",
+        "authenticator",
+        "sudo",
+        "configuraci",
+        "color",
+        "ssh",
+        "paso",
+        "border",
+        "padding",
+        "2fa",
+        "archivo",
+        "sshd",
+        "autenticaci",
+        "solid",
+        "pam",
+        "etc",
+        "background",
+        "margin",
+        "5em"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/2fa_linux.html"
+    },
+    {
+      "archivo": "archivo-log-linux",
+      "titulo": "Archivos de Registro en Linux",
+      "descripcion": "Un archivo de registro o archivo log en Linux es un archivo de texto que almacena un registro de eventos, operaciones y mensajes generados por el sistema operativo, las aplicaciones y los servicios. Su función principal es ayudar a los administradores de sistemas y a los desarrolladores a depurar problemas, monitorear el rendimiento y auditar la seguridad. En la mayoría de las distribuciones de Linux, los archivos de registro se encuentran en el directorio /var/log/. Este directorio es el lugar ",
+      "palabrasClave": [
+        "del",
+        "color",
+        "registro",
+        "archivos",
+        "border",
+        "linux",
+        "padding",
+        "log",
+        "sistema",
+        "solid",
+        "background",
+        "margin",
+        "5em",
+        "1px",
+        "archivo",
+        "mensajes",
+        "nombre",
+        "mensaje",
+        "bottom",
+        "radius"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/archivo-log-linux.html"
+    },
+    {
+      "archivo": "archivo-log-windows",
+      "titulo": "Archivos Log en Microsoft Windows",
+      "descripcion": "Los archivos de registro, o log files, en Microsoft Windows son registros de eventos del sistema operativo y de los programas instalados. Funcionan como un diario digital, documentando actividades, errores y advertencias. Estos archivos son esenciales para la solución de problemas, el diagnóstico de fallos y el monitoreo del rendimiento del sistema. La ubicación principal para los registros del sistema y de aplicaciones en Windows es el Visor de eventos. Puedes acceder a él de las siguientes man",
+      "palabrasClave": [
+        "registro",
+        "del",
+        "sistema",
+        "archivos",
+        "windows",
+        "color",
+        "registros",
+        "eventos",
+        "border",
+        "padding",
+        "microsoft",
+        "solid",
+        "visor",
+        "seguridad",
+        "log",
+        "background",
+        "margin",
+        "5em",
+        "1px",
+        "bottom"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/archivo-log-windows.html"
+    },
+    {
+      "archivo": "auditd",
+      "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+      "descripcion": "auditd es el demonio (daemon) del sistema de auditoría del kernel Linux que proporciona capacidades de registro y monitoreo de eventos del sistema en tiempo real. Forma parte del Linux Audit Framework, un conjunto de herramientas diseñadas para ayudar a los administradores de sistemas a crear un rastro de auditoría de prácticamente todas las acciones realizadas en el sistema. Este sistema permite rastrear accesos a archivos, ejecución de comandos, cambios en configuraciones del sistema, intentos",
+      "palabrasClave": [
+        "auditd",
+        "etc",
+        "audit",
+        "sudo",
+        "del",
+        "eventos",
+        "color",
+        "auditor",
+        "seguridad",
+        "sistema",
+        "log",
+        "border",
+        "sistemas",
+        "configuraci",
+        "integraci",
+        "siem",
+        "padding",
+        "ciberseguridad",
+        "solid",
+        "monitoreo"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/auditd.html"
+    },
+    {
+      "archivo": "cortafuego",
+      "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+      "descripcion": "Los firewalls son elementos fundamentales en la arquitectura de seguridad informática moderna. Actúan como barreras protectoras que controlan el tráfico de datos entre redes, siendo esenciales para proteger sistemas y datos sensibles de amenazas externas e internas. Un firewall (cortafuegos en español) es un sistema de seguridad de red que monitorea y controla el tráfico de red entrante y saliente basándose en reglas de seguridad predeterminadas. Establece una barrera entre una red interna confi",
+      "palabrasClave": [
+        "seguridad",
+        "firewall",
+        "red",
+        "color",
+        "firewalls",
+        "border",
+        "fico",
+        "amenazas",
+        "redes",
+        "padding",
+        "ventajas",
+        "implementaci",
+        "solid",
+        "arquitectura",
+        "como",
+        "datos",
+        "software",
+        "paquetes",
+        "filtrado",
+        "control"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/cortafuego.html"
+    },
+    {
+      "archivo": "ddos-playbook-linux",
+      "titulo": "Playbook de Mitigación DDoS",
+      "descripcion": "Servidor Objetivo: 10.0.0.11 Este playbook debe adaptarse según la infraestructura específica y mantenerse actualizado con las mejores prácticas de seguridad. Volver a la página principal de píldoras",
+      "palabrasClave": [
+        "log",
+        "color",
+        "border",
+        "ddos",
+        "conexiones",
+        "iptables",
+        "padding",
+        "del",
+        "input",
+        "solid",
+        "var",
+        "apache2",
+        "nginx",
+        "configurar",
+        "drop",
+        "playbook",
+        "background",
+        "margin",
+        "5em",
+        "1px"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/ddos-playbook-linux.html"
+    },
+    {
+      "archivo": "edr",
+      "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+      "descripcion": "Un EDR (Endpoint Detection and Response) es un tipo de solución de ciberseguridad diseñada para monitorizar, detectar y responder a actividades malintencionadas en los _endpoints_ de una organización. Los _endpoints_ son cualquier dispositivo informático conectado a la red, como ordenadores de escritorio, portátiles, servidores, máquinas virtuales y dispositivos móviles. A diferencia de los antivirus tradicionales (también conocidos como EPP - Endpoint Protection Platform), que se basan en firma",
+      "palabrasClave": [
+        "edr",
+        "amenazas",
+        "seguridad",
+        "color",
+        "border",
+        "respuesta",
+        "detecci",
+        "soluciones",
+        "soluci",
+        "como",
+        "antivirus",
+        "datos",
+        "del",
+        "endpoint",
+        "detection",
+        "response",
+        "padding",
+        "_endpoints_",
+        "lisis",
+        "solid"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/edr.html"
+    },
+    {
+      "archivo": "google-fotos-herramientas-ia-tutorial",
+      "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+      "descripcion": "La app evoluciona de un mero álbum a un espacio creativo con funciones para animar fotos, eliminar elementos y aplicar estilos artísticos, todo desde un nuevo hub central. Google ha reforzado Google Fotos con herramientas impulsadas por inteligencia artificial que permiten transformar imágenes estáticas, limpiar composiciones y generar estilos visuales listos para compartir. El objetivo es facilitar la edición y la creación ligera sin salir de la app. Una pestaña de creación centraliza accesos a",
+      "palabrasClave": [
+        "google",
+        "fotos",
+        "color",
+        "border",
+        "padding",
+        "herramientas",
+        "solid",
+        "foto",
+        "nuevas",
+        "background",
+        "margin",
+        "5em",
+        "1px",
+        "genes",
+        "app",
+        "estilos",
+        "desde",
+        "remix",
+        "videos",
+        "pesta"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/google-fotos-herramientas-ia-tutorial.html"
+    },
+    {
+      "archivo": "google-fotos-herramientas-ia",
+      "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+      "descripcion": "La app evoluciona de un mero álbum a un espacio creativo con funciones para animar fotos, eliminar elementos y aplicar estilos artísticos, todo desde un nuevo hub central. Google ha reforzado Google Fotos con herramientas impulsadas por inteligencia artificial que permiten transformar imágenes estáticas, limpiar composiciones y generar estilos visuales listos para compartir. El objetivo es facilitar la edición y la creación ligera sin salir de la app. Una pestaña de creación centraliza accesos a",
+      "palabrasClave": [
+        "google",
+        "color",
+        "fotos",
+        "border",
+        "padding",
+        "herramientas",
+        "solid",
+        "background",
+        "margin",
+        "5em",
+        "1px",
+        "genes",
+        "potencia",
+        "nuevas",
+        "bottom",
+        "radius",
+        "pre",
+        "estilos",
+        "desde",
+        "hub"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/google-fotos-herramientas-ia.html"
+    },
+    {
+      "archivo": "graylog_guia",
+      "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+      "descripcion": "Centraliza, analiza y alerta sobre tus logs con una plataforma rápida, extensible y amigable. Esta guía parte del artículo de DesdeLinux y lo actualiza con prácticas modernas (Docker Compose, pipelines, seguridad y operación). Diseño escalable: CPU para Graylog; RAM/IO para el data node; MongoDB con requisitos modestos. Graylog destaca como centro único de logs (syslog crudo o estructuras personalizadas) con búsquedas potentes y depuración fina en entornos distribuidos. Recomendación actual: usa",
+      "palabrasClave": [
+        "graylog",
+        "border",
+        "color",
+        "data",
+        "padding",
+        "font",
+        "solid",
+        "opensearch",
+        "mongodb",
+        "background",
+        "radius",
+        "1px",
+        "1rem",
+        "inputs",
+        "gelf",
+        "udp",
+        "logs",
+        "node",
+        "http",
+        "configuraci"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/graylog_guia.html"
+    },
+    {
+      "archivo": "ia",
+      "titulo": "Inteligencia Artificial - Pildoras",
+      "descripcion": "La IA, o inteligencia artificial, es una rama de la informática que se enfoca en crear máquinas que pueden imitar la inteligencia humana. Esto incluye la capacidad de aprender, razonar, resolver problemas, percibir y comprender el lenguaje. En lugar de ser programadas con reglas específicas para cada tarea, las máquinas de IA usan algoritmos para aprender de los datos y mejorar su rendimiento con el tiempo. La aplicación de la IA en ciberseguridad es una de las áreas más prometedoras para fortal",
+      "palabrasClave": [
+        "pueden",
+        "color",
+        "border",
+        "datos",
+        "puede",
+        "ataques",
+        "modelos",
+        "inteligencia",
+        "padding",
+        "sistemas",
+        "vulnerabilidades",
+        "artificial",
+        "solid",
+        "como",
+        "margin",
+        "background",
+        "5em",
+        "1px",
+        "tiempo",
+        "ciberseguridad"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/ia.html"
+    },
+    {
+      "archivo": "iptables",
+      "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+      "descripcion": "El Cortafuegos Definitivo de Linux iptables es el cortafuegos estándar de facto en sistemas Linux, proporcionando un framework robusto para el filtrado de paquetes, traducción de direcciones de red (NAT) y manipulación de paquetes. Forma parte del proyecto Netfilter del kernel de Linux y ha sido la herramienta principal para la seguridad de red en Linux durante más de dos décadas. Datos Interesantes: iptables ofrece ventajas significativas para la administración de la seguridad de red: En la may",
+      "palabrasClave": [
+        "iptables",
+        "sudo",
+        "input",
+        "accept",
+        "linux",
+        "tcp",
+        "dport",
+        "color",
+        "nat",
+        "reglas",
+        "border",
+        "puerto",
+        "padding",
+        "espec",
+        "cortafuegos",
+        "solid",
+        "seguridad",
+        "regla",
+        "ssh",
+        "background"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/iptables.html"
+    },
+    {
+      "archivo": "lamehug",
+      "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+      "descripcion": "En el panorama actual de la ciberseguridad, ha surgido una amenaza que marca un punto de inflexión significativo: LameHug, el primer malware conocido que integra capacidades de inteligencia artificial para potenciar sus ataques. Este software malicioso, descubierto por el Equipo de Respuesta a Emergencias Informáticas de Ucrania (CERT-UA), representa una evolución peligrosa en las tácticas de los ciberdelincuentes. LameHug es un malware sofisticado que utiliza modelos de lenguaje de gran escala ",
+      "palabrasClave": [
+        "lamehug",
+        "malware",
+        "del",
+        "color",
+        "border",
+        "inteligencia",
+        "artificial",
+        "capacidades",
+        "sistemas",
+        "amenazas",
+        "como",
+        "padding",
+        "ciberseguridad",
+        "primer",
+        "solid",
+        "evoluci",
+        "sus",
+        "campa",
+        "seguridad",
+        "nueva"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/lamehug.html"
+    },
+    {
+      "archivo": "mosquitto",
+      "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+      "descripcion": "Mosquitto es un broker MQTT (Message Queuing Telemetry Transport) de código abierto desarrollado por the Eclipse Foundation. Es una implementación ligera del protocolo MQTT que permite la comunicación entre dispositivos IoT (Internet of Things) de forma eficiente y segura. Mosquitto es ampliamente utilizado en aplicaciones IoT, como: Mosquitto puede instalarse en diferentes sistemas operativos: La configuración básica se realiza en el archivo /etc/mosquitto/mosquitto.conf: Para probar Mosquitto,",
+      "palabrasClave": [
+        "mosquitto",
+        "color",
+        "border",
+        "padding",
+        "solid",
+        "mqtt",
+        "margin",
+        "background",
+        "5em",
+        "1px",
+        "comunicaci",
+        "sistemas",
+        "ldora",
+        "bottom",
+        "radius",
+        "pre",
+        "protocolo",
+        "entre",
+        "dispositivos",
+        "iot"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/mosquitto.html"
+    },
+    {
+      "archivo": "nfs",
+      "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+      "descripcion": "Sistema de Archivos de Red - Guía Completa y Técnica Actualizado: Agosto 2025 El Network File System (NFS) es un protocolo de sistema de archivos distribuido que permite a los usuarios de una red acceder a archivos y directorios ubicados en servidores remotos como si estuvieran almacenados localmente en su máquina. Desarrollado originalmente por Sun Microsystems en 1984, NFS se ha convertido en uno de los estándares más utilizados para el intercambio de archivos en redes Unix y Linux. NFS es un ",
+      "palabrasClave": [
+        "nfs",
+        "border",
+        "color",
+        "margin",
+        "solid",
+        "padding",
+        "archivos",
+        "bottom",
+        "font",
+        "background",
+        "20px",
+        "servidor",
+        "seguridad",
+        "1px",
+        "radius",
+        "8px",
+        "rendimiento",
+        "nfsv4",
+        "red",
+        "bb86fc"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/nfs.html"
+    },
+    {
+      "archivo": "nfs_hardening",
+      "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+      "descripcion": "Guía Completa de Seguridad para Network File System Volver a la página principal de píldoras",
+      "palabrasClave": [
+        "nfs",
+        "color",
+        "border",
+        "font",
+        "padding",
+        "margin",
+        "seguridad",
+        "background",
+        "configuraci",
+        "solid",
+        "20px",
+        "bottom",
+        "size",
+        "left",
+        "radius",
+        "position",
+        "1px",
+        "etc",
+        "e0e0e0",
+        "8px"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/nfs_hardening.html"
+    },
+    {
+      "archivo": "notebooklm",
+      "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+      "descripcion": "NotebookLM es una herramienta experimental de investigación y toma de apuntes desarrollada por Google Labs que utiliza inteligencia artificial, específicamente la tecnología Google Gemini.  Actúa como un asistente de investigación personalizado potenciado por IA, diseñado para ayudar a los usuarios a procesar información compleja y organizar sus ideas.  Esta plataforma permite interactuar con documentos de manera inteligente, transformando la forma tradicional de realizar investigaciones y análi",
+      "palabrasClave": [
+        "notebooklm",
+        "fuentes",
+        "font",
+        "margin",
+        "google",
+        "padding",
+        "color",
+        "border",
+        "herramienta",
+        "text",
+        "informaci",
+        "20px",
+        "rgba",
+        "size",
+        "bottom",
+        "2px",
+        "top",
+        "inteligencia",
+        "artificial",
+        "shadow"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/notebooklm.html"
+    },
+    {
+      "archivo": "ntlm",
+      "titulo": "NTLM - Pildoras",
+      "descripcion": "NTLM (NT LAN Manager) es un conjunto de protocolos de seguridad de Microsoft que se utiliza para la autenticación, integridad y confidencialidad en entornos de red de Windows. Fue introducido con Windows NT como sucesor del protocolo de autenticación de Microsoft LAN Manager. NTLM utiliza un mecanismo de \"desafío-respuesta\" para autenticar a los usuarios. El proceso general se puede resumir en los siguientes pasos: Existen varias versiones de NTLM, siendo las más comunes NTLMv1 y NTLMv2. NTLMv2 ",
+      "palabrasClave": [
+        "ntlm",
+        "autenticaci",
+        "hash",
+        "ataques",
+        "color",
+        "puede",
+        "servidor",
+        "contrase",
+        "red",
+        "usuario",
+        "border",
+        "del",
+        "desaf",
+        "ntlmv1",
+        "padding",
+        "como",
+        "fico",
+        "vulnerabilidades",
+        "atacante",
+        "kerberos"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/ntlm.html"
+    },
+    {
+      "archivo": "ollama",
+      "titulo": "Tutorial Completo de Ollama",
+      "descripcion": "Ollama es una herramienta que te permite ejecutar modelos de lenguaje grandes (LLMs) localmente en tu máquina de forma sencilla y eficiente. Piensa en ello como tu propio ChatGPT personal que funciona sin internet y mantiene toda tu información privada. Ollama es una aplicación de código abierto que simplifica la ejecución de modelos de lenguaje grandes en tu computadora local. Desarrollada para ser fácil de usar, Ollama abstrae la complejidad técnica que normalmente conlleva ejecutar estos mode",
+      "palabrasClave": [
+        "ollama",
+        "border",
+        "color",
+        "modelos",
+        "modelo",
+        "solid",
+        "margin",
+        "background",
+        "code",
+        "block",
+        "padding",
+        "radius",
+        "8px",
+        "font",
+        "1px",
+        "bash",
+        "api",
+        "sudo",
+        "del",
+        "usr"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/ollama.html"
+    },
+    {
+      "archivo": "pdf-maliciosos",
+      "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+      "descripcion": "Guía práctica basada en una nota publicada por Infobae el 15 de agosto de 2025 sobre cómo reconocer y evitar PDFs peligrosos. Un archivo PDF, a primera vista inofensivo, puede ser un vehículo peligroso si contiene código oculto, comandos del sistema o elementos incrustados. Muchos lectores y navegadores permiten ejecutar JavaScript dentro del documento, algo que actores maliciosos explotan para instalar malware o robar datos. Los PDF maliciosos representan una amenaza real por su uso masivo y ap",
+      "palabrasClave": [
+        "color",
+        "pdf",
+        "border",
+        "padding",
+        "archivos",
+        "maliciosos",
+        "solid",
+        "archivo",
+        "del",
+        "background",
+        "margin",
+        "5em",
+        "1px",
+        "sistema",
+        "datos",
+        "tres",
+        "consejos",
+        "identificar",
+        "bottom",
+        "radius"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/pdf-maliciosos.html"
+    },
+    {
+      "archivo": "perplexica",
+      "titulo": "Tutorial de instalación de Perplexica",
+      "descripcion": "Este tutorial detalla la instalación de la aplicación Perplexica en un entorno Linux, utilizando Docker para la orquestación y Ollama como proveedor del modelo de lenguaje, en concreto el deepseek-r1:14b. Perplexica es una herramienta de búsqueda y respuesta potenciada por inteligencia artificial que combina la capacidad de los modelos de lenguaje grandes con un motor de búsqueda avanzado. A diferencia de los motores de búsqueda tradicionales, Perplexica puede proporcionar respuestas más context",
+      "palabrasClave": [
+        "perplexica",
+        "docker",
+        "color",
+        "ollama",
+        "border",
+        "squeda",
+        "padding",
+        "instalaci",
+        "margin",
+        "solid",
+        "deepseek",
+        "14b",
+        "compose",
+        "archivo",
+        "tutorial",
+        "background",
+        "bottom",
+        "5em",
+        "1px",
+        "linux"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/perplexica.html"
+    },
+    {
+      "archivo": "phishing",
+      "titulo": "Phishing: El Arte del Engaño Digital",
+      "descripcion": "El phishing es una técnica de ciberdelincuencia que utiliza la ingeniería social y el engaño para robar información confidencial como credenciales de acceso, datos financieros, información personal y corporativa. El término deriva de \"fishing\" (pescar en inglés), haciendo analogía con el uso de un \"cebo\" para \"pescar\" víctimas desprevenidas. Los atacantes se hacen pasar por entidades confiables como bancos, redes sociales, proveedores de servicios o incluso compañeros de trabajo para solicitar i",
+      "palabrasClave": [
+        "phishing",
+        "ataques",
+        "del",
+        "sitios",
+        "leg",
+        "color",
+        "informaci",
+        "web",
+        "enga",
+        "border",
+        "datos",
+        "ctimas",
+        "timos",
+        "cnicas",
+        "padding",
+        "seguridad",
+        "servicios",
+        "lisis",
+        "fase",
+        "solid"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/phishing.html"
+    },
+    {
+      "archivo": "pildoras",
+      "titulo": "Píldoras - Benito González Piñeiro",
+      "descripcion": "2025 Benito González Piñeiro.",
+      "palabrasClave": [
+        "ldora",
+        "fecha",
+        "actualizacion",
+        "important",
+        "color",
+        "sobre",
+        "aprende",
+        "linux",
+        "seguridad",
+        "sistema",
+        "del",
+        "completa",
+        "malware",
+        "archivos",
+        "windows",
+        "ciberseguridad",
+        "google",
+        "font",
+        "background",
+        "2c3e50"
+      ],
+      "fechaActualizacion": "02-08-2025",
+      "ruta": "pildoras/pildoras.html"
+    },
+    {
+      "archivo": "playbook_dos_windows_personalizado",
+      "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+      "descripcion": "Incluye bloque de configuración para tu entorno, perfiles por servicio y comandos listos. Actualiza estos valores y usa los comandos tal cual. Si un campo no aplica, déjalo vacío o comenta la línea en PowerShell. Incluye bloqueo de IPs, restricción dinámica y recordatorio de módulo Dynamic IP Restrictions. Copia el bloque de configuración, luego el script. Bloquea top IPs, respeta listas de permitidos y etiqueta la regla. Personalización aplicada: rangos de administración de ejemplo (10.10.0.0/1",
+      "palabrasClave": [
+        "object",
+        "netfirewallrule",
+        "top",
+        "color",
+        "border",
+        "remoteaddress",
+        "mal",
+        "displayname",
+        "ddos",
+        "block",
+        "get",
+        "padding",
+        "count",
+        "select",
+        "inbound",
+        "margin",
+        "solid",
+        "ips",
+        "iis",
+        "bloqueo"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/playbook_dos_windows_personalizado.html"
+    },
+    {
+      "archivo": "pxe",
+      "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+      "descripcion": "Arranque de red inteligente para la gestión moderna de sistemas Administración unificada de imágenes de sistema y configuraciones desde un punto central. Capacidad de gestionar desde una hasta miles de computadoras simultáneamente. Eliminación de medios físicos y reducción significativa de tiempo de mantenimiento. Posibilidad de cambiar sistemas operativos y configuraciones dinámicamente. Garantía de entornos idénticos y estandarizados en toda la infraestructura. Operación completa sin dependenc",
+      "palabrasClave": [
+        "pxe",
+        "arranque",
+        "border",
+        "margin",
+        "red",
+        "color",
+        "del",
+        "padding",
+        "solid",
+        "1em",
+        "background",
+        "como",
+        "servidor",
+        "5em",
+        "sistemas",
+        "tftp",
+        "bottom",
+        "radius",
+        "2em",
+        "1px"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/pxe.html"
+    },
+    {
+      "archivo": "ransomware",
+      "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+      "descripcion": "El ransomware es un tipo de malware (software malicioso) diseñado específicamente para bloquear el acceso a un sistema informático o cifrar los archivos del usuario hasta que se pague una suma de dinero como rescate. El término proviene de la combinación de \"ransom\" (rescate en inglés) y \"software\". Este tipo de malware utiliza técnicas de criptografía avanzada para hacer que los archivos sean completamente inaccesibles para el propietario legítimo. Una vez ejecutado, muestra un mensaje de resca",
+      "palabrasClave": [
+        "ransomware",
+        "del",
+        "color",
+        "archivos",
+        "ataques",
+        "border",
+        "rescate",
+        "cifrado",
+        "sistemas",
+        "sistema",
+        "seguridad",
+        "padding",
+        "fase",
+        "amenaza",
+        "solid",
+        "malware",
+        "software",
+        "espec",
+        "ticas",
+        "descifrado"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/ransomware.html"
+    },
+    {
+      "archivo": "redimensionar_imagen",
+      "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+      "descripcion": "Este script automatiza el proceso de redimensionado de imágenes, optimizándolas para uso web. Procesa todas las imágenes de una carpeta ORIGINALES y las guarda redimensionadas en la carpeta MODIFICADAS. Script en Python para redimensionar imágenes automáticamente Compatible con: Windows, macOS, Linux Se requiere Python 3.6 o superior. Descárgalo desde python.org Importante: La librería Pillow es necesaria para el procesamiento de imágenes. Formatos válidos: JPG, JPEG, PNG, BMP, TIFF, TIF, WebP R",
+      "palabrasClave": [
+        "genes",
+        "script",
+        "jpg",
+        "color",
+        "pillow",
+        "python",
+        "border",
+        "originales",
+        "tama",
+        "redimensionado",
+        "redimensionar_imagen",
+        "padding",
+        "carpeta",
+        "modificadas",
+        "dimensiones",
+        "reducci",
+        "solid",
+        "jpeg",
+        "png",
+        "bmp"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/redimensionar_imagen.html"
+    },
+    {
+      "archivo": "rsyslog",
+      "titulo": "Información sobre Rsyslog",
+      "descripcion": "Rsyslog es un software de código abierto utilizado en sistemas Unix y similares (como Linux) para la gestión de mensajes de registro (logs). Es una implementación moderna y mejorada del protocolo syslog tradicional. El protocolo syslog es un estándar que permite a los sistemas enviar mensajes de registro a un servidor central. Rsyslog toma este concepto y lo lleva a un nuevo nivel, ofreciendo una serie de características avanzadas que lo hacen más potente y flexible. La función principal de Rsys",
+      "palabrasClave": [
+        "log",
+        "var",
+        "rsyslog",
+        "mensajes",
+        "logs",
+        "syslog",
+        "color",
+        "border",
+        "padding",
+        "grep",
+        "sistemas",
+        "registro",
+        "del",
+        "servidor",
+        "archivos",
+        "tail",
+        "informaci",
+        "background",
+        "margin",
+        "solid"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/rsyslog.html"
+    },
+    {
+      "archivo": "rsyslog_a_mongodb",
+      "titulo": "Enviar salidas de rsyslog a MongoDB",
+      "descripcion": "Guía rápida para almacenar eventos de syslog en MongoDB usando el módulo ommongodb de rsyslog. Instalación en Debian/Ubuntu: Instalación en RHEL/CentOS/Fedora: Edita /etc/rsyslog.d/mongodb.conf (o /etc/rsyslog.conf) y añade: Por defecto, ommongodb inserta documentos similares a: Puedes definir una plantilla para controlar los campos enviados: © 2025 — Guía breve ommongodb.",
+      "palabrasClave": [
+        "rsyslog",
+        "mongodb",
+        "color",
+        "border",
+        "ommongodb",
+        "margin",
+        "padding",
+        "solid",
+        "font",
+        "background",
+        "syslog",
+        "name",
+        "enviar",
+        "radius",
+        "1px",
+        "2rem",
+        "1rem",
+        "type",
+        "dulo",
+        "sudo"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/rsyslog_a_mongodb.html"
+    },
+    {
+      "archivo": "soc",
+      "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+      "descripcion": "En un Centro de Operaciones de Seguridad (SOC) del Blue Team, la gestión de amenazas de ciberseguridad es un proceso multifacético que implica detección, respuesta, investigación proactiva y prevención constante. Aquí te detallo cómo se gestionan las amenazas: El Blue Team es la primera y última línea de defensa en ciberseguridad, y su trabajo es una vigilancia constante, operando 24/7 para proteger la información y los sistemas. Volver a Píldoras de Seguridad",
+      "palabrasClave": [
+        "color",
+        "border",
+        "amenazas",
+        "siem",
+        "ataque",
+        "seguridad",
+        "padding",
+        "del",
+        "blue",
+        "team",
+        "operaciones",
+        "solid",
+        "equipo",
+        "centro",
+        "soc",
+        "background",
+        "margin",
+        "5em",
+        "1px",
+        "como"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/soc.html"
+    },
+    {
+      "archivo": "ssh",
+      "titulo": "¿Qué es SSH?",
+      "descripcion": "SSH, que significa \"Secure Shell\" (en español, \"Consola Segura\"), es un protocolo de red y un conjunto de utilidades que permiten a los usuarios acceder de forma segura a un sistema informático remoto a través de una red no segura, como Internet. A diferencia de protocolos más antiguos como Telnet o FTP, que enviaban la información en texto plano, SSH cifra toda la comunicación entre el cliente (el ordenador desde el que te conectas) y el servidor (el ordenador al que te conectas). Esto signific",
+      "palabrasClave": [
+        "ssh",
+        "color",
+        "border",
+        "padding",
+        "segura",
+        "servidor",
+        "solid",
+        "cliente",
+        "ordenador",
+        "margin",
+        "background",
+        "5em",
+        "1px",
+        "como",
+        "usuario",
+        "contrase",
+        "clave",
+        "bottom",
+        "radius",
+        "pre"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/ssh.html"
+    },
+    {
+      "archivo": "virus_total",
+      "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+      "descripcion": "La plataforma de análisis de seguridad que utiliza múltiples motores de antivirus para detectar malware y analizar archivos sospechosos VirusTotal es un servicio en línea que analiza archivos y URLs sospechosos para detectar tipos de malware utilizando más de 70 motores de antivirus diferentes. Esta plataforma permite a usuarios y profesionales de seguridad verificar la seguridad de un archivo o enlace antes de abrirlo o ejecutarlo en sus sistemas. La principal ventaja de VirusTotal es su enfoqu",
+      "palabrasClave": [
+        "margin",
+        "border",
+        "font",
+        "color",
+        "padding",
+        "virustotal",
+        "seguridad",
+        "bottom",
+        "lisis",
+        "background",
+        "solid",
+        "20px",
+        "size",
+        "1px",
+        "30363d",
+        "25px",
+        "radius",
+        "archivos",
+        "width",
+        "58a6ff"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/virus_total.html"
+    },
+    {
+      "archivo": "wazuh-virus-total",
+      "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+      "descripcion": "Metodología para la Detección Avanzada de Malware mediante Inteligencia de Amenazas El presente documento técnico analiza la integración sistemática de VirusTotal como complemento analítico en plataformas Wazuh, con el propósito de optimizar las capacidades de detección y respuesta ante amenazas cibernéticas. La investigación metodológica se fundamenta en la complementariedad entre el sistema de monitorización de integridad de archivos de Wazuh y la base de datos de firmas de malware de VirusTot",
+      "palabrasClave": [
+        "virustotal",
+        "color",
+        "wazuh",
+        "border",
+        "del",
+        "font",
+        "margin",
+        "solid",
+        "integraci",
+        "detecci",
+        "padding",
+        "archivos",
+        "api",
+        "8px",
+        "sistema",
+        "lisis",
+        "4a90e2",
+        "malware",
+        "background",
+        "20px"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/wazuh-virus-total.html"
+    },
+    {
+      "archivo": "wazuh",
+      "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+      "descripcion": "Una guía completa sobre sus características, arquitectura, usos, limitaciones e integraciones La comunicación entre componentes está cifrada mediante AES-128 o Blowfish, y el dashboard utiliza Kibana para una experiencia visual avanzada. Los dashboards preconfigurados facilitan el seguimiento de normativas y ataques según el modelo MITRE ATT&CK. Esta flexibilidad lo convierte en un componente central en arquitecturas XDR modernas.",
+      "palabrasClave": [
+        "wazuh",
+        "color",
+        "font",
+        "seguridad",
+        "background",
+        "border",
+        "margin",
+        "lisis",
+        "padding",
+        "bottom",
+        "size",
+        "digo",
+        "abierto",
+        "text",
+        "solid",
+        "indexer",
+        "dashboard",
+        "plataforma",
+        "15px",
+        "weight"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/wazuh.html"
+    },
+    {
+      "archivo": "win11_cuenta_local",
+      "titulo": "Instalar Windows 11 con cuenta local",
+      "descripcion": "Microsoft cada vez empuja más al uso de cuentas online, pero si prefieres mantener tu privacidad y control, te muestro cómo hacerlo de forma sencilla durante la instalación:     ← Volver a todas las píldoras",
+      "palabrasClave": [
+        "color",
+        "border",
+        "padding",
+        "cuenta",
+        "local",
+        "solid",
+        "instalar",
+        "windows",
+        "background",
+        "margin",
+        "1px",
+        "font",
+        "bottom",
+        "radius",
+        "8px",
+        "4px",
+        "pre",
+        "internet",
+        "family",
+        "2em"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/win11_cuenta_local.html"
+    },
+    {
+      "archivo": "yara",
+      "titulo": "Tutorial YARA - Guía Completa",
+      "descripcion": "El patrón perfecto para la detección de malware YARA es una herramienta diseñada para ayudar a los investigadores de malware a identificar y clasificar muestras de malware mediante la creación de descripciones de familias de malware basadas en patrones textuales o binarios. En términos simples: YARA te permite crear \"reglas\" que describen patrones específicos. Cuando escaneas archivos con estas reglas, YARA te dice si encuentra esos patrones. ¿Por qué YARA es genial? Descarga el ejecutable desde",
+      "palabrasClave": [
+        "yara",
+        "nocase",
+        "strings",
+        "condition",
+        "malware",
+        "color",
+        "reglas",
+        "regla",
+        "rule",
+        "description",
+        "author",
+        "meta",
+        "border",
+        "string1",
+        "filesize",
+        "string",
+        "padding",
+        "date",
+        "detecta",
+        "security"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/yara.html"
+    },
+    {
+      "archivo": "yara_python",
+      "titulo": "Sistema de Detección de Malware con YARA",
+      "descripcion": "Análisis automatizado de archivos mediante reglas YARA y base de datos MongoDB Descripción General: Este script implementa un sistema automatizado de detección de malware que utiliza el motor de análisis YARA para escanear archivos almacenados en una base de datos MongoDB. Función principal de análisis que: Lenguaje de programación principal del sistema Motor de análisis de malware mediante patrones y reglas Base de datos NoSQL para almacenar metadatos de archivos El script establece la conexión",
+      "palabrasClave": [
+        "yara",
+        "reglas",
+        "archivos",
+        "archivo",
+        "print",
+        "mongodb",
+        "sistema",
+        "lista",
+        "color",
+        "lisis",
+        "malware",
+        "border",
+        "del",
+        "base",
+        "datos",
+        "colecci",
+        "ruta",
+        "return",
+        "filepath",
+        "detecci"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/yara_python.html"
+    },
+    {
+      "archivo": "zeek",
+      "titulo": "Zeek - Pildoras",
+      "descripcion": "Zeek, antes conocido como Bro, es un analizador de red de código abierto muy potente. A diferencia de un sistema de detección de intrusiones (IDS) tradicional que solo busca firmas de ataques conocidos, Zeek hace algo más profundo: analiza el tráfico de la red para construir un registro detallado de todo lo que está sucediendo. Piensa en Zeek como un forense digital que documenta cada conversación en tu red. No solo dice \"hubo una conexión\", sino que te dice quién habló con quién, cuándo, por cu",
+      "palabrasClave": [
+        "zeek",
+        "color",
+        "border",
+        "red",
+        "padding",
+        "solid",
+        "fico",
+        "seguridad",
+        "registros",
+        "margin",
+        "background",
+        "5em",
+        "1px",
+        "pildoras",
+        "bottom",
+        "radius",
+        "pre",
+        "como",
+        "detecci",
+        "solo"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/zeek.html"
+    }
+  ],
+  "keywords": {
+    "fail2ban": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 1
+      }
+    ],
+    "google": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 2
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 1
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 1
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 5
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 17
+      }
+    ],
+    "authenticator": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 3
+      }
+    ],
+    "sudo": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 4
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 4
+      },
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 2
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 18
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 20
+      }
+    ],
+    "configuraci": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 5
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 14
+      },
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 20
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 9
+      }
+    ],
+    "color": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 6
+      },
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 2
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 6
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 7
+      },
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 4
+      },
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 2
+      },
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 4
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 3
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 2
+      },
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 3
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 2
+      },
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 8
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 4
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 2
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 3
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 2
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 7
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 5
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 3
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 1
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 3
+      },
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 6
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 5
+      },
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 4
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 6
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 3
+      },
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 4
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 7
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 3
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 1
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 2
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 4
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 2
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 2
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 1
+      },
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 6
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 9
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 2
+      }
+    ],
+    "ssh": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 7
+      },
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 19
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 1
+      }
+    ],
+    "paso": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 8
+      }
+    ],
+    "border": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 9
+      },
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 5
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 9
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 12
+      },
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 6
+      },
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 3
+      },
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 5
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 4
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 4
+      },
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 2
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 3
+      },
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 11
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 5
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 3
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 2
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 3
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 8
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 11
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 2
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 3
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 5
+      },
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 10
+      },
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 5
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 3
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 6
+      },
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 7
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 8
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 4
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 2
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 3
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 2
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 4
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 6
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 2
+      },
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 13
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 12
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 3
+      }
+    ],
+    "padding": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 10
+      },
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 7
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 10
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 17
+      },
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 10
+      },
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 7
+      },
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 17
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 5
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 5
+      },
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 5
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 9
+      },
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 13
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 12
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 4
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 6
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 5
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 6
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 15
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 11
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 4
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 7
+      },
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 15
+      },
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 12
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 8
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 12
+      },
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 12
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 9
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 7
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 7
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 4
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 5
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 11
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 9
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 3
+      },
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 17
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 5
+      }
+    ],
+    "2fa": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 11
+      }
+    ],
+    "archivo": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 12
+      },
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 15
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 8
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 14
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 4
+      }
+    ],
+    "sshd": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 13
+      }
+    ],
+    "autenticaci": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 14
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 2
+      }
+    ],
+    "solid": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 15
+      },
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 10
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 12
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 19
+      },
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 13
+      },
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 10
+      },
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 20
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 7
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 7
+      },
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 7
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 13
+      },
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 16
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 15
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 5
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 5
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 10
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 6
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 7
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 10
+      },
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 20
+      },
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 17
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 9
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 15
+      },
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 17
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 20
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 8
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 12
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 7
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 11
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 8
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 15
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 6
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 6
+      }
+    ],
+    "pam": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 16
+      }
+    ],
+    "etc": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 17
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 2
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 18
+      }
+    ],
+    "background": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 18
+      },
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 11
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 16
+      },
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 17
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 10
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 8
+      },
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 10
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 16
+      },
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 20
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 8
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 10
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 8
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 8
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 10
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 16
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 19
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 11
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 18
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 10
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 16
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 11
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 10
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 19
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 5
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 9
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 11
+      }
+    ],
+    "margin": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 19
+      },
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 12
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 17
+      },
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 18
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 11
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 9
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 15
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 7
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 4
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 6
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 4
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 7
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 11
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 9
+      },
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 16
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 4
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 19
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 6
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 17
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 10
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 1
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 7
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 7
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 10
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 10
+      }
+    ],
+    "5em": [
+      {
+        "archivo": "2fa_linux",
+        "titulo": "Autenticación F2B con Google Authenticator",
+        "relevancia": 20
+      },
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 13
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 18
+      },
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 19
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 12
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 10
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 17
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 9
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 12
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 18
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 14
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 18
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 12
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 12
+      }
+    ],
+    "del": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 1
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 2
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 5
+      },
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 8
+      },
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 13
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 3
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 12
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 19
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 9
+      },
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 3
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 11
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 7
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 2
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 13
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 8
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 5
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 13
+      }
+    ],
+    "registro": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 3
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 1
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 12
+      }
+    ],
+    "archivos": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 4
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 4
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 7
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 5
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 14
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 4
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 15
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 18
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 12
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 3
+      }
+    ],
+    "linux": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 6
+      },
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 5
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 20
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 8
+      }
+    ],
+    "log": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 8
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 15
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 11
+      },
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 1
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 1
+      }
+    ],
+    "sistema": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 9
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 3
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 10
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 14
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 10
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 10
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 15
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 7
+      }
+    ],
+    "1px": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 14
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 19
+      },
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 20
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 13
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 11
+      },
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 12
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 18
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 10
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 14
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 17
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 15
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 13
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 19
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 20
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 15
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 19
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 13
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 14
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 11
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 13
+      }
+    ],
+    "mensajes": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 16
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 4
+      }
+    ],
+    "nombre": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 17
+      }
+    ],
+    "mensaje": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 18
+      }
+    ],
+    "bottom": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 19
+      },
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 20
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 15
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 14
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 8
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 12
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 15
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 19
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 17
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 17
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 18
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 8
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 10
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 13
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 15
+      }
+    ],
+    "radius": [
+      {
+        "archivo": "archivo-log-linux",
+        "titulo": "Archivos de Registro en Linux",
+        "relevancia": 20
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 16
+      },
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 11
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 15
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 15
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 15
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 12
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 20
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 18
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 14
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 19
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 17
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 14
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 16
+      }
+    ],
+    "windows": [
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 5
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 15
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 8
+      }
+    ],
+    "registros": [
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 7
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 9
+      }
+    ],
+    "eventos": [
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 8
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 6
+      }
+    ],
+    "microsoft": [
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 11
+      }
+    ],
+    "visor": [
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 13
+      }
+    ],
+    "seguridad": [
+      {
+        "archivo": "archivo-log-windows",
+        "titulo": "Archivos Log en Microsoft Windows",
+        "relevancia": 14
+      },
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 9
+      },
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 1
+      },
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 3
+      },
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 17
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 19
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 13
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 7
+      },
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 16
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 9
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 11
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 6
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 7
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 4
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 8
+      }
+    ],
+    "auditd": [
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 1
+      }
+    ],
+    "audit": [
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 3
+      }
+    ],
+    "auditor": [
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 8
+      }
+    ],
+    "sistemas": [
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 13
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 10
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 9
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 12
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 15
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 9
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 11
+      }
+    ],
+    "integraci": [
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 15
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 9
+      }
+    ],
+    "siem": [
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 16
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 4
+      }
+    ],
+    "ciberseguridad": [
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 18
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 20
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 13
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 16
+      }
+    ],
+    "monitoreo": [
+      {
+        "archivo": "auditd",
+        "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 20
+      }
+    ],
+    "firewall": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 2
+      }
+    ],
+    "red": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 3
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 19
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 9
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 5
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 4
+      }
+    ],
+    "firewalls": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 5
+      }
+    ],
+    "fico": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 7
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 17
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 7
+      }
+    ],
+    "amenazas": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 8
+      },
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 2
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 10
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 3
+      }
+    ],
+    "redes": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 9
+      }
+    ],
+    "ventajas": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 11
+      }
+    ],
+    "implementaci": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 12
+      }
+    ],
+    "arquitectura": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 14
+      }
+    ],
+    "como": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 15
+      },
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 10
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 14
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 11
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 16
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 12
+      },
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 20
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 14
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 18
+      }
+    ],
+    "datos": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 16
+      },
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 12
+      },
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 4
+      },
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 15
+      },
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 11
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 15
+      }
+    ],
+    "software": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 17
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 17
+      }
+    ],
+    "paquetes": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 18
+      }
+    ],
+    "filtrado": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 19
+      }
+    ],
+    "control": [
+      {
+        "archivo": "cortafuego",
+        "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
+        "relevancia": 20
+      }
+    ],
+    "ddos": [
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 4
+      },
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 9
+      }
+    ],
+    "conexiones": [
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 5
+      }
+    ],
+    "iptables": [
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 6
+      },
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 1
+      }
+    ],
+    "input": [
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 9
+      },
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 3
+      }
+    ],
+    "var": [
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 11
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 2
+      }
+    ],
+    "apache2": [
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 12
+      }
+    ],
+    "nginx": [
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 13
+      }
+    ],
+    "configurar": [
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 14
+      }
+    ],
+    "drop": [
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 15
+      }
+    ],
+    "playbook": [
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 16
+      }
+    ],
+    "edr": [
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 1
+      }
+    ],
+    "respuesta": [
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 6
+      }
+    ],
+    "detecci": [
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 7
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 10
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 20
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 19
+      }
+    ],
+    "soluciones": [
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 8
+      }
+    ],
+    "soluci": [
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 9
+      }
+    ],
+    "antivirus": [
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 11
+      }
+    ],
+    "endpoint": [
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 14
+      }
+    ],
+    "detection": [
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 15
+      }
+    ],
+    "response": [
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 16
+      }
+    ],
+    "_endpoints_": [
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 18
+      }
+    ],
+    "lisis": [
+      {
+        "archivo": "edr",
+        "titulo": "EDR (Endpoint Detection and Response) - Benito González Piñeiro",
+        "relevancia": 19
+      },
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 18
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 9
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 16
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 8
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 10
+      }
+    ],
+    "fotos": [
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 2
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 3
+      }
+    ],
+    "herramientas": [
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 6
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 6
+      }
+    ],
+    "foto": [
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 8
+      }
+    ],
+    "nuevas": [
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 9
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 14
+      }
+    ],
+    "genes": [
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 14
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 12
+      },
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 1
+      }
+    ],
+    "app": [
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 15
+      }
+    ],
+    "estilos": [
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 16
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 18
+      }
+    ],
+    "desde": [
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 17
+      },
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 19
+      }
+    ],
+    "remix": [
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 18
+      }
+    ],
+    "videos": [
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 19
+      }
+    ],
+    "pesta": [
+      {
+        "archivo": "google-fotos-herramientas-ia-tutorial",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 20
+      }
+    ],
+    "potencia": [
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 13
+      }
+    ],
+    "pre": [
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 17
+      },
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 16
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 20
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 17
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 17
+      }
+    ],
+    "hub": [
+      {
+        "archivo": "google-fotos-herramientas-ia",
+        "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
+        "relevancia": 20
+      }
+    ],
+    "graylog": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 1
+      }
+    ],
+    "data": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 4
+      }
+    ],
+    "font": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 6
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 9
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 4
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 3
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 14
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 18
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 9
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 3
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 6
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 3
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 12
+      }
+    ],
+    "opensearch": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 8
+      }
+    ],
+    "mongodb": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 9
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 2
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 6
+      }
+    ],
+    "1rem": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 13
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 17
+      }
+    ],
+    "inputs": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 14
+      }
+    ],
+    "gelf": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 15
+      }
+    ],
+    "udp": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 16
+      }
+    ],
+    "logs": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 17
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 5
+      }
+    ],
+    "node": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 18
+      }
+    ],
+    "http": [
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 19
+      }
+    ],
+    "pueden": [
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 1
+      }
+    ],
+    "puede": [
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 5
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 6
+      }
+    ],
+    "ataques": [
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 6
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 4
+      },
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 2
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 5
+      }
+    ],
+    "modelos": [
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 7
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 4
+      }
+    ],
+    "inteligencia": [
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 8
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 6
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 18
+      }
+    ],
+    "vulnerabilidades": [
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 11
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 18
+      }
+    ],
+    "artificial": [
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 12
+      },
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 7
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 19
+      }
+    ],
+    "tiempo": [
+      {
+        "archivo": "ia",
+        "titulo": "Inteligencia Artificial - Pildoras",
+        "relevancia": 19
+      }
+    ],
+    "accept": [
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 4
+      }
+    ],
+    "tcp": [
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 6
+      }
+    ],
+    "dport": [
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 7
+      }
+    ],
+    "nat": [
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 9
+      }
+    ],
+    "reglas": [
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 10
+      },
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 7
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 2
+      }
+    ],
+    "puerto": [
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 12
+      }
+    ],
+    "espec": [
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 14
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 18
+      }
+    ],
+    "cortafuegos": [
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 15
+      }
+    ],
+    "regla": [
+      {
+        "archivo": "iptables",
+        "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
+        "relevancia": 18
+      },
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 8
+      }
+    ],
+    "lamehug": [
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 1
+      }
+    ],
+    "malware": [
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 2
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 13
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 16
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 18
+      },
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 5
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 11
+      }
+    ],
+    "capacidades": [
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 8
+      }
+    ],
+    "primer": [
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 14
+      }
+    ],
+    "evoluci": [
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 16
+      }
+    ],
+    "sus": [
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 17
+      }
+    ],
+    "campa": [
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 18
+      }
+    ],
+    "nueva": [
+      {
+        "archivo": "lamehug",
+        "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
+        "relevancia": 20
+      }
+    ],
+    "mosquitto": [
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 1
+      }
+    ],
+    "mqtt": [
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 6
+      }
+    ],
+    "comunicaci": [
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 11
+      }
+    ],
+    "ldora": [
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 13
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 1
+      }
+    ],
+    "protocolo": [
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 17
+      }
+    ],
+    "entre": [
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 18
+      }
+    ],
+    "dispositivos": [
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 19
+      }
+    ],
+    "iot": [
+      {
+        "archivo": "mosquitto",
+        "titulo": "Mosquitto - Píldora Benito González Piñeiro",
+        "relevancia": 20
+      }
+    ],
+    "nfs": [
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 1
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 1
+      }
+    ],
+    "20px": [
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 11
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 11
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 12
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 12
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 20
+      }
+    ],
+    "servidor": [
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 12
+      },
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 7
+      },
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 13
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 14
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 6
+      }
+    ],
+    "8px": [
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 16
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 20
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 13
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 14
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 15
+      }
+    ],
+    "rendimiento": [
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 17
+      }
+    ],
+    "nfsv4": [
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 18
+      }
+    ],
+    "bb86fc": [
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 20
+      }
+    ],
+    "size": [
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 13
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 14
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 13
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 11
+      }
+    ],
+    "left": [
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 14
+      }
+    ],
+    "position": [
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 16
+      }
+    ],
+    "e0e0e0": [
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 19
+      }
+    ],
+    "notebooklm": [
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 1
+      }
+    ],
+    "fuentes": [
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 2
+      }
+    ],
+    "herramienta": [
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 9
+      }
+    ],
+    "text": [
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 10
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 14
+      }
+    ],
+    "informaci": [
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 11
+      },
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 7
+      },
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 17
+      }
+    ],
+    "rgba": [
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 13
+      }
+    ],
+    "2px": [
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 16
+      }
+    ],
+    "top": [
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 17
+      },
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 3
+      }
+    ],
+    "shadow": [
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 20
+      }
+    ],
+    "ntlm": [
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 1
+      }
+    ],
+    "hash": [
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 3
+      }
+    ],
+    "contrase": [
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 8
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 16
+      }
+    ],
+    "usuario": [
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 10
+      },
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 15
+      }
+    ],
+    "desaf": [
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 13
+      }
+    ],
+    "ntlmv1": [
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 14
+      }
+    ],
+    "atacante": [
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 19
+      }
+    ],
+    "kerberos": [
+      {
+        "archivo": "ntlm",
+        "titulo": "NTLM - Pildoras",
+        "relevancia": 20
+      }
+    ],
+    "ollama": [
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 1
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 4
+      }
+    ],
+    "modelo": [
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 5
+      }
+    ],
+    "code": [
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 9
+      }
+    ],
+    "block": [
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 10
+      },
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 10
+      }
+    ],
+    "bash": [
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 16
+      }
+    ],
+    "api": [
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 17
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 13
+      }
+    ],
+    "usr": [
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 20
+      }
+    ],
+    "pdf": [
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 2
+      }
+    ],
+    "maliciosos": [
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 6
+      }
+    ],
+    "tres": [
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 16
+      }
+    ],
+    "consejos": [
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 17
+      }
+    ],
+    "identificar": [
+      {
+        "archivo": "pdf-maliciosos",
+        "titulo": "Tres consejos para identificar archivos PDF maliciosos",
+        "relevancia": 18
+      }
+    ],
+    "perplexica": [
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 1
+      }
+    ],
+    "docker": [
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 2
+      }
+    ],
+    "squeda": [
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 6
+      }
+    ],
+    "instalaci": [
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 8
+      }
+    ],
+    "deepseek": [
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 11
+      }
+    ],
+    "14b": [
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 12
+      }
+    ],
+    "compose": [
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 13
+      }
+    ],
+    "tutorial": [
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 15
+      }
+    ],
+    "phishing": [
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 1
+      }
+    ],
+    "sitios": [
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 4
+      }
+    ],
+    "leg": [
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 5
+      }
+    ],
+    "web": [
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 8
+      }
+    ],
+    "enga": [
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 9
+      }
+    ],
+    "ctimas": [
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 12
+      }
+    ],
+    "timos": [
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 13
+      }
+    ],
+    "cnicas": [
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 14
+      }
+    ],
+    "servicios": [
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 17
+      }
+    ],
+    "fase": [
+      {
+        "archivo": "phishing",
+        "titulo": "Phishing: El Arte del Engaño Digital",
+        "relevancia": 19
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 13
+      }
+    ],
+    "fecha": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 2
+      }
+    ],
+    "actualizacion": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 3
+      }
+    ],
+    "important": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 4
+      }
+    ],
+    "sobre": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 6
+      }
+    ],
+    "aprende": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 7
+      }
+    ],
+    "completa": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 12
+      }
+    ],
+    "2c3e50": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 20
+      }
+    ],
+    "object": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 1
+      }
+    ],
+    "netfirewallrule": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 2
+      }
+    ],
+    "remoteaddress": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 6
+      }
+    ],
+    "mal": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 7
+      }
+    ],
+    "displayname": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 8
+      }
+    ],
+    "get": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 11
+      }
+    ],
+    "count": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 13
+      }
+    ],
+    "select": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 14
+      }
+    ],
+    "inbound": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 15
+      }
+    ],
+    "ips": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 18
+      }
+    ],
+    "iis": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 19
+      }
+    ],
+    "bloqueo": [
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 20
+      }
+    ],
+    "pxe": [
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 1
+      }
+    ],
+    "arranque": [
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 2
+      }
+    ],
+    "1em": [
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 10
+      }
+    ],
+    "tftp": [
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 16
+      }
+    ],
+    "2em": [
+      {
+        "archivo": "pxe",
+        "titulo": "PXE: Preboot Execution Environment - Guía Completa",
+        "relevancia": 19
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 20
+      }
+    ],
+    "ransomware": [
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 1
+      }
+    ],
+    "rescate": [
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 7
+      }
+    ],
+    "cifrado": [
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 8
+      }
+    ],
+    "amenaza": [
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 14
+      }
+    ],
+    "ticas": [
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 19
+      }
+    ],
+    "descifrado": [
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 20
+      }
+    ],
+    "script": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 2
+      }
+    ],
+    "jpg": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 3
+      }
+    ],
+    "pillow": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 5
+      }
+    ],
+    "python": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 6
+      }
+    ],
+    "originales": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 8
+      }
+    ],
+    "tama": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 9
+      }
+    ],
+    "redimensionado": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 10
+      }
+    ],
+    "redimensionar_imagen": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 11
+      }
+    ],
+    "carpeta": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 13
+      }
+    ],
+    "modificadas": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 14
+      }
+    ],
+    "dimensiones": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 15
+      }
+    ],
+    "reducci": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 16
+      }
+    ],
+    "jpeg": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 18
+      }
+    ],
+    "png": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 19
+      }
+    ],
+    "bmp": [
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 20
+      }
+    ],
+    "rsyslog": [
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 3
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 1
+      }
+    ],
+    "syslog": [
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 6
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 11
+      }
+    ],
+    "grep": [
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 10
+      }
+    ],
+    "tail": [
+      {
+        "archivo": "rsyslog",
+        "titulo": "Información sobre Rsyslog",
+        "relevancia": 16
+      }
+    ],
+    "ommongodb": [
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 5
+      }
+    ],
+    "name": [
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 12
+      }
+    ],
+    "enviar": [
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 13
+      }
+    ],
+    "2rem": [
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 16
+      }
+    ],
+    "type": [
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 18
+      }
+    ],
+    "dulo": [
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 19
+      }
+    ],
+    "ataque": [
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 5
+      }
+    ],
+    "blue": [
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 9
+      }
+    ],
+    "team": [
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 10
+      }
+    ],
+    "operaciones": [
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 11
+      }
+    ],
+    "equipo": [
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 13
+      }
+    ],
+    "centro": [
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 14
+      }
+    ],
+    "soc": [
+      {
+        "archivo": "soc",
+        "titulo": "Centro de Operaciones de Seguridad (SOC) - Benito González Piñeiro",
+        "relevancia": 15
+      }
+    ],
+    "segura": [
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 5
+      }
+    ],
+    "cliente": [
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 8
+      }
+    ],
+    "ordenador": [
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 9
+      }
+    ],
+    "clave": [
+      {
+        "archivo": "ssh",
+        "titulo": "¿Qué es SSH?",
+        "relevancia": 17
+      }
+    ],
+    "virustotal": [
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 6
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 1
+      }
+    ],
+    "30363d": [
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 15
+      }
+    ],
+    "25px": [
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 16
+      }
+    ],
+    "width": [
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 19
+      }
+    ],
+    "58a6ff": [
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 20
+      }
+    ],
+    "wazuh": [
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 3
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 1
+      }
+    ],
+    "4a90e2": [
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 17
+      }
+    ],
+    "digo": [
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 12
+      }
+    ],
+    "abierto": [
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 13
+      }
+    ],
+    "indexer": [
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 16
+      }
+    ],
+    "dashboard": [
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 17
+      }
+    ],
+    "plataforma": [
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 18
+      }
+    ],
+    "15px": [
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 19
+      }
+    ],
+    "weight": [
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 20
+      }
+    ],
+    "cuenta": [
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 4
+      }
+    ],
+    "local": [
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 5
+      }
+    ],
+    "instalar": [
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 7
+      }
+    ],
+    "4px": [
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 16
+      }
+    ],
+    "internet": [
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 18
+      }
+    ],
+    "family": [
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 19
+      }
+    ],
+    "yara": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 1
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 1
+      }
+    ],
+    "nocase": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 2
+      }
+    ],
+    "strings": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 3
+      }
+    ],
+    "condition": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 4
+      }
+    ],
+    "rule": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 9
+      }
+    ],
+    "description": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 10
+      }
+    ],
+    "author": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 11
+      }
+    ],
+    "meta": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 12
+      }
+    ],
+    "string1": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 14
+      }
+    ],
+    "filesize": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 15
+      }
+    ],
+    "string": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 16
+      }
+    ],
+    "date": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 18
+      }
+    ],
+    "detecta": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 19
+      }
+    ],
+    "security": [
+      {
+        "archivo": "yara",
+        "titulo": "Tutorial YARA - Guía Completa",
+        "relevancia": 20
+      }
+    ],
+    "print": [
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 5
+      }
+    ],
+    "lista": [
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 8
+      }
+    ],
+    "base": [
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 14
+      }
+    ],
+    "colecci": [
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 16
+      }
+    ],
+    "ruta": [
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 17
+      }
+    ],
+    "return": [
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 18
+      }
+    ],
+    "filepath": [
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 19
+      }
+    ],
+    "zeek": [
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 1
+      }
+    ],
+    "pildoras": [
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 14
+      }
+    ],
+    "solo": [
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 20
+      }
+    ]
+  },
+  "metadata": {
+    "created": "2025-08-24T12:55:03.058Z",
+    "description": "Índice de archivos HTML en la carpeta pildoras para búsquedas por palabras clave",
+    "version": "1.0",
+    "totalFiles": 38
+  }
+}

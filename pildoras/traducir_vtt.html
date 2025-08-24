@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Script para Traducir Archivos VTT</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #7f8c8d;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .code-block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .terminal-command {
+            background-color: #34495e;
+            color: #f39c12;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+
+        .info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #0c5460;
+        }
+
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #155724;
+        }
+
+        ul, ol {
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .file-structure {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .highlight {
+            background-color: #e3f2fd;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .step {
+            background-color: #e8f5e8;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .step-number {
+            font-weight: bold;
+            color: #4caf50;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Tutorial: Script para Traducir Archivos VTT</h1>
+
+        <div class="info">
+            <strong>¿Qué es este script?</strong> Una herramienta automatizada para traducir archivos de subtítulos VTT del inglés al español usando Google Translate.
+        </div>
+
+        <div class="success" style="margin-top: 20px;">
+            <h4>📥 Descargar el Script</h4>
+            <p><a href="../codigo/traducir_vtt.py" download style="color: #155724; text-decoration: underline; font-weight: bold;">Descargar traducir_vtt.py</a> - Haz clic aquí para descargar el script completo</p>
+        </div>
+
+        <h2>📋 Requisitos del Sistema</h2>
+
+        <div class="step">
+            <div class="step-number">1.</div>
+            <strong>Python 3.6 o superior</strong> - El script está escrito en Python 3
+        </div>
+
+        <div class="step">
+            <div class="step-number">2.</div>
+            <strong>Conexión a Internet</strong> - Necesaria para usar la API de Google Translate
+        </div>
+
+        <div class="step">
+            <div class="step-number">3.</div>
+            <strong>Dependencias de Python</strong> - Se instalarán automáticamente
+        </div>
+
+        <h2>🔧 Instalación</h2>
+
+        <h3>1. Instalar dependencias</h3>
+        <div class="terminal-command">
+pip install googletrans==4.0.0rc1
+        </div>
+
+        <h3>2. Verificar la instalación</h3>
+        <div class="terminal-command">
+python3 --version
+        </div>
+
+        <h2>📁 Estructura de Carpetas</h2>
+
+        <p>El script espera la siguiente estructura de carpetas:</p>
+
+        <div class="file-structure">
+📁 proyecto_traduccion/<br>
+├── 📄 traducir_vtt.py<br>
+├── 📁 entrada/<br>
+│   ├── 📄 video1.vtt<br>
+│   ├── 📄 video2.vtt<br>
+│   └── 📄 video3.vtt<br>
+└── 📁 salida/<br>
+    └── (aquí se guardarán los archivos traducidos)
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> Si las carpetas <code class="highlight">entrada</code> y <code class="highlight">salida</code> no existen, el script las creará automáticamente.
+        </div>
+
+        <h2>🚀 Uso del Script</h2>
+
+        <h3>Método 1: Ejecución directa</h3>
+        <div class="terminal-command">
+python3 traducir_vtt.py
+        </div>
+
+        <h3>Método 2: Ejecución con permisos de ejecución</h3>
+        <div class="terminal-command">
+chmod +x traducir_vtt.py<br>
+./traducir_vtt.py
+        </div>
+
+        <h2>📖 Ejemplo Completo de Uso</h2>
+
+        <div class="step">
+            <div class="step-number">1.</div>
+            <strong>Preparar los archivos</strong><br>
+            Coloca tus archivos VTT en la carpeta <code class="highlight">entrada/</code>
+        </div>
+
+        <div class="step">
+            <div class="step-number">2.</div>
+            <strong>Ejecutar el script</strong><br>
+            <div class="terminal-command">
+python3 traducir_vtt.py
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">3.</div>
+            <strong>Ver el resultado</strong><br>
+            Los archivos traducidos aparecerán en la carpeta <code class="highlight">salida/</code>
+        </div>
+
+        <h3>Salida esperada en la consola:</h3>
+        <div class="code-block">
+Encontrados 3 archivos VTT para traducir
+
+Procesando: entrada/video1.vtt
+Traduciendo segmento 1/25...
+Traduciendo segmento 2/25...
+...
+Archivo traducido guardado en: salida/video1.vtt
+--------------------------------------------------
+Procesando: entrada/video2.vtt
+...
+
+Proceso completado: 3/3 archivos traducidos exitosamente
+        </div>
+
+        <h2>🔍 Funcionalidades del Script</h2>
+
+        <table>
+            <tr>
+                <th>Característica</th>
+                <th>Descripción</th>
+            </tr>
+            <tr>
+                <td>Traducción automática</td>
+                <td>Traduce del inglés al español usando Google Translate</td>
+            </tr>
+            <tr>
+                <td>Preservación de timestamps</td>
+                <td>Mantiene los tiempos exactos de los subtítulos originales</td>
+            </tr>
+            <tr>
+                <td>Procesamiento por lotes</td>
+                <td>Procesa múltiples archivos VTT automáticamente</td>
+            </tr>
+            <tr>
+                <td>Manejo de errores</td>
+                <td>Reintenta la traducción en caso de fallos temporales</td>
+            </tr>
+            <tr>
+                <td>Limpieza de texto</td>
+                <td>Elimina etiquetas HTML y caracteres problemáticos</td>
+            </tr>
+        </table>
+
+        <h2>⚙️ Configuración Avanzada</h2>
+
+        <h3>Modificar idiomas de traducción</h3>
+        <p>Para cambiar los idiomas, edita la función <code class="highlight">translate_text</code> en el script:</p>
+        <div class="code-block">
+# Cambiar esta línea en translate_text():
+result = translator.translate(clean_text, src='en', dest='es')
+        </div>
+
+        <h3>Parámetros disponibles:</h3>
+        <ul>
+            <li><code class="highlight">src='en'</code> - Idioma de origen (inglés)</li>
+            <li><code class="highlight">dest='es'</code> - Idioma de destino (español)</li>
+        </ul>
+
+        <h2>🛠️ Solución de Problemas</h2>
+
+        <h3>Error: "La carpeta 'entrada' no existe"</h3>
+        <div class="warning">
+            <strong>Solución:</strong> Crea la carpeta <code class="highlight">entrada</code> y coloca los archivos VTT en ella.
+        </div>
+        <div class="terminal-command">
+mkdir entrada
+        </div>
+
+        <h3>Error: "googletrans module not found"</h3>
+        <div class="warning">
+            <strong>Solución:</strong> Instala la dependencia requerida.
+        </div>
+        <div class="terminal-command">
+pip install googletrans==4.0.0rc1
+        </div>
+
+        <h3>Error de conexión de red</h3>
+        <div class="warning">
+            <strong>Solución:</strong> Verifica tu conexión a Internet y vuelve a intentar.
+        </div>
+
+        <h3>Archivos no se traducen completamente</h3>
+        <div class="info">
+            <strong>Posible causa:</strong> Límites de rate limiting de Google Translate.<br>
+            <strong>Solución:</strong> El script tiene pausas automáticas entre traducciones para evitar este problema.
+        </div>
+
+        <h2>📝 Notas Importantes</h2>
+
+        <div class="warning">
+            <ul>
+                <li>El script requiere conexión a Internet para funcionar</li>
+                <li>Google Translate tiene límites de uso, por lo que se incluyen pausas automáticas</li>
+                <li>Los archivos originales no se modifican, solo se crean versiones traducidas</li>
+                <li>El script preserva toda la estructura temporal de los subtítulos</li>
+            </ul>
+        </div>
+
+        <h2>🎯 Casos de Uso Típicos</h2>
+
+        <ul>
+            <li><strong>Traductores profesionales:</strong> Para traducir subtítulos de videos</li>
+            <li><strong>Creadores de contenido:</strong> Para hacer contenido accesible en español</li>
+            <li><strong>Estudiantes:</strong> Para entender contenido en inglés</li>
+            <li><strong>Empresas:</strong> Para localizar contenido multimedia</li>
+        </ul>
+
+        <div class="success">
+            <h3>¡El script está listo para usar!</h3>
+            <p>Solo necesitas colocar tus archivos VTT en la carpeta <code class="highlight">entrada</code> y ejecutar el script. Los archivos traducidos aparecerán automáticamente en la carpeta <code class="highlight">salida</code>.</p>
+        </div>
+
+        <hr style="margin: 40px 0; border: none; border-top: 2px solid #3498db;">
+
+        <p style="text-align: center; color: #7f8c8d; font-size: 14px;">
+            Tutorial creado para el script traducir_vtt.py<br>
+            <em>Última actualización: Agosto de 2025</em>
+        </p>
+
+        <!-- Footer with link to pildoras -->
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; border-top: 1px solid #dee2e6;">
+            <a href="pildoras.html" style="color: #3498db; text-decoration: none; font-weight: bold; font-size: 16px;">
+                ← Volver a Píldoras
+            </a>
+        </div>
+    </div>
+</body>
+</html>

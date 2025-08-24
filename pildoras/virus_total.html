@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VirusTotal: La Plataforma de Análisis de Seguridad Multimotor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        body {
+            background-color: #0d1117;
+            color: #f0f6fc;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #161b22, #21262d);
+            color: #f0f6fc;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #30363d;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: normal;
+            color: #58a6ff;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+            color: #c9d1d9;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto 50px auto;
+        }
+
+        .main-content {
+            background: #161b22;
+            padding: 45px;
+            margin-bottom: 40px;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+        }
+
+        .sidebar {
+            background: #161b22;
+            padding: 35px;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #58a6ff;
+            margin: 40px 0 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #30363d;
+            font-size: 1.8rem;
+            font-weight: normal;
+        }
+
+        h3 {
+            color: #f78166;
+            margin: 30px 0 20px;
+            font-size: 1.3rem;
+            font-weight: normal;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            color: #c9d1d9;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 25px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            color: #c9d1d9;
+        }
+
+        .highlight {
+            background-color: #21262d;
+            border-left: 4px solid #58a6ff;
+            padding: 25px 30px;
+            margin: 30px 0;
+            font-style: italic;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature {
+            background: #21262d;
+            padding: 25px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+        }
+
+        .integration-list {
+            background: #21262d;
+            padding: 30px;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .integration-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+        }
+
+        .integration-icon {
+            width: 40px;
+            height: 40px;
+            background: #58a6ff;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0d1117;
+            font-weight: bold;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            border-radius: 4px;
+        }
+
+
+
+        .timeline-simple {
+            margin: 35px 0;
+        }
+
+        .timeline-item-simple {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-left: 4px solid #58a6ff;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .timeline-item-simple:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            color: #58a6ff;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #161b22, #0d1117);
+            color: #c9d1d9;
+            margin-top: 60px;
+            border-top: 1px solid #30363d;
+        }
+
+        footer p {
+            color: #c9d1d9;
+            margin-bottom: 15px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .footer-link {
+            color: #58a6ff;
+            text-decoration: none;
+            font-weight: normal;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #f78166;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content, .sidebar {
+                padding: 25px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item-simple {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            header {
+                padding: 40px 20px;
+            }
+
+            .integration-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>VirusTotal</h1>
+            <p class="subtitle">La plataforma de análisis de seguridad que utiliza múltiples motores de antivirus para detectar malware y analizar archivos sospechosos</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <div class="main-content">
+                <h2>¿Qué es VirusTotal?</h2>
+                <p>VirusTotal es un servicio en línea que analiza archivos y URLs sospechosos para detectar tipos de malware utilizando más de 70 motores de antivirus diferentes. Esta plataforma permite a usuarios y profesionales de seguridad verificar la seguridad de un archivo o enlace antes de abrirlo o ejecutarlo en sus sistemas.</p>
+                
+                <div class="highlight">
+                    <p>La principal ventaja de VirusTotal es su enfoque de "inteligencia colectiva", donde combina los resultados de múltiples soluciones de seguridad para ofrecer una visión más completa que cualquier solución individual.</p>
+                </div>
+
+                <h2>Historia de VirusTotal</h2>
+                <div class="timeline-simple">
+                    <div class="timeline-item-simple">
+                        <div class="timeline-year">2004</div>
+                        <p>VirusTotal fue fundado por Hispasec Sistemas, una empresa de seguridad española. Inicialmente ofrecía un servicio gratuito de análisis de archivos utilizando varios motores de antivirus.</p>
+                    </div>
+                    <div class="timeline-item-simple">
+                        <div class="timeline-year">2007-2011</div>
+                        <p>La plataforma creció rápidamente en popularidad, añadiendo más motores de análisis y funciones. Se convirtió en una herramienta esencial para investigadores de seguridad y usuarios avanzados.</p>
+                    </div>
+                    <div class="timeline-item-simple">
+                        <div class="timeline-year">2012</div>
+                        <p>Google adquirió VirusTotal, permitiendo una mayor integración con sus servicios y asegurando la continuidad y mejora de la plataforma.</p>
+                    </div>
+                    <div class="timeline-item-simple">
+                        <div class="timeline-year">2012-Presente</div>
+                        <p>Bajo la dirección de Google, VirusTotal ha expandido sus capacidades, añadiendo análisis de URLs, integración con APIs, inteligencia contra amenazas y funciones colaborativas para la comunidad de seguridad.</p>
+                    </div>
+                </div>
+
+                <h2>Características Principales</h2>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>Análisis Multimotor</h3>
+                        <p>Escanea archivos y URLs con más de 70 motores antivirus diferentes, incluyendo los principales proveedores como Kaspersky, Symantec, McAfee y muchos más.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>API Pública</h3>
+                        <p>Ofrece una API que permite a desarrolladores integrar las capacidades de análisis de VirusTotal en sus propias aplicaciones y flujos de trabajo de seguridad.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Inteligencia Colaborativa</h3>
+                        <p>Los usuarios pueden comentar y compartir información sobre muestras, creando una base de conocimiento colectivo sobre amenazas emergentes.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Análisis de Comportamiento</h3>
+                        <p>Proporciona información detallada sobre el comportamiento de archivos ejecutables en entornos sandbox, mostrando acciones como modificaciones del registro, llamadas al sistema y conexiones de red.</p>
+                    </div>
+                </div>
+
+                <h2>Integración en Plataformas de Seguridad</h2>
+                <p>VirusTotal se ha convertido en una herramienta fundamental en el ecosistema de seguridad, integrándose con numerosas plataformas y soluciones:</p>
+                
+                <div class="integration-list">
+                    <div class="integration-item">
+                        <div class="integration-icon">SO</div>
+                        <div>
+                            <h3>Sistemas Operativos</h3>
+                            <p>Integrado directamente en Windows 10 mediante Windows Defender, permitiendo a los usuarios verificar archivos con un clic derecho.</p>
+                        </div>
+                    </div>
+                    <div class="integration-item">
+                        <div class="integration-icon">SI</div>
+                        <div>
+                            <h3>Sistemas SIEM</h3>
+                            <p>Conectado con plataformas como Splunk, IBM QRadar y ArcSight para correlacionar eventos de seguridad con la base de datos de amenazas de VirusTotal.</p>
+                        </div>
+                    </div>
+                    <div class="integration-item">
+                        <div class="integration-icon">ED</div>
+                        <div>
+                            <h3>Soluciones EDR</h3>
+                            <p>Integrado con herramientas de detección y respuesta de endpoints como CrowdStrike, Carbon Black y SentinelOne para enriquecer alertas con inteligencia contextual.</p>
+                        </div>
+                    </div>
+                    <div class="integration-item">
+                        <div class="integration-icon">CT</div>
+                        <div>
+                            <h3>Plataformas de Threat Intelligence</h3>
+                            <p>Conectado con soluciones como MISP, ThreatConnect y Anomali para compartir indicadores de compromiso (IOCs) y enriquecer análisis de amenazas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Consideraciones de Privacidad</h2>
+                <p>Aunque VirusTotal es una herramienta poderosa, es importante considerar que los archivos subidos se comparten con la comunidad de seguridad. Los usuarios deben evitar subir documentos confidenciales o información personalmente identificable.</p>
+                
+                <div class="highlight">
+                    <p>Para organizaciones con requisitos estrictos de privacidad, VirusTotal ofrece una versión privada que permite mantener los análisis dentro del entorno propio de la organización.</p>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <h2>Datos Clave</h2>
+                <ul>
+                    <li><strong>Fundación:</strong> 2004</li>
+                    <li><strong>Adquisición por Google:</strong> Septiembre 2012</li>
+                    <li><strong>Motores de antivirus:</strong> 70+</li>
+                    <li><strong>Análisis diarios:</strong> Millones</li>
+                    <li><strong>API requests diarias:</strong> Más de 1 billón</li>
+                </ul>
+
+                <h2>Ventajas Principales</h2>
+                <ul>
+                    <li>Detección mejorada mediante múltiples motores</li>
+                    <li>Servicio gratuito para uso básico</li>
+                    <li>Comunidad activa de investigadores</li>
+                    <li>Historial completo de análisis</li>
+                    <li>Integraciones extensivas</li>
+                </ul>
+
+                <h2>Limitaciones</h2>
+                <ul>
+                    <li>No es un sustituto de soluciones EPP/EDR</li>
+                    <li>Retraso en detección de amenazas cero-day</li>
+                    <li>Consideraciones de privacidad con archivos subidos</li>
+                    <li>Límites de uso en la versión gratuita</li>
+                </ul>
+
+                <h2>Alternativas</h2>
+                <ul>
+                    <li>Hybrid Analysis</li>
+                    <li>ANY.RUN</li>
+                    <li>Joe Sandbox</li>
+                    <li>Cuckoo Sandbox</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">            
+            <p><a href="pildoras.html" class="footer-link">← Volver a Píldoras de Seguridad</a></p>
+            <p>Benito González Piñeiro 2025</p>
+        </div>
+    </footer>
+</body>
+</html>

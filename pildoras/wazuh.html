@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: #e0e0e0;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #0f1419 0%, #1a1a1a 100%);
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      border-bottom: 3px solid #3b82f6;
+      padding-bottom: 15px;
+    }
+    h1 {
+      color: #f3f4f6;
+      font-size: 28px;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    h2 {
+      color: #3b82f6;
+      border-bottom: 1px solid #374151;
+      padding-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+    }
+    h3 {
+      color: #60a5fa;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    p {
+      margin: 15px 0;
+      color: #d1d5db;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      background-color: #1f2937;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #374151;
+    }
+    th {
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    tr:nth-child(even) {
+      background-color: #111827;
+    }
+    tr:nth-child(odd) {
+      background-color: #1f2937;
+    }
+    tr:hover {
+      background-color: #374151;
+      transition: background-color 0.2s ease;
+    }
+    .citation {
+      font-size: 0.9em;
+      color: #9ca3af;
+      font-style: italic;
+    }
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #9ca3af;
+      border-top: 1px solid #374151;
+      padding-top: 20px;
+    }
+    code {
+      background-color: #1f2937;
+      color: #60a5fa;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 0.95em;
+      border: 1px solid #374151;
+    }
+    ul {
+      color: #d1d5db;
+    }
+    li {
+      color: #d1d5db;
+      margin: 8px 0;
+    }
+    strong {
+      color: #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto</h1>
+    <p>Una guía completa sobre sus características, arquitectura, usos, limitaciones e integraciones</p>
+  </header>
+
+  <section>
+    <h2>1. Arquitectura y Componentes Fundamentales</h2>
+    <p>
+      Wazuh es una plataforma de seguridad de código abierto que combina funcionalidades de SIEM (Sistema de Gestión de Eventos e Información de Seguridad) y XDR (Extended Detection and Response). Su arquitectura modular y escalable se basa en cuatro componentes principales: <strong>Agente</strong>, <strong>Manager</strong>, <strong>Indexer</strong> y <strong>Dashboard</strong>.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Componente</th>
+          <th>Función Principal</th>
+          <th>Comunicación Clave</th>
+          <th>Requisitos en Producción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Wazuh Agent</strong></td>
+          <td>Recopilación de logs, FIM, evaluación de configuración</td>
+          <td>Puerto 1514/TCP (AES/Blowfish)</td>
+          <td>Instalado en hosts a monitorear (on-premise, cloud, contenedores)</td>
+        </tr>
+        <tr>
+          <td><strong>Wazuh Manager</strong></td>
+          <td>Procesamiento de reglas, gestión de agentes, decodificación</td>
+          <td>Filebeat a Indexer (puerto 9200/TCP)</td>
+          <td>Separado del Indexer; clúster de nodos para alta disponibilidad</td>
+        </tr>
+        <tr>
+          <td><strong>Wazuh Indexer</strong></td>
+          <td>Indexación y almacenamiento de datos para búsqueda</td>
+          <td>Conexión directa con Wazuh Dashboard</td>
+          <td>Recomendado en hosts separados para entornos escalables</td>
+        </tr>
+        <tr>
+          <td><strong>Wazuh Dashboard</strong></td>
+          <td>Visualización, búsqueda y análisis de alertas</td>
+          <td>API REST a Wazuh Manager (puerto 55000/TCP)</td>
+          <td>Conectado a un clúster de Manager/Indexer</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>La comunicación entre componentes está cifrada mediante AES-128 o Blowfish, y el dashboard utiliza Kibana para una experiencia visual avanzada.</p>
+  </section>
+
+  <section>
+    <h2>2. Capacidades de Seguridad y Cumplimiento Normativo</h2>
+    <p>
+      Wazuh ofrece un conjunto robusto de capacidades de seguridad, incluyendo detección de intrusiones (IDS), monitorización de integridad de archivos (FIM), auditoría de configuración y respuesta a incidentes.
+    </p>
+    <ul>
+      <li><strong>FIM:</strong> Detecta modificaciones no autorizadas en archivos críticos.</li>
+      <li><strong>Cumplimiento:</strong> Soporta PCI DSS, HIPAA, GDPR, NIST, CIS, ISO 27001.</li>
+      <li><strong>Respuesta Activa:</strong> Permite ejecutar scripts automáticamente ante eventos críticos (ej: bloqueo de IPs).</li>
+    </ul>
+    <p>Los dashboards preconfigurados facilitan el seguimiento de normativas y ataques según el modelo MITRE ATT&CK.</p>
+  </section>
+
+  <section>
+    <h2>3. Ámbito de Aplicación y Despliegues Recomendados</h2>
+    <p>
+      Wazuh es versátil y se adapta a múltiples entornos:
+    </p>
+    <ul>
+      <li><strong>On-Premise:</strong> Ideal para entornos regulados con control total de datos.</li>
+      <li><strong>Cloud (AWS, Azure, GCP):</strong> Integra agentes y APIs nativas para monitorear infraestructura y eventos.</li>
+      <li><strong>Contenedores (Docker, Kubernetes):</strong> Usa DaemonSets para monitorear cada nodo y APIs del orquestador.</li>
+    </ul>
+    <p>
+      Se puede desplegar mediante VMs, AMIs, Docker, Kubernetes, Ansible o como servicio administrado (<code>Wazuh Cloud</code>).
+    </p>
+  </section>
+
+  <section>
+    <h2>4. Limitaciones y Consideraciones Operativas</h2>
+    <p>
+      A pesar de sus ventajas, Wazuh presenta desafíos importantes que deben considerarse:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Limitación / Consideración</th>
+          <th>Descripción Detallada</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Curva de Aprendizaje Pronunciada</strong></td>
+          <td>Requiere conocimientos técnicos avanzados para configuración y operación.</td>
+        </tr>
+        <tr>
+          <td><strong>Complejidad de Configuración Inicial</strong></td>
+          <td>Dimensionamiento incorrecto puede causar sobrecarga y alto ruido de alertas.</td>
+        </tr>
+        <tr>
+          <td><strong>Rendimiento y Escalabilidad</strong></td>
+          <td>Wazuh Cloud tiene límites de API no modificables por el usuario.</td>
+        </tr>
+        <tr>
+          <td><strong>Interfaz de Usuario y Personalización</strong></td>
+          <td>UI percibida como anticuada; personalización de informes limitada.</td>
+        </tr>
+        <tr>
+          <td><strong>Soporte</strong></td>
+          <td>Soporte comunitario gratuito; soporte profesional requiere pago.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>5. Integraciones y Ecosistema de Colaboración</h2>
+    <p>
+      Wazuh se integra perfectamente con diversas herramientas de seguridad:
+    </p>
+    <ul>
+      <li><strong>Elastic Stack (ELK):</strong> Dashboard basado en Kibana; datos enviados vía Filebeat a Elasticsearch.</li>
+      <li><strong>OpenSearch:</strong> Alternativa compatible al fork de Amazon.</li>
+      <li><strong>SIEM Comerciales:</strong> Splunk, QRadar, ArcSight (como fuente de eventos de seguridad).</li>
+      <li><strong>miniOrange:</strong> Integración API para gestión de identidades y reglas personalizadas.</li>
+      <li><strong>SOCaaS:</strong> Proveedores como TecnetOne ofrecen servicios de seguridad basados en Wazuh.</li>
+    </ul>
+    <p>Esta flexibilidad lo convierte en un componente central en arquitecturas XDR modernas.</p>
+  </section>
+
+  <section>
+    <h2>6. Posicionamiento Competitivo y Modelo de Valor</h2>
+    <p>
+      Wazuh se destaca por su modelo de valor único: <strong>capacidades empresariales sin costos de licencia</strong>.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Característica</th>
+          <th>Wazuh</th>
+          <th>Solución Competitiva (Ej: Microsoft Sentinel)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Modelo de Licencia</strong></td>
+          <td>Gratuito, código abierto (Apache 2.0)</td>
+          <td>Propietario, precios basados en ingesta</td>
+        </tr>
+        <tr>
+          <td><strong>Arquitectura</strong></td>
+          <td>Modular, escalable, desacoplable</td>
+          <td>Nativa en la nube, integrada con Azure</td>
+        </tr>
+        <tr>
+          <td><strong>Detección de Amenazas</strong></td>
+          <td>Reglas + FIM + respuesta activa</td>
+          <td>Análisis con machine learning</td>
+        </tr>
+        <tr>
+          <td><strong>Calidad de la Interfaz</strong></td>
+          <td>Funcional, pero menos pulida</td>
+          <td>UX moderna y fluida</td>
+        </tr>
+        <tr>
+          <td><strong>Costo Total de Propiedad (TCO)</strong></td>
+          <td>Bajo (solo infraestructura)</td>
+          <td>Alto (ingesta + licencias)</td>
+        </tr>
+        <tr>
+          <td><strong>Requisitos de Habilidad</strong></td>
+          <td>Alto (necesita experiencia técnica)</td>
+          <td>Bajo (automatizado)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Wazuh es ideal para organizaciones que priorizan el control, la transparencia y el bajo costo, y están dispuestas a invertir en conocimiento técnico.
+    </p>
+  </section>
+
+  <footer>
+    <div style="text-align: center; margin-bottom: 20px;">
+      <a href="pildoras.html" style="display: inline-block; background: linear-gradient(45deg, #3b82f6, #1e40af); color: white; text-decoration: none; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: none; font-size: 1em; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);">
+        <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>
+        Explorar Todas las Píldoras
+        <i class="fas fa-graduation-cap" style="margin-left: 8px;"></i>
+      </a>
+    </div>
+    <p class="citation">
+      © 2025 Análisis Técnico de Wazuh. Documento basado en documentación oficial y evaluaciones de la comunidad.
+      Fuentes: wazuh.com, elastic.co, miniOrange, TecnetOne, artículos de seguridad.
+    </p>
+  </footer>
+
+</body>
+</html>

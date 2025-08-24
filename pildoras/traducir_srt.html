@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Traductor de Archivos SRT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            display: grid;
+            gap: 30px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            font-weight: 600;
+        }
+
+        .section h3 {
+            color: #34495e;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+
+        .file-structure {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .info {
+            background: #cce5ff;
+            border: 1px solid #b3d4fc;
+            color: #004085;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .step {
+            background: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .step-number {
+            background: #17a2b8;
+            color: white;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .highlight {
+            background: #f1c40f;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Tutorial: Traductor de Archivos SRT</h1>
+            <p>Traduce subtítulos del inglés al español usando Ollama localmente</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>📋 Tabla de Contenidos</h2>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>🔧 Requisitos Previos</li>
+                    <li>⚙️ Instalación y Configuración</li>
+                    <li>📁 Estructura del Proyecto</li>
+                    <li>▶️ Cómo Ejecutar el Script</li>
+                    <li>📝 Ejemplos de Uso</li>
+                    <li>🔧 Personalización</li>
+                    <li>🚨 Solución de Problemas</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>🔧 Requisitos Previos</h2>
+
+                <h3>1. Python 3.7+</h3>
+                <div class="code-block">
+# Verificar versión de Python<br>
+python --version<br>
+# o<br>
+python3 --version<br>
+                </div>
+
+                <h3>2. Ollama Instalado</h3>
+                <div class="warning">
+                    <strong>⚠️ Importante:</strong> Ollama debe estar ejecutándose localmente para que el script funcione.
+                </div>
+
+                <div class="step">
+                    <span class="step-number">1</span>
+                    Descarga Ollama desde <a href="https://ollama.ai" target="_blank">ollama.ai</a>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    Instala y ejecuta Ollama
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    Descarga un modelo de lenguaje (recomendado: Mistral)
+                </div>
+
+                <div class="code-block">
+# En terminal, después de instalar Ollama:<br>
+ollama pull mistral<br>
+# o cualquier otro modelo que prefieras:<br>
+# ollama pull llama2<br>
+# ollama pull gemma<br>
+# ollama pull mixtral<br>
+                </div>
+
+                <h3>3. Dependencias de Python</h3>
+                <div class="code-block">
+# Instalar requests<br>
+pip install requests<br>
+# o para pip3<br>
+pip3 install requests<br>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>⚙️ Instalación y Configuración</h2>
+
+                <h3>1. Descargar el Script</h3>
+                <p>Copia el archivo <code class="highlight">traducir_srt.py</code> a tu directorio de trabajo.</p>
+
+                <h3>2. Configurar Carpetas</h3>
+                <div class="file-structure">
+📁 TuProyecto/<br>
+├── 📄 traducir_srt.py<br>
+├── 📁 entrada/          # Aquí van los archivos SRT a traducir<br>
+└── 📁 salida/           # Aquí se guardarán las traducciones<br>
+                </div>
+
+                <div class="info">
+                    <strong>💡 Tip:</strong> Las carpetas <code>entrada</code> y <code>salida</code> se crean automáticamente si no existen.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📁 Estructura del Proyecto</h2>
+
+                <div class="file-structure">
+📁 MiProyectoTraducciones/<br>
+├── 📄 traducir_srt.py              # Script principal<br>
+├── 📁 entrada/<br>
+│   ├── 📄 video1_en.srt           # Archivo SRT original<br>
+│   ├── 📄 video2_en.srt           # Otro archivo SRT<br>
+│   └── 📄 ...                     # Más archivos SRT<br>
+├── 📁 salida/<br>
+│   ├── 📄 video1_en.srt           # Traducción completada<br>
+│   ├── 📄 video2_en.srt           # Traducción completada<br>
+│   └── 📄 ...                     # Más traducciones<br>
+└── 📄 tutorial_traducir_srt.html  # Este tutorial<br>
+                </div>
+
+                <h3>Archivos SRT de Ejemplo</h3>
+                <div class="code-block">
+1
+00:00:01,234 --> 00:00:04,567<br>
+Hello, welcome to this video about artificial intelligence.<br>
+<br>
+2<br>
+00:00:04,568 --> 00:00:07,890<br>
+Today we will explore the fundamentals of AI.<br>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>▶️ Cómo Ejecutar el Script</h2>
+
+                <h3>Método 1: Ejecución Directa</h3>
+                <div class="code-block">
+# Navega al directorio del proyecto<br>
+cd /ruta/a/tu/proyecto<br>
+<br>
+# Ejecuta el script<br>
+python traducir_srt.py<br>
+# o<br>
+python3 traducir_srt.py<br>
+                </div>
+
+                <h3>Método 2: Ejecución con Python</h3>
+                <div class="code-block">
+# Si tienes múltiples versiones de Python<br>
+python3 traducir_srt.py<br>
+                </div>
+
+                <div class="success">
+                    <strong>✅ Progreso:</strong> El script procesará automáticamente todos los archivos .srt en la carpeta <code>entrada</code>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📝 Ejemplos de Uso</h2>
+
+                <h3>Ejemplo 1: Traducción Básica</h3>
+                <div class="code-block">
+🔍 Encontrados 3 archivos SRT para traducir<br>
+🌐 Traduciendo 'video1_en.srt' con mistral en Ollama...<br>
+✅ Traducción completada: salida/video1_en.srt<br>
+🌐 Traduciendo 'video2_en.srt' con mistral en Ollama...<br>
+✅ Traducción completada: salida/video2_en.srt<br>
+🌐 Traduciendo 'video3_en.srt' con mistral en Ollama...<br>
+✅ Traducción completada: salida/video3_en.srt<br>
+                </div>
+
+                <h3>Ejemplo 2: Sin Archivos SRT</h3>
+                <div class="warning">
+⚠️ No se encontraron archivos .srt en la carpeta de entrada<br>
+                </div>
+
+                <h3>Ejemplo 3: Error de Conexión</h3>
+                <div class="warning">
+⚠️ Error de conexión con Ollama: HTTPConnectionPool...<br>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🔧 Personalización</h2>
+
+                <h3>Cambiar el Modelo de Lenguaje</h3>
+                <div class="code-block">
+# En traducir_srt.py, línea 7:<br>
+modelo = "mistral"   # Cambia por otro modelo<br>
+# Opciones: llama2, gemma, mixtral, codellama, etc.<br>
+                </div>
+
+                <h3>Cambiar Carpetas</h3>
+                <div class="code-block">
+# En traducir_srt.py, líneas 5-6:<br>
+carpeta_entrada = "entrada"<br>
+carpeta_salida = "salida"<br>
+                </div>
+
+                <h3>Personalizar el Prompt</h3>
+                <div class="code-block">
+# En traducir_srt.py, línea 13:<br>
+prompt = f"Traduce al castellano de forma natural y concisa. Mantén el sentido original y usa un lenguaje natural:\n\n{texto}"<br>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🚨 Solución de Problemas</h2>
+
+                <h3>Error: "No se pudo decodificar"</h3>
+                <div class="info">
+                    <strong>Solución:</strong> El archivo SRT tiene una codificación no soportada. El script intenta automáticamente UTF-8, UTF-16, Latin1 y CP1252.
+                </div>
+
+                <h3>Error: "Error de conexión con Ollama"</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    Verifica que Ollama esté ejecutándose: <code>ollama list</code>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    Si no está ejecutándose, inicia Ollama
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    Verifica que el modelo esté descargado: <code>ollama pull mistral</code>
+                </div>
+
+                <h3>Error: "Model not found"</h3>
+                <div class="code-block">
+# Descarga el modelo especificado<br>
+ollama pull mistral<br>
+# o cambia el modelo en el script<br>
+                </div>
+
+                <h3>Traducción no funciona correctamente</h3>
+                <div class="info">
+                    <strong>Posibles causas:</strong>
+                    <ul>
+                        <li>El modelo no está optimizado para traducción</li>
+                        <li>El prompt puede necesitar ajustes</li>
+                        <li>Prueba con un modelo diferente</li>
+                    </ul>
+                </div>
+
+                <h3>Script no encuentra archivos</h3>
+                <div class="info">
+                    <strong>Verifica:</strong>
+                    <ul>
+                        <li>Que los archivos tengan extensión .srt</li>
+                        <li>Que estén en la carpeta <code>entrada</code></li>
+                        <li>Que no haya espacios extra en los nombres</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🎯 Consejos y Mejores Prácticas</h2>
+
+                <div class="info">
+                    <strong>💡 Optimización:</strong> Para mejores resultados de traducción, considera usar modelos más grandes como "mixtral" o "llama2:13b".
+                </div>
+
+                <div class="info">
+                    <strong>💡 Backup:</strong> Siempre mantén copias de seguridad de tus archivos SRT originales.
+                </div>
+
+                <div class="info">
+                    <strong>💡 Batch Processing:</strong> El script procesa todos los archivos .srt automáticamente, ideal para traducir múltiples videos.
+                </div>
+
+                <div class="info">
+                    <strong>💡 Monitoreo:</strong> Revisa la consola para ver el progreso y posibles errores durante la traducción.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Tutorial Traductor SRT | Desarrollado para facilitar la traducción de subtítulos</p>
+            <p style="margin-top: 10px;">
+                <a href="pildoras.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;" onmouseover="this.style.color='rgba(255, 255, 255, 1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.8)';">
+                    ← Volver al índice de píldoras
+                </a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

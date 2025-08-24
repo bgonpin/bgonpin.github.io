@@ -292,7 +292,7 @@
     },
     {
       "archivo": "hardening_ssh",
-      "titulo": "Manual de Hardening para SSH - Guía 2025",
+      "titulo": "Manual de Hardening para SSH",
       "descripcion": "Mantenga su sistema y el daemon SSH actualizados para cerrar vulnerabilidades conocidas. Modifique el puerto predeterminado (22) para reducir ataques automatizados. Evite el acceso directo al usuario root mediante SSH para minimizar riesgos de seguridad. Force el uso del protocolo SSHv2, que incluye mejoras de seguridad sobre versiones anteriores. Utilice claves SSH en lugar de contraseñas para eliminar el riesgo de ataques de fuerza bruta. Genere claves usando el algoritmo ed25519, considerado ",
       "palabrasClave": [
         "ssh",
@@ -677,17 +677,17 @@
         "actualizacion",
         "color",
         "important",
-        "const",
         "aprende",
+        "const",
         "sobre",
         "search",
         "results",
+        "archivos",
         "seguridad",
         "linux",
         "del",
         "pildora",
         "sistema",
-        "archivos",
         "font",
         "completa",
         "query",
@@ -927,6 +927,35 @@
       ],
       "fechaActualizacion": null,
       "ruta": "pildoras/ssh.html"
+    },
+    {
+      "archivo": "traducir_srt",
+      "titulo": "Tutorial: Traductor de Archivos SRT",
+      "descripcion": "Traduce subtítulos del inglés al español usando Ollama localmente Copia el archivo traducir_srt.py a tu directorio de trabajo. © 2025 Tutorial Traductor SRT | Desarrollado para facilitar la traducción de subtítulos",
+      "palabrasClave": [
+        "srt",
+        "ollama",
+        "border",
+        "margin",
+        "padding",
+        "archivos",
+        "font",
+        "15px",
+        "color",
+        "background",
+        "script",
+        "traducci",
+        "radius",
+        "modelo",
+        "8px",
+        "traducir_srt",
+        "mistral",
+        "solid",
+        "python",
+        "entrada"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/traducir_srt.html"
     },
     {
       "archivo": "traducir_vtt",
@@ -1243,7 +1272,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 13
       },
       {
@@ -1305,7 +1334,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 2
       },
       {
@@ -1414,6 +1443,11 @@
         "relevancia": 2
       },
       {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 9
+      },
+      {
         "archivo": "traducir_vtt",
         "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 1
@@ -1462,7 +1496,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 1
       },
       {
@@ -1536,7 +1570,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 3
       },
       {
@@ -1637,6 +1671,11 @@
       {
         "archivo": "ssh",
         "titulo": "¿Qué es SSH?",
+        "relevancia": 3
+      },
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
         "relevancia": 3
       },
       {
@@ -1733,7 +1772,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 5
       },
       {
@@ -1837,6 +1876,11 @@
         "relevancia": 4
       },
       {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 5
+      },
+      {
         "archivo": "traducir_vtt",
         "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 7
@@ -1921,7 +1965,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 8
       },
       {
@@ -1983,7 +2027,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 9
       },
       {
@@ -2075,6 +2119,11 @@
         "archivo": "ssh",
         "titulo": "¿Qué es SSH?",
         "relevancia": 7
+      },
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 18
       },
       {
         "archivo": "traducir_vtt",
@@ -2169,7 +2218,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 12
       },
       {
@@ -2238,6 +2287,11 @@
         "relevancia": 11
       },
       {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 10
+      },
+      {
         "archivo": "traducir_vtt",
         "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 8
@@ -2301,7 +2355,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 4
       },
       {
@@ -2373,6 +2427,11 @@
         "archivo": "ssh",
         "titulo": "¿Qué es SSH?",
         "relevancia": 10
+      },
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 4
       },
       {
         "archivo": "traducir_vtt",
@@ -2505,7 +2564,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 14
       },
       {
@@ -2536,7 +2595,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 13
+        "relevancia": 14
       },
       {
         "archivo": "pxe",
@@ -2610,7 +2669,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 16
+        "relevancia": 11
       },
       {
         "archivo": "ransomware",
@@ -2621,6 +2680,11 @@
         "archivo": "rsyslog",
         "titulo": "Información sobre Rsyslog",
         "relevancia": 15
+      },
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 6
       },
       {
         "archivo": "traducir_vtt",
@@ -2662,7 +2726,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 12
+        "relevancia": 13
       }
     ],
     "log": [
@@ -2716,7 +2780,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 15
+        "relevancia": 16
       },
       {
         "archivo": "ransomware",
@@ -3001,6 +3065,11 @@
         "relevancia": 19
       },
       {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 13
+      },
+      {
         "archivo": "traducir_vtt",
         "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 11
@@ -3094,7 +3163,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 11
       },
       {
@@ -3125,7 +3194,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 11
+        "relevancia": 12
       },
       {
         "archivo": "ransomware",
@@ -3861,7 +3930,7 @@
       },
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 7
       },
       {
@@ -3893,6 +3962,11 @@
         "archivo": "rsyslog_a_mongodb",
         "titulo": "Enviar salidas de rsyslog a MongoDB",
         "relevancia": 9
+      },
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 7
       },
       {
         "archivo": "traducir_vtt",
@@ -4006,14 +4080,14 @@
     "claves": [
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 6
       }
     ],
     "5px": [
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 10
       },
       {
@@ -4025,15 +4099,20 @@
     "acceso": [
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 15
       }
     ],
     "15px": [
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 16
+      },
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 8
       },
       {
         "archivo": "traducir_vtt",
@@ -4049,7 +4128,7 @@
     "size": [
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 17
       },
       {
@@ -4076,7 +4155,7 @@
     "text": [
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 18
       },
       {
@@ -4093,7 +4172,7 @@
     "top": [
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 19
       },
       {
@@ -4110,7 +4189,7 @@
     "left": [
       {
         "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "titulo": "Manual de Hardening para SSH",
         "relevancia": 20
       },
       {
@@ -4538,6 +4617,11 @@
         "relevancia": 13
       },
       {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 15
+      },
+      {
         "archivo": "wazuh-virus-total",
         "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
         "relevancia": 14
@@ -4718,6 +4802,11 @@
         "archivo": "perplexica",
         "titulo": "Tutorial de instalación de Perplexica",
         "relevancia": 4
+      },
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 2
       }
     ],
     "modelo": [
@@ -4725,6 +4814,11 @@
         "archivo": "ollama",
         "titulo": "Tutorial Completo de Ollama",
         "relevancia": 5
+      },
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 14
       }
     ],
     "code": [
@@ -4959,14 +5053,14 @@
         "relevancia": 5
       }
     ],
-    "const": [
+    "aprende": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
         "relevancia": 6
       }
     ],
-    "aprende": [
+    "const": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
@@ -4998,7 +5092,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 14
+        "relevancia": 15
       }
     ],
     "completa": [
@@ -5195,6 +5289,11 @@
         "relevancia": 2
       },
       {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 11
+      },
+      {
         "archivo": "traducir_vtt",
         "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 2
@@ -5219,6 +5318,11 @@
         "archivo": "redimensionar_imagen",
         "titulo": "Tutorial: Script de Redimensionado de Imágenes",
         "relevancia": 6
+      },
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 19
       }
     ],
     "originales": [
@@ -5455,18 +5559,51 @@
         "relevancia": 17
       }
     ],
+    "srt": [
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 1
+      }
+    ],
+    "traducci": [
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 12
+      }
+    ],
+    "traducir_srt": [
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 16
+      }
+    ],
+    "mistral": [
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 17
+      }
+    ],
+    "entrada": [
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 20
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 15
+      }
+    ],
     "vtt": [
       {
         "archivo": "traducir_vtt",
         "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 5
-      }
-    ],
-    "entrada": [
-      {
-        "archivo": "traducir_vtt",
-        "titulo": "Tutorial: Script para Traducir Archivos VTT",
-        "relevancia": 15
       }
     ],
     "traducir_vtt": [
@@ -5808,9 +5945,9 @@
     ]
   },
   "metadata": {
-    "created": "2025-08-24T21:17:28.325Z",
+    "created": "2025-08-24T22:29:53.507Z",
     "description": "Índice de archivos HTML en la carpeta pildoras para búsquedas por palabras clave",
     "version": "1.0",
-    "totalFiles": 40
+    "totalFiles": 41
   }
 }

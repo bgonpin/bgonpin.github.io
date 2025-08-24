@@ -291,6 +291,35 @@
       "ruta": "pildoras/graylog_guia.html"
     },
     {
+      "archivo": "hardening_ssh",
+      "titulo": "Manual de Hardening para SSH - Guía 2025",
+      "descripcion": "Mantenga su sistema y el daemon SSH actualizados para cerrar vulnerabilidades conocidas. Modifique el puerto predeterminado (22) para reducir ataques automatizados. Evite el acceso directo al usuario root mediante SSH para minimizar riesgos de seguridad. Force el uso del protocolo SSHv2, que incluye mejoras de seguridad sobre versiones anteriores. Utilice claves SSH en lugar de contraseñas para eliminar el riesgo de ataques de fuerza bruta. Genere claves usando el algoritmo ed25519, considerado ",
+      "palabrasClave": [
+        "ssh",
+        "color",
+        "border",
+        "margin",
+        "padding",
+        "claves",
+        "font",
+        "autenticaci",
+        "solid",
+        "5px",
+        "seguridad",
+        "background",
+        "configuraci",
+        "del",
+        "acceso",
+        "15px",
+        "size",
+        "text",
+        "top",
+        "left"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/hardening_ssh.html"
+    },
+    {
       "archivo": "ia",
       "titulo": "Inteligencia Artificial - Pildoras",
       "descripcion": "La IA, o inteligencia artificial, es una rama de la informática que se enfoca en crear máquinas que pueden imitar la inteligencia humana. Esto incluye la capacidad de aprender, razonar, resolver problemas, percibir y comprender el lenguaje. En lugar de ser programadas con reglas específicas para cada tarea, las máquinas de IA usan algoritmos para aprender de los datos y mejorar su rendimiento con el tiempo. La aplicación de la IA en ciberseguridad es una de las áreas más prometedoras para fortal",
@@ -649,20 +678,20 @@
         "color",
         "important",
         "const",
-        "sobre",
         "aprende",
+        "sobre",
         "search",
         "results",
-        "linux",
         "seguridad",
+        "linux",
         "del",
         "pildora",
         "sistema",
         "archivos",
         "font",
+        "completa",
         "query",
-        "searchterm",
-        "border"
+        "searchterm"
       ],
       "fechaActualizacion": "02-08-2025",
       "ruta": "pildoras/pildoras.html"
@@ -920,10 +949,10 @@
         "5px",
         "entrada",
         "traducir_vtt",
-        "autom",
         "traducir",
         "bottom",
-        "left"
+        "left",
+        "translate"
       ],
       "fechaActualizacion": null,
       "ruta": "pildoras/traducir_vtt.html"
@@ -1213,6 +1242,11 @@
         "relevancia": 20
       },
       {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 13
+      },
+      {
         "archivo": "nfs_hardening",
         "titulo": "Hardening de NFS: Guía Completa de Seguridad",
         "relevancia": 9
@@ -1268,6 +1302,11 @@
         "archivo": "graylog_guia",
         "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
         "relevancia": 3
+      },
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 2
       },
       {
         "archivo": "ia",
@@ -1422,6 +1461,11 @@
         "relevancia": 7
       },
       {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 1
+      },
+      {
         "archivo": "iptables",
         "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
         "relevancia": 19
@@ -1491,6 +1535,11 @@
         "relevancia": 2
       },
       {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 3
+      },
+      {
         "archivo": "ia",
         "titulo": "Inteligencia Artificial - Pildoras",
         "relevancia": 3
@@ -1549,11 +1598,6 @@
         "archivo": "phishing",
         "titulo": "Phishing: El Arte del Engaño Digital",
         "relevancia": 10
-      },
-      {
-        "archivo": "pildoras",
-        "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 20
       },
       {
         "archivo": "playbook_dos_windows_personalizado",
@@ -1685,6 +1729,11 @@
       {
         "archivo": "graylog_guia",
         "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 5
+      },
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
         "relevancia": 5
       },
       {
@@ -1871,6 +1920,11 @@
         "relevancia": 14
       },
       {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 8
+      },
+      {
         "archivo": "ntlm",
         "titulo": "NTLM - Pildoras",
         "relevancia": 2
@@ -1926,6 +1980,11 @@
         "archivo": "graylog_guia",
         "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
         "relevancia": 7
+      },
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 9
       },
       {
         "archivo": "ia",
@@ -2109,6 +2168,11 @@
         "relevancia": 10
       },
       {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 12
+      },
+      {
         "archivo": "ia",
         "titulo": "Inteligencia Artificial - Pildoras",
         "relevancia": 16
@@ -2234,6 +2298,11 @@
         "archivo": "google-fotos-herramientas-ia",
         "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
         "relevancia": 9
+      },
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 4
       },
       {
         "archivo": "ia",
@@ -2435,6 +2504,11 @@
         "relevancia": 13
       },
       {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 14
+      },
+      {
         "archivo": "lamehug",
         "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
         "relevancia": 3
@@ -2588,7 +2662,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 11
+        "relevancia": 12
       }
     ],
     "log": [
@@ -2847,7 +2921,7 @@
       {
         "archivo": "traducir_vtt",
         "titulo": "Tutorial: Script para Traducir Archivos VTT",
-        "relevancia": 19
+        "relevancia": 18
       },
       {
         "archivo": "virus_total",
@@ -3019,6 +3093,11 @@
         "relevancia": 3
       },
       {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 11
+      },
+      {
         "archivo": "iptables",
         "titulo": "iptables: El Cortafuegos de Linux - Guía Completa",
         "relevancia": 17
@@ -3046,7 +3125,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 12
+        "relevancia": 11
       },
       {
         "archivo": "ransomware",
@@ -3781,6 +3860,11 @@
         "relevancia": 6
       },
       {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 7
+      },
+      {
         "archivo": "nfs",
         "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
         "relevancia": 9
@@ -3916,6 +4000,127 @@
       {
         "archivo": "graylog_guia",
         "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 19
+      }
+    ],
+    "claves": [
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 6
+      }
+    ],
+    "5px": [
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 10
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 14
+      }
+    ],
+    "acceso": [
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 15
+      }
+    ],
+    "15px": [
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 16
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 13
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 19
+      }
+    ],
+    "size": [
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 17
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 13
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 14
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 13
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 11
+      }
+    ],
+    "text": [
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 18
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 10
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 14
+      }
+    ],
+    "top": [
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 19
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 17
+      },
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 3
+      }
+    ],
+    "left": [
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH - Guía 2025",
+        "relevancia": 20
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 14
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 19
       }
     ],
@@ -4364,40 +4569,6 @@
         "relevancia": 20
       }
     ],
-    "size": [
-      {
-        "archivo": "nfs_hardening",
-        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
-        "relevancia": 13
-      },
-      {
-        "archivo": "notebooklm",
-        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
-        "relevancia": 14
-      },
-      {
-        "archivo": "virus_total",
-        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
-        "relevancia": 13
-      },
-      {
-        "archivo": "wazuh",
-        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
-        "relevancia": 11
-      }
-    ],
-    "left": [
-      {
-        "archivo": "nfs_hardening",
-        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
-        "relevancia": 14
-      },
-      {
-        "archivo": "traducir_vtt",
-        "titulo": "Tutorial: Script para Traducir Archivos VTT",
-        "relevancia": 20
-      }
-    ],
     "position": [
       {
         "archivo": "nfs_hardening",
@@ -4433,18 +4604,6 @@
         "relevancia": 9
       }
     ],
-    "text": [
-      {
-        "archivo": "notebooklm",
-        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
-        "relevancia": 10
-      },
-      {
-        "archivo": "wazuh",
-        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
-        "relevancia": 14
-      }
-    ],
     "informaci": [
       {
         "archivo": "notebooklm",
@@ -4474,18 +4633,6 @@
         "archivo": "notebooklm",
         "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
         "relevancia": 16
-      }
-    ],
-    "top": [
-      {
-        "archivo": "notebooklm",
-        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
-        "relevancia": 17
-      },
-      {
-        "archivo": "playbook_dos_windows_personalizado",
-        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
-        "relevancia": 3
       }
     ],
     "shadow": [
@@ -4819,14 +4966,14 @@
         "relevancia": 6
       }
     ],
-    "sobre": [
+    "aprende": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
         "relevancia": 7
       }
     ],
-    "aprende": [
+    "sobre": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
@@ -4854,18 +5001,25 @@
         "relevancia": 14
       }
     ],
-    "query": [
+    "completa": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
         "relevancia": 18
       }
     ],
-    "searchterm": [
+    "query": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
         "relevancia": 19
+      }
+    ],
+    "searchterm": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 20
       }
     ],
     "object": [
@@ -5308,25 +5462,6 @@
         "relevancia": 5
       }
     ],
-    "15px": [
-      {
-        "archivo": "traducir_vtt",
-        "titulo": "Tutorial: Script para Traducir Archivos VTT",
-        "relevancia": 13
-      },
-      {
-        "archivo": "wazuh",
-        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
-        "relevancia": 19
-      }
-    ],
-    "5px": [
-      {
-        "archivo": "traducir_vtt",
-        "titulo": "Tutorial: Script para Traducir Archivos VTT",
-        "relevancia": 14
-      }
-    ],
     "entrada": [
       {
         "archivo": "traducir_vtt",
@@ -5341,18 +5476,18 @@
         "relevancia": 16
       }
     ],
-    "autom": [
+    "traducir": [
       {
         "archivo": "traducir_vtt",
         "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 17
       }
     ],
-    "traducir": [
+    "translate": [
       {
         "archivo": "traducir_vtt",
         "titulo": "Tutorial: Script para Traducir Archivos VTT",
-        "relevancia": 18
+        "relevancia": 20
       }
     ],
     "virustotal": [
@@ -5673,9 +5808,9 @@
     ]
   },
   "metadata": {
-    "created": "2025-08-24T18:57:50.087Z",
+    "created": "2025-08-24T21:17:28.325Z",
     "description": "Índice de archivos HTML en la carpeta pildoras para búsquedas por palabras clave",
     "version": "1.0",
-    "totalFiles": 39
+    "totalFiles": 40
   }
 }

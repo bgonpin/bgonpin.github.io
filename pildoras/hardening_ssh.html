@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Manual de Hardening para SSH - Guía 2025</title>
+    <style>
+        body { font-family: 'Times New Roman', serif; line-height: 1.8; max-width: 1000px; margin: 0 auto; padding: 30px; background-color: #1a1a1a; color: #e0e0e0; }
+        h1 { color: #ffffff; border-bottom: 3px solid #666666; padding-bottom: 15px; font-size: 2.5em; text-align: center; margin-bottom: 30px; }
+        h2 { color: #f0f0f0; margin-top: 40px; font-size: 1.8em; border-left: 5px solid #666666; padding-left: 15px; }
+        h3 { color: #d0d0d0; font-size: 1.4em; margin-top: 25px; font-weight: bold; }
+        p { text-align: justify; margin-bottom: 15px; }
+        code { background: #2a2a2a; padding: 3px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em; color: #f8f8f2; border: 1px solid #555; }
+        pre { background: #2a2a2a; padding: 20px; border-radius: 6px; overflow-x: auto; border: 1px solid #555; font-family: 'Courier New', monospace; color: #f8f8f2; }
+        .warning { background: #2d1810; border-left: 5px solid #a94442; padding: 15px; margin: 20px 0; border-radius: 0 5px 5px 0; color: #f2dede; }
+        .note { background: #1e2a35; border-left: 5px solid #337ab7; padding: 15px; margin: 20px 0; border-radius: 0 5px 5px 0; color: #d9edf7; }
+        .toc { background: #2a2a2a; padding: 20px; margin: 20px 0; border: 1px solid #555; border-radius: 5px; color: #e0e0e0; }
+        .toc ul { list-style-type: none; padding-left: 0; }
+        .toc li { margin: 8px 0; }
+        .toc a { text-decoration: none; color: #66b3ff; }
+        .toc a:hover { text-decoration: underline; color: #99ccff; }
+        footer { margin-top: 50px; padding-top: 25px; border-top: 2px solid #666; font-size: 0.9em; color: #aaa; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Manual de Hardening para SSH: Protección Avanzada 2025</h1>
+
+    <div class="toc">
+        <h2>Tabla de Contenidos</h2>
+        <ul>
+            <li><a href="#configuracion-basica">1. Configuración Básica de Seguridad</a>
+                <ul>
+                    <li><a href="#actualizacion">1.1 Actualización y Parcheo Regular</a></li>
+                    <li><a href="#cambio-puerto">1.2 Cambio del Puerto SSH Predeterminado</a></li>
+                    <li><a href="#deshabilitar-root">1.3 Deshabilitar Inicio de Sesión como Root</a></li>
+                    <li><a href="#protocolo-sshv2">1.4 Uso Exclusivo del Protocolo SSHv2</a></li>
+                </ul>
+            </li>
+            <li><a href="#autenticacion-segura">2. Autenticación Segura</a>
+                <ul>
+                    <li><a href="#autenticacion-claves">2.1 Autenticación Basada en Claves</a></li>
+                    <li><a href="#rotacion-claves">2.2 Rotación Periódica de Claves</a></li>
+                    <li><a href="#2fa">2.3 Autenticación de Dos Factores</a></li>
+                    <li><a href="#certificados-ssh">2.4 Certificados SSH en Entornos Empresariales</a></li>
+                </ul>
+            </li>
+            <li><a href="#control-acceso">3. Control de Acceso</a>
+                <ul>
+                    <li><a href="#restriccion-usuarios">3.1 Restricción de Usuarios Autorizados</a></li>
+                    <li><a href="#host-bastion">3.2 Uso de Host Bastión</a></li>
+                    <li><a href="#firewall">3.3 Reglas de Firewall Estrictas</a></li>
+                </ul>
+            </li>
+            <li><a href="#monitoreo">4. Monitoreo y Protección Adicional</a>
+                <ul>
+                    <li><a href="#fail2ban">4.1 Implementación de Fail2Ban</a></li>
+                    <li><a href="#registro-auditoria">4.2 Registro y Auditoría</a></li>
+                    <li><a href="#limites-conexion">4.3 Límites de Tiempo de Conexión</a></li>
+                </ul>
+            </li>
+            <li><a href="#verificacion">5. Verificación Final de Configuración</a></li>
+        </ul>
+    </div>
+
+    <div class="note">
+        <strong>Nota:</strong> Este manual contiene prácticas recomendadas actualizadas para 2025 basadas en estándares de seguridad empresarial y guías de hardening reconocidas.
+    </div>
+
+    <h2 id="configuracion-basica">1. Configuración Básica de Seguridad</h2>
+
+    <h3 id="actualizacion">1.1 Actualización y Parcheo Regular</h3>
+    <p>Mantenga su sistema y el daemon SSH actualizados para cerrar vulnerabilidades conocidas. </p>
+
+    <h3 id="cambio-puerto">1.2 Cambio del Puerto SSH Predeterminado</h3>
+    <p>Modifique el puerto predeterminado (22) para reducir ataques automatizados. </p>
+    <pre>Port 22222  # Ejemplo de puerto personalizado</pre>
+
+    <h3 id="deshabilitar-root">1.3 Deshabilitar Inicio de Sesión como Root</h3>
+    <p>Evite el acceso directo al usuario root mediante SSH para minimizar riesgos de seguridad. </p>
+    <pre>PermitRootLogin no</pre>
+
+    <h3 id="protocolo-sshv2">1.4 Uso Exclusivo del Protocolo SSHv2</h3>
+    <p>Force el uso del protocolo SSHv2, que incluye mejoras de seguridad sobre versiones anteriores. </p>
+    <pre>Protocol 2</pre>
+
+    <h2 id="autenticacion-segura">2. Autenticación Segura</h2>
+
+    <h3 id="autenticacion-claves">2.1 Autenticación Basada en Claves (Recomendado)</h3>
+    <p>Utilice claves SSH en lugar de contraseñas para eliminar el riesgo de ataques de fuerza bruta. </p>
+    <p>Genere claves usando el algoritmo ed25519, considerado estándar para 2025. </p>
+    <pre>ssh-keygen -t ed25519 -C "usuario@empresa.com"</pre>
+
+    <div class="warning">
+        <strong>Advertencia:</strong> Deshabilite completamente la autenticación por contraseña una vez configuradas las claves:
+        <pre>PasswordAuthentication no</pre>
+    </div>
+
+    <h3 id="rotacion-claves">2.2 Rotación Periódica de Claves</h3>
+    <p>Implemente un calendario de rotación de claves SSH para limitar el impacto de compromisos. </p>
+
+    <h3 id="2fa">2.3 Autenticación de Dos Factores (2FA)</h3>
+    <p>Agregue una capa adicional de seguridad mediante autenticación multifactor para conexiones SSH críticas. </p>
+
+    <h3 id="certificados-ssh">2.4 Certificados SSH en Entornos Empresariales</h3>
+    <p>Para entornos empresariales, utilice certificados SSH en lugar de claves individuales para una gestión centralizada. </p>
+
+    <h2 id="control-acceso">3. Control de Acceso</h2>
+
+    <h3 id="restriccion-usuarios">3.1 Restricción de Usuarios Autorizados</h3>
+    <p>Límite el acceso SSH solo a usuarios específicos necesarios para operaciones. </p>
+    <pre>AllowUsers usuario1 usuario2 admin@192.168.1.100</pre>
+
+    <h3 id="host-bastion">3.2 Uso de Host Bastión</h3>
+    <p>Implemente un servidor bastión como punto único de entrada para acceder a redes internas. </p>
+
+    <h3 id="firewall">3.3 Reglas de Firewall Estrictas</h3>
+    <p>Configure reglas de firewall para limitar el acceso SSH solo a direcciones IP autorizadas. </p>
+    <pre>ufw allow from 192.168.1.0/24 to any port 22222</pre>
+
+    <h2 id="monitoreo">4. Monitoreo y Protección Adicional</h2>
+
+    <h3 id="fail2ban">4.1 Implementación de Fail2Ban</h3>
+    <p>Utilice Fail2Ban para bloquear automáticamente intentos de conexión maliciosos repetidos. </p>
+
+    <h3 id="registro-auditoria">4.2 Registro y Auditoría</h3>
+    <p>Configure registros detallados y revise periódicamente los intentos de acceso:</p>
+    <pre>LogLevel VERBOSE</pre>
+
+    <h3 id="limites-conexion">4.3 Límites de Tiempo de Conexión</h3>
+    <p>Establezca límites de tiempo para conexiones inactivas:</p>
+    <pre>ClientAliveInterval 300
+ClientAliveCountMax 0</pre>
+
+    <h2 id="verificacion">5. Verificación Final de Configuración</h2>
+    <p>Antes de aplicar cambios permanentes, verifique su configuración SSH:</p>
+    <pre>sshd -t  # Valida la sintaxis del archivo de configuración</pre>
+    
+    <div class="note">
+        <h3>Resumen de Acciones Críticas</h3>
+        <ol>
+            <li>Cambie el puerto predeterminado de SSH </li>
+            <li>Deshabilite el inicio de sesión como root </li>
+            <li>Implemente autenticación basada en claves ed25519 </li>
+            <li>Restrinja usuarios y direcciones IP permitidas </li>
+            <li>Configure Fail2Ban para protección contra fuerza bruta </li>
+        </ol>
+    </div>
+
+    <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #666; font-size: 0.9em; color: #aaa;">
+        <p>Este documento se basa en las mejores prácticas de seguridad para SSH actualizadas a 2025. Consulte fuentes oficiales y realice pruebas en entornos de staging antes de implementar en producción.</p>
+        <p style="margin-top: 15px; text-align: center;"><a href="pildoras.html" style="color: #66b3ff; text-decoration: none;">← Volver al índice de píldoras</a></p>
+    </footer>
+</body>
+</html>

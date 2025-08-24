@@ -641,28 +641,28 @@
     {
       "archivo": "pildoras",
       "titulo": "Píldoras - Benito González Piñeiro",
-      "descripcion": "2025 Benito González Piñeiro.",
+      "descripcion": "2025 Benito González Piñeiro. No hay píldoras que coincidan con \"${searchTerm}\" ${highlightText(pildora.descripcion || '', searchTerm)}",
       "palabrasClave": [
         "ldora",
         "fecha",
         "actualizacion",
-        "important",
         "color",
+        "important",
+        "const",
         "sobre",
         "aprende",
+        "search",
+        "results",
         "linux",
         "seguridad",
-        "sistema",
         "del",
-        "completa",
-        "malware",
+        "pildora",
+        "sistema",
         "archivos",
-        "windows",
-        "ciberseguridad",
-        "google",
         "font",
-        "background",
-        "2c3e50"
+        "query",
+        "searchterm",
+        "border"
       ],
       "fechaActualizacion": "02-08-2025",
       "ruta": "pildoras/pildoras.html"
@@ -900,6 +900,35 @@
       "ruta": "pildoras/ssh.html"
     },
     {
+      "archivo": "traducir_vtt",
+      "titulo": "Tutorial: Script para Traducir Archivos VTT",
+      "descripcion": "Descargar traducir_vtt.py - Haz clic aquí para descargar el script completo El script espera la siguiente estructura de carpetas: Para cambiar los idiomas, edita la función translate_text en el script: Solo necesitas colocar tus archivos VTT en la carpeta entrada y ejecutar el script. Los archivos traducidos aparecerán automáticamente en la carpeta salida.",
+      "palabrasClave": [
+        "color",
+        "script",
+        "border",
+        "archivos",
+        "vtt",
+        "margin",
+        "padding",
+        "background",
+        "font",
+        "20px",
+        "radius",
+        "solid",
+        "15px",
+        "5px",
+        "entrada",
+        "traducir_vtt",
+        "autom",
+        "traducir",
+        "bottom",
+        "left"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/traducir_vtt.html"
+    },
+    {
       "archivo": "virus_total",
       "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
       "descripcion": "La plataforma de análisis de seguridad que utiliza múltiples motores de antivirus para detectar malware y analizar archivos sospechosos VirusTotal es un servicio en línea que analiza archivos y URLs sospechosos para detectar tipos de malware utilizando más de 70 motores de antivirus diferentes. Esta plataforma permite a usuarios y profesionales de seguridad verificar la seguridad de un archivo o enlace antes de abrirlo o ejecutarlo en sus sistemas. La principal ventaja de VirusTotal es su enfoqu",
@@ -1131,11 +1160,6 @@
         "archivo": "notebooklm",
         "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
         "relevancia": 5
-      },
-      {
-        "archivo": "pildoras",
-        "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 17
       }
     ],
     "authenticator": [
@@ -1308,7 +1332,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 5
+        "relevancia": 4
       },
       {
         "archivo": "playbook_dos_windows_personalizado",
@@ -1349,6 +1373,11 @@
         "archivo": "ssh",
         "titulo": "¿Qué es SSH?",
         "relevancia": 2
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 1
       },
       {
         "archivo": "virus_total",
@@ -1522,6 +1551,11 @@
         "relevancia": 10
       },
       {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 20
+      },
+      {
         "archivo": "playbook_dos_windows_personalizado",
         "titulo": "Playbook DoS/DDoS — Versión Personalizada",
         "relevancia": 5
@@ -1559,6 +1593,11 @@
       {
         "archivo": "ssh",
         "titulo": "¿Qué es SSH?",
+        "relevancia": 3
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 3
       },
       {
@@ -1747,6 +1786,11 @@
         "archivo": "ssh",
         "titulo": "¿Qué es SSH?",
         "relevancia": 4
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 7
       },
       {
         "archivo": "virus_total",
@@ -1974,6 +2018,11 @@
         "relevancia": 7
       },
       {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 12
+      },
+      {
         "archivo": "virus_total",
         "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
         "relevancia": 11
@@ -2100,11 +2149,6 @@
         "relevancia": 16
       },
       {
-        "archivo": "pildoras",
-        "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 19
-      },
-      {
         "archivo": "pxe",
         "titulo": "PXE: Preboot Execution Environment - Guía Completa",
         "relevancia": 11
@@ -2128,6 +2172,11 @@
         "archivo": "ssh",
         "titulo": "¿Qué es SSH?",
         "relevancia": 11
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 8
       },
       {
         "archivo": "virus_total",
@@ -2255,6 +2304,11 @@
         "archivo": "ssh",
         "titulo": "¿Qué es SSH?",
         "relevancia": 10
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 6
       },
       {
         "archivo": "virus_total",
@@ -2408,7 +2462,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 11
+        "relevancia": 13
       },
       {
         "archivo": "pxe",
@@ -2482,7 +2536,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 14
+        "relevancia": 16
       },
       {
         "archivo": "ransomware",
@@ -2493,6 +2547,11 @@
         "archivo": "rsyslog",
         "titulo": "Información sobre Rsyslog",
         "relevancia": 15
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 4
       },
       {
         "archivo": "virus_total",
@@ -2529,7 +2588,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 8
+        "relevancia": 11
       }
     ],
     "log": [
@@ -2583,7 +2642,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 10
+        "relevancia": 15
       },
       {
         "archivo": "ransomware",
@@ -2786,6 +2845,11 @@
         "relevancia": 18
       },
       {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 19
+      },
+      {
         "archivo": "virus_total",
         "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
         "relevancia": 8
@@ -2863,6 +2927,11 @@
         "relevancia": 19
       },
       {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 11
+      },
+      {
         "archivo": "virus_total",
         "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
         "relevancia": 17
@@ -2883,11 +2952,6 @@
         "archivo": "archivo-log-windows",
         "titulo": "Archivos Log en Microsoft Windows",
         "relevancia": 5
-      },
-      {
-        "archivo": "pildoras",
-        "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 15
       },
       {
         "archivo": "win11_cuenta_local",
@@ -2982,7 +3046,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 9
+        "relevancia": 12
       },
       {
         "archivo": "ransomware",
@@ -3107,11 +3171,6 @@
         "archivo": "lamehug",
         "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
         "relevancia": 13
-      },
-      {
-        "archivo": "pildoras",
-        "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 16
       }
     ],
     "monitoreo": [
@@ -3744,11 +3803,16 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 18
+        "relevancia": 17
       },
       {
         "archivo": "rsyslog_a_mongodb",
         "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 9
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 9
       },
       {
@@ -4058,11 +4122,6 @@
         "relevancia": 2
       },
       {
-        "archivo": "pildoras",
-        "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 13
-      },
-      {
         "archivo": "ransomware",
         "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
         "relevancia": 16
@@ -4215,6 +4274,11 @@
         "relevancia": 12
       },
       {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 10
+      },
+      {
         "archivo": "virus_total",
         "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
         "relevancia": 12
@@ -4327,6 +4391,11 @@
         "archivo": "nfs_hardening",
         "titulo": "Hardening de NFS: Guía Completa de Seguridad",
         "relevancia": 14
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 20
       }
     ],
     "position": [
@@ -4740,35 +4809,63 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 4
+        "relevancia": 5
       }
     ],
-    "sobre": [
+    "const": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
         "relevancia": 6
       }
     ],
-    "aprende": [
+    "sobre": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
         "relevancia": 7
       }
     ],
-    "completa": [
+    "aprende": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 12
+        "relevancia": 8
       }
     ],
-    "2c3e50": [
+    "search": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 20
+        "relevancia": 9
+      }
+    ],
+    "results": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 10
+      }
+    ],
+    "pildora": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 14
+      }
+    ],
+    "query": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 18
+      }
+    ],
+    "searchterm": [
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 19
       }
     ],
     "object": [
@@ -4941,6 +5038,11 @@
       {
         "archivo": "redimensionar_imagen",
         "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 2
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 2
       }
     ],
@@ -5199,6 +5301,60 @@
         "relevancia": 17
       }
     ],
+    "vtt": [
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 5
+      }
+    ],
+    "15px": [
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 13
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 19
+      }
+    ],
+    "5px": [
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 14
+      }
+    ],
+    "entrada": [
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 15
+      }
+    ],
+    "traducir_vtt": [
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 16
+      }
+    ],
+    "autom": [
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 17
+      }
+    ],
+    "traducir": [
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 18
+      }
+    ],
     "virustotal": [
       {
         "archivo": "virus_total",
@@ -5291,13 +5447,6 @@
         "archivo": "wazuh",
         "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
         "relevancia": 18
-      }
-    ],
-    "15px": [
-      {
-        "archivo": "wazuh",
-        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
-        "relevancia": 19
       }
     ],
     "weight": [
@@ -5524,9 +5673,9 @@
     ]
   },
   "metadata": {
-    "created": "2025-08-24T12:55:03.058Z",
+    "created": "2025-08-24T18:57:50.087Z",
     "description": "Índice de archivos HTML en la carpeta pildoras para búsquedas por palabras clave",
     "version": "1.0",
-    "totalFiles": 38
+    "totalFiles": 39
   }
 }

@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Comandos Linux & DevOps</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1a1a1a;
+        }
+        header {
+            background: linear-gradient(135deg, #1e1e1e, #2d3748);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            text-align: center;
+            opacity: 0.9;
+            font-size: 1.2em;
+        }
+        .toc {
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .toc h2 {
+            margin-top: 0;
+            color: #e0e0e0;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+        }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .toc li {
+            padding: 8px 0;
+        }
+        .toc a {
+            color: #61dafb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .toc a:hover {
+            color: #21b4d3;
+            text-decoration: underline;
+        }
+        section {
+            background-color: #333333;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        h2 {
+            color: #e0e0e0;
+            border-left: 4px solid #61dafb;
+            padding-left: 10px;
+            margin-top: 0;
+        }
+        h3 {
+            color: #61dafb;
+            margin-top: 20px;
+        }
+        .command {
+            background-color: #1e1e1e;
+            border-left: 3px solid #61dafb;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+            font-family: 'Courier New', monospace;
+            color: #e0e0e0;
+        }
+        .description {
+            margin-left: 10px;
+            color: #cccccc;
+        }
+        .example {
+            background-color: #2a2a2a;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 10px 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            color: #e0e0e0;
+        }
+        .example-title {
+            font-weight: bold;
+            color: #61dafb;
+            margin-bottom: 5px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #cccccc;
+            font-size: 0.9em;
+            border-top: 1px solid #555;
+        }
+        .category-count {
+            float: right;
+            background: #61dafb;
+            color: #1a1a1a;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Manual de Comandos Linux & DevOps</h1>
+        <p class="subtitle">Guía completa de más de 700 comandos esenciales para administración de sistemas y DevOps</p>
+    </header>
+
+    <div class="toc">
+        <h2>Tabla de Contenidos</h2>
+        <ul>
+            <li><a href="#gestion-archivos-directorios">1. Gestión de Archivos y Directorios</a></li>
+            <li><a href="#visualizacion-edicion">2. Visualización y Edición de Archivos</a></li>
+            <li><a href="#gestion-procesos">3. Gestión de Procesos</a></li>
+            <li><a href="#gestion-disco">4. Gestión de Disco</a></li>
+            <li><a href="#redes">5. Redes</a></li>
+            <li><a href="#usuarios-grupos">6. Gestión de Usuarios y Grupos</a></li>
+            <li><a href="#info-sistema">7. Información y Monitoreo del Sistema</a></li>
+            <li><a href="#archivos-comprimidos">8. Archivos Comprimidos y Empaquetados</a></li>
+            <li><a href="#gestion-paquetes">9. Gestión de Paquetes</a></li>
+            <li><a href="#servicios-sistema">10. Gestión de Servicios y Demonios del Sistema</a></li>
+            <li><a href="#tareas-programadas">11. Programación de Tareas</a></li>
+            <li><a href="#permisos-seguridad">12. Permisos de Archivos y Seguridad</a></li>
+            <li><a href="#copia-seguridad">13. Copias de Seguridad y Restauración</a></li>
+            <li><a href="#diagnostico">14. Diagnóstico y Solución de Problemas del Sistema</a></li>
+            <li><a href="#redes-avanzadas">15. Redes y Gestión Remota</a></li>
+            <li><a href="#procesamiento-texto">16. Utilidades de Procesamiento de Texto</a></li>
+            <li><a href="#apagado-reinicio">17. Apagado y Reinicio del Sistema</a></li>
+            <li><a href="#montaje-sistemas">18. Montaje y Gestión de Sistemas de Archivos</a></li>
+            <li><a href="#permisos-avanzados">19. Permisos Avanzados de Sistemas de Archivos</a></li>
+            <li><a href="#contenedores">20. Contenedores y Orquestación</a></li>
+            <li><a href="#automatizacion">21. Automatización y Gestión de Configuración</a></li>
+            <li><a href="#cicd">22. Herramientas CI/CD</a></li>
+            <li><a href="#cloud">23. Servicios en la Nube</a></li>
+            <li><a href="#monitoreo">24. Registro y Monitoreo</a></li>
+        </ul>
+    </div>
+
+    <section id="gestion-archivos-directorios">
+        <h2>1. Gestión de Archivos y Directorios <span class="category-count">15 comandos</span></h2>
+        
+        <div class="command">ls</div>
+        <p class="description">Lista el contenido de un directorio.</p>
+        
+        <div class="command">cd</div>
+        <p class="description">Cambia al directorio especificado.</p>
+        
+        <div class="command">pwd</div>
+        <p class="description">Muestra la ruta del directorio de trabajo actual.</p>
+        
+        <div class="command">cp</div>
+        <p class="description">Copia archivos y directorios.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>cp archivo.txt /ruta/destino/</div>
+            <div>cp -r directorio/ /ruta/destino/</div>
+        </div>
+        
+        <div class="command">mv</div>
+        <p class="description">Mueve o renombra archivos y directorios.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>mv archivo.txt nuevo_nombre.txt</div>
+            <div>mv archivo.txt /ruta/destino/</div>
+        </div>
+        
+        <div class="command">rm</div>
+        <p class="description">Elimina archivos o directorios.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>rm archivo.txt</div>
+            <div>rm -r directorio/</div>
+        </div>
+        
+        <div class="command">mkdir</div>
+        <p class="description">Crea uno o más directorios.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>mkdir nuevo_directorio</div>
+            <div>mkdir -p ruta/completa/nuevo_directorio</div>
+        </div>
+        
+        <div class="command">rmdir</div>
+        <p class="description">Elimina directorios vacíos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>rmdir directorio_vacio</div>
+        </div>
+        
+        <div class="command">touch</div>
+        <p class="description">Cambia las marcas de tiempo de un archivo o crea un archivo vacío.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>touch nuevo_archivo.txt</div>
+        </div>
+        
+        <div class="command">find</div>
+        <p class="description">Busca archivos en una jerarquía de directorios.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>find /ruta -name "archivo.txt"</div>
+            <div>find /ruta -type f -mtime -7</div>
+        </div>
+        
+        <div class="command">locate</div>
+        <p class="description">Encuentra archivos por nombre utilizando una base de datos preconstruida.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>locate archivo.txt</div>
+        </div>
+        
+        <div class="command">tree</div>
+        <p class="description">Muestra los directorios en formato de árbol.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>tree</div>
+            <div>tree -L 2</div>
+        </div>
+        
+        <div class="command">chmod</div>
+        <p class="description">Cambia los permisos de un archivo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>chmod 755 archivo.txt</div>
+            <div>chmod u+x archivo.sh</div>
+        </div>
+        
+        <div class="command">chown</div>
+        <p class="description">Cambia el propietario y grupo de un archivo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>chown usuario:grupo archivo.txt</div>
+        </div>
+        
+        <div class="command">chgrp</div>
+        <p class="description">Cambia la propiedad del grupo de un archivo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>chgrp grupo archivo.txt</div>
+        </div>
+        
+        <div class="command">stat</div>
+        <p class="description">Muestra el estado de un archivo o sistema de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>stat archivo.txt</div>
+        </div>
+    </section>
+
+    <section id="visualizacion-edicion">
+        <h2>2. Visualización y Edición de Archivos <span class="category-count">12 comandos</span></h2>
+        
+        <div class="command">cat</div>
+        <p class="description">Concatena y muestra el contenido de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>cat archivo.txt</div>
+            <div>cat archivo1.txt archivo2.txt > archivo_combinado.txt</div>
+        </div>
+        
+        <div class="command">tac</div>
+        <p class="description">Concatena y muestra el contenido de archivos en orden inverso.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>tac archivo.txt</div>
+        </div>
+        
+        <div class="command">more</div>
+        <p class="description">Muestra el contenido de un archivo interactivamente (página por página).</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>more archivo_grande.txt</div>
+        </div>
+        
+        <div class="command">less</div>
+        <p class="description">Muestra el contenido de un archivo interactivamente (con desplazamiento).</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>less archivo_grande.txt</div>
+        </div>
+        
+        <div class="command">head</div>
+        <p class="description">Muestra la primera parte de un archivo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>head archivo.txt</div>
+            <div>head -n 20 archivo.txt</div>
+        </div>
+        
+        <div class="command">tail</div>
+        <p class="description">Muestra la última parte de un archivo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>tail archivo.txt</div>
+            <div>tail -n 20 archivo.txt</div>
+            <div>tail -f archivo.log</div>
+        </div>
+        
+        <div class="command">nano</div>
+        <p class="description">Editor de texto basado en terminal.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>nano archivo.txt</div>
+        </div>
+        
+        <div class="command">vim/vi</div>
+        <p class="description">Editores de texto avanzados.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>vim archivo.txt</div>
+            <div>vi archivo.txt</div>
+        </div>
+        
+        <div class="command">emacs</div>
+        <p class="description">Editor de texto extensible y personalizable.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>emacs archivo.txt</div>
+        </div>
+        
+        <div class="command">grep</div>
+        <p class="description">Busca texto utilizando patrones.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>grep "patrón" archivo.txt</div>
+            <div>grep -i "patrón" archivo.txt</div>
+            <div>grep -r "patrón" /ruta/directorio/</div>
+        </div>
+        
+        <div class="command">sed</div>
+        <p class="description">Editor de flujo para filtrar y transformar texto.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>sed 's/antiguo/nuevo/g' archivo.txt</div>
+        </div>
+        
+        <div class="command">awk</div>
+        <p class="description">Lenguaje para escanear y procesar patrones.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>awk '{print $1}' archivo.txt</div>
+        </div>
+        
+        <div class="command">cut</div>
+        <p class="description">Elimina secciones de cada línea de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>cut -d':' -f 1 /etc/passwd</div>
+        </div>
+        
+        <div class="command">sort</div>
+        <p class="description">Ordena las líneas de archivos de texto.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>sort archivo.txt</div>
+            <div>sort -r archivo.txt</div>
+        </div>
+        
+        <div class="command">uniq</div>
+        <p class="description">Informa o omite líneas repetidas.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>sort archivo.txt | uniq</div>
+            <div>uniq -c archivo.txt</div>
+        </div>
+    </section>
+
+    <section id="gestion-procesos">
+        <h2>3. Gestión de Procesos <span class="category-count">12 comandos</span></h2>
+        
+        <div class="command">ps</div>
+        <p class="description">Muestra una instantánea de los procesos actuales.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>ps aux</div>
+            <div>ps -ef</div>
+        </div>
+        
+        <div class="command">top</div>
+        <p class="description">Muestra las tareas del sistema Linux en tiempo real.</p>
+        
+        <div class="command">htop</div>
+        <p class="description">Visor de procesos interactivo (versión avanzada de top).</p>
+        
+        <div class="command">kill</div>
+        <p class="description">Envía una señal a un proceso, generalmente para terminarlo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>kill 1234</div>
+            <div>kill -9 1234</div>
+        </div>
+        
+        <div class="command">killall</div>
+        <p class="description">Termina procesos por nombre.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>killall nombre_proceso</div>
+        </div>
+        
+        <div class="command">bg</div>
+        <p class="description">Reanuda un trabajo suspendido en segundo plano.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>bg %1</div>
+        </div>
+        
+        <div class="command">fg</div>
+        <p class="description">Trae un trabajo al primer plano.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>fg %1</div>
+        </div>
+        
+        <div class="command">jobs</div>
+        <p class="description">Lista los trabajos activos.</p>
+        
+        <div class="command">nice</div>
+        <p class="description">Ejecuta un programa con prioridad de planificación modificada.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>nice -n 10 comando</div>
+        </div>
+        
+        <div class="command">renice</div>
+        <p class="description">Cambia la prioridad de procesos en ejecución.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>renice 5 -p 1234</div>
+        </div>
+        
+        <div class="command">uptime</div>
+        <p class="description">Muestra cuánto tiempo lleva encendido el sistema.</p>
+        
+        <div class="command">time</div>
+        <p class="description">Mide el tiempo de ejecución de un programa.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>time comando</div>
+        </div>
+    </section>
+
+    <section id="gestion-disco">
+        <h2>4. Gestión de Disco <span class="category-count">10 comandos</span></h2>
+        
+        <div class="command">df</div>
+        <p class="description">Muestra el uso de espacio en sistemas de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>df -h</div>
+        </div>
+        
+        <div class="command">du</div>
+        <p class="description">Estima el uso de espacio de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>du -sh /ruta/directorio/</div>
+            <div>du -h archivo.txt</div>
+        </div>
+        
+        <div class="command">fdisk</div>
+        <p class="description">Manipulador de tabla de particiones para Linux.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>fdisk -l</div>
+            <div>fdisk /dev/sda</div>
+        </div>
+        
+        <div class="command">lsblk</div>
+        <p class="description">Lista información sobre dispositivos de bloque.</p>
+        
+        <div class="command">mount</div>
+        <p class="description">Monta un sistema de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>mount /dev/sda1 /mnt</div>
+        </div>
+        
+        <div class="command">umount</div>
+        <p class="description">Desmonta un sistema de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>umount /mnt</div>
+        </div>
+        
+        <div class="command">parted</div>
+        <p class="description">Programa para manipular particiones.</p>
+        
+        <div class="command">mkfs</div>
+        <p class="description">Crea un sistema de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>mkfs.ext4 /dev/sda1</div>
+        </div>
+        
+        <div class="command">fsck</div>
+        <p class="description">Verificación y reparación de consistencia del sistema de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>fsck /dev/sda1</div>
+        </div>
+        
+        <div class="command">blkid</div>
+        <p class="description">Localiza/imprime atributos de dispositivos de bloque.</p>
+    </section>
+
+    <section id="redes">
+        <h2>5. Redes <span class="category-count">11 comandos</span></h2>
+        
+        <div class="command">ifconfig</div>
+        <p class="description">Configura interfaces de red (comando antiguo, reemplazado por ip).</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>ifconfig</div>
+            <div>ifconfig eth0 up</div>
+        </div>
+        
+        <div class="command">ip</div>
+        <p class="description">Muestra/manipula enrutamiento, dispositivos y túneles.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>ip addr show</div>
+            <div>ip route</div>
+        </div>
+        
+        <div class="command">ping</div>
+        <p class="description">Envía solicitudes ICMP Echo a hosts de red.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>ping google.com</div>
+            <div>ping -c 4 192.168.1.1</div>
+        </div>
+        
+        <div class="command">netstat</div>
+        <p class="description">Muestra estadísticas de red.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>netstat -tuln</div>
+        </div>
+        
+        <div class="command">ss</div>
+        <p class="description">Muestra estadísticas de sockets (más rápido que netstat).</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>ss -tuln</div>
+        </div>
+        
+        <div class="command">traceroute</div>
+        <p class="description">Rastrea la ruta que siguen los paquetes hacia un host de red.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>traceroute google.com</div>
+        </div>
+        
+        <div class="command">nslookup</div>
+        <p class="description">Consulta servidores de nombres de Internet de forma interactiva.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>nslookup google.com</div>
+        </div>
+        
+        <div class="command">dig</div>
+        <p class="description">Utilidad de búsqueda DNS.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>dig google.com</div>
+        </div>
+        
+        <div class="command">wget</div>
+        <p class="description">Descargador de red no interactivo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>wget http://ejemplo.com/archivo.zip</div>
+        </div>
+        
+        <div class="command">curl</div>
+        <p class="description">Transfiere datos con URLs.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>curl http://ejemplo.com</div>
+            <div>curl -O http://ejemplo.com/archivo.zip</div>
+        </div>
+        
+        <div class="command">scp</div>
+        <p class="description">Copia archivos de forma segura entre hosts.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>scp archivo.txt usuario@host:/ruta/destino/</div>
+        </div>
+        
+        <div class="command">ssh</div>
+        <p class="description">Shell seguro para inicio de sesión remoto.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>ssh usuario@host</div>
+        </div>
+        
+        <div class="command">ftp</div>
+        <p class="description">Cliente de Protocolo de Transferencia de Archivos.</p>
+    </section>
+
+    <section id="usuarios-grupos">
+        <h2>6. Gestión de Usuarios y Grupos <span class="category-count">11 comandos</span></h2>
+        
+        <div class="command">useradd</div>
+        <p class="description">Agrega un usuario al sistema.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>useradd nuevo_usuario</div>
+            <div>useradd -m nuevo_usuario</div>
+        </div>
+        
+        <div class="command">usermod</div>
+        <p class="description">Modifica una cuenta de usuario.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>usermod -aG grupo usuario</div>
+        </div>
+        
+        <div class="command">userdel</div>
+        <p class="description">Elimina una cuenta de usuario.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>userdel usuario</div>
+            <div>userdel -r usuario</div>
+        </div>
+        
+        <div class="command">groupadd</div>
+        <p class="description">Agrega un grupo al sistema.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>groupadd nuevo_grupo</div>
+        </div>
+        
+        <div class="command">groupdel</div>
+        <p class="description">Elimina un grupo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>groupdel grupo</div>
+        </div>
+        
+        <div class="command">passwd</div>
+        <p class="description">Cambia la contraseña del usuario.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>passwd usuario</div>
+        </div>
+        
+        <div class="command">chage</div>
+        <p class="description">Cambia la información de caducidad de la contraseña del usuario.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>chage -l usuario</div>
+        </div>
+        
+        <div class="command">whoami</div>
+        <p class="description">Muestra el usuario actualmente conectado.</p>
+        
+        <div class="command">who</div>
+        <p class="description">Muestra quién está conectado al sistema.</p>
+        
+        <div class="command">w</div>
+        <p class="description">Muestra quién está conectado y qué están haciendo.</p>
+        
+        <div class="command">id</div>
+        <p class="description">Muestra información del usuario y grupos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>id usuario</div>
+        </div>
+        
+        <div class="command">groups</div>
+        <p class="description">Muestra los grupos del usuario.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>groups usuario</div>
+        </div>
+    </section>
+
+    <section id="info-sistema">
+        <h2>7. Información y Monitoreo del Sistema <span class="category-count">8 comandos</span></h2>
+        
+        <div class="command">uname</div>
+        <p class="description">Muestra información del sistema.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>uname -a</div>
+        </div>
+        
+        <div class="command">hostname</div>
+        <p class="description">Muestra o establece el nombre de host del sistema.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>hostname</div>
+            <div>hostname nuevo_nombre</div>
+        </div>
+        
+        <div class="command">uptime</div>
+        <p class="description">Muestra cuánto tiempo lleva encendido el sistema.</p>
+        
+        <div class="command">dmesg</div>
+        <p class="description">Muestra mensajes de arranque y del sistema.</p>
+        
+        <div class="command">free</div>
+        <p class="description">Muestra el uso de memoria.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>free -h</div>
+        </div>
+        
+        <div class="command">top</div>
+        <p class="description">Muestra las tareas del sistema Linux.</p>
+        
+        <div class="command">vmstat</div>
+        <p class="description">Muestra estadísticas de memoria virtual.</p>
+        
+        <div class="command">lscpu</div>
+        <p class="description">Muestra información sobre la arquitectura de la CPU.</p>
+        
+        <div class="command">lsusb</div>
+        <p class="description">Lista dispositivos USB.</p>
+        
+        <div class="command">lspci</div>
+        <p class="description">Lista dispositivos PCI.</p>
+        
+        <div class="command">lshw</div>
+        <p class="description">Lista la configuración del hardware.</p>
+    </section>
+
+    <section id="archivos-comprimidos">
+        <h2>8. Archivos Comprimidos y Empaquetados <span class="category-count">10 comandos</span></h2>
+        
+        <div class="command">tar</div>
+        <p class="description">Empaqueta archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>tar -czf archivo.tar.gz /ruta/directorio/ - Comprime archivos usando gzip</div>
+            <div>tar -xzf archivo.tar.gz - Extrae un archivo tar comprimido con gzip</div>
+            <div>tar -cf archivo.tar /ruta/directorio/ - Crea un archivo tar</div>
+            <div>tar -xf archivo.tar - Extrae un archivo tar</div>
+        </div>
+        
+        <div class="command">zip</div>
+        <p class="description">Empaqueta y comprime archivos en un archivo ZIP.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>zip -r archivo.zip directorio/</div>
+        </div>
+        
+        <div class="command">unzip</div>
+        <p class="description">Extrae archivos de un archivo ZIP.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>unzip archivo.zip</div>
+        </div>
+        
+        <div class="command">gzip</div>
+        <p class="description">Comprime archivos usando el algoritmo gzip.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>gzip archivo.txt</div>
+        </div>
+        
+        <div class="command">gunzip</div>
+        <p class="description">Descomprime archivos comprimidos con gzip.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>gunzip archivo.txt.gz</div>
+        </div>
+        
+        <div class="command">bzip2</div>
+        <p class="description">Comprime archivos usando el algoritmo bzip2.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>bzip2 archivo.txt</div>
+        </div>
+        
+        <div class="command">bunzip2</div>
+        <p class="description">Descomprime archivos comprimidos con bzip2.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>bunzip2 archivo.txt.bz2</div>
+        </div>
+        
+        <div class="command">xz</div>
+        <p class="description">Comprime archivos usando el algoritmo xz.</p>
+        
+        <div class="command">unxz</div>
+        <p class="description">Descomprime archivos comprimidos con xz.</p>
+    </section>
+
+    <section id="gestion-paquetes">
+        <h2>9. Gestión de Paquetes <span class="category-count">10+ comandos</span></h2>
+        
+        <h3>Sistemas basados en Debian (ej: Ubuntu)</h3>
+        
+        <div class="command">apt-get</div>
+        <p class="description">Utilidad de manejo de paquetes APT.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>apt-get install paquete - Instala un paquete</div>
+            <div>apt-get update - Actualiza la lista de paquetes</div>
+            <div>apt-get upgrade - Actualiza los paquetes instalados</div>
+            <div>apt-get remove paquete - Elimina un paquete</div>
+        </div>
+        
+        <div class="command">apt-cache</div>
+        <p class="description">Consulta la caché de APT.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>apt-cache search paquete - Busca un paquete</div>
+            <div>apt-cache show paquete - Muestra detalles del paquete</div>
+        </div>
+        
+        <h3>Sistemas basados en Red Hat (ej: CentOS, Fedora)</h3>
+        
+        <div class="command">yum</div>
+        <p class="description">Administrador de paquetes para sistemas basados en RPM.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>yum install paquete - Instala un paquete</div>
+            <div>yum update - Actualiza los paquetes instalados</div>
+            <div>yum remove paquete - Elimina un paquete</div>
+        </div>
+        
+        <div class="command">dnf</div>
+        <p class="description">Administrador de paquetes de próxima generación (Fedora, CentOS 8+).</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>dnf install paquete - Instala un paquete</div>
+            <div>dnf update - Actualiza los paquetes instalados</div>
+            <div>dnf remove paquete - Elimina un paquete</div>
+        </div>
+        
+        <h3>Comandos Generales</h3>
+        
+        <div class="command">rpm</div>
+        <p class="description">Administrador de paquetes RPM.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>rpm -i paquete.rpm - Instala un paquete RPM</div>
+            <div>rpm -e paquete - Elimina un paquete RPM</div>
+        </div>
+        
+        <div class="command">dpkg</div>
+        <p class="description">Administrador de paquetes Debian.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>dpkg -i paquete.deb - Instala un paquete Debian</div>
+            <div>dpkg -r paquete - Elimina un paquete Debian</div>
+        </div>
+    </section>
+
+    <section id="servicios-sistema">
+        <h2>10. Gestión de Servicios y Demonios del Sistema <span class="category-count">8 comandos</span></h2>
+        
+        <div class="command">systemctl</div>
+        <p class="description">Controla el sistema y el administrador de servicios de systemd.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>systemctl start servicio - Inicia un servicio</div>
+            <div>systemctl stop servicio - Detiene un servicio</div>
+            <div>systemctl restart servicio - Reinicia un servicio</div>
+            <div>systemctl enable servicio - Habilita un servicio para iniciar al arrancar</div>
+            <div>systemctl disable servicio - Deshabilita un servicio para iniciar al arrancar</div>
+            <div>systemctl status servicio - Verifica el estado del servicio</div>
+        </div>
+        
+        <div class="command">service</div>
+        <p class="description">Comando de gestión de servicios antiguo (usado en sistemas sin systemd).</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>service servicio start - Inicia un servicio</div>
+            <div>service servicio stop - Detiene un servicio</div>
+            <div>service servicio restart - Reinicia un servicio</div>
+            <div>service servicio status - Verifica el estado del servicio</div>
+        </div>
+    </section>
+
+    <section id="tareas-programadas">
+        <h2>11. Programación de Tareas <span class="category-count">4 comandos</span></h2>
+        
+        <div class="command">cron</div>
+        <p class="description">Demonio para ejecutar comandos programados.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>crontab -e - Edita los trabajos cron para el usuario actual</div>
+            <div>crontab -l - Lista los trabajos cron del usuario actual</div>
+            <div>crontab -r - Elimina los trabajos cron del usuario actual</div>
+        </div>
+        
+        <div class="command">at</div>
+        <p class="description">Ejecuta comandos en un tiempo especificado.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>at 09:00 - Programa un comando para ejecutarse a las 09:00 AM</div>
+        </div>
+        
+        <div class="command">batch</div>
+        <p class="description">Ejecuta comandos cuando la carga del sistema es baja.</p>
+        
+        <div class="command">sleep</div>
+        <p class="description">Retrasa la ejecución por un tiempo especificado.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>sleep 5s - Espera 5 segundos</div>
+        </div>
+    </section>
+
+    <section id="permisos-seguridad">
+        <h2>12. Permisos de Archivos y Seguridad <span class="category-count">10 comandos</span></h2>
+        
+        <div class="command">chmod</div>
+        <p class="description">Cambia los permisos de un archivo.</p>
+        
+        <div class="command">chown</div>
+        <p class="description">Cambia el propietario y grupo de un archivo.</p>
+        
+        <div class="command">chgrp</div>
+        <p class="description">Cambia la propiedad del grupo de un archivo.</p>
+        
+        <div class="command">umask</div>
+        <p class="description">Establece los permisos predeterminados para nuevos archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>umask 022 - Establece permisos predeterminados para nuevos archivos a 755</div>
+        </div>
+        
+        <div class="command">setfacl</div>
+        <p class="description">Establece listas de control de acceso (ACL) de archivos.</p>
+        
+        <div class="command">getfacl</div>
+        <p class="description">Obtiene listas de control de acceso (ACL) de archivos.</p>
+        
+        <div class="command">sudo</div>
+        <p class="description">Ejecuta un comando como otro usuario (generalmente root).</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>sudo comando</div>
+        </div>
+        
+        <div class="command">visudo</div>
+        <p class="description">Edita el archivo sudoers de forma segura.</p>
+        
+        <div class="command">passwd</div>
+        <p class="description">Cambia la contraseña de un usuario.</p>
+        
+        <div class="command">sudoers</div>
+        <p class="description">Gestiona el acceso sudo para usuarios.</p>
+        
+        <div class="command">gpasswd</div>
+        <p class="description">Administra contraseñas de grupo.</p>
+        
+        <div class="command">ss</div>
+        <p class="description">Muestra estadísticas de sockets (para conexiones de red seguras).</p>
+    </section>
+
+    <section id="copia-seguridad">
+        <h2>13. Copias de Seguridad y Restauración <span class="category-count">3 comandos</span></h2>
+        
+        <div class="command">rsync</div>
+        <p class="description">Sincronización remota de archivos y directorios.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>rsync -avz origen/ destino/ - Sincroniza archivos</div>
+            <div>rsync -avz -e ssh origen/ usuario@remoto:/destino/ - Sincroniza mediante SSH</div>
+        </div>
+        
+        <div class="command">cpio</div>
+        <p class="description">Copia archivos hacia y desde archivos.</p>
+        
+        <div class="command">dd</div>
+        <p class="description">Copia de bajo nivel y respaldo de sistemas de archivos completos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>dd if=/dev/sda of=/ruta/backup.img - Respalda un disco/partición</div>
+            <div>dd if=/ruta/backup.img of=/dev/sda - Restaura un disco/partición</div>
+        </div>
+    </section>
+
+    <section id="diagnostico">
+        <h2>14. Diagnóstico y Solución de Problemas del Sistema <span class="category-count">15+ comandos</span></h2>
+        
+        <div class="command">dmesg</div>
+        <p class="description">Muestra los mensajes del buffer del kernel (mensajes de arranque y relacionados con hardware).</p>
+        
+        <div class="command">journalctl</div>
+        <p class="description">Consulta y muestra registros del journal de systemd.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>journalctl -u servicio - Muestra registros de un servicio específico</div>
+        </div>
+        
+        <div class="command">strace</div>
+        <p class="description">Rastrea llamadas al sistema y señales.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>strace comando - Rastrea las llamadas al sistema de un comando</div>
+        </div>
+        
+        <div class="command">lsof</div>
+        <p class="description">Lista archivos abiertos (útil para depuración).</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>lsof archivo - Muestra procesos que usan un archivo específico</div>
+        </div>
+        
+        <div class="command">vmstat</div>
+        <p class="description">Muestra estadísticas de memoria virtual.</p>
+        
+        <div class="command">iostat</div>
+        <p class="description">Muestra estadísticas de CPU y E/S.</p>
+        
+        <div class="command">mpstat</div>
+        <p class="description">Muestra estadísticas de uso de CPU.</p>
+        
+        <div class="command">pidstat</div>
+        <p class="description">Muestra estadísticas por proceso.</p>
+        
+        <div class="command">free</div>
+        <p class="description">Muestra el uso de memoria.</p>
+        
+        <div class="command">uptime</div>
+        <p class="description">Muestra cuánto tiempo lleva encendido el sistema.</p>
+        
+        <div class="command">watch</div>
+        <p class="description">Ejecuta un programa periódicamente, mostrando la salida.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>watch -n 1 free - Observa el uso de memoria cada segundo</div>
+        </div>
+        
+        <div class="command">lshw</div>
+        <p class="description">Lista la configuración del hardware.</p>
+        
+        <div class="command">htop</div>
+        <p class="description">Visor de procesos interactivo (mejor que top).</p>
+        
+        <div class="command">netstat</div>
+        <p class="description">Muestra estadísticas de red (en desuso en favor de ss).</p>
+        
+        <div class="command">ss</div>
+        <p class="description">Muestra estadísticas de sockets (más eficiente que netstat).</p>
+    </section>
+
+    <section id="redes-avanzadas">
+        <h2>15. Redes y Gestión Remota <span class="category-count">15+ comandos</span></h2>
+        
+        <div class="command">ifconfig</div>
+        <p class="description">Configura interfaces de red (comando antiguo, reemplazado por ip).</p>
+        
+        <div class="command">ip</div>
+        <p class="description">Alternativa más moderna para gestionar interfaces de red y enrutamiento.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>ip addr - Muestra direcciones IP</div>
+            <div>ip link - Muestra o manipula interfaces de red</div>
+            <div>ip route - Muestra o manipula tablas de enrutamiento</div>
+        </div>
+        
+        <div class="command">ss</div>
+        <p class="description">Muestra estadísticas de sockets (útil para diagnosticar problemas de red).</p>
+        
+        <div class="command">nmap</div>
+        <p class="description">Herramienta de exploración de red (puede usarse para auditoría de seguridad).</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>nmap -sV 192.168.1.1</div>
+        </div>
+        
+        <div class="command">telnet</div>
+        <p class="description">Interfaz de usuario para el protocolo TELNET (menos común hoy en día).</p>
+        
+        <div class="command">nc (Netcat)</div>
+        <p class="description">Utilidad de red para leer y escribir desde conexiones de red.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>nc -l -p 1234 - Escucha en el puerto 1234</div>
+            <div>nc host puerto - Se conecta a un host y puerto</div>
+        </div>
+        
+        <div class="command">iptables</div>
+        <p class="description">Herramienta de administración para filtrado de paquetes IPv4 y NAT.</p>
+        
+        <div class="command">firewalld</div>
+        <p class="description">Frontend para gestionar reglas de firewall (usado en algunas distribuciones como Fedora y CentOS).</p>
+        
+        <div class="command">ufw</div>
+        <p class="description">Firewall simplificado (frontend para iptables).</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>ufw enable - Habilita el firewall</div>
+            <div>ufw allow puerto - Permite tráfico en un puerto específico</div>
+        </div>
+        
+        <div class="command">tcpdump</div>
+        <p class="description">Analizador de paquetes desde línea de comandos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>tcpdump -i eth0</div>
+        </div>
+        
+        <div class="command">curl</div>
+        <p class="description">Transfiere datos desde o hacia un servidor usando varios protocolos (HTTP, FTP, etc.).</p>
+        
+        <div class="command">wget</div>
+        <p class="description">Descarga archivos desde la web mediante HTTP, HTTPS, FTP.</p>
+        
+        <div class="command">scp</div>
+        <p class="description">Copia segura mediante SSH (usado para copiar archivos entre sistemas).</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>scp archivo.txt usuario@remoto:/ruta/destino/ - Copia archivo a servidor remoto</div>
+        </div>
+        
+        <div class="command">rsync</div>
+        <p class="description">Sincronización remota de archivos y directorios (a menudo usado para copias de seguridad).</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>rsync -avz /ruta/local/ remoto:/ruta/remota/ - Sincroniza directorios</div>
+        </div>
+    </section>
+
+    <section id="procesamiento-texto">
+        <h2>16. Utilidades de Procesamiento de Texto <span class="category-count">12 comandos</span></h2>
+        
+        <div class="command">grep</div>
+        <p class="description">Busca patrones dentro de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>grep 'patrón' archivo.txt - Busca un patrón en un archivo</div>
+            <div>grep -r 'patrón' /dir/ - Busca recursivamente un patrón</div>
+        </div>
+        
+        <div class="command">sed</div>
+        <p class="description">Editor de flujo para filtrar y transformar texto.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>sed 's/antiguo/nuevo/g' archivo.txt - Reemplaza antiguo con nuevo globalmente</div>
+        </div>
+        
+        <div class="command">awk</div>
+        <p class="description">Lenguaje potente para procesamiento de texto.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>awk '{print $1}' archivo.txt - Imprime la primera columna de cada línea en un archivo</div>
+        </div>
+        
+        <div class="command">cut</div>
+        <p class="description">Elimina secciones de cada línea de un archivo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>cut -d':' -f 1 /etc/passwd - Imprime el primer campo de cada línea, delimitado por ":"</div>
+        </div>
+        
+        <div class="command">sort</div>
+        <p class="description">Ordena líneas de archivos de texto.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>sort archivo.txt - Ordena el contenido del archivo en orden ascendente</div>
+        </div>
+        
+        <div class="command">uniq</div>
+        <p class="description">Informa u omite líneas repetidas en un archivo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>sort archivo.txt | uniq - Ordena y elimina líneas duplicadas</div>
+        </div>
+        
+        <div class="command">tee</div>
+        <p class="description">Lee desde la entrada estándar y escribe a la salida estándar y a archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>echo "texto" | tee archivo.txt - Escribe a archivo y muestra salida en pantalla</div>
+        </div>
+        
+        <div class="command">tr</div>
+        <p class="description">Traduce o elimina caracteres.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>echo "hola" | tr 'a-z' 'A-Z' - Convierte minúsculas a mayúsculas</div>
+        </div>
+        
+        <div class="command">paste</div>
+        <p class="description">Combina líneas de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>paste archivo1.txt archivo2.txt - Combina líneas de archivo1 y archivo2 lado a lado</div>
+        </div>
+        
+        <div class="command">wc</div>
+        <p class="description">Cuenta palabras, líneas, caracteres y bytes.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>wc -l archivo.txt - Cuenta líneas en un archivo</div>
+            <div>wc -w archivo.txt - Cuenta palabras en un archivo</div>
+        </div>
+    </section>
+
+    <section id="apagado-reinicio">
+        <h2>17. Apagado y Reinicio del Sistema <span class="category-count">5 comandos</span></h2>
+        
+        <div class="command">shutdown</div>
+        <p class="description">Apaga el sistema.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>shutdown -h now - Apaga inmediatamente</div>
+            <div>shutdown -r now - Reinicia el sistema</div>
+            <div>shutdown -h +10 - Apaga después de 10 minutos</div>
+        </div>
+        
+        <div class="command">reboot</div>
+        <p class="description">Reinicia el sistema.</p>
+        
+        <div class="command">halt</div>
+        <p class="description">Detiene el sistema inmediatamente (equivalente a apagar la energía).</p>
+        
+        <div class="command">poweroff</div>
+        <p class="description">Apaga el sistema.</p>
+        
+        <div class="command">init</div>
+        <p class="description">Cambia el nivel de ejecución (gestor de sistema de estilo antiguo).</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>init 0 - Apaga</div>
+            <div>init 6 - Reinicia</div>
+        </div>
+    </section>
+
+    <section id="montaje-sistemas">
+        <h2>18. Montaje y Gestión de Sistemas de Archivos <span class="category-count">5 comandos</span></h2>
+        
+        <div class="command">mount</div>
+        <p class="description">Monta un sistema de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>mount /dev/sda1 /mnt - Monta partición en un directorio</div>
+        </div>
+        
+        <div class="command">umount</div>
+        <p class="description">Desmonta un sistema de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>umount /mnt - Desmonta el sistema de archivos montado en /mnt</div>
+        </div>
+        
+        <div class="command">fstab</div>
+        <p class="description">Tabla de sistemas de archivos (archivo de configuración para montar sistemas de archivos).</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>/etc/fstab - Ver y configurar puntos de montaje persistentes</div>
+        </div>
+        
+        <div class="command">blkid</div>
+        <p class="description">Muestra atributos de dispositivos de bloque.</p>
+        
+        <div class="command">fsck</div>
+        <p class="description">Verifica y repara un sistema de archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>fsck /dev/sda1 - Verifica y repara /dev/sda1</div>
+        </div>
+    </section>
+
+    <section id="permisos-avanzados">
+        <h2>19. Permisos Avanzados de Sistemas de Archivos <span class="category-count">6 comandos</span></h2>
+        
+        <div class="command">chmod</div>
+        <p class="description">Cambia los permisos de un archivo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>chmod 755 archivo.txt - Da permisos de lectura, escritura y ejecución al propietario, y permisos de lectura-ejecución a otros</div>
+        </div>
+        
+        <div class="command">chown</div>
+        <p class="description">Cambia el propietario y grupo de un archivo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>chown usuario:grupo archivo.txt - Cambia propietario y grupo de un archivo</div>
+        </div>
+        
+        <div class="command">chgrp</div>
+        <p class="description">Cambia la propiedad del grupo de un archivo.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>chgrp grupo archivo.txt - Cambia el grupo de un archivo</div>
+        </div>
+        
+        <div class="command">umask</div>
+        <p class="description">Establece permisos predeterminados para nuevos archivos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>umask 022 - Establece permisos predeterminados para archivos nuevos a 755</div>
+        </div>
+        
+        <div class="command">setfacl</div>
+        <p class="description">Establece listas de control de acceso (ACL) para permisos de archivos.</p>
+        
+        <div class="command">getfacl</div>
+        <p class="description">Obtiene listas de control de acceso (ACL) para permisos de archivos.</p>
+    </section>
+
+    <section id="contenedores">
+        <h2>20. Contenedores y Orquestación <span class="category-count">20+ comandos</span></h2>
+        
+        <h3>Docker</h3>
+        
+        <div class="command">docker</div>
+        <p class="description">Interfaz de línea de comandos (CLI) de Docker para gestionar contenedores.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>docker run &lt;imagen&gt; - Ejecuta un contenedor desde una imagen</div>
+            <div>docker ps - Lista contenedores en ejecución</div>
+            <div>docker ps -a - Lista todos los contenedores, incluyendo los detenidos</div>
+            <div>docker build -t &lt;nombre_imagen&gt; . - Construye una imagen desde un Dockerfile</div>
+            <div>docker exec -it &lt;id_contenedor&gt; bash - Inicia una shell bash interactiva dentro de un contenedor en ejecución</div>
+            <div>docker stop &lt;id_contenedor&gt; - Detiene un contenedor</div>
+            <div>docker rm &lt;id_contenedor&gt; - Elimina un contenedor</div>
+            <div>docker logs &lt;id_contenedor&gt; - Visualiza registros de un contenedor</div>
+            <div>docker images - Lista imágenes disponibles</div>
+            <div>docker rmi &lt;nombre_imagen&gt; - Elimina una imagen</div>
+            <div>docker network ls - Lista redes de Docker</div>
+        </div>
+        
+        <div class="command">docker-compose</div>
+        <p class="description">Gestiona aplicaciones Docker de múltiples contenedores.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>docker-compose up - Inicia un entorno de múltiples contenedores</div>
+            <div>docker-compose down - Detiene y elimina contenedores creados por docker-compose</div>
+            <div>docker-compose logs - Visualiza registros de contenedores gestionados por docker-compose</div>
+        </div>
+        
+        <h3>Kubernetes (k8s)</h3>
+        
+        <div class="command">kubectl</div>
+        <p class="description">Herramienta de línea de comandos para interactuar con clústeres de Kubernetes.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>kubectl get pods - Lista pods en el namespace actual</div>
+            <div>kubectl get nodes - Lista nodos en el clúster</div>
+            <div>kubectl get services - Lista servicios en el clúster</div>
+            <div>kubectl apply -f &lt;archivo&gt;.yaml - Aplica configuración desde un archivo</div>
+            <div>kubectl create -f &lt;archivo&gt;.yaml - Crea un recurso desde un archivo</div>
+            <div>kubectl delete -f &lt;archivo&gt;.yaml - Elimina un recurso definido en un archivo</div>
+            <div>kubectl exec -it &lt;nombre_pod&gt; -- bash - Ejecuta un comando dentro de un pod</div>
+            <div>kubectl logs &lt;nombre_pod&gt; - Visualiza registros de un pod</div>
+            <div>kubectl describe pod &lt;nombre_pod&gt; - Obtiene información detallada sobre un pod</div>
+            <div>kubectl scale deployment &lt;nombre_despliegue&gt; --replicas=&lt;número&gt; - Escala un despliegue al número deseado de réplicas</div>
+            <div>kubectl rollout restart deployment &lt;nombre_despliegue&gt; - Reinicia un despliegue</div>
+            <div>kubectl port-forward pod &lt;nombre_pod&gt; &lt;puerto_local&gt;:&lt;puerto_remoto&gt; - Reenvía un puerto desde un pod a localhost</div>
+        </div>
+        
+        <h3>Helm</h3>
+        
+        <div class="command">helm</div>
+        <p class="description">Gestor de paquetes de Kubernetes para desplegar aplicaciones.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>helm install &lt;nombre_lanzamiento&gt; &lt;nombre_gráfico&gt; - Instala un gráfico de Helm</div>
+            <div>helm upgrade &lt;nombre_lanzamiento&gt; &lt;nombre_gráfico&gt; - Actualiza un lanzamiento de Helm</div>
+            <div>helm list - Lista todos los lanzamientos de Helm</div>
+            <div>helm delete &lt;nombre_lanzamiento&gt; - Elimina un lanzamiento de Helm</div>
+            <div>helm search &lt;nombre_gráfico&gt; - Busca un gráfico de Helm</div>
+        </div>
+    </section>
+
+    <section id="automatizacion">
+        <h2>21. Automatización y Gestión de Configuración <span class="category-count">10+ comandos</span></h2>
+        
+        <h3>Ansible</h3>
+        
+        <div class="command">ansible</div>
+        <p class="description">Herramienta de automatización para gestión de configuración.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>ansible all -m ping - Hace ping a todos los hosts definidos en el inventario</div>
+            <div>ansible-playbook playbook.yml - Ejecuta un playbook de Ansible</div>
+            <div>ansible -m command -a 'comando' &lt;host&gt; - Ejecuta un comando único en un host objetivo</div>
+            <div>ansible-playbook --check playbook.yml - Ejecución simulada de un playbook para ver qué cambiaría</div>
+            <div>ansible-playbook --limit &lt;host&gt; playbook.yml - Ejecuta un playbook en un host o grupo específico</div>
+            <div>ansible-playbook --extra-vars "clave=valor" - Pasa variables adicionales a un playbook</div>
+        </div>
+        
+        <h3>Terraform</h3>
+        
+        <div class="command">terraform</div>
+        <p class="description">Herramienta de infraestructura como código para aprovisionar y gestionar recursos en la nube.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>terraform init - Inicializa un directorio de trabajo para configuración de Terraform</div>
+            <div>terraform plan - Muestra un plan de ejecución (vista previa de qué cambios se realizarán)</div>
+            <div>terraform apply - Aplica los cambios descritos en una configuración de Terraform</div>
+            <div>terraform destroy - Destruye la infraestructura creada por Terraform</div>
+            <div>terraform validate - Valida los archivos de configuración</div>
+            <div>terraform show - Muestra el estado actual de la infraestructura</div>
+        </div>
+        
+        <h3>Puppet</h3>
+        
+        <div class="command">puppet</div>
+        <p class="description">Herramienta de gestión de configuración.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>puppet apply &lt;manifest.pp&gt; - Aplica un manifiesto de Puppet localmente</div>
+            <div>puppet agent --test - Prueba el agente de Puppet (puede usarse para ejecutar una ejecución única)</div>
+            <div>puppet resource - Muestra el estado actual de recursos (archivos, servicios, etc.)</div>
+        </div>
+    </section>
+
+    <section id="cicd">
+        <h2>22. Herramientas CI/CD <span class="category-count">5+ comandos</span></h2>
+        
+        <h3>Jenkins</h3>
+        
+        <div class="command">jenkins</div>
+        <p class="description">Herramienta de integración continua.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>java -jar jenkins.war - Inicia Jenkins desde un archivo WAR</div>
+            <div>Acceso a Jenkins a través de http://localhost:8080 por defecto</div>
+        </div>
+        
+        <h3>GitLab CI</h3>
+        
+        <div class="command">.gitlab-ci.yml</div>
+        <p class="description">Archivo de configuración para pipelines de GitLab CI/CD (generalmente reside en tu repositorio).</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>gitlab-runner register - Registra un nuevo runner con GitLab</div>
+            <div>gitlab-runner run - Ejecuta el GitLab Runner para procesar trabajos</div>
+        </div>
+        
+        <h3>GitHub Actions</h3>
+        
+        <p class="description">GitHub Actions utiliza archivos de configuración YAML (generalmente ubicados en .github/workflows/).</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>actions/checkout@v2 - Verifica el código del repositorio en tu pipeline CI</div>
+            <div>actions/setup-node@v2 - Configura Node.js para usar en un pipeline</div>
+            <div>docker/setup-buildx-action@v1 - Configura Docker Buildx para construir imágenes multiplataforma</div>
+        </div>
+    </section>
+
+    <section id="cloud">
+        <h2>23. Servicios en la Nube <span class="category-count">15+ comandos</span></h2>
+        
+        <h3>AWS CLI (Amazon Web Services)</h3>
+        
+        <div class="command">aws</div>
+        <p class="description">Herramienta de línea de comandos para gestionar servicios de AWS.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>aws configure - Configura AWS CLI con tus credenciales</div>
+            <div>aws s3 cp archivo.txt s3://nombre-bucket/ - Copia un archivo a un bucket S3</div>
+            <div>aws ec2 describe-instances - Describe instancias EC2</div>
+            <div>aws ec2 start-instances --instance-ids &lt;id&gt; - Inicia una instancia EC2</div>
+            <div>aws ec2 stop-instances --instance-ids &lt;id&gt; - Detiene una instancia EC2</div>
+            <div>aws s3 sync - Sincroniza directorios con un bucket S3</div>
+        </div>
+        
+        <h3>Azure CLI (Microsoft Azure)</h3>
+        
+        <div class="command">az</div>
+        <p class="description">Herramienta de línea de comandos para gestionar servicios de Azure.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>az login - Inicia sesión en tu cuenta de Azure</div>
+            <div>az vm list - Lista todas las máquinas virtuales</div>
+            <div>az vm start --name &lt;nombre_vm&gt; --resource-group &lt;grupo_recursos&gt; - Inicia una VM de Azure</div>
+            <div>az storage blob upload - Sube archivos a un almacenamiento blob de Azure</div>
+            <div>az group create - Crea un nuevo grupo de recursos en Azure</div>
+        </div>
+        
+        <h3>Google Cloud SDK (gcloud)</h3>
+        
+        <div class="command">gcloud</div>
+        <p class="description">Herramienta de línea de comandos para Google Cloud Platform.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>gcloud auth login - Inicia sesión en Google Cloud</div>
+            <div>gcloud compute instances list - Lista instancias de cómputo</div>
+            <div>gcloud compute instances stop &lt;nombre_instancia&gt; - Detiene una instancia de VM de Google Cloud</div>
+            <div>gcloud app browse - Abre la aplicación actual de Google App Engine en un navegador</div>
+        </div>
+    </section>
+
+    <section id="monitoreo">
+        <h2>24. Registro y Monitoreo <span class="category-count">8+ comandos</span></h2>
+        
+        <h3>Prometheus</h3>
+        
+        <div class="command">prometheus</div>
+        <p class="description">Kit de herramientas de monitoreo y alertas de código abierto.</p>
+        <div class="example">
+            <div class="example-title">Ejemplos:</div>
+            <div>prometheus - Inicia el servidor de Prometheus (generalmente se ejecuta como servicio en segundo plano)</div>
+            <div>prometheus --config.file=&lt;archivo_config&gt; - Inicia Prometheus con un archivo de configuración específico</div>
+        </div>
+        
+        <h3>Grafana</h3>
+        
+        <div class="command">grafana-cli</div>
+        <p class="description">Interfaz de línea de comandos para gestionar plugins de Grafana.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>grafana-cli plugins install &lt;nombre_plugin&gt; - Instala un plugin en Grafana</div>
+        </div>
+        
+        <h3>ELK Stack (Elasticsearch, Logstash, Kibana)</h3>
+        
+        <div class="command">elasticsearch</div>
+        <p class="description">Motor de búsqueda para registro y análisis de datos.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>curl -XGET 'localhost:9200/_cluster/health?pretty' - Obtiene estado de salud del clúster</div>
+        </div>
+        
+        <div class="command">logstash</div>
+        <p class="description">Canal de procesamiento de datos del lado del servidor.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>logstash -f &lt;archivo_config&gt; - Ejecuta Logstash con el archivo de configuración especificado</div>
+        </div>
+        
+        <div class="command">kibana</div>
+        <p class="description">Interfaz web para visualizar datos de Elasticsearch.</p>
+        <div class="example">
+            <div class="example-title">Ejemplo:</div>
+            <div>Kibana generalmente se accede a través de un navegador web (http://localhost:5601)</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Manual de Comandos Linux & DevOps | Más de 700 comandos esenciales</p>
+        <p>2025 - Benito González Piñeiro</p>
+        <p><a href="pildoras.html" style="color: #61dafb; text-decoration: none;">← Volver a Píldoras</a></p>
+    </footer>
+</body>
+</html>

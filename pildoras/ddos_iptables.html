@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protección contra DDoS con IPTables</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0d1117;
+            color: #e6edf3;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 1px solid #30363d;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #58a6ff;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #58a6ff;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #30363d;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: #58a6ff;
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .card {
+            background-color: #161b22;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #30363d;
+            margin-bottom: 20px;
+        }
+        
+        .full-width {
+            grid-column: 1 / span 2;
+        }
+        
+        pre {
+            background-color: #1e2633;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid #30363d;
+            color: #e6edf3;
+            font-size: 0.95rem;
+        }
+        
+        code {
+            color: #7ee787;
+            background-color: #1e2633;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .warning {
+            background-color: #3a1d1d;
+            border-left: 4px solid #da3633;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .tip {
+            background-color: #1c2b1e;
+            border-left: 4px solid #238636;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #161b22;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #30363d;
+        }
+        
+        th {
+            background-color: #1c2b32;
+            color: #58a6ff;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #1c2129;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: #238636;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: #2ea043;
+        }
+        
+        .button.secondary {
+            background-color: #30363d;
+        }
+        
+        .button.secondary:hover {
+            background-color: #484f58;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #30363d;
+            font-size: 0.9rem;
+            color: #7d8590;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .full-width {
+                grid-column: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Protección contra DDoS con IPTables</h1>
+        <p>Guía completa para configurar reglas de iptables y mitigar ataques de denegación de servicio</p>
+    </header>
+    
+    <div class="container">
+        <div class="card full-width">
+            <h2>Introducción</h2>
+            <p>Los ataques DDoS (Distributed Denial of Service) son una de las amenazas más comunes en la actualidad. IPTables, el firewall integrado en Linux, ofrece diversas técnicas para mitigar estos ataques.</p>
+            <p>Esta guía te proporcionará las reglas y configuraciones necesarias para proteger tu servidor contra diferentes tipos de ataques DDoS.</p>
+        </div>
+        
+        <div class="card">
+            <h2>Configuración del Kernel</h2>
+            <p>Antes de aplicar reglas de iptables, es crucial optimizar el kernel para mejorar el rendimiento bajo ataque DDoS.</p>
+            <p>Añade estas líneas en <code>/etc/sysctl.conf</code>:</p>
+            <pre># Ajustes clave para mitigar DDoS
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_max_syn_backlog = 16384
+net.ipv4.tcp_synack_retries = 1
+net.ipv4.tcp_syn_retries = 2
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+net.ipv4.tcp_rfc1337 = 1
+net.core.netdev_max_backlog = 262144
+net.core.somaxconn = 65535
+net.netfilter.nf_conntrack_max = 10000000</pre>
+            <p>Ejecuta <code>sysctl -p</code> para aplicar los cambios.</p>
+        </div>
+        
+        <div class="card">
+            <h2>Reglas Básicas de IPTables</h2>
+            <p>Estas reglas proporcionan una protección básica contra ataques DDoS:</p>
+            <pre># Bloquear paquetes inválidos
+iptables -t mangle -A PREROUTING -m conntrack --ctstate INVALID -j DROP
+
+# Bloquear nuevos paquetes que no son SYN
+iptables -t mangle -A PREROUTING -p tcp ! --syn -m conntrack --ctstate NEW -j DROP
+
+# Bloquear valores MSS anómalos
+iptables -t mangle -A PREROUTING -p tcp -m conntrack --ctstate NEW -m tcpmss ! --mss 536:65535 -j DROP</pre>
+        </div>
+        
+        <div class="card full-width">
+            <h2>Reglas Avanzadas de Protección</h2>
+            <p>Estas reglas ofrecen protección contra tipos específicos de ataques:</p>
+            
+            <h3>Protección contra SYN Flood</h3>
+            <pre># Limitar conexiones SYN por segundo
+iptables -A INPUT -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT
+iptables -A INPUT -p tcp --syn -j DROP</pre>
+            
+            <h3>Protección contra HTTP Flood</h3>
+            <pre># Limitar conexiones HTTP
+iptables -A INPUT -p tcp --dport 80 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -j DROP</pre>
+            
+            <h3>Protección contra ICMP Flood (Ping of Death)</h3>
+            <pre># Crear cadena personalizada para ICMP
+iptables -N ICMP_CHECK
+iptables -A ICMP_CHECK -p icmp --icmp-type echo-request -m limit --limit 1/s --limit-burst 4 -j RETURN
+iptables -A ICMP_CHECK -p icmp --icmp-type echo-request -m length --length 0:100 -j RETURN
+iptables -A ICMP_CHECK -j DROP
+iptables -A INPUT -p icmp --icmp-type echo-request -j ICMP_CHECK</pre>
+        </div>
+        
+        <div class="card full-width">
+            <h2>Script de Bloqueo Automático</h2>
+            <p>Crea un script que detecte y bloquee automáticamente IPs maliciosas:</p>
+            <pre>#!/bin/bash
+# dropip.sh - Auto-detectar y bloquear IPs sospechosas
+netstat -na | awk '/ESTABLISHED/{split($5,T,":");print T[1]}' | sort | grep -v -E '192.168|127.0' | uniq -c | sort -rn | head -10 | awk '{if ($2!=null && $1>4) {print $2}}' > /var/log/rejectip
+
+for i in $(cat /var/log/rejectip)
+do
+    rep=$(iptables-save | grep $i)
+    if [[ -z $rep ]];then
+        /sbin/iptables -A INPUT -s $i -j DROP
+        echo "$i bloqueada en $(date)" >> /var/log/ddos-ip
+    fi
+done</pre>
+            <p>Puedes programar este script para que se ejecute periódicamente con cron.</p>
+        </div>
+        
+        <div class="card full-width">
+            <h2>Tabla de Reglas de IPTables</h2>
+            <table>
+                <tr>
+                    <th>Regla</th>
+                    <th>Función</th>
+                    <th>Cadena/Tabla</th>
+                </tr>
+                <tr>
+                    <td>Bloqueo paquetes inválidos</td>
+                    <td>Elimina paquetes corruptos</td>
+                    <td>mangle/PREROUTING</td>
+                </tr>
+                <tr>
+                    <td>Limitar SYN/s</td>
+                    <td>Previene SYN floods</td>
+                    <td>INPUT</td>
+                </tr>
+                <tr>
+                    <td>Limitar conexiones por IP</td>
+                    <td>Mitiga Connection floods</td>
+                    <td>INPUT</td>
+                </tr>
+                <tr>
+                    <td>Filtrado MSS anómalo</td>
+                    <td>Bloquea paquetes con MSS incorrecto</td>
+                    <td>mangle/PREROUTING</td>
+                </tr>
+                <tr>
+                    <td>Bloqueo flags falsos</td>
+                    <td>Detiene paquetes TCP malformados</td>
+                    <td>mangle/PREROUTING</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="card">
+            <h2>Conservar las Reglas</h2>
+            <p>Para que las reglas persistan después de reiniciar:</p>
+            <pre># Instalar iptables-persistent
+sudo apt-get install iptables-persistent
+
+# Guardar reglas actuales
+sudo iptables-save > /etc/iptables/rules.v4
+sudo ip6tables-save > /etc/iptables/rules.v6</pre>
+        </div>
+        
+        <div class="card">
+            <h2>Recomendaciones Adicionales</h2>
+            <ul>
+                <li>Usa herramientas de monitorización como <code>netstat</code>, <code>tcpdump</code>, o <code>vnstat</code></li>
+                <li>Para ataques masivos, considera servicios especializados como Cloudflare</li>
+                <li>Combina iptables con un WAF para proteger aplicaciones web</li>
+                <li>Mantén el sistema y iptables actualizados</li>
+                <li>Realiza pruebas regularmente para verificar la efectividad</li>
+            </ul>
+        </div>
+        
+        <div class="card full-width warning">
+            <h2>⚠️ Advertencia Importante</h2>
+            <p>Estas reglas deben adaptarse a las necesidades específicas de tu servidor y tráfico. Aplicar configuraciones demasiado restrictivas podría bloquear tráfico legítimo.</p>
+            <p>Ninguna solución es 100% efectiva contra ataques DDoS grandes, pero iptables ofrece una capa de defensa sólida y flexible.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 - Guía de Protección contra DDoS con IPTables</p>
+        <p>Esta información se proporciona con fines educativos. El autor no se hace responsable de los daños que pueda causar su implementación.</p>
+        <p><a href="pildoras.html" style="color: #58a6ff; text-decoration: none;">← Volver a Píldoras</a></p>
+    </footer>
+</body>
+</html>

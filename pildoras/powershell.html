@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos de Scripting en PowerShell</title>
+    <style>
+        /* Academic Dark Theme */
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Source+Code+Pro:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Crimson Text', 'Times New Roman', serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #e8e8e8;
+            text-rendering: optimizeLegibility;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #2a2a2a 0%, #1e1e1e 100%);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 1px solid #404040;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: #f0f0f0;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            border-bottom: 3px solid #4a90e2;
+            padding-bottom: 15px;
+            margin-bottom: 2em;
+            color: #4a90e2;
+            font-style: italic;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-left: 6px solid #4a90e2;
+            padding-left: 20px;
+            margin-top: 2.5em;
+            margin-bottom: 1.2em;
+            color: #4a90e2;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #87ceeb;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            color: #b0c4de;
+        }
+
+        p {
+            margin-bottom: 1.5em;
+            text-align: justify;
+            font-size: 1.1rem;
+            color: #d3d3d3;
+        }
+
+        /* Code styling */
+        pre {
+            background: linear-gradient(145deg, #1e1e1e 0%, #2a2a2a 100%);
+            border: 2px solid #404040;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
+            font-family: 'Source Code Pro', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        code {
+            background: linear-gradient(145deg, #2a2a2a 0%, #1e1e1e 100%);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Source Code Pro', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            color: #f8f8f2;
+            border: 1px solid #404040;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2em 0;
+            background: linear-gradient(145deg, #2a2a2a 0%, #1e1e1e 100%);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+
+        table, th, td {
+            border: 1px solid #404040;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        th {
+            background: linear-gradient(145deg, #4a90e2 0%, #357abd 100%);
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255,255,255,0.02);
+        }
+
+        tr:hover {
+            background-color: rgba(74,144,226,0.1);
+        }
+
+        /* Special content boxes */
+        .note {
+            background: linear-gradient(145deg, #1e3a5f 0%, #2a4a6b 100%);
+            border-left: 6px solid #4a90e2;
+            padding: 20px;
+            margin: 1.5em 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .tip {
+            background: linear-gradient(145deg, #2d5a2d 0%, #3d6b3d 100%);
+            border-left: 6px solid #4caf50;
+            padding: 20px;
+            margin: 1.5em 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .warning {
+            background: linear-gradient(145deg, #5a2d2d 0%, #6b3d3d 100%);
+            border-left: 6px solid #f44336;
+            padding: 20px;
+            margin: 1.5em 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .note, .tip, .warning {
+            color: #e8e8e8;
+        }
+
+        .note h4, .tip h4, .warning h4 {
+            color: #f0f0f0;
+            margin-top: 0;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        .section {
+            margin-bottom: 3em;
+            padding: 20px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+            border: 1px solid #404040;
+        }
+
+        .code-output {
+            background: linear-gradient(145deg, #0d0d0d 0%, #1a1a1a 100%);
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 1.5em 0;
+            border: 2px solid #404040;
+            font-family: 'Source Code Pro', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        /* Syntax highlighting for code output */
+        .keyword {
+            color: #c678dd;
+            font-weight: 600;
+        }
+        .string {
+            color: #98c379;
+        }
+        .comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+        .number {
+            color: #d19a66;
+            font-weight: 600;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1.5em 0;
+            padding-left: 2em;
+        }
+
+        li {
+            margin-bottom: 0.8em;
+            color: #d3d3d3;
+            font-size: 1.1rem;
+        }
+
+        /* Links */
+        a {
+            color: #4a90e2;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #87ceeb;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(145deg, #2a2a2a 0%, #1e1e1e 100%);
+            border-top: 2px solid #4a90e2;
+            text-align: center;
+            border-radius: 8px;
+            color: #b0b0b0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #b0b0b0;
+        }
+
+        footer a {
+            color: #4a90e2;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #87ceeb;
+        }
+
+        /* Blockquotes for special content */
+        blockquote {
+            border-left: 4px solid #4a90e2;
+            padding-left: 20px;
+            margin: 2em 0;
+            font-style: italic;
+            color: #b0c4de;
+            background: rgba(74,144,226,0.05);
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            pre, .code-output {
+                font-size: 0.8rem;
+                padding: 15px;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+
+            .container {
+                box-shadow: none;
+                border: none;
+            }
+
+            pre {
+                background: #f5f5f5;
+                border: 1px solid #ccc;
+            }
+
+            .code-output {
+                background: #f5f5f5;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fundamentos de Scripting en PowerShell</h1>
+
+        <div class="section">
+            <h2>Variables y Ámbitos de PowerShell</h2>
+            
+            <h3>Variables</h3>
+            <p>Una variable es una <strong>ubicación de almacenamiento con nombre</strong> en la memoria de una computadora que contiene un valor que puede cambiar.</p>
+            <p>El signo <code>$</code> al principio indica una variable.</p>
+            
+            <pre><code>$i = 1
+$string = "Hola Mundo!"
+$this_is_a_variable = "prueba"</code></pre>
+            
+            <p>Las variables se utilizan para almacenar valores simples, cadenas y también la salida de comandos.</p>
+            
+            <pre><code>$date = Get-Date
+Write-Host "Hoy es" $date</code></pre>
+            
+            <h3>Tipos de Datos</h3>
+            <p>PowerShell asigna automáticamente un tipo de datos a una variable según el tipo que mejor se adapte a su contenido.</p>
+            
+            <p>Usando el comando <code>Get-Type</code> para averiguar el tipo de datos de una variable:</p>
+            
+            <pre><code>$x = 4
+$string = "Hola Mundo!"
+$date = Get-Date
+
+$x.GetType().Name
+$string.GetType().Name
+$date.GetType().Name</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Resumen de Tipos de Datos</h2>
+            
+            <table>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td><code>[string]</code></td>
+                    <td>System.String. Una cadena simple</td>
+                </tr>
+                <tr>
+                    <td><code>[char]</code></td>
+                    <td>Carácter Unicode de 16 bits</td>
+                </tr>
+                <tr>
+                    <td><code>[byte]</code></td>
+                    <td>Carácter sin signo de 8 bits</td>
+                </tr>
+                <tr>
+                    <td><code>[int]</code>, <code>[int32]</code></td>
+                    <td>Entero con signo de 32 bits</td>
+                </tr>
+                <tr>
+                    <td><code>[long]</code></td>
+                    <td>Entero con signo de 64 bits</td>
+                </tr>
+                <tr>
+                    <td><code>[bool]</code></td>
+                    <td>Booleano: Puede ser Verdadero o Falso</td>
+                </tr>
+                <tr>
+                    <td><code>[decimal]</code></td>
+                    <td>Decimal de 128 bits</td>
+                </tr>
+                <tr>
+                    <td><code>[single]</code>, <code>[float]</code></td>
+                    <td>Número de punto flotante de precisión simple de 32 bits</td>
+                </tr>
+                <tr>
+                    <td><code>[double]</code></td>
+                    <td>Número de punto flotante de precisión doble de 64 bits</td>
+                </tr>
+                <tr>
+                    <td><code>[datetime]</code></td>
+                    <td>Fecha y hora</td>
+                </tr>
+                <tr>
+                    <td><code>[array]</code></td>
+                    <td>Matriz de valores</td>
+                </tr>
+                <tr>
+                    <td><code>[hashtable]</code></td>
+                    <td>Objeto de tabla hash</td>
+                </tr>
+                <tr>
+                    <td><code>[guid]</code></td>
+                    <td>Identificador Único Global (GUID)</td>
+                </tr>
+                <tr>
+                    <td><code>[psobject]</code>, <code>[PSCustomobject]</code></td>
+                    <td>Objeto de PowerShell</td>
+                </tr>
+                <tr>
+                    <td><code>[scriptblock]</code></td>
+                    <td>Bloque de script de PowerShell</td>
+                </tr>
+                <tr>
+                    <td><code>[regex]</code></td>
+                    <td>Expresión Regular</td>
+                </tr>
+                <tr>
+                    <td><code>[timespan]</code></td>
+                    <td>Objeto de intervalo de tiempo</td>
+                </tr>
+            </table>
+            
+            <h3>Conversión de Variables (Casting)</h3>
+            <p>Convierte el tipo de datos de una variable <strong>casteándolo</strong> a otro tipo.</p>
+            
+            <pre><code>$number = "4"
+$number.GetType().Name    # Tipo de dato String
+
+# Convertir cadena a enteros
+$int_number = [int]$number
+$int_number.GetType().Name   # Int32
+
+# Convertir una cadena hexadecimal Unicode en un carácter
+[char]0x263a</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Variables Automáticas</h2>
+            <p>Variables integradas que son creadas y mantenidas por PowerShell.</p>
+            
+            <ul>
+                <li><code>$?</code>: Estado de ejecución del último comando. <code>True</code> si el comando tuvo éxito, de lo contrario <code>False</code>.</li>
+                <li><code>$_</code>: Llamada variable de pipeline, representa el elemento actual que se está procesando en un pipeline o bucle.</li>
+            </ul>
+            
+            <pre><code>Get-ChildItem -Path C:\ -Directory -Force -ErrorAction SilentlyContinue | ForEach-Object {
+    Write-Host $_.FullName
+}</code></pre>
+            
+            <ul>
+                <li><strong><code>$Error</code>:</strong> Contiene los errores más recientes, recopilados en una matriz. Indexado usando <code>$Error[8]</code></li>
+                <li><strong><code>$false</code>:</strong> Representa el valor booleano tradicional de Falso.</li>
+                <li><strong><code>$LastExitCode</code>:</strong> Contiene el último código de salida del programa que se ejecutó.</li>
+                <li><strong><code>$null</code>:</strong> Contiene nulo o un valor vacío, se utiliza para comprobar si una variable contiene un valor o está establecida como indefinida.</li>
+                <li><strong><code>$PSScriptRoot</code>:</strong> Ubicación del directorio desde el cual se ejecuta el script.</li>
+                <li><strong><code>$true</code>:</strong> Contiene Verdadero. Use <code>$true</code> para representar Verdadero en comandos y scripts.</li>
+            </ul>
+            
+            <h3>Variables de Entorno</h3>
+            <p>Almacenan información sobre el sistema operativo y las rutas que el sistema utiliza con frecuencia.</p>
+            
+            <p>Para mostrar todas las variables de entorno dentro de una sesión, use <code>dir env:</code></p>
+            <p>Accediendo y reutilizando variables anteponiendo <code>$env:</code></p>
+            
+            <pre><code># Accediendo al valor de PSModulePath.
+$env:PSModulePath</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Palabras Reservadas y Palabras Clave del Lenguaje</h2>
+            <p>Palabras que están reservadas por el sistema y no deben usarse como nombres de variables o funciones.</p>
+            
+            <pre><code># Más información sobre palabras reservadas
+Get-Help about_reserved_words
+
+# Obtener una descripción general detallada y explicación de todas las palabras clave del lenguaje:
+Get-Help about_Language_Keywords</code></pre>
+            
+            <h3>Resumen de Todas las Palabras Clave del Lenguaje</h3>
+            
+            <div class="code-output">
+                Begin    Enum    Param<br>
+                Break    Exit    Process<br>
+                Catch    Filter    Return<br>
+                Class    Finally    Static<br>
+                Continue    For    Switch<br>
+                Data    ForEach    Throw<br>
+                Define    From    Trap<br>
+                Do    Function    Try<br>
+                DynamicParam    Hidden    Until<br>
+                Else    If    Using<br>
+                Elseif    In    Var<br>
+                End    InlineScript    While
+            </div>
+            
+            <pre><code># Aprender más sobre una palabra clave específica del lenguaje
+Get-Help break
+
+# Encontrar páginas de ayuda que hablen sobre la palabra que estamos buscando
+Get-Help filter -Category:HelpFile</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Ámbito de Variables</h2>
+            <p>El <strong>ámbito de variable</strong> determina dónde se puede acceder a una variable dentro de un script, función o sesión.</p>
+            <p>En general, las variables solo están disponibles en el contexto en el que se establecen.</p>
+            
+            <pre><code># Establecer el ámbito de la variable $ModuleRoot a script
+$script:ModuleRoot = $PSScriptRoot</code></pre>
+            
+            <h3>Modificador de Ámbito</h3>
+            
+            <ul>
+                <li><strong>global:</strong> Establece el ámbito a <em>global</em>, efectivo cuando PowerShell se inicia o se crea una nueva sesión.</li>
+            </ul>
+            
+            <p>Las variables con ámbito <em>global</em> definidas en un módulo están disponibles en la sesión una vez que se carga el módulo.</p>
+            
+            <ul>
+                <li><strong>local:</strong> El ámbito actual. El ámbito local puede ser el ámbito global, el ámbito del script o cualquier otro ámbito.</li>
+                <li><strong>script:</strong> El ámbito solo es efectivo dentro del script que establece este ámbito.</li>
+            </ul>
+            
+            <pre><code>function Set-Variables {
+    $local_variable = "Hola, soy una variable local."
+    $script:script_variable = "Hola, soy una variable de script."
+    $global:global_variable = "Hola, soy una variable global."
+
+    Write-Host "################################################################"
+    Write-Host "Así se ven nuestras variables en la función, donde definimos las variables - en un ÁMBITO LOCAL:"
+    Write-Host " Local: " $local_variable
+    Write-Host " Script: " $script_variable
+    Write-Host " Global: " $global_variable
+}
+
+Set-Variables
+
+Write-Host "########################################################"
+Write-Host "Así se ven nuestras variables en el mismo script - en un ÁMBITO DE SCRIPT:"
+Write-Host " Local: " $local_variable
+Write-Host " Script: " $script_variable
+Write-Host " Global: " $global_variable</code></pre>
+            
+            <p>Primero se declara la función <code>Set-Variable</code>, una vez que se llama a la función, establece variables de tres ámbitos.</p>
+            
+            <div class="code-output">
+                ############################################################<br>
+                Así se ven nuestras variables en la función, donde definimos las variables - en un ÁMBITO LOCAL:<br>
+                Local: Hola, soy una variable local.<br>
+                Script: Hola, soy una variable de script.<br>
+                Global: Hola, soy una variable global.<br>
+                ############################################################<br>
+                Así se ven nuestras variables en el mismo script - en un ÁMBITO DE SCRIPT:<br>
+                Local:<br>
+                Script: Hola, soy una variable de script.<br>
+                Global: Hola, soy una variable global.
+            </div>
+            
+            <p>Llamando a variables con ámbito local, de script y global.</p>
+            <p>Al trabajar con variables de ámbito <em>script</em> y <em>global</em>, es una buena práctica usar siempre la variable con el modificador: <code>$script:script_variable/$global:global_variable</code></p>
+        </div>
+
+        <div class="section">
+            <h2>Operadores</h2>
+            
+            <h3>Operadores Aritméticos</h3>
+            
+            <pre><code># Suma
+$a = 3; $b = 5; $result = $a + $b
+
+# Resta
+$a = 3; $b = 5; $result = $b - $a
+
+# Multiplicación
+$a = 3; $b = 5; $result = $a * $b
+
+# División
+$a = 3; $b = 5; $result = $a / $b
+
+# Módulo
+$a = 12; $b = 4; $result = $a % $b</code></pre>
+            
+            <h3>Operadores de Comparación</h3>
+            
+            <ul>
+                <li><strong>Igual (-eq):</strong> Devuelve True si ambos valores son iguales.</li>
+            </ul>
+            
+            <pre><code>$a = 1; $b = 1; $a -eq $b</code></pre>
+            
+            <ul>
+                <li><strong>No igual (-ne):</strong> Devuelve True si ambos valores no son iguales.</li>
+            </ul>
+            
+            <pre><code>$a = 1; $b = 2; $a -ne $b</code></pre>
+            
+            <ul>
+                <li><strong>Menor o igual (-le):</strong> Devuelve True si el primer valor es menor o igual al segundo valor.</li>
+            </ul>
+            
+            <pre><code>$a = 1; $b = 2; $a -le $b</code></pre>
+            
+            <ul>
+                <li><strong>Mayor o igual (-ge):</strong> Devuelve True si el primer valor es mayor o igual al segundo valor.</li>
+            </ul>
+            
+            <pre><code>$a = 1; $b = 2; $a -ge $b</code></pre>
+            
+            <ul>
+                <li><strong>Menor que (-lt):</strong> Devuelve True si el primer valor es menor que el segundo valor.</li>
+            </ul>
+            
+            <pre><code>$a = 1; $b = 2; $a -lt $b</code></pre>
+            
+            <ul>
+                <li><strong>Mayor que (-gt):</strong> Devuelve True si el primer valor es mayor que el segundo valor.</li>
+            </ul>
+            
+            <pre><code>$a = 1; $b = 2; $b -gt $a</code></pre>
+            
+            <ul>
+                <li><strong>like:</strong> Comprueba si un valor coincide con una expresión comodín cuando se usa con un escalar.</li>
+            </ul>
+            
+            <pre><code>"PowerShell" -like "*owers*"
+True</code></pre>
+            
+            <p>Usado en un contexto de matriz, el operador <code>-like</code> devuelve solo los elementos que coinciden con la expresión comodín especificada.</p>
+            
+            <pre><code>"PowerShell", "Perro", "Gato", "Cobaya" -like "*owers*"
+PowerShell</code></pre>
+            
+            <ul>
+                <li><strong>notlike:</strong> Comprueba si un valor no coincide con una expresión comodín cuando se usa con un escalar.</li>
+            </ul>
+            
+            <pre><code>"PowerShell" -notlike "*owers*"
+False</code></pre>
+            
+            <p>Usado en un contexto de matriz, el operador <code>-notlike</code> devuelve solo los elementos que no coinciden con la expresión comodín especificada.</p>
+            
+            <pre><code>"PowerShell", "Perro", "Gato", "Cobaya" -notlike "*owers*"
+Perro
+Gato
+Cobaya</code></pre>
+            
+            <ul>
+                <li><strong>match:</strong> Comprueba si un valor coincide con una expresión regular.</li>
+            </ul>
+            
+            <pre><code>"Cybersecurity scripting in PowerShell 7.3" -match "shell\s*(\d)"
+True</code></pre>
+            
+            <p># shell: Coincide con la palabra literal "shell".<br>
+            # \s*: Coincide con cero o más caracteres de espacio en blanco.<br>
+            # (\d): Captura un solo dígito (0-9) en un grupo de captura.</p>
+            
+            <ul>
+                <li><strong>notmatch:</strong> Comprueba si un valor no coincide con una expresión regular.</li>
+            </ul>
+            
+            <pre><code>"PowerShell Scripting and Automation" -notmatch "^Cyb"</code></pre>
+            
+            <h3>Operadores de Asignación</h3>
+            
+            <p><code>=</code> : Asigna un valor</p>
+            
+            <pre><code>$a = 1; $a</code></pre>
+            
+            <p><code>+=</code> : Aumenta el valor por la cantidad definida después del operador y almacena el resultado en la variable inicial.</p>
+            
+            <pre><code>$a += 1; $a += 2; $a</code></pre>
+            
+            <p><code>-=</code> : Disminuye el valor por la cantidad definida después del operador y almacena el resultado en la variable inicial.</p>
+            
+            <pre><code>$a -= 1; $a</code></pre>
+            
+            <p><code>*=</code> : Multiplica el valor por la cantidad definida después del operador y almacena el resultado en la variable inicial.</p>
+            
+            <pre><code>$a *= 5; $a</code></pre>
+            
+            <p><code>/=</code> : Divide el valor por la cantidad definida después del operador y almacena el resultado en la variable inicial.</p>
+            
+            <pre><code>$a /= 2; $a</code></pre>
+            
+            <p><code>%=</code> : Realiza una operación de módulo en la variable usando la cantidad después del operador y almacena el resultado en la variable inicial.</p>
+            
+            <pre><code>$a %= 2; $a</code></pre>
+            
+            <p><code>++</code> : Aumenta la variable en 1</p>
+            
+            <pre><code>$a = 1; $a++; $a</code></pre>
+            
+            <p><code>--</code> : Disminuye la variable en 1</p>
+            
+            <pre><code>$a = 10; $a--; $a</code></pre>
+            
+            <h3>Operadores Lógicos</h3>
+            
+            <p><code>-and</code> : Combina condiciones, la acción se activa solo si se cumplen ambas condiciones.</p>
+            
+            <pre><code>$a = 1; $b = 2
+if (($a -eq 1) -and ($b -eq 2)) {Write-Host "¡La condición es verdadera!"}</code></pre>
+            
+            <p><code>-or</code> : Si se cumple una de las condiciones definidas, se activa la acción.</p>
+            
+            <pre><code>$a = 2; $b = 2
+if (($a -eq 1) -or ($b -eq 2)) {Write-Host "¡La condición es verdadera!"}</code></pre>
+            
+            <p><code>not</code> o <code>!</code> : Se utilizan para negar una condición.</p>
+            
+            <pre><code>$path = $env:TEMP + "\TestDirectory"
+if (-not (Test-Path -Path $path)) {
+    New-Item -ItemType directory -Path $path
+}
+
+if (!(Test-Path -Path $path)){
+    New-Item -ItemType directory -Path $path
+}</code></pre>
+            
+            <p><code>-xor</code> : O exclusivo lógico. Es True si solo una declaración es True (pero devuelve False si ambas son True).</p>
+            
+            <pre><code>$a = 1; $b = 2; ($a -eq 1) -xor ($b -eq 1)</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Estructuras de Control</h2>
+            <p>Una estructura de control es una lógica que evalúa condiciones y variables y decide qué acción definida tomar si se cumple cierta condición.</p>
+            
+            <h3>Condiciones</h3>
+            <p>if / elseif / else :</p>
+            
+            <p>Sintaxis:</p>
+            
+            <pre><code>if (&lt;condición&gt;)
+{
+    &lt;acción&gt;
+}
+elseif (&lt;condición&gt;)
+{
+    &lt;acción 2&gt;
+}
+...
+else
+{
+    &lt;acción 3&gt;
+}</code></pre>
+            
+            <p>Código:</p>
+            
+            <pre><code>$color = "verde"
+if ($color -eq "azul") {
+    Write-Host "¡El color es azul!"
+}
+elseif ($color -eq "verde") {
+    Write-Host "¡El color es verde!"
+}
+else {
+    Write-Host "¡Ese también es un color muy bonito!"
+}
+# devuelve: ¡El color es verde!</code></pre>
+            
+            <h3>Switch</h3>
+            <p>Comprueba una variable con una larga lista de valores.</p>
+            
+            <p>Sintaxis:</p>
+            
+            <pre><code>switch (&lt;valor a probar&gt;) {
+    &lt;condición 1&gt; {&lt;acción 1&gt;}
+    &lt;condición 2&gt; {&lt;acción 2&gt;}
+    &lt;condición 3&gt; {&lt;acción 3&gt;}
+    ...
+    default {}
+}</code></pre>
+            
+            <p>Código:</p>
+            
+            <pre><code>$color = Read-Host "¿Cuál es tu color favorito?"
+switch ($color){
+    "azul" { Write-Host "Soy AZUL, Da ba dee da ba di..." }
+    "amarillo" { Write-Host "El AMARILLO es el color de mi equipo de IPL favorito." }
+    "rojo" { Write-Host "¡Esté alerta!" }
+    "púrpura" { Write-Host "¡Lluvia PÚRPURA, lluvia púrpura!" }
+    "negro" { Write-Host "Hombres de negro..." }
+    default { Write-Host "El color no está en esta lista" }
+}</code></pre>
+            
+            <p>• Usando expresión regular:<br>
+            - El parámetro Regex permite el uso de expresiones regulares para coincidir con la entrada.</p>
+            
+            <pre><code>switch -Regex ($userInput){
+    "^[A-Z]" { "La entrada del usuario comienza con una letra." }
+    "^[0-9]" { "La entrada del usuario comienza con un número." }
+    default { "La entrada del usuario no comienza con una letra o número" }
+}</code></pre>
+            
+            <p>• Procesando el contenido de un archivo:<br>
+            El parámetro <code>-wildcard</code> permite el uso de lógica comodín en el código.</p>
+            
+            <pre><code>$path = $env:TEMP + "\ejemplo.txt"
+switch -wildcard -File $path {
+    "*Error*" { Write-Host "¡Se encontró un error!: $_" }
+}</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Bucles e Iteraciones</h2>
+            <p>Ejecuta una acción una y otra vez hasta que se cumple una determinada condición.</p>
+            
+            <h3>ForEach-Object:</h3>
+            <p>Acepta una lista o una matriz de elementos y permite realizar una acción contra cada uno de ellos.</p>
+            
+            <p>❌ Mejor caso de uso cuando se canalizan objetos de tubería a ForEach-Object.</p>
+            
+            <p>• Procesando todos los archivos que están en una carpeta:</p>
+            
+            <pre><code>$path = $env:TEMP + "\baselines"
+Get-ChildItem -Path $path | ForEach-Object {Write-Host $_}</code></pre>
+            
+            <p>○ Para realizar acciones específicas antes de procesar cada elemento, use los parámetros <code>Begin</code> y <code>End</code>.<br>
+            ○ Use el parámetro <code>-process</code> para especificar el bloque de script que se ejecuta para cada elemento en la canalización.</p>
+            
+            <h3>Foreach:</h3>
+            <p>Funciona de manera similar a <code>foreach-Object</code>, pero no acepta objetos de canalización.</p>
+            
+            <p>La declaración Foreach carga todos los elementos en una colección antes de que se procesen, lo que la hace más rápida pero consume más memoria que <code>foreach-Object</code>.</p>
+            
+            <p><strong>Código:</strong></p>
+            
+            <p>• <strong>declaración foreach</strong>:</p>
+            
+            <pre><code>$path = $env:TEMP + "\baselines"
+$items = Get-ChildItem -Path $path
+
+foreach ($file in $items){
+    Write-Host $file
+}</code></pre>
+            
+            <p>• <strong>método foreach</strong>:</p>
+            
+            <pre><code>$path = $env:TEMP + "\baselines"
+$items = Get-ChildItem -Path $path
+
+$items.foreach({ 
+    Write-Host "Elemento actual: $_"
+})</code></pre>
+            
+            <p>La variable <code>$_</code> se utiliza para hacer referencia al elemento actual que se está iterando.</p>
+            
+            <h3>while:</h3>
+            <p>Hace algo (<acciones>) siempre que la condición definida sea True.<br>
+            Sintaxis:</p>
+            
+            <pre><code>while (&lt;condición&gt;) { &lt;acción&gt; }</code></pre>
+            
+            <p>Código:</p>
+            
+            <pre><code>while (($input = Read-Host -Prompt "Elige un comando (escribe 'help' para ver una descripción general)") -ne "quit") {
+    switch($input) {
+        "hola" {Write-Host "¡Hola Mundo!"}
+        "color" {Write-Host "¿Cuál es tu deporte favorito?"}
+        "help" {Write-Host "Opciones: 'hola', 'color', 'help', 'quit'"}
+    }
+}</code></pre>
+            
+            <h3>for:</h3>
+            <p>Define la declaración de inicialización, una condición y recorre hasta que la condición definida no se cumple.<br>
+            Sintaxis:</p>
+            
+            <pre><code>for (&lt;declaración de inicialización&gt;; &lt;condición&gt;; &lt;repetir&gt;)
+{
+    &lt;acciones&gt;
+}</code></pre>
+            
+            <p>Código:</p>
+            
+            <pre><code>for ($i=1; $i -le 5; $i++) {Write-Host "i: $i"}</code></pre>
+            
+            <h3>do-until / do-while:</h3>
+            <p>Comienza ejecutando los comandos definidos y luego verifica si la condición aún se cumple o no.</p>
+            
+            <p>Sintaxis:</p>
+            
+            <pre><code>do{
+    &lt;acción&gt;
+}
+&lt;while/until&gt; &lt;condición&gt;</code></pre>
+            
+            <p>do-while se ejecuta mientras la condición sea True, do-until se ejecuta mientras la condición no se cumpla.</p>
+            
+            <h3>break:</h3>
+            <p>Se utiliza para salir del bucle.</p>
+            
+            <p>Código:</p>
+            
+            <pre><code>for ($i=1; $i -le 10; $i++) {
+    Write-Host "i: $i"
+    if ($i -eq 3) {break}
+}</code></pre>
+            
+            <h3>continue:</h3>
+            <p>Se utiliza para omitir la iteración actual de un bucle y pasar a la siguiente.</p>
+            
+            <p>Código:</p>
+            
+            <pre><code>for ($i=1; $i -le 10; $i++) {
+    if (($i % 2) -ne 0) {continue}
+    Write-Host "i: $i"
+}</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Convenciones de Nomenclatura</h2>
+            <p>Tanto los cmdlets como las funciones siguen el esquema verbo-sustantivo, como Get-Help o Stop-Process.</p>
+            <p>Microsoft ha publicado una lista de verbos aprobados.</p>
+            
+            <h3>Encontrar los verbos aprobados</h3>
+            <p>Comando Get-Verb para obtener la lista de verbos aprobados.</p>
+            
+            <pre><code># Por el nombre "Verbo"
+Get-Verb | Sort-Object Verb
+
+# Usando comodines para prefiltrar la lista:
+Get-Verb re*
+
+# Listar verbos de cierto grupo (en este caso el grupo Security):
+Get-Verb | Where-Object Group -eq Security</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Perfiles de PowerShell</h2>
+            <p>Los perfiles de PowerShell son archivos de configuración que permiten personalizar el entorno de PowerShell.</p>
+            <p>Los perfiles son scripts que se ejecutan cuando se inicia una sesión de PowerShell, permiten establecer variables, definir funciones, crear alias y más.</p>
+            
+            <h3>Tipos de perfiles de PowerShell</h3>
+            
+            <ul>
+                <li><strong>Todos los Usuarios, Todos los Hosts</strong> (<code>$profile.AllUsersAllHosts</code>): Este perfil se aplica a todos los usuarios para todos los hosts de PowerShell.</li>
+                <li><strong>Todos los Usuarios, Host Actual</strong> (<code>$profile.AllUsersCurrentHost</code>): Este perfil se aplica a todos los usuarios para el host de PowerShell actual.</li>
+                <li><strong>Usuario Actual, Todos los Hosts</strong> (<code>$profile.CurrentUserAllHosts</code>): Este perfil se aplica al usuario actual para todos los hosts de PowerShell.</li>
+                <li><strong>Usuario Actual, Host Actual</strong> (<code>$profile.CurrentUserCurrentHost</code>): Este perfil se aplica solo al usuario actual y al host de PowerShell actual.</li>
+            </ul>
+            
+            <p>Un host de PowerShell es una aplicación que aloja el motor de PowerShell.</p>
+            <p>Los hosts de PowerShell incluyen la consola de Windows PowerShell, el Entorno de Scripting Integrado (ISE) de PowerShell y la terminal de PowerShell en Visual Studio Code.</p>
+            
+            <h3>Encontrar la ubicación de los perfiles locales de PowerShell:</h3>
+            
+            <pre><code>$PROFILE | Format-List * -force</code></pre>
+            
+            <p>• Se aplica a shells locales y todos los usuarios: <code>windows\system32\WindowsPowerShell\v1.0\profile.ps1</code><br>
+            • Se aplica a todos los shells y todos los usuarios: <code>windows\system32\WindowsPowerShell\v1.0\Microsoft.PowerShell_profile.ps1</code><br>
+            • Se aplica a todos los shells ISE locales y todos los usuarios: <code>windows\system32\WindowsPowerShell\v1.0\Microsoft.PowerShellISE_profile.ps1</code></p>
+            
+            <p>Este perfil se carga cuando se usa PowerShell ISE y se puede ver ejecutando el comando <code>$profile | fl -force</code> dentro de ISE.</p>
+            
+            <p>• Se aplica a los shells ISE del usuario actual en el host local: <code>%userProfile%\Documents\WindowsPowerShell\Microsoft.PowerShellISE_profile.ps1</code></p>
+            
+            <h3>Acceder a la ruta del archivo de un perfil particular:</h3>
+            
+            <pre><code># Sintaxis:
+# $profile.&lt;nombre del perfil&gt;
+
+# Acceder a la ruta del perfil CurrentUserCurrentHost
+$profile.CurrentUserCurrentHost</code></pre>
+            
+            <h3>Crear un perfil de usuario:</h3>
+            
+            <p>• Comprobar si el archivo de perfil ya existe, si no, crear uno.</p>
+            
+            <pre><code>if (!(Test-Path $profile.CurrentUserCurrentHost)) {
+    New-Item -ItemType File -Path $profile.CurrentUserCurrentHost
+}</code></pre>
+            
+            <p>• Agregar los comandos, funciones o alias al perfil de usuario:</p>
+            
+            <pre><code>Add-Content -Path $profile -Value "New-Alias -Name Get-Ip -Value ipconfig.exe"</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Comprender las PSDrives</h2>
+            <p>Las unidades de PowerShell (PSDrives) en PowerShell son similares a las unidades del sistema de archivos en Windows, pero en lugar de acceder a archivos o carpetas, use PSDrives para acceder a una variedad de almacenes de datos.</p>
+            <p>Los almacenes de datos incluyen directorios, claves del registro y otras fuentes de datos.</p>
+            <p>Las PSDrives son impulsadas por PSProviders, que son componentes subyacentes que proporcionan acceso a los almacenes de datos.</p>
+            <p><code>Env:</code> es una unidad de PowerShell integrada que proporciona acceso a las variables de entorno.</p>
+            <p>Para acceder a una PSDrive, use un prefijo especial en la ruta, como hacemos con C: para acceder a la unidad del sistema de archivos.</p>
+            
+            <p>Recuperando todas las variables de entorno con la cadena <code>path</code> en su nombre:</p>
+            
+            <pre><code>Get-ChildItem Env:\*path*</code></pre>
+            
+            <h3>PSDrives integradas en PowerShell incluyen:</h3>
+            
+            <ul>
+                <li><strong>Alias:</strong> Proporciona acceso a los alias de PowerShell</li>
+                <li><strong>Environment:</strong> Proporciona acceso a las variables de entorno</li>
+                <li><strong>Function:</strong> Proporciona acceso a las funciones de PowerShell</li>
+                <li><strong>Variable:</strong> Proporciona acceso a las variables de PowerShell</li>
+                <li><strong>Cert:</strong> Proporciona acceso a los certificados en el almacén de certificados de Windows</li>
+                <li><strong>Cert::CurrentUser:</strong> Proporciona acceso a los certificados en el almacén de certificados del usuario actual</li>
+                <li><strong>Cert::LocalMachine:</strong> Proporciona acceso a los certificados en el almacén de certificados de la máquina local</li>
+                <li><strong>WSMan:</strong> Proporciona acceso a los datos de configuración de Windows Remote Management (WinRM)</li>
+                <li><strong>C:</strong> y <strong>D:</strong> (y otras letras de unidad): Se utilizan para acceder al sistema de archivos, al igual que en el Explorador de Windows</li>
+                <li><strong>HKCU:</strong> Proporciona acceso a la hive del registro <code>HKEY_CURRENT_USER</code></li>
+                <li><strong>HKLM:</strong> Proporciona acceso a la hive del registro <code>HKEY_LOCAL_MACHINE</code></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Hacer que tu código sea reutilizable</h2>
+            <p>La reutilización es un aspecto importante de la codificación que permite crear una función, cmdlet o módulo una vez y usarlo múltiples veces sin tener que reescribir el mismo código una y otra vez.</p>
+            
+            <h3>Cmdlets</h3>
+            <p>Comando de PowerShell que realiza una tarea específica y puede escribirse en <strong>C#</strong> o en otro lenguaje .NET.</p>
+            
+            <p>- Para encontrar todos los <strong>cmdlets</strong> que están actualmente instalados en la máquina:</p>
+            
+            <pre><code>Get-Command -CommandType Cmdlet</code></pre>
+            
+            <h3>Funciones</h3>
+            <p>Las funciones son una colección de comandos de PowerShell que deben ejecutarse siguiendo una cierta lógica.</p>
+            
+            <h4>Estructura Básica de una Función:</h4>
+            
+            <pre><code>function Verbo-Sustantivo {
+&lt;#
+&lt;Texto de ayuda opcional&gt;
+#&gt;
+param(
+    [tipo de datos] $Parámetro
+)
+&lt;...Código: Lógica de la Función...&gt;
+}</code></pre>
+            
+            <h4>Llamar a una Función:</h4>
+            
+            <pre><code>Verbo-Sustantivo -Parámetro "prueba"</code></pre>
+            
+            <h4>Parámetros:</h4>
+            <p>Permiten pasar valores a las funciones, mejorando su flexibilidad y reutilización.</p>
+            
+            <h4>Definir parámetros:</h4>
+            
+            <pre><code>function Invoke-Greeting {
+    param (
+        [string] $Nombre
+    )
+    Write-Output "¡Hola $Nombre!"
+}</code></pre>
+            
+            <h4>CmdletBinding:</h4>
+            <p>CmdletBinding es una característica en PowerShell que permite agregar parámetros comunes como (<code>-Verbose</code>, <code>-Debug</code>, <code>-ErrorAction</code>) a funciones y cmdlets sin definirlos.</p>
+            <p>- <code>[CmdletBinding()]</code> hace que las funciones de PowerShell se comporten como cmdlets avanzados.</p>
+            
+            <p><strong>Hacer un parámetro obligatorio en una función:</strong></p>
+            
+            <pre><code>function Invoke-Greeting {
+    [cmdletbinding()]
+    param (
+        [Parameter(Mandatory)]
+        [string] $Nombre
+    )
+    Write-Output "¡Hola $Nombre!"
+}</code></pre>
+            
+            <h4>SupportsShouldProcess:</h4>
+            <p>Agregando <code>[CmdletBinding(SupportsShouldProcess)]</code>, habilita los parámetros <code>-WhatIf</code> y <code>-Confirm</code> en la función.</p>
+            <p>Para usar SupportsshouldProcess efectivamente, necesitará llamar a ShouldProcess() para cada elemento que se esté procesando.</p>
+            
+            <p><strong>Código de Ejemplo:</strong></p>
+            
+            <pre><code>function Invoke-Greeting {
+    [CmdletBinding(SupportsShouldProcess)]
+    param (
+        $Nombre
+    )
+    foreach ($item in $Nombre) {
+        if ($PSCmdlet.ShouldProcess($item)) {
+            Write-Output "¡Hola $item!"
+        }
+    }
+}</code></pre>
+            
+            <h4>Aceptar entrada a través de la canalización:</h4>
+            <p>Aceptar entrada a través de la canalización se puede hacer de dos maneras, por valor o por nombre de propiedad.</p>
+            
+            <p><strong>1. Por Valor (Parámetros Posicionales):</strong><br>
+            Acepta la entrada pasando valores directamente a los parámetros de la función al llamarla, y PowerShell coincide automáticamente con los parámetros posicionales.</p>
+            
+            <p><strong>2. Por Nombre de Propiedad (Parámetros con Nombre):</strong><br>
+            Especifique los nombres de los parámetros al llamar a la función. Esto permite pasar argumentos en cualquier orden.</p>
+            
+            <p><strong>Código de Ejemplo:</strong></p>
+            
+            <pre><code>function Invoke-Greeting {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [String] $Nombre
+    )
+    process {
+        Write-Output "¡Hola $Nombre!"
+    }
+}</code></pre>
+            
+            <p><strong>Llamar a la Función:</strong></p>
+            
+            <p>1. Por Valor:</p>
+            
+            <pre><code>"Alicia", "Roberto" | Invoke-Greeting</code></pre>
+            
+            <p>2. Por nombre de propiedad:</p>
+            
+            <pre><code>[pscustomobject]@{Nombre = "Prash"} | Invoke-Greeting</code></pre>
+            
+            <h4>Ayuda basada en comentarios:</h4>
+            <p>Los comentarios simplifican el ajuste o la reutilización del código de la función.</p>
+            
+            <pre><code>&lt;#
+.SYNOPSIS
+&lt;Describe la función brevemente.&gt;
+
+.DESCRIPTION
+&lt;Descripción más detallada de la función.&gt;
+
+.PARAMETER Nombre
+&lt;Agrega una sección para describir cada parámetro, si la función tiene uno o más parámetros.&gt;
+
+.EXAMPLE
+&lt;Ejemplo de cómo llamar a la función&gt;
+
+&lt;Describe qué sucede si se ejecuta la llamada de ejemplo.&gt;
+#&gt;</code></pre>
+            
+            <h4>Manejo de Errores:</h4>
+            
+            <pre><code>try{
+    New-PSSession -ComputerName $Computadora -ErrorAction Stop
+}
+catch {
+    Write-Warning -Message "No se pudo conectar a la Computadora: $Computadora"
+}</code></pre>
+            
+            <p>• Establecer <code>ErrorAction</code> en <code>Stop</code> tratará el error como un error terminante.</p>
+            <p>• Como se detectan errores terminantes, se activa la acción definida en el bloque <code>catch</code>.</p>
+            
+            <h3>Demo: Script de PowerShell Integral</h3>
+            
+            <pre><code>function Write-Helloword(){
+    &lt;#
+    .SYNOPSIS
+    Esta función escribe "¡Hola Mundo!" en la línea de comandos.
+    .DESCRIPTION
+    Esto es solo para fines de aprendizaje
+    .PARAMETER Identidad
+    Si se especifica el parámetro, se agrega un saludo individual.
+    .EXAMPLE
+    Write-Helloword -Identidad "prash"
+
+    Escribe la salida "¡Hola Mundo! ¡Hola prash!"
+#&gt;
+
+    [cmdletbinding()]
+    param(
+        [string]$Identidad
+    )
+    if (![string]::IsNullOrEmpty($Identidad)) {
+        $appendStr = " ¡Hola $Identidad!"
+    }
+    else{
+        $appendstr = ""
+    }
+
+    Write-Host "¡Hola Mundo!$appendStr"
+}
+
+# Llamar a la función sin parámetro
+Write-Helloword
+
+# Llamar a la función con el parámetro de identidad agregado
+Write-Helloword -Identidad "prash"</code></pre>
+            
+            <h3>Diferencia entre cmdlets y script cmdlets (funciones avanzadas):</h3>
+            
+            <table>
+                <tr>
+                    <th>Aspecto</th>
+                    <th>Cmdlets</th>
+                    <th>Script Cmdlets (Funciones Avanzadas)</th>
+                </tr>
+                <tr>
+                    <td>Implementación</td>
+                    <td>Escritos en un lenguaje compilado como C#</td>
+                    <td>Escritos en lenguaje de scripting de PowerShell</td>
+                </tr>
+                <tr>
+                    <td>Rendimiento</td>
+                    <td>Más rápidos y eficientes debido a la compilación</td>
+                    <td>Ligeramente más lentos debido a la interpretación</td>
+                </tr>
+                <tr>
+                    <td>Complejidad</td>
+                    <td>Más complejos de desarrollar y requieren compilación</td>
+                    <td>Más fáciles de escribir, modificar y depurar</td>
+                </tr>
+                <tr>
+                    <td>Implementación</td>
+                    <td>Empaquetados como un DLL y cargados a través de módulos</td>
+                    <td>Incluidos en scripts o módulos como archivos <code>.ps1</code></td>
+                </tr>
+                <tr>
+                    <td>Extensibilidad</td>
+                    <td>Puede acceder a todo el poder del framework .NET</td>
+                    <td>Limitado a lo que el scripting de PowerShell puede lograr</td>
+                </tr>
+                <tr>
+                    <td>Ejemplo</td>
+                    <td>Get-Process (cmdlet integrado)</td>
+                    <td><code>function Get-Helloworld { [CmdletBinding()] ... }</code></td>
+                </tr>
+                <tr>
+                    <td>Caso de Uso</td>
+                    <td>Cuando el rendimiento y las operaciones de bajo nivel son importantes</td>
+                    <td>Para tareas de automatización más simples y desarrollo rápido</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Alias</h2>
+            <p>Los alias son nombres abreviados o alternativos para cmdlets, funciones, scripts o comandos.</p>
+            
+            <p>• Para ver todos los cmdlets disponibles que tienen la palabra <code>Alias</code> en el nombre:</p>
+            
+            <pre><code>Get-Command -Name "*Alias*"</code></pre>
+            
+            <h3>Trabajar con Alias:</h3>
+            
+            <p><strong>Get-Alias:</strong><br>
+            Para ver todos los alias que están actualmente configurados en la computadora.</p>
+            
+            <div class="code-output">
+                CommandType    Name    Version    Source<br>
+                ---    ---    ---    ---<br>
+                Alias    2 -> Where-Object<br>
+                Alias    3 -> ForEach-Object<br>
+                Alias    ac -> Add-Content<br>
+                Alias    cat -> Get-Content<br>
+                Alias    cd -> Set-Location<br>
+                Alias    chdir -> Set-Location<br>
+                Alias    clc -> Clear-Content<br>
+                Alias    clear -> Clear-Host<br>
+                Alias    clhy -> Clear-History<br>
+                Alias    cli -> Clear-Item<br>
+                Alias    clp -> Clear-ItemProperty<br>
+                Alias    cls -> Clear-Host<br>
+                Alias    clv -> Clear-Variable<br>
+                Alias    cnsn -> Connect-PSSession<br>
+                Alias    compare -> Compare-Object<br>
+                Alias    copy -> Copy-Item<br>
+                Alias    cp -> Copy-Item<br>
+                Alias    cpi -> Copy-Item<br>
+                Alias    cpp -> Copy-ItemProperty<br>
+                Alias    cvpa -> Convert-Path<br>
+                Alias    db -> Disable-PSBreakpoint<br>
+                Alias    del -> Remove-Item<br>
+                Alias    diff -> Compare-Object<br>
+                Alias    dir -> Get-ChildItem<br>
+                Alias    dnsn -> Disconnect-PSSession
+            </div>
+            
+            <p>Salida del comando Get-Alias</p>
+            
+            <p>Get-Alias también se puede usar para comprobar si existe un alias específico usando el parámetro <code>-Name</code>.</p>
+            
+            <p><strong>New-Alias:</strong><br>
+            Use <code>New-Alias</code> para crear un nuevo alias dentro de la sesión actual de PowerShell.</p>
+            
+            <pre><code>New-Alias -Name Get-IP -Value ipconfig</code></pre>
+            
+            <p class="tip">💡 Estos alias no se establecen permanentemente, por lo que una vez que salga de la sesión, el alias no funcionará más.<br>
+            Para hacer estos alias permanentes, configúrelos en el perfil de PowerShell.</p>
+            
+            <p><strong>Export-Alias:</strong><br>
+            Exporta uno o más alias con Export-Alias.</p>
+            
+            <p>Exportar todos los alias a un archivo .csv:</p>
+            
+            <pre><code>Export-Alias -Path "alias.csv"</code></pre>
+            
+            <p>Exportar todos los alias como script que se puede ejecutar:</p>
+            
+            <pre><code>Export-Alias -Path "alias.ps1" -As Script</code></pre>
+            
+            <p>Exportar un solo alias usando el parámetro -Name:</p>
+            
+            <pre><code>Export-Alias -Path "alias.ps1" -Name Get-Ip -As Script</code></pre>
+            
+            <p><strong>Import-Alias:</strong><br>
+            Se utiliza para importar alias desde un archivo a la sesión actual de PowerShell.</p>
+            
+            <p>Importando los alias exportados anteriormente a través de un archivo:</p>
+            
+            <pre><code>Import-Alias -Path .\alias.csv</code></pre>
+            
+            <p>Salida del alias GetIp</p>
+        </div>
+
+        <div class="section">
+            <h2>Módulos</h2>
+            <p>Los módulos son una colección de comandos y funciones de PowerShell que se pueden enviar e instalar fácilmente en otros sistemas.</p>
+            
+            <p class="tip">💡 Todos los módulos instalados en el sistema se pueden encontrar en las carpetas PSModulePath, parte de la PSDrive Env:\</p>
+            
+            <pre><code>Get-Item -Path Env:\PSModulePath</code></pre>
+            
+            <h3>Trabajar con módulos:</h3>
+            
+            <p>1. <strong>Encontrar e instalar módulos</strong><br>
+            Busque módulos usando <code>Find-Module -Name &lt;nombredelmódulo&gt;</code>, que consulta los repositorios que están configurados en el sistema operativo.</p>
+            
+            <p>Instale el módulo en el sistema local usando <code>Install-Module &lt;nombredelmódulo&gt;</code>:</p>
+            
+            <p>- Actualizar módulo con <code>Update-Module &lt;nombredelmódulo&gt; -Force</code>:</p>
+            
+            <div class="code-output">
+                [Administrator PowerShell 7 (64)]<br>
+                PS C:\Users\Administrator\Desktop\awesome-powerShell> Install-Module EventList<br>
+                Installing package 'PowerList' [Installing Commanding package 'PSFramework'<br>
+                Installing package 'PSFramework' [Copying unsigned package to "C:\Users\Administrator\AppData\Local\Temp\X86Hosts4.|
+            </div>
+            
+            <p>- Para ver qué repositorios están disponibles en el sistema usando <code>Get-PSRepository</code>:</p>
+            
+            <div class="code-output">
+                [Administrator PowerShell 7 (64)]<br>
+                PS C:\Users\Administrator\Desktop\awesome-powerShell> Get-PSRepository<br><br>
+                Name    InstallationPolicy   SourceLocation<br>
+                ---    ---    ---<br>
+                PSGallery    Untrusted    https://www.powershellgallery.com/api/v2
+            </div>
+            
+            <p>La Galería de PowerShell (PowerShell Gallery) es el repositorio central para contenido de PowerShell, que contiene miles de módulos útiles, scripts y recursos de Configuración de Estado Deseado (DSC).</p>
+            <p>Usar la Galería de PowerShell para instalar módulos directamente requiere que <code>NuGet</code> y <code>PowerShellGet</code> estén instalados.</p>
+            
+            <p>Configurar PSGallery como repositorio confiable:</p>
+            
+            <pre><code>Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted</code></pre>
+            
+            <div class="code-output">
+                [Administrator PowerShell 7 (64)]<br>
+                PS C:\Users\Administrator\Desktop\awesome-powerShell> Get-PSRepository<br><br>
+                Name    InstallationPolicy   SourceLocation<br>
+                ---    ---    ---<br>
+                PSGallery    Trusted    https://www.powershellgallery.com/api/v2
+            </div>
+            
+            <p>- Para encontrar módulos ya disponibles en la sesión actual usando <code>Get-Module</code>:</p>
+            
+            <p>Lista de todos los módulos disponibles en la sesión actual</p>
+            
+            <p>- Para ver qué módulos están disponibles para importar, incluidos los que vienen preinstalados con Windows, usando <code>Get-Module -ListAvailable</code>:</p>
+            
+            <p>Lista de todos los módulos disponibles</p>
+            
+            <p>- Para encontrar qué comandos están disponibles en un módulo usando <code>Get-Command -Module &lt;nombredelmódulo&gt;</code>:</p>
+            
+            <p>Listando todos los comandos disponibles de un módulo</p>
+            
+            <p>- Para conocer el uso de un comando específico, use <code>Get-Help -Full &lt;comando&gt;</code>:</p>
+            
+            <div class="code-output">
+                PS C:\> Get-Help -Full Open-EventListGUI<br><br>
+                NAME<br>
+                Open-EventListGUI<br><br>
+                SYNOPSIS<br>
+                Opens the EventList GUI.<br><br>
+                SYNTAX<br>
+                Open-EventListGUI [&lt;CommonParameters&gt;]<br><br>
+                DESCRIPTION<br>
+                Opens the EventList GUI.<br><br>
+                PARAMETERS<br>
+                &lt;CommonParameters&gt;<br>
+                This cmdlet supports the common parameters: Verbose, Debug,<br>
+                ErrorAction, ErrorVariable, WarningAction, WarningVariable,<br>
+                OutBuffer, PipelineVariable, and OutVariable. For more information, see<br>
+                about_CommonParameters (https://go.microsoft.com/fwlink/?LinkID=113216).
+            </div>
+            
+            <p>Obteniendo la página de ayuda de un comando</p>
+            
+            <p>• Descarga el módulo de la sesión actual usando <code>Remove-Module &lt;nombredelmódulo&gt;</code>:</p>
+            
+            <div class="code-output">
+                Administrator PowerShell 7 (64)<br>
+                PS C:\Users\Administrator> Get-Module<br><br>
+                ModuleType Version    PreRelease Name    ExportedCommands<br>
+                Manifest   7.0.0.0    Microsoft.PowerShell.Management    {Add-Content, Clear-Content, Clear-Item, Clear-It…}<br>
+                Script    2.3.5    PSReadLine    {Get-PSReadLineKeyHandler, Get-PSReadLineOption, …}<br>
+                PS C:\Users\Administrator> Remove-Module PSReadLine<br>
+                PS C:\Users\Administrator> Get-Module<br><br>
+                ModuleType Version    PreRelease Name    ExportedCommands<br>
+                Manifest   7.0.0.0    Microsoft.PowerShell.Management    {Add-Content, Clear-Content, Clear-Item, Clear-It…}
+            </div>
+            
+            <p>Eliminando el módulo PSReadLine de la sesión actual</p>
+            
+            <p>2. <strong>Crear tus propios módulos:</strong><br>
+            Para hacer que las funciones sean más fáciles de enviar a otros sistemas, crear un módulo es una gran manera.</p>
+            
+            <p>Archivos más necesarios comúnmente vistos en módulos: archivo .psm1 y archivo .psd1.</p>
+            
+            <p>• El archivo .psm1 contiene la lógica de scripting que debe proporcionar el módulo, y también puede usarlo para importar otras funciones dentro de un módulo.</p>
+            <p>• El archivo .psd1 es el manifiesto del módulo, que incluye información sobre el módulo.</p>
+            
+            <h4>Desarrollar un módulo básico:</h4>
+            <p>El archivo de módulo termina con la extensión de archivo .psm1</p>
+            
+            <p>1. Defina la ruta donde se debe guardar el módulo en la variable <code>$path</code>.</p>
+            <p>2. Use el cmdlet <code>New-ModuleManifest</code> para crear un nuevo archivo de manifiesto de módulo.</p>
+            <p>3. El parámetro <code>-RootModule</code> especifica el nombre del archivo de módulo de PowerShell.</p>
+            <p>4. Usando el cmdlet Set-Content, cree el archivo <code>Module.psm1</code> que contiene la lógica del código.</p>
+            
+            <pre><code>$path = $env::TEMP + "\MyModule\"
+if (!(Test-Path -Path $path)) {
+    New-Item -ItemType directory -Path $path
+}
+New-ModuleManifest -Path $path\MyModule.psd1 -RootModule MyModule.psm1
+Set-Content -Path $path/MyModule.psm1 -Value {
+    function Invoke-Greeting{
+        [Cmdletbinding()]
+        param(
+            [Parameter(Mandatory=$true)]
+            [string] $Name
+        )
+        "Hello $Name!"
+    }
+}</code></pre>
+            
+            <div class="code-output">
+                Administrator: PowerShell 7 (x64) --- □<br><br>
+                PowerShell 7.4.6<br>
+                PS C:\Users\Administrator> notepad<br>
+                PS C:\Users\Administrator> notepad .\createModule.ps1<br>
+                PS C:\Users\Administrator> .\createModule.ps1<br><br>
+                Directory: C:\Users\ADMINI~1\AppData\Local\Temp<br><br>
+                Mode    LastWriteTime    Length Name<br>
+                ---    ---    ---    ---<br>
+                d----    12/15/2024  2:17 AM    MyModule
+            </div>
+            
+            <p>Ejecutando el código anterior</p>
+            
+            <p>Para usar el módulo en una sesión de PowerShell, impórtelo directamente en la sesión o cópielo en una de las rutas de <code>PSModule</code>.</p>
+            <p>Las rutas de <code>PSModule</code> son directorios que se buscan para módulos cuando se usa el cmdlet <code>Import-Module</code>.</p>
+            
+            <p>• Para ver la ruta de <code>PSModule</code> usando <code>$env:PSModulePath</code>:</p>
+            
+            <p>5. Copie el directorio del módulo a la ubicación de la ruta de <code>PSModule</code></p>
+            <p>6. Importe el módulo a la sesión actual usando <code>Import-Module MyModule</code>:</p>
+            
+            <pre><code>Import-Module MyModule
+
+O
+• Importando el módulo directamente desde la ruta de PSModule:
+
+Import-Module $env::TEMP\MyModule\MyModule.psd1</code></pre>
+            
+            <p>6. Llamando a la función que se definió en el módulo MyModule:</p>
+            
+            <pre><code>Invoke-Greeting -Name "Prashant"</code></pre>
+            
+            <p>Las Opciones del Manifiesto del Módulo permiten especificar el autor, la descripción o los módulos que se requieren para instalar el módulo, usando la tabla hash <code>RequiredModules</code>.</p>
+            <p>Herramientas como <code>PSModuleDevelopment</code> vale la pena explorarlas.</p>
+        </div>
+
+        <div class="section">
+            <h2>Lecturas Adicionales</h2>
+            
+            <ol>
+                <li>Espacio de Nombres System: <a href="https://learn.microsoft.com/en-us/dotnet/api/system" target="_blank">https://learn.microsoft.com/en-us/dotnet/api/system</a></li>
+                <li>Espacio de Nombres System.Management.Automation: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.management.automation" target="_blank">https://learn.microsoft.com/en-us/dotnet/api/system.management.automation</a></li>
+                <li>about_Automatic_Variables: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables</a></li>
+                <li>about_Environment_Variables: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables</a></li>
+                <li>about_Scopes: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scopes" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scopes</a></li>
+                <li>about_Comparison_Operators: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators</a></li>
+                <li>about_Assignment_Operators: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_assignment_operators" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_assignment_operators</a></li>
+                <li>about_Operators: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators</a></li>
+                <li>ForEach-Object: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/foreach-object" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/foreach-object</a></li>
+                <li>about_Break: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_break" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_break</a></li>
+                <li>Verbos Aprobados para Comandos de PowerShell: <a href="https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands" target="_blank">https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands</a></li>
+                <li>Pautas de Desarrollo Fuertemente Alentadas: <a href="https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/strongly-encouraged-development-guidelines" target="_blank">https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/strongly-encouraged-development-guidelines</a></li>
+                <li>Resumen de Cmdlet: <a href="https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/cmdlet-overview" target="_blank">https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/cmdlet-overview</a></li>
+                <li>Conceptos de Cmdlet de Windows PowerShell: <a href="https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/windows-powershell-cmdlet-concepts" target="_blank">https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/windows-powershell-cmdlet-concepts</a></li>
+                <li>about_Functions_CmdletBindingAttribute: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_cmdletbindingattribute" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_cmdletbindingattribute</a></li>
+                <li>Conceptos Básicos de PowerShell para Profesionales de Seguridad Parte 6 – Pipeline por Carlos Perez: <a href="https://youtube.com/watch?v=P3ST3lat9bs" target="_blank">https://youtube.com/watch?v=P3ST3lat9bs</a></li>
+                <li>About Pipelines: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipelines" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipelines</a></li>
+                <li>about_Aliases: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_aliases" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_aliases</a></li>
+                <li>Galería de PowerShell: <a href="https://www.powershellgallery.com/" target="_blank">https://www.powershellgallery.com/</a></li>
+                <li>Escribir un Módulo de Windows PowerShell: <a href="https://docs.microsoft.com/en-us/powershell/scripting/developer/module/writing-a-windows-powershell-module" target="_blank">https://docs.microsoft.com/en-us/powershell/scripting/developer/module/writing-a-windows-powershell-module</a></li>
+                <li>PowerShell Framework: <a href="https://psframework.org/documentation/documents/psmoduledevelopment.html" target="_blank">https://psframework.org/documentation/documents/psmoduledevelopment.html</a></li>
+                <li>Todo lo que quieres saber sobre matrices: <a href="https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-arrays" target="_blank">https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-arrays</a></li>
+                <li>Todo lo que quieres saber sobre tablas hash: <a href="https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-hashtable" target="_blank">https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-hashtable</a></li>
+                <li>Todo lo que quieres saber sobre $null: <a href="https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-null" target="_blank">https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-null</a></li>
+                <li>Todo lo que quieres saber sobre PSCustomObject: <a href="https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-pscustomobject" target="_blank">https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-pscustomobject</a></li>
+                <li>Acerca de las funciones: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions</a></li>
+                <li>Funciones 101: <a href="https://docs.microsoft.com/en-us/powershell/scripting/learn/ps101/09-functions" target="_blank">https://docs.microsoft.com/en-us/powershell/scripting/learn/ps101/09-functions</a></li>
+                <li>Acerca de los parámetros avanzados de las funciones: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters</a></li>
+                <li>Cmdlets versus funciones: <a href="https://www.leeholmes.com/blog/2007/07/24/cmdlets-vs-functions/" target="_blank">https://www.leeholmes.com/blog/2007/07/24/cmdlets-vs-functions/</a></li>
+                <li>Páginas de ayuda de módulos: <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_modules" target="_blank">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_modules</a></li>
+            </ol>
+        </div>
+
+        <footer style="margin-top: 40px; padding: 20px; background-color: #f8f8f8; border-top: 1px solid #ddd; text-align: center;">
+            <p>&copy; 2025 - Benito González Piñeiro</p>
+            <nav>
+                <a href="pildoras.html" style="color: #0066cc; text-decoration: none; margin: 0 10px;">← Volver a Píldoras</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

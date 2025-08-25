@@ -81,8 +81,8 @@
 
     <div class="card">
         <div class="card-body">
-            <h2>Introducción a iptables</h2>
-            <p><strong>iptables</strong> es el cortafuegos estándar de facto en sistemas Linux, proporcionando un framework robusto para el filtrado de paquetes, traducción de direcciones de red (NAT) y manipulación de paquetes. Forma parte del proyecto Netfilter del kernel de Linux y ha sido la herramienta principal para la seguridad de red en Linux durante más de dos décadas.</p>
+            <h2>¿Qué es iptables?</h2>
+            <p><strong>iptables</strong> es una utilidad de línea de comandos en sistemas operativos Linux que se utiliza para configurar las reglas de firewall. Actúa como la interfaz para el framework <strong>Netfilter</strong> del kernel de Linux, permitiendo a los administradores de sistemas definir cómo se debe manejar el tráfico de red, ya sea para permitirlo o denegarlo.</p>
 
             <p><strong>Datos Interesantes:</strong></p>
             <ul>
@@ -91,20 +91,42 @@
                 <li>Actualmente está siendo gradualmente reemplazado por nftables en distribuciones modernas</li>
             </ul>
 
-            <h3>¿Por qué usar iptables?</h3>
-            <p>iptables ofrece ventajas significativas para la administración de la seguridad de red:</p>
+            <h2>¿Cómo funciona?</h2>
+            <p>iptables opera a través de un sistema de <strong>tablas</strong>, <strong>cadenas</strong> y <strong>reglas</strong>.</p>
+
+            <h3>Tablas</h3>
+            <p>Son categorías que manejan diferentes tipos de procesamiento del tráfico. Las cuatro tablas principales son:</p>
             <ul>
-                <li><strong>Control granular:</strong> Permite definir reglas específicas para diferentes tipos de tráfico</li>
-                <li><strong>Flexibilidad:</strong> Soporta múltiples criterios de filtrado y acciones</li>
-                <li><strong>Rendimiento:</strong> Procesamiento a nivel de kernel para máxima eficiencia</li>
-                <li><strong>Estabilidad:</strong> Probado en entornos de producción durante años</li>
+                <li><strong>filter</strong>: La tabla por defecto, usada para filtrar paquetes. Aquí defines si aceptas, rechazas o eliminas el tráfico.</li>
+                <li><strong>nat</strong> (Network Address Translation): Se usa para modificar las direcciones IP de origen o destino de los paquetes, lo cual es fundamental para el reenvío de puertos y compartir una única dirección IP pública entre varios equipos.</li>
+                <li><strong>mangle</strong>: Se utiliza para alteraciones de paquetes más especializadas.</li>
+                <li><strong>raw</strong>: Se encarga de los paquetes antes de que el sistema de seguimiento de conexiones entre en acción.</li>
+            </ul>
+
+            <h3>Cadenas</h3>
+            <p>Son listas de reglas dentro de una tabla. Un paquete debe pasar por las reglas de una cadena para ser procesado. Las cadenas más comunes son:</p>
+            <ul>
+                <li><strong>INPUT</strong>: Controla los paquetes que llegan al sistema local.</li>
+                <li><strong>OUTPUT</strong>: Controla los paquetes que se originan en el sistema local.</li>
+                <li><strong>FORWARD</strong>: Controla los paquetes que se enrutan a través del sistema hacia otro destino.</li>
+            </ul>
+
+            <h3>Reglas</h3>
+            <p>Son las instrucciones individuales dentro de una cadena. Cada regla especifica una condición (por ejemplo, una dirección IP de origen o un puerto de destino) y una acción a tomar si se cumple la condición (por ejemplo, <strong>ACCEPT</strong> - aceptar, <strong>DROP</strong> - eliminar, o <strong>REJECT</strong> - rechazar).</p>
+
+            <h2>Usos comunes</h2>
+            <p>iptables se usa ampliamente para:</p>
+            <ul>
+                <li><strong>Seguridad</strong>: Bloquear accesos no deseados desde internet a un servidor o computadora.</li>
+                <li><strong>Administración de red</strong>: Configurar el reenvío de puertos, el balanceo de carga y otros servicios de red.</li>
+                <li><strong>Inspección de paquetes</strong>: Analizar y registrar el tráfico de red para solucionar problemas o realizar auditorías de seguridad.</li>
             </ul>
         </div>
     </div>
 
     <div class="card">
         <div class="card-body">
-            <h2>Instalación y Configuración Inicial</h2>
+            <h2>Instalación y Verificación</h2>
 
             <h3>Instalación</h3>
             <p>En la mayoría de las distribuciones Linux, iptables viene preinstalado. Si no es el caso:</p>

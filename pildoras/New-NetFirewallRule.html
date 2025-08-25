@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva para New-NetFirewallRule</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate & Amber -->
+    <!-- Application Structure Plan: The application is designed as an interactive dashboard with four main thematic sections accessible via a top navigation bar: 1) 'Fundamentos' to introduce core concepts like profiles and actions, 2) 'Constructor de Reglas' as a central, hands-on tool for users to build and understand command syntax dynamically, 3) 'Lógica de Precedencia' to visually explain rule evaluation order with a chart, and 4) 'Cmdlets Relacionados' to show the relationship between different firewall commands. This non-linear, task-oriented structure was chosen over a simple document layout to enhance user engagement and facilitate learning by doing. It allows users to jump directly to the information they need and experiment in a controlled environment, which is more effective for technical documentation. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Firewall Profiles & Actions -> Goal: Inform -> Viz/Presentation: Interactive cards with JS-driven content switching. Interaction: Clicking on profile/action buttons. Justification: More engaging than static text, allows for focused learning. Library/Method: HTML/CSS/JS.
+        - Report Info: Cmdlet Parameters -> Goal: Organize & Teach -> Viz/Presentation: An interactive form ("Constructor de Reglas"). Interaction: User selects options from dropdowns and inputs text, which dynamically generates a PowerShell command. Justification: Provides a hands-on, practical way to learn the cmdlet's syntax and parameters. Library/Method: HTML/JS.
+        - Report Info: Rule Precedence Logic -> Goal: Explain -> Viz/Presentation: A horizontal bar chart. Interaction: Hovering over bars to see tooltips with explanations. Justification: A visual chart is far more effective at explaining a hierarchy than text alone. Library/Method: Chart.js (Canvas).
+        - Report Info: Related Cmdlets -> Goal: Show Relationships -> Viz/Presentation: A diagram-like layout using styled HTML/CSS cards connected by visual cues. Interaction: Clicking on a cmdlet card reveals its description. Justification: Visually organizes the ecosystem of cmdlets, making their relationships clear. Library/Method: HTML/CSS/JS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+        }
+        .nav-button.active {
+            background-color: #f59e0b; /* amber-500 */
+            color: #ffffff;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .param-table th, .param-table td {
+            border-color: #e2e8f0; /* slate-200 */
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-slate-900">Guía Interactiva de `New-NetFirewallRule`</h1>
+            <p class="mt-2 text-lg text-slate-600">Una herramienta para explorar y dominar el Firewall de Windows con PowerShell.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 bg-slate-100 p-2 rounded-lg shadow-sm">
+            <button data-target="fundamentos" class="nav-button active text-sm sm:text-base font-semibold py-2 px-4 rounded-md text-slate-700 hover:bg-amber-400 hover:text-white">Fundamentos</button>
+            <button data-target="constructor" class="nav-button text-sm sm:text-base font-semibold py-2 px-4 rounded-md text-slate-700 hover:bg-amber-400 hover:text-white">Constructor de Reglas</button>
+            <button data-target="precedencia" class="nav-button text-sm sm:text-base font-semibold py-2 px-4 rounded-md text-slate-700 hover:bg-amber-400 hover:text-white">Lógica de Precedencia</button>
+            <button data-target="relacionados" class="nav-button text-sm sm:text-base font-semibold py-2 px-4 rounded-md text-slate-700 hover:bg-amber-400 hover:text-white">Cmdlets Relacionados</button>
+        </nav>
+
+        <main>
+            <section id="fundamentos" class="content-section active">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Conceptos Clave del Firewall</h2>
+                    <p class="mb-6 text-slate-600">Para crear reglas de firewall efectivas, es crucial entender dos conceptos fundamentales: los **Perfiles de Red**, que determinan cuándo se aplica una regla, y las **Acciones**, que definen qué hacer con el tráfico. Explora estos conceptos a continuación.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3 text-amber-600">Perfiles de Red</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <button class="profile-btn bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm font-medium" data-profile="domain">Domain</button>
+                                <button class="profile-btn bg-green-100 text-green-800 py-1 px-3 rounded-full text-sm font-medium" data-profile="private">Private</button>
+                                <button class="profile-btn bg-red-100 text-red-800 py-1 px-3 rounded-full text-sm font-medium" data-profile="public">Public</button>
+                            </div>
+                            <div id="profile-description" class="p-4 bg-slate-50 rounded-md min-h-[120px]">
+                                <p class="text-slate-700">Selecciona un perfil para ver su descripción.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3 text-amber-600">Acciones y Dirección</h3>
+                             <div class="flex flex-wrap gap-2 mb-4">
+                                <button class="action-btn bg-indigo-100 text-indigo-800 py-1 px-3 rounded-full text-sm font-medium" data-action="inbound">Inbound</button>
+                                <button class="action-btn bg-indigo-100 text-indigo-800 py-1 px-3 rounded-full text-sm font-medium" data-action="outbound">Outbound</button>
+                                <button class="action-btn bg-teal-100 text-teal-800 py-1 px-3 rounded-full text-sm font-medium" data-action="allow">Allow</button>
+                                <button class="action-btn bg-rose-100 text-rose-800 py-1 px-3 rounded-full text-sm font-medium" data-action="block">Block</button>
+                            </div>
+                            <div id="action-description" class="p-4 bg-slate-50 rounded-md min-h-[120px]">
+                                 <p class="text-slate-700">Selecciona una dirección o acción para ver su descripción.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="constructor" class="content-section">
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Constructor de Reglas Interactivo</h2>
+                    <p class="mb-6 text-slate-600">Utiliza este formulario para construir tu propio comando `New-NetFirewallRule`. A medida que selecciones las opciones, el comando de PowerShell se generará automáticamente en la parte inferior. Esto te ayudará a familiarizarte con la sintaxis y los parámetros más comunes.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div>
+                                <label for="displayName" class="block text-sm font-medium text-slate-700">DisplayName (Obligatorio)</label>
+                                <input type="text" id="displayName" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" placeholder="Mi Regla de Firewall">
+                            </div>
+                            <div>
+                                <label for="direction" class="block text-sm font-medium text-slate-700">Direction</label>
+                                <select id="direction" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                                    <option>Inbound</option>
+                                    <option>Outbound</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="action" class="block text-sm font-medium text-slate-700">Action</label>
+                                <select id="action" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                                    <option>Allow</option>
+                                    <option>Block</option>
+                                </select>
+                            </div>
+                             <div>
+                                <label for="protocol" class="block text-sm font-medium text-slate-700">Protocol</label>
+                                <input type="text" id="protocol" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" placeholder="TCP, UDP, ICMPv4...">
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                           
+                            <div>
+                                <label for="localPort" class="block text-sm font-medium text-slate-700">LocalPort</label>
+                                <input type="text" id="localPort" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" placeholder="80, 443, 5000-5020">
+                            </div>
+                            <div>
+                                <label for="remoteAddress" class="block text-sm font-medium text-slate-700">RemoteAddress</label>
+                                <input type="text" id="remoteAddress" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" placeholder="192.168.1.10, LocalSubnet">
+                            </div>
+                             <div>
+                                <label for="program" class="block text-sm font-medium text-slate-700">Program</label>
+                                <input type="text" id="program" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" placeholder="C:\App\App.exe">
+                            </div>
+                             <div>
+                                <label for="profile" class="block text-sm font-medium text-slate-700">Profile</label>
+                                <select id="profile" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                                    <option>Any</option>
+                                    <option>Domain</option>
+                                    <option>Private</option>
+                                    <option>Public</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-lg font-semibold text-slate-800">Comando Generado:</h3>
+                        <div class="mt-2 p-4 bg-slate-900 text-white rounded-md font-mono text-sm overflow-x-auto relative">
+                            <code id="generated-command">New-NetFirewallRule -DisplayName "..."</code>
+                             <button id="copy-button" class="absolute top-2 right-2 bg-slate-700 hover:bg-slate-600 text-white text-xs py-1 px-2 rounded">Copiar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="precedencia" class="content-section">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Lógica de Precedencia de Reglas</h2>
+                    <p class="mb-6 text-slate-600">A diferencia de otros firewalls, el Firewall de Windows no evalúa las reglas en orden secuencial. En su lugar, utiliza una jerarquía de precedencia estricta. Las reglas de bloqueo siempre tienen prioridad sobre las reglas de permiso. El siguiente gráfico ilustra el orden en que se aplican las reglas a un paquete de red.</p>
+                    <div class="chart-container">
+                        <canvas id="precedenceChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="relacionados" class="content-section">
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Flujo de Trabajo con Cmdlets Relacionados</h2>
+                    <p class="mb-8 text-slate-600">`New-NetFirewallRule` es solo una pieza del rompecabezas. La gestión completa del firewall implica un ciclo de vida de creación, visualización, modificación y eliminación de reglas. Haz clic en cada cmdlet para ver su función dentro del ecosistema de `NetSecurity`.</p>
+                    
+                    <div class="flex flex-col items-center space-y-4 md:flex-row md:space-y-0 md:space-x-4 md:justify-center">
+                        <div class="cmdlet-card text-center p-4 border-2 border-amber-400 bg-amber-50 rounded-lg shadow-sm cursor-pointer w-48" data-cmdlet="new">
+                            <h4 class="font-bold text-amber-800">New-NetFirewallRule</h4>
+                            <p class="text-sm text-amber-700">Crear</p>
+                        </div>
+                        <div class="text-2xl text-slate-400 hidden md:block">→</div>
+                        <div class="text-2xl text-slate-400 md:hidden">↓</div>
+                        <div class="cmdlet-card text-center p-4 border border-slate-300 bg-slate-50 rounded-lg cursor-pointer w-48" data-cmdlet="get">
+                            <h4 class="font-bold text-slate-800">Get-NetFirewallRule</h4>
+                            <p class="text-sm text-slate-600">Leer</p>
+                        </div>
+                        <div class="text-2xl text-slate-400 hidden md:block">→</div>
+                        <div class="text-2xl text-slate-400 md:hidden">↓</div>
+                        <div class="cmdlet-card text-center p-4 border border-slate-300 bg-slate-50 rounded-lg cursor-pointer w-48" data-cmdlet="set">
+                            <h4 class="font-bold text-slate-800">Set-NetFirewallRule</h4>
+                            <p class="text-sm text-slate-600">Modificar</p>
+                        </div>
+                         <div class="text-2xl text-slate-400 hidden md:block">→</div>
+                         <div class="text-2xl text-slate-400 md:hidden">↓</div>
+                        <div class="cmdlet-card text-center p-4 border border-slate-300 bg-slate-50 rounded-lg cursor-pointer w-48" data-cmdlet="remove">
+                            <h4 class="font-bold text-slate-800">Remove-NetFirewallRule</h4>
+                            <p class="text-sm text-slate-600">Eliminar</p>
+                        </div>
+                    </div>
+                    
+                    <div id="cmdlet-description" class="mt-8 p-4 bg-slate-50 rounded-md min-h-[100px]">
+                        <p class="text-slate-700">Selecciona un cmdlet para ver su descripción detallada.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="mt-12 py-6 bg-slate-100 border-t border-slate-200">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-slate-600 mb-2">Explora más contenido relacionado:</p>
+            <a href="pildoras.html" class="inline-flex items-center px-4 py-2 bg-amber-500 text-white font-medium rounded-lg hover:bg-amber-600 transition-colors duration-200">
+                ← Volver al índice de píldoras
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navButtons = document.querySelectorAll('.nav-button');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    contentSections.forEach(section => section.classList.remove('active'));
+                    document.getElementById(button.dataset.target).classList.add('active');
+                });
+            });
+
+            const profileDescriptions = {
+                domain: '<strong>Perfil de Dominio:</strong> Se aplica cuando el equipo está conectado a una red corporativa con un controlador de dominio de Active Directory. Es el perfil más confiable.',
+                private: '<strong>Perfil Privado:</strong> Se utiliza para redes de confianza, como la red de tu casa u oficina pequeña. Es menos restrictivo que el perfil Público.',
+                public: '<strong>Perfil Público:</strong> Es el perfil más restrictivo y se activa en redes no confiables como Wi-Fi públicos en aeropuertos o cafeterías. Bloquea la mayoría del tráfico entrante por defecto.'
+            };
+
+            document.querySelectorAll('.profile-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.getElementById('profile-description').innerHTML = profileDescriptions[button.dataset.profile];
+                });
+            });
+
+            const actionDescriptions = {
+                inbound: '<strong>Dirección de Entrada (Inbound):</strong> Controla el tráfico que llega AL equipo desde la red. Es la dirección predeterminada.',
+                outbound: '<strong>Dirección de Salida (Outbound):</strong> Controla el tráfico que sale DESDE el equipo hacia la red.',
+                allow: '<strong>Acción Permitir (Allow):</strong> Permite que los paquetes que coinciden con la regla pasen a través del firewall. Es la acción predeterminada.',
+                block: '<strong>Acción Bloquear (Block):</strong> Descarta silenciosamente los paquetes que coinciden con la regla, impidiendo la comunicación.'
+            };
+
+            document.querySelectorAll('.action-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.getElementById('action-description').innerHTML = actionDescriptions[button.dataset.action];
+                });
+            });
+
+            const formElements = ['displayName', 'direction', 'action', 'protocol', 'localPort', 'remoteAddress', 'program', 'profile'];
+            const inputs = formElements.map(id => document.getElementById(id));
+            const commandOutput = document.getElementById('generated-command');
+            const copyButton = document.getElementById('copy-button');
+
+            function updateCommand() {
+                let command = 'New-NetFirewallRule';
+                const displayName = document.getElementById('displayName').value;
+
+                if (displayName) {
+                    command += ` -DisplayName "${displayName}"`;
+                } else {
+                     command += ` -DisplayName "Mi Regla de Firewall"`;
+                }
+
+                const direction = document.getElementById('direction').value;
+                if (direction !== 'Inbound') {
+                    command += ` -Direction ${direction}`;
+                }
+                
+                const action = document.getElementById('action').value;
+                if (action !== 'Allow') {
+                    command += ` -Action ${action}`;
+                }
+
+                const protocol = document.getElementById('protocol').value;
+                if (protocol) {
+                    command += ` -Protocol ${protocol}`;
+                }
+
+                const localPort = document.getElementById('localPort').value;
+                if (localPort) {
+                    command += ` -LocalPort ${localPort}`;
+                }
+
+                const remoteAddress = document.getElementById('remoteAddress').value;
+                if (remoteAddress) {
+                    command += ` -RemoteAddress ${remoteAddress}`;
+                }
+
+                const program = document.getElementById('program').value;
+                if (program) {
+                    command += ` -Program "${program}"`;
+                }
+                
+                const profile = document.getElementById('profile').value;
+                if (profile !== 'Any') {
+                    command += ` -Profile ${profile}`;
+                }
+
+                commandOutput.textContent = command;
+            }
+
+            inputs.forEach(input => input.addEventListener('input', updateCommand));
+            updateCommand();
+
+            copyButton.addEventListener('click', () => {
+                const commandText = commandOutput.textContent;
+                const textarea = document.createElement('textarea');
+                textarea.value = commandText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    copyButton.textContent = 'Copiado!';
+                    setTimeout(() => { copyButton.textContent = 'Copiar'; }, 2000);
+                } catch (err) {
+                    console.error('Error al copiar texto: ', err);
+                }
+                document.body.removeChild(textarea);
+            });
+
+            const ctx = document.getElementById('precedenceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Reglas de Bloqueo Explícitas', 'Reglas de Permiso Explícitas', 'Comportamiento Predeterminado'],
+                    datasets: [{
+                        label: 'Prioridad de Evaluación',
+                        data: [100, 75, 50],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.6)', // red-500
+                            'rgba(34, 197, 94, 0.6)', // green-500
+                            'rgba(100, 116, 139, 0.6)'  // slate-500
+                        ],
+                        borderColor: [
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(34, 197, 94, 1)',
+                            'rgba(100, 116, 139, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                display: false
+                            },
+                            grid: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Prioridad (Más alta a la izquierda)'
+                            }
+                        },
+                        y: {
+                           grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    if (label === 'Reglas de Bloqueo Explícitas') return 'Prioridad 1: Si un paquete coincide, se descarta. Anula cualquier regla de permiso.';
+                                    if (label === 'Reglas de Permiso Explícitas') return 'Prioridad 2: Si un paquete coincide, se permite, a menos que una regla de bloqueo lo anule.';
+                                    if (label === 'Comportamiento Predeterminado') return 'Prioridad 3: Si no coincide ninguna regla, se aplica la acción por defecto (Bloquear para entrante, Permitir para saliente).';
+                                    return '';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            const cmdletDescriptions = {
+                new: '<strong>New-NetFirewallRule:</strong> El punto de partida. Este cmdlet se utiliza para crear una nueva regla de firewall en el almacén de políticas local. Debes especificar sus propiedades, como el nombre, la dirección, la acción y el protocolo.',
+                get: '<strong>Get-NetFirewallRule:</strong> Se utiliza para recuperar y mostrar las reglas de firewall que ya existen en el sistema. Puedes filtrar las reglas por nombre, perfil, estado u otras propiedades para encontrar exactamente lo que buscas.',
+                set: '<strong>Set-NetFirewallRule:</strong> Permite modificar las propiedades de una o más reglas existentes. Después de usar `Get-NetFirewallRule` para encontrar una regla, puedes usar `Set` para cambiar su estado (habilitado/deshabilitado), las direcciones IP remotas, el perfil, etc.',
+                remove: '<strong>Remove-NetFirewallRule:</strong> Elimina permanentemente una o más reglas de firewall del sistema. A diferencia de deshabilitar una regla, esta acción es irreversible y la regla debe ser creada de nuevo si se necesita en el futuro.'
+            };
+
+            const cmdletCards = document.querySelectorAll('.cmdlet-card');
+            const cmdletDescriptionEl = document.getElementById('cmdlet-description');
+
+            cmdletCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    cmdletCards.forEach(c => {
+                        c.classList.remove('border-amber-400', 'bg-amber-50');
+                        c.classList.add('border-slate-300', 'bg-slate-50');
+                        c.querySelector('h4').classList.remove('text-amber-800');
+                        c.querySelector('p').classList.remove('text-amber-700');
+                    });
+                    
+                    card.classList.add('border-amber-400', 'bg-amber-50');
+                    card.classList.remove('border-slate-300', 'bg-slate-50');
+                    card.querySelector('h4').classList.add('text-amber-800');
+                    card.querySelector('p').classList.add('text-amber-700');
+
+                    cmdletDescriptionEl.innerHTML = cmdletDescriptions[card.dataset.cmdlet];
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

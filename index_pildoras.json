@@ -678,11 +678,11 @@
         "color",
         "important",
         "aprende",
-        "const",
         "sobre",
+        "const",
         "search",
-        "results",
         "archivos",
+        "results",
         "seguridad",
         "linux",
         "del",
@@ -811,6 +811,35 @@
       ],
       "fechaActualizacion": null,
       "ruta": "pildoras/redimensionar_imagen.html"
+    },
+    {
+      "archivo": "renombrar_archivos",
+      "titulo": "Tutorial: Script de Renombrado de Archivos",
+      "descripcion": "Solucionando problemas con espacios en nombres de archivos El problema fundamental es que los shells de Unix/Linux interpretan los espacios como separadores de argumentos, no como parte del nombre del archivo. Esto causa errores cuando intentas manipular archivos que tienen espacios en sus nombres. El script renombrar_archivos_.py es una solución automatizada que renombra todos los archivos en una carpeta específica, reemplazando los espacios por guiones bajos (_). Esto resuelve los problemas de",
+      "palabrasClave": [
+        "archivos",
+        "1rem",
+        "border",
+        "script",
+        "margin",
+        "background",
+        "padding",
+        "archivo",
+        "5px",
+        "font",
+        "espacios",
+        "python",
+        "radius",
+        "data",
+        "renombrado",
+        "color",
+        "left",
+        "nombres",
+        "carpeta",
+        "667eea"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/renombrar_archivos.html"
     },
     {
       "archivo": "rsyslog",
@@ -947,12 +976,12 @@
         "traducci",
         "radius",
         "modelo",
-        "8px",
         "traducir_srt",
-        "mistral",
+        "8px",
         "solid",
         "python",
-        "entrada"
+        "entrada",
+        "salida"
       ],
       "fechaActualizacion": null,
       "ruta": "pildoras/traducir_srt.html"
@@ -1423,6 +1452,11 @@
         "relevancia": 4
       },
       {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 16
+      },
+      {
         "archivo": "rsyslog",
         "titulo": "Información sobre Rsyslog",
         "relevancia": 7
@@ -1654,6 +1688,11 @@
         "relevancia": 7
       },
       {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 3
+      },
+      {
         "archivo": "rsyslog",
         "titulo": "Información sobre Rsyslog",
         "relevancia": 8
@@ -1856,6 +1895,11 @@
         "relevancia": 12
       },
       {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 7
+      },
+      {
         "archivo": "rsyslog",
         "titulo": "Información sobre Rsyslog",
         "relevancia": 9
@@ -1943,6 +1987,11 @@
         "archivo": "perplexica",
         "titulo": "Tutorial de instalación de Perplexica",
         "relevancia": 14
+      },
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 8
       },
       {
         "archivo": "yara_python",
@@ -2123,7 +2172,7 @@
       {
         "archivo": "traducir_srt",
         "titulo": "Tutorial: Traductor de Archivos SRT",
-        "relevancia": 18
+        "relevancia": 17
       },
       {
         "archivo": "traducir_vtt",
@@ -2267,6 +2316,11 @@
         "relevancia": 11
       },
       {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 6
+      },
+      {
         "archivo": "rsyslog",
         "titulo": "Información sobre Rsyslog",
         "relevancia": 18
@@ -2407,6 +2461,11 @@
         "archivo": "pxe",
         "titulo": "PXE: Preboot Execution Environment - Guía Completa",
         "relevancia": 4
+      },
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 5
       },
       {
         "archivo": "rsyslog",
@@ -2669,12 +2728,17 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 11
+        "relevancia": 10
       },
       {
         "archivo": "ransomware",
         "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
         "relevancia": 4
+      },
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 1
       },
       {
         "archivo": "rsyslog",
@@ -3053,6 +3117,11 @@
         "archivo": "pxe",
         "titulo": "PXE: Preboot Execution Environment - Guía Completa",
         "relevancia": 18
+      },
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 13
       },
       {
         "archivo": "rsyslog_a_mongodb",
@@ -3920,6 +3989,11 @@
         "archivo": "graylog_guia",
         "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
         "relevancia": 4
+      },
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 14
       }
     ],
     "font": [
@@ -3957,6 +4031,11 @@
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
         "relevancia": 17
+      },
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 10
       },
       {
         "archivo": "rsyslog_a_mongodb",
@@ -4025,6 +4104,11 @@
         "relevancia": 13
       },
       {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 2
+      },
+      {
         "archivo": "rsyslog_a_mongodb",
         "titulo": "Enviar salidas de rsyslog a MongoDB",
         "relevancia": 17
@@ -4089,6 +4173,11 @@
         "archivo": "hardening_ssh",
         "titulo": "Manual de Hardening para SSH",
         "relevancia": 10
+      },
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 9
       },
       {
         "archivo": "traducir_vtt",
@@ -4196,6 +4285,11 @@
         "archivo": "nfs_hardening",
         "titulo": "Hardening de NFS: Guía Completa de Seguridad",
         "relevancia": 14
+      },
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 17
       },
       {
         "archivo": "traducir_vtt",
@@ -4619,7 +4713,7 @@
       {
         "archivo": "traducir_srt",
         "titulo": "Tutorial: Traductor de Archivos SRT",
-        "relevancia": 15
+        "relevancia": 16
       },
       {
         "archivo": "wazuh-virus-total",
@@ -5060,14 +5154,14 @@
         "relevancia": 6
       }
     ],
-    "const": [
+    "sobre": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
         "relevancia": 7
       }
     ],
-    "sobre": [
+    "const": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
@@ -5085,7 +5179,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 10
+        "relevancia": 11
       }
     ],
     "pildora": [
@@ -5289,6 +5383,11 @@
         "relevancia": 2
       },
       {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 4
+      },
+      {
         "archivo": "traducir_srt",
         "titulo": "Tutorial: Traductor de Archivos SRT",
         "relevancia": 11
@@ -5320,9 +5419,14 @@
         "relevancia": 6
       },
       {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 12
+      },
+      {
         "archivo": "traducir_srt",
         "titulo": "Tutorial: Traductor de Archivos SRT",
-        "relevancia": 19
+        "relevancia": 18
       }
     ],
     "originales": [
@@ -5358,6 +5462,11 @@
         "archivo": "redimensionar_imagen",
         "titulo": "Tutorial: Script de Redimensionado de Imágenes",
         "relevancia": 13
+      },
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 19
       }
     ],
     "modificadas": [
@@ -5399,6 +5508,34 @@
       {
         "archivo": "redimensionar_imagen",
         "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 20
+      }
+    ],
+    "espacios": [
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 11
+      }
+    ],
+    "renombrado": [
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 15
+      }
+    ],
+    "nombres": [
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 18
+      }
+    ],
+    "667eea": [
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
         "relevancia": 20
       }
     ],
@@ -5577,26 +5714,26 @@
       {
         "archivo": "traducir_srt",
         "titulo": "Tutorial: Traductor de Archivos SRT",
-        "relevancia": 16
-      }
-    ],
-    "mistral": [
-      {
-        "archivo": "traducir_srt",
-        "titulo": "Tutorial: Traductor de Archivos SRT",
-        "relevancia": 17
+        "relevancia": 15
       }
     ],
     "entrada": [
       {
         "archivo": "traducir_srt",
         "titulo": "Tutorial: Traductor de Archivos SRT",
-        "relevancia": 20
+        "relevancia": 19
       },
       {
         "archivo": "traducir_vtt",
         "titulo": "Tutorial: Script para Traducir Archivos VTT",
         "relevancia": 15
+      }
+    ],
+    "salida": [
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 20
       }
     ],
     "vtt": [
@@ -5945,9 +6082,9 @@
     ]
   },
   "metadata": {
-    "created": "2025-08-24T22:29:53.507Z",
+    "created": "2025-08-25T08:43:16.954Z",
     "description": "Índice de archivos HTML en la carpeta pildoras para búsquedas por palabras clave",
     "version": "1.0",
-    "totalFiles": 41
+    "totalFiles": 42
   }
 }

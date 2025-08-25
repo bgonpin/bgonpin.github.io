@@ -1,155 +1,74 @@
 const fs = require('fs');
-const path = require('path');
 
-// Función para filtrar archivos HTML (excluyendo .backup)
-function filtrarArchivosHTML(directorio) {
-    const archivos = fs.readdirSync(directorio);
-    return archivos.filter(archivo => {
-        return archivo.endsWith('.html') && !archivo.endsWith('.backup');
-    });
-}
+// Read the HTML file
+const html = fs.readFileSync('pildoras/laps.html', 'utf8');
 
-// Función para extraer información de un archivo HTML
-function extraerInfoHTML(rutaArchivo) {
-    try {
-        const contenido = fs.readFileSync(rutaArchivo, 'utf-8');
-        const nombreArchivo = path.basename(rutaArchivo, '.html');
+// Define the missing IDs that need to be added
+const missingIds = [
+    // Configuration section
+    { tag: 'h3', text: 'Descargar e Instalar LAPS', id: 'descargar-laps' },
+    { tag: 'h2', text: 'Descargar LAPS', id: 'descargar-laps-seccion' },
+    { tag: 'h2', text: 'Instalar LAPS en el DC', id: 'instalar-dc' },
+    { tag: 'h2', text: 'Configurar Directiva de Grupo para LAPS', id: 'configurar-gpo' },
+    { tag: 'h2', text: 'Extender el Esquema de AD para LAPS', id: 'extender-esquema' },
+    { tag: 'h2', text: 'Establecer Permisos de AD', id: 'permisos-ad' },
+    { tag: 'h2', text: 'Desplegar LAPS a Máquinas Cliente', id: 'desplegar-clientes' },
+    { tag: 'h2', text: 'Probar LAPS', id: 'probar-laps' },
 
-        // Extraer título
-        const tituloMatch = contenido.match(/<title>(.*?)<\/title>/i);
-        const titulo = tituloMatch ? tituloMatch[1].trim() : nombreArchivo;
+    // Security section
+    { tag: 'h2', text: 'Comprender el Modelo de Seguridad de LAPS:', id: 'modelo-seguridad' },
+    { tag: 'h2', text: 'Añadir un nuevo usuario de dominio a la Máquina Cliente con Permiso AllExtendedRights.', id: 'permisos-usuario' },
+    { tag: 'h3', text: 'Explicación: Todos los Derechos Extendidos:', id: 'explicacion-permisos' },
 
-        // Extraer la descripción principal (contenido de los párrafos)
-        const parrafos = contenido.match(/<p[^>]*>(.*?)<\/p>/gi) || [];
-        const textoPlano = parrafos.map(p => {
-            // Remover etiquetas HTML y entidades
-            return p.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, ' ').trim();
-        }).join(' ').substring(0, 500); // Limitar a 500 caracteres
+    // Exploitation section
+    { tag: 'h2', text: 'Fase de Explotación', id: 'fase-explotacion' },
+    { tag: 'h3', text: 'Bloodhound – Búsqueda de Permisos Débiles', id: 'bloodhound' },
+    { tag: 'h4', text: 'Explicación de BloodHound', id: 'explicacion-bloodhound' },
+    { tag: 'h2', text: 'Método de Explotación - Volcado de Credenciales (T1003)', id: 'metodo-explotacion' },
+    { tag: 'h3', text: 'Impacket', id: 'impacket' },
+    { tag: 'h3', text: 'Herramienta NXC', id: 'nxc' },
+    { tag: 'h3', text: 'PyLaps', id: 'pylaps' },
+    { tag: 'h3', text: 'LAPSDumper', id: 'lapsdumper' },
+    { tag: 'h3', text: 'BloodyAD', id: 'bloodyad' },
+    { tag: 'h3', text: 'Ldapsearch', id: 'ldapsearch' },
+    { tag: 'h3', text: 'Metasploit: ldap_query', id: 'metasploit-ldap' },
+    { tag: 'h3', text: 'Impacket-ntlmrelayx', id: 'ntlmrelayx' },
+    { tag: 'h3', text: 'ldap_shell', id: 'ldap-shell' },
 
-        // Extraer palabras clave del contenido
-        const palabrasClave = extraerPalabrasClave(contenido + ' ' + titulo);
+    // Windows exploitation
+    { tag: 'h2', text: 'Explotación en Windows', id: 'explotacion-windows' },
+    { tag: 'h3', text: 'PowerShell', id: 'powershell' },
+    { tag: 'h3', text: 'NetTools', id: 'nettools' },
+    { tag: 'h3', text: 'Sharplaps', id: 'sharplaps' },
+    { tag: 'h3', text: 'Metasploit: enum_laps', id: 'metasploit-enum' },
+    { tag: 'h3', text: 'Powerview', id: 'powerview' },
+    { tag: 'h3', text: 'Explorador de Active Directory – Sysinternals', id: 'ad-explorer' },
 
-        // Extraer fecha de actualización si existe
-        const fechaMatch = contenido.match(/Fecha actualizacion:\s*(\d{2}-\d{2}-\d{4})/i);
-        const fechaActualizacion = fechaMatch ? fechaMatch[1] : null;
+    // Conclusion
+    { tag: 'h2', text: 'Conclusión', id: 'conclusion' },
+    { tag: 'h3', text: 'Mejores Prácticas para la Seguridad de LAPS:', id: 'mejores-practicas' },
+    { tag: 'h3', text: 'Resumen de Puntos Clave', id: 'resumen-puntos' },
+    { tag: 'h3', text: 'Notas', id: 'notas' },
 
-        return {
-            archivo: nombreArchivo,
-            titulo: titulo,
-            descripcion: textoPlano,
-            palabrasClave: palabrasClave,
-            fechaActualizacion: fechaActualizacion,
-            ruta: `pildoras/${path.basename(rutaArchivo)}`
-        };
-    } catch (error) {
-        console.error(`Error procesando ${rutaArchivo}:`, error.message);
-        return null;
-    }
-}
+    // Training programs
+    { tag: 'h2', text: 'ÚNETE A NUESTROS PROGRAMAS DE ENTRENAMIENTO', id: 'programas-entrenamiento' },
+    { tag: 'h3', text: 'PRINCIPIANTE', id: 'principiante' },
+    { tag: 'h3', text: 'AVANZADO', id: 'avanzado' },
+    { tag: 'h3', text: 'EXPERTO', id: 'experto' }
+];
 
-// Función para extraer palabras clave del contenido
-function extraerPalabrasClave(contenido) {
-    // Palabras comunes en español e inglés a excluir
-    const palabrasComunes = new Set([
-        'el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas', 'y', 'o', 'pero', 'que', 'de', 'en', 'a', 'con',
-        'por', 'para', 'es', 'son', 'está', 'están', 'ser', 'estar', 'tener', 'hacer', 'ir', 'ver', 'dar', 'saber',
-        'querer', 'llegar', 'pasar', 'deber', 'poner', 'parecer', 'quedar', 'creer', 'hablar', 'llevar', 'dejar',
-        'seguir', 'encontrar', 'llamar', 'venir', 'pensar', 'salir', 'volver', 'tomar', 'conocer', 'vivir', 'sentir',
-        'tratar', 'mirar', 'contar', 'empezar', 'esperar', 'buscar', 'existir', 'entrar', 'trabajar', 'escribir',
-        'perder', 'producir', 'ocurrir', 'entender', 'pedir', 'recibir', 'recordar', 'terminar', 'permitir', 'aparecer',
-        'conseguir', 'comenzar', 'servir', 'sacar', 'necesitar', 'mantener', 'resultar', 'leer', 'caer', 'cambiar',
-        'presentar', 'crear', 'abrir', 'considerar', 'oír', 'acabar', 'convertir', 'ganar', 'formar', 'traer',
-        'partir', 'morir', 'aceptar', 'realizar', 'suponer', 'comprender', 'lograr', 'explicar', 'preguntar', 'tocar',
-        'reconocer', 'estudiar', 'alcanzar', 'nacer', 'dirigir', 'correr', 'utilizar', 'pagar', 'ayudar', 'gustar',
-        'jugar', 'escuchar', 'cumplir', 'ofrecer', 'descubrir', 'levantar', 'acercar', 'separar', 'recordar', 'acercarse',
-        'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'an', 'a', 'is', 'are', 'was',
-        'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should',
-        'may', 'might', 'must', 'can', 'this', 'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they',
-        'me', 'him', 'her', 'us', 'them', 'my', 'your', 'his', 'its', 'our', 'their', 'what', 'which', 'who', 'when',
-        'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no',
-        'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 'just', 'now', 'here', 'there', 'then',
-        'once', 'always', 'never', 'sometimes', 'often', 'usually', 'seldom', 'rarely', 'again', 'also', 'as', 'even',
-        'ever', 'far', 'long', 'near', 'much', 'many', 'little', 'few', 'well', 'better', 'best', 'worse', 'worst',
-        'good', 'bad', 'new', 'old', 'young', 'big', 'small', 'large', 'short', 'tall', 'high', 'low', 'right', 'wrong'
-    ]);
+let updatedHtml = html;
 
-    // Limpiar el contenido y extraer palabras
-    const textoLimpio = contenido
-        .replace(/<[^>]*>/g, ' ') // Remover etiquetas HTML
-        .replace(/&[^;]+;/g, ' ') // Remover entidades HTML
-        .replace(/[^\w\s]/g, ' ') // Remover puntuación
-        .toLowerCase()
-        .split(/\s+/)
-        .filter(palabra => {
-            return palabra.length > 2 && // Al menos 3 caracteres
-                   !palabrasComunes.has(palabra) &&
-                   !/^\d+$/.test(palabra); // No solo números
-        });
+// Process each missing ID
+missingIds.forEach(({ tag, text, id }) => {
+    // Create the regex pattern to find the tag with the specific text
+    const pattern = new RegExp(`<${tag}>([^<]*${text}[^<]*)</${tag}>`, 'g');
 
-    // Contar frecuencia de palabras
-    const frecuencia = {};
-    textoLimpio.forEach(palabra => {
-        frecuencia[palabra] = (frecuencia[palabra] || 0) + 1;
-    });
+    // Replace with the same tag but with id attribute
+    updatedHtml = updatedHtml.replace(pattern, `<${tag} id="${id}">$1</${tag}>`);
+});
 
-    // Retornar las palabras más frecuentes (top 20)
-    return Object.keys(frecuencia)
-        .sort((a, b) => frecuencia[b] - frecuencia[a])
-        .slice(0, 20);
-}
+// Write the updated HTML back to the file
+fs.writeFileSync('pildoras/laps.html', updatedHtml, 'utf8');
 
-// Función principal para generar el índice
-function generarIndice() {
-    const directorioPildoras = path.join(__dirname, 'pildoras');
-    const archivosHTML = filtrarArchivosHTML(directorioPildoras);
-
-    console.log(`Procesando ${archivosHTML.length} archivos HTML...`);
-
-    const indice = {
-        files: [],
-        keywords: {},
-        metadata: {
-            created: new Date().toISOString(),
-            description: "Índice de archivos HTML en la carpeta pildoras para búsquedas por palabras clave",
-            version: "1.0",
-            totalFiles: archivosHTML.length
-        }
-    };
-
-    archivosHTML.forEach((archivo, index) => {
-        console.log(`Procesando ${index + 1}/${archivosHTML.length}: ${archivo}`);
-        const rutaCompleta = path.join(directorioPildoras, archivo);
-        const info = extraerInfoHTML(rutaCompleta);
-
-        if (info) {
-            indice.files.push(info);
-
-            // Indexar palabras clave
-            info.palabrasClave.forEach(palabra => {
-                if (!indice.keywords[palabra]) {
-                    indice.keywords[palabra] = [];
-                }
-                indice.keywords[palabra].push({
-                    archivo: info.archivo,
-                    titulo: info.titulo,
-                    relevancia: info.palabrasClave.indexOf(palabra) + 1
-                });
-            });
-        }
-    });
-
-    // Guardar el índice
-    const rutaIndice = path.join(__dirname, 'index_pildoras.json');
-    fs.writeFileSync(rutaIndice, JSON.stringify(indice, null, 2), 'utf-8');
-
-    console.log(`\nÍndice generado exitosamente en: ${rutaIndice}`);
-    console.log(`Total de archivos procesados: ${indice.files.length}`);
-    console.log(`Total de palabras clave indexadas: ${Object.keys(indice.keywords).length}`);
-}
-
-// Ejecutar si se llama directamente
-if (require.main === module) {
-    generarIndice();
-}
-
-module.exports = { generarIndice, filtrarArchivosHTML, extraerInfoHTML, extraerPalabrasClave };
+console.log('All missing IDs have been added successfully!');

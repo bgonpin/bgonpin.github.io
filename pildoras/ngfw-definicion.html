@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qué es un Firewall NGFW? - Definición.</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.7;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #1a1a1a;
+            color: #e6e6e6;
+        }
+        h1 {
+            color: #ffffff;
+            border-bottom: 3px solid #4a90e2;
+            padding-bottom: 15px;
+            font-size: 2.2em;
+            font-weight: bold;
+            text-align: center;
+        }
+        h2 {
+            color: #b8b8b8;
+            margin-top: 40px;
+            font-size: 1.6em;
+            border-left: 4px solid #4a90e2;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #cccccc;
+            margin-top: 25px;
+            font-size: 1.3em;
+        }
+        ul, ol {
+            margin-left: 25px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .highlight {
+            background-color: #2d2d2d;
+            padding: 20px;
+            border-left: 5px solid #4a90e2;
+            margin: 25px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            border-top: 2px solid #4a90e2;
+            color: #999999;
+            background-color: #252525;
+        }
+        footer a {
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        footer a:hover {
+            text-decoration: underline;
+            color: #6bb6ff;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        strong {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Qué es un Firewall NGFW</h1>
+
+    <h2>Definición Básica</h2>
+
+    <p>Un Firewall de Próxima Generación (NGFW) es un firewall de red que va más allá de la funcionalidad básica de filtrado de paquetes y bloqueo de puertos de los firewalls tradicionales. Incluye capacidades integradas para detectar y bloquear amenazas más complejas y sofisticadas, aplicando políticas de seguridad a un nivel mucho más granular.</p>
+
+    <p>Piensa en la evolución de la seguridad de un edificio:</p>
+
+    <div class="highlight">
+        <p><strong>· Firewall Tradicional:</strong> Es como un portero que solo mira el número de la oficina (puerto) y la dirección de quien llama (dirección IP) en una lista. Si el número y la dirección están permitidos, deja pasar el paquete.</p>
+        <p><strong>· NGFW:</strong> Es como un guardia de seguridad de élite que no solo verifica el destino y la dirección, sino que también:</p>
+        <ul>
+            <li>Revisa la identificación a fondo (inspección profunda del contenido).</li>
+            <li>Sabe exactamente qué tipo de negocio va a hacer la persona (qué aplicación específica se está usando, como Facebook, Zoom o Salesforce).</li>
+            <li>Revisa si la persona tiene antecedentes maliciosos (integración con bases de datos de amenazas en la nube).</li>
+            <li>Inspecciona el equipaje (los archivos adjuntos) en busca de objetos peligrosos.</li>
+        </ul>
+    </div>
+
+    <h2>Características Clave que diferencian a un NGFW</h2>
+
+    <p>Estas son las funcionalidades que lo convierten en "de próxima generación":</p>
+
+    <h3>1. Inspección Profunda de Paquetes (DPI)</h3>
+
+    <ul>
+        <li><strong>Firewall tradicional:</strong> Solo inspecciona las cabeceras de los paquetes (origen, destino, puerto, protocolo).</li>
+        <li><strong>NGFW:</strong> Inspecciona el contenido real (payload) de los paquetes de datos. Puede leer y analizar el contenido de correos electrónicos, mensajes, transacciones web, etc., para identificar malware, exploits, comandos de botnets o fugas de información.</li>
+    </ul>
+
+    <h3>2. Control de Aplicaciones</h3>
+
+    <p>Puede identificar y controlar el tráfico basándose en la aplicación específica que lo genera, no solo en el puerto que utiliza.</p>
+
+    <p><strong>Ejemplo:</strong> Un firewall tradicional podría bloquear el puerto 80 (HTTP) o 443 (HTTPS), pero eso bloquearía toda la navegación web. Un NGFW puede permitir el acceso a Office 365 o Salesforce (que usan el puerto 443) pero bloquear el uso de Netflix, TikTok o Facebook en horario laboral, incluso si todo ese tráfico va cifrado por el mismo puerto.</p>
+
+    <h3>3. Prevención de Intrusiones (IPS)</h3>
+
+    <p>Un IPS está integrado directamente en el NGFW. Analiza el tráfico de red en tiempo real para detectar y bloquear ataques conocidos, vulnerabilidades explotadas y actividades maliciosas, como escaneos de puertos o intentos de denegación de servicio (DoS).</p>
+
+    <h3>4. Conciencia del Contexto y Identidad</h3>
+
+    <p>Puede aplicar políticas de seguridad basadas en quién es el usuario, no solo en desde dónde se conecta.</p>
+
+    <p><strong>Ejemplo:</strong> Puedes crear una política que diga: "El usuario Juan Pérez puede acceder a la aplicación de contabilidad desde cualquier dispositivo y ubicación, pero el usuario Ana García solo puede acceder desde la red de la oficina".</p>
+
+    <h3>5. Intelligence de Amenazas e Información en la Nube</h3>
+
+    <p>La mayoría de los NGFW modernos se conectan a servicios de inteligencia de amenazas en la nube. Esto les permiten recibir actualizaciones automáticas y en tiempo real sobre nuevas amenazas, dominios maliciosos, direcciones IP comprometidas, etc., mejorando su capacidad de protección de forma continua.</p>
+
+    <h3>6. Otras Capacidades Avanzadas (dependiendo del fabricante)</h3>
+
+    <ul>
+        <li><strong>Descifrado SSL/TLS:</strong> Inspecciona el tráfico web cifrado para detectar amenazas que se ocultan dentro de él.</li>
+        <li><strong>Sandboxing:</strong> Aísla y ejecuta archivos sospechosos (como un PDF o un .exe) en un entorno seguro y virtualizado ("la caja de arena") para analizar su comportamiento antes de permitir que entren en la red.</li>
+        <li><strong>Filtrado URL:</strong> Permite o bloquea el acceso a sitios web basándose en categorías (redes sociales, sitios maliciosos, de apuestas, etc.).</li>
+    </ul>
+
+    <h2>¿Por qué son necesarios los NGFW?</h2>
+
+    <ol>
+        <li><strong>El tráfico está cifrado:</strong> La mayoría del tráfico hoy usa HTTPS (cifrado). Un firewall tradicional es ciego ante este tráfico, mientras que un NGFW puede inspeccionarlo.</li>
+        <li><strong>Las amenazas son más evasivas:</strong> El malware moderno no usa puertos fijos; puede camuflarse en tráfico web legítimo.</li>
+        <li><strong>BYOD y Trabajo Remoto:</strong> Los usuarios se conectan desde diversos dispositivos y lugares. Las políticas basadas solo en IP son insuficientes; se necesitan políticas basadas en usuario e identidad.</li>
+        <li><strong>Ancho de banda limitado:</strong> Es crucial priorizar el tráfico de aplicaciones críticas para el negocio (como VoIP) sobre el tráfico de ocio (como streaming de video).</li>
+    </ol>
+
+    <h2>Resumen</h2>
+
+    <p>Un Firewall de Próxima Generación (NGFW) es una solución de seguridad integral que combina las funciones de un firewall tradicional con capacidades avanzadas como inspección profunda de paquetes, control de aplicaciones, prevención de intrusiones (IPS) y políticas basadas en la identidad del usuario. Su objetivo es proporcionar una protección más inteligente, granular y adaptada a las amenazas modernas y al panorama digital actual.</p>
+
+    <p>Principales fabricantes de NGFW incluyen a Palo Alto Networks, Fortinet, Cisco, Check Point, y Sophos, entre otros.</p>
+
+    <footer>
+        <p><a href="pildoras.html">← Volver al índice de píldoras</a></p>
+    </footer>
+</body>
+</html>

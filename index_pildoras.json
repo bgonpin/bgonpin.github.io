@@ -30,6 +30,35 @@
       "ruta": "pildoras/ssh.html"
     },
     {
+      "archivo": "ngfw-definicion",
+      "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+      "descripcion": "Un Firewall de Próxima Generación (NGFW) es un firewall de red que va más allá de la funcionalidad básica de filtrado de paquetes y bloqueo de puertos de los firewalls tradicionales. Incluye capacidades integradas para detectar y bloquear amenazas más complejas y sofisticadas, aplicando políticas de",
+      "palabrasClave": [
+        "ngfw",
+        "firewall",
+        "fico",
+        "amenazas",
+        "como",
+        "puede",
+        "ticas",
+        "solo",
+        "para",
+        "puerto",
+        "paquetes",
+        "bloquear",
+        "seguridad",
+        "tradicional",
+        "usuario",
+        "direcci",
+        "inspecciona",
+        "cifrado",
+        "basadas",
+        "desde"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/ngfw-definicion.html"
+    },
+    {
       "archivo": "ngfw",
       "titulo": "🔐 Guía Completa de Firewalls de Próxima Generación (NGFW) de Código Abierto",
       "descripcion": "Un Firewall de Próxima Generación (NGFW) es un dispositivo de seguridad avanzado que va más allá del filtrado tradicional de puertos y protocolos. Incluye funciones como inspección a nivel de aplicación, prevención de intrusiones (IPS), filtrado de contenido e inteligencia contra amenazas en tiempo ",
@@ -1829,6 +1858,11 @@
         "relevancia": 1
       },
       {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 9
+      },
+      {
         "archivo": "ngfw",
         "titulo": "🔐 Guía Completa de Firewalls de Próxima Generación (NGFW) de Código Abierto",
         "relevancia": 1
@@ -2713,6 +2747,11 @@
         "relevancia": 3
       },
       {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 13
+      },
+      {
         "archivo": "phishing",
         "titulo": "Phishing: El Arte del Engaño Digital",
         "relevancia": 11
@@ -2839,6 +2878,11 @@
         "archivo": "nfs",
         "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
         "relevancia": 7
+      },
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 5
       },
       {
         "archivo": "notebooklm",
@@ -3175,6 +3219,11 @@
         "relevancia": 15
       },
       {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 15
+      },
+      {
         "archivo": "ntlm",
         "titulo": "NTLM - Pildoras",
         "relevancia": 9
@@ -3298,6 +3347,11 @@
         "relevancia": 10
       },
       {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 11
+      },
+      {
         "archivo": "syn-flood",
         "titulo": "SYN Flood - Ataque DDoS",
         "relevancia": 7
@@ -3320,6 +3374,11 @@
         "archivo": "cortafuego",
         "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
         "relevancia": 1
+      },
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 2
       },
       {
         "archivo": "ngfw",
@@ -3366,6 +3425,11 @@
         "relevancia": 12
       },
       {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 3
+      },
+      {
         "archivo": "ntlm",
         "titulo": "NTLM - Pildoras",
         "relevancia": 13
@@ -3406,6 +3470,11 @@
         "archivo": "lamehug",
         "titulo": "LameHug: El Primer Malware Potenciado por Inteligencia Artificial - Pildoras",
         "relevancia": 6
+      },
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 4
       },
       {
         "archivo": "ngfw",
@@ -4275,6 +4344,11 @@
         "archivo": "filtrado-paquetes-anomalos",
         "titulo": "Filtrado de Paquetes Anómalos",
         "relevancia": 16
+      },
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 12
       }
     ],
     "direcciones": [
@@ -4376,6 +4450,11 @@
         "archivo": "google-fotos-herramientas-ia",
         "titulo": "Google potencia Google Fotos con nuevas herramientas de IA",
         "relevancia": 7
+      },
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 20
       },
       {
         "archivo": "pxe",
@@ -4701,6 +4780,11 @@
         "relevancia": 11
       },
       {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 10
+      },
+      {
         "archivo": "wazuh",
         "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
         "relevancia": 19
@@ -4941,6 +5025,11 @@
         "archivo": "mosquitto",
         "titulo": "Mosquitto - Píldora Benito González Piñeiro",
         "relevancia": 13
+      },
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 6
       },
       {
         "archivo": "ntlm",
@@ -5552,6 +5641,11 @@
         "relevancia": 10
       },
       {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 18
+      },
+      {
         "archivo": "ransomware",
         "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
         "relevancia": 6
@@ -5587,9 +5681,71 @@
     ],
     "ngfw": [
       {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 1
+      },
+      {
         "archivo": "ngfw",
         "titulo": "🔐 Guía Completa de Firewalls de Próxima Generación (NGFW) de Código Abierto",
         "relevancia": 2
+      }
+    ],
+    "ticas": [
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 7
+      },
+      {
+        "archivo": "ransomware",
+        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
+        "relevancia": 14
+      }
+    ],
+    "solo": [
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 8
+      },
+      {
+        "archivo": "playbook_dos_windows_personalizado",
+        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 20
+      },
+      {
+        "archivo": "zeek",
+        "titulo": "Zeek - Pildoras",
+        "relevancia": 8
+      }
+    ],
+    "tradicional": [
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 14
+      }
+    ],
+    "direcci": [
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 16
+      }
+    ],
+    "inspecciona": [
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 17
+      }
+    ],
+    "basadas": [
+      {
+        "archivo": "ngfw-definicion",
+        "titulo": "¿Qué es un Firewall NGFW? - Definición.",
+        "relevancia": 19
       }
     ],
     "abierto": [
@@ -6329,18 +6485,6 @@
         "relevancia": 19
       }
     ],
-    "solo": [
-      {
-        "archivo": "playbook_dos_windows_personalizado",
-        "titulo": "Playbook DoS/DDoS — Versión Personalizada",
-        "relevancia": 20
-      },
-      {
-        "archivo": "zeek",
-        "titulo": "Zeek - Pildoras",
-        "relevancia": 8
-      }
-    ],
     "alias": [
       {
         "archivo": "powershell",
@@ -6563,13 +6707,6 @@
         "archivo": "ransomware",
         "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
         "relevancia": 5
-      }
-    ],
-    "ticas": [
-      {
-        "archivo": "ransomware",
-        "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
-        "relevancia": 14
       }
     ],
     "descifrado": [
@@ -7647,9 +7784,9 @@
     ]
   },
   "metadata": {
-    "created": "2025-08-25T20:19:26.419Z",
+    "created": "2025-08-25T20:42:54.086Z",
     "description": "Índice de archivos HTML en la carpeta pildoras para búsquedas por palabras clave",
     "version": "1.0",
-    "totalFiles": 51
+    "totalFiles": 52
   }
 }

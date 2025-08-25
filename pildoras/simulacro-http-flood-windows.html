@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protección contra HTTP Flood en Windows Server</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 1px solid #34495e;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .alert-banner {
+            background-color: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            border: 1px solid #c0392b;
+        }
+
+        .alert-banner i {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        .content-section {
+            background-color: #2c3e50;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid #34495e;
+        }
+
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: #ecf0f1;
+            margin: 15px 0 10px;
+            font-weight: 600;
+        }
+
+        .phase {
+            margin-bottom: 25px;
+        }
+
+        .step {
+            background-color: #34495e;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+            border: 1px solid #2c3e50;
+        }
+
+        .step-number {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        pre {
+            background-color: #1a1a1a;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            border: 1px solid #34495e;
+        }
+
+        code {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #34495e;
+            border: 1px solid #2c3e50;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #2c3e50;
+        }
+
+        .checklist {
+            margin: 20px 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            accent-color: #3498db;
+        }
+
+        .tip {
+            background-color: #34495e;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border: 1px solid #2c3e50;
+        }
+
+        .conclusion {
+            background-color: #27ae60;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 1px solid #229954;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .content-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Protección contra HTTP Flood en Windows Server</h1>
+            <p class="subtitle">Tutorial práctico para identificar, mitigar y prevenir ataques DDoS de capa 7</p>
+        </header>
+        
+        <div class="alert-banner">
+            <i>⚠️</i>
+            <div>
+                <strong>Escenario crítico:</strong> Su servidor web IIS en Windows Server 2019/2022 está respondiendo extremadamente lento con alta CPU, consumo excesivo de memoria y clientes reportando errores 503.
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Fase 1: Detección y Confirmación</h2>
+            
+            <div class="phase">
+                <h3>Paso 1: Identificar el Tráfico Malicioso</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Abrir PowerShell como Administrador</strong>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Ejecutar comando para ver conexiones activas:</strong>
+                    <pre>netstat -an | Select-String ":80 " | Group-Object { $_ -replace '^[^:]*:[^:]*:(\d+\.\d+\.\d+\.\d+):\d+.*$', '$1' } | Sort-Object Count -Descending</pre>
+                    <p>Esto agrupa las conexiones por IP y muestra las que más se repiten.</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Usar el Monitor de Rendimiento (PerfMon):</strong>
+                    <ul>
+                        <li>Abrir <code>perfmon.exe</code></li>
+                        <li>Agregar contadores:
+                            <ul>
+                                <li><code>Web Service -> Current Connections</code></li>
+                                <li><code>HTTP Service Request Queues -> CurrentQueueSize</code></li>
+                                <li><code>Processor -> % Processor Time</code></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>Si <code>CurrentQueueSize</code> es alto y <code>Current Connections</code> está en miles, es probable un HTTP Flood.</p>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <h3>Paso 2: Analizar Registros de IIS</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Ubicar logs de IIS</strong> (por defecto en <code>C:\inetpub\logs\LogFiles\W3SVC1</code>)
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Usar PowerShell para analizar requests por IP:</strong>
+                    <pre>Get-Content .\u_ex220101.log | Select-String "GET|POST" | Group-Object { ($_ -split ' ')[1] } | Sort-Object Count -Descending | Select -First 10</pre>
+                    <p>Esto mostrará las 10 IPs con más requests.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Fase 2: Mitigación Inmediata (Durante el Ataque)</h2>
+            
+            <div class="phase">
+                <h3>Paso 1: Bloquear IPs Maliciosas con Firewall de Windows</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Identificar las IPs atacantes</strong> (ej: 192.168.1.100, 203.0.113.50)
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Crear regla de bloqueo en PowerShell:</strong>
+                    <pre>New-NetFirewallRule -DisplayName "Block_DDoS_IP" -Direction Inbound -RemoteAddress 192.168.1.100,203.0.113.50 -Action Block -Protocol TCP -LocalPort 80,443</pre>
+                    <p>Bloqueará las IPs en puertos HTTP/HTTPS.</p>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <h3>Paso 2: Aplicar Limitación de Ancho de Banda en IIS</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Abrir IIS Manager</strong>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Ir a "Limits de Ancho de Banda"</strong> en configuración del sitio
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Habilitar y configurar:</strong>
+                    <ul>
+                        <li>Limitar ancho de banda (bytes/sec): Ej. 1000000 (1 MB/s)</li>
+                        <li>Limitar conexiones: Ej. 50 conexiones por IP</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <h3>Paso 3: Reducir Timeouts y Ajustar Colas</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>En IIS, modificar configuraciones avanzadas:</strong>
+                    <ul>
+                        <li><code>queueLength</code>: Reducir a 1000 (por defecto es 65535)</li>
+                        <li><code>connectionTimeout</code>: Reducir a 00:00:30 (30 segundos)</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Reiniciar el sitio web:</strong>
+                    <pre>Restart-WebAppPool -Name "DefaultAppPool"</pre>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <h3>Paso 4: Habilitar Cache Estático</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>En IIS, para contenido estático (images, CSS, JS), habilitar cache:</strong>
+                    <pre>Set-WebConfigurationProperty -Filter "system.webServer/staticContent" -Name clientCache -Value "max-age=3600"</pre>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Fase 3: Mitigación Avanzada (Herramientas Adicionales)</h2>
+            
+            <div class="phase">
+                <h3>Paso 1: Configurar URL Rewrite para Filtrar Requests</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Instalar módulo "URL Rewrite" en IIS</strong>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Crear regla para bloquear patrones maliciosos:</strong>
+                    <pre>
+&lt;rule name="Block_DDoS_UserAgent" stopProcessing="true"&gt;
+    &lt;match url=".*" /&gt;
+    &lt;conditions&gt;
+        &lt;add input="{HTTP_USER_AGENT}" pattern="evil-bot|DDOSTool" /&gt;
+    &lt;/conditions&gt;
+    &lt;action type="CustomResponse" statusCode="403" statusReason="Forbidden" /&gt;
+&lt;/rule&gt;
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <h3>Paso 2: Usar Dynamic IP Restrictions (DIPR)</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Instalar módulo "Dynamic IP Restrictions"</strong> (descargable desde Microsoft)
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Configurar en IIS:</strong>
+                    <ul>
+                        <li>Denegar IPs que excedan 100 requests en 200 ms</li>
+                        <li>Habilitar "Proxy Mode" para detectar IPs detrás de CDN</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <h3>Paso 3: Integrar con un WAF (Web Application Firewall)</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Azure WAF</strong> (si usas Azure): Habilitar reglas contra DDoS
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Cloudflare:</strong>
+                    <ul>
+                        <li>Registrar tu dominio en Cloudflare</li>
+                        <li>Cambiar DNS para apuntar a Cloudflare</li>
+                        <li>Habilitar "Under Attack Mode" en Cloudflare Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Fase 4: Monitoreo y Recuperación</h2>
+            
+            <div class="phase">
+                <h3>Paso 1: Monitoreo en Tiempo Real</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Usar Resource Monitor (<code>resmon.exe</code>):</strong> Verificar red, CPU y memoria
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>PowerShell para monitoreo continuo:</strong>
+                    <pre>
+while ($true) { 
+    Get-NetTCPConnection -State Established | Where-Object { $_.RemotePort -eq 80 } | 
+    Group-Object RemoteAddress | Sort-Object Count -Descending | Select -First 5; 
+    Start-Sleep -Seconds 2 
+}
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <h3>Paso 2: Análisis Post-Ataque</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Revisar logs con herramientas como Log Parser:</strong>
+                    <pre>logparser.exe -i:IISW3C "SELECT TOP 10 c-ip, COUNT(*) AS Requests FROM ex*.log GROUP BY c-IP ORDER BY Requests DESC"</pre>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Documentar IPs atacantes para bloqueo permanente</strong>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <h3>Paso 3: Hardening Preventivo</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Configurar siempre DIPR y limitaciones en IIS</strong>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Usar un CDN</strong> (Cloudflare, Akamai) para ocultar la IP real del servidor
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Implementar CAPTCHA en formularios</strong> para evitar bots
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>Checklist de Respuesta Rápida</h2>
+            
+            <div class="checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="step1">
+                    <label for="step1">Identificar IPs atacantes con <code>netstat</code> y logs</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step2">
+                    <label for="step2">Bloquear IPs en firewall inmediatamente</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step3">
+                    <label for="step3">Aplicar limitaciones de ancho de banda y conexiones en IIS</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step4">
+                    <label for="step4">Reducir timeouts y colas</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step5">
+                    <label for="step5">Habilitar cache estático</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step6">
+                    <label for="step6">Considerar reglas de URL Rewrite</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step7">
+                    <label for="step7">Monitorear recursos en tiempo real</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step8">
+                    <label for="step8">Documentar y analizar post-ataque</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section conclusion">
+            <h2>Conclusión</h2>
+            <p>Un ataque HTTP Flood puede ser devastador, pero con una respuesta rápida y las herramientas adecuadas (Firewall, IIS tuning, WAF), puedes mitigarlo efectivamente. La combinación de soluciones nativas de Windows Server y servicios externos (como CDN) proporciona la mejor defensa.</p>
+            <p class="tip"><strong>¿Necesitas ayuda?</strong> Si necesitas ayuda con la implementación de algún paso específico, no dudes en contactar a tu administrador de sistemas o buscar asistencia especializada.</p>
+        </div>
+
+        <!-- Footer -->
+        <footer style="background-color: #2c3e50; color: #ecf0f1; text-align: center; padding: 20px; margin-top: 40px; border-radius: 10px;">
+            <div style="margin-bottom: 15px;">
+                <a href="pildoras.html" style="color: #3498db; text-decoration: none; font-weight: bold; font-size: 1.1rem;">
+                    ← Volver al índice de píldoras
+                </a>
+            </div>
+            <div style="border-top: 1px solid #34495e; padding-top: 15px; font-size: 0.9rem;">
+                <p>&copy; 2025 Benito González Piñeiro</p>
+                <div style="margin-top: 10px;">
+                    <a href="mailto:bgonpin@gmail.com" style="color: #ecf0f1; margin: 0 10px; text-decoration: none;">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                    <a href="https://www.linkedin.com/in/benitogonzálezpiñeiro" target="_blank" style="color: #ecf0f1; margin: 0 10px; text-decoration: none;">
+                        <i class="fas fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/bgonpin" target="_blank" style="color: #ecf0f1; margin: 0 10px; text-decoration: none;">
+                        <i class="fas fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Funcionalidad simple para los checkboxes
+        document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    this.parentElement.style.textDecoration = 'line-through';
+                    this.parentElement.style.opacity = '0.7';
+                } else {
+                    this.parentElement.style.textDecoration = 'none';
+                    this.parentElement.style.opacity = '1';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

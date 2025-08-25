@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Script de Renombrado de Archivos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            border-radius: 0 5px 5px 0;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: '$';
+            position: absolute;
+            left: -15px;
+            top: 10px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .output-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .error-block {
+            background: #2d1b1b;
+            color: #fca5a5;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid #dc2626;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .success-box {
+            background: #e8f5e8;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .problem-box {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .solution-box {
+            background: #e8f5e8;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .feature-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            background: #667eea;
+            color: white;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .file-structure {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f1f1f1;
+        }
+
+        .comparison-table .problem {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .comparison-table .solution {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .author-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            border-radius: 10px;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📁 Script de Renombrado de Archivos</h1>
+            <p>Solucionando problemas con espacios en nombres de archivos</p>
+        </header>
+
+        <main class="content">
+            <section class="section">
+                <h2>🚨 El Problema con los Espacios en Nombres de Archivos</h2>
+
+                <div class="problem-box">
+                    <h4>¿Has tenido estos problemas?</h4>
+                    <ul>
+                        <li>❌ <code>mv Mi Archivo.txt destino/</code> → "mv: no se puede efectuar `Mi': No existe el archivo o directorio"</li>
+                        <li>❌ <code>cp "Archivo con espacios.txt" backup/</code> → Funciona pero es engorroso</li>
+                        <li>❌ Scripts que fallan al procesar archivos con nombres que contienen espacios</li>
+                        <li>❌ Dificultades para automatizar tareas en la línea de comandos</li>
+                    </ul>
+                </div>
+
+                <p>El problema fundamental es que los shells de Unix/Linux interpretan los espacios como separadores de argumentos, no como parte del nombre del archivo. Esto causa errores cuando intentas manipular archivos que tienen espacios en sus nombres.</p>
+
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Situación</th>
+                                <th>Comando Problemático</th>
+                                <th>Resultado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="problem">Archivo: <code>Mi Foto.jpg</code></td>
+                                <td class="problem"><code>mv Mi Foto.jpg backup/</code></td>
+                                <td class="problem">ERROR: "Mi: No existe el archivo"</td>
+                            </tr>
+                            <tr>
+                                <td class="solution">Archivo: <code>Mi_Foto.jpg</code></td>
+                                <td class="solution"><code>mv Mi_Foto.jpg backup/</code></td>
+                                <td class="solution">✅ Funciona correctamente</td>
+                            </tr>
+                            <tr>
+                                <td class="problem">Script procesando archivos</td>
+                                <td class="problem">Falla con nombres con espacios</td>
+                                <td class="problem">Interrupción del proceso</td>
+                            </tr>
+                            <tr>
+                                <td class="solution">Script procesando archivos</td>
+                                <td class="solution">Funciona con guiones bajos</td>
+                                <td class="solution">✅ Proceso completo exitoso</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>📋 Descripción del Script</h2>
+                <p>El script <code>renombrar_archivos_.py</code> es una solución automatizada que renombra todos los archivos en una carpeta específica, reemplazando los espacios por guiones bajos (_). Esto resuelve los problemas de compatibilidad con la línea de comandos y facilita el procesamiento automatizado de archivos.</p>
+
+                <div class="info-box">
+                    <strong>📥 Descargar el Script:</strong>
+                    <p>Para usar el script, descárgalo desde el siguiente enlace:</p>
+                    <p><a href="../codigo/renombrar_archivos_.py" download style="background-color: #667eea; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;">📄 Descargar renombrar_archivos_.py</a></p>
+                </div>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <h4>🎯 Funcionalidades Principales</h4>
+                        <ul>
+                            <li>Renombrado automático de archivos</li>
+                            <li>Reemplazo de espacios por guiones bajos</li>
+                            <li>Procesamiento por lotes</li>
+                            <li>Verificación de archivos existentes</li>
+                            <li>Reporte detallado de cambios</li>
+                        </ul>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📁 Características Técnicas</h4>
+                        <ul>
+                            <li>Compatible con todos los tipos de archivos</li>
+                            <li>Preserva las extensiones originales</li>
+                            <li>Detecta conflictos de nombres</li>
+                            <li>Manejo seguro de errores</li>
+                            <li>Interfaz clara y detallada</li>
+                        </ul>
+                    </div>
+                    <div class="feature-item">
+                        <h4>⚡ Beneficios</h4>
+                        <ul>
+                            <li>Compatibilidad con línea de comandos</li>
+                            <li>Facilita scripts automatizados</li>
+                            <li>Mejora la organización de archivos</li>
+                            <li>Previene errores de procesamiento</li>
+                            <li>Ahorra tiempo en renombrado manual</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>⚙️ Requisitos Previos</h2>
+
+                <h3>Sistema Operativo</h3>
+                <div class="info-box">
+                    <strong>Compatible con:</strong> Windows, macOS, Linux<br>
+                    <strong>Requisitos:</strong> Python 3.x instalado
+                </div>
+
+                <h3>Python</h3>
+                <div class="code-block">
+python --version<br>
+                </div>
+                <div class="info-box">
+                    Se requiere Python 3.6 o superior. Descárgalo desde <a href="https://www.python.org" target="_blank">python.org</a>
+                </div>
+
+                <h3>Verificación de Python</h3>
+                <div class="code-block">
+python -c "import sys; print(f'Python {sys.version}')"<br>
+                </div>
+                <div class="output-block">
+Python 3.9.7 (default, Sep 10 2021, 14:59:43)<br>
+[GCC 11.2.0] on linux<br>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🚀 Instalación y Configuración</h2>
+
+                <ol class="step-list">
+                    <li>
+                        <strong>Verificar Python:</strong>
+                        <div class="code-block">
+python --version<br>
+                        </div>
+                        <div class="output-block">
+Python 3.9.7<br>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Descargar el script:</strong> Guarda el archivo <code>renombrar_archivos_.py</code> en tu directorio de trabajo
+                    </li>
+                    <li>
+                        <strong>Crear la carpeta data:</strong>
+                        <div class="file-structure">
+📁 Directorio de trabajo/<br>
+├── 📄 renombrar_archivos_.py<br>
+└── 📁 data/                    ← Coloca aquí tus archivos<br>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Colocar archivos:</strong> Mueve los archivos con espacios en sus nombres a la carpeta <code>data</code>
+                    </li>
+                </ol>
+
+                <div class="warning-box">
+                    <strong>Importante:</strong> El script procesa únicamente la carpeta <code>data</code> en el mismo directorio donde se encuentra el script.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>📁 Preparación de Archivos</h2>
+
+                <h3>Estructura Recomendada</h3>
+                <div class="file-structure">
+📁 data/<br>
+├── Mi Foto Favorita.jpg<br>
+├── Documento Importante.pdf<br>
+├── Archivo con espacios.txt<br>
+├── Presentación Final.pptx<br>
+├── Backup 2024.zip<br>
+└── Video Tutorial.mp4<br>
+                </div>
+
+                <h3>Tipos de Archivos Soportados</h3>
+                <div class="info-box">
+                    <strong>Todos los tipos de archivos son compatibles.</strong> El script no discrimina por extensiones, procesa cualquier archivo que contenga espacios en su nombre.
+                </div>
+
+                <div class="warning-box">
+                    <strong>Recomendaciones:</strong>
+                    <ul>
+                        <li>Respaldar los archivos originales antes de procesar</li>
+                        <li>Verificar que no haya archivos importantes con nombres similares</li>
+                        <li>Revisar que la carpeta <code>data</code> no contenga subcarpetas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>▶️ Ejecución del Script</h2>
+
+                <h3>Método 1: Ejecutar directamente</h3>
+                <div class="code-block">
+python renombrar_archivos_.py<br>
+                </div>
+
+                <h3>Método 2: Usando Python específico</h3>
+                <div class="code-block">
+python3 renombrar_archivos_.py<br>
+                </div>
+
+                <h3>Ejemplo de Ejecución Completa</h3>
+                <div class="output-block">
+==================================================<br>
+Script para renombrar archivos<br>
+Reemplaza espacios por guiones bajos (_)<br>
+==================================================<br>
+<br>
+Directorio actual: /home/usuario/Documentos/Proyecto<br>
+<br>
+Procesando archivos en la carpeta 'data'...<br>
+<br>
+⏭️  Sin cambios: 'documento.pdf' (no contiene espacios)<br>
+✅ Renombrado: 'Mi Foto Favorita.jpg' -> 'Mi_Foto_Favorita.jpg'<br>
+✅ Renombrado: 'Documento Importante.pdf' -> 'Documento_Importante.pdf'<br>
+✅ Renombrado: 'Archivo con espacios.txt' -> 'Archivo_con_espacios.txt'<br>
+✅ Renombrado: 'Presentación Final.pptx' -> 'Presentación_Final.pptx'<br>
+✅ Renombrado: 'Backup 2024.zip' -> 'Backup_2024.zip'<br>
+✅ Renombrado: 'Video Tutorial.mp4' -> 'Video_Tutorial.mp4'<br>
+<br>
+🎉 Proceso completado. Se renombraron 6 archivos.<br>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>📊 Interpretación de Resultados</h2>
+
+                <h3>Tipos de Mensajes</h3>
+                <ul>
+                    <li><strong>✅ Renombrado:</strong> Archivo procesado correctamente</li>
+                    <li><strong>⏭️ Sin cambios:</strong> Archivo que no necesita renombrado</li>
+                    <li><strong>⚠️ Saltando:</strong> Archivo con nombre conflictivo</li>
+                    <li><strong>❌ Error:</strong> Problema procesando el archivo</li>
+                </ul>
+
+                <h3>Archivos de Salida</h3>
+                <div class="success-box">
+                    <strong>Características de los archivos renombrados:</strong>
+                    <ul>
+                        <li>Nombre: Espacios reemplazados por guiones bajos</li>
+                        <li>Extensión: Preservada exactamente igual</li>
+                        <li>Ubicación: Mismo directorio de origen</li>
+                        <li>Contenido: Sin modificaciones</li>
+                        <li>Permisos: Mantenidos originales</li>
+                    </ul>
+                </div>
+
+                <h3>Estadísticas Finales</h3>
+                <div class="info-box">
+                    Al final de la ejecución, el script muestra el total de archivos renombrados, lo que te permite verificar que el proceso se completó correctamente.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🔧 Solución de Problemas</h2>
+
+                <h3>Error: "La carpeta 'data' no existe"</h3>
+                <div class="solution-box">
+                    <strong>Solución:</strong> Crea la carpeta <code>data</code> en el mismo directorio que el script.
+                    <div class="code-block">
+mkdir data<br>
+                    </div>
+                </div>
+
+                <h3>Error: "No se encontraron archivos"</h3>
+                <div class="solution-box">
+                    <strong>Solución:</strong> Verifica que hayas colocado archivos en la carpeta <code>data</code>.
+                    <div class="code-block">
+ls -la data/<br>
+                    </div>
+                </div>
+
+                <h3>Error: "No tienes permisos para acceder"</h3>
+                <div class="solution-box">
+                    <strong>Solución:</strong> Cambia los permisos de la carpeta <code>data</code>.
+                    <div class="code-block">
+chmod 755 data/<br>
+                    </div>
+                </div>
+
+                <h3>Error: "Ya existe un archivo con el nuevo nombre"</h3>
+                <div class="warning-box">
+                    <strong>Situación:</strong> El script detecta que ya existe un archivo con el nombre que se generaría.
+                    <strong>Comportamiento:</strong> Salta ese archivo y continúa con los demás.
+                    <strong>Solución:</strong> Revisa manualmente y elimina o renombra el archivo conflictivo.
+                </div>
+
+                <h3>El script no se ejecuta</h3>
+                <div class="error-block">
+$ python renombrar_archivos_.py<br>
+bash: python: command not found<br>
+                </div>
+                <div class="solution-box">
+                    <strong>Solución:</strong> Verifica la instalación de Python o usa <code>python3</code>.
+                    <div class="code-block">
+python3 renombrar_archivos_.py<br>
+                    </div>
+                </div>
+
+                <h3>Problemas con caracteres especiales</h3>
+                <div class="warning-box">
+                    <strong>Nota:</strong> El script solo reemplaza espacios. Si tienes otros caracteres problemáticos (ñ, acentos, etc.), es posible que necesites procesarlos manualmente o modificar el script.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🎯 Casos de Uso Prácticos</h2>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <h4>💻 Desarrollo de Software</h4>
+                        <ul>
+                            <li>Preparar archivos para scripts de automatización</li>
+                            <li>Normalizar nombres en proyectos</li>
+                            <li>Facilitar deployment en servidores</li>
+                            <li>Compatibilidad con herramientas CLI</li>
+                        </ul>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📊 Procesamiento de Datos</h4>
+                        <ul>
+                            <li>Preparar datasets para análisis</li>
+                            <li>Normalizar archivos de entrada</li>
+                            <li>Facilitar procesamiento por lotes</li>
+                            <li>Compatibilidad con pipelines de datos</li>
+                        </ul>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🗂️ Gestión de Archivos</h4>
+                        <ul>
+                            <li>Organizar bibliotecas multimedia</li>
+                            <li>Preparar archivos para backup</li>
+                            <li>Normalizar nombres de documentos</li>
+                            <li>Facilitar búsquedas y filtros</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>⚡ Mejores Prácticas</h2>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <h4>📁 Preparación</h4>
+                        <ul>
+                            <li>Siempre hacer backup antes de procesar</li>
+                            <li>Revisar archivos con nombres similares</li>
+                            <li>Verificar espacio en disco disponible</li>
+                            <li>Probar con un subconjunto pequeño</li>
+                        </ul>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔍 Verificación</h4>
+                        <ul>
+                            <li>Contar archivos antes y después</li>
+                            <li>Verificar integridad de archivos renombrados</li>
+                            <li>Comprobar que los programas funcionan</li>
+                            <li>Revisar el log de salida del script</li>
+                        </ul>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🛡️ Seguridad</h4>
+                        <ul>
+                            <li>No procesar archivos del sistema</li>
+                            <li>Evitar archivos en uso por otros programas</li>
+                            <li>Revisar permisos de archivos</li>
+                            <li>Mantener backups actualizados</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🔧 Personalización del Script</h2>
+
+                <h3>Cambiar el directorio de procesamiento</h3>
+                <div class="code-block">
+# En la función rename_files_in_data_folder(), línea ~12<br>
+data_folder = "data"  # Cambia este valor por tu carpeta<br>
+                </div>
+
+                <h3>Modificar el carácter de reemplazo</h3>
+                <div class="code-block">
+# En la función rename_files_in_data_folder(), línea ~25<br>
+new_filename = filename.replace(' ', '_')  # Cambia '_' por otro carácter<br>
+                </div>
+
+                <h3>Agregar más caracteres a reemplazar</h3>
+                <div class="code-block">
+# Modificar la línea de reemplazo<br>
+new_filename = filename.replace(' ', '_').replace('-', '_').replace('(', '').replace(')', '')<br>
+                </div>
+
+                <h3>Cambiar la verificación de archivos existentes</h3>
+                <div class="warning-box">
+                    <strong>Nota:</strong> Modificar la lógica de verificación puede causar sobrescritura de archivos. Úsalo con precaución.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>📝 Ejemplos de Comandos que Ahora Funcionan</h2>
+
+                <h3>Después del procesamiento</h3>
+                <div class="success-box">
+                    <strong>Comandos que ahora funcionan sin problemas:</strong>
+                    <div class="code-block">
+# Mover archivos<br>
+mv Mi_Foto_Favorita.jpg backup/<br>
+<br>
+# Copiar archivos<br>
+cp Documento_Importante.pdf ~/Documentos/<br>
+<br>
+# Procesar con scripts<br>
+for file in *.txt; do echo "Procesando $file"; done<br>
+<br>
+# Usar con find<br>
+find . -name "Video_Tutorial.mp4" -type f<br>
+<br>
+# Comprimir archivos<br>
+tar -czf backup.tar.gz *.pdf<br>
+<br>
+# Procesar con sed/awk<br>
+sed 's/patrones/texto/g' Archivo_con_espacios.txt<br>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>Beneficio principal:</strong> Los archivos renombrados pueden ser referenciados directamente en scripts y comandos sin necesidad de comillas o escape de caracteres.
+                </div>
+            </section>
+        </main>
+
+        <div class="author-info">
+            <h3>👨‍💻 Autor</h3>
+            <p><strong>Benito González Piñeiro</strong></p>
+            <p>Script desarrollado para resolver problemas comunes de línea de comandos</p>
+            <p>Versión 1.0 - Agosto 2025</p>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 Benito González Piñeiro - Tutorial del Script de Renombrado de Archivos</p>
+            <p><a href="piladoras.html" style="color: #667eea;">Volver a Píldoras</a></p>
+        </footer>
+    </div>
+</body>
+</html>

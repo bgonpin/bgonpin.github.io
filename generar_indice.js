@@ -1,74 +1,168 @@
 const fs = require('fs');
+const path = require('path');
 
-// Read the HTML file
-const html = fs.readFileSync('pildoras/laps.html', 'utf8');
+// Function to extract text content from HTML, removing scripts and styles
+function extractTextFromHtml(html) {
+    // Remove script and style tags and their content
+    let text = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+    text = text.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
 
-// Define the missing IDs that need to be added
-const missingIds = [
-    // Configuration section
-    { tag: 'h3', text: 'Descargar e Instalar LAPS', id: 'descargar-laps' },
-    { tag: 'h2', text: 'Descargar LAPS', id: 'descargar-laps-seccion' },
-    { tag: 'h2', text: 'Instalar LAPS en el DC', id: 'instalar-dc' },
-    { tag: 'h2', text: 'Configurar Directiva de Grupo para LAPS', id: 'configurar-gpo' },
-    { tag: 'h2', text: 'Extender el Esquema de AD para LAPS', id: 'extender-esquema' },
-    { tag: 'h2', text: 'Establecer Permisos de AD', id: 'permisos-ad' },
-    { tag: 'h2', text: 'Desplegar LAPS a Máquinas Cliente', id: 'desplegar-clientes' },
-    { tag: 'h2', text: 'Probar LAPS', id: 'probar-laps' },
+    // Remove HTML tags
+    text = text.replace(/<[^>]+>/g, ' ');
 
-    // Security section
-    { tag: 'h2', text: 'Comprender el Modelo de Seguridad de LAPS:', id: 'modelo-seguridad' },
-    { tag: 'h2', text: 'Añadir un nuevo usuario de dominio a la Máquina Cliente con Permiso AllExtendedRights.', id: 'permisos-usuario' },
-    { tag: 'h3', text: 'Explicación: Todos los Derechos Extendidos:', id: 'explicacion-permisos' },
+    // Decode HTML entities
+    text = text.replace(/&nbsp;/g, ' ');
+    text = text.replace(/&/g, '&');
+    text = text.replace(/</g, '<');
+    text = text.replace(/>/g, '>');
+    text = text.replace(/"/g, '"');
+    text = text.replace(/&#39;/g, "'");
+    text = text.replace(/'/g, "'");
 
-    // Exploitation section
-    { tag: 'h2', text: 'Fase de Explotación', id: 'fase-explotacion' },
-    { tag: 'h3', text: 'Bloodhound – Búsqueda de Permisos Débiles', id: 'bloodhound' },
-    { tag: 'h4', text: 'Explicación de BloodHound', id: 'explicacion-bloodhound' },
-    { tag: 'h2', text: 'Método de Explotación - Volcado de Credenciales (T1003)', id: 'metodo-explotacion' },
-    { tag: 'h3', text: 'Impacket', id: 'impacket' },
-    { tag: 'h3', text: 'Herramienta NXC', id: 'nxc' },
-    { tag: 'h3', text: 'PyLaps', id: 'pylaps' },
-    { tag: 'h3', text: 'LAPSDumper', id: 'lapsdumper' },
-    { tag: 'h3', text: 'BloodyAD', id: 'bloodyad' },
-    { tag: 'h3', text: 'Ldapsearch', id: 'ldapsearch' },
-    { tag: 'h3', text: 'Metasploit: ldap_query', id: 'metasploit-ldap' },
-    { tag: 'h3', text: 'Impacket-ntlmrelayx', id: 'ntlmrelayx' },
-    { tag: 'h3', text: 'ldap_shell', id: 'ldap-shell' },
+    // Clean up whitespace
+    text = text.replace(/\s+/g, ' ').trim();
 
-    // Windows exploitation
-    { tag: 'h2', text: 'Explotación en Windows', id: 'explotacion-windows' },
-    { tag: 'h3', text: 'PowerShell', id: 'powershell' },
-    { tag: 'h3', text: 'NetTools', id: 'nettools' },
-    { tag: 'h3', text: 'Sharplaps', id: 'sharplaps' },
-    { tag: 'h3', text: 'Metasploit: enum_laps', id: 'metasploit-enum' },
-    { tag: 'h3', text: 'Powerview', id: 'powerview' },
-    { tag: 'h3', text: 'Explorador de Active Directory – Sysinternals', id: 'ad-explorer' },
+    return text;
+}
 
-    // Conclusion
-    { tag: 'h2', text: 'Conclusión', id: 'conclusion' },
-    { tag: 'h3', text: 'Mejores Prácticas para la Seguridad de LAPS:', id: 'mejores-practicas' },
-    { tag: 'h3', text: 'Resumen de Puntos Clave', id: 'resumen-puntos' },
-    { tag: 'h3', text: 'Notas', id: 'notas' },
+// Function to extract title from HTML
+function extractTitle(html) {
+    const titleMatch = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+    if (titleMatch) {
+        return titleMatch[1].trim();
+    }
 
-    // Training programs
-    { tag: 'h2', text: 'ÚNETE A NUESTROS PROGRAMAS DE ENTRENAMIENTO', id: 'programas-entrenamiento' },
-    { tag: 'h3', text: 'PRINCIPIANTE', id: 'principiante' },
-    { tag: 'h3', text: 'AVANZADO', id: 'avanzado' },
-    { tag: 'h3', text: 'EXPERTO', id: 'experto' }
-];
+    // Fallback: try to find h1
+    const h1Match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+    if (h1Match) {
+        return h1Match[1].replace(/<[^>]+>/g, '').trim();
+    }
 
-let updatedHtml = html;
+    return '';
+}
 
-// Process each missing ID
-missingIds.forEach(({ tag, text, id }) => {
-    // Create the regex pattern to find the tag with the specific text
-    const pattern = new RegExp(`<${tag}>([^<]*${text}[^<]*)</${tag}>`, 'g');
+// Function to extract description from HTML
+function extractDescription(html) {
+    // Try to find meta description
+    const metaMatch = html.match(/<meta[^>]*name=["']description["'][^>]*content=["']([^"']*)[^>]*>/i);
+    if (metaMatch) {
+        return metaMatch[1].trim();
+    }
 
-    // Replace with the same tag but with id attribute
-    updatedHtml = updatedHtml.replace(pattern, `<${tag} id="${id}">$1</${tag}>`);
-});
+    // Fallback: extract first paragraph or h2
+    const pMatch = html.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+    if (pMatch) {
+        return pMatch[1].replace(/<[^>]+>/g, '').trim().substring(0, 300);
+    }
 
-// Write the updated HTML back to the file
-fs.writeFileSync('pildoras/laps.html', updatedHtml, 'utf8');
+    const h2Match = html.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+    if (h2Match) {
+        return h2Match[1].replace(/<[^>]+>/g, '').trim();
+    }
 
-console.log('All missing IDs have been added successfully!');
+    return '';
+}
+
+// Function to extract keywords from HTML
+function extractKeywords(html) {
+    // Try to find meta keywords
+    const metaMatch = html.match(/<meta[^>]*name=["']keywords["'][^>]*content=["']([^"']*)[^>]*>/i);
+    if (metaMatch) {
+        return metaMatch[1].split(',').map(k => k.trim().toLowerCase());
+    }
+
+    // Extract common words from text (most frequent words)
+    const text = extractTextFromHtml(html).toLowerCase();
+    const words = text.match(/\b\w{4,}\b/g) || [];
+    const wordCount = {};
+
+    words.forEach(word => {
+        if (!['that', 'with', 'this', 'will', 'your', 'from', 'they', 'know', 'want', 'been', 'good', 'much', 'some', 'time', 'very', 'when', 'come', 'here', 'just', 'like', 'long', 'make', 'many', 'over', 'such', 'take', 'than', 'them', 'well', 'were', 'what', 'year', 'could', 'have', 'there', 'these', 'where', 'which', 'while', 'about', 'would', 'their', 'after', 'before', 'being', 'every', 'never', 'other', 'should', 'under', 'also', 'because', 'between', 'doing', 'during', 'however', 'though', 'through', 'another', 'around', 'become', 'called', 'cannot', 'coming', 'enough', 'little', 'really', 'always', 'called', 'coming', 'enough', 'little', 'really', 'always', 'called', 'coming', 'enough', 'little', 'really'].includes(word)) {
+            wordCount[word] = (wordCount[word] || 0) + 1;
+        }
+    });
+
+    return Object.entries(wordCount)
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 20)
+        .map(([word]) => word);
+}
+
+// Function to extract update date from HTML
+function extractUpdateDate(html) {
+    const dateMatch = html.match(/fecha\s+actualizacion:\s*([^<\n\r]+)/i);
+    if (dateMatch) {
+        return dateMatch[1].trim();
+    }
+    return null;
+}
+
+// Main function to generate index
+function generateIndex() {
+    const pildorasDir = path.join(__dirname, 'pildoras');
+    const files = fs.readdirSync(pildorasDir);
+    const htmlFiles = files.filter(file => file.endsWith('.html'));
+
+    const indexData = {
+        files: [],
+        keywords: {},
+        metadata: {
+            created: new Date().toISOString(),
+            description: "Índice de archivos HTML en la carpeta pildoras para búsquedas por palabras clave",
+            version: "1.0",
+            totalFiles: htmlFiles.length
+        }
+    };
+
+    // Process each HTML file
+    htmlFiles.forEach(file => {
+        const filePath = path.join(pildorasDir, file);
+        const html = fs.readFileSync(filePath, 'utf8');
+
+        const archivo = file.replace('.html', '');
+        const titulo = extractTitle(html);
+        const descripcion = extractDescription(html);
+        const palabrasClave = extractKeywords(html);
+        const fechaActualizacion = extractUpdateDate(html);
+        const ruta = `pildoras/${file}`;
+
+        const fileData = {
+            archivo,
+            titulo,
+            descripcion,
+            palabrasClave,
+            fechaActualizacion,
+            ruta
+        };
+
+        indexData.files.push(fileData);
+
+        // Build keyword index
+        palabrasClave.forEach(keyword => {
+            if (!indexData.keywords[keyword]) {
+                indexData.keywords[keyword] = [];
+            }
+            indexData.keywords[keyword].push({
+                archivo,
+                titulo,
+                relevancia: palabrasClave.indexOf(keyword) + 1
+            });
+        });
+    });
+
+    // Sort files alphabetically by title
+    indexData.files.sort((a, b) => {
+        const titleA = a.titulo || a.archivo;
+        const titleB = b.titulo || b.archivo;
+        return titleA.localeCompare(titleB);
+    });
+
+    // Write index file
+    fs.writeFileSync('index_pildoras.json', JSON.stringify(indexData, null, 2), 'utf8');
+
+    console.log(`Índice actualizado exitosamente. ${htmlFiles.length} archivos procesados.`);
+    console.log(`Archivo generado: index_pildoras.json`);
+}
+
+// Run the generator
+generateIndex();

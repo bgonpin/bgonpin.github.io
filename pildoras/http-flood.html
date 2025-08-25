@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Flood - Ataque DDoS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #7f8c8d;
+            margin-top: 25px;
+        }
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .step {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .step-number {
+            font-weight: bold;
+            color: #3498db;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .example {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HTTP Flood</h1>
+
+        <p>Un <strong>HTTP Flood</strong> es un tipo de ataque de Denegación de Servicio (DDoS) que se dirige específicamente a aplicaciones web y servidores web.</p>
+
+        <p>Su objetivo es abrumar al servidor objetivo con una avalancha de solicitudes HTTP aparentemente legítimas, hasta que este ya no pueda responder al tráfico normal y el servicio se vuelva inaccesible para los usuarios reales.</p>
+
+        <h2>¿Cómo funciona?</h2>
+
+        <p>A diferencia de otros ataques DDoS que saturan el ancho de banda de la red, un HTTP Flood opera en la <strong>Capa 7 del modelo OSI</strong> (la capa de aplicación), que es donde funcionan protocolos como HTTP.</p>
+
+        <p>El ataque sigue estos pasos:</p>
+
+        <div class="step">
+            <span class="step-number">1. Creación de Solicitudes:</span> El atacante utiliza una red de equipos comprometidos (un botnet) para generar una enorme cantidad de peticiones HTTP.
+        </div>
+
+        <div class="step">
+            <span class="step-number">2. Tipos de Solicitudes:</span>
+            <ul>
+                <li><strong>HTTP GET Flood:</strong> El botnet envía una gran cantidad de solicitudes de obtención (GET) para recuperar contenido del servidor. Por ejemplo, podría estar pidiendo repetidamente la misma página web, una imagen grande, un archivo PDF o cualquier recurso que consuma muchos recursos del servidor para ser generado o enviado.</li>
+                <li><strong>HTTP POST Flood:</strong> El botnet envía una gran cantidad de solicitudes de envío (POST), normalmente utilizadas en formularios de login, búsquedas o comentarios. Estas solicitudes obligan al servidor a procesar los datos recibidos, lo que consume aún más recursos de CPU y memoria que una simple solicitud GET.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3. Apariencia Legítima:</span> Las solicitudes suelen provenir de direcciones IP diversas y imitan el comportamiento de un navegador web real (usando headers HTTP comunes como User-Agent), lo que hace que sea difícil diferenciarlas del tráfico legítimo con métodos simples.
+        </div>
+
+        <div class="step">
+            <span class="step-number">4. Agotamiento de Recursos:</span> El servidor web, al intentar responder a cada una de estas millones de solicitudes, agota sus recursos:
+            <ul>
+                <li>CPU para procesar las peticiones.</li>
+                <li>Memoria RAM para manejar las conexiones simultáneas.</li>
+                <li>Ancho de banda para enviar las respuestas.</li>
+            </ul>
+            Finalmente, se sobrecarga y no puede atender a los usuarios reales, resultando en una denegación de servicio.
+        </div>
+
+        <h2>Objetivo Principal</h2>
+
+        <p>Agotar los recursos del servidor web (como Apache, Nginx o IIS) o de la aplicación web que se ejecuta en él, haciendo que el sitio web o servicio online se vuelva extremadamente lento o completamente inaccesible.</p>
+
+        <h2>Características Clave</h2>
+
+        <div class="highlight">
+            <ul>
+                <li><strong>Ataque de Capa 7:</strong> Es sofisticado porque ataca la lógica de la aplicación, no solo la infraestructura de red.</li>
+                <li><strong>Bajo costo para el atacante:</strong> Enviar solicitudes HTTP simples requiere muy poco ancho de banda para el atacante, pero puede causar un gran impacto en el objetivo.</li>
+                <li><strong>Difícil de Mitigar:</strong> Dado que el tráfico malicioso se mezcla con el tráfico legítimo, los firewalls tradicionales suelen ser insuficientes. Se necesitan soluciones especializadas como Web Application Firewalls (WAF) y sistemas de mitigación DDoS que analicen el comportamiento de las solicitudes.</li>
+            </ul>
+        </div>
+
+        <h2>Ejemplo Sencillo</h2>
+
+        <div class="example">
+            Imagina que un servidor web es una camarera en un restaurante muy concurrido. Un HTTP Flood sería como si 1000 personas (el botnet) le hicieran pedidos larguísimos y complicados al mismo tiempo, o le cambiaran constantemente su orden. La camarera estaría tan ocupada atendiendo estas peticiones falsas que no tendría tiempo para servirle a los clientes reales que solo quieren un café.
+        </div>
+
+        <h2>En resumen</h2>
+
+        <p>Un <strong>HTTP Flood</strong> es un ataque DDoS que satura un servidor web con peticiones HTTP aparentemente normales, consumiendo todos sus recursos y dejándolo fuera de servicio.</p>
+
+        <div class="footer">
+            <a href="pildoras.html">← Volver al índice de pildoras</a>
+        </div>
+    </div>
+</body>
+</html>

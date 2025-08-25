@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYN Flood - Ataque DDoS</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Sección Hero con título principal -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content" style="grid-template-columns: 1fr; text-align: center;">
+                <div>
+                    <h1 class="hero-title">SYN Flood</h1>
+                    <p class="hero-subtitle">Ataque de Denegación de Servicio DDoS</p>
+                    <p class="hero-description">Análisis técnico detallado de uno de los ataques más comunes en ciberseguridad</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- Sección de introducción -->
+        <section class="about" style="padding: 80px 0;">
+            <div class="container">
+                <h2 class="section-title">Introducción al SYN Flood</h2>
+
+                <div class="about-main">
+                    <div class="intro-card" style="background: linear-gradient(135deg, #475569 0%, #64748b 100%); max-width: 800px; margin: 0 auto;">
+                        <div class="intro-icon" style="background: linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%); color: #1e293b;">
+                            <i class="fas fa-shield-alt" style="font-size: 2rem;"></i>
+                        </div>
+                        <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+                            Un SYN Flood es un tipo de ataque de denegación de servicio (DDoS) que tiene como objetivo inundar un servidor con solicitudes de conexión falsas, consumiendo sus recursos hasta que deja de responder al tráfico legítimo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- Sección del Three-Way Handshake -->
+        <section class="experience" style="padding: 80px 0;">
+            <div class="container">
+                <h2 class="section-title">1. El "Three-Way Handshake" Normal</h2>
+
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <div class="timeline-content" style="background: linear-gradient(135deg, #475569 0%, #64748b 100%); margin-bottom: 2rem;">
+                        <h3 style="color: #f1f5f9; margin-bottom: 1rem;">Protocolo TCP (Transmission Control Protocol)</h3>
+                        <p style="color: #cbd5e1; line-height: 1.7; margin-bottom: 1.5rem;">
+                            Para entender el ataque SYN Flood, primero hay que comprender cómo se establece una conexión normal en internet usando el protocolo TCP.
+                        </p>
+                        <p style="color: #cbd5e1; line-height: 1.7;">
+                            Cuando tu computadora quiere conectarse a un servidor (por ejemplo, para cargar una página web), sigue estos tres pasos críticos:
+                        </p>
+                    </div>
+
+                    <div class="stats" style="margin: 3rem 0;">
+                        <div class="stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-handshake" style="color: #1e293b;"></i>
+                            </div>
+                            <h3 style="color: #cbd5e1; font-size: 1.5rem;">PASO 1</h3>
+                            <p style="color: #94a3b8;">SYN - Solicitud Inicial</p>
+                            <p style="color: #cbd5e1; font-size: 0.9rem; margin-top: 1rem;">
+                                El cliente envía un paquete SYN preguntando si el servidor está disponible
+                            </p>
+                        </div>
+
+                        <div class="stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-reply" style="color: #1e293b;"></i>
+                            </div>
+                            <h3 style="color: #cbd5e1; font-size: 1.5rem;">PASO 2</h3>
+                            <p style="color: #94a3b8;">SYN-ACK - Respuesta</p>
+                            <p style="color: #cbd5e1; font-size: 0.9rem; margin-top: 1rem;">
+                                El servidor reserva recursos y confirma su disponibilidad
+                            </p>
+                        </div>
+
+                        <div class="stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle" style="color: #1e293b;"></i>
+                            </div>
+                            <h3 style="color: #cbd5e1; font-size: 1.5rem;">PASO 3</h3>
+                            <p style="color: #94a3b8;">ACK - Confirmación</p>
+                            <p style="color: #cbd5e1; font-size: 0.9rem; margin-top: 1rem;">
+                                El cliente confirma y la conexión se establece
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-content" style="background: linear-gradient(135deg, #64748b 0%, #475569 100%);">
+                        <p style="color: #cbd5e1; line-height: 1.7; font-style: italic;">
+                            Este proceso es rápido y eficiente cuando ambas partes actúan de buena fe, permitiendo una comunicación segura y ordenada.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección del ataque SYN Flood -->
+        <section class="skills" style="padding: 80px 0;">
+            <div class="container">
+                <h2 class="section-title">2. Mecanismo del Ataque SYN Flood</h2>
+
+                <div class="skills-grid" style="max-width: 1000px; margin: 0 auto;">
+                    <div class="skill-category" style="background: linear-gradient(135deg, #475569 0%, #64748b 100%);">
+                        <h3 style="color: #f1f5f9; text-align: center; margin-bottom: 2rem;">
+                            <i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i>
+                            Vector de Ataque
+                        </h3>
+
+                        <div class="skill-item">
+                            <span class="skill-name" style="color: #cbd5e1; font-weight: 600;">
+                                1. SYN Falsificado
+                            </span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 100%; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);"></div>
+                            </div>
+                            <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">
+                                Ráfaga masiva de paquetes SYN con direcciones IP falsificadas
+                            </p>
+                        </div>
+
+                        <div class="skill-item">
+                            <span class="skill-name" style="color: #cbd5e1; font-weight: 600;">
+                                2. Reserva de Recursos
+                            </span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 100%; background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);"></div>
+                            </div>
+                            <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">
+                                El servidor reserva memoria y CPU para cada conexión semiabierta
+                            </p>
+                        </div>
+
+                        <div class="skill-item">
+                            <span class="skill-name" style="color: #cbd5e1; font-weight: 600;">
+                                3. ACK Ausente
+                            </span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 100%; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);"></div>
+                            </div>
+                            <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">
+                                Los paquetes ACK nunca llegan, dejando conexiones incompletas
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="skill-category" style="background: linear-gradient(135deg, #64748b 0%, #475569 100%);">
+                        <h3 style="color: #f1f5f9; text-align: center; margin-bottom: 2rem;">
+                            <i class="fas fa-chart-line" style="margin-right: 0.5rem;"></i>
+                            Impacto del Ataque
+                        </h3>
+
+                        <div style="background: rgba(239, 68, 68, 0.1); padding: 1.5rem; border-radius: 10px; border-left: 4px solid #ef4444;">
+                            <h4 style="color: #f1f5f9; margin-bottom: 1rem;">Recursos Consumidos</h4>
+                            <ul style="color: #cbd5e1; line-height: 1.7;">
+                                <li><strong>Memoria RAM:</strong> Cada conexión semiabierta consume buffers del kernel</li>
+                                <li><strong>CPU:</strong> Procesamiento de paquetes SYN y gestión de estados</li>
+                                <li><strong>Tabla de conexiones:</strong> Límite finito de conexiones TCP simultáneas</li>
+                                <li><strong>Ancho de banda:</strong> Tráfico masivo de paquetes SYN-ACK salientes</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(245, 101, 101, 0.1); padding: 1.5rem; border-radius: 10px; margin-top: 1rem; border-left: 4px solid #f87171;">
+                            <h4 style="color: #f1f5f9; margin-bottom: 1rem;">Consecuencias</h4>
+                            <p style="color: #cbd5e1; line-height: 1.7;">
+                                El servidor se vuelve incapaz de procesar conexiones legítimas, resultando en una denegación de servicio completa para usuarios reales.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 - Análisis Técnico de Ciberseguridad</p>
+            <p style="text-align: center; margin-top: 1rem;">
+                <a href="pildoras.html" style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: color 0.3s ease;" onmouseover="this.style.color='#cbd5e1'" onmouseout="this.style.color='#94a3b8'">
+                    ← Volver al índice de pildoras
+                </a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

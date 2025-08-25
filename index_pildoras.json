@@ -117,6 +117,35 @@
       "ruta": "pildoras/auditd.html"
     },
     {
+      "archivo": "comandos_linux",
+      "titulo": "Manual de Comandos Linux & DevOps",
+      "descripcion": "Guía completa de más de 700 comandos esenciales para administración de sistemas y DevOps Lista el contenido de un directorio. Cambia al directorio especificado. Muestra la ruta del directorio de trabajo actual. Copia archivos y directorios. Mueve o renombra archivos y directorios. Elimina archivos o directorios. Crea uno o más directorios. Elimina directorios vacíos. Cambia las marcas de tiempo de un archivo o crea un archivo vacío. Busca archivos en una jerarquía de directorios. Encuentra archi",
+      "palabrasClave": [
+        "docker",
+        "color",
+        "comandos",
+        "margin",
+        "ejemplos",
+        "kubectl",
+        "padding",
+        "archivo",
+        "helm",
+        "border",
+        "configuraci",
+        "playbook",
+        "terraform",
+        "lista",
+        "aws",
+        "inicia",
+        "ansible",
+        "10px",
+        "font",
+        "ejecuta"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/comandos_linux.html"
+    },
+    {
       "archivo": "cortafuego",
       "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
       "descripcion": "Los firewalls son elementos fundamentales en la arquitectura de seguridad informática moderna. Actúan como barreras protectoras que controlan el tráfico de datos entre redes, siendo esenciales para proteger sistemas y datos sensibles de amenazas externas e internas. Un firewall (cortafuegos en español) es un sistema de seguridad de red que monitorea y controla el tráfico de red entrante y saliente basándose en reglas de seguridad predeterminadas. Establece una barrera entre una red interna confi",
@@ -676,20 +705,20 @@
         "fecha",
         "actualizacion",
         "color",
-        "important",
         "aprende",
+        "important",
         "sobre",
         "const",
         "search",
         "archivos",
         "results",
-        "seguridad",
         "linux",
+        "seguridad",
         "del",
         "pildora",
+        "completa",
         "sistema",
         "font",
-        "completa",
         "query",
         "searchterm"
       ],
@@ -724,6 +753,35 @@
       ],
       "fechaActualizacion": null,
       "ruta": "pildoras/playbook_dos_windows_personalizado.html"
+    },
+    {
+      "archivo": "powershell",
+      "titulo": "Fundamentos de Scripting en PowerShell",
+      "descripcion": "Una variable es una ubicación de almacenamiento con nombre en la memoria de una computadora que contiene un valor que puede cambiar. El signo $ al principio indica una variable. Las variables se utilizan para almacenar valores simples, cadenas y también la salida de comandos. PowerShell asigna automáticamente un tipo de datos a una variable según el tipo que mejor se adapte a su contenido. Usando el comando Get-Type para averiguar el tipo de datos de una variable: Convierte el tipo de datos de u",
+      "palabrasClave": [
+        "powershell",
+        "alias",
+        "microsoft",
+        "path",
+        "host",
+        "color",
+        "write",
+        "get",
+        "del",
+        "https",
+        "com",
+        "dulo",
+        "variable",
+        "module",
+        "script",
+        "font",
+        "variables",
+        "border",
+        "margin",
+        "valor"
+      ],
+      "fechaActualizacion": null,
+      "ruta": "pildoras/powershell.html"
     },
     {
       "archivo": "pxe",
@@ -1295,6 +1353,11 @@
         "relevancia": 14
       },
       {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 11
+      },
+      {
         "archivo": "graylog_guia",
         "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
         "relevancia": 20
@@ -1330,6 +1393,11 @@
         "archivo": "auditd",
         "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
         "relevancia": 7
+      },
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 2
       },
       {
         "archivo": "cortafuego",
@@ -1435,6 +1503,11 @@
         "archivo": "playbook_dos_windows_personalizado",
         "titulo": "Playbook DoS/DDoS — Versión Personalizada",
         "relevancia": 4
+      },
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 6
       },
       {
         "archivo": "pxe",
@@ -1573,6 +1646,11 @@
         "relevancia": 12
       },
       {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 10
+      },
+      {
         "archivo": "cortafuego",
         "titulo": "Firewalls: Guía Completa de Seguridad de Redes",
         "relevancia": 6
@@ -1671,6 +1749,11 @@
         "archivo": "playbook_dos_windows_personalizado",
         "titulo": "Playbook DoS/DDoS — Versión Personalizada",
         "relevancia": 5
+      },
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 18
       },
       {
         "archivo": "pxe",
@@ -1778,6 +1861,11 @@
         "archivo": "auditd",
         "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
         "relevancia": 17
+      },
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 7
       },
       {
         "archivo": "cortafuego",
@@ -1977,6 +2065,11 @@
         "archivo": "archivo-log-linux",
         "titulo": "Archivos de Registro en Linux",
         "relevancia": 15
+      },
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 8
       },
       {
         "archivo": "pdf-maliciosos",
@@ -2393,6 +2486,11 @@
         "relevancia": 17
       },
       {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 4
+      },
+      {
         "archivo": "ddos-playbook-linux",
         "titulo": "Playbook de Mitigación DDoS",
         "relevancia": 18
@@ -2456,6 +2554,11 @@
         "archivo": "playbook_dos_windows_personalizado",
         "titulo": "Playbook DoS/DDoS — Versión Personalizada",
         "relevancia": 16
+      },
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 19
       },
       {
         "archivo": "pxe",
@@ -2657,6 +2760,11 @@
         "relevancia": 14
       },
       {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 9
+      },
+      {
         "archivo": "pxe",
         "titulo": "PXE: Preboot Execution Environment - Guía Completa",
         "relevancia": 7
@@ -2790,7 +2898,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 13
+        "relevancia": 12
       }
     ],
     "log": [
@@ -2844,7 +2952,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 16
+        "relevancia": 17
       },
       {
         "archivo": "ransomware",
@@ -3200,6 +3308,11 @@
         "archivo": "archivo-log-windows",
         "titulo": "Archivos Log en Microsoft Windows",
         "relevancia": 11
+      },
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 3
       }
     ],
     "visor": [
@@ -3263,7 +3376,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 12
+        "relevancia": 13
       },
       {
         "archivo": "ransomware",
@@ -3394,6 +3507,199 @@
       {
         "archivo": "auditd",
         "titulo": "auditd: Guía para Estudiantes de Ciberseguridad",
+        "relevancia": 20
+      }
+    ],
+    "docker": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 1
+      },
+      {
+        "archivo": "perplexica",
+        "titulo": "Tutorial de instalación de Perplexica",
+        "relevancia": 2
+      }
+    ],
+    "comandos": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 3
+      }
+    ],
+    "ejemplos": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 5
+      }
+    ],
+    "kubectl": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 6
+      }
+    ],
+    "helm": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 9
+      }
+    ],
+    "playbook": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 12
+      },
+      {
+        "archivo": "ddos-playbook-linux",
+        "titulo": "Playbook de Mitigación DDoS",
+        "relevancia": 16
+      }
+    ],
+    "terraform": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 13
+      }
+    ],
+    "lista": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 14
+      },
+      {
+        "archivo": "yara_python",
+        "titulo": "Sistema de Detección de Malware con YARA",
+        "relevancia": 8
+      }
+    ],
+    "aws": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 15
+      }
+    ],
+    "inicia": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 16
+      }
+    ],
+    "ansible": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 17
+      }
+    ],
+    "10px": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 18
+      }
+    ],
+    "font": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
+        "relevancia": 19
+      },
+      {
+        "archivo": "graylog_guia",
+        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
+        "relevancia": 6
+      },
+      {
+        "archivo": "hardening_ssh",
+        "titulo": "Manual de Hardening para SSH",
+        "relevancia": 7
+      },
+      {
+        "archivo": "nfs",
+        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
+        "relevancia": 9
+      },
+      {
+        "archivo": "nfs_hardening",
+        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
+        "relevancia": 4
+      },
+      {
+        "archivo": "notebooklm",
+        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
+        "relevancia": 3
+      },
+      {
+        "archivo": "ollama",
+        "titulo": "Tutorial Completo de Ollama",
+        "relevancia": 14
+      },
+      {
+        "archivo": "pildoras",
+        "titulo": "Píldoras - Benito González Piñeiro",
+        "relevancia": 18
+      },
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 16
+      },
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 10
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 9
+      },
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 7
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 9
+      },
+      {
+        "archivo": "virus_total",
+        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
+        "relevancia": 3
+      },
+      {
+        "archivo": "wazuh-virus-total",
+        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
+        "relevancia": 6
+      },
+      {
+        "archivo": "wazuh",
+        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
+        "relevancia": 3
+      },
+      {
+        "archivo": "win11_cuenta_local",
+        "titulo": "Instalar Windows 11 con cuenta local",
+        "relevancia": 12
+      }
+    ],
+    "ejecuta": [
+      {
+        "archivo": "comandos_linux",
+        "titulo": "Manual de Comandos Linux & DevOps",
         "relevancia": 20
       }
     ],
@@ -3700,13 +4006,6 @@
         "relevancia": 15
       }
     ],
-    "playbook": [
-      {
-        "archivo": "ddos-playbook-linux",
-        "titulo": "Playbook de Mitigación DDoS",
-        "relevancia": 16
-      }
-    ],
     "edr": [
       {
         "archivo": "edr",
@@ -3994,83 +4293,6 @@
         "archivo": "renombrar_archivos",
         "titulo": "Tutorial: Script de Renombrado de Archivos",
         "relevancia": 14
-      }
-    ],
-    "font": [
-      {
-        "archivo": "graylog_guia",
-        "titulo": "Graylog: Guía práctica de configuración y uso (basada en DesdeLinux)",
-        "relevancia": 6
-      },
-      {
-        "archivo": "hardening_ssh",
-        "titulo": "Manual de Hardening para SSH",
-        "relevancia": 7
-      },
-      {
-        "archivo": "nfs",
-        "titulo": "NFS: Sistema de Archivos de Red - Guía Completa",
-        "relevancia": 9
-      },
-      {
-        "archivo": "nfs_hardening",
-        "titulo": "Hardening de NFS: Guía Completa de Seguridad",
-        "relevancia": 4
-      },
-      {
-        "archivo": "notebooklm",
-        "titulo": "NotebookLM: Guía Completa de la Herramienta de Inteligencia Artificial de Google",
-        "relevancia": 3
-      },
-      {
-        "archivo": "ollama",
-        "titulo": "Tutorial Completo de Ollama",
-        "relevancia": 14
-      },
-      {
-        "archivo": "pildoras",
-        "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 17
-      },
-      {
-        "archivo": "renombrar_archivos",
-        "titulo": "Tutorial: Script de Renombrado de Archivos",
-        "relevancia": 10
-      },
-      {
-        "archivo": "rsyslog_a_mongodb",
-        "titulo": "Enviar salidas de rsyslog a MongoDB",
-        "relevancia": 9
-      },
-      {
-        "archivo": "traducir_srt",
-        "titulo": "Tutorial: Traductor de Archivos SRT",
-        "relevancia": 7
-      },
-      {
-        "archivo": "traducir_vtt",
-        "titulo": "Tutorial: Script para Traducir Archivos VTT",
-        "relevancia": 9
-      },
-      {
-        "archivo": "virus_total",
-        "titulo": "VirusTotal: La Plataforma de Análisis de Seguridad Multimotor",
-        "relevancia": 3
-      },
-      {
-        "archivo": "wazuh-virus-total",
-        "titulo": "Análisis Técnico: Integración de VirusTotal en Plataformas Wazuh para Detección Avanzada de Malware",
-        "relevancia": 6
-      },
-      {
-        "archivo": "wazuh",
-        "titulo": "Wazuh: Análisis Profundo de la Plataforma de Seguridad de Código Abierto",
-        "relevancia": 3
-      },
-      {
-        "archivo": "win11_cuenta_local",
-        "titulo": "Instalar Windows 11 con cuenta local",
-        "relevancia": 12
       }
     ],
     "opensearch": [
@@ -5002,13 +5224,6 @@
         "relevancia": 1
       }
     ],
-    "docker": [
-      {
-        "archivo": "perplexica",
-        "titulo": "Tutorial de instalación de Perplexica",
-        "relevancia": 2
-      }
-    ],
     "squeda": [
       {
         "archivo": "perplexica",
@@ -5140,14 +5355,14 @@
         "relevancia": 3
       }
     ],
-    "important": [
+    "aprende": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
         "relevancia": 5
       }
     ],
-    "aprende": [
+    "important": [
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
@@ -5193,7 +5408,7 @@
       {
         "archivo": "pildoras",
         "titulo": "Píldoras - Benito González Piñeiro",
-        "relevancia": 18
+        "relevancia": 16
       }
     ],
     "query": [
@@ -5250,6 +5465,11 @@
         "archivo": "playbook_dos_windows_personalizado",
         "titulo": "Playbook DoS/DDoS — Versión Personalizada",
         "relevancia": 11
+      },
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 8
       }
     ],
     "count": [
@@ -5291,6 +5511,122 @@
       {
         "archivo": "playbook_dos_windows_personalizado",
         "titulo": "Playbook DoS/DDoS — Versión Personalizada",
+        "relevancia": 20
+      }
+    ],
+    "powershell": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 1
+      }
+    ],
+    "alias": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 2
+      }
+    ],
+    "path": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 4
+      }
+    ],
+    "host": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 5
+      }
+    ],
+    "write": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 7
+      }
+    ],
+    "https": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 10
+      }
+    ],
+    "com": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 11
+      }
+    ],
+    "dulo": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 12
+      },
+      {
+        "archivo": "rsyslog_a_mongodb",
+        "titulo": "Enviar salidas de rsyslog a MongoDB",
+        "relevancia": 19
+      }
+    ],
+    "variable": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 13
+      }
+    ],
+    "module": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 14
+      }
+    ],
+    "script": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 15
+      },
+      {
+        "archivo": "redimensionar_imagen",
+        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
+        "relevancia": 2
+      },
+      {
+        "archivo": "renombrar_archivos",
+        "titulo": "Tutorial: Script de Renombrado de Archivos",
+        "relevancia": 4
+      },
+      {
+        "archivo": "traducir_srt",
+        "titulo": "Tutorial: Traductor de Archivos SRT",
+        "relevancia": 11
+      },
+      {
+        "archivo": "traducir_vtt",
+        "titulo": "Tutorial: Script para Traducir Archivos VTT",
+        "relevancia": 2
+      }
+    ],
+    "variables": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
+        "relevancia": 17
+      }
+    ],
+    "valor": [
+      {
+        "archivo": "powershell",
+        "titulo": "Fundamentos de Scripting en PowerShell",
         "relevancia": 20
       }
     ],
@@ -5374,28 +5710,6 @@
         "archivo": "ransomware",
         "titulo": "Ransomware: Amenaza Digital del Siglo XXI",
         "relevancia": 20
-      }
-    ],
-    "script": [
-      {
-        "archivo": "redimensionar_imagen",
-        "titulo": "Tutorial: Script de Redimensionado de Imágenes",
-        "relevancia": 2
-      },
-      {
-        "archivo": "renombrar_archivos",
-        "titulo": "Tutorial: Script de Renombrado de Archivos",
-        "relevancia": 4
-      },
-      {
-        "archivo": "traducir_srt",
-        "titulo": "Tutorial: Traductor de Archivos SRT",
-        "relevancia": 11
-      },
-      {
-        "archivo": "traducir_vtt",
-        "titulo": "Tutorial: Script para Traducir Archivos VTT",
-        "relevancia": 2
       }
     ],
     "jpg": [
@@ -5610,13 +5924,6 @@
         "archivo": "rsyslog_a_mongodb",
         "titulo": "Enviar salidas de rsyslog a MongoDB",
         "relevancia": 18
-      }
-    ],
-    "dulo": [
-      {
-        "archivo": "rsyslog_a_mongodb",
-        "titulo": "Enviar salidas de rsyslog a MongoDB",
-        "relevancia": 19
       }
     ],
     "ataque": [
@@ -6017,13 +6324,6 @@
         "relevancia": 5
       }
     ],
-    "lista": [
-      {
-        "archivo": "yara_python",
-        "titulo": "Sistema de Detección de Malware con YARA",
-        "relevancia": 8
-      }
-    ],
     "base": [
       {
         "archivo": "yara_python",
@@ -6082,9 +6382,9 @@
     ]
   },
   "metadata": {
-    "created": "2025-08-25T08:54:10.311Z",
+    "created": "2025-08-25T11:56:31.446Z",
     "description": "Índice de archivos HTML en la carpeta pildoras para búsquedas por palabras clave",
     "version": "1.0",
-    "totalFiles": 42
+    "totalFiles": 44
   }
 }

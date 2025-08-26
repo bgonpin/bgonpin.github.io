@@ -83,6 +83,25 @@
         <div class="card-body">
             <h2>¿Qué es NTLM?</h2>
             <p>NTLM (NT LAN Manager) es un conjunto de protocolos de seguridad de Microsoft que se utiliza para la autenticación, integridad y confidencialidad en entornos de red de Windows. Fue introducido con Windows NT como sucesor del protocolo de autenticación de Microsoft LAN Manager.</p>
+
+            <h3>Historia y evolución</h3>
+            <p>NTLM fue desarrollado por Microsoft en la década de 1990 como parte del sistema operativo Windows NT. Su evolución incluye:</p>
+            <ul>
+                <li><strong>LM (LAN Manager, 1987):</strong> El protocolo original, extremadamente vulnerable</li>
+                <li><strong>NTLMv1 (1993):</strong> Primera versión mejorada con algoritmos más robustos</li>
+                <li><strong>NTLMv2 (1999):</strong> Versión mejorada con mayor seguridad y soporte para mutual authentication</li>
+                <li><strong>NTLMv2 con Session Security:</strong> Incluye firma y sellado de mensajes</li>
+            </ul>
+
+            <h3>Casos de uso actuales</h3>
+            <p>Aunque NTLM ha sido reemplazado por Kerberos en la mayoría de entornos modernos, aún se utiliza en:</p>
+            <ul>
+                <li>Autenticación local en sistemas Windows</li>
+                <li>Conexiones a recursos compartidos (SMB/CIFS)</li>
+                <li>Autenticación HTTP en aplicaciones web</li>
+                <li>Entornos mixtos con sistemas legacy</li>
+                <li>Conexiones entre dominios no confiables</li>
+            </ul>
         </div>
     </div>
 
@@ -90,18 +109,18 @@
         <div class="card-body">
             <h2>¿Cómo funciona NTLM?</h2>
             <p>NTLM utiliza un mecanismo de "desafío-respuesta" para autenticar a los usuarios. El proceso general se puede resumir en los siguientes pasos:</p>
-            <ol class="ps-4">
+            <ol>
                 <li class="mb-2"><strong>El cliente solicita autenticación:</strong> Un usuario intenta acceder a un recurso en un servidor de la red.</li>
                 <li class="mb-2"><strong>El servidor envía un desafío (Challenge):</strong> El servidor responde con un número aleatorio de 8 bytes, conocido como "desafío" (o *nonce*).</li>
                 <li class="mb-2"><strong>El cliente responde (Response):</strong>
-                    <ul class="ps-4 mt-2">
+                    <ul>
                         <li class="mb-1">El cliente toma el desafío.</li>
                         <li class="mb-1">Cifra el desafío utilizando un *hash* criptográfico de la contraseña del usuario.</li>
                         <li class="mb-1">Envía el resultado (la "respuesta") de vuelta al servidor.</li>
                     </ul>
                 </li>
                 <li class="mb-2"><strong>El servidor verifica la autenticación:</strong>
-                    <ul class="ps-4 mt-2">
+                    <ul>
                         <li class="mb-1">El servidor envía el nombre de usuario, el desafío original y la respuesta del cliente a un controlador de dominio.</li>
                         <li class="mb-1">El controlador de dominio usa el nombre de usuario para recuperar el *hash* de la contraseña de la base de datos de cuentas.</li>
                         <li class="mb-1">Cifra el desafío original con ese *hash* y compara el resultado con la respuesta que envió el cliente.</li>
@@ -109,6 +128,70 @@
                     </ul>
                 </li>
             </ol>
+
+            <h3>Flujo detallado de NTLMv2</h3>
+            <p>En NTLMv2, el proceso es más complejo y seguro:</p>
+            <ol>
+                <li><strong>NEGOTIATE_MESSAGE:</strong> El cliente envía sus capacidades y el nombre de usuario</li>
+                <li><strong>CHALLENGE_MESSAGE:</strong> El servidor responde con el desafío de 8 bytes y sus capacidades</li>
+                <li><strong>AUTHENTICATE_MESSAGE:</strong> El cliente envía la respuesta que incluye:
+                    <ul>
+                        <li>HMAC-MD5 del desafío del servidor</li>
+                        <li>Timestamp del cliente</li>
+                        <li>Client challenge de 8 bytes</li>
+                        <li>Información del dominio/servidor</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Ejemplo práctico</h3>
+            <p>Cuando un usuario intenta acceder a una carpeta compartida en Windows:</p>
+            <pre><code>1. Cliente: Quiero acceder a \\servidor\compartida
+2. Servidor: Aquí tienes un desafío: 0x1234567890ABCDEF
+3. Cliente: Calcula NTLM hash de "MiContraseña123" = 0xA1B2C3D4E5F6789A
+4. Cliente: HMAC-MD5(desafío + timestamp + client_challenge, hash)
+5. Servidor: Verifica la respuesta con el hash del usuario en AD</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Configuración de NTLM en Windows</h2>
+
+            <h3>Verificar versión de NTLM</h3>
+            <pre><code># Ver la configuración actual
+Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LmCompatibilityLevel"
+
+# Valores:
+# 0 - Enviar LM y NTLMv1
+# 1 - Enviar LM y NTLMv1, usar NTLMv2 si se negocia
+# 2 - Enviar solo NTLMv1, usar NTLMv2 si se negocia
+# 3 - Enviar solo NTLMv2
+# 4 - Enviar solo NTLMv2, rechazar LM
+# 5 - Enviar solo NTLMv2, rechazar LM y NTLMv1</code></pre>
+
+            <h3>Forzar NTLMv2</h3>
+            <pre><code># Configurar para usar solo NTLMv2
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LmCompatibilityLevel" -Value 3
+
+# Reiniciar para aplicar cambios
+Restart-Computer</code></pre>
+
+            <h3>Deshabilitar NTLMv1</h3>
+            <pre><code># Deshabilitar NTLMv1 completamente
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictSendingNTLMTraffic" -Value 1 -PropertyType DWORD
+
+# O usar política de grupo
+# Computer Configuration > Policies > Windows Settings > Security Settings > Local Policies > Security Options
+# "Network security: Restrict NTLM: NTLM authentication in this domain"</code></pre>
+
+            <h3>Habilitar SMB Signing</h3>
+            <pre><code># Requerir firma SMB
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "RequireSecuritySignature" -Value 1
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "EnableSecuritySignature" -Value 1
+
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" -Name "RequireSecuritySignature" -Value 1
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" -Name "EnableSecuritySignature" -Value 1</code></pre>
         </div>
     </div>
 
@@ -116,49 +199,366 @@
         <div class="card-body">
             <h2>Versiones de NTLM</h2>
             <p>Existen varias versiones de NTLM, siendo las más comunes NTLMv1 y NTLMv2. NTLMv2 es una versión mejorada y más segura que NTLMv1, ya que incorpora características adicionales para prevenir ciertos tipos de ataques.</p>
-        </div>
-    </div>
 
-    <div class="card">
-        <div class="card-body">
-            <h2>Debilidades de NTLM</h2>
-            <p>A pesar de su uso extendido, NTLM tiene varias vulnerabilidades de seguridad que lo hacen susceptible a ataques como:</p>
-            <ul class="ps-4">
-                <li class="mb-2"><strong>Ataques Pass-the-Hash:</strong> Si un atacante consigue el *hash* de la contraseña de un usuario, puede usarlo para autenticarse en la red sin necesidad de conocer la contraseña en texto claro.</li>
-                <li class="mb-2"><strong>Ataques de retransmisión (Relay Attacks):</strong> Un atacante puede interceptar el *hash* NTLM enviado a través de la red y retransmitirlo a otro servidor para obtener acceso.</li>
-                <li class="mb-2"><strong>Algoritmos de cifrado obsoletos:</strong> Las primeras versiones de NTLM utilizan algoritmos de cifrado que se consideran inseguros y pueden ser fácilmente descifrados con el hardware moderno.</li>
+            <h3>NTLMv1</h3>
+            <p>La versión original mejorada del protocolo LM. Utiliza:</p>
+            <ul>
+                <li><strong>Hash MD4:</strong> Para generar el hash de la contraseña (16 bytes)</li>
+                <li><strong>DES:</strong> Para cifrar el desafío con el hash dividido en 3 partes de 7 bytes</li>
+                <li><strong>Respuesta de 24 bytes:</strong> Tres bloques DES concatenados</li>
             </ul>
-            <p>Debido a estas vulnerabilidades, Microsoft ha recomendado el uso de Kerberos, un protocolo de autenticación más moderno y seguro, como la opción principal en entornos de Active Directory. Sin embargo, NTLM todavía se utiliza en muchos sistemas, especialmente en situaciones donde Kerberos no es compatible o en entornos más antiguos.</p>
-            <p><strong>Las vulnerabilidades de NTLM provienen principalmente de su diseño, que es una tecnología de autenticación antigua. La mitigación principal es <em>reemplazarlo con Kerberos</em> siempre que sea posible.</strong></p>
+            <p><strong>Debilidades principales:</strong> Vulnerable a ataques rainbow table y relativamente fácil de crackear con hardware moderno.</p>
+
+            <h3>NTLMv2</h3>
+            <p>Versión significativamente mejorada introducida en Windows 2000. Incluye:</p>
+            <ul>
+                <li><strong>HMAC-MD5:</strong> Para mayor seguridad criptográfica</li>
+                <li><strong>Mutual Authentication:</strong> El servidor también se autentica al cliente</li>
+                <li><strong>Timestamp:</strong> Para prevenir ataques de replay</li>
+                <li><strong>Client Challenge:</strong> El cliente añade su propio desafío de 8 bytes</li>
+            </ul>
+
+            <h3>Session Security</h3>
+            <p>NTLMv2 puede incluir características adicionales de seguridad de sesión:</p>
+            <ul>
+                <li><strong>Message Signing:</strong> Verificación de integridad de mensajes</li>
+                <li><strong>Message Sealing:</strong> Confidencialidad de mensajes usando RC4</li>
+            </ul>
+
+            <h3>Comparación de versiones</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 1em 0;">
+                <thead>
+                    <tr style="background-color: #333;">
+                        <th style="border: 1px solid #555; padding: 8px; text-align: left;">Característica</th>
+                        <th style="border: 1px solid #555; padding: 8px; text-align: left;">NTLMv1</th>
+                        <th style="border: 1px solid #555; padding: 8px; text-align: left;">NTLMv2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 8px;">Algoritmo Hash</td>
+                        <td style="border: 1px solid #555; padding: 8px;">MD4 + DES</td>
+                        <td style="border: 1px solid #555; padding: 8px;">HMAC-MD5</td>
+                    </tr>
+                    <tr style="background-color: #2a2a2a;">
+                        <td style="border: 1px solid #555; padding: 8px;">Longitud Respuesta</td>
+                        <td style="border: 1px solid #555; padding: 8px;">24 bytes</td>
+                        <td style="border: 1px solid #555; padding: 16 bytes (mínimo)</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 8px;">Mutual Authentication</td>
+                        <td style="border: 1px solid #555; padding: 8px;">No</td>
+                        <td style="border: 1px solid #555; padding: 8px;">Sí</td>
+                    </tr>
+                    <tr style="background-color: #2a2a2a;">
+                        <td style="border: 1px solid #555; padding: 8px;">Protección Replay</td>
+                        <td style="border: 1px solid #555; padding: 8px;">No</td>
+                        <td style="border: 1px solid #555; padding: 8px;">Sí (timestamp)</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 8px;">Seguridad</td>
+                        <td style="border: 1px solid #555; padding: 8px;">Débil</td>
+                        <td style="border: 1px solid #555; padding: 8px;">Mejorada</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <div class="card">
         <div class="card-body">
-            <h2>Vulnerabilidades de NTLM</h2>
+            <h2>Herramientas de diagnóstico y auditoría</h2>
+
+            <h3>Comandos de diagnóstico en Windows</h3>
+            <pre><code># Ver eventos de autenticación NTLM
+Get-WinEvent -LogName "Security" | Where-Object { $_.Id -eq 4624 -or $_.Id -eq 4625 } | Select-Object TimeCreated, Id, Message
+
+# Ver configuración de NTLM
+Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LmCompatibilityLevel"
+Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictSendingNTLMTraffic"
+
+# Ver uso de NTLM en la red
+Get-SmbConnection | Select-Object ServerName, Credential, Dialect, NumOpens
+
+# Analizar logs de NTLM
+Get-WinEvent -FilterHashtable @{ LogName = "Microsoft-Windows-NTLM/Operational"; }</code></pre>
+
+            <h3>Monitoreo con PowerShell</h3>
+            <pre><code># Script para detectar uso de NTLMv1
+$events = Get-WinEvent -LogName "Microsoft-Windows-NTLM/Operational" -MaxEvents 1000
+$ntlmv1Events = $events | Where-Object { $_.Message -match "NTLMv1" }
+
+foreach ($event in $ntlmv1Events) {
+    Write-Host "NTLMv1 detected: $($event.TimeCreated) - $($event.Message)"
+}</code></pre>
+
+            <h3>Herramientas de análisis forense</h3>
+            <ul>
+                <li><strong>NTLM Auditor:</strong> Herramienta para auditar configuraciones NTLM</li>
+                <li><strong>Wireshark:</strong> Captura y análisis de paquetes NTLM en la red</li>
+                <li><strong>Mimikatz:</strong> Extracción de hashes NTLM de memoria (útil para auditorías de seguridad)</li>
+                <li><strong>Event Viewer:</strong> Monitoreo de eventos de seguridad relacionados con NTLM</li>
+                <li><strong>Group Policy Management Console:</strong> Gestión de políticas de NTLM</li>
+            </ul>
+
+            <h3>Análisis de logs con LogParser</h3>
+            <pre><code>logparser "SELECT * FROM Security.evtx WHERE EventID=4624 AND LogonType=3" -o:CSV</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Ejemplos de ataques NTLM</h2>
+
+            <h3>1. Pass-the-Hash Attack</h3>
+            <pre><code># Usando Mimikatz para extraer hashes
+mimikatz.exe "sekurlsa::logonpasswords" exit
+
+# Usando el hash extraído con PsExec
+PsExec.exe \\target -u domain\user -p hash_value cmd.exe</code></pre>
+
+            <h3>2. NTLM Relay Attack</h3>
+            <pre><code># Configurar un relay con Responder
+python Responder.py -I eth0 -v
+
+# Envenenar LLMNR/NBNS para capturar NTLM
+# Responder automáticamente intenta relay a otros sistemas</code></pre>
+
+            <h3>3. Downgrade Attack (forzar NTLMv1)</h3>
+            <pre><code># Configurar para aceptar NTLMv1
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LmCompatibilityLevel" -Value 0
+
+# Capturar con Wireshark y crackear con John the Ripper
+john --format=netlm ntlm_hashes.txt</code></pre>
+
+            <h3>4. Captura de credenciales HTTP</h3>
+            <pre><code># Configurar un servidor malicioso
+python -m http.server 80
+
+# Forzar autenticación NTLM desde el navegador
+# Las credenciales se envían automáticamente por el navegador</code></pre>
+
+            <h3>5. SMB Relay Attack</h3>
+            <pre><code># Usar ntlmrelayx de Impacket
+python ntlmrelayx.py -t smb://target -smb2support
+
+# Envenenar con Responder para capturar y relay</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Vulnerabilidades y ataques</h2>
             <p>Las principales debilidades de NTLM lo hacen susceptible a varios tipos de ataques:</p>
-            <ul class="ps-4">
-                <li class="mb-2"><strong>Ataques de retransmisión (*Relay Attacks*):</strong> Un atacante puede interceptar el *hash* NTLM de un usuario en un servidor y "retransmitirlo" a otro servidor para autenticarse como si fuera ese usuario. Esto es posible porque, por defecto, NTLM no enlaza la sesión de autenticación a un canal específico.</li>
-                <li class="mb-2"><strong>Ataques de paso de *hash* (*Pass-the-Hash*):</strong> En lugar de robar una contraseña en texto claro, un atacante puede robar directamente el *hash* de la contraseña del usuario. Como el proceso de autenticación de NTLM se basa en este *hash*, el atacante puede usarlo para autenticarse en otros sistemas de la red sin necesidad de descifrar la contraseña real.</li>
-                <li class="mb-2"><strong>Ataques de fuerza bruta y de diccionario:</strong> Aunque NTLMv2 es más seguro que NTLMv1, el *hash* aún puede ser vulnerable a ataques de fuerza bruta si la contraseña del usuario es débil. Los atacantes pueden capturar el *hash* y luego intentar descifrarlo sin conexión.</li>
+            <ul>
+                <li class="mb-2"><strong>Ataques de retransmisión (Relay Attacks):</strong> Un atacante puede interceptar el hash NTLM de un usuario en un servidor y retransmitirlo a otro servidor para autenticarse como si fuera ese usuario. Esto es posible porque, por defecto, NTLM no enlaza la sesión de autenticación a un canal específico.</li>
+                <li class="mb-2"><strong>Ataques de paso de hash (Pass-the-Hash):</strong> En lugar de robar una contraseña en texto claro, un atacante puede robar directamente el hash de la contraseña del usuario. Como el proceso de autenticación de NTLM se basa en este hash, el atacante puede usarlo para autenticarse en otros sistemas de la red sin necesidad de descifrar la contraseña real.</li>
+                <li class="mb-2"><strong>Ataques de fuerza bruta y de diccionario:</strong> Aunque NTLMv2 es más seguro que NTLMv1, el hash aún puede ser vulnerable a ataques de fuerza bruta si la contraseña del usuario es débil. Los atacantes pueden capturar el hash y luego intentar descifrarlo sin conexión.</li>
                 <li class="mb-2"><strong>Vulnerabilidades en versiones antiguas (NTLMv1):</strong> La versión NTLMv1 utiliza algoritmos criptográficos débiles que se consideran obsoletos y son muy fáciles de romper.</li>
+                <li class="mb-2"><strong>Ataques de downgrade:</strong> Forzar al sistema a usar versiones más débiles de NTLM para aprovechar vulnerabilidades conocidas.</li>
+            </ul>
+
+            <h3>Principales vectores de ataque</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 1em 0;">
+                <thead>
+                    <tr style="background-color: #333;">
+                        <th style="border: 1px solid #555; padding: 8px; text-align: left;">Vector</th>
+                        <th style="border: 1px solid #555; padding: 8px; text-align: left;">Protocolo</th>
+                        <th style="border: 1px solid #555; padding: 8px; text-align: left;">Herramientas comunes</th>
+                        <th style="border: 1px solid #555; padding: 8px; text-align: left;">Mitigación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 8px;">SMB Relay</td>
+                        <td style="border: 1px solid #555; padding: 8px;">SMB</td>
+                        <td style="border: 1px solid #555; padding: 8px;">ntlmrelayx, Responder</td>
+                        <td style="border: 1px solid #555; padding: 8px;">SMB Signing</td>
+                    </tr>
+                    <tr style="background-color: #2a2a2a;">
+                        <td style="border: 1px solid #555; padding: 8px;">Pass-the-Hash</td>
+                        <td style="border: 1px solid #555; padding: 8px;">Cualquier</td>
+                        <td style="border: 1px solid #555; padding: 8px;">Mimikatz, PsExec</td>
+                        <td style="border: 1px solid #555; padding: 8px;">Credential Guard</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 8px;">HTTP NTLM</td>
+                        <td style="border: 1px solid #555; padding: 8px;">HTTP</td>
+                        <td style="border: 1px solid #555; padding: 8px;">Evil-WinRM</td>
+                        <td style="border: 1px solid #555; padding: 8px;">HTTPS + EPA</td>
+                    </tr>
+                    <tr style="background-color: #2a2a2a;">
+                        <td style="border: 1px solid #555; padding: 8px;">LDAP Relay</td>
+                        <td style="border: 1px solid #555; padding: 8px;">LDAP</td>
+                        <td style="border: 1px solid #555; padding: 8px;">ntlmrelayx</td>
+                        <td style="border: 1px solid #555; padding: 8px;">LDAP Signing</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Recomendaciones de Microsoft</h2>
+
+            <h3>Guía de seguridad Microsoft (2023)</h3>
+            <p>Según Microsoft, las mejores prácticas para NTLM incluyen:</p>
+            <ul>
+                <li><strong>Eliminar NTLM completamente cuando sea posible</strong></li>
+                <li><strong>Usar solo NTLMv2 con session security</strong></li>
+                <li><strong>Habilitar SMB signing requerido</strong></li>
+                <li><strong>Implementar Credential Guard</strong></li>
+                <li><strong>Usar políticas de restricción NTLM</strong></li>
+                <li><strong>Monitorear eventos de NTLM</strong></li>
+            </ul>
+
+            <h3>Configuración recomendada por Microsoft</h3>
+            <pre><code># Política de grupo: Network Security: Restrict NTLM: Audit NTLM authentication
+# Computer Configuration > Policies > Windows Settings > Security Settings > Local Policies > Security Options
+
+# Habilitar auditoría de NTLM
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0" -Name "AuditReceivingNTLMTraffic" -Value 1
+
+# Configurar nivel de compatibilidad
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LmCompatibilityLevel" -Value 5</code></pre>
+
+            <h3>Alertas de seguridad críticas</h3>
+            <ul>
+                <li><strong>KB5005413:</strong> Actualización para mejorar la seguridad de NTLM</li>
+                <li><strong>CVE-2019-1040:</strong> Vulnerabilidad de relay en NTLM</li>
+                <li><strong>CVE-2019-1019:</strong> Vulnerabilidad de bypass en Credential Guard</li>
             </ul>
         </div>
     </div>
 
     <div class="card">
         <div class="card-body">
-            <h2>¿Cómo mitigar estas vulnerabilidades?</h2>
-            <p>La mejor estrategia es eliminar el uso de NTLM y adoptar protocolos más modernos, pero si su uso es inevitable, hay medidas que puede tomar:</p>
-            <ul class="ps-4">
-                <li class="mb-2"><strong>Priorizar Kerberos:</strong> La solución más eficaz es deshabilitar NTLM en su red y utilizar <strong>Kerberos</strong> para la autenticación en entornos de Active Directory. Kerberos es un protocolo más robusto que incluye protecciones integradas contra ataques de retransmisión y robo de credenciales.</li>
-                <li class="mb-2"><strong>Implementar la firma SMB (*SMB Signing*):</strong> Habilitar la firma de bloques de mensajes del servidor (SMB) obliga a que cada mensaje sea firmado digitalmente. Esto ayuda a prevenir ataques de retransmisión al asegurar que los mensajes no han sido modificados en tránsito.</li>
-                <li class="mb-2"><strong>Usar NTLMv2 y deshabilitar NTLMv1:</strong> Asegúrese de que todos los sistemas de su red están configurados para usar NTLMv2 o superior y desactive NTLMv1 por completo, ya que es la versión más vulnerable.</li>
-                <li class="mb-2"><strong>Habilitar la Protección Ampliada para la Autenticación (EPA):</strong> EPA añade seguridad al garantizar que las solicitudes de autenticación están enlazadas a un canal de comunicación específico, lo que frustra los ataques de retransmisión.</li>
-                <li class="mb-2"><strong>Restringir el tráfico de NTLM:</strong> Use políticas de grupo (GPO) para restringir dónde y cómo se usa la autenticación NTLM dentro de su dominio. Esto puede incluir bloquear el tráfico NTLM entrante en servidores críticos.</li>
-                <li class="mb-2"><strong>Implementar la segmentación de la red:</strong> Aislar los sistemas críticos del resto de la red puede limitar el movimiento lateral de un atacante, incluso si logra comprometer una cuenta NTLM.</li>
-                <li class="mb-2"><strong>Habilitar Credential Guard:</strong> En sistemas Windows 10 y Server 2016 o posteriores, Credential Guard protege los hashes NTLM en la memoria, dificultando su robo.</li>
-                <li class="mb-2"><strong>Uso de contraseñas fuertes y monitoreo:</strong> Aplique políticas de contraseñas robustas y monitoree el tráfico de autenticación NTLM en busca de actividad inusual que pueda indicar un ataque.</li>
+            <h2>Guía completa de mitigación</h2>
+
+            <h3>1. Migración a Kerberos</h3>
+            <pre><code># Verificar que Kerberos funciona correctamente
+klist tickets
+klist sessions
+
+# Configurar SPN para servicios
+setspn -S HTTP/webserver.domain.com domain\serviceaccount
+
+# Forzar Kerberos en IIS
+# En applicationHost.config:
+# <windowsAuthentication authPersistNonNTLM="false" /></code></pre>
+
+            <h3>2. Implementar SMB Signing</h3>
+            <pre><code># PowerShell para habilitar SMB signing requerido
+Set-SmbServerConfiguration -RequireSecuritySignature $true -Force
+Set-SmbClientConfiguration -RequireSecuritySignature $true -Force
+
+# Política de grupo
+# Computer Configuration > Policies > Windows Settings > Security Settings > Local Policies > Security Options
+# "Microsoft network server: Digitally sign communications (always)"
+# "Microsoft network client: Digitally sign communications (always)"</code></pre>
+
+            <h3>3. Configurar políticas de restricción NTLM</h3>
+            <pre><code># Crear política de restricción NTLM
+New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0" -Name "RestrictReceivingNTLMTraffic" -Force
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0\RestrictReceivingNTLMTraffic" -Name "Value" -Value 1
+
+# Configurar excepciones para servidores legacy
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0\RestrictReceivingNTLMTraffic" -Name "AllowDomainAccounts" -Value 1</code></pre>
+
+            <h3>4. Habilitar Credential Guard</h3>
+            <pre><code># Verificar si Credential Guard está disponible
+Get-ComputerInfo | Select-Object DeviceGuard*
+
+# Habilitar con política de grupo
+# Computer Configuration > Policies > Administrative Templates > System > Device Guard
+# "Turn On Virtualization Based Security" = Enabled
+# "Credential Guard Configuration" = Enabled with UEFI lock</code></pre>
+
+            <h3>5. Configurar EPA (Extended Protection for Authentication)</h3>
+            <pre><code># En IIS para aplicaciones web
+# En web.config:
+# <system.webServer>
+#   <security>
+#     <authentication>
+#       <windowsAuthentication enabled="true">
+#         <extendedProtection tokenChecking="Require" />
+#       </windowsAuthentication>
+#     </authentication>
+#   </security>
+# </system.webServer></code></pre>
+
+            <h3>6. Monitoreo y alertas</h3>
+            <pre><code># Script de monitoreo de eventos NTLM
+$ntlmEvents = Get-WinEvent -LogName "Microsoft-Windows-NTLM/Operational" -MaxEvents 1000 |
+    Where-Object { $_.Id -eq 4004 -or $_.Id -eq 4005 }
+
+# Alertar sobre uso de NTLMv1
+if ($ntlmEvents | Where-Object { $_.Message -match "NTLMv1" }) {
+    Write-EventLog -LogName "Application" -Source "NTLM-Monitor" -EventId 1001 -Message "NTLMv1 usage detected"
+}</code></pre>
+
+            <h3>7. Configuración de red segura</h3>
+            <pre><code># Deshabilitar LLMNR y NetBIOS
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" -Name "EnableMulticast" -Value 0
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters" -Name "NodeType" -Value 2
+
+# Configurar DNS seguro
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses "10.0.0.53","10.0.0.54"</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Referencias y recursos adicionales</h2>
+
+            <h3>Documentación oficial de Microsoft</h3>
+            <ul>
+                <li><a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/network-security-restrict-ntlm-ntlm-authentication-in-this-domain">Microsoft Docs - Restrict NTLM</a></li>
+                <li><a href="https://docs.microsoft.com/en-us/windows/security/identity-protection/credential-guard/credential-guard">Microsoft Docs - Credential Guard</a></li>
+                <li><a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/microsoft-network-server-digitally-sign-communications-always">Microsoft Docs - SMB Signing</a></li>
+                <li><a href="https://support.microsoft.com/en-us/topic/bf4d3879-5b3d-4eff-b89f-6b0e2e8a8caa">KB5005413 - NTLM Security Update</a></li>
+            </ul>
+
+            <h3>Artículos técnicos</h3>
+            <ul>
+                <li><strong>NTLM Explained:</strong> Documento técnico detallado sobre el protocolo</li>
+                <li><strong>Kerberos vs NTLM:</strong> Comparación de protocolos de autenticación</li>
+                <li><strong>NTLM Attack Vectors:</strong> Análisis de vulnerabilidades por Fox-IT</li>
+                <li><strong>Pass-the-Hash Attacks:</strong> Técnicas y mitigaciones</li>
+            </ul>
+
+            <h3>Herramientas y scripts útiles</h3>
+            <ul>
+                <li><strong>NTLM-Auditor:</strong> Script de PowerShell para auditar configuraciones NTLM</li>
+                <li><strong>Invoke-NTLMMonitor:</strong> Módulo de PowerShell para monitoreo</li>
+                <li><strong>ntlmrelayx:</strong> Herramienta para pruebas de relay attacks</li>
+                <li><strong>Responder:</strong> Framework para análisis de protocolos</li>
+            </ul>
+
+            <h3>Comunidades y foros</h3>
+            <ul>
+                <li><strong>Microsoft Security Community:</strong> Foros oficiales de Microsoft</li>
+                <li><strong>Active Directory Security:</strong> Grupo de discusión especializado</li>
+                <li><strong>Reddit r/sysadmin:</strong> Comunidad de administradores de sistemas</li>
+                <li><strong>Twitter @MSFTSecurity:</strong> Actualizaciones de seguridad de Microsoft</li>
+            </ul>
+
+            <h3>Certificaciones relacionadas</h3>
+            <ul>
+                <li><strong>Microsoft Certified: Azure Administrator</strong></li>
+                <li><strong>Microsoft Certified: Windows Server Hybrid Administrator</strong></li>
+                <li><strong>CompTIA Security+</strong></li>
+                <li><strong>CISSP (Certified Information Systems Security Professional)</strong></li>
+            </ul>
+
+            <h3>Últimas actualizaciones</h3>
+            <p><em>Última revisión: 26 de agosto de 2025</em></p>
+            <p><em>Próximas actualizaciones importantes:</em></p>
+            <ul>
+                <li>Windows Server 2025 - Mejoras en autenticación</li>
+                <li>Azure AD - Eliminación progresiva de NTLM</li>
+                <li>Microsoft Security Updates - Parches de seguridad regulares</li>
             </ul>
         </div>
     </div>

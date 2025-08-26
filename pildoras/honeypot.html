@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Honeypot - Ciberseguridad</title>
+    <title>Honeypot - Ciberseguridad Completa</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,7 +12,7 @@
             background-color: #1a1a1a;
             margin: 0;
             padding: 20px;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -39,6 +39,13 @@
             margin-bottom: 15px;
         }
 
+        h4 {
+            color: #d0d0d0;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
         p {
             margin-bottom: 20px;
             text-align: justify;
@@ -47,6 +54,16 @@
         .highlight {
             font-weight: bold;
             color: #ffffff;
+        }
+
+        .warning {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #51cf66;
+            font-weight: bold;
         }
 
         ul, ol {
@@ -91,6 +108,81 @@
             border-left: 3px solid #555555;
         }
 
+        .code-block {
+            background-color: #1e1e1e;
+            border: 1px solid #3a3a3a;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #a0a0a0;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .example-box {
+            background-color: #1a2332;
+            border: 1px solid #2a4a6b;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .tool-box {
+            background-color: #2a1a32;
+            border: 1px solid #4a2a6b;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .pros {
+            background-color: #1a2a1a;
+            border: 1px solid #2a4a2a;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .cons {
+            background-color: #2a1a1a;
+            border: 1px solid #4a2a2a;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #2a2a2a;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .table th {
+            background-color: #3a3a3a;
+            color: #ffffff;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #404040;
+        }
+
+        .table tr:hover {
+            background-color: #333333;
+        }
+
         strong {
             color: #ffffff;
         }
@@ -101,6 +193,39 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .toc {
+            background-color: #252525;
+            border: 1px solid #3a3a3a;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            color: #ffffff;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+        }
+
+        .toc a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: #ffffff;
         }
 
         footer {
@@ -120,58 +245,509 @@
         footer a:hover {
             color: #ffffff;
         }
+
+        @media (max-width: 768px) {
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Honeypot</h1>
+        <h1>Honeypot - Guía Completa de Ciberseguridad</h1>
 
-        <div class="definition">
-            <p>Un <span class="highlight">honeypot</span> (del inglés, "tarro de miel") es una herramienta de ciberseguridad que actúa como una trampa o señuelo para los ciberdelincuentes. Se trata de un sistema informático, una aplicación o una red que se despliega intencionalmente para que parezca un objetivo atractivo y vulnerable, con el fin de atraer a los atacantes y observar su comportamiento.</p>
+        <div class="toc">
+            <h3>Índice de Contenidos</h3>
+            <ul>
+                <li><a href="#definicion">1. Definición y Conceptos Básicos</a></li>
+                <li><a href="#proposito">2. ¿Para qué sirve un honeypot?</a></li>
+                <li><a href="#tipos">3. Tipos de honeypots</a></li>
+                <li><a href="#arquitectura">4. Arquitectura y Componentes</a></li>
+                <li><a href="#implementacion">5. Implementación y Configuración</a></li>
+                <li><a href="#herramientas">6. Herramientas y Tecnologías</a></li>
+                <li><a href="#casos-uso">7. Casos de Uso y Ejemplos Reales</a></li>
+                <li><a href="#deteccion">8. Detección y Evasión</a></li>
+                <li><a href="#ventajas">9. Ventajas y Desventajas</a></li>
+                <li><a href="#aspectos-legales">10. Aspectos Legales y Éticos</a></li>
+                <li><a href="#tendencias">11. Tendencias Futuras</a></li>
+                <li><a href="#mejores-practicas">12. Mejores Prácticas</a></li>
+            </ul>
         </div>
 
-        <div class="section">
-            <h2>¿Para qué sirve un honeypot?</h2>
+        <div class="definition" id="definicion">
+            <h2>1. Definición y Conceptos Básicos</h2>
+            <p>Un <span class="highlight">honeypot</span> (del inglés, "tarro de miel") es una herramienta de ciberseguridad que actúa como una trampa o señuelo para los ciberdelincuentes. Se trata de un sistema informático, una aplicación o una red que se despliega intencionalmente para que parezca un objetivo atractivo y vulnerable, con el fin de atraer a los atacantes y observar su comportamiento.</p>
+            
+            <h3>Conceptos Relacionados:</h3>
+            <ul>
+                <li class="list-item"><strong>Honeynet:</strong> Una red completa de honeypots interconectados que simula una infraestructura empresarial.</li>
+                <li class="list-item"><strong>Honeypod:</strong> Un contenedor Docker configurado como honeypot.</li>
+                <li class="list-item"><strong>Honeytoken:</strong> Datos falsos colocados estratégicamente para detectar accesos no autorizados.</li>
+                <li class="list-item"><strong>Tarpit:</strong> Un tipo de honeypot que ralentiza intencionalmente las conexiones maliciosas.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="proposito">
+            <h2>2. ¿Para qué sirve un honeypot?</h2>
             <p>El propósito principal de un honeypot no es proteger datos reales, sino <span class="highlight">recopilar información</span> sobre las amenazas y los atacantes. Cuando un ciberdelincuente intenta comprometer el honeypot, los profesionales de la seguridad pueden registrar y analizar:</p>
 
             <div class="subsection">
+                <h3>Información de Inteligencia de Amenazas:</h3>
                 <ul>
-                    <li class="list-item"><strong>El origen del ataque:</strong> De dónde vienen los ciberdelincuentes (dirección IP, ubicación).</li>
-                    <li class="list-item"><strong>Las técnicas de ataque:</strong> Qué métodos, herramientas y vulnerabilidades intentan explotar.</li>
-                    <li class="list-item"><strong>El modus operandi:</strong> Qué datos o aplicaciones les interesan, qué comandos ejecutan y cómo se mueven dentro del sistema.</li>
-                    <li class="list-item"><strong>El malware utilizado:</strong> Qué tipo de software malicioso intentan instalar.</li>
+                    <li class="list-item"><strong>El origen del ataque:</strong> Dirección IP, ubicación geográfica, ISP y patrones de comportamiento.</li>
+                    <li class="list-item"><strong>Las técnicas de ataque:</strong> Métodos, herramientas, exploits y vulnerabilidades explotadas.</li>
+                    <li class="list-item"><strong>El modus operandi:</strong> Secuencia de acciones, comandos ejecutados y objetivos específicos.</li>
+                    <li class="list-item"><strong>El malware utilizado:</strong> Análisis de payloads, backdoors y herramientas de post-explotación.</li>
+                    <li class="list-item"><strong>Comunicaciones:</strong> Canales C&C, protocolos utilizados y frecuencia de comunicación.</li>
                 </ul>
             </div>
 
-            <p>Esta información es invaluable para fortalecer las defensas de la red principal de una empresa, ya que permite identificar debilidades, anticipar futuros ataques y mejorar la postura de seguridad.</p>
+            <div class="subsection">
+                <h3>Objetivos Estratégicos:</h3>
+                <ul>
+                    <li class="list-item"><strong>Detección Temprana:</strong> Identificar amenazas antes de que impacten sistemas críticos.</li>
+                    <li class="list-item"><strong>Distracción:</strong> Desviar recursos de atacantes lejos de activos reales.</li>
+                    <li class="list-item"><strong>Análisis Forense:</strong> Obtener evidencias detalladas de actividades maliciosas.</li>
+                    <li class="list-item"><strong>Mejora de Defensas:</strong> Fortalecer medidas de seguridad basadas en amenazas reales.</li>
+                </ul>
+            </div>
+
+            <p>Esta información es invaluable para fortalecer las defensas de la red principal de una empresa, ya que permite identificar debilidades, anticipar futuros ataques y mejorar la postura de seguridad general.</p>
         </div>
 
-        <div class="section">
-            <h2>Tipos de honeypots</h2>
-            <p>Los honeypots se pueden clasificar de varias maneras, pero las más comunes son según su nivel de interacción y su propósito:</p>
+        <div class="section" id="tipos">
+            <h2>3. Tipos de honeypots</h2>
+            <p>Los honeypots se pueden clasificar de varias maneras según diferentes criterios:</p>
 
             <div class="subsection">
                 <h3>Según el nivel de interacción:</h3>
+                
+                <h4>Honeypots de Baja Interacción:</h4>
                 <ul>
-                    <li class="list-item"><strong>Honeypots de baja interacción:</strong> Son los más sencillos de configurar y mantener. Simulan servicios básicos (como un puerto SSH o FTP) y ofrecen una funcionalidad limitada. Son ideales para detectar ataques automatizados, como los de bots o gusanos, pero un atacante experimentado puede identificarlos rápidamente.</li>
-                    <li class="list-item"><strong>Honeypots de alta interacción:</strong> Son más complejos y simulan un sistema completo con múltiples servicios y aplicaciones. Permiten una interacción profunda con el atacante, ofreciendo una gran cantidad de datos sobre sus acciones. Requieren más recursos y son más difíciles de mantener, pero proporcionan información muy detallada.</li>
+                    <li class="list-item"><strong>Características:</strong> Simulan servicios básicos con funcionalidad limitada.</li>
+                    <li class="list-item"><strong>Ventajas:</strong> Fáciles de implementar, menor riesgo, bajos recursos.</li>
+                    <li class="list-item"><strong>Desventajas:</strong> Información limitada, fáciles de detectar por atacantes experimentados.</li>
+                    <li class="list-item"><strong>Ejemplos:</strong> Kippo (SSH), Cowrie, Honeyd.</li>
+                </ul>
+
+                <h4>Honeypots de Media Interacción:</h4>
+                <ul>
+                    <li class="list-item"><strong>Características:</strong> Simulan aplicaciones específicas con mayor funcionalidad.</li>
+                    <li class="list-item"><strong>Ventajas:</strong> Equilibrio entre seguridad e información obtenida.</li>
+                    <li class="list-item"><strong>Desventajas:</strong> Más complejos que los de baja interacción.</li>
+                    <li class="list-item"><strong>Ejemplos:</strong> Glastopf (web), Dionaea (malware).</li>
+                </ul>
+
+                <h4>Honeypots de Alta Interacción:</h4>
+                <ul>
+                    <li class="list-item"><strong>Características:</strong> Sistemas operativos completos y funcionales.</li>
+                    <li class="list-item"><strong>Ventajas:</strong> Información muy detallada, difíciles de detectar.</li>
+                    <li class="list-item"><strong>Desventajas:</strong> Alto riesgo, recursos intensivos, mantenimiento complejo.</li>
+                    <li class="list-item"><strong>Ejemplos:</strong> VMware con sistemas reales, contenedores especializados.</li>
                 </ul>
             </div>
 
             <div class="subsection">
                 <h3>Según su propósito:</h3>
+                
+                <h4>Honeypots de Producción:</h4>
                 <ul>
-                    <li class="list-item"><strong>Honeypots de producción:</strong> Se implementan dentro de una red corporativa junto con la infraestructura real. Su objetivo es desviar los ataques dirigidos a los sistemas reales y detectar movimientos sospechosos en tiempo real.</li>
-                    <li class="list-item"><strong>Honeypots de investigación:</strong> Se utilizan para estudiar el comportamiento de los ciberdelincuentes, analizar el malware y desarrollar nuevas técnicas de defensa.</li>
+                    <li class="list-item"><strong>Objetivo:</strong> Detectar ataques internos y externos en tiempo real.</li>
+                    <li class="list-item"><strong>Ubicación:</strong> Dentro de redes corporativas.</li>
+                    <li class="list-item"><strong>Beneficios:</strong> Alertas tempranas, evidencia forense, reducción de falsos positivos.</li>
+                </ul>
+
+                <h4>Honeypots de Investigación:</h4>
+                <ul>
+                    <li class="list-item"><strong>Objetivo:</strong> Estudiar comportamientos de atacantes y desarrollar contramedidas.</li>
+                    <li class="list-item"><strong>Ubicación:</strong> Laboratorios de investigación o redes académicas.</li>
+                    <li class="list-item"><strong>Beneficios:</strong> Inteligencia de amenazas, desarrollo de firmas, análisis de malware.</li>
                 </ul>
             </div>
 
-            <p>Además, existe el concepto de <span class="highlight">Honeynet</span>, que es una red de varios honeypots interconectados que simula una infraestructura de red completa.</p>
+            <div class="subsection">
+                <h3>Según el protocolo o servicio:</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Protocolo/Servicio</th>
+                            <th>Objetivos Comunes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>SSH Honeypot</strong></td>
+                            <td>SSH (Puerto 22)</td>
+                            <td>Ataques de fuerza bruta, credenciales comprometidas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Web Honeypot</strong></td>
+                            <td>HTTP/HTTPS</td>
+                            <td>Vulnerabilidades web, inyecciones SQL, XSS</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email Honeypot</strong></td>
+                            <td>SMTP/POP3/IMAP</td>
+                            <td>Spam, phishing, malware por email</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Database Honeypot</strong></td>
+                            <td>MySQL/PostgreSQL</td>
+                            <td>Accesos no autorizados, extracción de datos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IoT Honeypot</strong></td>
+                            <td>Telnet/HTTP</td>
+                            <td>Botnets IoT, dispositivos comprometidos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section" id="arquitectura">
+            <h2>4. Arquitectura y Componentes</h2>
+            
+            <div class="subsection">
+                <h3>Componentes Principales:</h3>
+                
+                <h4>Sistema Señuelo:</h4>
+                <ul>
+                    <li class="list-item"><strong>Hardware/Virtual:</strong> Servidor físico, máquina virtual o contenedor.</li>
+                    <li class="list-item"><strong>Sistema Operativo:</strong> Windows, Linux, o sistemas especializados.</li>
+                    <li class="list-item"><strong>Servicios:</strong> Aplicaciones y servicios simulados o reales.</li>
+                </ul>
+
+                <h4>Sistema de Monitoreo:</h4>
+                <ul>
+                    <li class="list-item"><strong>Logging:</strong> Registro detallado de todas las actividades.</li>
+                    <li class="list-item"><strong>Captura de Red:</strong> Análisis de tráfico de red.</li>
+                    <li class="list-item"><strong>Análisis de Malware:</strong> Sandbox para análisis seguro.</li>
+                </ul>
+
+                <h4>Sistema de Alertas:</h4>
+                <ul>
+                    <li class="list-item"><strong>Detección:</strong> Identificación de actividades sospechosas.</li>
+                    <li class="list-item"><strong>Notificación:</strong> Alertas en tiempo real al equipo de seguridad.</li>
+                    <li class="list-item"><strong>Correlación:</strong> Análisis de patrones y tendencias.</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Diseño de Red:</h3>
+                <div class="code-block">
+Internet
+    |
+Firewall/Router
+    |
+DMZ (Honeypots de baja interacción)
+    |
+LAN Interna
+    |
+Honeypots de alta interacción
+                </div>
+                
+                <h4>Consideraciones de Segmentación:</h4>
+                <ul>
+                    <li class="list-item"><strong>Aislamiento:</strong> Los honeypots deben estar aislados de sistemas productivos.</li>
+                    <li class="list-item"><strong>Monitoreo:</strong> Todo el tráfico debe ser capturado y analizado.</li>
+                    <li class="list-item"><strong>Contención:</strong> Prevenir que los honeypots comprometidos afecten otros sistemas.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="implementacion">
+            <h2>5. Implementación y Configuración</h2>
+            
+            <div class="subsection">
+                <h3>Planificación:</h3>
+                <ol>
+                    <li class="list-item"><strong>Definir Objetivos:</strong> ¿Qué tipo de amenazas queremos detectar?</li>
+                    <li class="list-item"><strong>Seleccionar Tipo:</strong> Nivel de interacción y propósito.</li>
+                    <li class="list-item"><strong>Diseñar Arquitectura:</strong> Ubicación, conectividad y segmentación.</li>
+                    <li class="list-item"><strong>Asignar Recursos:</strong> Hardware, software y personal.</li>
+                </ol>
+            </div>
+
+            <div class="subsection">
+                <h3>Configuración Básica de SSH Honeypot (Cowrie):</h3>
+                <div class="code-block">
+# Instalación<br>
+sudo apt update<br>
+sudo apt install git python3-virtualenv libssl-dev libffi-dev build-essential<br>
+<br>
+# Clonar repositorio<br>
+git clone https://github.com/cowrie/cowrie<br>
+cd cowrie<br>
+<br>
+# Configurar entorno virtual<br>
+python3 -m venv venv<br>
+source venv/bin/activate<br>
+pip install -r requirements.txt<br>
+<br>
+# Configuración básica<br>
+cp etc/cowrie.cfg.dist etc/cowrie.cfg<br>
+<br>
+# Iniciar honeypot<br>
+bin/cowrie start<br>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Parámetros de Configuración Críticos:</h3>
+                <ul>
+                    <li class="list-item"><strong>Credenciales Débiles:</strong> Configurar usuarios y contraseñas comunes.</li>
+                    <li class="list-item"><strong>Servicios Visibles:</strong> Exponer servicios atractivos para atacantes.</li>
+                    <li class="list-item"><strong>Vulnerabilidades Simuladas:</strong> Implementar fallas de seguridad aparentes.</li>
+                    <li class="list-item"><strong>Logging Exhaustivo:</strong> Capturar toda la actividad sin afectar rendimiento.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="herramientas">
+            <h2>6. Herramientas y Tecnologías</h2>
+            
+            <div class="tool-box">
+                <h3>Honeypots de Baja Interacción:</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Herramienta</th>
+                            <th>Protocolo</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Cowrie</strong></td>
+                            <td>SSH/Telnet</td>
+                            <td>Honeypot SSH/Telnet con logging avanzado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Honeyd</strong></td>
+                            <td>Múltiple</td>
+                            <td>Framework para simular múltiples hosts</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dionaea</strong></td>
+                            <td>SMB/HTTP/FTP</td>
+                            <td>Captura malware a través de múltiples servicios</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conpot</strong></td>
+                            <td>SCADA/ICS</td>
+                            <td>Honeypot para sistemas de control industrial</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tool-box">
+                <h3>Plataformas de Gestión:</h3>
+                <ul>
+                    <li class="list-item"><strong>T-Pot:</strong> Distribución todo-en-uno con múltiples honeypots.</li>
+                    <li class="list-item"><strong>Modern Honey Network (MHN):</strong> Plataforma centralizada de gestión.</li>
+                    <li class="list-item"><strong>HoneyDrive:</strong> Distribución Linux especializada en honeypots.</li>
+                    <li class="list-item"><strong>DRAKVUF Sandbox:</strong> Sistema de análisis de malware.</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Honeypots en la Nube:</h3>
+                <ul>
+                    <li class="list-item"><strong>AWS Honeypot:</strong> Utilizando servicios de Amazon Web Services.</li>
+                    <li class="list-item"><strong>Azure Sentinel:</strong> Integración con honeypots para detección.</li>
+                    <li class="list-item"><strong>Google Cloud Security:</strong> Honeypots escalables en GCP.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="casos-uso">
+            <h2>7. Casos de Uso y Ejemplos Reales</h2>
+            
+            <div class="example-box">
+                <h3>Caso 1: Detección de Botnets IoT</h3>
+                <p><strong>Problema:</strong> Una empresa manufacturera experimentaba intentos de conexión sospechosos en sus dispositivos IoT.</p>
+                <p><strong>Solución:</strong> Implementaron honeypots Cowrie y Conpot simulando dispositivos industriales vulnerables.</p>
+                <p><strong>Resultado:</strong> Detectaron una botnet Mirai intentando comprometer dispositivos IoT, permitiendo implementar contramedidas antes del ataque real.</p>
+            </div>
+
+            <div class="example-box">
+                <h3>Caso 2: Análisis de APT (Advanced Persistent Threat)</h3>
+                <p><strong>Problema:</strong> Organización gubernamental sospechaba de actividad de APT en su red.</p>
+                <p><strong>Solución:</strong> Desplegaron honeypots de alta interacción con documentos señuelo.</p>
+                <p><strong>Resultado:</strong> Identificaron técnicas TTPs específicas del grupo APT, incluyendo herramientas personalizadas y canales C&C.</p>
+            </div>
+
+            <div class="example-box">
+                <h3>Caso 3: Investigación de Ransomware</h3>
+                <p><strong>Problema:</strong> Universidad necesitaba entender variantes emergentes de ransomware.</p>
+                <p><strong>Solución:</strong> Implementaron honeypots con archivos atractivos y sistemas de backup simulados.</p>
+                <p><strong>Resultado:</strong> Capturaron múltiples variantes de ransomware, desarrollando firmas y procedimientos de respuesta.</p>
+            </div>
+        </div>
+
+        <div class="section" id="deteccion">
+            <h2>8. Detección y Evasión</h2>
+            
+            <div class="subsection">
+                <h3>Técnicas de Detección de Honeypots:</h3>
+                <ul>
+                    <li class="list-item"><strong>Fingerprinting:</strong> Identificación de patrones únicos en respuestas.</li>
+                    <li class="list-item"><strong>Timing Analysis:</strong> Análisis de tiempos de respuesta anómalos.</li>
+                    <li class="list-item"><strong>Behavioral Testing:</strong> Pruebas de comportamiento inusual del sistema.</li>
+                    <li class="list-item"><strong>Network Topology:</strong> Análisis de la topología de red sospechosa.</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Contramedidas Anti-Detección:</h3>
+                <ul>
+                    <li class="list-item"><strong>Personalización:</strong> Modificar respuestas y comportamientos estándar.</li>
+                    <li class="list-item"><strong>Latencia Artificial:</strong> Simular tiempos de respuesta realistas.</li>
+                    <li class="list-item"><strong>Contenido Dinámico:</strong> Generar contenido variable y contextual.</li>
+                    <li class="list-item"><strong>Integración Realista:</strong> Colocar honeypots en ubicaciones lógicas de la red.</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Indicadores de Honeypot:</h3>
+                <div class="code-block">
+# Ejemplos de detección automatizada<br>
+# Verificar respuestas estándar<br>
+nmap -sV -p 22 target_ip<br>
+<br>
+# Análisis de banners SSH<br>
+ssh -o ConnectTimeout=5 target_ip<br>
+<br>
+# Pruebas de servicios ficticios<br>
+curl -I http://target_ip/nonexistent_path<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="ventajas">
+            <h2>9. Ventajas y Desventajas</h2>
+            
+            <div class="pros-cons">
+                <div class="pros">
+                    <h3><span class="success">✓ Ventajas</span></h3>
+                    <ul>
+                        <li><strong>Detección Proactiva:</strong> Identifica amenazas antes de que impacten sistemas críticos.</li>
+                        <li><strong>Inteligencia de Amenazas:</strong> Proporciona información valiosa sobre TTPs de atacantes.</li>
+                        <li><strong>Bajo Ruido:</strong> Genera pocos falsos positivos comparado con otros sistemas.</li>
+                        <li><strong>Evidencia Forense:</strong> Captura evidencia detallada para investigaciones.</li>
+                        <li><strong>Distracción:</strong> Desvía la atención de los atacantes hacia objetivos no críticos.</li>
+                    </ul>
+                </div>
+
+                <div class="cons">
+                    <h3><span class="warning">✗ Desventajas</span></h3>
+                    <ul>
+                        <li><strong>Riesgo de Compromiso:</strong> Los honeypots de alta interacción pueden ser utilizados como plataforma de ataque.</li>
+                        <li><strong>Mantenimiento Complejo:</strong> Requieren actualización constante y monitoreo intensivo.</li>
+                        <li><strong>Recursos Elevados:</strong> Pueden consumir considerable CPU, memoria y almacenamiento.</li>
+                        <li><strong>Falsos Positivos:</strong> Detección de ataques no maliciosos o actividades de investigación.</li>
+                        <li><strong>Aspectos Legales:</strong> Deben cumplir con leyes de privacidad y jurisdicciones.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="aspectos-legales">
+            <h2>10. Aspectos Legales y Éticos</h2>
+
+            <div class="subsection">
+                <h3>Consideraciones Legales:</h3>
+                <ul>
+                    <li class="list-item"><strong>Consentimiento:</strong> Obtener autorización antes de desplegar honeypots en redes compartidas.</li>
+                    <li class="list-item"><strong>Privacidad de Datos:</strong> Proteger la información capturada sobre actividades de atacantes.</li>
+                    <li class="list-item"><strong>Jurisdicción:</strong> Considerar leyes locales e internacionales al capturar datos.</li>
+                    <li class="list-item"><strong>Colaboración:</strong> Compartir información de amenazas con entidades competentes.</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Implicaciones Éticas:</h3>
+                <ul>
+                    <li class="list-item"><strong>Transparencia:</strong> Informar a las partes interesadas sobre el uso de honeypots.</li>
+                    <li class="list-item"><strong>Proporcionalidad:</strong> Asegurar que los beneficios superen los riesgos potenciales.</li>
+                    <li class="list-item"><strong>Responsabilidad:</strong> Monitorear y controlar las actividades de los honeypots.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="tendencias">
+            <h2>11. Tendencias Futuras</h2>
+
+            <div class="subsection">
+                <h3>Innovaciones Tecnológicas:</h3>
+                <ul>
+                    <li class="list-item"><strong>Inteligencia Artificial:</strong> Honeypots adaptativos que aprenden de ataques reales.</li>
+                    <li class="list-item"><strong>Machine Learning:</strong> Detección automática de patrones de ataque emergentes.</li>
+                    <li class="list-item"><strong>Automatización:</strong> Despliegue y gestión automatizados de honeypots.</li>
+                    <li class="list-item"><strong>Integración Cloud:</strong> Honeypots nativos en plataformas de nube.</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Desafíos Futuros:</h3>
+                <ul>
+                    <li class="list-item"><strong>Ataques Avanzados:</strong> Evasión de honeypots por parte de atacantes sofisticados.</li>
+                    <li class="list-item"><strong>Escalabilidad:</strong> Gestión de grandes cantidades de datos de honeypots.</li>
+                    <li class="list-item"><strong>Regulaciones:</strong> Cumplimiento con nuevas normativas de ciberseguridad.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="mejores-practicas">
+            <h2>12. Mejores Prácticas</h2>
+
+            <div class="subsection">
+                <h3>Diseño y Despliegue:</h3>
+                <ul>
+                    <li class="list-item"><strong>Planificación Estratégica:</strong> Definir objetivos claros antes del despliegue.</li>
+                    <li class="list-item"><strong>Segmentación de Red:</strong> Aislar honeypots de sistemas productivos.</li>
+                    <li class="list-item"><strong>Monitoreo Continuo:</strong> Implementar alertas y dashboards en tiempo real.</li>
+                    <li class="list-item"><strong>Actualizaciones Regulares:</strong> Mantener honeypots actualizados con las últimas amenazas.</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Operación y Mantenimiento:</h3>
+                <ul>
+                    <li class="list-item"><strong>Backup y Recuperación:</strong> Planes para restaurar honeypots comprometidos.</li>
+                    <li class="list-item"><strong>Documentación:</strong> Registrar configuraciones, cambios y lecciones aprendidas.</li>
+                    <li class="list-item"><strong>Entrenamiento:</strong> Capacitar al equipo en el uso y gestión de honeypots.</li>
+                    <li class="list-item"><strong>Auditorías:</strong> Revisar periódicamente la efectividad de los honeypots.</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Mejores Prácticas de Seguridad:</h3>
+                <ul>
+                    <li class="list-item"><strong>Principio de Menor Privilegio:</strong> Limitar permisos al mínimo necesario.</li>
+                    <li class="list-item"><strong>Autenticación Multifactor:</strong> Proteger el acceso a sistemas de gestión.</li>
+                    <li class="list-item"><strong>Encriptación:</strong> Proteger datos sensibles capturados por honeypots.</li>
+                    <li class="list-item"><strong>Respuesta a Incidentes:</strong> Procedimientos claros para cuando se comprometa un honeypot.</li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <footer>
-        <a href="pildoras.html">← Volver al índice de pildoras</a>
+        <p style="text-align: center;"><a href="./pildoras.html">← Volver al índice de píldoras</a></p>
+        <p>&copy; 2025 Benito González Piñeiro - Guía Completa de Honeypots</p>
     </footer>
 </body>
 </html>

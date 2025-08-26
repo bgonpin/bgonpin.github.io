@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duplicati</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .software-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Duplicati</h1>
+            <p>Backup en la nube gratuito con cifrado para usuarios individuales y empresas</p>
+        </header>
+
+        <main>
+            <section id="introduction">
+                <div class="software-card">
+                    <h2>¿Qué es Duplicati?</h2>
+                    <p>Duplicati es una solución de backup gratuita y open source que permite crear copias de seguridad cifradas en la nube, ofreciendo una alternativa segura y privada a servicios comerciales de backup online.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Gratuito y open source:</strong> Sin costos de licencias ni suscripciones</li>
+                        <li><strong>Cifrado de extremo a extremo:</strong> Protección completa de datos en la nube</li>
+                        <li><strong>Múltiples destinos:</strong> Soporte para diversos proveedores de cloud storage</li>
+                        <li><strong>Deduplicación integrada:</strong> Optimización eficiente del almacenamiento</li>
+                        <li><strong>Interfaz web moderna:</strong> Fácil configuración y gestión</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="key-features">
+                <h2>Características Destacadas</h2>
+
+                <div class="software-card">
+                    <h3>Seguridad y Privacidad</h3>
+                    <ul>
+                        <li>Cifrado AES-256 para datos en reposo y tránsito</li>
+                        <li>Claves de cifrado gestionadas por el usuario</li>
+                        <li>Sin dependencia de proveedores específicos</li>
+                        <li>Verificación automática de integridad</li>
+                        <li>Compresión avanzada de datos</li>
+                    </ul>
+                </div>
+
+                <div class="software-card">
+                    <h3>Flexibilidad y Automatización</h3>
+                    <ul>
+                        <li>Soporte para múltiples plataformas (Windows, Linux, macOS)</li>
+                        <li>Backup programado y automatizado</li>
+                        <li>Retención configurable de versiones</li>
+                        <li>Interfaz de línea de comandos para scripts</li>
+                        <li>Gestión centralizada para múltiples equipos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="use-cases">
+                <h2>Casos de Uso</h2>
+                <div class="software-card">
+                    <h3>Escenarios ideales</h3>
+                    <ul>
+                        <li>Usuarios individuales que buscan backup seguro en la nube</li>
+                        <li>PYMEs con presupuestos limitados</li>
+                        <li>Organizaciones preocupadas por la privacidad de datos</li>
+                        <li>Entornos que requieren cifrado de extremo a extremo</li>
+                        <li>Backup de datos personales y sensibles</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="software-backup.html" class="back-link">← Volver a Software de Backup</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHA-1 - Algoritmo de Hash</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .integrity-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SHA-1 - Algoritmo de Hash</h1>
+            <p>Función hash criptográfica para verificación de integridad</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-sha1">
+                <h2>¿Qué es SHA-1?</h2>
+                <div class="integrity-card">
+                    <h3>Secure Hash Algorithm 1</h3>
+                    <p>SHA-1 es una función hash criptográfica que produce un valor hash de 160 bits (40 caracteres hexadecimales). Fue diseñado por la NSA y publicado por NIST en 1995 como parte de la familia SHA.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Longitud del hash:</strong> 160 bits (40 caracteres hex)</li>
+                        <li><strong>Velocidad:</strong> Rápido pero más lento que MD5</li>
+                        <li><strong>Uso común:</strong> Verificación de integridad, firmas digitales</li>
+                        <li><strong>Estado actual:</strong> Obsoleto para seguridad criptográfica</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-sha1-works">
+                <h2>Cómo funciona SHA-1</h2>
+                <div class="integrity-card">
+                    <h3>Proceso de hash</h3>
+                    <p>SHA-1 procesa el mensaje de entrada en bloques de 512 bits, aplicando una serie de operaciones lógicas y matemáticas para producir el hash final.</p>
+
+                    <h3>Pasos principales</h3>
+                    <ol>
+                        <li><strong>Preprocesamiento:</strong> Añade padding y longitud del mensaje</li>
+                        <li><strong>Procesamiento en bloques:</strong> Divide el mensaje en bloques de 512 bits</li>
+                        <li><strong>Expansión del mensaje:</strong> Expande cada bloque a 80 palabras de 32 bits</li>
+                        <li><strong>Compresión:</strong> Aplica función de compresión 80 veces por bloque</li>
+                        <li><strong>Resultado:</strong> Produce hash de 160 bits</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="sha1-usage">
+                <h2>Uso en Verificación de Integridad</h2>
+                <div class="integrity-card">
+                    <h3>Aplicaciones comunes</h3>
+                    <ul>
+                        <li><strong>Verificación de descargas:</strong> Comprobar integridad de archivos</li>
+                        <li><strong>Control de versiones:</strong> Git y otros sistemas de control de versiones</li>
+                        <li><strong>Firmas digitales:</strong> Parte de certificados SSL/TLS (obsoleto)</li>
+                        <li><strong>Verificación de backups:</strong> Asegurar que los datos no han cambiado</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso</h3>
+                    <pre><code># Linux
+sha1sum archivo.txt
+
+# Windows PowerShell
+Get-FileHash -Algorithm SHA1 archivo.txt
+
+# Git
+git hash-object archivo.txt</code></pre>
+                </div>
+            </section>
+
+            <section id="sha1-security">
+                <h2>Seguridad y Limitaciones</h2>
+                <div class="integrity-card">
+                    <h3>Vulnerabilidades conocidas</h3>
+                    <ul>
+                        <li><strong>Colisiones:</strong> Encontradas en 2005 por Xiaoyun Wang</li>
+                        <li><strong>Ataques de colisión:</strong> SHAttered attack en 2017</li>
+                        <li><strong>Longitud insuficiente:</strong> 160 bits vs 256+ bits de algoritmos modernos</li>
+                    </ul>
+
+                    <h3>¿Por qué está obsoleto?</h3>
+                    <ul>
+                        <li>No resiste ataques de colisión</li>
+                        <li>Reemplazado por SHA-256 en protocolos modernos</li>
+                        <li>Prohibido en certificados SSL desde 2017</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="sha1-alternatives">
+                <h2>Alternativas Recomendadas</h2>
+                <div class="integrity-card">
+                    <h3>Algoritmos más seguros</h3>
+                    <ul>
+                        <li><strong>SHA-256:</strong> Estándar actual para integridad</li>
+                        <li><strong>SHA-3:</strong> Nuevo estándar NIST</li>
+                        <li><strong>BLAKE2:</strong> Alternativa moderna y rápida</li>
+                    </ul>
+
+                    <h3>Migración desde SHA-1</h3>
+                    <p>Se recomienda migrar urgentemente a algoritmos más seguros. SHA-1 ya no se considera seguro para aplicaciones criptográficas.</p>
+                </div>
+            </section>
+
+            <section id="sha1-tools">
+                <h2>Herramientas que usan SHA-1</h2>
+                <div class="integrity-card">
+                    <h3>Herramientas nativas</h3>
+                    <ul>
+                        <li><strong>Linux:</strong> sha1sum</li>
+                        <li><strong>Windows:</strong> CertUtil, PowerShell</li>
+                        <li><strong>macOS:</strong> shasum</li>
+                    </ul>
+
+                    <h3>Aplicaciones</h3>
+                    <ul>
+                        <li>Sistemas de control de versiones (Git)</li>
+                        <li>Herramientas de backup (algunas versiones antiguas)</li>
+                        <li>Software de verificación de archivos</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

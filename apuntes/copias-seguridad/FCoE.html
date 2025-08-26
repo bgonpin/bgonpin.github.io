@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCoE - Fibre Channel over Ethernet</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .fcoe-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>FCoE - Fibre Channel over Ethernet</h1>
+            <p>Protocolo que combina las ventajas de FC con la simplicidad de Ethernet</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="backup-vms.html">Backup para VMs</a>
+            <a href="almacenamiento-backup.html">Almacenamiento</a>
+            <a href="ransomware-backup.html">Protección Ransomware</a>
+            <a href="drp.html">Plan de Recuperación</a>
+            <a href="snapshots-vms.html">Snapshots para VMs</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+            <a href="SAN_NAS.html">SAN vs NAS</a>
+        </nav>
+
+        <main>
+            <section id="what-is-fcoe">
+                <h2>¿Qué es FCoE?</h2>
+                <div class="fcoe-card">
+                    <h3>Definición y propósito</h3>
+                    <p><strong>Fibre Channel over Ethernet (FCoE)</strong> es un protocolo de red que permite el transporte de comandos Fibre Channel sobre redes Ethernet estándar. Combina las ventajas de rendimiento de FC con la simplicidad y ubiquidad de Ethernet.</p>
+
+                    <h3>¿Por qué FCoE?</h3>
+                    <ul>
+                        <li><strong>Convergencia de red:</strong> Una sola infraestructura para storage y LAN</li>
+                        <li><strong>Reducción de cables:</strong> Menos cables FC dedicados</li>
+                        <li><strong>Mejor utilización:</strong> Recursos de red compartidos</li>
+                        <li><strong>Costo-efectivo:</strong> Aprovecha inversión existente en Ethernet</li>
+                        <li><strong>Escalabilidad:</strong> Fácil expansión con switches Ethernet</li>
+                    </ul>
+
+                    <h3>Estándares FCoE</h3>
+                    <ul>
+                        <li><strong>FCoE (2009):</strong> Especificación inicial de T11</li>
+                        <li><strong>FCoE-2 (2010):</strong> Mejoras en eficiencia</li>
+                        <li><strong>IFCP (2005):</strong> Precursor de FCoE</li>
+                        <li><strong>FC-BB-5:</strong> Estándar actual para bridges</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="architecture">
+                <h2>Arquitectura de FCoE</h2>
+
+                <h3>Componentes principales</h3>
+                <div class="fcoe-card">
+                    <h4>Converged Network Adapters (CNA)</h4>
+                    <ul>
+                        <li><strong>Integración HBA + NIC:</strong> Un solo adaptador para FC y Ethernet</li>
+                        <li><strong>Offload de FCoE:</strong> Procesamiento hardware de FCoE</li>
+                        <li><strong>Virtualización:</strong> Soporte para múltiples interfaces virtuales</li>
+                        <li><strong>DCB support:</strong> Data Center Bridging</li>
+                    </ul>
+                </div>
+
+                <div class="fcoe-card">
+                    <h4>FCoE Forwarders (FCF)</h4>
+                    <ul>
+                        <li><strong>FCoE switches:</strong> Switches especializados para FCoE</li>
+                        <li><strong>FIP snooping:</strong> Protocolo de inicialización FCoE</li>
+                        <li><strong>FCF-MAC:</strong> Dirección MAC para FCoE</li>
+                        <li><strong>Gateway function:</strong> Puerta de enlace a redes FC</li>
+                    </ul>
+                </div>
+
+                <div class="fcoe-card">
+                    <h4>Data Center Bridging (DCB)</h4>
+                    <ul>
+                        <li><strong>Priority Flow Control (PFC):</strong> Control de flujo sin pérdidas</li>
+                        <li><strong>Enhanced Transmission Selection (ETS):</strong> Asignación de ancho de banda</li>
+                        <li><strong>DCBX:</strong> Descubrimiento y configuración automática</li>
+                        <li><strong>Congestion Notification:</strong> Notificación de congestión</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-it-works">
+                <h2>¿Cómo funciona FCoE?</h2>
+
+                <h3>Proceso de inicialización</h3>
+                <div class="fcoe-card">
+                    <h4>FIP (FCoE Initialization Protocol)</h4>
+                    <ol>
+                        <li><strong>Discovery:</strong> Cliente busca FCF disponibles</li>
+                        <li><strong>Login:</strong> Establecimiento de sesión FCoE</li>
+                        <li><strong>Fabric Login:</strong> Registro con la red FC</li>
+                        <li><strong>Process Login:</strong> Conexión con dispositivos de storage</li>
+                    </ol>
+                </div>
+
+                <h3>Mapeo de protocolos</h3>
+                <div class="fcoe-card">
+                    <h4>Encapsulación de FC sobre Ethernet</h4>
+                    <ul>
+                        <li><strong>FC frame → Ethernet frame:</strong> Encapsulación de frames FC</li>
+                        <li><strong>FC header preservation:</strong> Mantiene cabeceras FC originales</li>
+                        <li><strong>Ethernet header:</strong> Cabecera Ethernet estándar</li>
+                        <li><strong>VLAN tagging:</strong> Separación de tráfico FCoE</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="benefits">
+                <h2>Ventajas de FCoE</h2>
+
+                <h3>Económicas</h3>
+                <div class="fcoe-card">
+                    <h4>Reducción de costos</h4>
+                    <ul>
+                        <li><strong>Menos switches:</strong> Una sola red convergente</li>
+                        <li><strong>Menos cables:</strong> Eliminación de cables FC dedicados</li>
+                        <li><strong>Menos puertos:</strong> Consolidación de interfaces</li>
+                        <li><strong>Menos energía:</strong> Infraestructura más eficiente</li>
+                        <li><strong>Mantenimiento simplificado:</strong> Una sola red que gestionar</li>
+                    </ul>
+                </div>
+
+                <h3>Técnicas</h3>
+                <div class="fcoe-card">
+                    <h4>Beneficios de rendimiento</h4>
+                    <ul>
+                        <li><strong>Rendimiento FC:</strong> Mantiene velocidades nativas de FC</li>
+                        <li><strong>Baja latencia:</strong> Características de FC preservadas</li>
+                        <li><strong>Escalabilidad:</strong> Soporte para miles de dispositivos</li>
+                        <li><strong>Confiabilidad:</strong> Redundancia y alta disponibilidad</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="challenges">
+                <h2>Desafíos y consideraciones</h2>
+
+                <div class="fcoe-card">
+                    <h3>Limitaciones técnicas</h3>
+                    <ul>
+                        <li><strong>Distancia limitada:</strong> Máximo 10km vs FC ilimitado</li>
+                        <li><strong>Configuración compleja:</strong> Requiere expertise en DCB</li>
+                        <li><strong>Debugging difícil:</strong> Problemas de troubleshooting</li>
+                        <li><strong>Compatibilidad:</strong> No todos los switches lo soportan</li>
+                    </ul>
+                </div>
+
+                <div class="fcoe-card">
+                    <h3>Cuándo usar FCoE</h3>
+                    <ul>
+                        <li><strong>✅ Data centers:</strong> Consolidación de infraestructura</li>
+                        <li><strong>✅ Migración gradual:</strong> Transición de FC a Ethernet</li>
+                        <li><strong>✅ Presupuesto limitado:</strong> Aprovechar inversión Ethernet</li>
+                        <li><strong>❌ Misión crítica:</strong> Cuando se requiere máxima confiabilidad</li>
+                        <li><strong>❌ Distancia extendida:</strong> Más de 10km</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="configuration">
+                <h2>Configuración de FCoE</h2>
+
+                <h3>Configuración del switch</h3>
+                <div class="fcoe-card">
+                    <h4>Cisco Nexus</h4>
+                    <pre><code># Habilitar FCoE
+feature fcoe
+
+# Configurar VLAN FCoE
+vlan 100
+  name FCoE_VLAN
+  fcoe vsan 100
+
+# Configurar VSAN
+vsan database
+  vsan 100
+    fcoe vlan 100
+
+# Configurar interface
+interface Ethernet1/1
+  switchport mode trunk
+  switchport trunk allowed vlan 100
+  fcoe vsan 100</code></pre>
+                </div>
+
+                <div class="fcoe-card">
+                    <h4>Configuración del servidor</h4>
+                    <pre><code># Ver CNA disponible
+lspci | grep -i fibre
+
+# Configurar interface FCoE
+sudo fcoeadm -c eth0 -m fabric
+
+# Ver sesiones FCoE
+sudo fcoeadm -i
+
+# Ver dispositivos FC
+ls /sys/class/fc_host/
+
+# Configurar multipathing
+sudo multipath -ll</code></pre>
+                </div>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Solución de problemas</h2>
+
+                <div class="fcoe-card">
+                    <h3>Comandos de diagnóstico</h3>
+                    <pre><code># Ver estado FCoE
+fcoeadm -i
+
+# Ver sesiones
+fcoeadm -t
+
+# Ver estadísticas
+fcoeadm -s
+
+# Debug FCoE
+fcoeadm -d 1
+
+# Ver CNA info
+fcoeadm -n</code></pre>
+                </div>
+
+                <div class="fcoe-card">
+                    <h3>Problemas comunes</h3>
+                    <ul>
+                        <li><strong>No login:</strong> Problemas de zoning o configuración</li>
+                        <li><strong>Performance issues:</strong> Configuración DCB incorrecta</li>
+                        <li><strong>Link failures:</strong> Problemas de conectividad física</li>
+                        <li><strong>VLAN issues:</strong> Configuración incorrecta de VLANs</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="best-practices">
+                <h2>Mejores prácticas</h2>
+
+                <div class="fcoe-card">
+                    <h3>Diseño de red</h3>
+                    <ul>
+                        <li><strong>Red dedicada:</strong> Separar FCoE del tráfico LAN</li>
+                        <li><strong>DCB configuration:</strong> Configurar correctamente PFC y ETS</li>
+                        <li><strong>Redundancia:</strong> Múltiples rutas y switches</li>
+                        <li><strong>Monitoring:</strong> Monitoreo continuo del rendimiento</li>
+                    </ul>
+                </div>
+
+                <div class="fcoe-card">
+                    <h3>Consideraciones de seguridad</h3>
+                    <ul>
+                        <li><strong>Zoning:</strong> Segmentación de la red FC</li>
+                        <li><strong>Access control:</strong> Control de acceso por puerto</li>
+                        <li><strong>Encryption:</strong> Considerar IPsec para seguridad</li>
+                        <li><strong>Auditoría:</strong> Monitoreo de actividades</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="future">
+                <h2>Evolución de FCoE</h2>
+
+                <div class="fcoe-card">
+                    <h3>Tendencias futuras</h3>
+                    <ul>
+                        <li><strong>FCoE con RoCE:</strong> Integración con RDMA</li>
+                        <li><strong>25/50/100GbE:</strong> Velocidades Ethernet más altas</li>
+                        <li><strong>Automatización:</strong> Configuración automática</li>
+                        <li><strong>Cloud integration:</strong> FCoE en entornos cloud</li>
+                        <li><strong>AI optimization:</strong> Gestión inteligente de recursos</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

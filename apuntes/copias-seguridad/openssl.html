@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenSSL - Librería Criptográfica</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .integrity-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OpenSSL - Librería Criptográfica</h1>
+            <p>Herramienta fundamental para verificación de integridad y criptografía</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-openssl">
+                <h2>¿Qué es OpenSSL?</h2>
+                <div class="integrity-card">
+                    <h3>Open Source SSL/TLS Library</h3>
+                    <p>OpenSSL es una librería de código abierto que implementa los protocolos SSL y TLS, junto con una completa suite de herramientas criptográficas. Es la librería criptográfica más utilizada en el mundo y proporciona funciones esenciales para verificación de integridad de datos.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Multiplataforma:</strong> Disponible para Windows, Linux, macOS</li>
+                        <li><strong>Amplio soporte:</strong> Múltiples algoritmos hash y criptográficos</li>
+                        <li><strong>Librería completa:</strong> Funciones para desarrollo y línea de comandos</li>
+                        <li><strong>Estándar de facto:</strong> Usado por la mayoría del software moderno</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="openssl-hash">
+                <h2>Cálculo de Hashes con OpenSSL</h2>
+                <div class="integrity-card">
+                    <h3>Comando dgst</h3>
+                    <p>El comando dgst se utiliza para calcular y verificar message digests.</p>
+
+                    <h3>Sintaxis básica</h3>
+                    <pre><code>openssl dgst -algoritmo archivo</code></pre>
+
+                    <h3>Ejemplos de uso</h3>
+                    <pre><code># SHA-256 (recomendado)
+openssl dgst -sha256 archivo.txt
+
+# SHA-512 para máxima seguridad
+openssl dgst -sha512 backup.zip
+
+# Múltiples archivos
+openssl dgst -sha256 archivo1.txt archivo2.txt
+
+# Salida binaria
+openssl dgst -sha256 -binary archivo.bin</code></pre>
+                </div>
+            </section>
+
+            <section id="openssl-algorithms">
+                <h2>Algoritmos Soportados</h2>
+                <div class="integrity-card">
+                    <h3>Funciones hash disponibles</h3>
+                    <ul>
+                        <li><strong>MD5:</strong> md5 (obsoleto)</li>
+                        <li><strong>SHA-1:</strong> sha1 (obsoleto)</li>
+                        <li><strong>SHA-2:</strong> sha224, sha256, sha384, sha512</li>
+                        <li><strong>SHA-3:</strong> sha3-224, sha3-256, sha3-384, sha3-512</li>
+                        <li><strong>BLAKE2:</strong> blake2b512, blake2s256</li>
+                        <li><strong>Otros:</strong> ripemd160, whirlpool</li>
+                    </ul>
+
+                    <h3>Recomendaciones</h3>
+                    <ul>
+                        <li>SHA-256 para uso general</li>
+                        <li>SHA-512 para alta seguridad</li>
+                        <li>SHA3-256 para máxima robustez futura</li>
+                        <li>Evitar MD5 y SHA-1</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="openssl-verification">
+                <h2>Verificación de Integridad</h2>
+                <div class="integrity-card">
+                    <h3>Verificación de hashes</h3>
+                    <p>OpenSSL puede verificar archivos contra hashes precalculados.</p>
+
+                    <h3>Métodos de verificación</h3>
+                    <ol>
+                        <li><strong>Verificación manual:</strong> Comparar hashes calculados</li>
+                        <li><strong>Archivos de suma:</strong> Usar archivos .sha256, etc.</li>
+                        <li><strong>Scripts automatizados:</strong> Procesar múltiples archivos</li>
+                    </ol>
+
+                    <h3>Ejemplos</h3>
+                    <pre><code># Verificar un archivo
+openssl dgst -sha256 archivo.iso
+
+# Crear archivo de hash
+openssl dgst -sha256 archivo.zip > archivo.zip.sha256
+
+# Verificar desde archivo
+openssl dgst -sha256 -verify archivo.zip.sha256 archivo.zip</code></pre>
+                </div>
+            </section>
+
+            <section id="openssl-scripts">
+                <h2>Scripts de Automatización</h2>
+                <div class="integrity-card">
+                    <h3>Script para verificar backups</h3>
+                    <pre><code>#!/bin/bash
+# Verificar integridad de backups
+
+BACKUP_DIR="/mnt/backups"
+LOG_FILE="/var/log/backup_integrity.log"
+
+echo "$(date): Iniciando verificación de integridad" >> "$LOG_FILE"
+
+find "$BACKUP_DIR" -name "*.tar.gz" -exec openssl dgst -sha256 {} \; >> "$LOG_FILE"
+
+echo "$(date): Verificación completada" >> "$LOG_FILE"</code></pre>
+
+                    <h3>Script PowerShell</h3>
+                    <pre><code>$backupPath = "C:\backups"
+$logFile = "C:\logs\backup_integrity.log"
+
+Get-ChildItem $backupPath -Filter *.zip | ForEach-Object {
+    $hash = & openssl dgst -sha256 $_.FullName
+    "$($_.Name): $hash" | Out-File $logFile -Append
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="openssl-encryption">
+                <h2>Funciones Adicionales</h2>
+                <div class="integrity-card">
+                    <h3>Cifrado y descifrado</h3>
+                    <ul>
+                        <li><strong>Cifrado simétrico:</strong> openssl enc</li>
+                        <li><strong>Generación de claves:</strong> openssl genpkey, openssl rand</li>
+                        <li><strong>Certificados:</strong> openssl req, openssl x509</li>
+                        <li><strong>CMS (S/MIME):</strong> Para firmas y encriptación</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso combinado</h3>
+                    <pre><code># Cifrar y verificar
+openssl enc -aes-256-cbc -salt -in archivo.txt -out archivo.enc
+openssl dgst -sha256 archivo.enc</code></pre>
+                </div>
+            </section>
+
+            <section id="openssl-performance">
+                <h2>Rendimiento y Optimizaciones</h2>
+                <div class="integrity-card">
+                    <h3>Consideraciones de rendimiento</h3>
+                    <ul>
+                        <li><strong>CPU:</strong> Aceleración hardware en algunos sistemas</li>
+                        <li><strong>Archivos grandes:</strong> Procesamiento por bloques eficiente</li>
+                        <li><strong>Paralelización:</strong> Soporte para múltiples hilos</li>
+                        <li><strong>Memoria:</strong> Uso eficiente de recursos</li>
+                    </ul>
+
+                    <h3>Optimizaciones</h3>
+                    <ul>
+                        <li>Usar algoritmos apropiados al tamaño del archivo</li>
+                        <li>Procesar en lotes para múltiples archivos</li>
+                        <li>Utilizar compresión previa si es necesario</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="openssl-security">
+                <h2>Seguridad y Mejores Prácticas</h2>
+                <div class="integrity-card">
+                    <h3>Consideraciones de seguridad</h3>
+                    <ul>
+                        <li><strong>Versiones:</strong> Mantener OpenSSL actualizado</li>
+                        <li><strong>Configuración:</strong> Usar configuraciones seguras</li>
+                        <li><strong>Almacenamiento:</strong> Proteger hashes y claves</li>
+                        <li><strong>Auditoría:</strong> Monitorear el uso de herramientas criptográficas</li>
+                    </ul>
+
+                    <h3>Mejores prácticas</h3>
+                    <ul>
+                        <li>Usar algoritmos recomendados (SHA-256 mínimo)</li>
+                        <li>Verificar la integridad de la instalación de OpenSSL</li>
+                        <li>Documentar procesos de verificación</li>
+                        <li>Implementar verificación automática en pipelines</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="openssl-alternatives">
+                <h2>Alternativas y Complementos</h2>
+                <div class="integrity-card">
+                    <h3>Herramientas similares</h3>
+                    <ul>
+                        <li><strong>GnuPG:</strong> Para firmas digitales</li>
+                        <li><strong>LibreSSL:</strong> Fork de OpenSSL (macOS)</li>
+                        <li><strong>BoringSSL:</strong> Versión de Google</li>
+                        <li><strong>Botan:</strong> Librería C++ alternativa</li>
+                    </ul>
+
+                    <h3>Cuándo usar OpenSSL</h3>
+                    <ul>
+                        <li>Entornos multiplataforma</li>
+                        <li>Sistemas Linux/Unix</li>
+                        <li>Integración con scripts y automatización</li>
+                        <li>Desarrollo de aplicaciones criptográficas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="openssl-troubleshooting">
+                <h2>Solución de Problemas</h2>
+                <div class="integrity-card">
+                    <h3>Errores comunes</h3>
+                    <ul>
+                        <li><strong>"command not found":</strong> Verificar instalación y PATH</li>
+                        <li><strong>"unable to load":</strong> Problemas con certificados o configuraciones</li>
+                        <li><strong>Errores de algoritmo:</strong> Verificar sintaxis y soporte</li>
+                        <li><strong>Problemas de memoria:</strong> Archivos muy grandes</li>
+                    </ul>
+
+                    <h3>Soluciones</h3>
+                    <ul>
+                        <li>Verificar versión: openssl version</li>
+                        <li>Comprobar sintaxis: openssl dgst -help</li>
+                        <li>Usar rutas absolutas</li>
+                        <li>Verificar permisos de archivos</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

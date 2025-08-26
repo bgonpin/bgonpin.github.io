@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAN vs NAS - Sistemas de Almacenamiento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .intro {
+            padding: 30px;
+            text-align: center;
+            background: #f0f4f8;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        
+        .section {
+            flex: 1;
+            min-width: 300px;
+            padding: 25px;
+            margin: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a6491;
+        }
+        
+        h3 {
+            color: #4a6491;
+            margin: 20px 0 10px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        li:before {
+            content: "•";
+            color: #4a6491;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+        
+        .comparison {
+            background: #f0f4f8;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #4a6491;
+            color: white;
+        }
+        
+        tr:hover {
+            background-color: #f5f7fa;
+        }
+        
+        .conclusion {
+            padding: 30px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .section {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SAN vs NAS</h1>
+            <p class="subtitle">Sistemas de Almacenamiento en Red</p>
+        </header>
+        
+        <div class="intro">
+            <p>En el ámbito del almacenamiento de datos empresariales, las soluciones SAN (Storage Area Network) y NAS (Network Attached Storage) son dos arquitecturas fundamentales que permiten gestionar y acceder a grandes volúmenes de información.</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>¿Qué es NAS?</h2>
+                <p>El <strong>NAS (Network Attached Storage)</strong> es un dispositivo de almacenamiento conectado a una red local (LAN) que proporciona acceso centralizado a archivos para múltiples usuarios y dispositivos.</p>
+                
+                <h3>Características principales:</h3>
+                <ul>
+                    <li>Arquitectura basada en archivos</li>
+                    <li>Protocolos: <a href="NFS.html" style="color: #4a6491; text-decoration: underline;">NFS</a>, <a href="SMB_CIFS.html" style="color: #4a6491; text-decoration: underline;">SMB/CIFS</a></li>
+                    <li>Fácil implementación y gestión</li>
+                    <li>Escalabilidad limitada</li>
+                    <li>Económico para pequeñas y medianas empresas</li>
+                </ul>
+                
+                <h3>Casos de uso:</h3>
+                <ul>
+                    <li>Compartición de archivos en oficinas</li>
+                    <li>Copias de seguridad</li>
+                    <li>Almacenamiento multimedia</li>
+                    <li>Servidores de correo electrónico</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>¿Qué es SAN?</h2>
+                <p>La <strong>SAN (Storage Area Network)</strong> es una red dedicada de alta velocidad que interconecta servidores y dispositivos de almacenamiento, proporcionando acceso a nivel de bloque.</p>
+                
+                <h3>Características principales:</h3>
+                <ul>
+                    <li>Arquitectura basada en bloques</li>
+                    <li>Protocolos: Fibre Channel, iSCSI, FCoE</li>
+                    <li>Alto rendimiento y baja latencia</li>
+                    <li>Alta escalabilidad</li>
+                    <li>Costo elevado, requiere personal especializado</li>
+                </ul>
+                
+                <h3>Casos de uso:</h3>
+                <ul>
+                    <li>Bases de datos empresariales</li>
+                    <li>Virtualización de servidores</li>
+                    <li>Entornos de misión crítica</li>
+                    <li>Recuperación ante desastres</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="comparison">
+            <h2>Diferencias entre SAN y NAS</h2>
+            <table>
+                <tr>
+                    <th>Aspecto</th>
+                    <th>SAN</th>
+                    <th>NAS</th>
+                </tr>
+                <tr>
+                    <td>Tipo de acceso</td>
+                    <td>Nivel de bloque</td>
+                    <td>Nivel de archivo</td>
+                </tr>
+                <tr>
+                    <td>Protocolos</td>
+                    <td>Fibre Channel, iSCSI, FCoE</td>
+                    <td><a href="NFS.html" style="color: #4a6491; text-decoration: underline;">NFS</a>, <a href="SMB_CIFS.html" style="color: #4a6491; text-decoration: underline;">SMB/CIFS</a>, AFP</td>
+                </tr>
+                <tr>
+                    <td>Rendimiento</td>
+                    <td>Alto rendimiento, baja latencia</td>
+                    <td>Depende de la red local</td>
+                </tr>
+                <tr>
+                    <td>Escalabilidad</td>
+                    <td>Alta escalabilidad</td>
+                    <td>Limitada por la red</td>
+                </tr>
+                <tr>
+                    <td>Costo</td>
+                    <td>Alto (hardware dedicado)</td>
+                    <td>Económico y fácil de implementar</td>
+                </tr>
+                <tr>
+                    <td>Facilidad de gestión</td>
+                    <td>Compleja, requiere especialización</td>
+                    <td>Sencilla, interfaces intuitivas</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="conclusion">
+            <h2>Conclusión</h2>
+            <p>Tanto <span class="highlight">SAN</span> como <span class="highlight">NAS</span> son soluciones esenciales para el almacenamiento en red, pero cada una se adapta a necesidades diferentes.</p>
+            <p>La <span class="highlight">SAN</span> es ideal para entornos empresariales que exigen alto rendimiento, escalabilidad y confiabilidad, mientras que el <span class="highlight">NAS</span> es una solución práctica y económica para la compartición de archivos y el almacenamiento colaborativo.</p>
+            <p>La elección correcta depende de factores como el presupuesto, los casos de uso y las demandas técnicas específicas de cada organización.</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 2rem 0;">
+        <a href="../copias-seguridad.html" style="display: inline-block; margin-top: 2rem; padding: 10px 20px; background-color: #4a6491; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">← Volver al Manual Principal</a>
+    </div>
+</body>
+</html>

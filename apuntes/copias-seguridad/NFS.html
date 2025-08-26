@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFS - Network File System</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .nfs-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NFS - Network File System</h1>
+            <p>Protocolo estándar para compartir archivos en redes Unix/Linux</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="backup-vms.html">Backup para VMs</a>
+            <a href="almacenamiento-backup.html">Almacenamiento</a>
+            <a href="ransomware-backup.html">Protección Ransomware</a>
+            <a href="drp.html">Plan de Recuperación</a>
+            <a href="snapshots-vms.html">Snapshots para VMs</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+            <a href="SAN_NAS.html">SAN vs NAS</a>
+        </nav>
+
+        <main>
+            <section id="what-is-nfs">
+                <h2>¿Qué es NFS?</h2>
+                <div class="nfs-card">
+                    <h3>Definición y propósito</h3>
+                    <p><strong>NFS (Network File System)</strong> es un protocolo de red distribuido que permite a los sistemas compartir archivos y directorios a través de una red. Desarrollado originalmente por Sun Microsystems en 1984, NFS permite que un sistema cliente acceda a archivos en un servidor remoto como si fueran locales.</p>
+
+                    <h3>¿Cómo funciona?</h3>
+                    <ul>
+                        <li><strong>Arquitectura cliente-servidor:</strong> Un servidor NFS comparte directorios, los clientes los montan</li>
+                        <li><strong>Transparencia de red:</strong> Los archivos remotos aparecen como locales</li>
+                        <li><strong>Protocolo sin estado:</strong> Cada petición es independiente</li>
+                        <li><strong>Sistema de archivos virtual:</strong> VFS (Virtual File System) en el kernel</li>
+                    </ul>
+
+                    <h3>Versiones principales</h3>
+                    <ul>
+                        <li><strong>NFSv2 (1989):</strong> Versión original con limitaciones</li>
+                        <li><strong>NFSv3 (1995):</strong> Mejoras en rendimiento y seguridad</li>
+                        <li><strong>NFSv4 (2003):</strong> Versión actual con características enterprise</li>
+                        <li><strong>NFSv4.1 (2010):</strong> Sesiones y mejoras de rendimiento</li>
+                        <li><strong>NFSv4.2 (2016):</strong> Características avanzadas como clonación</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="architecture">
+                <h2>Arquitectura de NFS</h2>
+
+                <h3>Componentes principales</h3>
+                <div class="nfs-card">
+                    <h4>Servidor NFS</h4>
+                    <ul>
+                        <li><strong>nfsd:</strong> Daemon principal que maneja las peticiones</li>
+                        <li><strong>mountd:</strong> Gestiona las solicitudes de montaje</li>
+                        <li><strong>rpcbind:</strong> Mapea servicios RPC a puertos</li>
+                        <li><strong>lockd:</strong> Gestiona bloqueos de archivos</li>
+                        <li><strong>statd:</strong> Monitorea estado de la red</li>
+                    </ul>
+                </div>
+
+                <div class="nfs-card">
+                    <h4>Cliente NFS</h4>
+                    <ul>
+                        <li><strong>Kernel NFS client:</strong> Implementación en el kernel</li>
+                        <li><strong>Mount command:</strong> Monta sistemas de archivos remotos</li>
+                        <li><strong>Cache system:</strong> Almacenamiento en caché de datos</li>
+                        <li><strong>Lock management:</strong> Manejo de bloqueos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="features">
+                <h2>Características principales</h2>
+
+                <h3>Funcionalidades de NFSv4</h3>
+                <div class="nfs-card">
+                    <h4>Mejoras significativas</h4>
+                    <ul>
+                        <li><strong>Seguridad mejorada:</strong> Autenticación Kerberos integrada</li>
+                        <li><strong>UTF-8 support:</strong> Nombres de archivos internacionales</li>
+                        <li><strong>Compound operations:</strong> Múltiples operaciones en una petición</li>
+                        <li><strong>State management:</strong> Mejor manejo de estado</li>
+                        <li><strong>ACLs:</strong> Listas de control de acceso</li>
+                        <li><strong>pNFS:</strong> Paralel NFS para escalabilidad</li>
+                    </ul>
+                </div>
+
+                <h3>Protocolos de transporte</h3>
+                <div class="nfs-card">
+                    <h4>Opciones de red</h4>
+                    <ul>
+                        <li><strong>TCP:</strong> Confiable, recomendado para producción</li>
+                        <li><strong>UDP:</strong> Más rápido pero menos confiable</li>
+                        <li><strong>RPCSEC_GSS:</strong> Seguridad con Kerberos</li>
+                        <li><strong>TLS:</strong> Encriptación de transporte</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="configuration">
+                <h2>Configuración y uso</h2>
+
+                <h3>Configuración del servidor</h3>
+                <div class="nfs-card">
+                    <h4>En Linux (Ubuntu/Debian)</h4>
+                    <pre><code># Instalar NFS server
+sudo apt-get install nfs-kernel-server
+
+# Configurar exports en /etc/exports
+/data/shared 192.168.1.0/24(rw,sync,no_subtree_check)
+
+# Reiniciar servicio
+sudo systemctl restart nfs-server</code></pre>
+                </div>
+
+                <div class="nfs-card">
+                    <h4>En Linux (RHEL/CentOS)</h4>
+                    <pre><code># Instalar NFS utils
+sudo yum install nfs-utils
+
+# Configurar exports
+echo "/data/shared 192.168.1.0/24(rw,sync)" >> /etc/exports
+
+# Iniciar servicios
+sudo systemctl enable nfs-server
+sudo systemctl start nfs-server</code></pre>
+                </div>
+
+                <h3>Configuración del cliente</h3>
+                <div class="nfs-card">
+                    <h4>Montaje en Linux</h4>
+                    <pre><code># Montaje temporal
+sudo mount -t nfs 192.168.1.100:/data/shared /mnt/nfs
+
+# Montaje persistente en /etc/fstab
+192.168.1.100:/data/shared /mnt/nfs nfs defaults 0 0</code></pre>
+                </div>
+
+                <div class="nfs-card">
+                    <h4>Montaje en Windows</h4>
+                    <pre><code># Usando mount command
+mount \\192.168.1.100\data\shared Z:
+
+# Montaje persistente con net use
+net use Z: \\192.168.1.100\data\shared /persistent:yes</code></pre>
+                </div>
+            </section>
+
+            <section id="performance">
+                <h2>Optimización de rendimiento</h2>
+
+                <h3>Parámetros de rendimiento</h3>
+                <div class="nfs-card">
+                    <h4>Opciones de montaje</h4>
+                    <ul>
+                        <li><strong>rsize/wsize:</strong> Tamaño de bloques de lectura/escritura</li>
+                        <li><strong>async/sync:</strong> Sincronización de escrituras</li>
+                        <li><strong>noatime:</strong> No actualizar timestamps de acceso</li>
+                        <li><strong>nolock:</strong> Deshabilitar bloqueos (para solo lectura)</li>
+                        <li><strong>actimeo:</strong> Tiempo de vida de atributos en caché</li>
+                    </ul>
+                </div>
+
+                <h3>Problemas comunes y soluciones</h3>
+                <div class="nfs-card">
+                    <h4>Solución de problemas comunes</h4>
+                    <ul>
+                        <li><strong>Stale file handles:</strong>
+                            <ul>
+                                <li>Causa: Archivo eliminado mientras estaba abierto</li>
+                                <li>Solución: Reiniciar cliente o usar umount/mount</li>
+                            </ul>
+                        </li>
+                        <li><strong>Permission denied:</strong>
+                            <ul>
+                                <li>Causa: Problemas de UID/GID mapping</li>
+                                <li>Solución: Usar all_squash, no_root_squash apropiadamente</li>
+                            </ul>
+                        </li>
+                        <li><strong>Slow performance:</strong>
+                            <ul>
+                                <li>Causa: Tamaños de bloque pequeños, latencia de red</li>
+                                <li>Solución: Ajustar rsize/wsize, optimizar red</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="security">
+                <h2>Seguridad en NFS</h2>
+
+                <h3>Configuraciones de seguridad</h3>
+                <div class="nfs-card">
+                    <h4>Opciones de exportación seguras</h4>
+                    <pre><code># Configuración básica
+/data *(ro,sync,secure)
+
+# Configuración segura
+/data 192.168.1.0/24(rw,sync,secure,root_squash,all_squash)
+
+# Con Kerberos
+/data *.example.com(rw,sec=krb5p)</code></pre>
+                </div>
+
+                <h3>Mejores prácticas de seguridad</h3>
+                <div class="nfs-card">
+                    <h4>Recomendaciones</h4>
+                    <ul>
+                        <li><strong>root_squash:</strong> Mapear root remoto a nobody</li>
+                        <li><strong>secure:</strong> Usar puertos privilegiados (< 1024)</li>
+                        <li><strong>subnet restrictions:</strong> Limitar acceso por IP/subnet</li>
+                        <li><strong>read-only:</strong> Usar ro para datos estáticos</li>
+                        <li><strong>noaccess:</strong> Bloquear subdirectorios sensibles</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Solución de problemas</h2>
+
+                <div class="nfs-card">
+                    <h3>Comandos de diagnóstico</h3>
+                    <pre><code># Ver exports activos
+showmount -e server_ip
+
+# Ver procesos NFS
+ps aux | grep nfs
+
+# Ver logs
+tail -f /var/log/messages | grep nfs
+
+# Probar conectividad
+rpcinfo -p server_ip
+
+# Ver tabla de montajes
+mount | grep nfs</code></pre>
+                </div>
+
+                <div class="nfs-card">
+                    <h3>Errores comunes</h3>
+                    <ul>
+                        <li><strong>mount: mount to NFS server failed:</strong> Problema de red o configuración</li>
+                        <li><strong>Permission denied:</strong> Problemas de permisos o squash</li>
+                        <li><strong>Stale NFS file handle:</strong> Archivo eliminado en servidor</li>
+                        <li><strong>NFS server not responding:</strong> Problemas de conectividad</li>
+                        <li><strong>Access denied by server:</strong> Restricciones de export</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="best-practices">
+                <h2>Mejores prácticas</h2>
+
+                <div class="nfs-card">
+                    <h3>Configuración recomendada</h3>
+                    <ul>
+                        <li><strong>Usar NFSv4:</strong> Mejor seguridad y rendimiento</li>
+                        <li><strong>Implementar Kerberos:</strong> Para entornos enterprise</li>
+                        <li><strong>Monitorear rendimiento:</strong> nfsstat, iostat</li>
+                        <li><strong>Backup regular:</strong> De configuración y datos</li>
+                        <li><strong>Documentar cambios:</strong> Mantener registro de modificaciones</li>
+                    </ul>
+                </div>
+
+                <div class="nfs-card">
+                    <h3>Consideraciones de escalabilidad</h3>
+                    <ul>
+                        <li><strong>pNFS:</strong> Para entornos de alto rendimiento</li>
+                        <li><strong>Load balancing:</strong> Múltiples servidores NFS</li>
+                        <li><strong>Cache systems:</strong> FS-Cache, NFS-Ganesha</li>
+                        <li><strong>Monitoring:</strong> Nagios, Zabbix para NFS</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="future">
+                <h2>Tendencias futuras</h2>
+
+                <div class="nfs-card">
+                    <h3>Evolución de NFS</h3>
+                    <ul>
+                        <li><strong>NFS 4.3:</strong> Características de gestión de directorios</li>
+                        <li><strong>Integración cloud:</strong> NFS en entornos híbridos</li>
+                        <li><strong>Mejor encriptación:</strong> Seguridad mejorada</li>
+                        <li><strong>Container-native:</strong> NFS para Kubernetes</li>
+                        <li><strong>AI/ML optimization:</strong> Ajuste automático de parámetros</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

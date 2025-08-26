@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protección contra Ransomware con Backup</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .warning-card {
+            background-color: #fff3e0;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 1.5rem 0;
+        }
+
+        .strategy-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .strategy-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .concept-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .stats-table th, .stats-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .stats-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .stats-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Protección contra Ransomware</h1>
+            <p>Backup como primera línea de defensa</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="backup-vms.html">Backup para VMs</a>
+            <a href="almacenamiento-backup.html">Almacenamiento</a>
+            <a href="ransomware-backup.html">Protección Ransomware</a>
+            <a href="drp.html">Plan de Recuperación</a>
+            <a href="snapshots-vms.html">Snapshots para VMs</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="ransomware-threat">
+                <h2>El Amenaza del Ransomware</h2>
+
+                <div class="warning-card">
+                    <h3>Estadísticas Alarmantes</h3>
+                    <ul>
+                        <li><strong>43% de las empresas</strong> sufrieron ransomware en 2023</li>
+                        <li><strong>$4.54M</strong> es el costo promedio de un ataque</li>
+                        <li><strong>60% de las PYMES</strong> cierran tras 6 meses de un ataque</li>
+                        <li><strong>250,000 ataques</strong> diarios en promedio</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <h3>¿Cómo funciona el ransomware?</h3>
+                    <ol>
+                        <li><strong>Infiltración:</strong> Malware entra al sistema</li>
+                        <li><strong>Encriptación:</strong> Archivos se cifran y se vuelven inaccesibles</li>
+                        <li><strong>Extorsión:</strong> Criminales piden rescate por la clave de desencriptación</li>
+                        <li><strong>Daño adicional:</strong> Posible robo y filtración de datos</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="backup-as-defense">
+                <h2>Backup como Primera Línea de Defensa</h2>
+
+                <div class="concept-card">
+                    <h3>¿Por qué el backup es la mejor protección?</h3>
+                    <ul>
+                        <li><strong>No pagas rescate:</strong> Recuperas tus datos sin negociar con criminales</li>
+                        <li><strong>Recuperación completa:</strong> Restauras todo el sistema a estado anterior</li>
+                        <li><strong>Sin garantía de recuperación:</strong> Los criminales pueden no devolver los datos</li>
+                        <li><strong>Prevención de futuros ataques:</strong> Evitas financiar más cibercrimen</li>
+                    </ul>
+                </div>
+
+                <div class="strategy-card">
+                    <h4>Estudio de Caso Real</h4>
+                    <p><strong>Empresa atacada por ransomware:</strong></p>
+                    <ul>
+                        <li>Tenía backup actualizado (3-2-1)</li>
+                        <li>Recuperó todos los datos en 4 horas</li>
+                        <li>Costo total: $2,000 (backup + horas de trabajo)</li>
+                        <li>Vs $50,000 de rescate + sin garantía de recuperación</li>
+                        <li><strong>Ahorro: $48,000 + tranquilidad</strong></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="3-2-1-ransomware">
+                <h2>La Regla 3-2-1 Anti-Ransomware</h2>
+
+                <h3>Principios Esenciales</h3>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <h4>1. Copias Offline/Aire-Gapped</h4>
+                        <ul>
+                            <li>Desconectar físicamente las copias</li>
+                            <li>No accesibles desde la red</li>
+                            <li>Inmunes a ataques remotos</li>
+                            <li>Discos externos, cintas, etc.</li>
+                        </ul>
+                    </div>
+
+                    <div class="strategy-card">
+                        <h4>2. Copias Inmutables</h4>
+                        <ul>
+                            <li>No se pueden modificar ni borrar</li>
+                            <li>Protección contra eliminación</li>
+                            <li>Versiones WORM (Write Once Read Many)</li>
+                            <li>Object Lock en servicios cloud</li>
+                        </ul>
+                    </div>
+
+                    <div class="strategy-card">
+                        <h4>3. Copias en Ubicaciones Seguras</h4>
+                        <ul>
+                            <li>Data centers externos</li>
+                            <li>Servicios cloud dedicados</li>
+                            <li>Cajas de seguridad</li>
+                            <li>Múltiples proveedores</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="implementation-strategies">
+                <h2>Estrategias de Implementación</h2>
+
+                <h3>Para Empresas</h3>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Estrategia</th>
+                            <th>Protección</th>
+                            <th>Costo</th>
+                            <th>Complejidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Backup en cinta + Cloud</td>
+                            <td>Muy Alta</td>
+                            <td>Medio</td>
+                            <td>Alta</td>
+                        </tr>
+                        <tr>
+                            <td>NAS + Backup Cloud</td>
+                            <td>Alta</td>
+                            <td>Medio-Bajo</td>
+                            <td>Media</td>
+                        </tr>
+                        <tr>
+                            <td>SaaS Backup (Veeam, Rubrik)</td>
+                            <td>Muy Alta</td>
+                            <td>Alto</td>
+                            <td>Baja</td>
+                        </tr>
+                        <tr>
+                            <td>Object Storage + Immutability</td>
+                            <td>Muy Alta</td>
+                            <td>Medio</td>
+                            <td>Media</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Para Particulares</h3>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <h4>Opción Básica</h4>
+                        <ul>
+                            <li>Disco duro externo desconectado</li>
+                            <li>Google Drive/Dropbox</li>
+                            <li>Copia mensual a USB en caja fuerte</li>
+                            <li>Costo: $50-100 inicial</li>
+                        </ul>
+                    </div>
+
+                    <div class="strategy-card">
+                        <h4>Opción Avanzada</h4>
+                        <ul>
+                            <li>NAS con RAID</li>
+                            <li>OneDrive for Business</li>
+                            <li>Backup automático semanal</li>
+                            <li>Costo: $200-500 inicial</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="best-practices">
+                <h2>Mejores Prácticas Anti-Ransomware</h2>
+
+                <div class="concept-card">
+                    <h3>Políticas de Backup</h3>
+                    <ul>
+                        <li><strong>Frecuencia:</strong> Múltiples backups diarios para datos críticos</li>
+                        <li><strong>Retención:</strong> Mínimo 30 días de versiones históricas</li>
+                        <li><strong>Verificación:</strong> Probar restauración mensualmente</li>
+                        <li><strong>Monitoreo:</strong> Alertas de cambios en archivos de backup</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Seguridad Adicional</h3>
+                    <ul>
+                        <li><strong>Autenticación multifactor:</strong> Proteger cuentas de backup</li>
+                        <li><strong>Cifrado:</strong> Todos los backups deben estar cifrados</li>
+                        <li><strong>Segmentación:</strong> Backups en redes separadas</li>
+                        <li><strong>Actualizaciones:</strong> Mantener software de backup actualizado</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="testing-recovery">
+                <h2>Pruebas de Recuperación</h2>
+
+                <div class="warning-card">
+                    <h3>¡Prueba Obligatoria!</h3>
+                    <p>El 30% de los backups fallan al intentar restaurar. Siempre prueba tu estrategia de recuperación.</p>
+                </div>
+
+                <h3>Tipos de Pruebas</h3>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <h4>Prueba Funcional</h4>
+                        <ul>
+                            <li>Restaurar archivos individuales</li>
+                            <li>Verificar integridad de datos</li>
+                            <li>Comprobar funcionamiento de aplicaciones</li>
+                            <li>Frecuencia: Mensual</li>
+                        </ul>
+                    </div>
+
+                    <div class="strategy-card">
+                        <h4>Simulacro de Desastre</h4>
+                        <ul>
+                            <li>Restaurar sistema completo</li>
+                            <li>Medir tiempo de recuperación</li>
+                            <li>Documentar procedimientos</li>
+                            <li>Frecuencia: Trimestral</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="response-plan">
+                <h2>Plan de Respuesta a Ransomware</h2>
+
+                <div class="concept-card">
+                    <h3>Pasos Inmediatos</h3>
+                    <ol>
+                        <li><strong>Contener:</strong> Desconectar sistemas infectados</li>
+                        <li><strong>Evaluar:</strong> Determinar alcance del daño</li>
+                        <li><strong>Recuperar:</strong> Usar backups limpios para restaurar</li>
+                        <li><strong>Investigar:</strong> Identificar vector de ataque</li>
+                        <li><strong>Mejorar:</strong> Implementar medidas preventivas</li>
+                    </ol>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Equipo de Respuesta</h3>
+                    <ul>
+                        <li><strong>Líder técnico:</strong> Coordina la recuperación</li>
+                        <li><strong>Administrador de backup:</strong> Gestiona la restauración</li>
+                        <li><strong>Equipo de seguridad:</strong> Investiga el incidente</li>
+                        <li><strong>Comunicación:</strong> Gestiona información a stakeholders</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="costs">
+                <h2>Costo vs Beneficio</h2>
+
+                <div class="strategy-card">
+                    <h3>Análisis de Costo-Beneficio</h3>
+                    <h4>Inversión en Backup Robusto</h4>
+                    <ul>
+                        <li><strong>Costo inicial:</strong> $1,000-10,000 (dependiendo del tamaño)</li>
+                        <li><strong>Costo mensual:</strong> $50-500 (mantenimiento)</li>
+                        <li><strong>Costo de recuperación:</strong> 4-8 horas de tiempo</li>
+                    </ul>
+
+                    <h4>Costos de un Ataque de Ransomware</h4>
+                    <ul>
+                        <li><strong>Rescate promedio:</strong> $1.5M para empresas</li>
+                        <li><strong>Pérdida de productividad:</strong> $100K+ por día</li>
+                        <li><strong>Daño a reputación:</strong> Irrecuperable para muchos</li>
+                        <li><strong>Costos legales:</strong> Multas por protección de datos</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

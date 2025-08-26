@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMB/CIFS - Server Message Block</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .smb-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SMB/CIFS - Server Message Block</h1>
+            <p>Protocolo estándar para compartir archivos en redes Windows y multiplataforma</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="backup-vms.html">Backup para VMs</a>
+            <a href="almacenamiento-backup.html">Almacenamiento</a>
+            <a href="ransomware-backup.html">Protección Ransomware</a>
+            <a href="drp.html">Plan de Recuperación</a>
+            <a href="snapshots-vms.html">Snapshots para VMs</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+            <a href="SAN_NAS.html">SAN vs NAS</a>
+        </nav>
+
+        <main>
+            <section id="what-is-smb">
+                <h2>¿Qué es SMB/CIFS?</h2>
+                <div class="smb-card">
+                    <h3>Definición y evolución</h3>
+                    <p><strong>SMB (Server Message Block)</strong> es un protocolo de red que permite compartir archivos, impresoras y otros recursos entre nodos de una red. Originalmente desarrollado por IBM en 1983 como SMB, fue adoptado por Microsoft y renombrado como <strong>CIFS (Common Internet File System)</strong> en 1996.</p>
+
+                    <h3>Versiones principales</h3>
+                    <ul>
+                        <li><strong>SMB 1.0 (1984):</strong> Versión original de IBM</li>
+                        <li><strong>SMB 2.0 (2006):</strong> Mayor eficiencia y seguridad</li>
+                        <li><strong>SMB 2.1 (2009):</strong> Mejoras en virtualización</li>
+                        <li><strong>SMB 3.0 (2012):</strong> Características enterprise</li>
+                        <li><strong>SMB 3.1.1 (2015):</strong> Encriptación AES-128/256</li>
+                    </ul>
+
+                    <h3>¿Por qué es importante?</h3>
+                    <ul>
+                        <li>Protocolo nativo de Windows para compartir archivos</li>
+                        <li>Soporte multiplataforma (Samba para Linux/Unix)</li>
+                        <li>Base de Active Directory y dominios Windows</li>
+                        <li>Utilizado en NAS, file servers y storage arrays</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="architecture">
+                <h2>Arquitectura de SMB</h2>
+
+                <h3>Componentes principales</h3>
+                <div class="smb-card">
+                    <h4>Cliente SMB</h4>
+                    <ul>
+                        <li><strong>Redirector:</strong> Maneja operaciones de archivos remotos</li>
+                        <li><strong>Cache manager:</strong> Almacenamiento en caché local</li>
+                        <li><strong>Security subsystem:</strong> Autenticación y autorización</li>
+                        <li><strong>Transport driver:</strong> Comunicación de red</li>
+                    </ul>
+                </div>
+
+                <div class="smb-card">
+                    <h4>Servidor SMB</h4>
+                    <ul>
+                        <li><strong>SMB server:</strong> Procesa peticiones de clientes</li>
+                        <li><strong>NTFS/VFS:</strong> Sistema de archivos subyacente</li>
+                        <li><strong>Security reference monitor:</strong> Control de acceso</li>
+                        <li><strong>Object manager:</strong> Gestión de recursos compartidos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="features">
+                <h2>Características de SMB 3.x</h2>
+
+                <h3>SMB 3.0 (Windows Server 2012)</h3>
+                <div class="smb-card">
+                    <h4>Innovaciones principales</h4>
+                    <ul>
+                        <li><strong>Continuous Availability:</strong> Transparente a fallos de nodos</li>
+                        <li><strong>Work Folders:</strong> Sincronización de archivos</li>
+                        <li><strong>Automatic Rebalancing:</strong> Distribución automática de carga</li>
+                        <li><strong>Direct from SMB:</strong> Acceso directo desde Hyper-V</li>
+                        <li><strong>VSS Integration:</strong> Volume Shadow Copy Service</li>
+                    </ul>
+                </div>
+
+                <h3>SMB 3.1.1 (Windows Server 2016+)</h3>
+                <div class="smb-card">
+                    <h4>Mejoras de seguridad</h4>
+                    <ul>
+                        <li><strong>AES-128/256 Encryption:</strong> Encriptación de datos en tránsito</li>
+                        <li><strong>Secure Dialect Negotiation:</strong> Negociación segura de versión</li>
+                        <li><strong>Pre-authentication Integrity:</strong> Protección contra ataques man-in-the-middle</li>
+                        <li><strong>Cluster Dialect Fencing:</strong> Aislamiento de clústeres antiguos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="samba">
+                <h2>Samba - SMB para Linux/Unix</h2>
+
+                <div class="smb-card">
+                    <h3>¿Qué es Samba?</h3>
+                    <p><strong>Samba</strong> es una implementación open source del protocolo SMB/CIFS para sistemas Linux y Unix, permitiendo que estos sistemas se integren perfectamente en redes Windows.</p>
+
+                    <h3>Componentes principales</h3>
+                    <ul>
+                        <li><strong>smbd:</strong> Daemon principal del servidor SMB</li>
+                        <li><strong>nmbd:</strong> Servicio de nombres NetBIOS</li>
+                        <li><strong>winbindd:</strong> Integración con Active Directory</li>
+                        <li><strong>samba-tool:</strong> Utilidades de gestión</li>
+                    </ul>
+                </div>
+
+                <div class="smb-card">
+                    <h4>Configuración básica</h4>
+                    <pre><code>[global]
+workgroup = WORKGROUP
+server string = Samba Server
+security = user
+
+[shared]
+path = /data/shared
+browsable = yes
+writable = yes
+valid users = user1 user2</code></pre>
+                </div>
+            </section>
+
+            <section id="security">
+                <h2>Seguridad en SMB</h2>
+
+                <h3>Configuraciones de seguridad</h3>
+                <div class="smb-card">
+                    <h4>Mejores prácticas</h4>
+                    <ul>
+                        <li><strong>Deshabilitar SMBv1:</strong> Eliminar vulnerabilidades antiguas</li>
+                        <li><strong>Habilitar encriptación:</strong> Proteger datos en tránsito</li>
+                        <li><strong>Autenticación fuerte:</strong> Kerberos y NTLMv2</li>
+                        <li><strong>Control de acceso:</strong> Listas de control de acceso (ACLs)</li>
+                        <li><strong>Auditoría:</strong> Monitoreo de accesos y cambios</li>
+                    </ul>
+                </div>
+
+                <div class="smb-card">
+                    <h4>Configuración segura</h4>
+                    <pre><code>[global]
+server min protocol = SMB2_10
+encrypt passwords = yes
+restrict anonymous = 2
+lanman auth = no
+ntlm auth = no
+raw NTLMv2 auth = no
+
+[data]
+path = /data/secure
+browsable = yes
+writable = yes
+valid users = @admins
+admin users = administrator
+guest ok = no</code></pre>
+                </div>
+            </section>
+
+            <section id="performance">
+                <h2>Optimización de rendimiento</h2>
+
+                <h3>Parámetros de rendimiento</h3>
+                <div class="smb-card">
+                    <h4>Configuración del servidor</h4>
+                    <ul>
+                        <li><strong>Socket options:</strong> TCP_NODELAY, SO_RCVBUF, SO_SNDBUF</li>
+                        <li><strong>Max connections:</strong> Límite de conexiones simultáneas</li>
+                        <li><strong>Lock directory:</strong> Directorio para archivos de bloqueo</li>
+                        <li><strong>Share modes:</strong> Control de acceso compartido</li>
+                        <li><strong>Oplocks:</strong> Optimistic locking para mejor rendimiento</li>
+                    </ul>
+                </div>
+
+                <h3>Problemas comunes y soluciones</h3>
+                <div class="smb-card">
+                    <h4>Solución de problemas comunes</h4>
+                    <ul>
+                        <li><strong>Performance issues:</strong>
+                            <ul>
+                                <li>Causa: Configuración de red, buffers pequeños</li>
+                                <li>Solución: Ajustar socket options, optimizar red</li>
+                            </ul>
+                        </li>
+                        <li><strong>Access denied:</strong>
+                            <ul>
+                                <li>Causa: Problemas de permisos, configuración de seguridad</li>
+                                <li>Solución: Revisar ACLs, configuración de autenticación</li>
+                            </ul>
+                        </li>
+                        <li><strong>Connection timeouts:</strong>
+                            <ul>
+                                <li>Causa: Problemas de red, timeouts demasiado cortos</li>
+                                <li>Solución: Ajustar timeouts, verificar conectividad</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Solución de problemas</h2>
+
+                <div class="smb-card">
+                    <h3>Comandos de diagnóstico</h3>
+                    <pre><code># Ver recursos compartidos
+smbclient -L localhost
+
+# Probar conexión
+smbclient //server/share -U username
+
+# Ver estado del servidor
+smbstatus
+
+# Logs de Samba
+tail -f /var/log/samba/log.smbd</code></pre>
+                </div>
+
+                <div class="smb-card">
+                    <h3>Errores comunes</h3>
+                    <ul>
+                        <li><strong>NT_STATUS_ACCESS_DENIED:</strong> Problemas de permisos</li>
+                        <li><strong>NT_STATUS_BAD_NETWORK_NAME:</strong> Recurso no encontrado</li>
+                        <li><strong>NT_STATUS_LOGON_FAILURE:</strong> Credenciales incorrectas</li>
+                        <li><strong>NT_STATUS_CONNECTION_REFUSED:</strong> Puerto bloqueado o servicio no iniciado</li>
+                        <li><strong>NT_STATUS_NETWORK_UNREACHABLE:</strong> Problemas de red</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="best-practices">
+                <h2>Mejores prácticas</h2>
+
+                <div class="smb-card">
+                    <h3>Configuración recomendada</h3>
+                    <ul>
+                        <li><strong>Usar SMB 3.x:</strong> Mejor seguridad y rendimiento</li>
+                        <li><strong>Implementar Active Directory:</strong> Gestión centralizada</li>
+                        <li><strong>Monitorear logs:</strong> Detección de problemas</li>
+                        <li><strong>Backup regular:</strong> De configuración y datos</li>
+                        <li><strong>Documentar cambios:</strong> Mantener registro de modificaciones</li>
+                    </ul>
+                </div>
+
+                <div class="smb-card">
+                    <h3>Consideraciones de escalabilidad</h3>
+                    <ul>
+                        <li><strong>Cluster configurations:</strong> Alta disponibilidad</li>
+                        <li><strong>Load balancing:</strong> Distribución de carga</li>
+                        <li><strong>Caching solutions:</strong> Mejora de rendimiento</li>
+                        <li><strong>Monitoring tools:</strong> Nagios, Zabbix para SMB</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="future">
+                <h2>Tendencias futuras</h2>
+
+                <div class="smb-card">
+                    <h3>Evolución de SMB</h3>
+                    <ul>
+                        <li><strong>SMB 3.1.1 improvements:</strong> Mejor encriptación</li>
+                        <li><strong>Integración cloud:</strong> SMB en entornos híbridos</li>
+                        <li><strong>Container support:</strong> SMB para Kubernetes</li>
+                        <li><strong>AI optimization:</strong> Ajuste automático de parámetros</li>
+                        <li><strong>Quantum-resistant security:</strong> Preparación para futuro</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

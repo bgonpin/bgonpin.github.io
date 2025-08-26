@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Regla 3-2-1 para Copias de Seguridad</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .rule-card {
+            background: linear-gradient(135deg, var(--light-color), #f8f9fa);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .rule-card h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .rule-card .number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 1.5rem 0;
+        }
+
+        .strategy-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .strategy-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fff3e0;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+
+        .implementation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .implementation-table th, .implementation-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .implementation-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .implementation-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>La Regla 3-2-1</h1>
+            <p>La estrategia fundamental para la protección de datos</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="backup-vms.html">Backup para VMs</a>
+            <a href="almacenamiento-backup.html">Almacenamiento</a>
+            <a href="ransomware-backup.html">Protección Ransomware</a>
+            <a href="drp.html">Plan de Recuperación</a>
+            <a href="snapshots-vms.html">Snapshots para VMs</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="rule-explanation">
+                <h2>¿Qué es la Regla 3-2-1?</h2>
+                <p>La regla 3-2-1 es una estrategia fundamental para la protección de datos que establece los principios básicos que debe seguir cualquier sistema de copias de seguridad efectivo.</p>
+
+                <div style="display: flex; justify-content: space-around; margin: 2rem 0;">
+                    <div class="rule-card">
+                        <span class="number">3</span>
+                        <h2>Copias de tus datos</h2>
+                        <p>La original + 2 copias adicionales</p>
+                    </div>
+
+                    <div class="rule-card">
+                        <span class="number">2</span>
+                        <h2>Medios diferentes</h2>
+                        <p>Disco duro, NAS, nube, cinta, etc.</p>
+                    </div>
+
+                    <div class="rule-card">
+                        <span class="number">1</span>
+                        <h2>Copia off-site</h2>
+                        <p>Ubicación física diferente</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="why-important">
+                <h2>¿Por qué es importante?</h2>
+                <div class="warning-card">
+                    <h3>La Realidad</h3>
+                    <p>El 70% de las empresas que sufren un desastre y pierden sus datos cierran sus puertas en los siguientes 12 meses.</p>
+                    <p>Una sola copia de seguridad no es suficiente para proteger contra todas las amenazas modernas.</p>
+                </div>
+
+                <h3>Protección contra múltiples riesgos</h3>
+                <ul>
+                    <li><strong>Hardware defectuoso:</strong> Discos duros, SSDs, servidores completos</li>
+                    <li><strong>Errores humanos:</strong> Eliminación accidental, sobrescritura</li>
+                    <li><strong>Ciberataques:</strong> Ransomware, malware, hacking</li>
+                    <li><strong>Desastres naturales:</strong> Incendios, inundaciones, terremotos</li>
+                    <li><strong>Robo o vandalismo:</strong> Pérdida física de equipos</li>
+                </ul>
+            </section>
+
+            <section id="implementation">
+                <h2>Implementación de la Regla 3-2-1</h2>
+
+                <h3>Estrategia para Particulares</h3>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <h4>Copia 1: Disco duro externo</h4>
+                        <ul>
+                            <li>Capacidad: 2x tamaño de tus datos</li>
+                            <li>Conexión: USB 3.0 o superior</li>
+                            <li>Almacenamiento: En casa, pero desconectado</li>
+                        </ul>
+                    </div>
+
+                    <div class="strategy-card">
+                        <h4>Copia 2: Servicio en la nube</h4>
+                        <ul>
+                            <li>Ejemplos: Google Drive, OneDrive, Dropbox</li>
+                            <li>Acceso desde cualquier dispositivo</li>
+                            <li>Cifrado automático de datos</li>
+                        </ul>
+                    </div>
+
+                    <div class="strategy-card">
+                        <h4>Copia 3: Off-site físico</h4>
+                        <ul>
+                            <li>Casa de familiar o amigo</li>
+                            <li>Caja de seguridad en banco</li>
+                            <li>Disco duro rotativo mensual</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Estrategia para Empresas</h3>
+                <table class="implementation-table">
+                    <thead>
+                        <tr>
+                            <th>Copia</th>
+                            <th>Medio</th>
+                            <th>Ubicación</th>
+                            <th>Frecuencia</th>
+                            <th>Responsable</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Original</td>
+                            <td>Servidores/SAN</td>
+                            <td>Data Center Local</td>
+                            <td>N/A</td>
+                            <td>Sistema</td>
+                        </tr>
+                        <tr>
+                            <td>Copia 1</td>
+                            <td>NAS/Librería de Cintas</td>
+                            <td>Data Center Local</td>
+                            <td>Diaria</td>
+                            <td>Sistema Automático</td>
+                        </tr>
+                        <tr>
+                            <td>Copia 2</td>
+                            <td>Cloud Storage</td>
+                            <td>Proveedor Externo</td>
+                            <td>Diaria/Semanal</td>
+                            <td>Sistema Automático</td>
+                        </tr>
+                        <tr>
+                            <td>Copia 3</td>
+                            <td>Disco Externo/Cinta</td>
+                            <td>Data Center Remoto</td>
+                            <td>Semanal/Mensual</td>
+                            <td>Administrador</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="best-practices">
+                <h2>Mejores Prácticas</h2>
+
+                <div class="strategy-card">
+                    <h3>Gestión de Copias</h3>
+                    <ul>
+                        <li><strong>Automatización:</strong> Programar backups automáticos para evitar olvidos</li>
+                        <li><strong>Verificación:</strong> Probar regularmente que las copias se pueden restaurar</li>
+                        <li><strong>Rotación:</strong> Mantener múltiples versiones históricas</li>
+                        <li><strong>Documentación:</strong> Registrar qué se backup, cuándo y cómo restaurar</li>
+                    </ul>
+                </div>
+
+                <div class="strategy-card">
+                    <h3>Seguridad Adicional</h3>
+                    <ul>
+                        <li><strong>Cifrado:</strong> Proteger copias sensibles con encriptación</li>
+                        <li><strong>Acceso restringido:</strong> Controlar quién puede acceder a las copias</li>
+                        <li><strong>Monitoreo:</strong> Alertas ante fallos en el proceso de backup</li>
+                        <li><strong>Pruebas regulares:</strong> Simulacros de restauración trimestrales</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="common-mistakes">
+                <h2>Errores Comunes a Evitar</h2>
+
+                <div class="warning-card">
+                    <h3>Errores Críticos</h3>
+                    <ul>
+                        <li><strong>Una sola copia:</strong> Vulnerable a cualquier tipo de pérdida</li>
+                        <li><strong>Todas las copias en el mismo lugar:</strong> Un incendio destruye todo</li>
+                        <li><strong>Copias conectadas permanentemente:</strong> Ransomware las encripta también</li>
+                        <li><strong>Sin verificar restauración:</strong> "Backup" que no se puede recuperar</li>
+                        <li><strong>Sin cifrado:</strong> Datos sensibles expuestos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="cost-benefit">
+                <h2>Costo vs Beneficio</h2>
+
+                <div class="strategy-card">
+                    <h3>¿Vale la pena?</h3>
+                    <p>Consideremos el costo real de perder datos:</p>
+
+                    <h4>Costo de Implementar 3-2-1</h4>
+                    <ul>
+                        <li><strong>Hardware:</strong> $200-500 para discos externos</li>
+                        <li><strong>Software:</strong> Gratuito a $500 por licencias</li>
+                        <li><strong>Cloud Storage:</strong> $10-50/mes por TB</li>
+                        <li><strong>Tiempo de configuración:</strong> 4-8 horas</li>
+                    </ul>
+
+                    <h4>Costo de Perder Datos</h4>
+                    <ul>
+                        <li><strong>Datos personales:</strong> Irrecuperables (fotos, documentos)</li>
+                        <li><strong>PYMES:</strong> 43% cierran tras perder datos críticos</li>
+                        <li><strong>Grandes empresas:</strong> Pérdidas de $100K+ por hora de downtime</li>
+                        <li><strong>Reputación:</strong> Daño permanente a la confianza del cliente</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

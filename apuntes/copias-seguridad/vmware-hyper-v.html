@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMware vSphere y Microsoft Hyper-V</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .software-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>VMware vSphere y Microsoft Hyper-V</h1>
+            <p>Plataformas líderes en virtualización para entornos enterprise</p>
+        </header>
+
+        <main>
+            <section id="introduction">
+                <div class="software-card">
+                    <h2>¿Qué son VMware vSphere y Hyper-V?</h2>
+                    <p>VMware vSphere y Microsoft Hyper-V son las dos plataformas de virtualización más utilizadas en entornos enterprise. Proporcionan la base para la consolidación de servidores, alta disponibilidad y gestión eficiente de recursos de TI.</p>
+
+                    <h3>Importancia en el Backup</h3>
+                    <ul>
+                        <li><strong>Consolidación masiva:</strong> Múltiples VMs requieren estrategias de backup especializadas</li>
+                        <li><strong>Gestión centralizada:</strong> APIs y herramientas específicas para cada plataforma</li>
+                        <li><strong>Recuperación granular:</strong> Capacidad de restaurar VMs individuales o completas</li>
+                        <li><strong>Integración nativa:</strong> Soporte específico en soluciones de backup enterprise</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="vmware">
+                <h2>VMware vSphere</h2>
+                <div class="software-card">
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>VMware ESXi:</strong> Hipervisor tipo 1 para virtualización de servidores</li>
+                        <li><strong>vCenter Server:</strong> Gestión centralizada de hosts e VMs</li>
+                        <li><strong>vSphere HA:</strong> Alta disponibilidad automática</li>
+                        <li><strong>VMware Tools:</strong> Integración optimizada entre host y VM</li>
+                        <li><strong>Storage vMotion:</strong> Migración de VMs entre datastores</li>
+                    </ul>
+
+                    <h3>Componentes clave</h3>
+                    <ul>
+                        <li><strong>ESXi Hosts:</strong> Servidores físicos que ejecutan el hipervisor</li>
+                        <li><strong>VMs:</strong> Máquinas virtuales con sistemas operativos invitados</li>
+                        <li><strong>Datastores:</strong> Almacenamiento compartido para VMs</li>
+                        <li><strong>vSphere Clusters:</strong> Grupos de hosts con recursos compartidos</li>
+                        <li><strong>Distributed Switches:</strong> Redes virtuales avanzadas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="hyper-v">
+                <h2>Microsoft Hyper-V</h2>
+                <div class="software-card">
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Hipervisor nativo:</strong> Integrado en Windows Server</li>
+                        <li><strong>System Center VMM:</strong> Gestión avanzada de virtualización</li>
+                        <li><strong>Live Migration:</strong> Movimiento de VMs sin interrupción</li>
+                        <li><strong>Integration Services:</strong> Mejora del rendimiento de VMs</li>
+                        <li><strong>Shielded VMs:</strong> Protección avanzada con TPM virtual</li>
+                    </ul>
+
+                    <h3>Componentes clave</h3>
+                    <ul>
+                        <li><strong>Hyper-V Hosts:</strong> Servidores con rol Hyper-V habilitado</li>
+                        <li><strong>Virtual Machines:</strong> VMs con soporte para múltiples OS</li>
+                        <li><strong>Virtual Switches:</strong> Redes virtuales con funcionalidades avanzadas</li>
+                        <li><strong>Clusters de failover:</strong> Alta disponibilidad con Windows Server</li>
+                        <li><strong>Storage Spaces:</strong> Almacenamiento definido por software</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="comparison">
+                <h2>Comparación: VMware vs Hyper-V</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>VMware vSphere</th>
+                            <th>Microsoft Hyper-V</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Costo</td>
+                            <td>Comercial (alto)</td>
+                            <td>Incluido en Windows Server</td>
+                        </tr>
+                        <tr>
+                            <td>Soporte multiplataforma</td>
+                            <td>Excelente</td>
+                            <td>Limitado a Windows</td>
+                        </tr>
+                        <tr>
+                            <td>Gestión de recursos</td>
+                            <td>Muy granular</td>
+                            <td>Buena</td>
+                        </tr>
+                        <tr>
+                            <td>Ecosistema de partners</td>
+                            <td>Extenso</td>
+                            <td>Limitado</td>
+                        </tr>
+                        <tr>
+                            <td>Curva de aprendizaje</td>
+                            <td>Moderada</td>
+                            <td>Baja</td>
+                        </tr>
+                        <tr>
+                            <td>Integración cloud</td>
+                            <td>VMware Cloud Foundation</td>
+                            <td>Azure Stack HCI</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="backup-considerations">
+                <h2>Consideraciones para Backup</h2>
+
+                <h3>Desafíos específicos</h3>
+                <div class="software-card">
+                    <h4>En entornos virtualizados</h4>
+                    <ul>
+                        <li><strong>Cambio rápido:</strong> VMs efímeras y cambios frecuentes</li>
+                        <li><strong>Dependencias complejas:</strong> Relaciones entre VMs y recursos</li>
+                        <li><strong>Recursos compartidos:</strong> Almacenamiento y redes virtuales</li>
+                        <li><strong>Replicación de estado:</strong> Captura de estado consistente</li>
+                        <li><strong>Recuperación a diferentes niveles:</strong> VM, aplicación o archivo individual</li>
+                    </ul>
+                </div>
+
+                <h3>Estrategias recomendadas</h3>
+                <div class="software-card">
+                    <h4>Mejores prácticas</h4>
+                    <ul>
+                        <li><strong>Backup a nivel de imagen:</strong> Captura completa de VMs</li>
+                        <li><strong>Integración con herramientas nativas:</strong> VMware Tools y Integration Services</li>
+                        <li><strong>CBT (Changed Block Tracking):</strong> Backups incrementales eficientes</li>
+                        <li><strong>Orquestación centralizada:</strong> Gestión unificada de backups</li>
+                        <li><strong>Testing regular:</strong> Verificación de restauración de VMs</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="future-trends">
+                <h2>Tendencias Futuras</h2>
+                <div class="software-card">
+                    <h3>Virtualización moderna</h3>
+                    <ul>
+                        <li><strong>Contenedores:</strong> Kubernetes y Docker en entornos virtualizados</li>
+                        <li><strong>Multi-cloud:</strong> Híbridos VMware-Azure y VMware-AWS</li>
+                        <li><strong>Automatización:</strong> Gestión declarativa con Terraform y Ansible</li>
+                        <li><strong>Edge computing:</strong> Virtualización distribuida en el edge</li>
+                        <li><strong>Serverless:</strong> Funciones como servicio en entornos virtualizados</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="software-backup.html" class="back-link">← Volver a Software de Backup</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHA-256 - Algoritmo de Hash</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .integrity-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SHA-256 - Algoritmo de Hash</h1>
+            <p>Función hash criptográfica estándar para verificación de integridad</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-sha256">
+                <h2>¿Qué es SHA-256?</h2>
+                <div class="integrity-card">
+                    <h3>Secure Hash Algorithm 256</h3>
+                    <p>SHA-256 es una función hash criptográfica que produce un valor hash de 256 bits (64 caracteres hexadecimales). Es parte de la familia SHA-2 y es el estándar actual recomendado por NIST para la mayoría de aplicaciones criptográficas.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Longitud del hash:</strong> 256 bits (64 caracteres hex)</li>
+                        <li><strong>Seguridad:</strong> Resistente a colisiones conocidas</li>
+                        <li><strong>Uso común:</strong> Verificación de integridad, blockchain, certificados</li>
+                        <li><strong>Estado actual:</strong> Estándar recomendado para seguridad</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-sha256-works">
+                <h2>Cómo funciona SHA-256</h2>
+                <div class="integrity-card">
+                    <h3>Proceso de hash</h3>
+                    <p>SHA-256 procesa el mensaje de entrada en bloques de 512 bits, aplicando una serie de operaciones lógicas y matemáticas complejas para producir el hash final.</p>
+
+                    <h3>Pasos principales</h3>
+                    <ol>
+                        <li><strong>Preprocesamiento:</strong> Añade padding y longitud del mensaje</li>
+                        <li><strong>Procesamiento en bloques:</strong> Divide el mensaje en bloques de 512 bits</li>
+                        <li><strong>Expansión del mensaje:</strong> Expande cada bloque a 64 palabras de 32 bits</li>
+                        <li><strong>Compresión:</strong> Aplica función de compresión 64 veces por bloque</li>
+                        <li><strong>Resultado:</strong> Produce hash de 256 bits</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="sha256-usage">
+                <h2>Uso en Verificación de Integridad</h2>
+                <div class="integrity-card">
+                    <h3>Aplicaciones comunes</h3>
+                    <ul>
+                        <li><strong>Verificación de descargas:</strong> Comprobar integridad de archivos</li>
+                        <li><strong>Blockchain:</strong> Bitcoin y otras criptomonedas</li>
+                        <li><strong>Certificados SSL/TLS:</strong> Firmas digitales seguras</li>
+                        <li><strong>Verificación de backups:</strong> Asegurar que los datos no han cambiado</li>
+                        <li><strong>Almacenamiento de contraseñas:</strong> Con salting y múltiples iteraciones</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso</h3>
+                    <pre><code># Linux
+sha256sum archivo.txt
+
+# Windows PowerShell
+Get-FileHash -Algorithm SHA256 archivo.txt
+
+# OpenSSL
+openssl dgst -sha256 archivo.txt</code></pre>
+                </div>
+            </section>
+
+            <section id="sha256-security">
+                <h2>Seguridad y Ventajas</h2>
+                <div class="integrity-card">
+                    <h3>Fortalezas de SHA-256</h3>
+                    <ul>
+                        <li><strong>Resistencia a colisiones:</strong> No se conocen colisiones prácticas</li>
+                        <li><strong>Longitud adecuada:</strong> 256 bits proporcionan alta seguridad</li>
+                        <li><strong>Ampliamente estudiado:</strong> Analizado por la comunidad criptográfica</li>
+                        <li><strong>Estándar NIST:</strong> Recomendado por estándares oficiales</li>
+                    </ul>
+
+                    <h3>Consideraciones de seguridad</h3>
+                    <ul>
+                        <li>Usar con salting para contraseñas</li>
+                        <li>Considerar rendimiento vs seguridad</li>
+                        <li>Monitorear avances en criptoanálisis</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="sha256-alternatives">
+                <h2>Alternativas y Variantes</h2>
+                <div class="integrity-card">
+                    <h3>Otros algoritmos SHA-2</h3>
+                    <ul>
+                        <li><strong>SHA-224:</strong> Versión truncada de SHA-256</li>
+                        <li><strong>SHA-384:</strong> 384 bits, para aplicaciones más seguras</li>
+                        <li><strong>SHA-512:</strong> 512 bits, para máxima seguridad</li>
+                    </ul>
+
+                    <h3>Alternativas modernas</h3>
+                    <ul>
+                        <li><strong>SHA-3:</strong> Nuevo estándar NIST (Keccak)</li>
+                        <li><strong>BLAKE2:</strong> Alternativa más rápida</li>
+                    </ul>
+
+                    <h3>Cuándo usar SHA-256</h3>
+                    <p>SHA-256 es la opción recomendada para la mayoría de aplicaciones que requieren verificación de integridad. Es seguro, ampliamente soportado y tiene un buen balance entre seguridad y rendimiento.</p>
+                </div>
+            </section>
+
+            <section id="sha256-tools">
+                <h2>Herramientas que usan SHA-256</h2>
+                <div class="integrity-card">
+                    <h3>Herramientas nativas</h3>
+                    <ul>
+                        <li><strong>Linux:</strong> sha256sum</li>
+                        <li><strong>Windows:</strong> CertUtil, PowerShell</li>
+                        <li><strong>macOS:</strong> shasum</li>
+                    </ul>
+
+                    <h3>Librerías y frameworks</h3>
+                    <ul>
+                        <li><strong>OpenSSL:</strong> Implementación criptográfica completa</li>
+                        <li><strong>Python hashlib:</strong> Módulo estándar</li>
+                        <li><strong>Java MessageDigest:</strong> API de Java</li>
+                    </ul>
+
+                    <h3>Aplicaciones</h3>
+                    <ul>
+                        <li>Herramientas de backup (Veeam, Acronis)</li>
+                        <li>Sistemas blockchain</li>
+                        <li>Gestores de descargas</li>
+                        <li>Software de verificación de archivos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="sha256-performance">
+                <h2>Rendimiento y Consideraciones</h2>
+                <div class="integrity-card">
+                    <h3>Velocidad de procesamiento</h3>
+                    <ul>
+                        <li><strong>CPU:</strong> Más lento que MD5/SHA-1 pero aceptable</li>
+                        <li><strong>Hardware:</strong> Aceleración disponible en algunos procesadores</li>
+                        <li><strong>Archivos grandes:</strong> Considerar verificación incremental</li>
+                    </ul>
+
+                    <h3>Optimizaciones</h3>
+                    <ul>
+                        <li>Usar verificación en paralelo para múltiples archivos</li>
+                        <li>Implementar caching de hashes</li>
+                        <li>Considerar algoritmos más rápidos para casos específicos</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

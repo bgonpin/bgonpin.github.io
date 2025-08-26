@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHA-3 - Algoritmo de Hash</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .integrity-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SHA-3 - Algoritmo de Hash</h1>
+            <p>Nuevo estándar NIST para funciones hash criptográficas</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-sha3">
+                <h2>¿Qué es SHA-3?</h2>
+                <div class="integrity-card">
+                    <h3>Secure Hash Algorithm 3</h3>
+                    <p>SHA-3 es la familia más reciente de funciones hash criptográficas estandarizada por NIST en 2015. A diferencia de SHA-2, SHA-3 se basa en el algoritmo Keccak, que fue seleccionado después de una competencia internacional de algoritmos hash.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Longitud del hash:</strong> Múltiples variantes (224, 256, 384, 512 bits)</li>
+                        <li><strong>Base:</strong> Algoritmo Keccak (esponja)</li>
+                        <li><strong>Seguridad:</strong> Mayor resistencia a ataques conocidos</li>
+                        <li><strong>Estado actual:</strong> Estándar NIST recomendado</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-sha3-works">
+                <h2>Cómo funciona SHA-3</h2>
+                <div class="integrity-card">
+                    <h3>Función de esponja (Keccak)</h3>
+                    <p>SHA-3 utiliza el paradigma de función de esponja, que es diferente a las funciones de compresión utilizadas por SHA-1 y SHA-2. Este enfoque proporciona mayor flexibilidad y resistencia a ataques.</p>
+
+                    <h3>Pasos principales</h3>
+                    <ol>
+                        <li><strong>Absorción:</strong> El mensaje se divide en bloques y se XOR con el estado</li>
+                        <li><strong>Función de permutación:</strong> Se aplica la función Keccak-f 24 veces por bloque</li>
+                        <li><strong>Compresión:</strong> El estado se mezcla completamente</li>
+                        <li><strong>Extracción:</strong> Se extrae el hash de la longitud deseada</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="sha3-usage">
+                <h2>Uso en Verificación de Integridad</h2>
+                <div class="integrity-card">
+                    <h3>Aplicaciones comunes</h3>
+                    <ul>
+                        <li><strong>Verificación de archivos:</strong> Integridad de datos críticos</li>
+                        <li><strong>Criptomonedas:</strong> Ethereum usa variantes de SHA-3</li>
+                        <li><strong>Firmas digitales:</strong> Parte de protocolos de seguridad modernos</li>
+                        <li><strong>Verificación de backups:</strong> Para máxima seguridad</li>
+                        <li><strong>Blockchain:</strong> Varias plataformas lo implementan</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso</h3>
+                    <pre><code># Linux (con OpenSSL)
+openssl dgst -sha3-256 archivo.txt
+
+# Python
+import hashlib
+hashlib.sha3_256(open('archivo.txt','rb').read()).hexdigest()
+
+# Java
+MessageDigest md = MessageDigest.getInstance("SHA3-256");</code></pre>
+                </div>
+            </section>
+
+            <section id="sha3-security">
+                <h2>Seguridad y Ventajas</h2>
+                <div class="integrity-card">
+                    <h3>Ventajas sobre SHA-2</h3>
+                    <ul>
+                        <li><strong>Resistencia a ataques:</strong> Diferente estructura reduce riesgos</li>
+                        <li><strong>Flexibilidad:</strong> Múltiples longitudes de hash</li>
+                        <li><strong>Paralelización:</strong> Mejor rendimiento en hardware paralelo</li>
+                        <li><strong>Resistencia cuántica:</strong> Mayor protección futura</li>
+                    </ul>
+
+                    <h3>Seguridad criptográfica</h3>
+                    <ul>
+                        <li>No se conocen ataques prácticos contra SHA-3</li>
+                        <li>Mejor resistencia a ataques de longitud de extensión</li>
+                        <li>Independiente de SHA-1/SHA-2 (sin debilidades compartidas)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="sha3-variants">
+                <h2>Variantes de SHA-3</h2>
+                <div class="integrity-card">
+                    <h3>Funciones de hash SHA-3</h3>
+                    <ul>
+                        <li><strong>SHA3-224:</strong> 224 bits, para aplicaciones ligeras</li>
+                        <li><strong>SHA3-256:</strong> 256 bits, uso general recomendado</li>
+                        <li><strong>SHA3-384:</strong> 384 bits, para alta seguridad</li>
+                        <li><strong>SHA3-512:</strong> 512 bits, máxima seguridad</li>
+                    </ul>
+
+                    <h3>Funciones de derivación de clave (SHAKE)</h3>
+                    <ul>
+                        <li><strong>SHAKE128:</strong> Salida variable, 128 bits de seguridad</li>
+                        <li><strong>SHAKE256:</strong> Salida variable, 256 bits de seguridad</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="sha3-performance">
+                <h2>Rendimiento y Consideraciones</h2>
+                <div class="integrity-card">
+                    <h3>Comparación de rendimiento</h3>
+                    <ul>
+                        <li><strong>Software:</strong> Generalmente más lento que SHA-2 en CPU</li>
+                        <li><strong>Hardware:</strong> Mejor rendimiento en ASIC y FPGA</li>
+                        <li><strong>Paralelización:</strong> Excelente escalabilidad</li>
+                    </ul>
+
+                    <h3>Cuándo usar SHA-3</h3>
+                    <ul>
+                        <li>Aplicaciones que requieren máxima seguridad futura</li>
+                        <li>Entornos con hardware especializado</li>
+                        <li>Sistemas que necesitan resistencia cuántica</li>
+                        <li>Aplicaciones donde el rendimiento no es crítico</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="sha3-tools">
+                <h2>Herramientas que soportan SHA-3</h2>
+                <div class="integrity-card">
+                    <h3>Implementaciones disponibles</h3>
+                    <ul>
+                        <li><strong>OpenSSL:</strong> Soporte desde versión 1.1.1</li>
+                        <li><strong>Python:</strong> hashlib.sha3_* desde Python 3.6</li>
+                        <li><strong>Java:</strong> MessageDigest con SHA3</li>
+                        <li><strong>C#:</strong> System.Security.Cryptography.SHA3</li>
+                    </ul>
+
+                    <h3>Herramientas especializadas</h3>
+                    <ul>
+                        <li>Librerías criptográficas modernas</li>
+                        <li>Herramientas de verificación de integridad</li>
+                        <li>Implementaciones hardware para alta performance</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="sha3-future">
+                <h2>Futuro de SHA-3</h2>
+                <div class="integrity-card">
+                    <h3>Adopción creciente</h3>
+                    <ul>
+                        <li><strong>Estándar NIST:</strong> Recomendado para nuevas aplicaciones</li>
+                        <li><strong>Criptomonedas:</strong> Ethereum, otras plataformas</li>
+                        <li><strong>Protocolos de seguridad:</strong> Integración gradual</li>
+                    </ul>
+
+                    <h3>Migración desde SHA-2</h3>
+                    <p>Se recomienda considerar SHA-3 para nuevas implementaciones, especialmente en aplicaciones que requieren seguridad a largo plazo. La migración gradual es preferible para sistemas existentes.</p>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

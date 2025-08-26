@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticación Multifactor</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .software-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Autenticación Multifactor</h1>
+            <p>Capa adicional de seguridad para acceso a sistemas de backup</p>
+        </header>
+
+        <main>
+            <section id="introduction">
+                <div class="software-card">
+                    <h2>¿Qué es la Autenticación Multifactor?</h2>
+                    <p>La autenticación multifactor (MFA) es un método de seguridad que requiere múltiples formas de verificación para acceder a sistemas y datos, proporcionando una capa adicional de protección contra accesos no autorizados en soluciones de backup.</p>
+
+                    <h3>Factores de autenticación</h3>
+                    <ul>
+                        <li><strong>Algo que sabe:</strong> Contraseña, PIN, respuesta a pregunta secreta</li>
+                        <li><strong>Algo que tiene:</strong> Token hardware, smartphone, tarjeta inteligente</li>
+                        <li><strong>Algo que es:</strong> Biometría (huella, rostro, voz)</li>
+                        <li><strong>Algún lugar:</strong> Ubicación geográfica, dirección IP específica</li>
+                        <li><strong>Algún momento:</strong> Horarios permitidos, frecuencia de acceso</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="key-features">
+                <h2>Métodos Comunes de MFA</h2>
+
+                <div class="software-card">
+                    <h3>Métodos Basados en Aplicación</h3>
+                    <ul>
+                        <li><strong>Google Authenticator:</strong> Genera códigos TOTP en smartphone</li>
+                        <li><strong>Microsoft Authenticator:</strong> Notificaciones push y códigos</li>
+                        <li><strong>Authy:</strong> Soporte para múltiples dispositivos</li>
+                        <li><strong>FreeOTP:</strong> Alternativa open source</li>
+                    </ul>
+                </div>
+
+                <div class="software-card">
+                    <h3>Métodos Basados en Hardware</h3>
+                    <ul>
+                        <li><strong>YubiKey:</strong> Token USB con múltiples protocolos</li>
+                        <li><strong>Titan Security Key:</strong> Solución de Google</li>
+                        <li><strong>Token SMS:</strong> Códigos enviados por mensaje de texto</li>
+                        <li><strong>Smart Cards:</strong> Tarjetas inteligentes con certificados</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="use-cases">
+                <h2>Implementación en Backup</h2>
+                <div class="software-card">
+                    <h3>Escenarios de aplicación</h3>
+                    <ul>
+                        <li>Acceso a consolas de administración de backup</li>
+                        <li>Autenticación para recuperación de datos</li>
+                        <li>Protección de repositorios cloud de backup</li>
+                        <li>Acceso a interfaces web de soluciones enterprise</li>
+                        <li>Cumplimiento con políticas de seguridad corporativas</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="software-backup.html" class="back-link">← Volver a Software de Backup</a>
+        </div>
+    </div>
+</body>
+</html>

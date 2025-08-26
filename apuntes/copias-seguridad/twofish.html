@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twofish - Algoritmo de Cifrado Simétrico</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .encryption-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Twofish - Algoritmo de Cifrado Simétrico</h1>
+            <p>Finalista de AES con excelente seguridad y rendimiento</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-twofish">
+                <h2>¿Qué es Twofish?</h2>
+                <div class="encryption-card">
+                    <h3>Twofish Cipher</h3>
+                    <p>Twofish es un algoritmo de cifrado simétrico por bloques que fue uno de los cinco finalistas en el concurso Advanced Encryption Standard (AES) del NIST en el año 2000. Desarrollado por Bruce Schneier y su equipo, Twofish es conocido por su excelente seguridad, rendimiento y flexibilidad.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Algoritmo de bloques:</strong> Cifra datos en bloques de 128 bits</li>
+                        <li><strong>Clave flexible:</strong> Soporta claves de 128, 192 o 256 bits</li>
+                        <li><strong>16 rondas:</strong> Balance óptimo entre seguridad y rendimiento</li>
+                        <li><strong>Función Feistel:</strong> Estructura robusta y probada</li>
+                        <li><strong>Prewhitening y postwhitening:</strong> Capas adicionales de seguridad</li>
+                        <li><strong>S-Boxes dependientes de clave:</strong> Mayor resistencia a ataques</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-twofish-works">
+                <h2>Cómo funciona Twofish</h2>
+                <div class="encryption-card">
+                    <h3>Arquitectura general</h3>
+                    <p>Twofish utiliza una red Feistel modificada con 16 rondas idénticas. Cada ronda consiste en transformación de clave, substitución, permutación y mezcla. El algoritmo emplea cuatro S-Boxes de 8 bits dependientes de la clave y operaciones de mezcla de filas y columnas.</p>
+
+                    <h3>Componentes clave</h3>
+                    <ul>
+                        <li><strong>Función F:</strong> Corazón del algoritmo con S-Boxes y operaciones MDS</li>
+                        <li><strong>Matriz MDS:</strong> Dispersión máxima de bits para mayor seguridad</li>
+                        <li><strong>Expansión de clave:</strong> Genera subclaves para cada ronda</li>
+                        <li><strong>Prewhitening:</strong> XOR inicial con material de clave</li>
+                        <li><strong>Postwhitening:</strong> XOR final con material de clave</li>
+                    </ul>
+
+                    <h3>Proceso de cifrado</h3>
+                    <ol>
+                        <li><strong>Prewhitening:</strong> XOR del plaintext con claves iniciales</li>
+                        <li><strong>Rondas de cifrado:</strong> 16 rondas con función F y permutación</li>
+                        <li><strong>Postwhitening:</strong> XOR final con claves de salida</li>
+                        <li><strong>Salida del ciphertext:</strong> Bloque cifrado de 128 bits</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="twofish-usage">
+                <h2>Uso en Copias de Seguridad</h2>
+                <div class="encryption-card">
+                    <h3>Aplicaciones principales</h3>
+                    <ul>
+                        <li><strong>Cifrado de archivos:</strong> Protección de datos sensibles en reposo</li>
+                        <li><strong>Backup cifrado:</strong> Seguridad de copias de seguridad completas</li>
+                        <li><strong>Sistemas embebidos:</strong> Dispositivos con recursos limitados</li>
+                        <li><strong>Almacenamiento en nube:</strong> Cifrado cliente antes de subida</li>
+                        <li><strong>Comunicaciones seguras:</strong> VPN y protocolos de red</li>
+                        <li><strong>Contenedores cifrados:</strong> VeraCrypt, TrueCrypt</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso</h3>
+                    <pre><code>// C++
+#include <twofish.h>
+
+Twofish cipher;
+uint8_t key[32] = {...}; // 256-bit key
+uint8_t plaintext[16] = {...};
+uint8_t ciphertext[16];
+
+cipher.SetKey(key, 32);
+cipher.Encrypt(plaintext, ciphertext);
+
+// Java con Bouncy Castle
+TwofishEngine engine = new TwofishEngine();
+KeyParameter keyParam = new KeyParameter(keyBytes);
+engine.init(true, keyParam); // true for encryption
+engine.processBlock(input, 0, output, 0);</code></pre>
+                </div>
+            </section>
+
+            <section id="twofish-security">
+                <h2>Seguridad y Rendimiento</h2>
+                <div class="encryption-card">
+                    <h3>Nivel de seguridad</h3>
+                    <ul>
+                        <li><strong>Resistencia a ataques:</strong> No se conocen ataques prácticos viables</li>
+                        <li><strong>Seguridad probada:</strong> 20+ años de análisis criptográfico</li>
+                        <li><strong>S-Boxes dependientes de clave:</strong> Resistencia a ataques lineales</li>
+                        <li><strong>Propiedades de confusión y difusión:</strong> Excelente mezcla de bits</li>
+                        <li><strong>Flexible en tamaño de clave:</strong> 128, 192 o 256 bits</li>
+                    </ul>
+
+                    <h3>Rendimiento</h3>
+                    <ul>
+                        <li><strong>Velocidad:</strong> Comparable a AES en software</li>
+                        <li><strong>Memoria:</strong> Eficiente en uso de memoria</li>
+                        <li><strong>Paralelización:</strong> Buena escalabilidad en múltiples núcleos</li>
+                        <li><strong>Hardware:</strong> Implementable eficientemente en ASIC</li>
+                        <li><strong>Móviles:</strong> Adecuado para dispositivos con recursos limitados</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="twofish-vs-others">
+                <h2>Comparación con otros algoritmos</h2>
+                <div class="encryption-card">
+                    <h3>Vs AES-256</h3>
+                    <ul>
+                        <li><strong>Seguridad:</strong> Twofish tiene propiedades de seguridad similares</li>
+                        <li><strong>Rendimiento:</strong> Twofish es más rápido en algunos entornos</li>
+                        <li><strong>Flexibilidad:</strong> Twofish soporta múltiples tamaños de clave</li>
+                        <li><strong>Adopción:</strong> AES es más ampliamente usado</li>
+                        <li><strong>Patentes:</strong> Twofish es completamente libre de patentes</li>
+                    </ul>
+
+                    <h3>Vs Serpent</h3>
+                    <ul>
+                        <li><strong>Seguridad:</strong> Serpent es más conservador con 32 rondas</li>
+                        <li><strong>Rendimiento:</strong> Twofish es más rápido que Serpent</li>
+                        <li><strong>Implementación:</strong> Twofish tiene mejor rendimiento en software</li>
+                        <li><strong>Flexibilidad:</strong> Ambos son seguros y patent-free</li>
+                    </ul>
+
+                    <h3>Vs RC6</h3>
+                    <ul>
+                        <li><strong>Patentes:</strong> RC6 está patentado por RSA Security</li>
+                        <li><strong>Seguridad:</strong> Ambos son seguros</li>
+                        <li><strong>Libertad:</strong> Twofish es completamente open source</li>
+                        <li><strong>Adopción:</strong> Twofish es más usado en software libre</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="twofish-implementation">
+                <h2>Implementación Práctica</h2>
+                <div class="encryption-card">
+                    <h3>Librerías y frameworks</h3>
+                    <ul>
+                        <li><strong>OpenSSL:</strong> Soporte limitado, no en versiones recientes</li>
+                        <li><strong>Libgcrypt:</strong> Parte de GnuPG, buena implementación</li>
+                        <li><strong>Botan:</strong> Librería C++ con Twofish optimizado</li>
+                        <li><strong>Crypto++:</strong> Implementación completa y optimizada</li>
+                        <li><strong>Python cryptography:</strong> Soporte a través de backends</li>
+                        <li><strong>Bouncy Castle:</strong> Implementación Java completa</li>
+                        <li><strong>LibreSSL:</strong> Versión fork de OpenSSL con Twofish</li>
+                    </ul>
+
+                    <h3>Modos de operación</h3>
+                    <ul>
+                        <li><strong>ECB (Electronic Codebook):</strong> No recomendado para datos estructurados</li>
+                        <li><strong>CBC (Cipher Block Chaining):</strong> Modo más común</li>
+                        <li><strong>CFB (Cipher Feedback):</strong> Modo de flujo para datos de cualquier tamaño</li>
+                        <li><strong>OFB (Output Feedback):</strong> Modo de flujo con sincronización</li>
+                        <li><strong>CTR (Counter Mode):</strong> Paralelizable y eficiente</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="twofish-tools">
+                <h2>Herramientas que usan Twofish</h2>
+                <div class="encryption-card">
+                    <h3>Software de cifrado</h3>
+                    <ul>
+                        <li><strong>TrueCrypt/VeraCrypt:</strong> Algoritmo disponible en contenedores</li>
+                        <li><strong>GnuPG:</strong> Soporte para cifrado simétrico</li>
+                        <li><strong>7-Zip:</strong> Opción de cifrado en archivos comprimidos</li>
+                        <li><strong>WinRAR:</strong> Algoritmo de cifrado disponible</li>
+                        <li><strong>KeePass:</strong> Base de datos de contraseñas</li>
+                    </ul>
+
+                    <h3>Software de backup</h3>
+                    <ul>
+                        <li><strong>Duplicati:</strong> Soporte para Twofish en backups cifrados</li>
+                        <li><strong>UrBackup:</strong> Opción de cifrado para backups</li>
+                        <li><strong>Bacula:</strong> Soporte para múltiples algoritmos</li>
+                        <li><strong>BackupPC:</strong> Configurable para usar Twofish</li>
+                    </ul>
+
+                    <h3>Sistemas operativos y plataformas</h3>
+                    <ul>
+                        <li><strong>OpenBSD:</strong> Algoritmo disponible en el kernel</li>
+                        <li><strong>FreeBSD:</strong> Soporte en bibliotecas criptográficas</li>
+                        <li><strong>Linux:</strong> Disponible en módulos del kernel</li>
+                        <li><strong>Android:</strong> Soporte en algunas implementaciones</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="twofish-compliance">
+                <h2>Cumplimiento y Estándares</h2>
+                <div class="encryption-card">
+                    <h3>Estándares que lo reconocen</h3>
+                    <ul>
+                        <li><strong>NESSIE:</strong> Evaluado como seguro por el proyecto europeo</li>
+                        <li><strong>CRYPTREC:</strong> Recomendado por el gobierno japonés</li>
+                        <li><strong>eSTREAM:</strong> Evaluado para cifrado de flujo (variante)</li>
+                        <li><strong>ISO/IEC 18033-3:</strong> Estándar internacional de cifrado</li>
+                        <li><strong>RFC 4949:</strong> Mencionado en estándares de Internet</li>
+                    </ul>
+
+                    <h3>Requisitos por sector</h3>
+                    <ul>
+                        <li><strong>Gobierno:</strong> Aprobado para datos no clasificados</li>
+                        <li><strong>Finanzas:</strong> Cumple con estándares de seguridad</li>
+                        <li><strong>Salud:</strong> Adecuado para protección de datos médicos</li>
+                        <li><strong>Comercial:</strong> Buena opción para cifrado corporativo</li>
+                        <li><strong>Open Source:</strong> Preferido en software libre por ser patent-free</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="twofish-performance">
+                <h2>Consideraciones de Rendimiento</h2>
+                <div class="encryption-card">
+                    <h3>Optimizaciones de rendimiento</h3>
+                    <ul>
+                        <li><strong>Tablas precomputadas:</strong> S-Boxes optimizadas para velocidad</li>
+                        <li><strong>Procesamiento por bloques:</strong> Eficiente en operaciones masivas</li>
+                        <li><strong>Paralelización:</strong> Múltiples bloques pueden procesarse en paralelo</li>
+                        <li><strong>Cache efficiency:</strong> Acceso optimizado a memoria</li>
+                        <li><strong>Implementaciones SIMD:</strong> Aceleración con instrucciones vectoriales</li>
+                    </ul>
+
+                    <h3>Benchmarks típicos</h3>
+                    <ul>
+                        <li><strong>Intel Core i7:</strong> ~400-600 MB/s por núcleo</li>
+                        <li><strong>ARM Cortex-A:</strong> ~150-250 MB/s por núcleo</li>
+                        <li><strong>Raspberry Pi:</strong> ~50-80 MB/s</li>
+                        <li><strong>Hardware dedicado:</strong> >1 GB/s en implementaciones ASIC</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="twofish-best-practices">
+                <h2>Mejores Prácticas</h2>
+                <div class="encryption-card">
+                    <h3>Implementación segura</h3>
+                    <ul>
+                        <li><strong>Usar modo CBC o CTR:</strong> Evitar ECB para datos estructurados</li>
+                        <li><strong>IV único por mensaje:</strong> Nunca reutilizar vector de inicialización</li>
+                        <li><strong>Gestión de claves:</strong> Rotación periódica y almacenamiento seguro</li>
+                        <li><strong>Validación:</strong> Verificar implementaciones contra vulnerabilidades</li>
+                        <li><strong>Testing:</strong> Validar contra ataques conocidos</li>
+                    </ul>
+
+                    <h3>Consideraciones operativas</h3>
+                    <ul>
+                        <li><strong>Compatibilidad:</strong> Verificar soporte en plataformas objetivo</li>
+                        <li><strong>Actualización:</strong> Mantener librerías actualizadas</li>
+                        <li><strong>Documentación:</strong> Registrar configuraciones de seguridad</li>
+                        <li><strong>Alternativas:</strong> Considerar AES para máxima compatibilidad</li>
+                        <li><strong>Performance tuning:</strong> Optimizar según el caso de uso</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="twofish-future">
+                <h2>Futuro y Consideraciones</h2>
+                <div class="encryption-card">
+                    <h3>Evolución del algoritmo</h3>
+                    <ul>
+                        <li><strong>Adopción limitada:</strong> Menos usado que AES pero aún viable</li>
+                        <li><strong>Software libre:</strong> Beneficio principal por ser patent-free</li>
+                        <li><strong>Variantes:</strong> Threefish para Skein hash function</li>
+                        <li><strong>Post-quantum:</strong> Considerar algoritmos resistentes a quantum</li>
+                    </ul>
+
+                    <h3>Mejores prácticas actuales</h3>
+                    <ul>
+                        <li>Usar 256-bit keys para máxima seguridad futura</li>
+                        <li>Implementar en modo CTR para mejor rendimiento</li>
+                        <li>Considerar alternativas más modernas como ChaCha20</li>
+                        <li>Monitorear actualizaciones de estándares criptográficos</li>
+                        <li>Evaluar rendimiento en el contexto específico de uso</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

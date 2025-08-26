@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLAKE2 - Algoritmo de Hash</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .integrity-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BLAKE2 - Algoritmo de Hash</h1>
+            <p>Algoritmo hash moderno de alta velocidad y seguridad</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-blake2">
+                <h2>¿Qué es BLAKE2?</h2>
+                <div class="integrity-card">
+                    <h3>BLAKE2 Hash Function</h3>
+                    <p>BLAKE2 es una familia de funciones hash criptográficas que incluye BLAKE2b (para arquitecturas de 64 bits) y BLAKE2s (para 32 bits). Es una evolución optimizada de BLAKE, que fue finalista en la competencia SHA-3 de NIST.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Velocidad:</strong> Extremadamente rápido en software y hardware</li>
+                        <li><strong>Seguridad:</strong> Resistente a ataques conocidos</li>
+                        <li><strong>Flexibilidad:</strong> Longitudes de hash personalizables</li>
+                        <li><strong>Estado actual:</strong> Recomendado por estándares modernos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-blake2-works">
+                <h2>Cómo funciona BLAKE2</h2>
+                <div class="integrity-card">
+                    <h3>Basado en HAIFA (HAsh Iterative FrAmework)</h3>
+                    <p>BLAKE2 utiliza el framework HAIFA, que combina elementos de Merkle-Damgård y esponja para lograr un excelente rendimiento y seguridad. Es una versión optimizada del algoritmo BLAKE original.</p>
+
+                    <h3>Pasos principales</h3>
+                    <ol>
+                        <li><strong>Inicialización:</strong> Configuración del estado inicial con parámetros</li>
+                        <li><strong>Procesamiento en bloques:</strong> Mensaje dividido en bloques de 128 bytes</li>
+                        <li><strong>Compresión:</strong> Función de compresión G optimizada</li>
+                        <li><strong>Finalización:</strong> Aplicación de función de finalización</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="blake2-usage">
+                <h2>Uso en Verificación de Integridad</h2>
+                <div class="integrity-card">
+                    <h3>Aplicaciones comunes</h3>
+                    <ul>
+                        <li><strong>Verificación de archivos:</strong> Integridad de datos a alta velocidad</li>
+                        <li><strong>Sistemas de archivos:</strong> ZFS, otros sistemas modernos</li>
+                        <li><strong>Almacenamiento de contraseñas:</strong> Argon2 usa BLAKE2</li>
+                        <li><strong>Verificación de backups:</strong> Para entornos de alto rendimiento</li>
+                        <li><strong>Blockchain:</strong> Usado en algunas criptomonedas</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso</h3>
+                    <pre><code># Python
+import hashlib
+hashlib.blake2b(data).hexdigest()
+
+# Linux (con b2sum)
+b2sum archivo.txt
+
+# C
+#include <blake2.h>
+blake2b(hash, data, key, len, hashlen, salt, person);</code></pre>
+                </div>
+            </section>
+
+            <section id="blake2-variants">
+                <h2>Variantes de BLAKE2</h2>
+                <div class="integrity-card">
+                    <h3>BLAKE2b vs BLAKE2s</h3>
+                    <ul>
+                        <li><strong>BLAKE2b:</strong>
+                            <ul>
+                                <li>64 bits de palabra</li>
+                                <li>Hasta 64 bytes de hash</li>
+                                <li>Para arquitecturas de 64 bits</li>
+                            </ul>
+                        </li>
+                        <li><strong>BLAKE2s:</strong>
+                            <ul>
+                                <li>32 bits de palabra</li>
+                                <li>Hasta 32 bytes de hash</li>
+                                <li>Para arquitecturas de 32 bits</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Funciones adicionales</h3>
+                    <ul>
+                        <li><strong>BLAKE2bp/BLAKE2sp:</strong> Paralelización automática</li>
+                        <li><strong>BLAKE2x:</strong> Salida extendida más allá de 64 bytes</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="blake2-security">
+                <h2>Seguridad y Rendimiento</h2>
+                <div class="integrity-card">
+                    <h3>Fortalezas de seguridad</h3>
+                    <ul>
+                        <li><strong>Resistencia a colisiones:</strong> Diseño robusto</li>
+                        <li><strong>Preimage resistance:</strong> Alta seguridad</li>
+                        <li><strong>No length extension:</strong> Inmunidad a ataques de extensión</li>
+                    </ul>
+
+                    <h3>Rendimiento superior</h3>
+                    <ul>
+                        <li><strong>CPU:</strong> 3x más rápido que SHA-256 en software</li>
+                        <li><strong>Hardware:</strong> Excelente en ASIC y FPGA</li>
+                        <li><strong>Memoria:</strong> Menor footprint que otros algoritmos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="blake2-features">
+                <h2>Características Avanzadas</h2>
+                <div class="integrity-card">
+                    <h3>Personalización</h3>
+                    <ul>
+                        <li><strong>Keyed hashing:</strong> Soporte para claves (BLAKE2X)</li>
+                        <li><strong>Salt:</strong> Soporte para salting</li>
+                        <li><strong>Personalization:</strong> Parámetros personalizables</li>
+                        <li><strong>Tree hashing:</strong> Para procesamiento paralelo</li>
+                    </ul>
+
+                    <h3>Beneficios únicos</h3>
+                    <ul>
+                        <li>Excelente para contraseñas (con Argon2)</li>
+                        <li>Ideal para verificación de integridad masiva</li>
+                        <li>Soporte nativo en sistemas modernos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="blake2-tools">
+                <h2>Herramientas que usan BLAKE2</h2>
+                <div class="integrity-card">
+                    <h3>Implementaciones disponibles</h3>
+                    <ul>
+                        <li><strong>Python:</strong> hashlib.blake2b/s desde Python 3.6</li>
+                        <li><strong>Linux:</strong> b2sum (GNU Coreutils)</li>
+                        <li><strong>Node.js:</strong> crypto.blake2b</li>
+                        <li><strong>Rust:</strong> Librería blake2</li>
+                        <li><strong>C/C++:</strong> Librería de referencia oficial</li>
+                    </ul>
+
+                    <h3>Sistemas que lo integran</h3>
+                    <ul>
+                        <li><strong>ZFS:</strong> Sistema de archivos usa BLAKE2</li>
+                        <li><strong>WireGuard:</strong> VPN usa BLAKE2s</li>
+                        <li><strong>Argon2:</strong> Función de derivación de claves</li>
+                        <li><strong>7-Zip:</strong> Soporte en versiones recientes</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="blake2-comparison">
+                <h2>Comparación con otros algoritmos</h2>
+                <div class="integrity-card">
+                    <h3>Vs SHA-256</h3>
+                    <ul>
+                        <li><strong>Velocidad:</strong> BLAKE2 es significativamente más rápido</li>
+                        <li><strong>Seguridad:</strong> Ambos son seguros</li>
+                        <li><strong>Adopción:</strong> SHA-256 más establecido</li>
+                    </ul>
+
+                    <h3>Vs SHA-3</h3>
+                    <ul>
+                        <li><strong>Velocidad:</strong> BLAKE2 generalmente más rápido</li>
+                        <li><strong>Simplicidad:</strong> BLAKE2 más simple de implementar</li>
+                        <li><strong>Adopción:</strong> SHA-3 es estándar NIST oficial</li>
+                    </ul>
+
+                    <h3>Cuándo elegir BLAKE2</h3>
+                    <ul>
+                        <li>Cuando el rendimiento es crítico</li>
+                        <li>Para verificación de integridad a gran escala</li>
+                        <li>En sistemas con recursos limitados</li>
+                        <li>Para aplicaciones que requieren personalización</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

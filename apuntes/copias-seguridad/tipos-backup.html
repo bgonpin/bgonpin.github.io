@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipos de Copias de Seguridad</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .concept-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .strategy-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .strategy-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tipos de Copias de Seguridad</h1>
+            <p>Exploración detallada de las diferentes estrategias de backup</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="backup-vms.html">Backup para VMs</a>
+            <a href="almacenamiento-backup.html">Almacenamiento</a>
+            <a href="ransomware-backup.html">Protección Ransomware</a>
+            <a href="drp.html">Plan de Recuperación</a>
+            <a href="snapshots-vms.html">Snapshots para VMs</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="full-backup">
+                <h2>Copia Completa (Full Backup)</h2>
+                <div class="concept-card">
+                    <h3>Definición</h3>
+                    <p>Una copia completa incluye todos los datos seleccionados en cada ejecución, sin importar si han cambiado o no desde la última copia.</p>
+
+                    <h3>Ventajas</h3>
+                    <ul>
+                        <li><strong>Restauración rápida:</strong> Todos los datos están en un solo lugar</li>
+                        <li><strong>Simplicidad:</strong> Fácil de entender y gestionar</li>
+                        <li><strong>Confiabilidad:</strong> Menos propenso a errores en la restauración</li>
+                    </ul>
+
+                    <h3>Desventajas</h3>
+                    <ul>
+                        <li><strong>Tiempo de ejecución:</strong> Muy lento para grandes volúmenes</li>
+                        <li><strong>Espacio de almacenamiento:</strong> Consume mucho espacio</li>
+                        <li><strong>Impacto en rendimiento:</strong> Puede afectar el sistema durante la copia</li>
+                    </ul>
+
+                    <h3>Casos de uso</h3>
+                    <ul>
+                        <li>Primer backup del sistema</li>
+                        <li>Entornos pequeños con poco cambio de datos</li>
+                        <li>Copias base para estrategias incrementales</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="incremental-backup">
+                <h2>Copia Incremental</h2>
+                <div class="concept-card">
+                    <h3>Definición</h3>
+                    <p>Solo copia los datos que han cambiado desde la última copia de cualquier tipo (completa o incremental).</p>
+
+                    <h3>Ventajas</h3>
+                    <ul>
+                        <li><strong>Velocidad:</strong> Muy rápida después del primer backup completo</li>
+                        <li><strong>Espacio eficiente:</strong> Solo almacena cambios</li>
+                        <li><strong>Mínimo impacto:</strong> Baja carga en el sistema</li>
+                    </ul>
+
+                    <h3>Desventajas</h3>
+                    <ul>
+                        <li><strong>Restauración compleja:</strong> Requiere todas las copias para restaurar completamente</li>
+                        <li><strong>Dependencia:</strong> Si una copia incremental se corrompe, se pierden datos posteriores</li>
+                        <li><strong>Gestión compleja:</strong> Múltiples archivos que mantener</li>
+                    </ul>
+
+                    <h3>Casos de uso</h3>
+                    <ul>
+                        <li>Backups diarios en entornos con muchos cambios</li>
+                        <li>Optimización de espacio de almacenamiento</li>
+                        <li>Entornos donde la velocidad es crítica</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="differential-backup">
+                <h2>Copia Diferencial</h2>
+                <div class="concept-card">
+                    <h3>Definición</h3>
+                    <p>Copia todos los datos que han cambiado desde la última copia completa, independientemente de copias incrementales realizadas.</p>
+
+                    <h3>Ventajas</h3>
+                    <ul>
+                        <li><strong>Restauración más rápida:</strong> Solo necesita la copia completa + la última diferencial</li>
+                        <li><strong>Balance velocidad/espacio:</strong> Mejor compromiso que incremental</li>
+                        <li><strong>Menos dependencias:</strong> Menos archivos que mantener</li>
+                    </ul>
+
+                    <h3>Desventajas</h3>
+                    <ul>
+                        <li><strong>Espacio creciente:</strong> Ocupa más espacio que incremental con el tiempo</li>
+                        <li><strong>Velocidad decreciente:</strong> Se vuelve más lenta conforme pasan los días</li>
+                    </ul>
+
+                    <h3>Casos de uso</h3>
+                    <ul>
+                        <li>Entornos medianos con presupuesto limitado</li>
+                        <li>Cuando se necesita balance entre velocidad y simplicidad</li>
+                        <li>Backups semanales o quincenales</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="comparison">
+                <h2>Comparación de Tipos de Backup</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>Completa</th>
+                            <th>Incremental</th>
+                            <th>Diferencial</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Velocidad de Backup</td>
+                            <td>Lenta</td>
+                            <td>Muy Rápida</td>
+                            <td>Rápida (al principio)</td>
+                        </tr>
+                        <tr>
+                            <td>Espacio Utilizado</td>
+                            <td>Alta</td>
+                            <td>Muy Baja</td>
+                            <td>Media (crece)</td>
+                        </tr>
+                        <tr>
+                            <td>Velocidad de Restauración</td>
+                            <td>Muy Rápida</td>
+                            <td>Lenta</td>
+                            <td>Media</td>
+                        </tr>
+                        <tr>
+                            <td>Complejidad de Gestión</td>
+                            <td>Baja</td>
+                            <td>Alta</td>
+                            <td>Media</td>
+                        </tr>
+                        <tr>
+                            <td>Recomendación</td>
+                            <td>Base semanal</td>
+                            <td>Diaria</td>
+                            <td>Intermedia</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="hybrid-strategy">
+                <h2>Estrategia Híbrida Recomendada</h2>
+                <div class="strategy-card">
+                    <h3>La Mejor de Ambos Mundos</h3>
+                    <p>La estrategia más efectiva combina diferentes tipos de backup para optimizar velocidad, espacio y fiabilidad.</p>
+
+                    <h4>Estrategia Recomendada</h4>
+                    <ul>
+                        <li><strong>Copia completa semanal:</strong> Los domingos por la noche, cuando hay menos actividad</li>
+                        <li><strong>Copias incrementales diarias:</strong> De lunes a sábado, capturando solo cambios</li>
+                        <li><strong>Retención:</strong> Mantener 4 semanas de copias completas + incrementales diarias</li>
+                    </ul>
+
+                    <h4>Beneficios de esta estrategia</h4>
+                    <ul>
+                        <li>Velocidad en backups diarios</li>
+                        <li>Espacio de almacenamiento optimizado</li>
+                        <li>Restauración relativamente rápida</li>
+                        <li>Balance entre costo y funcionalidad</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="considerations">
+                <h2>Consideraciones Importantes</h2>
+                <div class="concept-card">
+                    <h3>Factores a Considerar</h3>
+                    <ul>
+                        <li><strong>Volumen de datos:</strong> Más datos = más tiempo y espacio necesario</li>
+                        <li><strong>Velocidad de cambio:</strong> Cuántos datos cambian diariamente</li>
+                        <li><strong>Ventana de backup:</strong> Tiempo disponible para realizar copias</li>
+                        <li><strong>Objetivos de recuperación:</strong> RTO y RPO requeridos</li>
+                        <li><strong>Recursos disponibles:</strong> Hardware, software, presupuesto</li>
+                    </ul>
+
+                    <h3>Mejores Prácticas</h3>
+                    <ul>
+                        <li>Documentar claramente la estrategia elegida</li>
+                        <li>Probar regularmente la restauración</li>
+                        <li>Monitorear el rendimiento de los backups</li>
+                        <li>Revisar y ajustar la estrategia según necesidades</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

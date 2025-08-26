@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CertUtil - Herramienta de Verificación de Integridad</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .integrity-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CertUtil - Herramienta de Verificación</h1>
+            <p>Utilidad de Windows para cálculo de hashes y verificación de integridad</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-certutil">
+                <h2>¿Qué es CertUtil?</h2>
+                <div class="integrity-card">
+                    <h3>Certificate Utility</h3>
+                    <p>CertUtil es una herramienta de línea de comandos incluida en Windows que forma parte del Certificate Services. Aunque su función principal es gestionar certificados digitales, también incluye capacidades robustas para calcular hashes criptográficos.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Integrada en Windows:</strong> Disponible en todas las versiones</li>
+                        <li><strong>Múltiples algoritmos:</strong> Soporte para MD5, SHA-1, SHA-256, SHA-384, SHA-512</li>
+                        <li><strong>Verificación de archivos:</strong> Cálculo y comparación de hashes</li>
+                        <li><strong>Automatización:</strong> Ideal para scripts y procesos batch</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="certutil-hash">
+                <h2>Cálculo de Hashes con CertUtil</h2>
+                <div class="integrity-card">
+                    <h3>Comandos básicos</h3>
+                    <p>CertUtil utiliza el parámetro -hashfile para calcular hashes de archivos.</p>
+
+                    <h3>Sintaxis general</h3>
+                    <pre><code>certutil -hashfile archivo.ext algoritmo</code></pre>
+
+                    <h3>Ejemplos de uso</h3>
+                    <pre><code># SHA-256 (recomendado)
+certutil -hashfile documento.pdf SHA256
+
+# SHA-1
+certutil -hashfile imagen.jpg SHA1
+
+# MD5 (obsoleto pero soportado)
+certutil -hashfile archivo.txt MD5
+
+# SHA-512 para máxima seguridad
+certutil -hashfile backup.zip SHA512</code></pre>
+                </div>
+            </section>
+
+            <section id="certutil-algorithms">
+                <h2>Algoritmos Soportados</h2>
+                <div class="integrity-card">
+                    <h3>Algoritmos disponibles</h3>
+                    <ul>
+                        <li><strong>MD5:</strong> 128 bits (obsoleto)</li>
+                        <li><strong>SHA1:</strong> 160 bits (obsoleto)</li>
+                        <li><strong>SHA256:</strong> 256 bits (recomendado)</li>
+                        <li><strong>SHA384:</strong> 384 bits (alta seguridad)</li>
+                        <li><strong>SHA512:</strong> 512 bits (máxima seguridad)</li>
+                    </ul>
+
+                    <h3>Recomendaciones</h3>
+                    <ul>
+                        <li>Usar SHA-256 como mínimo para nuevas implementaciones</li>
+                        <li>SHA-384 o SHA-512 para entornos de alta seguridad</li>
+                        <li>Evitar MD5 y SHA-1 para aplicaciones nuevas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="certutil-batch">
+                <h2>Automatización y Scripts</h2>
+                <div class="integrity-card">
+                    <h3>Procesamiento por lotes</h3>
+                    <p>CertUtil es ideal para procesar múltiples archivos en scripts batch.</p>
+
+                    <h3>Ejemplo de script batch</h3>
+                    <pre><code>@echo off
+echo Calculando hashes SHA-256...
+for %%f in (*.pdf) do (
+    echo Procesando: %%f
+    certutil -hashfile "%%f" SHA256 > "%%f.sha256"
+)
+echo Proceso completado.</code></pre>
+
+                    <h3>Script PowerShell</h3>
+                    <pre><code>$files = Get-ChildItem *.zip
+foreach ($file in $files) {
+    $hash = certutil -hashfile $file.FullName SHA256 | Select-String -Pattern "^[0-9a-f]{64}$"
+    "$($file.Name): $hash" | Out-File -FilePath "hashes.txt" -Append
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="certutil-verification">
+                <h2>Verificación de Integridad</h2>
+                <div class="integrity-card">
+                    <h3>Comparación de hashes</h3>
+                    <p>Para verificar la integridad, compare el hash calculado con el hash de referencia.</p>
+
+                    <h3>Proceso de verificación</h3>
+                    <ol>
+                        <li>Calcular hash del archivo actual</li>
+                        <li>Comparar con hash de referencia</li>
+                        <li>Verificar que coincidan exactamente</li>
+                    </ol>
+
+                    <h3>Ejemplo de verificación</h3>
+                    <pre><code># Calcular hash
+certutil -hashfile archivo.iso SHA256
+
+# Comparar manualmente o con script
+# Hash esperado: a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3</code></pre>
+                </div>
+            </section>
+
+            <section id="certutil-backup">
+                <h2>Uso en Copias de Seguridad</h2>
+                <div class="integrity-card">
+                    <h3>Integración con backups</h3>
+                    <ul>
+                        <li><strong>Verificación post-backup:</strong> Validar integridad después de copiar</li>
+                        <li><strong>Scripts de automatización:</strong> Incluir en procesos de backup</li>
+                        <li><strong>Verificación incremental:</strong> Comprobar solo archivos modificados</li>
+                        <li><strong>Reportes:</strong> Generar logs de verificación</li>
+                    </ul>
+
+                    <h3>Ejemplo en backup script</h3>
+                    <pre><code>rem Verificar backup después de copiar
+certutil -hashfile "D:\backup\datos.bak" SHA256 > "D:\logs\backup_hash.txt"
+echo Backup verificado en %DATE% %TIME% >> "D:\logs\backup_log.txt"</code></pre>
+                </div>
+            </section>
+
+            <section id="certutil-limitations">
+                <h2>Limitaciones y Consideraciones</h2>
+                <div class="integrity-card">
+                    <h3>Limitaciones conocidas</h3>
+                    <ul>
+                        <li><strong>Solo Windows:</strong> No disponible en Linux/macOS</li>
+                        <li><strong>Velocidad:</strong> Más lento que herramientas especializadas</li>
+                        <li><strong>Salida:</strong> Incluye texto adicional que requiere filtrado</li>
+                        <li><strong>Algoritmos obsoletos:</strong> Sigue soportando MD5/SHA-1</li>
+                    </ul>
+
+                    <h3>Mejores prácticas</h3>
+                    <ul>
+                        <li>Filtrar la salida para obtener solo el hash</li>
+                        <li>Usar en scripts donde la portabilidad no es crítica</li>
+                        <li>Considerar herramientas multiplataforma para entornos mixtos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="certutil-alternatives">
+                <h2>Alternativas y Complementos</h2>
+                <div class="integrity-card">
+                    <h3>Herramientas similares</h3>
+                    <ul>
+                        <li><strong>PowerShell:</strong> Get-FileHash (más moderna)</li>
+                        <li><strong>FCIV:</strong> File Checksum Integrity Verifier (Microsoft)</li>
+                        <li><strong>OpenSSL:</strong> Multiplataforma</li>
+                        <li><strong>7-Zip:</strong> Integrado en el compresor</li>
+                    </ul>
+
+                    <h3>Cuándo usar CertUtil</h3>
+                    <ul>
+                        <li>Entornos Windows puros</li>
+                        <li>Scripts existentes que ya lo usan</li>
+                        <li>No requiere instalación adicional</li>
+                        <li>Procesos de automatización simples</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="certutil-troubleshooting">
+                <h2>Solución de Problemas</h2>
+                <div class="integrity-card">
+                    <h3>Errores comunes</h3>
+                    <ul>
+                        <li><strong>Acceso denegado:</strong> Ejecutar como administrador</li>
+                        <li><strong>Archivo no encontrado:</strong> Verificar ruta completa</li>
+                        <li><strong>Algoritmo no válido:</strong> Usar nombres exactos (SHA256, no SHA-256)</li>
+                    </ul>
+
+                    <h3>Optimizaciones</h3>
+                    <ul>
+                        <li>Procesar archivos grandes en lotes</li>
+                        <li>Redirigir salida para evitar delays</li>
+                        <li>Usar rutas UNC para archivos en red</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almacenamiento para Copias de Seguridad</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .storage-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Almacenamiento para Copias de Seguridad</h1>
+            <p>Soluciones de almacenamiento para proteger y preservar tus datos</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="backup-vms.html">Backup para VMs</a>
+            <a href="almacenamiento-backup.html">Almacenamiento</a>
+            <a href="ransomware-backup.html">Protección Ransomware</a>
+            <a href="drp.html">Plan de Recuperación</a>
+            <a href="snapshots-vms.html">Snapshots para VMs</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="importance">
+                <h2>¿Por qué es crucial el almacenamiento para backup?</h2>
+                <div class="storage-card">
+                    <h3>El almacenamiento es la base de tu estrategia de backup</h3>
+                    <p>Un buen sistema de almacenamiento para copias de seguridad debe equilibrar capacidad, rendimiento, confiabilidad y costo, mientras garantiza la accesibilidad de los datos cuando más se necesiten.</p>
+
+                    <h3>Factores críticos a considerar</h3>
+                    <ul>
+                        <li><strong>Capacidad:</strong> Suficiente espacio para múltiples versiones</li>
+                        <li><strong>Velocidad:</strong> Acceso rápido para restauraciones</li>
+                        <li><strong>Confiabilidad:</strong> Protección contra fallos</li>
+                        <li><strong>Escalabilidad:</strong> Capacidad de crecimiento</li>
+                        <li><strong>Costo:</strong> Balance económico vs requerimientos</li>
+                        <li><strong>Accesibilidad:</strong> Disponibilidad cuando se necesite</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="local-storage">
+                <h2>Almacenamiento Local</h2>
+
+                <h3>Discos Duros Internos/Externos</h3>
+                <div class="storage-card">
+                    <h4>Características principales</h4>
+                    <ul>
+                        <li><strong>Acceso rápido:</strong> Velocidades de 100-200 MB/s</li>
+                        <li><strong>Capacidad alta:</strong> Hasta 20TB por disco</li>
+                        <li><strong>Costo por GB:</strong> Muy económico ($0.02-0.05/GB)</li>
+                        <li><strong>Disponibilidad:</strong> 24/7 con redundancia RAID</li>
+                    </ul>
+
+                    <h4>Tipos de discos</h4>
+                    <ul>
+                        <li><strong>HDD tradicionales:</strong> Alta capacidad, menor velocidad</li>
+                        <li><strong>SSD/SATA:</strong> Alta velocidad, menor capacidad</li>
+                        <li><strong>SSD NVMe:</strong> Velocidad extrema para datos críticos</li>
+                    </ul>
+
+                    <h4>Limitaciones</h4>
+                    <ul>
+                        <li>Susceptible a desastres locales (incendios, robos)</li>
+                        <li>No cumple regla 3-2-1 completamente</li>
+                        <li>Mantenimiento físico requerido</li>
+                    </ul>
+                </div>
+
+                <h3>Redes de Almacenamiento Local</h3>
+                <div class="storage-card">
+                    <h4>NAS (Network Attached Storage)</h4>
+                    <ul>
+                        <li>Almacenamiento compartido en red local</li>
+                        <li>RAID para redundancia</li>
+                        <li>Acceso desde múltiples dispositivos</li>
+                        <li>Fácil configuración y gestión</li>
+                    </ul>
+
+                    <h4>SAN (Storage Area Network)</h4>
+                    <ul>
+                        <li>Red dedicada de alto rendimiento</li>
+                        <li>Acceso a nivel de bloque</li>
+                        <li>Escalabilidad enterprise</li>
+                        <li>Costo elevado</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="cloud-storage">
+                <h2>Almacenamiento en la Nube</h2>
+
+                <h3>Ventajas del Cloud Storage</h3>
+                <div class="storage-card">
+                    <h4>Beneficios principales</h4>
+                    <ul>
+                        <li><strong>Off-site automático:</strong> Cumple regla 3-2-1</li>
+                        <li><strong>Escalabilidad ilimitada:</strong> Paga por lo que usas</li>
+                        <li><strong>Disponibilidad 99.9%:</strong> Acceso desde cualquier lugar</li>
+                        <li><strong>Mantenimiento cero:</strong> Gestionado por proveedores</li>
+                        <li><strong>Redundancia geográfica:</strong> Múltiples centros de datos</li>
+                    </ul>
+                </div>
+
+                <h3>Principales Proveedores</h3>
+                <div class="storage-card">
+                    <h4>Amazon S3</h4>
+                    <ul>
+                        <li><strong>Durabilidad:</strong> 99.999999999% (11 nueves)</li>
+                        <li><strong>Clases de almacenamiento:</strong> Standard, IA, Glacier, Deep Archive</li>
+                        <li><strong>Integración:</strong> Excelente con AWS ecosystem</li>
+                        <li><strong>Costo:</strong> $0.023/GB (Standard), $0.0125/GB (IA)</li>
+                    </ul>
+
+                    <h4>Microsoft Azure Blob Storage</h4>
+                    <ul>
+                        <li><strong>Integración:</strong> Perfecta con entornos Microsoft</li>
+                        <li><strong>Niveles:</strong> Hot, Cool, Archive</li>
+                        <li><strong>Seguridad:</strong> Azure AD y RBAC</li>
+                        <li><strong>Costo:</strong> $0.0184/GB (Hot), $0.0152/GB (Cool)</li>
+                    </ul>
+
+                    <h4>Google Cloud Storage</h4>
+                    <ul>
+                        <li><strong>Velocidad:</strong> Excelente para datos calientes</li>
+                        <li><strong>Regiones:</strong> Más de 100 ubicaciones globales</li>
+                        <li><strong>Precios competitivos:</strong> $0.020/GB (Standard)</li>
+                        <li><strong>Inteligencia:</strong> Auto-classification con AI</li>
+                    </ul>
+
+                    <h4>Backblaze B2</h4>
+                    <ul>
+                        <li><strong>Sencillez:</strong> API simple y bien documentada</li>
+                        <li><strong>Costo:</strong> $0.005/GB (muy competitivo)</li>
+                        <li><strong>Velocidad:</strong> Subida rápida, descarga ilimitada</li>
+                        <li><strong>Transparencia:</strong> Sin costos ocultos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="tape-storage">
+                <h2>Cintas Magnéticas (Tape Storage)</h2>
+
+                <div class="storage-card">
+                    <h3>¿Por qué las cintas siguen siendo relevantes?</h3>
+                    <p>A pesar de los avances tecnológicos, las cintas magnéticas siguen siendo una opción viable para archivado de largo plazo y backup masivo.</p>
+
+                    <h4>Ventajas</h4>
+                    <ul>
+                        <li><strong>Costo por TB:</strong> El más bajo disponible ($0.01-0.02/GB)</li>
+                        <li><strong>Durabilidad:</strong> Hasta 30 años de vida útil</li>
+                        <li><strong>Capacidad:</strong> Hasta 20TB por cinta (LTO-9)</li>
+                        <li><strong>Consumo energético:</strong> Muy bajo</li>
+                        <li><strong>Portabilidad:</strong> Fácil transporte off-site</li>
+                    </ul>
+
+                    <h4>Desventajas</h4>
+                    <ul>
+                        <li>Acceso lento (minutos u horas)</li>
+                        <li>Mantenimiento de librerías</li>
+                        <li>Curva de aprendizaje alta</li>
+                        <li>No apto para recuperación frecuente</li>
+                    </ul>
+
+                    <h4>Casos de uso ideales</h4>
+                    <ul>
+                        <li>Archivado de datos históricos</li>
+                        <li>Backup de largo plazo (más de 1 año)</li>
+                        <li>Cumplimiento normativo</li>
+                        <li>Recuperación ante desastres</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="hybrid-solutions">
+                <h2>Soluciones Híbridas</h2>
+
+                <h3>Cloud + Local</h3>
+                <div class="storage-card">
+                    <h4>Estrategia balanceada</h4>
+                    <p>Combina lo mejor de ambos mundos: velocidad local con seguridad off-site.</p>
+
+                    <h4>Ejemplos de implementación</h4>
+                    <ul>
+                        <li><strong>Caché local + cloud:</strong> Datos recientes local, históricos en cloud</li>
+                        <li><strong>Backup en capas:</strong> Completo local, incremental cloud</li>
+                        <li><strong>Replicación automática:</strong> Sincronización bidireccional</li>
+                    </ul>
+                </div>
+
+                <h3>Object Storage + File Storage</h3>
+                <div class="storage-card">
+                    <h4>Optimización por tipo de dato</h4>
+                    <ul>
+                        <li><strong>Object Storage:</strong> Para backup masivo, archivado</li>
+                        <li><strong>File Storage:</strong> Para acceso frecuente, colaboración</li>
+                        <li><strong>Block Storage:</strong> Para aplicaciones, bases de datos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="considerations">
+                <h2>Consideraciones Importantes</h2>
+
+                <h3>Costos Totales (TCO)</h3>
+                <div class="storage-card">
+                    <h4>Factores a incluir</h4>
+                    <ul>
+                        <li><strong>Costo inicial:</strong> Hardware, software, instalación</li>
+                        <li><strong>Costo operativo:</strong> Electricidad, mantenimiento, soporte</li>
+                        <li><strong>Costo de crecimiento:</strong> Escalabilidad, migraciones</li>
+                        <li><strong>Costo de recuperación:</strong> Tiempo de inactividad, pérdida de datos</li>
+                        <li><strong>Costo de cumplimiento:</strong> Multas por no cumplimiento normativo</li>
+                    </ul>
+                </div>
+
+                <h3>Requisitos de Rendimiento</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo de Dato</th>
+                            <th>Velocidad Requerida</th>
+                            <th>Disponibilidad</th>
+                            <th>Solución Recomendada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Datos críticos (BD, email)</td>
+                            <td>Alto (ms)</td>
+                            <td>99.9%</td>
+                            <td>SSD NVMe + RAID</td>
+                        </tr>
+                        <tr>
+                            <td>Datos importantes</td>
+                            <td>Medio (segundos)</td>
+                            <td>99.5%</td>
+                            <td>HDD + RAID</td>
+                        </tr>
+                        <tr>
+                            <td>Archivos históricos</td>
+                            <td>Bajo (minutos)</td>
+                            <td>99%</td>
+                            <td>Cloud/ Tape</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="future-trends">
+                <h2>Tendencias Futuras</h2>
+
+                <div class="storage-card">
+                    <h3>Storage Defined Software</h3>
+                    <p>El futuro del almacenamiento es el software-defined, donde el hardware se abstrae completamente.</p>
+                    <ul>
+                        <li>Implementación en commodity hardware</li>
+                        <li>Gestión automatizada con IA</li>
+                        <li>Escalabilidad infinita</li>
+                        <li>Optimización automática de recursos</li>
+                    </ul>
+
+                    <h3>Edge Computing Storage</h3>
+                    <p>Con el crecimiento del IoT y edge computing, el almacenamiento se distribuye.</p>
+                    <ul>
+                        <li>Procesamiento de datos en el borde</li>
+                        <li>Sincronización inteligente</li>
+                        <li>Gestión centralizada de nodos distribuidos</li>
+                        <li>Backup automático de dispositivos edge</li>
+                    </ul>
+
+                    <h3>Storage con IA</h3>
+                    <p>La inteligencia artificial está transformando el almacenamiento.</p>
+                    <ul>
+                        <li>Clasificación automática de datos</li>
+                        <li>Optimización predictiva de capacidad</li>
+                        <li>Detección automática de anomalías</li>
+                        <li>Migración inteligente de datos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="best-practices">
+                <h2>Mejores Prácticas</h2>
+
+                <div class="storage-card">
+                    <h3>Planificación de Capacidad</h3>
+                    <ul>
+                        <li><strong>Crecimiento esperado:</strong> Planificar 3-5 años</li>
+                        <li><strong>Compresión y deduplicación:</strong> Reducir espacio en 70-90%</li>
+                        <li><strong>Retención de datos:</strong> Políticas claras por tipo de dato</li>
+                        <li><strong>Monitoreo continuo:</strong> Alertas de capacidad y rendimiento</li>
+                    </ul>
+
+                    <h3>Seguridad y Cumplimiento</h3>
+                    <ul>
+                        <li><strong>Cifrado:</strong> Datos en reposo y en tránsito</li>
+                        <li><strong>Acceso controlado:</strong> RBAC y MFA</li>
+                        <li><strong>Auditorías:</strong> Logs de acceso y modificaciones</li>
+                        <li><strong>Cumplimiento:</strong> GDPR, HIPAA, SOX según industria</li>
+                    </ul>
+
+                    <h3>Mantenimiento y Testing</h3>
+                    <ul>
+                        <li><strong>Pruebas regulares:</strong> Verificar integridad de datos</li>
+                        <li><strong>Simulacros de recuperación:</strong> Al menos trimestral</li>
+                        <li><strong>Actualizaciones:</strong> Firmware, drivers, software</li>
+                        <li><strong>Documentación:</strong> Mantener actualizada</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

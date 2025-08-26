@@ -229,7 +229,7 @@
                     
                     <!-- Apuntes Grid -->
                     <div class="row g-4">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="card h-100 apunte-card shadow-lg border-0" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); border-radius: 15px; transform: translateY(0); transition: all 0.3s ease;">
                                 <div class="card-body text-center">
                                     <div class="apunte-icon mb-3">
@@ -243,6 +243,23 @@
                                         Integración de auditd con Wazuh para monitoreo avanzado de sistemas Linux. Configuración, reglas personalizadas y análisis de eventos de seguridad.
                                     </p>
                                     <a href="auditd-wazuh.html" class="btn btn-dark mt-2">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 apunte-card shadow-lg border-0" style="background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%); border-radius: 15px; transform: translateY(0); transition: all 0.3s ease;">
+                                <div class="card-body text-center">
+                                    <div class="apunte-icon mb-3">
+                                        <i class="fas fa-database fa-2x" style="color: #667EEA;"></i>
+                                    </div>
+                                    <h5 class="card-title fw-bold">Apunte 2: Manual de Copias de Seguridad</h5>
+                                    <p class="card-text small">
+                                        Fecha actualizacion: 26-08-2025
+                                    </p>
+                                    <p class="card-text">
+                                        Guía integral para la protección de datos en entornos empresariales y domésticos. Tipos de backup, políticas de seguridad y estrategias de recuperación.
+                                    </p>
+                                    <a href="copias-seguridad.html" class="btn btn-dark mt-2">Leer más</a>
                                 </div>
                             </div>
                         </div>
@@ -308,7 +325,8 @@
             try {
                 // For now, we'll create basic data from current page structure
                 apuntesData = [
-                    { archivo: "auditd-wazuh", titulo: "Apunte 1: Auditd con Wazuh", descripcion: "Integración de auditd con Wazuh para monitoreo avanzado de sistemas Linux.", ruta: "apuntes/auditd-wazuh.html" }
+                    { archivo: "auditd-wazuh", titulo: "Apunte 1: Auditd con Wazuh", descripcion: "Integración de auditd con Wazuh para monitoreo avanzado de sistemas Linux.", ruta: "apuntes/auditd-wazuh.html" },
+                    { archivo: "copias-seguridad", titulo: "Apunte 2: Manual de Copias de Seguridad", descripcion: "Guía integral para la protección de datos en entornos empresariales y domésticos. Tipos de backup, políticas de seguridad y estrategias de recuperación.", ruta: "apuntes/copias-seguridad.html" }
                 ];
             } catch (error) {
                 console.error('Error loading apuntes data:', error);

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECDSA - Algoritmo de Firma Digital de Curva Elíptica</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .encryption-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ECDSA - Algoritmo de Firma Digital de Curva Elíptica</h1>
+            <p>Elliptic Curve Digital Signature Algorithm - Firma digital moderna y eficiente</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-ecdsa">
+                <h2>¿Qué es ECDSA?</h2>
+                <div class="encryption-card">
+                    <h3>Elliptic Curve Digital Signature Algorithm</h3>
+                    <p>ECDSA es un algoritmo de firma digital que utiliza criptografía de curva elíptica para proporcionar autenticación y verificación de integridad. Es una alternativa más eficiente a RSA, ofreciendo el mismo nivel de seguridad con claves significativamente más pequeñas.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Basado en curvas elípticas:</strong> Matemáticas de curvas elípticas sobre campos finitos</li>
+                        <li><strong>Claves más pequeñas:</strong> Misma seguridad que RSA con claves mucho más cortas</li>
+                        <li><strong>Firma digital:</strong> Principalmente para autenticación y no-repudio</li>
+                        <li><strong>Intercambio de claves:</strong> Usado en ECDSA para derivar claves compartidas</li>
+                        <li><strong>Estándar NIST:</strong> FIPS 186-4, ANSI X9.62</li>
+                        <li><strong>Curvas soportadas:</strong> secp256r1, secp384r1, secp521r1, brainpoolP256r1</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-ecdsa-works">
+                <h2>Cómo funciona ECDSA</h2>
+                <div class="encryption-card">
+                    <h3>Fundamentos matemáticos</h3>
+                    <p>ECDSA se basa en el problema del logaritmo discreto en curvas elípticas, que es computacionalmente difícil de resolver. Utiliza una curva elíptica sobre un campo finito y operaciones de punto en la curva.</p>
+
+                    <h3>Generación de claves</h3>
+                    <ol>
+                        <li><strong>Seleccionar curva:</strong> Elegir una curva elíptica estándar (ej: secp256r1)</li>
+                        <li><strong>Generar clave privada:</strong> d (número aleatorio entre 1 y n-1, donde n es el orden de la curva)</li>
+                        <li><strong>Calcular clave pública:</strong> Q = d × G (multiplicación escalar de punto)</li>
+                        <li><strong>Par de claves:</strong> (d, Q) donde d es privada y Q es pública</li>
+                    </ol>
+
+                    <h3>Proceso de firma</h3>
+                    <ul>
+                        <li><strong>Mensaje:</strong> M (datos a firmar)</li>
+                        <li><strong>Hash del mensaje:</strong> e = HASH(M)</li>
+                        <li><strong>Número aleatorio:</strong> k (debe ser único por firma)</li>
+                        <li><strong>Calcular punto:</strong> (x, y) = k × G</li>
+                        <li><strong>Firma:</strong> r = x mod n, s = (e + d × r) × k^(-1) mod n</li>
+                        <li><strong>Firma completa:</strong> (r, s)</li>
+                    </ul>
+
+                    <h3>Verificación de firma</h3>
+                    <ul>
+                        <li><strong>Calcular hash:</strong> e = HASH(M)</li>
+                        <li><strong>Verificar rangos:</strong> Comprobar que r y s están en rango válido</li>
+                        <li><strong>Calcular valores:</strong> w = s^(-1) mod n, u1 = e × w mod n, u2 = r × w mod n</li>
+                        <li><strong>Calcular punto:</strong> P = u1 × G + u2 × Q</li>
+                        <li><strong>Verificar:</strong> r ≡ P.x mod n</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="ecdsa-usage">
+                <h2>Uso en Copias de Seguridad</h2>
+                <div class="encryption-card">
+                    <h3>Aplicaciones principales</h3>
+                    <ul>
+                        <li><strong>Firma digital de backups:</strong> Verificar integridad y autenticidad</li>
+                        <li><strong>Certificados SSL/TLS:</strong> Autenticación de servidores web</li>
+                        <li><strong>Blockchain y criptomonedas:</strong> Bitcoin, Ethereum (usando secp256k1)</li>
+                        <li><strong>Autenticación SSH:</strong> Verificación de identidad de servidores</li>
+                        <li><strong>Firma de software:</strong> Verificación de actualizaciones y parches</li>
+                        <li><strong>Token de hardware:</strong> YubiKey, TPM con soporte ECDSA</li>
+                        <li><strong>IoT y dispositivos:</strong> Autenticación eficiente en recursos limitados</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso</h3>
+                    <pre><code># OpenSSL - Generar claves ECDSA
+openssl ecparam -genkey -name secp256r1 -out private_key.pem
+openssl ec -pubout -in private_key.pem -out public_key.pem
+
+# Firmar archivo
+openssl dgst -sha256 -sign private_key.pem -out signature.bin archivo.txt
+
+# Verificar firma
+openssl dgst -sha256 -verify public_key.pem -signature signature.bin archivo.txt
+
+# Python con cryptography
+from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric.utils import decode_dss_signature
+
+# Generar claves
+private_key = ec.generate_private_key(ec.SECP256R1())
+public_key = private_key.public_key()
+
+# Firmar
+signature = private_key.sign(message, ec.ECDSA(hashes.SHA256()))
+
+# Verificar
+try:
+    public_key.verify(signature, message, ec.ECDSA(hashes.SHA256()))
+    print("Firma válida")
+except:
+    print("Firma inválida")</code></pre>
+                </div>
+            </section>
+
+            <section id="ecdsa-security">
+                <h2>Seguridad y Rendimiento</h2>
+                <div class="encryption-card">
+                    <h3>Nivel de seguridad</h3>
+                    <ul>
+                        <li><strong>Seguridad probada:</strong> 15+ años de análisis criptográfico</li>
+                        <li><strong>Equivalencia de seguridad:</strong> ECDSA con curvas de 256 bits ≈ RSA de 3072 bits</li>
+                        <li><strong>Resistente a ataques actuales:</strong> No vulnerable a ataques conocidos</li>
+                        <li><strong>Factor de seguridad:</strong> Depende de la curva seleccionada</li>
+                        <li><strong>Mejora continua:</strong> Nuevas curvas y estándares</li>
+                    </ul>
+
+                    <h3>Rendimiento superior</h3>
+                    <ul>
+                        <li><strong>Más rápido:</strong> Operaciones de firma/verificación más rápidas que RSA</li>
+                        <li><strong>Claves más pequeñas:</strong> 256-bit vs 2048-bit para misma seguridad</li>
+                        <li><strong>Menos ancho de banda:</strong> Firmas y claves públicas más compactas</li>
+                        <li><strong>Menor consumo energético:</strong> Ideal para dispositivos móviles y IoT</li>
+                        <li><strong>Mejor escalabilidad:</strong> Mejor rendimiento en operaciones masivas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="ecdsa-curves">
+                <h2>Curvas Elípticas Recomendadas</h2>
+                <div class="encryption-card">
+                    <h3>Curvas NIST (FIPS 186-4)</h3>
+                    <ul>
+                        <li><strong>secp256r1 (P-256):</strong> 256 bits, uso general, buena compatibilidad</li>
+                        <li><strong>secp384r1 (P-384):</strong> 384 bits, alta seguridad, gobierno</li>
+                        <li><strong>secp521r1 (P-521):</strong> 521 bits, máxima seguridad</li>
+                        <li><strong>secp256k1:</strong> Bitcoin, Ethereum (no NIST, pero ampliamente usada)</li>
+                    </ul>
+
+                    <h3>Curvas Brainpool</h3>
+                    <ul>
+                        <li><strong>brainpoolP256r1:</strong> Alternativa europea a secp256r1</li>
+                        <li><strong>brainpoolP384r1:</strong> Mayor seguridad que secp384r1</li>
+                        <li><strong>brainpoolP512r1:</strong> Seguridad adicional</li>
+                        <li><strong>Completa especificación:</strong> RFC 5639</li>
+                    </ul>
+
+                    <h3>Recomendaciones por uso</h3>
+                    <ul>
+                        <li><strong>Web/SSL:</strong> secp256r1 para compatibilidad máxima</li>
+                        <li><strong>Gobierno:</strong> secp384r1 o superior</li>
+                        <li><strong>Blockchain:</strong> secp256k1 para Bitcoin/Ethereum</li>
+                        <li><strong>IoT/Móviles:</strong> secp256r1 para eficiencia</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="ecdsa-implementation">
+                <h2>Implementación Práctica</h2>
+                <div class="encryption-card">
+                    <h3>Librerías y frameworks</h3>
+                    <ul>
+                        <li><strong>OpenSSL:</strong> Soporte completo para todas las curvas NIST</li>
+                        <li><strong>Python cryptography:</strong> Implementación moderna y segura</li>
+                        <li><strong>Bouncy Castle:</strong> Soporte Java completo</li>
+                        <li><strong>.NET System.Security:</strong> Clases ECC nativas</li>
+                        <li><strong>LibreSSL:</strong> Versión fork con optimizaciones</li>
+                        <li><strong>mbed TLS:</strong> Ideal para sistemas embebidos</li>
+                        <li><strong>WolfSSL:</strong> Optimizado para IoT</li>
+                        <li><strong>cryptopp:</strong> Librería C++ con curvas personalizadas</li>
+                    </ul>
+
+                    <h3>Consideraciones de implementación</h3>
+                    <ul>
+                        <li><strong>Generación de aleatorios:</strong> Usar generadores seguros para nonce k</li>
+                        <li><strong>Nonce único:</strong> Nunca reutilizar k con la misma clave</li>
+                        <li><strong>Validación de curvas:</strong> Verificar parámetros de curva</li>
+                        <li><strong>Timing attacks:</strong> Implementar contramedidas</li>
+                        <li><strong>Validación de firma:</strong> Comprobar rangos antes de verificar</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="ecdsa-tools">
+                <h2>Herramientas que usan ECDSA</h2>
+                <div class="encryption-card">
+                    <h3>Protocolos y estándares</h3>
+                    <ul>
+                        <li><strong>TLS 1.3:</strong> Soporte para ECDSA con curvas P-256 y P-384</li>
+                        <li><strong>HTTPS:</strong> Certificados con firma ECDSA</li>
+                        <li><strong>SSH:</strong> Autenticación de host con ecdsa-sha2-nistp256</li>
+                        <li><strong>Bitcoin:</strong> Firma de transacciones con secp256k1</li>
+                        <li><strong>Ethereum:</strong> Recuperación de direcciones y firma de transacciones</li>
+                    </ul>
+
+                    <h3>Software y aplicaciones</h3>
+                    <ul>
+                        <li><strong>Let's Encrypt:</strong> Certificados ECDSA disponibles</li>
+                        <li><strong>Apache/Nginx:</strong> Soporte TLS con ECDSA</li>
+                        <li><strong>OpenSSH:</strong> Autenticación con claves ECDSA</li>
+                        <li><strong>Putty:</strong> Cliente SSH con soporte ECDSA</li>
+                        <li><strong>YubiKey:</strong> Token de hardware con claves ECDSA</li>
+                    </ul>
+
+                    <h3>Blockchain y criptomonedas</h3>
+                    <ul>
+                        <li><strong>Bitcoin Core:</strong> Firma de transacciones con secp256k1</li>
+                        <li><strong>Ethereum:</strong> ecrecover para verificación de firma</li>
+                        <li><strong>MetaMask:</strong> Firma de transacciones Ethereum</li>
+                        <li><strong>MyEtherWallet:</strong> Billetera con soporte ECDSA</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="ecdsa-compliance">
+                <h2>Cumplimiento y Estándares</h2>
+                <div class="encryption-card">
+                    <h3>Estándares que lo reconocen</h3>
+                    <ul>
+                        <li><strong>FIPS 186-4:</strong> Estándar federal para firmas digitales</li>
+                        <li><strong>ANSI X9.62:</strong> Estándar para firma digital de curvas elípticas</li>
+                        <li><strong>RFC 6979:</strong> Deterministic ECDSA (RFC 6979)</li>
+                        <li><strong>ISO/IEC 14888-3:</strong> Firma digital - Parte 3: Mecanismos basados en curvas elípticas</li>
+                        <li><strong>NIST SP 800-57:</strong> Guía de gestión de claves</li>
+                    </ul>
+
+                    <h3>Requisitos por sector</h3>
+                    <ul>
+                        <li><strong>Finanzas:</strong> Aprobado para transacciones seguras</li>
+                        <li><strong>Gobierno:</strong> secp384r1 para información clasificada</li>
+                        <li><strong>Salud:</strong> Cumple HIPAA para firmas digitales</li>
+                        <li><strong>Blockchain:</strong> Estándar para criptomonedas</li>
+                        <li><strong>IoT:</strong> Ideal para dispositivos conectados</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="ecdsa-challenges">
+                <h2>Desafíos y Consideraciones</h2>
+                <div class="encryption-card">
+                    <h3>Problemas potenciales</h3>
+                    <ul>
+                        <li><strong>Nonce reuse:</strong> Reutilizar k compromete la clave privada</li>
+                        <li><strong>Timing attacks:</strong> Operaciones deben ser tiempo-constante</li>
+                        <li><strong>Curvas débiles:</strong> Algunas curvas tienen vulnerabilidades conocidas</li>
+                        <li><strong>Generación de aleatorios:</strong> Debe ser de alta calidad</li>
+                        <li><strong>Validación de parámetros:</strong> Verificar curvas y puntos</li>
+                    </ul>
+
+                    <h3>Mejores prácticas y soluciones</h3>
+                    <ul>
+                        <li><strong>Usar RFC 6979:</strong> ECDSA determinístico para nonce seguro</li>
+                        <li><strong>Validar curvas:</strong> Usar solo curvas validadas por NIST</li>
+                        <li><strong>Timing-safe implementation:</strong> Evitar ataques de temporización</li>
+                        <li><strong>Entropy de calidad:</strong> Generadores de números aleatorios certificados</li>
+                        <li><strong>Actualización regular:</strong> Mantenerse al día con vulnerabilidades</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="ecdsa-best-practices">
+                <h2>Mejores Prácticas</h2>
+                <div class="encryption-card">
+                    <h3>Implementación segura</h3>
+                    <ul>
+                        <li><strong>Usar curvas NIST validadas:</strong> secp256r1, secp384r1, secp521r1</li>
+                        <li><strong>Implementar RFC 6979:</strong> Para generación determinística de nonce</li>
+                        <li><strong>Validar todas las entradas:</strong> Comprobar rangos de r y s</li>
+                        <li><strong>Usar hashes apropiados:</strong> SHA-256 para P-256, SHA-384 para P-384</li>
+                        <li><strong>Proteger claves privadas:</strong> Almacenamiento seguro con HSM</li>
+                    </ul>
+
+                    <h3>Consideraciones operativas</h3>
+                    <ul>
+                        <li><strong>Generación de claves:</strong> Usar generadores certificados FIPS 140-2</li>
+                        <li><strong>Gestión de curvas:</strong> Mantener lista de curvas permitidas</li>
+                        <li><strong>Compatibilidad:</strong> Verificar soporte en todas las plataformas</li>
+                        <li><strong>Monitoreo:</strong> Registrar operaciones de firma y verificación</li>
+                        <li><strong>Rotación:</strong> Cambiar claves periódicamente según política</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="ecdsa-future">
+                <h2>Futuro y Consideraciones</h2>
+                <div class="encryption-card">
+                    <h3>Evolución del algoritmo</h3>
+                    <ul>
+                        <li><strong>Adopción creciente:</strong> Más implementaciones en protocolos modernos</li>
+                        <li><strong>Nuevas curvas:</strong> Ed25519 como alternativa más moderna</li>
+                        <li><strong>Hardware acceleration:</strong> Mejor soporte en procesadores futuros</li>
+                        <li><strong>Post-quantum signatures:</strong> Preparación para computación cuántica</li>
+                        <li><strong>Integración con blockchain:</strong> Más uso en aplicaciones distribuidas</li>
+                    </ul>
+
+                    <h3>Mejores prácticas actuales</h3>
+                    <ul>
+                        <li>Usar ECDSA para firma digital en lugar de RSA cuando sea posible</li>
+                        <li>Implementar RFC 6979 para mayor seguridad</li>
+                        <li>Considerar Ed25519 para nuevas implementaciones</li>
+                        <li>Monitorear actualizaciones de estándares criptográficos</li>
+                        <li>Evaluar rendimiento en el contexto específico de uso</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

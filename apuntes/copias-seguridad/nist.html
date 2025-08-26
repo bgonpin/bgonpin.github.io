@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIST - Instituto Nacional de Estándares y Tecnología</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .encryption-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NIST - Instituto Nacional de Estándares y Tecnología</h1>
+            <p>Autoridad líder en estándares de ciberseguridad y criptografía</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-nist">
+                <h2>¿Qué es el NIST?</h2>
+                <div class="encryption-card">
+                    <h3>National Institute of Standards and Technology</h3>
+                    <p>El NIST es una agencia del Departamento de Comercio de Estados Unidos que desarrolla y promueve estándares tecnológicos, incluyendo los más importantes estándares de ciberseguridad y criptografía utilizados globalmente. Fundado en 1901, el NIST juega un rol crucial en la seguridad de la información y la protección de datos.</p>
+
+                    <h3>Misión y objetivos</h3>
+                    <ul>
+                        <li><strong>Estándares tecnológicos:</strong> Desarrollar y mantener estándares para la industria</li>
+                        <li><strong>Medidas y tecnología:</strong> Crear estándares de medición precisos</li>
+                        <li><strong>Seguridad cibernética:</strong> Proteger la infraestructura crítica nacional</li>
+                        <li><strong>Innovación:</strong> Fomentar la innovación tecnológica segura</li>
+                        <li><strong>Cooperación internacional:</strong> Colaborar con organizaciones globales</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="nist-history">
+                <h2>Historia y Evolución</h2>
+                <div class="encryption-card">
+                    <h3>Orígenes y desarrollo</h3>
+                    <p>El NIST tiene sus raíces en el siglo XIX con la creación de la Oficina de Pesos y Medidas en 1830, pero su forma moderna se estableció en 1988 cuando el Laboratorio Nacional de Estándares (NBS) se convirtió en NIST. Desde entonces, ha evolucionado para abordar los desafíos tecnológicos modernos.</p>
+
+                    <h3>Hitos importantes</h3>
+                    <ul>
+                        <li><strong>1901:</strong> Fundación del National Bureau of Standards (NBS)</li>
+                        <li><strong>1988:</strong> NBS se convierte en NIST</li>
+                        <li><strong>1995:</strong> Publicación del primer FIPS 140 para módulos criptográficos</li>
+                        <li><strong>2000:</strong> Concurso AES para reemplazar DES</li>
+                        <li><strong>2002:</strong> Creación del Information Technology Laboratory</li>
+                        <li><strong>2014:</strong> Framework de Ciberseguridad (CSF)</li>
+                        <li><strong>2018:</strong> Actualización del Framework de Ciberseguridad</li>
+                        <li><strong>2020:</strong> Publicación del primer estándar post-cuántico</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="nist-standards">
+                <h2>Estándares Clave en Criptografía</h2>
+                <div class="encryption-card">
+                    <h3>Estándares FIPS (Federal Information Processing Standards)</h3>
+                    <ul>
+                        <li><strong>FIPS 140:</strong> Estándares de seguridad para módulos criptográficos</li>
+                        <li><strong>FIPS 186:</strong> Estándar para firma digital</li>
+                        <li><strong>FIPS 197:</strong> Especificación del algoritmo AES</li>
+                        <li><strong>FIPS 198:</strong> HMAC (Hash Message Authentication Code)</li>
+                        <li><strong>FIPS 202:</strong> Especificación de SHA-3</li>
+                    </ul>
+
+                    <h3>Publicaciones Especiales (SP)</h3>
+                    <ul>
+                        <li><strong>SP 800-57:</strong> Guía para gestión de claves</li>
+                        <li><strong>SP 800-67:</strong> Recomendaciones para Triple DES</li>
+                        <li><strong>SP 800-175B:</strong> Guía de selección de algoritmos</li>
+                        <li><strong>SP 800-185:</strong> Especificación de SHA-3</li>
+                        <li><strong>SP 800-207:</strong> Curvas elípticas para firma digital</li>
+                    </ul>
+
+                    <h3>Estándares en desarrollo</h3>
+                    <ul>
+                        <li><strong>Post-quantum cryptography:</strong> Algoritmos resistentes a computación cuántica</li>
+                        <li><strong>FIPS 140-3:</strong> Nueva versión del estándar de módulos criptográficos</li>
+                        <li><strong>Nuevas curvas elípticas:</strong> Curvas más seguras y eficientes</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="nist-cryptography">
+                <h2>Contribuciones a la Criptografía</h2>
+                <div class="encryption-card">
+                    <h3>Algoritmos estándar</h3>
+                    <ul>
+                        <li><strong>AES (Advanced Encryption Standard):</strong> Reemplazó DES en 2001</li>
+                        <li><strong>SHA-2:</strong> Familia de funciones hash publicadas en 2001</li>
+                        <li><strong>SHA-3:</strong> Nueva familia de funciones hash (2015)</li>
+                        <li><strong>Triple DES:</strong> Transición de DES a AES</li>
+                        <li><strong>ECDSA:</strong> Firma digital con curvas elípticas</li>
+                        <li><strong>HMAC:</strong> Autenticación de mensajes con hash</li>
+                    </ul>
+
+                    <h3>Concurso AES (1997-2000)</h3>
+                    <ul>
+                        <li>15 algoritmos candidatos de todo el mundo</li>
+                        <li>Evaluación rigurosa de seguridad y rendimiento</li>
+                        <li>Rijndael seleccionado como AES</li>
+                        <li>Proceso transparente y abierto</li>
+                        <li>Influencia en estándares globales</li>
+                    </ul>
+
+                    <h3>Validación criptográfica</h3>
+                    <ul>
+                        <li><strong>Cryptographic Module Validation Program (CMVP):</strong> Validación de módulos</li>
+                        <li><strong>Cryptographic Algorithm Validation Program (CAVP):</strong> Validación de algoritmos</li>
+                        <li><strong>Laboratorios acreditados:</strong> Más de 200 laboratorios en el mundo</li>
+                        <li><strong>Certificación FIPS 140:</strong> Requerida para uso gubernamental</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="nist-cybersecurity">
+                <h2>Framework de Ciberseguridad (CSF)</h2>
+                <div class="encryption-card">
+                    <h3>Componentes principales</h3>
+                    <ul>
+                        <li><strong>Identify:</strong> Entender y gestionar riesgos de ciberseguridad</li>
+                        <li><strong>Protect:</strong> Desarrollar y implementar protecciones</li>
+                        <li><strong>Detect:</strong> Identificar incidentes de ciberseguridad</li>
+                        <li><strong>Respond:</strong> Responder a incidentes</li>
+                        <li><strong>Recover:</strong> Recuperarse de incidentes</li>
+                    </ul>
+
+                    <h3>Impacto en backups</h3>
+                    <ul>
+                        <li><strong>Protección de datos:</strong> Guías para cifrado de backups</li>
+                        <li><strong>Gestión de claves:</strong> Mejores prácticas para llaves de cifrado</li>
+                        <li><strong>Recuperación de desastres:</strong> Estrategias de respaldo y restauración</li>
+                        <li><strong>Verificación de integridad:</strong> Métodos para validar backups</li>
+                    </ul>
+
+                    <h3>Adopción global</h3>
+                    <ul>
+                        <li>Adoptado por empresas de todo el mundo</li>
+                        <li>Base para regulaciones como GDPR</li>
+                        <li>Compatible con ISO 27001</li>
+                        <li>Utilizado por gobiernos y sector privado</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="nist-standards-backup">
+                <h2>Estándares NIST para Backups</h2>
+                <div class="encryption-card">
+                    <h3>Recomendaciones de cifrado</h3>
+                    <ul>
+                        <li><strong>SP 800-175B:</strong> Guía para almacenamiento cifrado</li>
+                        <li><strong>SP 800-111:</strong> Guía para cifrado de almacenamiento</li>
+                        <li><strong>SP 800-57 Part 3:</strong> Gestión de claves para backups</li>
+                        <li><strong>SP 800-53:</strong> Controles de seguridad para backups</li>
+                    </ul>
+
+                    <h3>Validación de backups</h3>
+                    <ul>
+                        <li><strong>SP 800-88:</strong> Guía para sanitización de medios</li>
+                        <li><strong>SP 800-147:</strong> BIOS Protection Guidelines</li>
+                        <li><strong>SP 800-155:</strong> BIOS Integrity Measurement</li>
+                    </ul>
+
+                    <h3>Mejores prácticas</h3>
+                    <ul>
+                        <li>Uso de algoritmos validados FIPS 140-2</li>
+                        <li>Implementación de gestión de claves robusta</li>
+                        <li>Verificación regular de integridad</li>
+                        <li>Planes de recuperación de desastres</li>
+                        <li>Monitoreo continuo de backups</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="nist-tools">
+                <h2>Herramientas y Recursos NIST</h2>
+                <div class="encryption-card">
+                    <h3>Herramientas de validación</h3>
+                    <ul>
+                        <li><strong>Cryptographic Module Validation Program:</strong> Validación de módulos</li>
+                        <li><strong>Cryptographic Algorithm Validation:</strong> Testing de algoritmos</li>
+                        <li><strong>Random Number Generator Validation:</strong> Validación de RNG</li>
+                        <li><strong>Entropy Source Validation:</strong> Validación de fuentes de entropía</li>
+                    </ul>
+
+                    <h3>Recursos públicos</h3>
+                    <ul>
+                        <li><strong>NIST Computer Security Resource Center:</strong> Centro de recursos</li>
+                        <li><strong>Digital Library:</strong> Publicaciones técnicas</li>
+                        <li><strong>Workshops and Conferences:</strong> Eventos sobre ciberseguridad</li>
+                        <li><strong>Standards Development:</strong> Procesos de desarrollo de estándares</li>
+                    </ul>
+
+                    <h3>Herramientas prácticas</h3>
+                    <ul>
+                        <li><strong>NIST SP 800-53 Controls:</strong> Catálogo de controles de seguridad</li>
+                        <li><strong>Risk Management Framework:</strong> Framework de gestión de riesgos</li>
+                        <li><strong>Privacy Framework:</strong> Framework de privacidad</li>
+                        <li><strong>Supply Chain Risk Management:</strong> Gestión de riesgos en cadena de suministro</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="nist-compliance">
+                <h2>Cumplimiento y Requisitos</h2>
+                <div class="encryption-card">
+                    <h3>Requisitos legales</h3>
+                    <ul>
+                        <li><strong>FISMA:</strong> Federal Information Security Modernization Act</li>
+                        <li><strong>FIPS 140:</strong> Obligatorio para agencias federales</li>
+                        <li><strong>DFARS:</strong> Defense Federal Acquisition Regulation Supplement</li>
+                        <li><strong>PCI DSS:</strong> Referencia estándares NIST</li>
+                        <li><strong>HIPAA:</strong> Adopta guías NIST para seguridad</li>
+                    </ul>
+
+                    <h3>Certificaciones</h3>
+                    <ul>
+                        <li><strong>FIPS 140-2/3:</strong> Certificación de módulos criptográficos</li>
+                        <li><strong>FedRAMP:</strong> Autorización para cloud computing federal</li>
+                        <li><strong>CMMC:</strong> Cybersecurity Maturity Model Certification</li>
+                        <li><strong>Risk Management Framework:</strong> Acreditación de sistemas</li>
+                    </ul>
+
+                    <h3>Impacto en la industria</h3>
+                    <ul>
+                        <li>Estándares adoptados globalmente</li>
+                        <li>Base para regulaciones internacionales</li>
+                        <li>Influencia en ISO 27001</li>
+                        <li>Referencia para mejores prácticas</li>
+                        <li>Base para certificaciones de seguridad</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="nist-future">
+                <h2>Futuro y Tendencias</h2>
+                <div class="encryption-card">
+                    <h3>Post-quantum cryptography</h3>
+                    <ul>
+                        <li><strong>Concurso NIST PQC:</strong> Desarrollo de algoritmos post-quánticos</li>
+                        <li><strong>Primeros estándares:</strong> Kyber y Dilithium en proceso de estandarización</li>
+                        <li><strong>Transición gradual:</strong> Migración de algoritmos actuales</li>
+                        <li><strong>Híbridos:</strong> Combinación de algoritmos clásicos y post-quánticos</li>
+                    </ul>
+
+                    <h3>Innovaciones emergentes</h3>
+                    <ul>
+                        <li><strong>AI y Machine Learning:</strong> Aplicación a ciberseguridad</li>
+                        <li><strong>Zero Trust Architecture:</strong> Nuevos frameworks de confianza</li>
+                        <li><strong>Blockchain technology:</strong> Estándares para aplicaciones distribuidas</li>
+                        <li><strong>IoT Security:</strong> Marcos de seguridad para dispositivos IoT</li>
+                    </ul>
+
+                    <h3>Cooperación internacional</h3>
+                    <ul>
+                        <li><strong>ISO/IEC collaboration:</strong> Trabajo conjunto con organizaciones internacionales</li>
+                        <li><strong>Bilateral agreements:</strong> Acuerdos con otros países</li>
+                        <li><strong>Global standards:</strong> Influencia en estándares mundiales</li>
+                        <li><strong>Research partnerships:</strong> Colaboraciones con universidades y empresas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="nist-resources">
+                <h2>Recursos y Referencias</h2>
+                <div class="encryption-card">
+                    <h3>Sitios web principales</h3>
+                    <ul>
+                        <li><strong>nvlpubs.nist.gov:</strong> Publicaciones y estándares</li>
+                        <li><strong>csrc.nist.gov:</strong> Computer Security Resource Center</li>
+                        <li><strong>www.nist.gov/cyberframework:</strong> Cybersecurity Framework</li>
+                        <li><strong>www.nist.gov/itl:</strong> Information Technology Laboratory</li>
+                    </ul>
+
+                    <h3>Documentos clave</h3>
+                    <ul>
+                        <li><strong>NIST SP 800-53:</strong> Security and Privacy Controls</li>
+                        <li><strong>NIST SP 800-57:</strong> Key Management</li>
+                        <li><strong>NIST SP 800-175B:</strong> Encryption Guidelines</li>
+                        <li><strong>NIST CSF:</strong> Cybersecurity Framework</li>
+                    </ul>
+
+                    <h3>Comunidades y eventos</h3>
+                    <ul>
+                        <li><strong>NICE Conference:</strong> Conferencia anual sobre ciberseguridad</li>
+                        <li><strong>Standards Development:</strong> Procesos abiertos de desarrollo</li>
+                        <li><strong>Technical Working Groups:</strong> Grupos de trabajo especializados</li>
+                        <li><strong>International Collaboration:</strong> Cooperación global</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

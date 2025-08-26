@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES-128 - Algoritmo de Cifrado Simétrico</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .encryption-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AES-128 - Algoritmo de Cifrado Simétrico</h1>
+            <p>Estándar de cifrado simétrico de 128 bits</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-aes128">
+                <h2>¿Qué es AES-128?</h2>
+                <div class="encryption-card">
+                    <h3>Advanced Encryption Standard 128-bit</h3>
+                    <p>AES-128 es una variante del algoritmo de cifrado simétrico Advanced Encryption Standard (AES) que utiliza claves de 128 bits. Es el estándar de cifrado más utilizado en el mundo y forma parte de la familia Rijndael.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Longitud de clave:</strong> 128 bits (16 bytes)</li>
+                        <li><strong>Tamaño de bloque:</strong> 128 bits</li>
+                        <li><strong>Rondas de cifrado:</strong> 10 rondas</li>
+                        <li><strong>Velocidad:</strong> Muy rápida en software y hardware</li>
+                        <li><strong>Seguridad:</strong> Adecuada para la mayoría de aplicaciones</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-aes128-works">
+                <h2>Cómo funciona AES-128</h2>
+                <div class="encryption-card">
+                    <h3>Proceso de cifrado</h3>
+                    <p>AES-128 opera sobre bloques de 128 bits de datos en un proceso de 10 rondas idénticas que incluyen:</p>
+
+                    <h3>Rondas de cifrado</h3>
+                    <ol>
+                        <li><strong>SubBytes:</strong> Sustitución no lineal de bytes</li>
+                        <li><strong>ShiftRows:</strong> Rotación cíclica de filas</li>
+                        <li><strong>MixColumns:</strong> Mezcla lineal de columnas (excepto última ronda)</li>
+                        <li><strong>AddRoundKey:</strong> XOR con la clave de ronda</li>
+                    </ol>
+
+                    <h3>Expansión de clave</h3>
+                    <p>La clave de 128 bits se expande a 11 claves de ronda (10 rondas + clave inicial) de 128 bits cada una.</p>
+                </div>
+            </section>
+
+            <section id="aes128-usage">
+                <h2>Uso en Copias de Seguridad</h2>
+                <div class="encryption-card">
+                    <h3>Aplicaciones comunes</h3>
+                    <ul>
+                        <li><strong>Cifrado de archivos:</strong> Protección de datos sensibles</li>
+                        <li><strong>Comunicaciones seguras:</strong> TLS 1.2, IPSec</li>
+                        <li><strong>Almacenamiento cifrado:</strong> Discos duros, USB drives</li>
+                        <li><strong>Backup en la nube:</strong> Protección de datos en tránsito</li>
+                        <li><strong>Bases de datos:</strong> Cifrado de campos sensibles</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso</h3>
+                    <pre><code># OpenSSL
+openssl enc -aes-128-cbc -salt -in archivo.txt -out archivo.enc -k mi_clave
+
+# Python
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+import os
+
+key = os.urandom(16)  # 128 bits
+cipher = Cipher(algorithms.AES(key), modes.CBC(iv))
+encryptor = cipher.encryptor()</code></pre>
+                </div>
+            </section>
+
+            <section id="aes128-security">
+                <h2>Seguridad y Rendimiento</h2>
+                <div class="encryption-card">
+                    <h3>Nivel de seguridad</h3>
+                    <ul>
+                        <li><strong>Resistencia a ataques:</strong> No se conocen ataques prácticos</li>
+                        <li><strong>Longitud de clave:</strong> Suficiente para protección a largo plazo</li>
+                        <li><strong>Estándar aprobado:</strong> NIST, FIPS 140-2</li>
+                        <li><strong>Ampliamente analizado:</strong> 20+ años de escrutinio criptográfico</li>
+                    </ul>
+
+                    <h3>Rendimiento</h3>
+                    <ul>
+                        <li><strong>Velocidad:</strong> Más rápido que AES-256</li>
+                        <li><strong>Uso de recursos:</strong> Menor consumo de CPU/memoria</li>
+                        <li><strong>Hardware:</strong> Aceleración AES-NI en CPUs modernas</li>
+                        <li><strong>Móviles:</strong> Ideal para dispositivos con recursos limitados</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes128-vs-others">
+                <h2>Comparación con otros algoritmos AES</h2>
+                <div class="encryption-card">
+                    <h3>Vs AES-256</h3>
+                    <ul>
+                        <li><strong>Velocidad:</strong> AES-128 es ~30-40% más rápido</li>
+                        <li><strong>Seguridad:</strong> AES-256 es marginalmente más seguro</li>
+                        <li><strong>Recomendación:</strong> AES-128 para la mayoría de casos</li>
+                        <li><strong>Uso común:</strong> AES-128 para datos no clasificados</li>
+                    </ul>
+
+                    <h3>Vs AES-192</h3>
+                    <ul>
+                        <li><strong>Longitud de clave:</strong> AES-192 tiene 192 bits</li>
+                        <li><strong>Rondas:</strong> AES-192 usa 12 rondas (vs 10 de AES-128)</li>
+                        <li><strong>Adopción:</strong> AES-192 es menos común</li>
+                        <li><strong>Performance:</strong> AES-128 es generalmente preferido</li>
+                    </ul>
+
+                    <h3>Cuándo usar AES-128</h3>
+                    <ul>
+                        <li>Datos no clasificados o sensibles</li>
+                        <li>Entornos con limitaciones de rendimiento</li>
+                        <li>Dispositivos móviles o embebidos</li>
+                        <li>Cuando la velocidad es prioritaria</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes128-implementation">
+                <h2>Implementación Práctica</h2>
+                <div class="encryption-card">
+                    <h3>Librerías y frameworks</h3>
+                    <ul>
+                        <li><strong>OpenSSL:</strong> Implementación de referencia</li>
+                        <li><strong>Python cryptography:</strong> Librería moderna y segura</li>
+                        <li><strong>Java Cryptography Extension:</strong> API estándar de Java</li>
+                        <li><strong>.NET System.Security:</strong> Clases de cifrado</li>
+                        <li><strong>Crypto++:</strong> Librería C++ completa</li>
+                    </ul>
+
+                    <h3>Consideraciones de implementación</h3>
+                    <ul>
+                        <li><strong>Modos de operación:</strong> CBC, GCM (recomendado)</li>
+                        <li><strong>IV/Padding:</strong> Generación segura de vectores de inicialización</li>
+                        <li><strong>Autenticación:</strong> Usar modos autenticados (GCM)</li>
+                        <li><strong>Gestión de claves:</strong> Almacenamiento y rotación segura</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes128-tools">
+                <h2>Herramientas que usan AES-128</h2>
+                <div class="encryption-card">
+                    <h3>Software de backup</h3>
+                    <ul>
+                        <li><strong>VeraCrypt:</strong> Cifrado de contenedores</li>
+                        <li><strong>7-Zip:</strong> Compresión con cifrado</li>
+                        <li><strong>WinRAR:</strong> Archivos cifrados</li>
+                        <li><strong>Duplicati:</strong> Backup con cifrado integrado</li>
+                    </ul>
+
+                    <h3>Sistemas operativos</h3>
+                    <ul>
+                        <li><strong>BitLocker (Windows):</strong> Opciones de cifrado</li>
+                        <li><strong>FileVault (macOS):</strong> Cifrado de disco</li>
+                        <li><strong>LUKS (Linux):</strong> Cifrado de volúmenes</li>
+                    </ul>
+
+                    <h3>Aplicaciones</h3>
+                    <ul>
+                        <li>Protocolos TLS/SSL</li>
+                        <li>Wi-Fi WPA2</li>
+                        <li>IPSec VPN</li>
+                        <li>SSH (opcional)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes128-compliance">
+                <h2>Cumplimiento y Estándares</h2>
+                <div class="encryption-card">
+                    <h3>Estándares que lo reconocen</h3>
+                    <ul>
+                        <li><strong>NIST SP 800-175B:</strong> Guía de selección de algoritmos</li>
+                        <li><strong>FIPS 140-2/3:</strong> Validación de módulos criptográficos</li>
+                        <li><strong>ISO/IEC 27001:</strong> Controles de seguridad de la información</li>
+                        <li><strong>GDPR:</strong> Medidas técnicas de protección de datos</li>
+                    </ul>
+
+                    <h3>Requisitos por sector</h3>
+                    <ul>
+                        <li><strong>Gobierno:</strong> Adecuado para datos no clasificados</li>
+                        <li><strong>Finanzas:</strong> Cumple con PCI DSS</li>
+                        <li><strong>Salud:</strong> Adecuado para HIPAA</li>
+                        <li><strong>Comercial:</strong> Suficiente para la mayoría de empresas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes128-future">
+                <h2>Futuro y Consideraciones</h2>
+                <div class="encryption-card">
+                    <h3>Evolución del algoritmo</h3>
+                    <ul>
+                        <li><strong>Resistencia cuántica:</strong> Suficiente para amenazas actuales</li>
+                        <li><strong>Hardware:</strong> Mejor soporte en nuevos procesadores</li>
+                        <li><strong>Nuevos modos:</strong> GCM, CCM para autenticación integrada</li>
+                        <li><strong>Quantum computing:</strong> Considerar AES-256 para futuro distante</li>
+                    </ul>
+
+                    <h3>Mejores prácticas actuales</h3>
+                    <ul>
+                        <li>Usar modos autenticados (GCM)</li>
+                        <li>Implementar gestión de claves segura</li>
+                        <li>Monitorear avances en criptoanálisis</li>
+                        <li>Planificar migración si es necesario</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

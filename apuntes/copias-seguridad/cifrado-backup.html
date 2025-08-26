@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrado de Copias de Seguridad</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .encryption-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cifrado de Copias de Seguridad</h1>
+            <p>Protección criptográfica de datos en copias de seguridad</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="backup-vms.html">Backup para VMs</a>
+            <a href="almacenamiento-backup.html">Almacenamiento</a>
+            <a href="ransomware-backup.html">Protección Ransomware</a>
+            <a href="drp.html">Plan de Recuperación</a>
+            <a href="snapshots-vms.html">Snapshots para VMs</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="why-encrypt">
+                <h2>¿Por qué cifrar las copias de seguridad?</h2>
+                <div class="encryption-card">
+                    <h3>Amenazas a los datos de backup</h3>
+                    <p>Las copias de seguridad contienen información valiosa que puede ser objetivo de ataques, robos o accesos no autorizados.</p>
+
+                    <h3>Riesgos principales</h3>
+                    <ul>
+                        <li><strong>Robo físico:</strong> Discos duros, cintas o dispositivos portátiles</li>
+                        <li><strong>Acceso remoto:</strong> Brechas en sistemas de almacenamiento cloud</li>
+                        <li><strong>Malware y ransomware:</strong> Encriptación no autorizada</li>
+                        <li><strong>Insider threats:</strong> Acceso por empleados o contratistas</li>
+                        <li><strong>Requisitos legales:</strong> Protección de datos sensibles (GDPR, HIPAA)</li>
+                    </ul>
+
+                    <h3>Beneficios del cifrado</h3>
+                    <ul>
+                        <li><strong>Confidencialidad:</strong> Solo autorizados pueden acceder</li>
+                        <li><strong>Integridad:</strong> Detección de manipulaciones</li>
+                        <li><strong>Cumplimiento:</strong> Requisitos regulatorios</li>
+                        <li><strong>Protección off-site:</strong> Seguridad en copias remotas</li>
+                        <li><strong>Defensa en profundidad:</strong> Capa adicional de seguridad</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="encryption-types">
+                <h2>Tipos de Cifrado</h2>
+
+                <h3>Cifrado en Reposo (At-Rest)</h3>
+                <div class="encryption-card">
+                    <h4>Protección de datos almacenados</h4>
+                    <ul>
+                        <li><strong>Full disk encryption:</strong> Cifrado completo del dispositivo</li>
+                        <li><strong>File-level encryption:</strong> Cifrado individual de archivos</li>
+                        <li><strong>Database encryption:</strong> Cifrado a nivel de base de datos</li>
+                        <li><strong>Backup-specific encryption:</strong> Cifrado integrado en software de backup</li>
+                    </ul>
+                </div>
+
+                <h3>Cifrado en Tránsito (In-Transit)</h3>
+                <div class="encryption-card">
+                    <h4>Protección durante la transferencia</h4>
+                    <ul>
+                        <li><strong>TLS/SSL:</strong> Protocolos estándar para comunicaciones seguras</li>
+                        <li><strong>SFTP/FTPS:</strong> Transferencia segura de archivos</li>
+                        <li><strong>VPN:</strong> Túneles encriptados para conexiones remotas</li>
+                        <li><strong>IPsec:</strong> Seguridad a nivel de red</li>
+                    </ul>
+                </div>
+
+                <h3>Cifrado de Claves</h3>
+                <div class="encryption-card">
+                    <h4>Gestión de claves de cifrado</h4>
+                    <ul>
+                        <li><strong>Key management service (KMS):</strong> Gestión centralizada de claves</li>
+                        <li><strong>Hardware security modules (HSM):</strong> Almacenamiento seguro de claves</li>
+                        <li><strong>Key rotation:</strong> Renovación periódica de claves</li>
+                        <li><strong>Multi-factor authentication:</strong> Acceso protegido a claves</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="algorithms">
+                <h2>Algoritmos de Cifrado</h2>
+
+                <h3>Algoritmos Simétricos</h3>
+                <div class="encryption-card">
+                    <h4>Alta velocidad, misma clave para cifrar y descifrar</h4>
+                    <ul>
+                        <li><strong><a href="aes-256.html">AES-256</a>:</strong> Estándar militar, recomendado para datos sensibles</li>
+                        <li><strong><a href="aes-128.html">AES-128</a>:</strong> Buen balance velocidad-seguridad</li>
+                        <li><strong><a href="chacha20.html">ChaCha20</a>:</strong> Alternativa moderna a AES</li>
+                        <li><strong><a href="twofish.html">Twofish</a>:</strong> Finalista de AES, buena seguridad</li>
+                    </ul>
+                </div>
+
+                <h3>Algoritmos Asimétricos</h3>
+                <div class="encryption-card">
+                    <h4>Clave pública/privada, más seguros pero lentos</h4>
+                    <ul>
+                        <li><strong><a href="rsa.html">RSA</a>:</strong> Ampliamente usado, 2048-4096 bits</li>
+                        <li><strong><a href="ecdsa.html">ECDSA</a>:</strong> Basado en curvas elípticas, más eficiente</li>
+                        <li><strong><a href="ed25519.html">Ed25519</a>:</strong> Moderna alternativa a ECDSA</li>
+                    </ul>
+                </div>
+
+                <h3>Funciones Hash</h3>
+                <div class="encryption-card">
+                    <h4>Verificación de integridad, no reversibles</h4>
+                    <ul>
+                        <li><strong>SHA-256:</strong> Estándar actual para hashing</li>
+                        <li><strong><a href="sha-3.html">SHA-3</a>:</strong> Nuevo estándar <a href="nist.html">NIST</a></li>
+                        <li><strong>BLAKE2:</strong> Alternativa moderna y rápida</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="implementation">
+                <h2>Implementación del Cifrado</h2>
+
+                <h3>En Software de Backup</h3>
+                <div class="encryption-card">
+                    <h4>Configuración en herramientas de backup</h4>
+                    <ul>
+                        <li><strong>Veeam:</strong> Cifrado AES-256 integrado, gestión de claves</li>
+                        <li><strong>Acronis:</strong> Cifrado completo con autenticación de dos factores</li>
+                        <li><strong>StorageCraft:</strong> Cifrado a nivel de imagen</li>
+                        <li><strong>Bacula:</strong> Soporte para múltiples algoritmos</li>
+                    </ul>
+                </div>
+
+                <h3>En Almacenamiento</h3>
+                <div class="encryption-card">
+                    <h4>Cifrado a nivel de almacenamiento</h4>
+                    <ul>
+                        <li><strong>BitLocker (Windows):</strong> Cifrado de disco completo</li>
+                        <li><strong>FileVault (macOS):</strong> Cifrado de disco integrado</li>
+                        <li><strong>LUKS (Linux):</strong> Estándar de cifrado para Linux</li>
+                        <li><strong>VeraCrypt:</strong> Cifrado de contenedores multiplataforma</li>
+                    </ul>
+                </div>
+
+                <h3>En la Nube</h3>
+                <div class="encryption-card">
+                    <h4>Protección en servicios cloud</h4>
+                    <ul>
+                        <li><strong>Amazon S3:</strong> Server-side encryption, KMS integration</li>
+                        <li><strong>Azure Blob:</strong> Azure Storage Service Encryption</li>
+                        <li><strong>Google Cloud:</strong> Customer-managed encryption keys</li>
+                        <li><strong>Backblaze:</strong> Cifrado cliente opcional</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="best-practices">
+                <h2>Mejores Prácticas</h2>
+
+                <h3>Gestión de Claves</h3>
+                <div class="encryption-card">
+                    <h4>Estrategias seguras para claves</h4>
+                    <ul>
+                        <li><strong>Rotación regular:</strong> Cambiar claves periódicamente</li>
+                        <li><strong>Backup de claves:</strong> Almacenamiento seguro de claves maestras</li>
+                        <li><strong>Acceso restringido:</strong> Control estricto de quién puede acceder</li>
+                        <li><strong>Recuperación de desastres:</strong> Plan para pérdida de claves</li>
+                        <li><strong>Auditoría:</strong> Registro de acceso a claves</li>
+                    </ul>
+                </div>
+
+                <h3>Performance y Escalabilidad</h3>
+                <div class="encryption-card">
+                    <h4>Balance entre seguridad y rendimiento</h4>
+                    <ul>
+                        <li><strong>Hardware acceleration:</strong> CPUs con AES-NI para mejor rendimiento</li>
+                        <li><strong>Compresión primero:</strong> Comprimir antes de cifrar para mejor ratio</li>
+                        <li><strong>Paralelización:</strong> Procesamiento multi-hilo para grandes volúmenes</li>
+                        <li><strong>Caching inteligente:</strong> Minimizar recifrado de datos no modificados</li>
+                    </ul>
+                </div>
+
+                <h3>Cumplimiento Normativo</h3>
+                <div class="encryption-card">
+                    <h4>Requisitos por sector</h4>
+                    <ul>
+                        <li><strong>GDPR:</strong> Artículo 32, medidas técnicas de protección</li>
+                        <li><strong>HIPAA:</strong> Cifrado de datos de salud protegidos</li>
+                        <li><strong>PCI DSS:</strong> Cifrado de datos de tarjetas de crédito</li>
+                        <li><strong>SOX:</strong> Protección de datos financieros</li>
+                        <li><strong>ISO 27001:</strong> Controles de seguridad de la información</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="challenges">
+                <h2>Desafíos y Soluciones</h2>
+
+                <div class="encryption-card">
+                    <h3>Problemas comunes</h3>
+                    <ul>
+                        <li><strong>Degradación de rendimiento:</strong>
+                            <ul>
+                                <li><strong>Solución:</strong> Hardware optimizado, algoritmos eficientes</li>
+                            </ul>
+                        </li>
+                        <li><strong>Gestión compleja de claves:</strong>
+                            <ul>
+                                <li><strong>Solución:</strong> Sistemas KMS centralizados</li>
+                            </ul>
+                        </li>
+                        <li><strong>Compatibilidad entre plataformas:</strong>
+                            <ul>
+                                <li><strong>Solución:</strong> Estándares abiertos, testing exhaustivo</li>
+                            </ul>
+                        </li>
+                        <li><strong>Recuperación en caso de pérdida:</strong>
+                            <ul>
+                                <li><strong>Solución:</strong> Planes de contingencia, backup de claves</li>
+                            </ul>
+                        </li>
+                        <li><strong>Cumplimiento legal:</strong>
+                            <ul>
+                                <li><strong>Solución:</strong> Consultoría especializada, auditorías regulares</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="future-trends">
+                <h2>Tendencias Futuras</h2>
+
+                <div class="encryption-card">
+                    <h3>Innovaciones emergentes</h3>
+                    <ul>
+                        <li><strong>Cuantum-resistant encryption:</strong> Preparación para computación cuántica</li>
+                        <li><strong>Homomorphic encryption:</strong> Procesamiento de datos cifrados</li>
+                        <li><strong>AI-powered security:</strong> Detección automática de anomalías</li>
+                        <li><strong>Zero-trust encryption:</strong> Verificación continua de confianza</li>
+                        <li><strong>Blockchain-based key management:</strong> Gestión distribuida de claves</li>
+                    </ul>
+
+                    <h3>Evolución de estándares</h3>
+                    <ul>
+                        <li><strong>Post-quantum cryptography:</strong> Algoritmos resistentes a quantum</li>
+                        <li><strong>FIPS 140-3:</strong> Nuevos estándares de seguridad</li>
+                        <li><strong>ISO/IEC 27001 updates:</strong> Controles de cifrado actualizados</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

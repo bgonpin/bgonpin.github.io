@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA - Algoritmo de Cifrado Asimétrico</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .encryption-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RSA - Algoritmo de Cifrado Asimétrico</h1>
+            <p>Rivest-Shamir-Adleman - Fundamento de la criptografía moderna</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-rsa">
+                <h2>¿Qué es RSA?</h2>
+                <div class="encryption-card">
+                    <h3>Rivest-Shamir-Adleman</h3>
+                    <p>RSA es el primer algoritmo de cifrado asimétrico practicable y es el más utilizado en todo el mundo. Desarrollado en 1977 por Ron Rivest, Adi Shamir y Leonard Adleman en el MIT, RSA se basa en la dificultad matemática de factorizar números enteros grandes y es fundamental para la seguridad de internet.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Algoritmo asimétrico:</strong> Clave pública/privada diferente</li>
+                        <li><strong>Basado en factorización:</strong> Dificultad de factorizar números grandes</li>
+                        <li><strong>Longitud de clave variable:</strong> 1024, 2048, 3072, 4096 bits</li>
+                        <li><strong>Usos múltiples:</strong> Cifrado, firma digital, intercambio de claves</li>
+                        <li><strong>Patente expirada:</strong> Libre de patentes desde 2000</li>
+                        <li><strong>Estándar PKCS #1:</strong> RFC 8017 (actualización de PKCS#1 v2.2)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-rsa-works">
+                <h2>Cómo funciona RSA</h2>
+                <div class="encryption-card">
+                    <h3>Fundamentos matemáticos</h3>
+                    <p>RSA se basa en la teoría de números y la aritmética modular. Su seguridad depende de la dificultad de factorizar el producto de dos números primos grandes.</p>
+
+                    <h3>Generación de claves</h3>
+                    <ol>
+                        <li><strong>Seleccionar primos:</strong> Elegir dos números primos grandes p y q</li>
+                        <li><strong>Calcular módulo:</strong> n = p × q (clave pública)</li>
+                        <li><strong>Función totiente:</strong> φ(n) = (p-1) × (q-1)</li>
+                        <li><strong>Exponente público:</strong> e (normalmente 65537)</li>
+                        <li><strong>Exponente privado:</strong> d = e^(-1) mod φ(n)</li>
+                    </ol>
+
+                    <h3>Proceso de cifrado</h3>
+                    <ul>
+                        <li><strong>Mensaje original:</strong> M (número menor que n)</li>
+                        <li><strong>Cifrado:</strong> C = M^e mod n</li>
+                        <li><strong>Descifrado:</strong> M = C^d mod n</li>
+                    </ul>
+
+                    <h3>Firma digital</h3>
+                    <ul>
+                        <li><strong>Firma:</strong> S = H(M)^d mod n (usando clave privada)</li>
+                        <li><strong>Verificación:</strong> H(M) = S^e mod n (usando clave pública)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="rsa-usage">
+                <h2>Uso en Copias de Seguridad</h2>
+                <div class="encryption-card">
+                    <h3>Aplicaciones principales</h3>
+                    <ul>
+                        <li><strong>Intercambio de claves:</strong> Establecer claves simétricas seguras</li>
+                        <li><strong>Firma digital:</strong> Verificar integridad e autenticidad</li>
+                        <li><strong>Autenticación:</strong> Probar identidad sin revelar clave privada</li>
+                        <li><strong>Certificados SSL/TLS:</strong> Base de HTTPS y comunicaciones seguras</li>
+                        <li><strong>Backup en nube:</strong> Cifrado de claves de acceso</li>
+                        <li><strong>Firma de software:</strong> Verificar autenticidad de actualizaciones</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso</h3>
+                    <pre><code># Generar claves RSA
+openssl genpkey -algorithm RSA -out private_key.pem -pkcs8 -outform PEM
+
+# Extraer clave pública
+openssl rsa -pubout -in private_key.pem -out public_key.pem
+
+# Cifrar archivo con clave pública
+openssl rsautl -encrypt -pubin -inkey public_key.pem -in archivo.txt -out archivo.enc
+
+# Descifrar con clave privada
+openssl rsautl -decrypt -inkey private_key.pem -in archivo.enc -out archivo.txt
+
+# Python con cryptography
+from cryptography.hazmat.primitives.asymmetric import rsa, padding
+from cryptography.hazmat.primitives import hashes
+
+# Generar claves
+private_key = rsa.generate_private_key(
+    public_exponent=65537,
+    key_size=2048
+)
+public_key = private_key.public_key()
+
+# Cifrar
+ciphertext = public_key.encrypt(
+    message,
+    padding.OAEP(
+        mgf=padding.MGF1(algorithm=hashes.SHA256()),
+        algorithm=hashes.SHA256(),
+        label=None
+    )
+)</code></pre>
+                </div>
+            </section>
+
+            <section id="rsa-security">
+                <h2>Seguridad y Rendimiento</h2>
+                <div class="encryption-card">
+                    <h3>Nivel de seguridad</h3>
+                    <ul>
+                        <li><strong>Seguridad probada:</strong> 40+ años de análisis criptográfico</li>
+                        <li><strong>Ampliamente estudiado:</strong> Millones de horas de análisis</li>
+                        <li><strong>Resistente a ataques actuales:</strong> No vulnerable a ataques conocidos</li>
+                        <li><strong>Mejora continua:</strong> Aumento de tamaño de clave recomendado</li>
+                        <li><strong>Híbrido recomendado:</strong> Usar con algoritmos simétricos</li>
+                    </ul>
+
+                    <h3>Consideraciones de rendimiento</h3>
+                    <ul>
+                        <li><strong>Lento para datos grandes:</strong> Recomendado solo para datos pequeños</li>
+                        <li><strong>Cálculo intensivo:</strong> Operaciones exponenciales costosas</li>
+                        <li><strong>Mejora con hardware:</strong> Aceleración en HSM dedicados</li>
+                        <li><strong>Recomendación actual:</strong> Mínimo 2048 bits, preferible 3072+</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="rsa-key-sizes">
+                <h2>Tamaños de Clave RSA</h2>
+                <div class="encryption-card">
+                    <h3>Recomendaciones por período</h3>
+                    <ul>
+                        <li><strong>1024 bits:</strong> Obsoleto, no usar (quebrado teóricamente)</li>
+                        <li><strong>2048 bits:</strong> Mínimo actual para uso general</li>
+                        <li><strong>3072 bits:</strong> Recomendado para datos sensibles</li>
+                        <li><strong>4096 bits:</strong> Máxima seguridad, uso limitado</li>
+                    </ul>
+
+                    <h3>Recomendaciones por sector</h3>
+                    <ul>
+                        <li><strong>SSL/TLS:</strong> 2048 bits (mínimo aceptable)</li>
+                        <li><strong>Gobierno:</strong> 3072 bits o superior</li>
+                        <li><strong>Banca:</strong> 3072 bits para transacciones</li>
+                        <li><strong>Militar:</strong> 4096 bits para información clasificada</li>
+                    </ul>
+
+                    <h3>Transición recomendada</h3>
+                    <ul>
+                        <li>Planificar migración de 1024-bit antes de 2015</li>
+                        <li>Actualizar certificados SSL regularmente</li>
+                        <li>Monitorear avances en factorización</li>
+                        <li>Considerar post-quantum cryptography para futuro</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="rsa-implementation">
+                <h2>Implementación Práctica</h2>
+                <div class="encryption-card">
+                    <h3>Librerías y frameworks</h3>
+                    <ul>
+                        <li><strong>OpenSSL:</strong> Implementación de referencia más utilizada</li>
+                        <li><strong>Python cryptography:</strong> Librería moderna y segura</li>
+                        <li><strong>Java Cryptography Extension:</strong> API estándar de Java</li>
+                        <li><strong>.NET System.Security:</strong> Clases de cifrado nativas</li>
+                        <li><strong>Bouncy Castle:</strong> Implementación completa multiplataforma</li>
+                        <li><strong>LibreSSL:</strong> Versión fork de OpenSSL</li>
+                        <li><strong>GnuTLS:</strong> Alternativa open source</li>
+                    </ul>
+
+                    <h3>Modos de operación</h3>
+                    <ul>
+                        <li><strong>PKCS #1 v1.5:</strong> Modo tradicional (legacy)</li>
+                        <li><strong>OAEP:</strong> Optimal Asymmetric Encryption Padding (recomendado)</li>
+                        <li><strong>PKCS #1 v2.1:</strong> Estándar actual RFC 8017</li>
+                        <li><strong>SSL/TLS:</strong> Integración en protocolos de red</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="rsa-tools">
+                <h2>Herramientas que usan RSA</h2>
+                <div class="encryption-card">
+                    <h3>Protocolos y estándares</h3>
+                    <ul>
+                        <li><strong>HTTPS:</strong> Base de certificados SSL/TLS</li>
+                        <li><strong>SSH:</strong> Autenticación y cifrado de conexiones</li>
+                        <li><strong>PGP/GPG:</strong> Cifrado de email y archivos</li>
+                        <li><strong>S/MIME:</strong> Firma y cifrado de email</li>
+                        <li><strong>IPSec:</strong> VPN y comunicaciones de red seguras</li>
+                    </ul>
+
+                    <h3>Software de seguridad</h3>
+                    <ul>
+                        <li><strong>OpenVPN:</strong> VPN que usa RSA para intercambio de claves</li>
+                        <li><strong>Apache/Nginx:</strong> Servidores web con soporte SSL/TLS</li>
+                        <li><strong>Postfix/Sendmail:</strong> Servidores de email con S/MIME</li>
+                        <li><strong>Thunderbird:</strong> Cliente de email con OpenPGP</li>
+                    </ul>
+
+                    <h3>Gestión de certificados</h3>
+                    <ul>
+                        <li><strong>Let's Encrypt:</strong> Autoridad de certificación gratuita</li>
+                        <li><strong>DigiCert:</strong> Proveedor comercial de certificados</li>
+                        <li><strong>Microsoft CA:</strong> Autoridad de certificación de Windows</li>
+                        <li><strong>OpenSSL CA:</strong> Herramientas para gestión de CA</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="rsa-compliance">
+                <h2>Cumplimiento y Estándares</h2>
+                <div class="encryption-card">
+                    <h3>Estándares que lo reconocen</h3>
+                    <ul>
+                        <li><strong>RFC 8017:</strong> PKCS #1 v2.2, especificación oficial</li>
+                        <li><strong>FIPS 186-4:</strong> Estándar federal de procesamiento de información</li>
+                        <li><strong>ISO/IEC 18033-2:</strong> Estándar internacional de cifrado asimétrico</li>
+                        <li><strong>NIST SP 800-57:</strong> Guía de gestión de claves</li>
+                        <li><strong>PCI DSS:</strong> Requerido para procesamiento de tarjetas</li>
+                    </ul>
+
+                    <h3>Requisitos por sector</h3>
+                    <ul>
+                        <li><strong>Finanzas:</strong> 2048 bits mínimo, 3072 recomendado</li>
+                        <li><strong>Gobierno:</strong> 3072 bits para datos sensibles</li>
+                        <li><strong>Salud:</strong> Cumple HIPAA para datos protegidos</li>
+                        <li><strong>eCommerce:</strong> Obligatorio para transacciones PCI DSS</li>
+                        <li><strong>Cloud:</strong> Estándar para autenticación de usuarios</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="rsa-challenges">
+                <h2>Desafíos y Limitaciones</h2>
+                <div class="encryption-card">
+                    <h3>Problemas conocidos</h3>
+                    <ul>
+                        <li><strong>Rendimiento lento:</strong> No adecuado para cifrar datos grandes</li>
+                        <li><strong>Vulnerable a ataques de temporización:</strong> Necesita contramedidas</li>
+                        <li><strong>Problemas con padding:</strong> PKCS #1 v1.5 tiene vulnerabilidades</li>
+                        <li><strong>Quantum computing:</strong> Vulnerable a algoritmos de Shor</li>
+                        <li><strong>Gestión de claves compleja:</strong> Claves grandes y costosas de generar</li>
+                    </ul>
+
+                    <h3>Soluciones y mejores prácticas</h3>
+                    <ul>
+                        <li><strong>Usar OAEP padding:</strong> Para cifrado de datos</li>
+                        <li><strong>Implementar blinding:</strong> Proteger contra ataques de temporización</li>
+                        <li><strong>Combinar con simétricos:</strong> RSA para intercambio de claves, AES para datos</li>
+                        <li><strong>Rotación regular:</strong> Cambiar claves periódicamente</li>
+                        <li><strong>Hardware security modules:</strong> Aceleración y protección de claves</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="rsa-best-practices">
+                <h2>Mejores Prácticas</h2>
+                <div class="encryption-card">
+                    <h3>Implementación segura</h3>
+                    <ul>
+                        <li><strong>Usar claves de 2048 bits mínimo:</strong> 3072+ para datos sensibles</li>
+                        <li><strong>Implementar OAEP padding:</strong> Evitar PKCS #1 v1.5</li>
+                        <li><strong>Proteger contra timing attacks:</strong> Usar blinding o HSM</li>
+                        <li><strong>Validar implementaciones:</strong> Verificar contra vulnerabilidades conocidas</li>
+                        <li><strong>Monitorear avances:</strong> Mantenerse actualizado con factorización</li>
+                    </ul>
+
+                    <h3>Consideraciones operativas</h3>
+                    <ul>
+                        <li><strong>Generación de claves:</strong> Usar generadores seguros de números aleatorios</li>
+                        <li><strong>Almacenamiento seguro:</strong> Proteger claves privadas con HSM</li>
+                        <li><strong>Backup de claves:</strong> Almacenamiento seguro y recuperación de desastres</li>
+                        <li><strong>Auditoría:</strong> Registrar uso de claves y operaciones</li>
+                        <li><strong>Certificados:</strong> Gestionar lifecycle completo de certificados</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="rsa-future">
+                <h2>Futuro y Consideraciones</h2>
+                <div class="encryption-card">
+                    <h3>Evolución del algoritmo</h3>
+                    <ul>
+                        <li><strong>Migración a ECC:</strong> Curvas elípticas más eficientes</li>
+                        <li><strong>Post-quantum cryptography:</strong> Preparación para computación cuántica</li>
+                        <li><strong>Mejores tamaños de clave:</strong> 3072 bits como nuevo estándar</li>
+                        <li><strong>Hardware acceleration:</strong> Mejor soporte en procesadores futuros</li>
+                    </ul>
+
+                    <h3>Mejores prácticas actuales</h3>
+                    <ul>
+                        <li>Usar RSA solo para firma digital y intercambio de claves</li>
+                        <li>Implementar criptografía híbrida para cifrado de datos</li>
+                        <li>Planificar migración a algoritmos post-quantum</li>
+                        <li>Monitorear avances en factorización de números grandes</li>
+                        <li>Evaluar ECDSA/Ed25519 como alternativas más eficientes</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

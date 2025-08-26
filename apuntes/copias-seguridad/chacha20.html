@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChaCha20 - Algoritmo de Cifrado de Flujo</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .encryption-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ChaCha20 - Algoritmo de Cifrado de Flujo</h1>
+            <p>Algoritmo de cifrado simétrico de alto rendimiento</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-chacha20">
+                <h2>¿Qué es ChaCha20?</h2>
+                <div class="encryption-card">
+                    <h3>ChaCha20 Cipher</h3>
+                    <p>ChaCha20 es un algoritmo de cifrado de flujo simétrico diseñado por Daniel J. Bernstein en 2008. Forma parte de la familia ChaCha y se ha convertido en una alternativa moderna y de alto rendimiento a algoritmos tradicionales como AES, especialmente en entornos donde el rendimiento en software es crítico.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Algoritmo de flujo:</strong> Cifra datos bit a bit o byte a byte</li>
+                        <li><strong>Clave de 256 bits:</strong> 32 bytes de clave simétrica</li>
+                        <li><strong>Nonce de 96 bits:</strong> 12 bytes para inicialización</li>
+                        <li><strong>Contador de 32 bits:</strong> Para numeración de bloques</li>
+                        <li><strong>20 rondas:</strong> Balance óptimo entre seguridad y rendimiento</li>
+                        <li><strong>Paralelizable:</strong> Excelente escalabilidad en múltiples núcleos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-chacha20-works">
+                <h2>Cómo funciona ChaCha20</h2>
+                <div class="encryption-card">
+                    <h3>Funcionamiento básico</h3>
+                    <p>ChaCha20 opera generando un keystream (flujo de claves) que se combina con los datos plaintext mediante operación XOR. El algoritmo procesa bloques de 64 bytes y utiliza una función de permutación basada en operaciones ARX (Addition, Rotation, XOR).</p>
+
+                    <h3>Componentes principales</h3>
+                    <ul>
+                        <li><strong>Estado inicial:</strong> 16 palabras de 32 bits (512 bits total)</li>
+                        <li><strong>Función de cuarto:</strong> Operaciones básicas en grupos de 4 palabras</li>
+                        <li><strong>Ronda doble:</strong> 2 rondas completas por iteración</li>
+                        <li><strong>Permutación:</strong> Reorganización del estado</li>
+                    </ul>
+
+                    <h3>Proceso de cifrado</h3>
+                    <ol>
+                        <li><strong>Inicialización:</strong> Configurar estado con clave, nonce y contador</li>
+                        <li><strong>Generación de keystream:</strong> Aplicar 20 rondas de permutación</li>
+                        <li><strong>Operación XOR:</strong> Combinar keystream con datos plaintext</li>
+                        <li><strong>Incremento de contador:</strong> Preparar para el siguiente bloque</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="chacha20-usage">
+                <h2>Uso en Copias de Seguridad</h2>
+                <div class="encryption-card">
+                    <h3>Aplicaciones principales</h3>
+                    <ul>
+                        <li><strong>Dispositivos móviles:</strong> Cifrado eficiente en smartphones y tablets</li>
+                        <li><strong>Redes de alta velocidad:</strong> VPN y comunicaciones seguras</li>
+                        <li><strong>Sistemas embebidos:</strong> Dispositivos IoT con recursos limitados</li>
+                        <li><strong>Backup en la nube:</strong> Cifrado de datos en tránsito</li>
+                        <li><strong>Aplicaciones web:</strong> TLS 1.3 para HTTPS</li>
+                        <li><strong>Sistemas de archivos:</strong> Cifrado de volúmenes y contenedores</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso</h3>
+                    <pre><code># OpenSSL (versión moderna)
+openssl enc -chacha20 -salt -in archivo.txt -out archivo.enc -k clave_segura
+
+# Python con cryptography
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+import os
+
+key = os.urandom(32)  # 256 bits
+nonce = os.urandom(16)  # 128 bits
+cipher = Cipher(algorithms.ChaCha20(key, nonce), mode=None)
+encryptor = cipher.encryptor()
+
+# Node.js con crypto
+const crypto = require('crypto');
+const cipher = crypto.createCipher('chacha20', 'clave');
+const encrypted = cipher.update('datos', 'utf8', 'hex') + cipher.final('hex');</code></pre>
+                </div>
+            </section>
+
+            <section id="chacha20-security">
+                <h2>Seguridad y Rendimiento</h2>
+                <div class="encryption-card">
+                    <h3>Nivel de seguridad</h3>
+                    <ul>
+                        <li><strong>Resistencia a ataques:</strong> No se conocen ataques prácticos</li>
+                        <li><strong>Protección contra timing attacks:</strong> Operaciones constantes en tiempo</li>
+                        <li><strong>Resistencia a cache attacks:</strong> Diseño robusto contra ataques de canal lateral</li>
+                        <li><strong>Análisis criptográfico:</strong> 15+ años de escrutinio académico</li>
+                        <li><strong>Aprobación RFC:</strong> RFC 8439 (estándar IETF)</li>
+                    </ul>
+
+                    <h3>Rendimiento superior</h3>
+                    <ul>
+                        <li><strong>Velocidad en software:</strong> 2-3x más rápido que AES en CPUs sin AES-NI</li>
+                        <li><strong>Paralelización:</strong> Excelente escalabilidad en múltiples hilos</li>
+                        <li><strong>Hardware móvil:</strong> Optimizado para procesadores ARM</li>
+                        <li><strong>Memoria:</strong> Uso eficiente de caché y memoria</li>
+                        <li><strong>Batería:</strong> Menor consumo energético que AES</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="chacha20-vs-aes">
+                <h2>Comparación con AES</h2>
+                <div class="encryption-card">
+                    <h3>Vs AES-256</h3>
+                    <ul>
+                        <li><strong>Rendimiento software:</strong> ChaCha20 ~2-3x más rápido sin AES-NI</li>
+                        <li><strong>Hardware específico:</strong> AES más rápido con instrucciones dedicadas</li>
+                        <li><strong>Seguridad:</strong> Ambos son seguros (diferentes puntos fuertes)</li>
+                        <li><strong>Flexibilidad:</strong> ChaCha20 más simple de implementar</li>
+                        <li><strong>Uso recomendado:</strong> ChaCha20 para dispositivos móviles y software puro</li>
+                    </ul>
+
+                    <h3>Vs AES-128</h3>
+                    <ul>
+                        <li><strong>Velocidad:</strong> ChaCha20 generalmente más rápido en software</li>
+                        <li><strong>Seguridad:</strong> Ambos adecuados para la mayoría de aplicaciones</li>
+                        <li><strong>Implementación:</strong> ChaCha20 más simple y limpio</li>
+                        <li><strong>Adopción:</strong> ChaCha20 ganando terreno en nuevas aplicaciones</li>
+                    </ul>
+
+                    <h3>Cuándo elegir ChaCha20</h3>
+                    <ul>
+                        <li>Dispositivos móviles y embebidos</li>
+                        <li>Entornos sin aceleración AES-NI</li>
+                        <li>Aplicaciones que requieren paralelización</li>
+                        <li>Sistemas sensibles a ataques de canal lateral</li>
+                        <li>Implementaciones puras en software</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="chacha20-implementation">
+                <h2>Implementación Práctica</h2>
+                <div class="encryption-card">
+                    <h3>Librerías y frameworks</h3>
+                    <ul>
+                        <li><strong>OpenSSL:</strong> Soporte desde versión 1.1.0</li>
+                        <li><strong>Python cryptography:</strong> Librería moderna y segura</li>
+                        <li><strong>libsodium:</strong> Implementación de referencia optimizada</li>
+                        <li><strong>BoringSSL:</strong> Versión de Google con optimizaciones</li>
+                        <li><strong>Node.js crypto:</strong> Módulo nativo</li>
+                        <li><strong>.NET:</strong> System.Security.Cryptography (versión moderna)</li>
+                        <li><strong>Rust ring:</strong> Implementación de bajo nivel</li>
+                    </ul>
+
+                    <h3>Modos de operación</h3>
+                    <ul>
+                        <li><strong>ChaCha20:</strong> Cifrado de flujo puro</li>
+                        <li><strong>ChaCha20-Poly1305:</strong> Modo autenticado (recomendado)</li>
+                        <li><strong>XChaCha20:</strong> Versión extendida con nonce de 192 bits</li>
+                        <li><strong>XChaCha20-Poly1305:</strong> Versión extendida autenticada</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="chacha20-tools">
+                <h2>Herramientas que usan ChaCha20</h2>
+                <div class="encryption-card">
+                    <h3>Protocolos y estándares</h3>
+                    <ul>
+                        <li><strong>TLS 1.3:</strong> Opción preferida para cifrado simétrico</li>
+                        <li><strong>SSH:</strong> Soporte para ChaCha20-Poly1305</li>
+                        <li><strong>WireGuard:</strong> VPN que usa ChaCha20 de forma predeterminada</li>
+                        <li><strong>Noise Protocol:</strong> Framework de protocolos criptográficos</li>
+                        <li><strong>Zstandard:</strong> Algoritmo de compresión con cifrado ChaCha20</li>
+                    </ul>
+
+                    <h3>Software de seguridad</h3>
+                    <ul>
+                        <li><strong>VeraCrypt:</strong> Soporte para ChaCha20 en contenedores cifrados</li>
+                        <li><strong>KeePass:</strong> Opción de cifrado para bases de datos de contraseñas</li>
+                        <li><strong>Signal:</strong> Aplicación de mensajería que usa ChaCha20</li>
+                        <li><strong>WhatsApp:</strong> Cifrado de extremo a extremo</li>
+                        <li><strong>Telegram:</strong> Protocolo MTProto usa ChaCha20</li>
+                    </ul>
+
+                    <h3>Sistemas operativos</h3>
+                    <ul>
+                        <li><strong>Android:</strong> API de cifrado desde Android 10</li>
+                        <li><strong>iOS:</strong> Soporte en Security framework</li>
+                        <li><strong>Linux:</strong> Integrado en kernel y utilidades</li>
+                        <li><strong>FreeBSD:</strong> Soporte en bibliotecas criptográficas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="chacha20-compliance">
+                <h2>Cumplimiento y Estándares</h2>
+                <div class="encryption-card">
+                    <h3>Estándares que lo reconocen</h3>
+                    <ul>
+                        <li><strong>RFC 8439:</strong> Especificación oficial de ChaCha20 y Poly1305</li>
+                        <li><strong>TLS 1.3:</strong> RFC 8446, método de cifrado aprobado</li>
+                        <li><strong>IEEE:</strong> Estándar para comunicaciones seguras</li>
+                        <li><strong>ISO/IEC:</strong> Reconocido en estándares de seguridad</li>
+                    </ul>
+
+                    <h3>Aplicaciones por sector</h3>
+                    <ul>
+                        <li><strong>Telecomunicaciones:</strong> 5G, VoIP, streaming</li>
+                        <li><strong>IoT:</strong> Dispositivos conectados con recursos limitados</li>
+                        <li><strong>Cloud computing:</strong> Servicios que requieren alto rendimiento</li>
+                        <li><strong>Mobile:</strong> Apps y comunicaciones móviles</li>
+                        <li><strong>Gaming:</strong> Protección de contenido y comunicaciones</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="chacha20-performance">
+                <h2>Consideraciones de Rendimiento</h2>
+                <div class="encryption-card">
+                    <h3>Optimizaciones de rendimiento</h3>
+                    <ul>
+                        <li><strong>Vectorización SIMD:</strong> Instrucciones AVX, SSE para procesadores x86</li>
+                        <li><strong>Procesamiento ARM:</strong> Optimizado para arquitectura móvil</li>
+                        <li><strong>Paralelización:</strong> Múltiples flujos independientes</li>
+                        <li><strong>Cache efficiency:</strong> Acceso secuencial a memoria</li>
+                        <li><strong>Branchless design:</strong> Sin ramas condicionales que afecten rendimiento</li>
+                    </ul>
+
+                    <h3>Benchmarks comparativos</h3>
+                    <ul>
+                        <li><strong>Intel Core i7 (sin AES-NI):</strong> ~12 GB/s vs ~4 GB/s de AES-256</li>
+                        <li><strong>ARM Cortex-A:</strong> ~3 GB/s vs ~1.5 GB/s de AES-256</li>
+                        <li><strong>Raspberry Pi:</strong> ~500 MB/s vs ~200 MB/s de AES-256</li>
+                        <li><strong>Procesamiento móvil:</strong> 50-80% más rápido que AES</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="chacha20-best-practices">
+                <h2>Mejores Prácticas</h2>
+                <div class="encryption-card">
+                    <h3>Implementación segura</h3>
+                    <ul>
+                        <li><strong>Usar modo autenticado:</strong> ChaCha20-Poly1305 para confidencialidad e integridad</li>
+                        <li><strong>Nonce único por mensaje:</strong> Nunca reutilizar nonce con la misma clave</li>
+                        <li><strong>Gestión de claves:</strong> Rotación periódica y almacenamiento seguro</li>
+                        <li><strong>Límite de datos:</strong> Considerar límites de 256 GB por clave/nonce</li>
+                        <li><strong>Validación:</strong> Verificar implementaciones contra vulnerabilidades conocidas</li>
+                    </ul>
+
+                    <h3>Consideraciones operativas</h3>
+                    <ul>
+                        <li><strong>Compatibilidad:</strong> Verificar soporte en plataformas objetivo</li>
+                        <li><strong>Actualización:</strong> Mantener bibliotecas y software actualizados</li>
+                        <li><strong>Testing:</strong> Validar rendimiento en el entorno objetivo</li>
+                        <li><strong>Documentación:</strong> Registrar configuraciones y parámetros de seguridad</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="chacha20-future">
+                <h2>Futuro y Consideraciones</h2>
+                <div class="encryption-card">
+                    <h3>Evolución del algoritmo</h3>
+                    <ul>
+                        <li><strong>Adopción creciente:</strong> Más implementaciones en protocolos modernos</li>
+                        <li><strong>Optimizaciones hardware:</strong> Mejor soporte en nuevos procesadores</li>
+                        <li><strong>Nuevos modos:</strong> Variantes para casos de uso específicos</li>
+                        <li><strong>Integración con post-quantum:</strong> Combinación con algoritmos resistentes a quantum</li>
+                    </ul>
+
+                    <h3>Mejores prácticas actuales</h3>
+                    <ul>
+                        <li>Preferir ChaCha20-Poly1305 sobre ChaCha20 puro</li>
+                        <li>Usar XChaCha20 para nonces largos cuando sea necesario</li>
+                        <li>Implementar gestión de claves robusta</li>
+                        <li>Monitorear actualizaciones de estándares criptográficos</li>
+                        <li>Evaluar rendimiento en el contexto específico de uso</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

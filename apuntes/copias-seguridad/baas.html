@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backup como Servicio (BaaS)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .software-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Backup como Servicio (BaaS)</h1>
+            <p>Protección de datos en la nube sin gestión de infraestructura</p>
+        </header>
+
+        <main>
+            <section id="introduction">
+                <div class="software-card">
+                    <h2>¿Qué es Backup como Servicio?</h2>
+                    <p>El Backup como Servicio (BaaS) es un modelo de entrega de soluciones de backup donde el proveedor gestiona completamente la infraestructura, el software y el almacenamiento, permitiendo a las organizaciones acceder a servicios avanzados de backup sin invertir en hardware o personal especializado.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Modelo SaaS:</strong> Pago por uso sin inversiones iniciales</li>
+                        <li><strong>Gestión completa:</strong> El proveedor administra toda la infraestructura</li>
+                        <li><strong>Escalabilidad automática:</strong> Ajuste dinámico de recursos según demanda</li>
+                        <li><strong>Acceso desde cualquier lugar:</strong> Backup y recuperación desde la nube</li>
+                        <li><strong>Actualizaciones automáticas:</strong> Siempre con las últimas funcionalidades</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="key-features">
+                <h2>Ventajas del BaaS</h2>
+
+                <div class="software-card">
+                    <h3>Beneficios para las organizaciones</h3>
+                    <ul>
+                        <li>Reducción significativa de costes de capital e infraestructura</li>
+                        <li>Eliminación de la gestión y mantenimiento de hardware</li>
+                        <li>Acceso a tecnologías avanzadas sin expertise interno</li>
+                        <li>Rapidez de implementación y escalado</li>
+                        <li>Recuperación ante desastres simplificada</li>
+                    </ul>
+                </div>
+
+                <div class="software-card">
+                    <h3>Características Técnicas</h3>
+                    <ul>
+                        <li>SLA garantizados para backup y recuperación</li>
+                        <li>Cifrado de datos end-to-end</li>
+                        <li>Replicación automática entre múltiples centros de datos</li>
+                        <li>Monitoreo 24/7 y soporte técnico incluido</li>
+                        <li>Integración con herramientas existentes</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="use-cases">
+                <h2>Proveedores y Soluciones</h2>
+                <div class="software-card">
+                    <h3>Principales proveedores de BaaS</h3>
+                    <ul>
+                        <li><strong>AWS Backup:</strong> Servicio integrado con el ecosistema AWS</li>
+                        <li><strong>Azure Backup:</strong> Solución nativa de Microsoft Azure</li>
+                        <li><strong>Google Cloud Backup:</strong> Backup inteligente con IA integrada</li>
+                        <li><strong>Veeam Cloud Connect:</strong> Extensión cloud del software Veeam</li>
+                        <li><strong>Rubrik Cloud:</strong> Backup inteligente con capacidades cloud</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="implementation">
+                <h2>Implementación y Consideraciones</h2>
+                <div class="software-card">
+                    <h3>Aspectos a considerar</h3>
+                    <ul>
+                        <li><strong>Ancho de banda:</strong> Velocidad de conexión para transferencias iniciales</li>
+                        <li><strong>Costes de transferencia:</strong> Evaluación de costes de salida de datos</li>
+                        <li><strong>Latencia:</strong> Impacto en tiempos de backup y recuperación</li>
+                        <li><strong>Regulaciones de datos:</strong> Cumplimiento con leyes de residencia de datos</li>
+                        <li><strong>Dependencia del proveedor:</strong> Estrategias de migración y portabilidad</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="software-backup.html" class="back-link">← Volver a Software de Backup</a>
+        </div>
+    </div>
+</body>
+</html>

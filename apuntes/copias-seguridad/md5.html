@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD5 - Algoritmo de Hash</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .integrity-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MD5 - Algoritmo de Hash</h1>
+            <p>Función hash criptográfica para verificación de integridad</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-md5">
+                <h2>¿Qué es MD5?</h2>
+                <div class="integrity-card">
+                    <h3>Message Digest 5</h3>
+                    <p>MD5 es una función hash criptográfica que produce un valor hash de 128 bits (32 caracteres hexadecimales). Fue diseñado por Ronald Rivest en 1991 y se utiliza ampliamente para verificar la integridad de archivos y datos.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Longitud del hash:</strong> 128 bits (32 caracteres hex)</li>
+                        <li><strong>Velocidad:</strong> Muy rápido en computación</li>
+                        <li><strong>Uso común:</strong> Verificación de descargas, integridad de archivos</li>
+                        <li><strong>Estado actual:</strong> Obsoleto para seguridad criptográfica</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-md5-works">
+                <h2>Cómo funciona MD5</h2>
+                <div class="integrity-card">
+                    <h3>Proceso de hash</h3>
+                    <p>MD5 procesa el mensaje de entrada en bloques de 512 bits, aplicando una serie de operaciones matemáticas para producir el hash final.</p>
+
+                    <h3>Pasos principales</h3>
+                    <ol>
+                        <li><strong>Preprocesamiento:</strong> Añade padding y longitud del mensaje</li>
+                        <li><strong>Procesamiento en bloques:</strong> Divide el mensaje en bloques de 512 bits</li>
+                        <li><strong>Compresión:</strong> Aplica función de compresión 64 veces por bloque</li>
+                        <li><strong>Resultado:</strong> Produce hash de 128 bits</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="md5-usage">
+                <h2>Uso en Verificación de Integridad</h2>
+                <div class="integrity-card">
+                    <h3>Aplicaciones comunes</h3>
+                    <ul>
+                        <li><strong>Verificación de descargas:</strong> Comprobar integridad de archivos descargados</li>
+                        <li><strong>Control de cambios:</strong> Detectar modificaciones en archivos</li>
+                        <li><strong>Almacenamiento de contraseñas:</strong> (Obsoleto, no recomendado)</li>
+                        <li><strong>Verificación de backups:</strong> Asegurar que los datos no han cambiado</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso</h3>
+                    <pre><code># Linux
+md5sum archivo.txt
+
+# Windows PowerShell
+Get-FileHash -Algorithm MD5 archivo.txt</code></pre>
+                </div>
+            </section>
+
+            <section id="md5-security">
+                <h2>Seguridad y Limitaciones</h2>
+                <div class="integrity-card">
+                    <h3>Vulnerabilidades conocidas</h3>
+                    <ul>
+                        <li><strong>Colisiones:</strong> Encontradas en 2004 por Xiaoyun Wang</li>
+                        <li><strong>Ataques de fuerza bruta:</strong> Fácil de computar en hardware moderno</li>
+                        <li><strong>Rainbow tables:</strong> Precomputación de hashes</li>
+                    </ul>
+
+                    <h3>¿Por qué está obsoleto?</h3>
+                    <ul>
+                        <li>No resiste ataques de colisión</li>
+                        <li>Fácil de falsificar</li>
+                        <li>Reemplazado por SHA-256 y superiores</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="md5-alternatives">
+                <h2>Alternativas Recomendadas</h2>
+                <div class="integrity-card">
+                    <h3>Algoritmos más seguros</h3>
+                    <ul>
+                        <li><strong>SHA-256:</strong> Estándar actual para integridad</li>
+                        <li><strong>SHA-3:</strong> Nuevo estándar NIST</li>
+                        <li><strong>BLAKE2:</strong> Alternativa moderna y rápida</li>
+                    </ul>
+
+                    <h3>Migración desde MD5</h3>
+                    <p>Para aplicaciones existentes, se recomienda migrar a algoritmos más seguros. MD5 aún puede usarse para verificación de integridad no criptográfica donde la velocidad es prioritaria sobre la seguridad.</p>
+                </div>
+            </section>
+
+            <section id="md5-tools">
+                <h2>Herramientas que usan MD5</h2>
+                <div class="integrity-card">
+                    <h3>Herramientas nativas</h3>
+                    <ul>
+                        <li><strong>Linux:</strong> md5sum</li>
+                        <li><strong>Windows:</strong> CertUtil, PowerShell</li>
+                        <li><strong>macOS:</strong> md5</li>
+                    </ul>
+
+                    <h3>Aplicaciones</h3>
+                    <ul>
+                        <li>Gestores de descargas (verificación de integridad)</li>
+                        <li>Herramientas de backup (Duplicati, etc.)</li>
+                        <li>Software de verificación de archivos</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

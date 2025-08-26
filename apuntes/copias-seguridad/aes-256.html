@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES-256 - Algoritmo de Cifrado Simétrico</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .encryption-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AES-256 - Algoritmo de Cifrado Simétrico</h1>
+            <p>Estándar militar de cifrado de máxima seguridad</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-aes256">
+                <h2>¿Qué es AES-256?</h2>
+                <div class="encryption-card">
+                    <h3>Advanced Encryption Standard 256-bit</h3>
+                    <p>AES-256 es la variante más segura del algoritmo Advanced Encryption Standard (AES) que utiliza claves de 256 bits. Es el estándar de cifrado aprobado por el gobierno de Estados Unidos para proteger información clasificada hasta el nivel Top Secret y es considerado el algoritmo simétrico más seguro disponible.</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Longitud de clave:</strong> 256 bits (32 bytes)</li>
+                        <li><strong>Tamaño de bloque:</strong> 128 bits</li>
+                        <li><strong>Rondas de cifrado:</strong> 14 rondas</li>
+                        <li><strong>Seguridad máxima:</strong> Resistente a ataques cuánticos</li>
+                        <li><strong>Estándar militar:</strong> Aprobado para información clasificada</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-aes256-works">
+                <h2>Cómo funciona AES-256</h2>
+                <div class="encryption-card">
+                    <h3>Proceso de cifrado</h3>
+                    <p>AES-256 opera sobre bloques de 128 bits de datos en un proceso de 14 rondas idénticas que incluyen las mismas operaciones que AES-128 pero con mayor complejidad:</p>
+
+                    <h3>Rondas de cifrado</h3>
+                    <ol>
+                        <li><strong>SubBytes:</strong> Sustitución no lineal usando tabla S-Box</li>
+                        <li><strong>ShiftRows:</strong> Rotación cíclica de filas</li>
+                        <li><strong>MixColumns:</strong> Mezcla lineal de columnas (excepto última ronda)</li>
+                        <li><strong>AddRoundKey:</strong> XOR con la clave de ronda expandida</li>
+                    </ol>
+
+                    <h3>Expansión de clave</h3>
+                    <p>La clave de 256 bits se expande a 15 claves de ronda (14 rondas + clave inicial) de 128 bits cada una, requiriendo el doble de procesamiento que AES-128.</p>
+                </div>
+            </section>
+
+            <section id="aes256-usage">
+                <h2>Uso en Copias de Seguridad</h2>
+                <div class="encryption-card">
+                    <h3>Aplicaciones críticas</h3>
+                    <ul>
+                        <li><strong>Datos clasificados:</strong> Información gubernamental y militar</li>
+                        <li><strong>Datos financieros:</strong> Información bancaria y transacciones</li>
+                        <li><strong>Datos médicos:</strong> Registros de salud protegidos (HIPAA)</li>
+                        <li><strong>Propiedad intelectual:</strong> Secretos comerciales y patentes</li>
+                        <li><strong>Backup empresarial:</strong> Datos críticos de negocio</li>
+                    </ul>
+
+                    <h3>Ejemplo de uso</h3>
+                    <pre><code># OpenSSL
+openssl enc -aes-256-cbc -salt -in archivo_confidencial.txt -out archivo.enc -k clave_segura
+
+# Python con cryptography
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+import os
+
+key = os.urandom(32)  # 256 bits
+cipher = Cipher(algorithms.AES(key), modes.GCM(iv))
+encryptor = cipher.encryptor()</code></pre>
+                </div>
+            </section>
+
+            <section id="aes256-security">
+                <h2>Seguridad y Rendimiento</h2>
+                <div class="encryption-card">
+                    <h3>Nivel de seguridad</h3>
+                    <ul>
+                        <li><strong>Resistencia a ataques:</strong> No se conocen ataques prácticos viables</li>
+                        <li><strong>Protección cuántica:</strong> Segura contra computación cuántica actual</li>
+                        <li><strong>Estándar FIPS 140-2:</strong> Validado por NIST</li>
+                        <li><strong>Aprobación gubernamental:</strong> Usado por NSA y otros organismos</li>
+                        <li><strong>Análisis criptográfico:</strong> 25+ años de escrutinio académico</li>
+                    </ul>
+
+                    <h3>Rendimiento</h3>
+                    <ul>
+                        <li><strong>Velocidad:</strong> ~30-40% más lento que AES-128</li>
+                        <li><strong>Hardware:</strong> Aceleración AES-NI en CPUs modernas</li>
+                        <li><strong>Paralelización:</strong> Excelente escalabilidad en múltiples núcleos</li>
+                        <li><strong>Memoria:</strong> Mayor uso de memoria para claves expandidas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes256-vs-others">
+                <h2>Comparación con otros algoritmos AES</h2>
+                <div class="encryption-card">
+                    <h3>Vs AES-128</h3>
+                    <ul>
+                        <li><strong>Seguridad:</strong> AES-256 es marginalmente más seguro</li>
+                        <li><strong>Rendimiento:</strong> AES-128 es 30-40% más rápido</li>
+                        <li><strong>Recomendación:</strong> AES-256 para datos altamente sensibles</li>
+                        <li><strong>Uso común:</strong> AES-256 para datos clasificados o críticos</li>
+                    </ul>
+
+                    <h3>Vs AES-192</h3>
+                    <ul>
+                        <li><strong>Longitud de clave:</strong> AES-192 tiene 192 bits</li>
+                        <li><strong>Rondas:</strong> AES-192 usa 12 rondas (vs 14 de AES-256)</li>
+                        <li><strong>Adopción:</strong> AES-256 es el más recomendado</li>
+                        <li><strong>Seguridad:</strong> AES-256 proporciona el máximo nivel</li>
+                    </ul>
+
+                    <h3>Vs otros algoritmos</h3>
+                    <ul>
+                        <li><strong>Twofish:</strong> Competidor de AES, similar en seguridad</li>
+                        <li><strong>Serpent:</strong> Otro finalista de AES, más conservador</li>
+                        <li><strong>ChaCha20:</strong> Más rápido en software puro</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes256-implementation">
+                <h2>Implementación Práctica</h2>
+                <div class="encryption-card">
+                    <h3>Librerías y frameworks</h3>
+                    <ul>
+                        <li><strong>OpenSSL:</strong> Implementación de referencia más utilizada</li>
+                        <li><strong>Python cryptography:</strong> Librería moderna y segura</li>
+                        <li><strong>Java Cryptography Extension:</strong> API estándar de Java</li>
+                        <li><strong>.NET System.Security:</strong> Clases de cifrado nativas</li>
+                        <li><strong>Crypto++:</strong> Librería C++ completa</li>
+                        <li><strong>Libgcrypt:</strong> Usado por GnuPG</li>
+                    </ul>
+
+                    <h3>Consideraciones de implementación</h3>
+                    <ul>
+                        <li><strong>Modos de operación:</strong> GCM recomendado para nueva implementación</li>
+                        <li><strong>IV/Padding:</strong> Generación segura de vectores de inicialización</li>
+                        <li><strong>Autenticación:</strong> Usar modos AEAD (Authenticated Encryption)</li>
+                        <li><strong>Gestión de claves:</strong> Almacenamiento y rotación seguras</li>
+                        <li><strong>Side-channel attacks:</strong> Proteger contra ataques de canal lateral</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes256-tools">
+                <h2>Herramientas que usan AES-256</h2>
+                <div class="encryption-card">
+                    <h3>Software de backup</h3>
+                    <ul>
+                        <li><strong>Veeam:</strong> Cifrado AES-256 en backups y replicación</li>
+                        <li><strong>Acronis:</strong> Cifrado completo con AES-256</li>
+                        <li><strong>StorageCraft:</strong> Imágenes cifradas con AES-256</li>
+                        <li><strong>Veritas NetBackup:</strong> Soporte para AES-256</li>
+                        <li><strong>Rubrik:</strong> Cifrado AES-256 para datos en reposo</li>
+                    </ul>
+
+                    <h3>Sistemas operativos y herramientas</h3>
+                    <ul>
+                        <li><strong>BitLocker (Windows):</strong> Cifrado de disco completo AES-256</li>
+                        <li><strong>FileVault (macOS):</strong> Cifrado de disco con AES-256</li>
+                        <li><strong>LUKS (Linux):</strong> Soporte para AES-256</li>
+                        <li><strong>VeraCrypt:</strong> Contenedores cifrados con AES-256</li>
+                        <li><strong>7-Zip:</strong> Compresión con cifrado AES-256</li>
+                    </ul>
+
+                    <h3>Protocolos y estándares</h3>
+                    <ul>
+                        <li><strong>TLS 1.3:</strong> Protocolos de comunicación segura</li>
+                        <li><strong>IPSec:</strong> VPN con cifrado AES-256</li>
+                        <li><strong>SSH:</strong> Comunicación remota cifrada</li>
+                        <li><strong>HTTPS:</strong> Sitios web con cifrado TLS</li>
+                        <li><strong>SMB 3.0:</strong> Compartición de archivos cifrada</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes256-compliance">
+                <h2>Cumplimiento y Estándares</h2>
+                <div class="encryption-card">
+                    <h3>Estándares que lo reconocen</h3>
+                    <ul>
+                        <li><strong>NIST SP 800-175B:</strong> Guía de selección de algoritmos</li>
+                        <li><strong>FIPS 140-2/3:</strong> Validación de módulos criptográficos</li>
+                        <li><strong>ISO/IEC 27001:</strong> Controles de seguridad de la información</li>
+                        <li><strong>NIST SP 800-57:</strong> Recomendaciones para gestión de claves</li>
+                        <li><strong>CNSSP-15:</strong> Estándar de seguridad nacional</li>
+                    </ul>
+
+                    <h3>Requisitos por sector</h3>
+                    <ul>
+                        <li><strong>Gobierno:</strong> Obligatorio para información clasificada</li>
+                        <li><strong>Finanzas:</strong> Requerido por PCI DSS y SOX</li>
+                        <li><strong>Salud:</strong> Obligatorio para datos protegidos (HIPAA)</li>
+                        <li><strong>Defensa:</strong> Estándar para información sensible</li>
+                        <li><strong>Comercial:</strong> Recomendado para datos críticos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes256-performance">
+                <h2>Consideraciones de Rendimiento</h2>
+                <div class="encryption-card">
+                    <h3>Optimizaciones de rendimiento</h3>
+                    <ul>
+                        <li><strong>Aceleración hardware:</strong> CPUs con instrucciones AES-NI</li>
+                        <li><strong>GPU acceleration:</strong> Procesamiento paralelo en GPUs</li>
+                        <li><strong>Paralelización:</strong> Múltiples hilos para grandes volúmenes</li>
+                        <li><strong>Caching inteligente:</strong> Minimizar operaciones de cifrado</li>
+                        <li><strong>Compresión previa:</strong> Comprimir antes de cifrar</li>
+                    </ul>
+
+                    <h3>Benchmarks típicos</h3>
+                    <ul>
+                        <li><strong>Software puro:</strong> ~50-100 MB/s por núcleo</li>
+                        <li><strong>Con AES-NI:</strong> ~500-1000 MB/s por núcleo</li>
+                        <li><strong>Hardware dedicado:</strong> >1 GB/s en dispositivos ASIC</li>
+                        <li><strong>Reducción de velocidad:</strong> ~20-30% vs sin cifrado</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes256-best-practices">
+                <h2>Mejores Prácticas</h2>
+                <div class="encryption-card">
+                    <h3>Implementación segura</h3>
+                    <ul>
+                        <li><strong>Usar modos autenticados:</strong> GCM o CCM para confidencialidad e integridad</li>
+                        <li><strong>IV únicos:</strong> Nunca reutilizar vectores de inicialización</li>
+                        <li><strong>Gestión de claves:</strong> Rotación periódica y almacenamiento seguro</li>
+                        <li><strong>Validación:</strong> Verificar implementaciones contra vulnerabilidades</li>
+                        <li><strong>Actualización:</strong> Mantener librerías y software actualizados</li>
+                    </ul>
+
+                    <h3>Consideraciones operativas</h3>
+                    <ul>
+                        <li><strong>Backup de claves:</strong> Almacenamiento seguro de claves maestras</li>
+                        <li><strong>Recuperación de desastres:</strong> Planes para pérdida de claves</li>
+                        <li><strong>Monitoreo de rendimiento:</strong> Impacto en operaciones de backup</li>
+                        <li><strong>Testing:</strong> Validar restauración de datos cifrados</li>
+                        <li><strong>Documentación:</strong> Procedimientos de gestión de claves</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="aes256-future">
+                <h2>Futuro y Consideraciones</h2>
+                <div class="encryption-card">
+                    <h3>Evolución del algoritmo</h3>
+                    <ul>
+                        <li><strong>Resistencia cuántica:</strong> Suficiente para amenazas futuras cercanas</li>
+                        <li><strong>Nuevos modos:</strong> Mejores modos de operación</li>
+                        <li><strong>Hardware:</strong> Mejor soporte en procesadores futuros</li>
+                        <li><strong>Quantum threats:</strong> Monitorear avances en computación cuántica</li>
+                    </ul>
+
+                    <h3>Mejores prácticas actuales</h3>
+                    <ul>
+                        <li>Usar modos AEAD (Authenticated Encryption with Associated Data)</li>
+                        <li>Implementar gestión de claves basada en hardware (HSM)</li>
+                        <li>Considerar post-quantum cryptography para futuro distante</li>
+                        <li>Monitorear actualizaciones de estándares criptográficos</li>
+                        <li>Planificar migración si surge necesidad</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

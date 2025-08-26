@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Recuperación ante Desastres (DRP)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .drp-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Plan de Recuperación ante Desastres (DRP)</h1>
+            <p>Guía completa para la preparación y respuesta ante desastres</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="backup-vms.html">Backup para VMs</a>
+            <a href="almacenamiento-backup.html">Almacenamiento</a>
+            <a href="ransomware-backup.html">Protección Ransomware</a>
+            <a href="drp.html">Plan de Recuperación</a>
+            <a href="snapshots-vms.html">Snapshots para VMs</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-drp">
+                <h2>¿Qué es un Plan de Recuperación ante Desastres?</h2>
+                <div class="drp-card">
+                    <h3>Definición y propósito</h3>
+                    <p>Un Plan de Recuperación ante Desastres (DRP) es un documento estratégico que detalla los procedimientos, procesos y recursos necesarios para restaurar las operaciones críticas de una organización después de un desastre.</p>
+
+                    <h3>¿Por qué es esencial?</h3>
+                    <ul>
+                        <li><strong>Continuidad del negocio:</strong> Minimizar tiempo de inactividad</li>
+                        <li><strong>Protección de datos:</strong> Recuperar información crítica</li>
+                        <li><strong>Cumplimiento normativo:</strong> Requisitos legales y regulatorios</li>
+                        <li><strong>Confianza de stakeholders:</strong> Clientes, inversores, empleados</li>
+                        <li><strong>Reducción de pérdidas:</strong> Financieras y reputacionales</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="drp-components">
+                <h2>Componentes de un DRP Efectivo</h2>
+
+                <h3>1. Evaluación de Riesgos</h3>
+                <div class="drp-card">
+                    <h4>Análisis de amenazas</h4>
+                    <ul>
+                        <li><strong>Desastres naturales:</strong> Terremotos, inundaciones, huracanes</li>
+                        <li><strong>Incendios y explosiones:</strong> Daños por fuego o químicos</li>
+                        <li><strong>Fallas técnicas:</strong> Cortes de energía, fallos de hardware</li>
+                        <li><strong>Ciberataques:</strong> Ransomware, DDoS, brechas de seguridad</li>
+                        <li><strong>Errores humanos:</strong> Eliminación accidental, configuración errónea</li>
+                        <li><strong>Desastres humanos:</strong> Sabotaje, vandalismo</li>
+                    </ul>
+
+                    <h4>Evaluación de impacto</h4>
+                    <ul>
+                        <li><strong>Análisis BIA:</strong> Business Impact Analysis</li>
+                        <li><strong>Priorización de procesos:</strong> Críticos vs importantes</li>
+                        <li><strong>Mapeo de dependencias:</strong> Sistemas interconectados</li>
+                    </ul>
+                </div>
+
+                <h3>2. Estrategias de Recuperación</h3>
+                <div class="drp-card">
+                    <h4>Sitios de recuperación</h4>
+                    <ul>
+                        <li><strong>Hot Site:</strong> Instalación completamente operativa</li>
+                        <li><strong>Warm Site:</strong> Infraestructura básica, datos actualizados</li>
+                        <li><strong>Cold Site:</strong> Solo espacio y energía, sin equipos</li>
+                        <li><strong>Cloud Recovery:</strong> Servicios de nube como alternativa</li>
+                        <li><strong>Reciprocal Agreement:</strong> Acuerdos con otras empresas</li>
+                    </ul>
+                </div>
+
+                <h3>3. Equipos de Respuesta</h3>
+                <div class="drp-card">
+                    <h4>Estructura organizacional</h4>
+                    <ul>
+                        <li><strong>Comité de dirección:</strong> Toma de decisiones estratégicas</li>
+                        <li><strong>Equipo de respuesta:</strong> Coordinación general</li>
+                        <li><strong>Equipo técnico:</strong> Recuperación de sistemas</li>
+                        <li><strong>Equipo de comunicaciones:</strong> Información a stakeholders</li>
+                        <li><strong>Equipo de soporte:</strong> Logística y recursos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="creating-drp">
+                <h2>Creación de un DRP</h2>
+
+                <h3>Fase 1: Planificación y Análisis</h3>
+                <div class="drp-card">
+                    <h4>Pasos iniciales</h4>
+                    <ol>
+                        <li><strong>Definir alcance:</strong> ¿Qué sistemas y procesos incluir?</li>
+                        <li><strong>Identificar recursos:</strong> Personal, equipos, proveedores</li>
+                        <li><strong>Establecer objetivos:</strong> RTO y RPO por sistema</li>
+                        <li><strong>Analizar riesgos:</strong> Probabilidad e impacto de cada amenaza</li>
+                        <li><strong>Evaluar recursos existentes:</strong> Backup, redundancia actual</li>
+                    </ol>
+                </div>
+
+                <h3>Fase 2: Desarrollo del Plan</h3>
+                <div class="drp-card">
+                    <h4>Contenido del documento</h4>
+                    <ul>
+                        <li><strong>Introducción y alcance:</strong> Propósito y límites del plan</li>
+                        <li><strong>Roles y responsabilidades:</strong> Quién hace qué</li>
+                        <li><strong>Procedimientos de activación:</strong> Cómo declarar un desastre</li>
+                        <li><strong>Procedimientos de recuperación:</strong> Paso a paso por sistema</li>
+                        <li><strong>Planes de comunicación:</strong> Internos y externos</li>
+                        <li><strong>Recursos y proveedores:</strong> Contactos y acuerdos</li>
+                    </ul>
+                </div>
+
+                <h3>Fase 3: Pruebas y Mantenimiento</h3>
+                <div class="drp-card">
+                    <h4>Validación continua</h4>
+                    <ul>
+                        <li><strong>Pruebas de escritorio:</strong> Revisión teórica del plan</li>
+                        <li><strong>Simulacros funcionales:</strong> Pruebas de componentes específicos</li>
+                        <li><strong>Simulacros completos:</strong> Prueba de todo el plan</li>
+                        <li><strong>Actualización regular:</strong> Mínimo una vez al año</li>
+                        <li><strong>Entrenamiento del personal:</strong> Capacitación continua</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="implementation">
+                <h2>Implementación y Ejecución</h2>
+
+                <h3>Procedimiento de Activación</h3>
+                <div class="drp-card">
+                    <h4>Pasos para declarar desastre</h4>
+                    <ol>
+                        <li><strong>Evaluación inicial:</strong> Confirmar que es un desastre</li>
+                        <li><strong>Notificación:</strong> Alertar al equipo de respuesta</li>
+                        <li><strong>Declaración formal:</strong> Activar el plan DRP</li>
+                        <li><strong>Activación de equipos:</strong> Poner en marcha los recursos</li>
+                        <li><strong>Comunicación inicial:</strong> Informar a stakeholders</li>
+                    </ol>
+                </div>
+
+                <h3>Recuperación por Prioridades</h3>
+                <div class="drp-card">
+                    <h4>Fases de recuperación</h4>
+                    <ul>
+                        <li><strong>Fase 1 - Crítica:</strong> 0-24 horas (sistemas vitales)</li>
+                        <li><strong>Fase 2 - Importante:</strong> 24-72 horas (operaciones principales)</li>
+                        <li><strong>Fase 3 - Normal:</strong> 72+ horas (sistemas restantes)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="monitoring-review">
+                <h2>Monitoreo y Revisión</h2>
+
+                <div class="drp-card">
+                    <h3>Métricas de éxito</h3>
+                    <ul>
+                        <li><strong>Tiempo de recuperación:</strong> Comparar con RTO establecido</li>
+                        <li><strong>Pérdida de datos:</strong> Comparar con RPO definido</li>
+                        <li><strong>Costo de recuperación:</strong> Presupuesto vs gasto real</li>
+                        <li><strong>Tiempo de inactividad:</strong> Impacto en operaciones</li>
+                        <li><strong>Satisfacción de usuarios:</strong> Feedback de empleados y clientes</li>
+                    </ul>
+
+                    <h3>Mejora continua</h3>
+                    <ul>
+                        <li><strong>Lecciones aprendidas:</strong> Documentar después de cada prueba</li>
+                        <li><strong>Actualizaciones tecnológicas:</strong> Incorporar nuevos sistemas</li>
+                        <li><strong>Cambios organizacionales:</strong> Adaptar a crecimiento o reestructuración</li>
+                        <li><strong>Revisión de riesgos:</strong> Amenazas emergentes</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="common-challenges">
+                <h2>Desafíos Comunes y Soluciones</h2>
+
+                <div class="drp-card">
+                    <h3>Problemas frecuentes</h3>
+                    <ul>
+                        <li><strong>Falta de compromiso:</strong>
+                            <ul>
+                                <li>Solución: Involucrar a la alta dirección desde el inicio</li>
+                            </ul>
+                        </li>
+                        <li><strong>Planes obsoletos:</strong>
+                            <ul>
+                                <li>Solución: Revisiones y actualizaciones regulares</li>
+                            </ul>
+                        </li>
+                        <li><strong>Falta de pruebas:</strong>
+                            <ul>
+                                <li>Solución: Programar simulacros periódicos</li>
+                            </ul>
+                        </li>
+                        <li><strong>Recursos insuficientes:</strong>
+                            <ul>
+                                <li>Solución: Presupuestar y planificar con anticipación</li>
+                            </ul>
+                        </li>
+                        <li><strong>Comunicación deficiente:</strong>
+                            <ul>
+                                <li>Solución: Planes de comunicación detallados</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="legal-compliance">
+                <h2>Cumplimiento Legal y Regulatorio</h2>
+
+                <div class="drp-card">
+                    <h3>Requisitos por sector</h3>
+                    <ul>
+                        <li><strong>Financiero:</strong> SOX, PCI DSS, regulaciones locales</li>
+                        <li><strong>Salud:</strong> HIPAA, HITECH, protección de datos médicos</li>
+                        <li><strong>Gubernamental:</strong> FISMA, estándares de seguridad nacional</li>
+                        <li><strong>General:</strong> GDPR, LOPD, protección de datos personales</li>
+                    </ul>
+
+                    <h3>Documentación requerida</h3>
+                    <ul>
+                        <li>Políticas de backup y recuperación</li>
+                        <li>Registros de pruebas y simulacros</li>
+                        <li>Evaluaciones de riesgo periódicas</li>
+                        <li>Planes de notificación de incidentes</li>
+                        <li>Acuerdos con proveedores de servicios</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="best-practices">
+                <h2>Mejores Prácticas</h2>
+
+                <div class="drp-card">
+                    <h3>Principios fundamentales</h3>
+                    <ul>
+                        <li><strong>Simplicidad:</strong> Planes complejos fallan bajo presión</li>
+                        <li><strong>Claridad:</strong> Roles y responsabilidades bien definidos</li>
+                        <li><strong>Practicidad:</strong> Procedimientos realistas y probados</li>
+                        <li><strong>Flexibilidad:</strong> Adaptable a diferentes tipos de desastres</li>
+                        <li><strong>Actualización:</strong> Mantener vivo y relevante</li>
+                    </ul>
+
+                    <h3>Consejos para el éxito</h3>
+                    <ul>
+                        <li>Involucrar a todas las áreas desde el inicio</li>
+                        <li>Realizar pruebas regulares y aprender de ellas</li>
+                        <li>Mantener el plan accesible y actualizado</li>
+                        <li>Presupuestar recursos para pruebas y actualizaciones</li>
+                        <li>Documentar todo: decisiones, cambios, lecciones</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

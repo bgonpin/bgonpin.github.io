@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibre Channel - Redes de Almacenamiento de Alta Velocidad</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .fc-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fibre Channel</h1>
+            <p>Protocolo de red de almacenamiento de alta velocidad para entornos enterprise</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="backup-vms.html">Backup para VMs</a>
+            <a href="almacenamiento-backup.html">Almacenamiento</a>
+            <a href="ransomware-backup.html">Protección Ransomware</a>
+            <a href="drp.html">Plan de Recuperación</a>
+            <a href="snapshots-vms.html">Snapshots para VMs</a>
+            <a href="cifrado-backup.html">Cifrado de Copias</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+            <a href="SAN_NAS.html">SAN vs NAS</a>
+        </nav>
+
+        <main>
+            <section id="what-is-fc">
+                <h2>¿Qué es Fibre Channel?</h2>
+                <div class="fc-card">
+                    <h3>Definición y propósito</h3>
+                    <p><strong>Fibre Channel (FC)</strong> es un protocolo de red de alta velocidad diseñado específicamente para el almacenamiento en red (SAN - Storage Area Network). Proporciona conectividad de alta velocidad y baja latencia entre servidores y dispositivos de almacenamiento.</p>
+
+                    <h3>¿Cómo funciona?</h3>
+                    <ul>
+                        <li><strong>Arquitectura punto a punto:</strong> Conexión directa entre dispositivos</li>
+                        <li><strong>Topología switched:</strong> Switches FC para múltiples conexiones</li>
+                        <li><strong>Protocolo full-duplex:</strong> Transmisión bidireccional simultánea</li>
+                        <li><strong>Distancia extendida:</strong> Hasta 10km con cables ópticos</li>
+                        <li><strong>QoS integrado:</strong> Calidad de servicio para diferentes tipos de tráfico</li>
+                    </ul>
+
+                    <h3>Versiones principales</h3>
+                    <ul>
+                        <li><strong>FC 1G (1997):</strong> Primera generación, 100MB/s</li>
+                        <li><strong>FC 2G (2002):</strong> 200MB/s, mejoras en escalabilidad</li>
+                        <li><strong>FC 4G (2004):</strong> 400MB/s, mejor eficiencia</li>
+                        <li><strong>FC 8G (2008):</strong> 800MB/s, optimización de energía</li>
+                        <li><strong>FC 16G (2011):</strong> 1600MB/s, latencia reducida</li>
+                        <li><strong>FC 32G (2016):</strong> 3200MB/s, mayor densidad</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="architecture">
+                <h2>Arquitectura de Fibre Channel</h2>
+
+                <h3>Componentes principales</h3>
+                <div class="fc-card">
+                    <h4>Host Bus Adapters (HBA)</h4>
+                    <ul>
+                        <li><strong>HBA de servidor:</strong> Conecta el servidor a la red FC</li>
+                        <li><strong>HBA de almacenamiento:</strong> Conecta dispositivos de storage</li>
+                        <li><strong>World Wide Names (WWN):</strong> Identificación única de dispositivos</li>
+                        <li><strong>Driver y firmware:</strong> Software de control y actualización</li>
+                    </ul>
+                </div>
+
+                <div class="fc-card">
+                    <h4>Switches FC</h4>
+                    <ul>
+                        <li><strong>Director switches:</strong> Switches enterprise de alto rendimiento</li>
+                        <li><strong>Fabric switches:</strong> Switches de acceso para conexiones múltiples</li>
+                        <li><strong>Zoning:</strong> Segmentación de la red para aislamiento</li>
+                        <li><strong>NPIV (N_Port ID Virtualization):</strong> Virtualización de puertos</li>
+                    </ul>
+                </div>
+
+                <div class="fc-card">
+                    <h4>Storage Arrays</h4>
+                    <ul>
+                        <li><strong>Controladores FC:</strong> Procesadores dedicados para FC</li>
+                        <li><strong>LUNs (Logical Unit Numbers):</strong> Unidades lógicas de almacenamiento</li>
+                        <li><strong>RAID integration:</strong> Protección de datos integrada</li>
+                        <li><strong>Multi-pathing:</strong> Redundancia de rutas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="features">
+                <h2>Características principales</h2>
+
+                <h3>Capas del protocolo</h3>
+                <div class="fc-card">
+                    <h4>FC-4 (Protocol Mapping)</h4>
+                    <ul>
+                        <li><strong>SCSI-FCP:</strong> Mapeo de comandos SCSI sobre FC</li>
+                        <li><strong>IP-FC:</strong> Protocolos IP sobre FC</li>
+                        <li><strong>FICON:</strong> Mainframe connectivity</li>
+                    </ul>
+                </div>
+
+                <div class="fc-card">
+                    <h4>FC-3 (Common Services)</h4>
+                    <ul>
+                        <li><strong>Striping:</strong> Distribución de datos para mejor rendimiento</li>
+                        <li><strong>Hunt groups:</strong> Balanceo de carga</li>
+                        <li><strong>Multicasting:</strong> Envío a múltiples destinos</li>
+                    </ul>
+                </div>
+
+                <div class="fc-card">
+                    <h4>FC-2 (Framing Protocol)</h4>
+                    <ul>
+                        <li><strong>Frames:</strong> Unidades de transmisión de datos</li>
+                        <li><strong>Sequences:</strong> Agrupación de frames relacionados</li>
+                        <li><strong>Exchanges:</strong> Conversaciones completas</li>
+                        <li><strong>Flow control:</strong> Control de flujo de datos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="configuration">
+                <h2>Configuración y uso</h2>
+
+                <h3>Configuración básica</h3>
+                <div class="fc-card">
+                    <h4>En Linux</h4>
+                    <pre><code># Instalar utilidades FC
+sudo yum install sg3_utils
+
+# Ver dispositivos FC
+sudo lsscsi
+sudo sg_map
+
+# Configurar multipathing
+sudo mpathconf --enable
+
+# Ver rutas FC
+sudo multipath -ll</code></pre>
+                </div>
+
+                <div class="fc-card">
+                    <h4>En Windows</h4>
+                    <pre><code># Ver HBA instalados
+Get-InitiatorPort
+
+# Configurar MPIO
+Enable-WindowsOptionalFeature -Online -FeatureName MultiPathIO
+
+# Ver discos FC
+Get-Disk | Where-Object BusType -eq "Fibre Channel"</code></pre>
+                </div>
+
+                <h3>Zoning Configuration</h3>
+                <div class="fc-card">
+                    <h4>Soft Zoning (Recommended)</h4>
+                    <pre><code># Configuración de zona
+zonecreate "web_servers", "server1_hba1; server1_hba2"
+zonecreate "storage_array", "array1_port1; array1_port2"
+
+# Crear zona set
+cfgcreate "production", "web_servers; storage_array"
+
+# Activar configuración
+cfgenable "production"</code></pre>
+                </div>
+            </section>
+
+            <section id="performance">
+                <h2>Optimización de rendimiento</h2>
+
+                <h3>Parámetros de rendimiento</h3>
+                <div class="fc-card">
+                    <h4>Configuración de HBA</h4>
+                    <ul>
+                        <li><strong>Queue depth:</strong> Profundidad de cola para mejor rendimiento</li>
+                        <li><strong>Interrupt coalescing:</strong> Reducción de interrupciones</li>
+                        <li><strong>Frame size:</strong> Tamaño óptimo de frames</li>
+                        <li><strong>Buffer credits:</strong> Control de flujo de datos</li>
+                    </ul>
+                </div>
+
+                <h3>Mejores prácticas</h3>
+                <div class="fc-card">
+                    <h4>Configuración recomendada</h4>
+                    <ul>
+                        <li><strong>Redundancia:</strong> Múltiples rutas (multipathing)</li>
+                        <li><strong>Balanceo de carga:</strong> Distribución automática de carga</li>
+                        <li><strong>Monitoreo continuo:</strong> Performance monitoring</li>
+                        <li><strong>Actualizaciones firmware:</strong> Mantener drivers actualizados</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Solución de problemas</h2>
+
+                <div class="fc-card">
+                    <h3>Comandos de diagnóstico</h3>
+                    <pre><code># Ver estado de puertos
+fcinfo hba-port
+
+# Ver estadísticas FC
+fcstat hba-port
+
+# Ver errores
+fcinfo hba-port --error
+
+# Ver zoning
+fcinfo zone --list</code></pre>
+                </div>
+
+                <div class="fc-card">
+                    <h3>Problemas comunes</h3>
+                    <ul>
+                        <li><strong>Link failures:</strong> Problemas de conectividad física</li>
+                        <li><strong>Zoning issues:</strong> Configuración incorrecta de zonas</li>
+                        <li><strong>Performance degradation:</strong> Contención de recursos</li>
+                        <li><strong>Driver compatibility:</strong> Versiones incompatibles</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="best-practices">
+                <h2>Mejores prácticas</h2>
+
+                <div class="fc-card">
+                    <h3>Diseño de red</h3>
+                    <ul>
+                        <li><strong>Topología dual fabric:</strong> Redundancia completa</li>
+                        <li><strong>Zoning por función:</strong> Separación por roles</li>
+                        <li><strong>Monitoreo proactivo:</strong> Alertas automáticas</li>
+                        <li><strong>Documentación completa:</strong> Configuraciones documentadas</li>
+                    </ul>
+                </div>
+
+                <div class="fc-card">
+                    <h3>Seguridad</h3>
+                    <ul>
+                        <li><strong>Port binding:</strong> Control de acceso por puerto</li>
+                        <li><strong>LUN masking:</strong> Control de acceso a storage</li>
+                        <li><strong>Auditoría de logs:</strong> Monitoreo de actividades</li>
+                        <li><strong>Actualizaciones regulares:</strong> Firmware y drivers</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="future">
+                <h2>Tendencias futuras</h2>
+
+                <div class="fc-card">
+                    <h3>Evolución de Fibre Channel</h3>
+                    <ul>
+                        <li><strong>FC 64G:</strong> Próxima generación de velocidad</li>
+                        <li><strong>NVMe over FC:</strong> Integración con NVMe</li>
+                        <li><strong>Inteligencia artificial:</strong> Optimización automática</li>
+                        <li><strong>Integración cloud:</strong> FC en entornos híbridos</li>
+                        <li><strong>Automatización completa:</strong> Gestión autónoma</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

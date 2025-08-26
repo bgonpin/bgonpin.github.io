@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISO 27001 - Gestión de Seguridad de la Información</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .integrity-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ISO 27001 - Gestión de Seguridad de la Información</h1>
+            <p>Sistema de Gestión de Seguridad de la Información (SGSI)</p>
+        </header>
+
+        <nav>
+            <a href="tipos-backup.html">Tipos de Backup</a>
+            <a href="regla-3-2-1.html">Regla 3-2-1</a>
+            <a href="rto-rpo.html">RTO y RPO</a>
+            <a href="software-backup.html">Software de Backup</a>
+            <a href="verificacion-integridad.html">Verificación de Integridad</a>
+        </nav>
+
+        <main>
+            <section id="what-is-iso27001">
+                <h2>¿Qué es ISO 27001?</h2>
+                <div class="integrity-card">
+                    <h3>Sistema de Gestión de Seguridad de la Información</h3>
+                    <p>ISO 27001 es la norma internacional más reconocida para la gestión de la seguridad de la información. Establece los requisitos para implementar, mantener y mejorar continuamente un Sistema de Gestión de Seguridad de la Información (SGSI).</p>
+
+                    <h3>Características principales</h3>
+                    <ul>
+                        <li><strong>Enfoque basado en riesgos:</strong> Gestión proactiva de riesgos de seguridad</li>
+                        <li><strong>Mejora continua:</strong> Ciclo PDCA (Plan-Do-Check-Act)</li>
+                        <li><strong>Certificación internacional:</strong> Reconocimiento global</li>
+                        <li><strong>Marco integral:</strong> Cubre todos los aspectos de la seguridad</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="iso27001-structure">
+                <h2>Estructura de ISO 27001</h2>
+                <div class="integrity-card">
+                    <h3>Cláusulas principales</h3>
+                    <ol>
+                        <li><strong>Alcance del SGSI:</strong> Definición del alcance y límites</li>
+                        <li><strong>Referencias normativas:</strong> Documentos de referencia</li>
+                        <li><strong>Términos y definiciones:</strong> Glosario específico</li>
+                        <li><strong>Contexto de la organización:</strong> Entorno interno y externo</li>
+                        <li><strong>Liderazgo:</strong> Compromiso de la dirección</li>
+                        <li><strong>Planificación:</strong> Gestión de riesgos y objetivos</li>
+                        <li><strong>Soporte:</strong> Recursos, competencias y comunicación</li>
+                        <li><strong>Operación:</strong> Planificación y control operativos</li>
+                        <li><strong>Evaluación del desempeño:</strong> Monitoreo y medición</li>
+                        <li><strong>Mejora:</strong> No conformidades y acciones correctivas</li>
+                    </ol>
+
+                    <h3>Anexo A - Controles</h3>
+                    <p>114 controles organizados en 14 secciones que cubren:</p>
+                    <ul>
+                        <li>Políticas de seguridad</li>
+                        <li>Organización de la seguridad</li>
+                        <li>Gestión de activos</li>
+                        <li>Control de acceso</li>
+                        <li>Criptografía</li>
+                        <li>Seguridad física y del entorno</li>
+                        <li>Seguridad de las operaciones</li>
+                        <li>Seguridad en las comunicaciones</li>
+                        <li>Adquisición, desarrollo y mantenimiento</li>
+                        <li>Relaciones con proveedores</li>
+                        <li>Gestión de incidentes</li>
+                        <li>Aspectos de la continuidad</li>
+                        <li>Cumplimiento normativo</li>
+                        <li>Revisiones de seguridad</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="iso27001-benefits">
+                <h2>Beneficios de ISO 27001</h2>
+                <div class="integrity-card">
+                    <h3>Beneficios estratégicos</h3>
+                    <ul>
+                        <li><strong>Confianza de los interesados:</strong> Demostración de compromiso con la seguridad</li>
+                        <li><strong>Ventaja competitiva:</strong> Diferenciación en el mercado</li>
+                        <li><strong>Reducción de riesgos:</strong> Identificación y mitigación proactiva</li>
+                        <li><strong>Cumplimiento normativo:</strong> Alineación con requisitos legales</li>
+                        <li><strong>Mejora continua:</strong> Optimización de procesos de seguridad</li>
+                    </ul>
+
+                    <h3>Beneficios operativos</h3>
+                    <ul>
+                        <li><strong>Gestión sistemática:</strong> Procesos estandarizados y documentados</li>
+                        <li><strong>Reducción de incidentes:</strong> Prevención proactiva</li>
+                        <li><strong>Mejor respuesta:</strong> Planes de gestión de incidentes efectivos</li>
+                        <li><strong>Recursos optimizados:</strong> Uso eficiente de recursos de seguridad</li>
+                        <li><strong>Mejora de la cultura:</strong> Conciencia de seguridad en la organización</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="iso27001-implementation">
+                <h2>Implementación de ISO 27001</h2>
+                <div class="integrity-card">
+                    <h3>Fases de implementación</h3>
+                    <ol>
+                        <li><strong>Planificación inicial:</strong>
+                            <ul>
+                                <li>Definir alcance del SGSI</li>
+                                <li>Obtener compromiso de la dirección</li>
+                                <li>Establecer equipo de implementación</li>
+                            </ul>
+                        </li>
+                        <li><strong>Análisis de brechas:</strong>
+                            <ul>
+                                <li>Evaluar estado actual de seguridad</li>
+                                <li>Identificar brechas con los requisitos</li>
+                                <li>Definir plan de remediación</li>
+                            </ul>
+                        </li>
+                        <li><strong>Desarrollo del SGSI:</strong>
+                            <ul>
+                                <li>Documentar políticas y procedimientos</li>
+                                <li>Implementar controles de seguridad</li>
+                                <li>Establecer procesos de gestión de riesgos</li>
+                            </ul>
+                        </li>
+                        <li><strong>Implementación y operación:</strong>
+                            <ul>
+                                <li>Desplegar el SGSI</li>
+                                <li>Capacitar al personal</li>
+                                <li>Monitorear el desempeño</li>
+                            </ul>
+                        </li>
+                        <li><strong>Certificación:</strong>
+                            <ul>
+                                <li>Auditoría interna</li>
+                                <li>Auditoría de certificación</li>
+                                <li>Obtención del certificado</li>
+                            </ul>
+                        </li>
+                        <li><strong>Mantenimiento:</strong>
+                            <ul>
+                                <li>Auditorías de seguimiento</li>
+                                <li>Mejora continua</li>
+                                <li>Renovación del certificado</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="iso27001-backups">
+                <h2>ISO 27001 y Copias de Seguridad</h2>
+                <div class="integrity-card">
+                    <h3>Controles específicos para backups</h3>
+                    <ul>
+                        <li><strong>A.12.3.1 Gestión de información y verificación:</strong>
+                            <ul>
+                                <li>Verificación de integridad de backups</li>
+                                <li>Validación de procesos de restauración</li>
+                                <li>Documentación de procedimientos</li>
+                            </ul>
+                        </li>
+                        <li><strong>A.17.1.1 Planificación de la continuidad:</strong>
+                            <ul>
+                                <li>Planes de respaldo y recuperación</li>
+                                <li>Procedimientos de restauración</li>
+                                <li>Pruebas regulares de restauración</li>
+                            </ul>
+                        </li>
+                        <li><strong>A.17.1.2 Redundancia:</strong>
+                            <ul>
+                                <li>Copias de seguridad redundantes</li>
+                                <li>Almacenamiento en múltiples ubicaciones</li>
+                                <li>Protección contra ransomware</li>
+                            </ul>
+                        </li>
+                        <li><strong>A.18.1.3 Protección de registros:</strong>
+                            <ul>
+                                <li>Logs de procesos de backup</li>
+                                <li>Registros de restauraciones</li>
+                                <li>Auditoría de accesos</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Requisitos específicos</h3>
+                    <ul>
+                        <li>Verificación regular de la integridad de las copias</li>
+                        <li>Pruebas de restauración documentadas</li>
+                        <li>Protección de backups contra acceso no autorizado</li>
+                        <li>Gestión de riesgos de pérdida de datos</li>
+                        <li>Planes de continuidad de negocio</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="iso27001-audit">
+                <h2>Proceso de Auditoría</h2>
+                <div class="integrity-card">
+                    <h3>Tipos de auditorías</h3>
+                    <ul>
+                        <li><strong>Auditorías internas:</strong>
+                            <ul>
+                                <li>Realizadas por personal de la organización</li>
+                                <li>Evaluación continua del cumplimiento</li>
+                                <li>Preparación para auditorías externas</li>
+                            </ul>
+                        </li>
+                        <li><strong>Auditorías de certificación:</strong>
+                            <ul>
+                                <li>Realizadas por organismos acreditados</li>
+                                <li>Evaluación independiente del SGSI</li>
+                                <li>Emisión del certificado ISO 27001</li>
+                            </ul>
+                        </li>
+                        <li><strong>Auditorías de seguimiento:</strong>
+                            <ul>
+                                <li>Verificación del mantenimiento del certificado</li>
+                                <li>Evaluación de mejoras implementadas</li>
+                                <li>Renovación cada 3 años</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Fases de una auditoría</h3>
+                    <ol>
+                        <li><strong>Planificación:</strong> Definir alcance y criterios</li>
+                        <li><strong>Ejecución:</strong> Recopilación de evidencia</li>
+                        <li><strong>Evaluación:</strong> Análisis de conformidad</li>
+                        <li><strong>Reporte:</strong> Documentación de hallazgos</li>
+                        <li><strong>Seguimiento:</strong> Verificación de acciones correctivas</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="iso27001-certification">
+                <h2>Certificación ISO 27001</h2>
+                <div class="integrity-card">
+                    <h3>Proceso de certificación</h3>
+                    <ol>
+                        <li><strong>Selección del organismo certificador:</strong>
+                            <ul>
+                                <li>Verificar acreditación (ej. UKAS, ANAB)</li>
+                                <li>Evaluar experiencia del auditor</li>
+                                <li>Considerar costos y plazos</li>
+                            </ul>
+                        </li>
+                        <li><strong>Auditoría de certificación:</strong>
+                            <ul>
+                                <li>Fase 1: Evaluación documental</li>
+                                <li>Fase 2: Evaluación in situ</li>
+                                <li>Evaluación de la implementación</li>
+                            </ul>
+                        </li>
+                        <li><strong>Emisión del certificado:</strong>
+                            <ul>
+                                <li>Validez de 3 años</li>
+                                <li>Auditorías de seguimiento anuales</li>
+                                <li>Renovación al final del período</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h3>Mantenimiento de la certificación</h3>
+                    <ul>
+                        <li>Auditorías de seguimiento anuales</li>
+                        <li>Mejora continua del SGSI</li>
+                        <li>Revisión de la política de seguridad</li>
+                        <li>Actualización de la evaluación de riesgos</li>
+                        <li>Recertificación cada 3 años</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="iso27001-challenges">
+                <h2>Desafíos Comunes</h2>
+                <div class="integrity-card">
+                    <h3>Desafíos de implementación</h3>
+                    <ul>
+                        <li><strong>Compromiso de la dirección:</strong> Necesidad de soporte ejecutivo</li>
+                        <li><strong>Complejidad:</strong> Número de controles y procesos</li>
+                        <li><strong>Recursos:</strong> Requerimientos de personal y tiempo</li>
+                        <li><strong>Cultura organizacional:</strong> Cambio en la mentalidad de seguridad</li>
+                        <li><strong>Documentación:</strong> Mantenimiento actualizado de documentos</li>
+                    </ul>
+
+                    <h3>Desafíos de mantenimiento</h3>
+                    <ul>
+                        <li><strong>Gestión del cambio:</strong> Adaptación a cambios organizacionales</li>
+                        <li><strong>Recursos continuos:</strong> Inversión sostenida en seguridad</li>
+                        <li><strong>Auditorías:</strong> Preparación y respuesta a hallazgos</li>
+                        <li><strong>Mejora continua:</strong> Implementación de lecciones aprendidas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="iso27001-best-practices">
+                <h2>Mejores Prácticas</h2>
+                <div class="integrity-card">
+                    <h3>Para una implementación exitosa</h3>
+                    <ul>
+                        <li><strong>Enfoque por fases:</strong> Implementar gradualmente los controles</li>
+                        <li><strong>Involucrar stakeholders:</strong> Participación de todas las áreas</li>
+                        <li><strong>Capacitación:</strong> Formación continua del personal</li>
+                        <li><strong>Automatización:</strong> Usar herramientas para gestión y monitoreo</li>
+                        <li><strong>Medición:</strong> Definir métricas de desempeño claras</li>
+                    </ul>
+
+                    <h3>Para el mantenimiento</h3>
+                    <ul>
+                        <li><strong>Revisión regular:</strong> Evaluación periódica del SGSI</li>
+                        <li><strong>Gestión de riesgos:</strong> Actualización continua del análisis</li>
+                        <li><strong>Comunicación:</strong> Mantenimiento de la conciencia de seguridad</li>
+                        <li><strong>Lecciones aprendidas:</strong> Incorporación de incidentes y auditorías</li>
+                        <li><strong>Mejora continua:</strong> Adaptación a amenazas emergentes</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="iso27001-tools">
+                <h2>Herramientas y Recursos</h2>
+                <div class="integrity-card">
+                    <h3>Herramientas de gestión</h3>
+                    <ul>
+                        <li><strong>Software GRC:</strong> Governance, Risk, Compliance</li>
+                        <li><strong>Plataformas de gestión de riesgos:</strong> Risk management tools</li>
+                        <li><strong>Herramientas de auditoría:</strong> Automated audit tools</li>
+                        <li><strong>Gestión documental:</strong> Document management systems</li>
+                        <li><strong>Monitoreo de seguridad:</strong> SIEM y herramientas de monitoreo</li>
+                    </ul>
+
+                    <h3>Recursos de formación</h3>
+                    <ul>
+                        <li><strong>Cursos oficiales:</strong> Entrenamiento en ISO 27001</li>
+                        <li><strong>Consultores certificados:</strong> Expertos en implementación</li>
+                        <li><strong>Comunidades:</strong> Grupos de discusión y mejores prácticas</li>
+                        <li><strong>Literatura especializada:</strong> Libros y guías de referencia</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="../copias-seguridad.html" class="back-link">← Volver al Manual Principal</a>
+        </div>
+    </div>
+</body>
+</html>

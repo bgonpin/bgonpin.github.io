@@ -100,15 +100,208 @@
     <div class="card">
         <div class="card-body">
             <h2>¿Cómo funciona SSH?</h2>
-            <p>El protocolo SSH utiliza una arquitectura de cliente-servidor.</p>
+            <p>El protocolo SSH utiliza una arquitectura de cliente-servidor. Existen dos versiones principales del protocolo SSH:</p>
+            <ul>
+                <li><strong>SSH-1:</strong> La versión original, ahora obsoleta debido a vulnerabilidades de seguridad conocidas.</li>
+                <li><strong>SSH-2:</strong> La versión actual y recomendada, que incluye mejoras significativas en seguridad y funcionalidad.</li>
+            </ul>
+
+            <h3>Componentes principales:</h3>
             <ul>
                 <li><strong>Cliente SSH:</strong> Es el programa que se ejecuta en tu ordenador para iniciar la conexión. Ejemplos populares son OpenSSH (incluido en la mayoría de los sistemas Linux y macOS) y PuTTY (para Windows).</li>
-                <li><strong>Servidor SSH:</strong> Es el servicio que se ejecuta en el ordenador remoto y que está a la espera de conexiones entrantes.</li>
+                <li><strong>Servidor SSH:</strong> Es el servicio que se ejecuta en el ordenador remoto y que está a la espera de conexiones entrantes. El más común es OpenSSH Server.</li>
+                <li><strong>Puerto por defecto:</strong> SSH utiliza el puerto TCP 22 por defecto, aunque puede configurarse para usar otros puertos por motivos de seguridad.</li>
             </ul>
-            <p>Cuando te conectas, el cliente y el servidor se autentican mutuamente y establecen una conexión segura mediante el uso de criptografía de clave pública. La autenticación se puede realizar de varias maneras, siendo las más comunes:</p>
+
+            <h3>Proceso de conexión:</h3>
+            <ol>
+                <li><strong>Negociación de versión:</strong> Cliente y servidor acuerdan qué versión de SSH usarán.</li>
+                <li><strong>Intercambio de claves:</strong> Se establece una clave de sesión compartida usando algoritmos de cifrado asimétrico.</li>
+                <li><strong>Autenticación:</strong> El cliente debe probar su identidad al servidor.</li>
+                <li><strong>Canal cifrado:</strong> Una vez autenticado, se crea un canal seguro para la comunicación.</li>
+            </ol>
+
+            <h3>Métodos de autenticación:</h3>
+            <p>La autenticación se puede realizar de varias maneras, siendo las más comunes:</p>
             <ul>
-                <li><strong>Contraseña:</strong> El usuario introduce su nombre de usuario y contraseña.</li>
-                <li><strong>Claves SSH:</strong> Es el método más seguro. Implica un par de claves: una clave pública que se almacena en el servidor y una clave privada que se mantiene en el ordenador del usuario. El servidor utiliza la clave pública para verificar que el cliente es quien dice ser, sin necesidad de enviar la contraseña a través de la red.</li>
+                <li><strong>Contraseña:</strong> El usuario introduce su nombre de usuario y contraseña. Es simple pero menos seguro que otros métodos.</li>
+                <li><strong>Claves SSH:</strong> Es el método más seguro. Implica un par de claves:
+                    <ul>
+                        <li><strong>Clave privada:</strong> Se mantiene en el ordenador del usuario (nunca se comparte).</li>
+                        <li><strong>Clave pública:</strong> Se almacena en el servidor en el archivo <code>~/.ssh/authorized_keys</code>.</li>
+                    </ul>
+                    <p>El servidor utiliza la clave pública para verificar que el cliente es quien dice ser, sin necesidad de enviar la contraseña a través de la red.</p>
+                </li>
+                <li><strong>Autenticación basada en host:</strong> Permite conexiones basadas en la confianza entre hosts.</li>
+                <li><strong>Autenticación multifactor:</strong> Combina varios métodos para mayor seguridad.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Instalación y configuración básica</h2>
+            <h3>En Linux/Ubuntu:</h3>
+            <pre><code>sudo apt update
+sudo apt install openssh-server
+sudo systemctl enable ssh
+sudo systemctl start ssh</code></pre>
+
+            <h3>En CentOS/RHEL:</h3>
+            <pre><code>sudo yum install openssh-server
+sudo systemctl enable sshd
+sudo systemctl start sshd</code></pre>
+
+            <h3>Archivos de configuración importantes:</h3>
+            <ul>
+                <li><code>/etc/ssh/sshd_config</code> - Configuración del servidor SSH</li>
+                <li><code>/etc/ssh/ssh_config</code> - Configuración del cliente SSH</li>
+                <li><code>~/.ssh/config</code> - Configuración personal del cliente</li>
+                <li><code>~/.ssh/authorized_keys</code> - Claves públicas autorizadas</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Comandos SSH más utilizados</h2>
+            <h3>Conexión básica:</h3>
+            <pre><code>ssh usuario@hostname</code></pre>
+
+            <h3>Conexión a puerto específico:</h3>
+            <pre><code>ssh -p 2222 usuario@hostname</code></pre>
+
+            <h3>Transferencia de archivos:</h3>
+            <pre><code>scp archivo.txt usuario@servidor:/ruta/destino/
+scp usuario@servidor:/ruta/archivo.txt .</code></pre>
+
+            <h3>Transferencia de archivos con SFTP:</h3>
+            <pre><code>sftp usuario@hostname</code></pre>
+
+            <h3>Ejecución de comandos remotos:</h3>
+            <pre><code>ssh usuario@servidor "ls -la /home"</code></pre>
+
+            <h3>Reenvío de puertos (Port Forwarding):</h3>
+            <pre><code>ssh -L 8080:localhost:80 usuario@servidor</code></pre>
+
+            <h3>Generación de claves SSH:</h3>
+            <pre><code>ssh-keygen -t rsa -b 4096 -C "tu-email@ejemplo.com"</code></pre>
+
+            <h3>Copia de clave pública al servidor:</h3>
+            <pre><code>ssh-copy-id usuario@servidor</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Características avanzadas</h2>
+            <h3>SSH Agent:</h3>
+            <p>El SSH Agent permite gestionar claves SSH y mantenerlas en memoria para conexiones más rápidas y convenientes.</p>
+            <pre><code>eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa</code></pre>
+
+            <h3>Configuración de hosts:</h3>
+            <p>En <code>~/.ssh/config</code> puedes definir configuraciones específicas para diferentes hosts:</p>
+            <pre><code>Host servidor-produccion
+    HostName 192.168.1.100
+    User miusuario
+    Port 22
+    IdentityFile ~/.ssh/produccion_key
+
+Host *
+    ServerAliveInterval 60
+    ServerAliveCountMax 3</code></pre>
+
+            <h3>Túneles SSH (SSH Tunneling):</h3>
+            <ul>
+                <li><strong>Local Port Forwarding:</strong> Acceder a un servicio remoto a través de un túnel seguro.</li>
+                <li><strong>Remote Port Forwarding:</strong> Exponer un servicio local en un servidor remoto.</li>
+                <li><strong>Dynamic Port Forwarding:</strong> Crear un proxy SOCKS para navegar de forma segura.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Hardening y mejores prácticas de seguridad</h2>
+            <h3>Configuración del servidor:</h3>
+            <ul>
+                <li>Cambiar el puerto por defecto (22) a uno no estándar</li>
+                <li>Deshabilitar el acceso root directo</li>
+                <li>Usar solo SSH-2</li>
+                <li>Limitar los usuarios que pueden conectarse</li>
+                <li>Configurar timeouts apropiados</li>
+                <li>Usar Fail2Ban para prevenir ataques de fuerza bruta</li>
+            </ul>
+
+            <h3>Mejores prácticas:</h3>
+            <ul>
+                <li>Siempre usar claves SSH en lugar de contraseñas</li>
+                <li>Usar frases de paso para proteger las claves privadas</li>
+                <li>Regularmente rotar las claves SSH</li>
+                <li>Monitorear los logs de SSH (<code>/var/log/auth.log</code>, <code>/var/log/secure</code>)</li>
+                <li>Usar <code>ssh-audit</code> para verificar la configuración de seguridad</li>
+            </ul>
+
+            <h3>Configuración de ejemplo segura:</h3>
+            <pre><code>Port 2222
+PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+AllowUsers usuario1 usuario2
+ClientAliveInterval 300
+ClientAliveCountMax 0
+MaxAuthTries 3
+LoginGraceTime 20</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>Solución de problemas comunes</h2>
+            <h3>Problemas de conexión:</h3>
+            <ul>
+                <li><strong>"Connection refused":</strong> El servidor SSH no está ejecutándose o el puerto está bloqueado por firewall</li>
+                <li><strong>"Permission denied":</strong> Problemas de autenticación o permisos de archivos</li>
+                <li><strong>"Host key verification failed":</strong> La clave del host ha cambiado (puede ser un ataque MITM)</li>
+            </ul>
+
+            <h3>Comandos de diagnóstico:</h3>
+            <pre><code>ssh -v usuario@servidor          # Modo verbose
+nmap -p 22 servidor              # Verificar si el puerto está abierto
+telnet servidor 22               # Probar conectividad básica
+ssh-keyscan servidor             # Obtener fingerprint del host</code></pre>
+
+            <h3>Problemas con claves SSH:</h3>
+            <ul>
+                <li>Verificar permisos: <code>chmod 600 ~/.ssh/id_rsa</code></li>
+                <li>Verificar permisos del directorio: <code>chmod 700 ~/.ssh</code></li>
+                <li>Asegurarse de que el archivo authorized_keys tenga los permisos correctos</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>SSH en diferentes entornos</h2>
+            <h3>SSH en contenedores Docker:</h3>
+            <pre><code>docker run -d -p 2222:22 \
+  -v /host/path:/home/user \
+  --name ssh-container ssh-server-image</code></pre>
+
+            <h3>SSH en la nube (AWS, GCP, Azure):</h3>
+            <ul>
+                <li>Usar Security Groups para controlar el acceso</li>
+                <li>Implementar bastion hosts para acceso seguro</li>
+                <li>Usar AWS Systems Manager Session Manager como alternativa</li>
+            </ul>
+
+            <h3>SSH vs otras alternativas:</h3>
+            <ul>
+                <li><strong>vs Telnet:</strong> SSH es cifrado, Telnet no lo es</li>
+                <li><strong>vs RDP:</strong> SSH es más ligero y seguro para administración de servidores</li>
+                <li><strong>vs VPN:</strong> SSH proporciona acceso remoto a nivel de aplicación, VPN a nivel de red</li>
             </ul>
         </div>
     </div>

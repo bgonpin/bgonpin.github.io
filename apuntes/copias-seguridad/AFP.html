@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFP - Apple Filing Protocol</title>
+    <link rel="stylesheet" href="SAN_NAS.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AFP</h1>
+            <p class="subtitle">Apple Filing Protocol</p>
+        </header>
+
+        <div class="intro">
+            <p>El <strong>AFP (Apple Filing Protocol)</strong> es un protocolo de red propietario desarrollado por Apple Inc. para proporcionar servicios de archivos compartidos en redes, específicamente diseñado para sistemas macOS y dispositivos Apple.</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>¿Qué es AFP?</h2>
+                <p>AFP es el protocolo nativo de Apple para compartir archivos en red. Fue diseñado específicamente para el entorno Mac y ofrece características optimizadas para sistemas macOS, incluyendo soporte completo para metadatos específicos de Apple como atributos extendidos, bifurcaciones de recursos y permisos POSIX.</p>
+
+                <h3>Características principales:</h3>
+                <ul>
+                    <li>Protocolo propietario de Apple</li>
+                    <li>Optimizado para entornos macOS</li>
+                    <li>Soporte completo para metadatos de archivos Apple</li>
+                    <li>Autenticación integrada con macOS</li>
+                    <li>Gestión avanzada de permisos</li>
+                </ul>
+
+                <h3>Componentes clave:</h3>
+                <ul>
+                    <li><strong>Servidor AFP:</strong> Proporciona servicios de archivos (macOS Server, Netatalk en Linux)</li>
+                    <li><strong>Cliente AFP:</strong> Cliente integrado en macOS (Finder)</li>
+                    <li><strong>Metadatos extendidos:</strong> Soporte para atributos específicos de macOS</li>
+                    <li><strong>Bifurcaciones de recursos:</strong> Manejo de archivos de doble bifurcación</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Funcionamiento</h2>
+                <p>AFP opera en el puerto TCP 548 y utiliza comandos específicos para gestionar archivos y directorios. Está diseñado para proporcionar una experiencia nativa en macOS, con soporte completo para características del sistema de archivos HFS+ y APFS.</p>
+
+                <h3>Ventajas:</h3>
+                <ul>
+                    <li>Integración perfecta con macOS</li>
+                    <li>Soporte completo para metadatos Apple</li>
+                    <li>Gestión granular de permisos</li>
+                    <li>Autenticación Kerberos opcional</li>
+                </ul>
+
+                <h3>Limitaciones:</h3>
+                <ul>
+                    <li>Protocolo propietario (menos interoperable)</li>
+                    <li>Limitado principalmente a entornos Apple</li>
+                    <li>Soporte limitado en sistemas no-Apple</li>
+                    <li>Menos eficiente en redes grandes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="comparison">
+            <h2>AFP vs Otros Protocolos</h2>
+            <table>
+                <tr>
+                    <th>Protocolo</th>
+                    <th>AFP</th>
+                    <th>SMB/CIFS</th>
+                    <th>NFS</th>
+                </tr>
+                <tr>
+                    <td>Plataforma principal</td>
+                    <td>macOS</td>
+                    <td>Windows</td>
+                    <td>Unix/Linux</td>
+                </tr>
+                <tr>
+                    <td>Metadatos</td>
+                    <td>Completo soporte Apple</td>
+                    <td>Soporte limitado</td>
+                    <td>Básico</td>
+                </tr>
+                <tr>
+                    <td>Interoperabilidad</td>
+                    <td>Limitada</td>
+                    <td>Excelente</td>
+                    <td>Buena</td>
+                </tr>
+                <tr>
+                    <td>Autenticación</td>
+                    <td><a href="Kerberos.html" style="color: #4a6491; text-decoration: underline;">Kerberos</a>, local</td>
+                    <td><a href="ActiveDirectory.html" style="color: #4a6491; text-decoration: underline;">Active Directory</a></td>
+                    <td>NIS, <a href="iLDAP.html" style="color: #4a6491; text-decoration: underline;">LDAP</a></td>
+                </tr>
+                <tr>
+                    <td>Rendimiento</td>
+                    <td>Bueno en macOS</td>
+                    <td>Excelente</td>
+                    <td>Excelente</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="conclusion">
+            <h2>Conclusión</h2>
+            <p><span class="highlight">AFP</span> es el protocolo ideal para entornos dominados por dispositivos Apple, proporcionando una integración perfecta con macOS y soporte completo para todas las características específicas de Apple. Es especialmente valioso en organizaciones que dependen de macOS para su flujo de trabajo creativo o desarrollo.</p>
+            <p>Sin embargo, para entornos heterogéneos o empresariales mixtos, protocolos más interoperables como SMB/CIFS o NFS pueden ser más apropiados. La elección depende de la composición de la infraestructura y los sistemas operativos utilizados.</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 2rem 0;">
+        <a href="SAN_NAS.html" style="display: inline-block; margin-top: 2rem; padding: 10px 20px; background-color: #4a6491; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">← Volver a SAN vs NAS</a>
+    </div>
+</body>
+</html>

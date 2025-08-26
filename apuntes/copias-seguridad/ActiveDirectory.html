@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Active Directory - Servicio de Directorio Empresarial</title>
+    <link rel="stylesheet" href="SAN_NAS.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Microsoft Active Directory</h1>
+            <p class="subtitle">Servicio de Directorio Empresarial</p>
+        </header>
+
+        <div class="intro">
+            <p><strong>Microsoft Active Directory (AD)</strong> es la solución integral de servicios de directorio desarrollada por Microsoft Corporation para entornos Windows Server. Constituye la columna vertebral de la infraestructura de dominios Windows, proporcionando servicios de autenticación centralizada, gestión de recursos de red y políticas de seguridad organizacional.</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>Introducción a Active Directory</h2>
+                <p>Active Directory representa la evolución natural de los servicios de directorio en entornos corporativos, implementando un modelo jerárquico distribuido que permite la gestión eficiente de recursos en redes de cualquier escala. Desde su introducción en Windows 2000 Server, AD ha establecido el estándar de facto para la administración de directorios en infraestructuras Microsoft.</p>
+            </div>
+
+            <div class="section">
+                <h2>Arquitectura y Características Fundamentales</h2>
+                <p>Active Directory implementa una arquitectura multi-capa que garantiza la integridad, disponibilidad y escalabilidad de los servicios de directorio. Su diseño modular permite la implementación de soluciones personalizadas según los requerimientos específicos de cada organización.</p>
+
+                <h3>Características técnicas principales:</h3>
+                <ul>
+                    <li><strong>Autenticación centralizada:</strong> Sistema unificado de gestión de identidades y credenciales con soporte para múltiples factores de autenticación</li>
+                    <li><strong>Single Sign-On (SSO):</strong> Mecanismo de autenticación única que permite el acceso transparente a recursos autorizados sin re-autenticación</li>
+                    <li><strong>Integración nativa con Kerberos:</strong> Implementación del protocolo de autenticación Kerberos v5 para entornos seguros</li>
+                    <li><strong>Compatibilidad completa con LDAP:</strong> Soporte integral para operaciones LDAP v3 y extensiones Microsoft</li>
+                    <li><strong>Políticas de grupo (GPO):</strong> Framework avanzado para la gestión centralizada de configuraciones y políticas de seguridad</li>
+                    <li><strong>Escalabilidad horizontal:</strong> Capacidad para gestionar directorios con cientos de miles de objetos distribuidos globalmente</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Componentes Arquitectónicos</h2>
+                <p>La arquitectura de Active Directory se basa en componentes altamente especializados que trabajan en conjunto para proporcionar un servicio de directorio robusto y eficiente.</p>
+
+                <h3>Componentes principales:</h3>
+                <ul>
+                    <li><strong>Controladores de dominio (DC):</strong> Servidores especializados que alojan réplicas completas de la base de datos de Active Directory</li>
+                    <li><strong>Esquema de directorio:</strong> Especificación formal que define las clases de objetos, atributos y sintaxis permitidas en el directorio</li>
+                    <li><strong>Catálogo global (GC):</strong> Base de datos distribuida de solo lectura que contiene información parcial de todos los dominios del bosque</li>
+                    <li><strong>Servicios de dominio:</strong> Conjunto de servicios especializados que proporcionan funcionalidades específicas del directorio</li>
+                    <li><strong>Motor de replicación:</strong> Sistema distribuido que garantiza la consistencia de datos entre múltiples controladores de dominio</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Modelo de Objetos del Directorio</h2>
+                <p>Active Directory implementa un modelo de objetos estructurado que permite la representación jerárquica de recursos y entidades organizativas. Este modelo se basa en el estándar X.500 con extensiones específicas de Microsoft.</p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h3>Objetos de Identidad y Seguridad</h3>
+                        <ul>
+                            <li><strong>Cuentas de usuario:</strong> Entidades de seguridad que representan usuarios individuales con credenciales de autenticación</li>
+                            <li><strong>Grupos de seguridad:</strong> Colecciones lógicas de usuarios, computadoras y otros grupos para la gestión de permisos</li>
+                            <li><strong>Contactos:</strong> Objetos que representan información de contacto para usuarios externos al dominio</li>
+                            <li><strong>Cuentas de computadora:</strong> Representación de sistemas informáticos miembros del dominio</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Objetos Organizativos y Estructurales</h3>
+                        <ul>
+                            <li><strong>Unidades organizativas (OU):</strong> Contenedores administrativos para organización lógica de objetos del directorio</li>
+                            <li><strong>Dominios:</strong> Particiones administrativas que definen límites de seguridad y políticas</li>
+                            <li><strong>Bosques:</strong> Colección de dominios que comparten una configuración común y esquema de directorio</li>
+                            <li><strong>Árboles de dominios:</strong> Jerarquía de dominios conectados que comparten un espacio de nombres contiguo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Funcionalidades del Servicio de Directorio</h2>
+                <p>Active Directory proporciona un conjunto integral de servicios que van más allá del simple almacenamiento de información de directorio.</p>
+
+                <h3>Servicios principales:</h3>
+                <ul>
+                    <li><strong>Servicio de autenticación y autorización:</strong> Validación de identidades y control de acceso basado en roles y permisos</li>
+                    <li><strong>Framework de políticas de grupo:</strong> Motor de gestión centralizada para la aplicación de configuraciones y políticas de seguridad</li>
+                    <li><strong>Servicio de resolución de nombres:</strong> Integración con DNS para la localización eficiente de recursos de red</li>
+                    <li><strong>Sistema de replicación multi-maestro:</strong> Mecanismo distribuido para la sincronización de datos entre controladores de dominio</li>
+                    <li><strong>Gestión de confianza entre dominios:</strong> Establecimiento de relaciones de seguridad entre dominios separados</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Integración con Infraestructuras de Red</h2>
+                <p>Active Directory se integra de manera nativa con múltiples protocolos y servicios de red, proporcionando una plataforma unificada para la gestión de recursos heterogéneos.</p>
+
+                <h3>Protocolos compatibles:</h3>
+                <ul>
+                    <li><strong>Kerberos v5:</strong> Protocolo de autenticación principal para entornos Windows y compatibles</li>
+                    <li><strong>LDAP v3:</strong> Protocolo estándar para consultas y manipulación del directorio</li>
+                    <li><strong>DNS dinámico:</strong> Servicio de resolución de nombres integrado con el directorio</li>
+                    <li><strong>SMB/CIFS con autenticación NTLM y Kerberos:</strong> Protocolos de compartición de archivos con autenticación AD</li>
+                    <li><strong>NFS v4 con integración Kerberos:</strong> Acceso a sistemas de archivos Unix/Linux con autenticación unificada</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Administración y Operaciones</h2>
+                <p>La gestión de Active Directory requiere el uso de herramientas especializadas y comandos específicos que permiten la administración eficiente del directorio.</p>
+
+                <h3>Comandos de gestión con PowerShell:</h3>
+                <div class="code-block">
+                    <pre><code># Incorporación de equipos al dominio
+Add-Computer -DomainName "dominio.local" -Credential (Get-Credential) -Restart
+
+# Creación de nuevas cuentas de usuario
+New-ADUser -Name "Juan Pérez" -SamAccountName "jperez" `
+           -UserPrincipalName "jperez@dominio.local" `
+           -AccountPassword (ConvertTo-SecureString "P@ssw0rd123" -AsPlainText -Force) `
+           -Enabled $true -PasswordNeverExpires $false
+
+# Gestión de membresías de grupo
+Add-ADGroupMember -Identity "Usuarios del Dominio" -Members "jperez"
+
+# Consulta de información del dominio
+Get-ADDomain | Select-Object Name, DomainMode, ForestMode
+
+# Inventario de usuarios del directorio
+Get-ADUser -Filter * -Properties Name, SamAccountName, EmailAddress | `
+           Select-Object Name, SamAccountName, EmailAddress
+
+# Localización de controladores de dominio
+Get-ADDomainController -Filter * | Select-Object Name, IPv4Address, Site</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Marco de Políticas de Grupo (GPO)</h2>
+                <p>Las Políticas de Grupo representan uno de los componentes más poderosos de Active Directory, permitiendo la gestión centralizada de configuraciones en toda la infraestructura.</p>
+
+                <h3>Operaciones administrativas con GPO:</h3>
+                <div class="code-block">
+                    <pre><code># Creación de objetos de política de grupo
+New-GPO -Name "Directiva de Seguridad Corporativa" -Comment "Política de seguridad estándar"
+
+# Establecimiento de enlaces GPO a unidades organizativas
+New-GPLink -Name "Directiva de Seguridad Corporativa" `
+           -Target "OU=Estaciones de Trabajo,DC=dominio,DC=local" `
+           -LinkEnabled Yes -Enforced Yes
+
+# Importación de configuraciones de seguridad
+Import-GPO -BackupGpoName "Backup-Seguridad-2024" `
+           -TargetName "Directiva de Seguridad Corporativa" `
+           -Path "\\Servidor\Compartida\GPO-Backups"
+
+# Análisis de políticas resultantes aplicadas
+Get-GPResultantSetOfPolicy -User "jperez" -Computer "PC01" `
+                           -ReportType Html -Path "C:\Reportes\GPO-Aplicadas.html"</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Evolución y Versiones</h2>
+                <p>Active Directory ha evolucionado significativamente desde su introducción inicial, incorporando nuevas funcionalidades y mejoras de seguridad con cada versión de Windows Server.</p>
+
+                <h3>Cronología de versiones principales:</h3>
+                <ul>
+                    <li><strong>Windows Server 2003:</strong> Establecimiento de la arquitectura base con mejoras significativas en rendimiento y escalabilidad</li>
+                    <li><strong>Windows Server 2008:</strong> Introducción de Controladores de Dominio de Solo Lectura (RODC) para sucursales</li>
+                    <li><strong>Windows Server 2008 R2:</strong> Mejoras en virtualización y administración remota</li>
+                    <li><strong>Windows Server 2012:</strong> Virtualización de controladores de dominio y clustering mejorado</li>
+                    <li><strong>Windows Server 2012 R2:</strong> Integración con servicios en la nube y Workplace Join</li>
+                    <li><strong>Windows Server 2016:</strong> Implementación de Privileged Access Management y Time-Based Group Membership</li>
+                    <li><strong>Windows Server 2019:</strong> Integración nativa con Azure AD y mejoras en seguridad</li>
+                    <li><strong>Windows Server 2022:</strong> Optimizaciones de rendimiento y nuevas características de seguridad</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Análisis Comparativo</h2>
+                <p>La evaluación de Active Directory requiere un análisis objetivo de sus fortalezas y debilidades en el contexto de la infraestructura tecnológica actual.</p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h3>Fortalezas Estratégicas</h3>
+                        <ul>
+                            <li><strong>Gestión centralizada integral:</strong> Consola única para administración de toda la infraestructura Windows</li>
+                            <li><strong>Integración nativa perfecta:</strong> Compatibilidad inherente con todos los productos Microsoft</li>
+                            <li><strong>Escalabilidad empresarial probada:</strong> Despliegues exitosos en organizaciones con millones de usuarios</li>
+                            <li><strong>Soporte multi-plataforma:</strong> Compatibilidad con sistemas Unix, Linux y macOS a través de servicios adicionales</li>
+                            <li><strong>Ecosistema de herramientas robusto:</strong> Conjunto completo de utilidades administrativas y de monitoreo</li>
+                            <li><strong>Arquitectura de seguridad avanzada:</strong> Integración completa con Kerberos y certificados digitales</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Consideraciones Técnicas</h3>
+                        <ul>
+                            <li><strong>Inversión financiera significativa:</strong> Costos asociados con licencias de Windows Server y CALs</li>
+                            <li><strong>Complejidad de implementación inicial:</strong> Curva de aprendizaje pronunciada para administradores</li>
+                            <li><strong>Dependencia tecnológica:</strong> Acoplamiento estrecho con la plataforma Windows Server</li>
+                            <li><strong>Requerimientos de especialización:</strong> Necesidad de certificaciones y conocimientos específicos</li>
+                            <li><strong>Infraestructura dedicada necesaria:</strong> Requerimientos específicos de hardware para controladores de dominio</li>
+                            <li><strong>Limitaciones en entornos heterogéneos:</strong> Funcionalidad reducida en infraestructuras no-Windows</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="conclusion">
+            <h2>Conclusión</h2>
+            <p><strong>Microsoft Active Directory</strong> continúa representando la solución de directorio más robusta y ampliamente adoptada en entornos empresariales Windows. Su evolución constante y integración con tecnologías emergentes como la nube aseguran su relevancia en la infraestructura moderna de TI.</p>
+            <p>La decisión de implementar Active Directory debe basarse en un análisis comprehensivo de los requerimientos organizacionales, considerando tanto los beneficios técnicos como los aspectos económicos y de recursos humanos asociados con su gestión y mantenimiento.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 - Documentación Técnica Corporativa - Microsoft Active Directory</p>
+        <div style="text-align: center; margin-top: 1rem;">
+            <a href="AFP.html" style="display: inline-block; padding: 8px 16px; background-color: #4a6491; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">← Volver a AFP</a>
+        </div>
+    </footer>
+</body>
+</html>

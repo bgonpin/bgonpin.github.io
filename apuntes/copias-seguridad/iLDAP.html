@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iLDAP - Lightweight Directory Access Protocol</title>
+    <link rel="stylesheet" href="SAN_NAS.css">
+</head>
+<body>
+    <header>
+        <h1>iLDAP - Lightweight Directory Access Protocol</h1>
+        <nav>
+            <a href="../apuntes.html">← Volver a Apuntes</a>
+            <a href="copias-seguridad.html">← Volver a Copias de Seguridad</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>¿Qué es iLDAP?</h2>
+            <p>iLDAP (Lightweight Directory Access Protocol) es un protocolo de aplicación utilizado para acceder y mantener servicios de información de directorio distribuida sobre una red IP. Es una versión simplificada del protocolo DAP (Directory Access Protocol) que forma parte del protocolo X.500.</p>
+        </section>
+
+        <section>
+            <h2>Características principales</h2>
+            <ul>
+                <li><strong>Protocolo cliente-servidor:</strong> Arquitectura basada en peticiones y respuestas</li>
+                <li><strong>Operaciones principales:</strong> Búsqueda, adición, modificación y eliminación de entradas</li>
+                <li><strong>Autenticación:</strong> Soporte para diversos mecanismos de autenticación</li>
+                <li><strong>Seguridad:</strong> Puede operar sobre SSL/TLS (LDAPS)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Usos comunes</h2>
+            <ul>
+                <li>Autenticación centralizada de usuarios</li>
+                <li>Gestión de directorios de empresas</li>
+                <li>Servicios de correo electrónico</li>
+                <li>Integración con sistemas de copias de seguridad</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Implementaciones populares</h2>
+            <ul>
+                <li><strong>OpenLDAP:</strong> Implementación de código abierto más utilizada</li>
+                <li><strong>Microsoft Active Directory:</strong> Basado en LDAP para Windows</li>
+                <li><strong>IBM Tivoli Directory Server</li>
+                <li><strong>Oracle Directory Server</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Comandos básicos LDAP</h2>
+            <div class="code-block">
+                <pre><code># Búsqueda en directorio LDAP
+ldapsearch -x -b "dc=example,dc=com" -H ldap://localhost
+
+# Adición de entrada
+ldapadd -x -D "cn=admin,dc=example,dc=com" -W -f entrada.ldif
+
+# Modificación de entrada
+ldapmodify -x -D "cn=admin,dc=example,dc=com" -W -f cambios.ldif</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 - Documentación técnica sobre iLDAP</p>
+    </footer>
+</body>
+</html>

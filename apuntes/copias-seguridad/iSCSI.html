@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iSCSI - Internet Small Computer Systems Interface</title>
+    <link rel="stylesheet" href="SAN_NAS.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>iSCSI</h1>
+            <p class="subtitle">Internet Small Computer Systems Interface</p>
+        </header>
+
+        <div class="intro">
+            <p>El <strong>iSCSI (Internet Small Computer Systems Interface)</strong> es un protocolo de red que permite el transporte de comandos SCSI a través de redes TCP/IP, facilitando el acceso a dispositivos de almacenamiento remoto como si fueran locales.</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>¿Qué es iSCSI?</h2>
+                <p>iSCSI es un protocolo que encapsula comandos SCSI en paquetes TCP/IP, permitiendo que los servidores accedan a almacenamiento remoto a través de la red. Es una alternativa económica a Fibre Channel para implementar redes SAN.</p>
+
+                <h3>Características principales:</h3>
+                <ul>
+                    <li>Transporte de comandos SCSI sobre TCP/IP</li>
+                    <li>Compatible con redes Ethernet estándar</li>
+                    <li>Costo reducido comparado con Fibre Channel</li>
+                    <li>Soporte para autenticación y encriptación</li>
+                    <li>Escalabilidad y facilidad de gestión</li>
+                </ul>
+
+                <h3>Componentes clave:</h3>
+                <ul>
+                    <li><strong>Iniciador iSCSI:</strong> Cliente que inicia las conexiones (servidores)</li>
+                    <li><strong>Objetivo iSCSI:</strong> Servidor que proporciona el almacenamiento (arrays de discos)</li>
+                    <li><strong>LUN (Logical Unit Number):</strong> Unidades lógicas de almacenamiento presentadas al iniciador</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Funcionamiento</h2>
+                <p>El protocolo iSCSI funciona encapsulando los comandos SCSI en paquetes TCP/IP para su transporte a través de la red. Los datos se dividen en PDU (Protocol Data Units) que incluyen cabeceras iSCSI con información de control.</p>
+
+                <h3>Ventajas:</h3>
+                <ul>
+                    <li>Utiliza infraestructura de red existente</li>
+                    <li>Distancia ilimitada (vs limitaciones de Fibre Channel)</li>
+                    <li>Bajo costo de implementación</li>
+                    <li>Fácil configuración y gestión</li>
+                </ul>
+
+                <h3>Limitaciones:</h3>
+                <ul>
+                    <li>Rendimiento inferior a Fibre Channel</li>
+                    <li>Latencia mayor debido al overhead de TCP/IP</li>
+                    <li>Dependiente de la calidad de la red</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="comparison">
+            <h2>iSCSI vs Otros Protocolos</h2>
+            <table>
+                <tr>
+                    <th>Protocolo</th>
+                    <th>iSCSI</th>
+                    <th>Fibre Channel</th>
+                    <th>FCoE</th>
+                </tr>
+                <tr>
+                    <td>Red subyacente</td>
+                    <td>Ethernet TCP/IP</td>
+                    <td>Dedicada Fibre Channel</td>
+                    <td>Ethernet (encapsulado)</td>
+                </tr>
+                <tr>
+                    <td>Costo</td>
+                    <td>Bajo</td>
+                    <td>Alto</td>
+                    <td>Medio</td>
+                </tr>
+                <tr>
+                    <td>Distancia máxima</td>
+                    <td>Ilimitada</td>
+                    <td>10km (multimodo)</td>
+                    <td>Depende de Ethernet</td>
+                </tr>
+                <tr>
+                    <td>Rendimiento</td>
+                    <td>10Gbps+</td>
+                    <td>16Gbps+</td>
+                    <td>10Gbps+</td>
+                </tr>
+                <tr>
+                    <td>Complejidad</td>
+                    <td>Baja</td>
+                    <td>Alta</td>
+                    <td>Media</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="conclusion">
+            <h2>Conclusión</h2>
+            <p><span class="highlight">iSCSI</span> representa una solución accesible y eficiente para implementar almacenamiento en red, especialmente en entornos donde el costo es un factor importante. Su capacidad para funcionar sobre redes Ethernet estándar lo hace ideal para organizaciones que buscan expandir su capacidad de almacenamiento sin inversiones masivas en infraestructura dedicada.</p>
+            <p>Sin embargo, para aplicaciones que requieren el máximo rendimiento y baja latencia, protocolos como Fibre Channel pueden ser más apropiados. La elección depende de los requisitos específicos de cada entorno.</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 2rem 0;">
+        <a href="SAN_NAS.html" style="display: inline-block; margin-top: 2rem; padding: 10px 20px; background-color: #4a6491; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">← Volver a SAN vs NAS</a>
+    </div>
+</body>
+</html>

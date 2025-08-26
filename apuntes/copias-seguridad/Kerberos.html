@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerberos - Protocolo de Autenticación</title>
+    <link rel="stylesheet" href="SAN_NAS.css">
+</head>
+<body>
+    <header>
+        <h1>Kerberos - Protocolo de Autenticación</h1>
+        <nav>
+            <a href="../apuntes.html">← Volver a Apuntes</a>
+            <a href="copias-seguridad.html">← Volver a Copias de Seguridad</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>¿Qué es Kerberos?</h2>
+            <p><strong>Kerberos</strong> es un protocolo de autenticación de red que utiliza criptografía de clave secreta para proporcionar autenticación fuerte en entornos de red no seguros. Fue desarrollado en el MIT (Massachusetts Institute of Technology) como parte del proyecto Athena y se ha convertido en un estándar de la industria para autenticación en redes.</p>
+        </section>
+
+        <section>
+            <h2>Características principales</h2>
+            <ul>
+                <li><strong>Autenticación mutua:</strong> Tanto el cliente como el servidor se autentican entre sí</li>
+                <li><strong>Criptografía de clave secreta:</strong> Utiliza algoritmos simétricos para la encriptación</li>
+                <li><strong>Tickets de autenticación:</strong> Sistema basado en tickets temporales</li>
+                <li><strong>Single Sign-On (SSO):</strong> Una autenticación permite acceso a múltiples servicios</li>
+                <li><strong>Seguridad robusta:</strong> Protege contra ataques de replay y spoofing</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Componentes del sistema Kerberos</h2>
+            <ul>
+                <li><strong>Centro de Distribución de Claves (KDC):</strong> Servidor central que emite tickets</li>
+                <li><strong>Servidor de Autenticación (AS):</strong> Valida la identidad del usuario</li>
+                <li><strong>Servidor de Concesión de Tickets (TGS):</strong> Emite tickets de servicio</li>
+                <li><strong>Base de datos de principales:</strong> Almacena información de usuarios y servicios</li>
+                <li><strong>Cliente Kerberos:</strong> Aplicación que solicita autenticación</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Funcionamiento básico</h2>
+            <ol>
+                <li><strong>Autenticación inicial:</strong> El cliente solicita un TGT (Ticket Granting Ticket) al AS</li>
+                <li><strong>Obtención de ticket de servicio:</strong> El cliente usa el TGT para obtener un ticket de servicio del TGS</li>
+                <li><strong>Acceso al servicio:</strong> El cliente presenta el ticket de servicio al servidor</li>
+                <li><strong>Autenticación mutua:</strong> El servidor valida el ticket y responde con una confirmación</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Usos comunes</h2>
+            <ul>
+                <li>Autenticación en dominios Windows (Active Directory)</li>
+                <li>Servicios de archivos compartidos (SMB, NFS con Kerberos)</li>
+                <li>Autenticación SSH con Kerberos</li>
+                <li>Servicios web con autenticación Kerberos (SPNEGO)</li>
+                <li>Integración con protocolos de red como AFP, SMB, y NFS</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Implementaciones populares</h2>
+            <ul>
+                <li><strong>Microsoft Active Directory:</strong> Implementación más utilizada en entornos Windows</li>
+                <li><strong>MIT Kerberos:</strong> Implementación de referencia de código abierto</li>
+                <li><strong>Red Hat Enterprise Linux:</strong> Integración nativa con Kerberos</li>
+                <li><strong>Apple macOS:</strong> Soporte Kerberos para autenticación en red</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Comandos básicos Kerberos</h2>
+            <div class="code-block">
+                <pre><code># Obtener ticket inicial (Linux)
+kinit usuario@DOMINIO.COM
+
+# Ver tickets actuales
+klist
+
+# Destruir todos los tickets
+kdestroy
+
+# Renovar ticket
+kinit -R
+
+# Configurar Kerberos (Windows)
+ksetup /setdomain DOMINIO.COM
+ksetup /addkdc DOMINIO.COM kdc.dominio.com</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Configuración básica</h2>
+            <div class="code-block">
+                <pre><code># Archivo /etc/krb5.conf (Linux)
+[libdefaults]
+    default_realm = DOMINIO.COM
+    dns_lookup_realm = false
+    dns_lookup_kdc = false
+
+[realms]
+    DOMINIO.COM = {
+        kdc = kdc.dominio.com
+        admin_server = kdc.dominio.com
+    }</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Ventajas y limitaciones</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h3>Ventajas</h3>
+                    <ul>
+                        <li>Seguridad robusta contra ataques</li>
+                        <li>Single Sign-On eficiente</li>
+                        <li>Escalabilidad en grandes redes</li>
+                        <li>Integración con múltiples servicios</li>
+                        <li>Soporte en múltiples plataformas</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Limitaciones</h3>
+                    <ul>
+                        <li>Complejidad de configuración</li>
+                        <li>Sincronización de relojes requerida</li>
+                        <li>Vulnerabilidades si se compromete el KDC</li>
+                        <li>No es adecuado para autenticación web directa</li>
+                        <li>Requiere infraestructura dedicada</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 - Documentación técnica sobre Kerberos</p>
+    </footer>
+</body>
+</html>

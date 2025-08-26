@@ -4,155 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAN vs NAS - Sistemas de Almacenamiento</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #2c3e50, #4a6491);
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .intro {
-            padding: 30px;
-            text-align: center;
-            background: #f0f4f8;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .content {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 20px;
-        }
-        
-        .section {
-            flex: 1;
-            min-width: 300px;
-            padding: 25px;
-            margin: 15px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #4a6491;
-        }
-        
-        h3 {
-            color: #4a6491;
-            margin: 20px 0 10px;
-        }
-        
-        ul {
-            list-style-type: none;
-            padding-left: 20px;
-        }
-        
-        li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 25px;
-        }
-        
-        li:before {
-            content: "•";
-            color: #4a6491;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            font-size: 1.2rem;
-        }
-        
-        .comparison {
-            background: #f0f4f8;
-            padding: 30px;
-            margin-top: 20px;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        th {
-            background-color: #4a6491;
-            color: white;
-        }
-        
-        tr:hover {
-            background-color: #f5f7fa;
-        }
-        
-        .conclusion {
-            padding: 30px;
-            background: #2c3e50;
-            color: white;
-            border-radius: 0 0 12px 12px;
-        }
-        
-        .highlight {
-            color: #ffd700;
-            font-weight: bold;
-        }
-        
-        @media (max-width: 768px) {
-            .content {
-                flex-direction: column;
-            }
-            
-            .section {
-                margin: 10px 0;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="SAN_NAS.css">
 </head>
 <body>
     <div class="container">
@@ -195,7 +47,7 @@
                 <h3>Características principales:</h3>
                 <ul>
                     <li>Arquitectura basada en bloques</li>
-                    <li>Protocolos: Fibre Channel, iSCSI, FCoE</li>
+                    <li>Protocolos: <a href="Fibre_Channel.html" style="color: #4a6491; text-decoration: underline;">Fibre Channel</a>, <a href="iSCSI.html" style="color: #4a6491; text-decoration: underline;">iSCSI</a>, <a href="FCoE.html" style="color: #4a6491; text-decoration: underline;">FCoE</a></li>
                     <li>Alto rendimiento y baja latencia</li>
                     <li>Alta escalabilidad</li>
                     <li>Costo elevado, requiere personal especializado</li>
@@ -226,8 +78,8 @@
                 </tr>
                 <tr>
                     <td>Protocolos</td>
-                    <td>Fibre Channel, iSCSI, FCoE</td>
-                    <td><a href="NFS.html" style="color: #4a6491; text-decoration: underline;">NFS</a>, <a href="SMB_CIFS.html" style="color: #4a6491; text-decoration: underline;">SMB/CIFS</a>, AFP</td>
+                    <td><a href="Fibre_Channel.html" style="color: #4a6491; text-decoration: underline;">Fibre Channel</a>, <a href="iSCSI.html" style="color: #4a6491; text-decoration: underline;">iSCSI</a>, <a href="FCoE.html" style="color: #4a6491; text-decoration: underline;">FCoE</a></td>
+                    <td><a href="NFS.html" style="color: #4a6491; text-decoration: underline;">NFS</a>, <a href="SMB_CIFS.html" style="color: #4a6491; text-decoration: underline;">SMB/CIFS</a>, <a href="AFP.html" style="color: #4a6491; text-decoration: underline;">AFP</a></td>
                 </tr>
                 <tr>
                     <td>Rendimiento</td>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honeypot - Ciberseguridad</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background-color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            border-bottom: 2px solid #4a4a4a;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #b0b0b0;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 4px solid #555555;
+        }
+
+        h3 {
+            color: #c0c0c0;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .definition {
+            background-color: #2a2a2a;
+            border: 1px solid #404040;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background-color: #252525;
+            border: 1px solid #353535;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .subsection {
+            background-color: #2d2d2d;
+            border: 1px solid #3d3d3d;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+
+        .list-item {
+            background-color: #303030;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            border-left: 3px solid #555555;
+        }
+
+        strong {
+            color: #ffffff;
+        }
+
+        .container {
+            background-color: #1e1e1e;
+            border: 1px solid #2e2e2e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #404040;
+        }
+
+        footer a {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Honeypot</h1>
+
+        <div class="definition">
+            <p>Un <span class="highlight">honeypot</span> (del inglés, "tarro de miel") es una herramienta de ciberseguridad que actúa como una trampa o señuelo para los ciberdelincuentes. Se trata de un sistema informático, una aplicación o una red que se despliega intencionalmente para que parezca un objetivo atractivo y vulnerable, con el fin de atraer a los atacantes y observar su comportamiento.</p>
+        </div>
+
+        <div class="section">
+            <h2>¿Para qué sirve un honeypot?</h2>
+            <p>El propósito principal de un honeypot no es proteger datos reales, sino <span class="highlight">recopilar información</span> sobre las amenazas y los atacantes. Cuando un ciberdelincuente intenta comprometer el honeypot, los profesionales de la seguridad pueden registrar y analizar:</p>
+
+            <div class="subsection">
+                <ul>
+                    <li class="list-item"><strong>El origen del ataque:</strong> De dónde vienen los ciberdelincuentes (dirección IP, ubicación).</li>
+                    <li class="list-item"><strong>Las técnicas de ataque:</strong> Qué métodos, herramientas y vulnerabilidades intentan explotar.</li>
+                    <li class="list-item"><strong>El modus operandi:</strong> Qué datos o aplicaciones les interesan, qué comandos ejecutan y cómo se mueven dentro del sistema.</li>
+                    <li class="list-item"><strong>El malware utilizado:</strong> Qué tipo de software malicioso intentan instalar.</li>
+                </ul>
+            </div>
+
+            <p>Esta información es invaluable para fortalecer las defensas de la red principal de una empresa, ya que permite identificar debilidades, anticipar futuros ataques y mejorar la postura de seguridad.</p>
+        </div>
+
+        <div class="section">
+            <h2>Tipos de honeypots</h2>
+            <p>Los honeypots se pueden clasificar de varias maneras, pero las más comunes son según su nivel de interacción y su propósito:</p>
+
+            <div class="subsection">
+                <h3>Según el nivel de interacción:</h3>
+                <ul>
+                    <li class="list-item"><strong>Honeypots de baja interacción:</strong> Son los más sencillos de configurar y mantener. Simulan servicios básicos (como un puerto SSH o FTP) y ofrecen una funcionalidad limitada. Son ideales para detectar ataques automatizados, como los de bots o gusanos, pero un atacante experimentado puede identificarlos rápidamente.</li>
+                    <li class="list-item"><strong>Honeypots de alta interacción:</strong> Son más complejos y simulan un sistema completo con múltiples servicios y aplicaciones. Permiten una interacción profunda con el atacante, ofreciendo una gran cantidad de datos sobre sus acciones. Requieren más recursos y son más difíciles de mantener, pero proporcionan información muy detallada.</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Según su propósito:</h3>
+                <ul>
+                    <li class="list-item"><strong>Honeypots de producción:</strong> Se implementan dentro de una red corporativa junto con la infraestructura real. Su objetivo es desviar los ataques dirigidos a los sistemas reales y detectar movimientos sospechosos en tiempo real.</li>
+                    <li class="list-item"><strong>Honeypots de investigación:</strong> Se utilizan para estudiar el comportamiento de los ciberdelincuentes, analizar el malware y desarrollar nuevas técnicas de defensa.</li>
+                </ul>
+            </div>
+
+            <p>Además, existe el concepto de <span class="highlight">Honeynet</span>, que es una red de varios honeypots interconectados que simula una infraestructura de red completa.</p>
+        </div>
+    </div>
+
+    <footer>
+        <a href="pildoras.html">← Volver al índice de pildoras</a>
+    </footer>
+</body>
+</html>

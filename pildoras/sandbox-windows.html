@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Sandbox - Guía Completa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #2d2d2d;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3a5f, #2c4a6b);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            padding: 30px;
+        }
+        
+        .main-content {
+            padding-right: 20px;
+        }
+        
+        .sidebar {
+            background: #3a3a3a;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        h2 {
+            color: #4a90e2;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #4a4a4a;
+        }
+
+        h3 {
+            color: #5ba0f2;
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .card {
+            background: #404040;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background: #2c4a6b;
+            color: white;
+            padding: 10px 15px;
+            margin: -15px -15px 15px;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+        }
+        
+        .warning {
+            background-color: #4a3c28;
+            border-left: 4px solid #d4af37;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .tip {
+            background-color: #2a3d4a;
+            border-left: 4px solid #4a90e2;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        code {
+            background: #404040;
+            color: #e0e0e0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+        }
+
+        pre {
+            background: #1a1a1a;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #4a4a4a;
+        }
+
+        .requirements {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .requirement-item {
+            background: #404040;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #555;
+        }
+
+        .requirement-item h4 {
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2a2a2a;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            border-top: 1px solid #4a4a4a;
+        }
+
+        footer a {
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #5ba0f2;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 900px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                padding-right: 0;
+            }
+            
+            .requirements {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Windows Sandbox</h1>
+            <p class="subtitle">Un entorno seguro y aislado para probar aplicaciones en Windows</p>
+        </header>
+        
+        <div class="content">
+            <div class="main-content">
+                <h2>¿Qué es Windows Sandbox?</h2>
+                <p>Windows Sandbox es un entorno de escritorio virtualizado, ligero y aislado integrado en Windows que permite ejecutar aplicaciones de forma segura sin afectar al sistema principal.</p>
+                
+                <div class="tip">
+                    <strong>Consejo:</strong> Todas las aplicaciones y archivos utilizados en Windows Sandbox se eliminan permanentemente cuando se cierra la aplicación, manteniendo tu sistema seguro.
+                </div>
+                
+                <h2>Características principales</h2>
+                <ul>
+                    <li><strong>Incluido en Windows:</strong> Integrado en Windows 10/11 Pro, Enterprise y Education</li>
+                    <li><strong>Inmutable:</strong> Cada sesión es completamente nueva y limpia</li>
+                    <li><strong>Seguro:</strong> Utiliza virtualización basada en hardware para aislamiento</li>
+                    <li><strong>Eficiente:</strong> Utiliza la tecnología de integración inteligente del kernel</li>
+                    <li><strong>Rápido:</strong> Se inicia en cuestión de segundos</li>
+                </ul>
+                
+                <h2>Requisitos del sistema</h2>
+                <div class="requirements">
+                    <div class="requirement-item">
+                        <h4>Arquitectura</h4>
+                        <p>AMD64 o ARM64</p>
+                    </div>
+                    <div class="requirement-item">
+                        <h4>Virtualización</h4>
+                        <p>Activada en BIOS/UEFI</p>
+                    </div>
+                    <div class="requirement-item">
+                        <h4>Memoria RAM</h4>
+                        <p>4 GB mínimo (8 GB recomendado)</p>
+                    </div>
+                    <div class="requirement-item">
+                        <h4>Almacenamiento</h4>
+                        <p>1 GB libre (SSD recomendado)</p>
+                    </div>
+                    <div class="requirement-item">
+                        <h4>CPU</h4>
+                        <p>2 núcleos (4 con hyper-threading recomendados)</p>
+                    </div>
+                    <div class="requirement-item">
+                        <h4>Versión de Windows</h4>
+                        <p>Windows 10/11 Pro, Enterprise o Education</p>
+                    </div>
+                </div>
+                
+                <h2>Activación de Windows Sandbox</h2>
+                <h3>Método 1: A través del Panel de control</h3>
+                <ol>
+                    <li>Abre "Activar o desactivar características de Windows"</li>
+                    <li>Busca y selecciona "Windows Sandbox"</li>
+                    <li>Haz clic en Aceptar y reinicia el equipo cuando se te solicite</li>
+                </ol>
+                
+                <h3>Método 2: Usando PowerShell</h3>
+                <p>Ejecuta PowerShell como administrador y utiliza el siguiente comando:</p>
+                <pre>Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online</pre>
+                
+                <h2>Uso de Windows Sandbox</h2>
+                <p>Una vez activado, puedes iniciar Windows Sandbox desde el Menú Inicio. La aplicación se abrirá como una ventana independiente que muestra un escritorio aislado.</p>
+                
+                <div class="card">
+                    <div class="card-header">Características de uso</div>
+                    <ul>
+                        <li>Puedes copiar archivos desde tu sistema principal y pegarlos en Sandbox</li>
+                        <li>Navega por internet de forma segura para probar sitios web potencialmente riesgosos</li>
+                        <li>Instala y prueba aplicaciones sin dejar rastro en tu sistema principal</li>
+                        <li>Al cerrar Sandbox, todo el contenido se elimina automáticamente</li>
+                    </ul>
+                </div>
+                
+                <div class="warning">
+                    <strong>Importante:</strong> Windows Sandbox no está disponible en la edición Home de Windows. Si tienes esta edición, necesitarás actualizar a una versión superior o usar alternativas como Sandboxie.
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <h2>Casos de uso comunes</h2>
+                <ul>
+                    <li>Prueba de software desconocido</li>
+                    <li>Abrir archivos de fuentes no confiables</li>
+                    <li>Navegación web segura</li>
+                    <li>Pruebas de desarrollo de software</li>
+                    <li>Visitar sitios web potencialmente maliciosos</li>
+                </ul>
+                
+                <h2>Alternativas</h2>
+                <ul>
+                    <li>Sandboxie-Plus</li>
+                    <li>Máquinas virtuales con VirtualBox/VMware</li>
+                    <li>Contenedores Docker</li>
+                    <li>Hyper-V de Windows</li>
+                </ul>
+                
+                <h2>Configuración avanzada</h2>
+                <p>Puedes personalizar Windows Sandbox mediante archivos de configuración (.wsb) para:</p>
+                <ul>
+                    <li>Controlar el acceso a la red</li>
+                    <li>Habilitar/deshabilitar el portapapeles compartido</li>
+                    <li>Mapear carpetas específicas</li>
+                    <li>Personalizar el entorno virtual</li>
+                </ul>
+                
+                <h2>Solución de problemas</h2>
+                <p>Si Sandbox no funciona:</p>
+                <ul>
+                    <li>Verifica que la virtualización esté habilitada en el BIOS/UEFI</li>
+                    <li>Asegúrate de tener una edición compatible de Windows</li>
+                    <li>Comprueba que tienes suficientes recursos del sistema</li>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Windows Sandbox es una función de seguridad integrada en Windows 10 y Windows 11 | Documentación oficial de Microsoft</p>
+            <p><a href="pildoras.html">← Volver al índice de pildoras</a></p>
+        </footer>
+    </div>
+</body>
+</html>

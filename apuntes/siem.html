@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artículo Técnico: Concepto de SIEM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .highlight {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            margin: 20px 0;
+        }
+        .tool-list {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .tool-name {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Artículo Técnico: Concepto de SIEM (Security Information and Event Management)</h1>
+
+    <h2>Introducción</h2>
+    <p>El <strong>SIEM (Security Information and Event Management)</strong> es una solución tecnológica que centraliza la recopilación, análisis y correlación de eventos de seguridad en tiempo real desde múltiples fuentes dentro de una infraestructura IT. Combina capacidades de gestión de eventos de seguridad (SEM) y gestión de información de seguridad (SIM) para detectar amenazas, cumplir normativas y optimizar la respuesta ante incidentes.</p>
+
+    <hr>
+
+    <h2>Tipos de SIEM</h2>
+    <p>Los sistemas SIEM se clasifican principalmente según su modelo de implementación:</p>
+
+    <ol>
+        <li><strong>SIEM On-Premise</strong>: Implementados localmente en los servidores de la organización. Ejemplo destacado: <strong>ArcSight</strong>, ampliamente utilizado en grandes empresas por su versatilidad en entornos complejos.</li>
+        <li><strong>SIEM Cloud-Nativo</strong>: Soluciones basadas en la nube que ofrecen escalabilidad y reducen la carga de infraestructura. <strong>Microsoft Azure Sentinel</strong> es un referente en este segmento.</li>
+        <li><strong>SIEM Híbrido</strong>: Combina elementos locales y en la nube para adaptarse a entornos multiplataforma.</li>
+    </ol>
+
+    <p>Adicionalmente, existen enfoques especializados como los SIEM con <strong>análisis de comportamiento de usuarios (UEBA)</strong>, destacados por herramientas como <strong>Rapid7</strong>, que priorizan la detección avanzada de amenazas.</p>
+
+    <hr>
+
+    <h2>Características Clave</h2>
+    <p>Un sistema SIEM efectivo debe incluir:</p>
+
+    <ul>
+        <li><strong>Correlación de eventos en tiempo real</strong>: Analiza patrones entre logs para identificar amenazas complejas.</li>
+        <li><strong>Gestión de alertas inteligente</strong>: Reduce falsos positivos mediante algoritmos de priorización.</li>
+        <li><strong>Integración con threat intelligence</strong>: Herramientas como <strong>ManageEngine Log360</strong> destacan por su enfoque en inteligencia de amenazas.</li>
+        <li><strong>Cumplimiento normativo</strong>: Genera reportes automatizados para estándares como GDPR, HIPAA o PCI-DSS.</li>
+        <li><strong>Análisis estadístico avanzado</strong>: <strong>Splunk</strong> destaca por funcionalidades como investigador de activos y análisis estadístico para investigación de incidentes.</li>
+        <li><strong>Escalabilidad</strong>: Capacidad para procesar grandes volúmenes de datos, crítica en entornos empresariales.</li>
+    </ul>
+
+    <hr>
+
+    <h2>Implementación de un SIEM</h2>
+    <p>Los pasos críticos para una implementación exitosa son:</p>
+
+    <ol>
+        <li><strong>Definición de objetivos</strong>: Establecer metas claras (ej.: cumplimiento, detección de APTs).</li>
+        <li><strong>Integración de fuentes de datos</strong>: Conectar firewalls, servidores, endpoints y aplicaciones.</li>
+        <li><strong>Configuración de reglas de correlación</strong>: Personalizar escenarios de detección según el entorno.</li>
+        <li><strong>Calibración continua</strong>: Ajustar alertas para minimizar falsos positivos, proceso esencial en soluciones como <strong>LogRhythm</strong>, reconocida por su robustez tras 9 años en el Cuadrante Mágico de Gartner.</li>
+        <li><strong>Capacitación del equipo SOC</strong>: Garantizar que el equipo interprete correctamente las alertas.</li>
+    </ol>
+
+    <hr>
+
+    <h2>Principales Herramientas SIEM en el Mercado</h2>
+
+    <div class="tool-list">
+        <h3>1. <span class="tool-name">Splunk</span></h3>
+        <p>Líder indiscutible en el sector, ofrece capacidades avanzadas como investigador de activos, análisis estadístico y revisión de incidentes. Su flexibilidad lo hace ideal para operaciones de seguridad complejas.</p>
+    </div>
+
+    <div class="tool-list">
+        <h3>2. <span class="tool-name">IBM QRadar SIEM</span></h3>
+        <p>Destaca por su motor de correlación inteligente y soporte para entornos híbridos. Es una de las soluciones más recomendadas para empresas que buscan equilibrio entre funcionalidad y usabilidad.</p>
+    </div>
+
+    <div class="tool-list">
+        <h3>3. <span class="tool-name">LogRhythm</span></h3>
+        <p>Reconocido como líder en el Cuadrante Mágico de Gartner durante 9 años consecutivos, ofrece uno de los sistemas SIEM más confiables y potentes del mercado.</p>
+    </div>
+
+    <div class="tool-list">
+        <h3>4. <span class="tool-name">Microsoft Azure Sentinel</span></h3>
+        <p>Plataforma cloud-nativa que aprovecha la inteligencia artificial de Microsoft para automatizar respuestas. Es ideal para organizaciones migrando a entornos cloud.</p>
+    </div>
+
+    <div class="tool-list">
+        <h3>5. <span class="tool-name">SolarWinds Security Event Manager</span></h3>
+        <p>Combina gestión de eventos y cumplimiento normativo con una interfaz intuitiva, especialmente valorada por equipos con recursos limitados.</p>
+    </div>
+
+    <div class="tool-list">
+        <h3>6. <span class="tool-name">ManageEngine Log360</span></h3>
+        <p>Opción destacada para inteligencia de amenazas, con módulos integrados de prevención de pérdida de datos (DLP) y análisis forense.</p>
+    </div>
+
+    <div class="tool-list">
+        <h3>7. <span class="tool-name">Rapid7</span></h3>
+        <p>Enfocado en análisis de comportamiento de usuarios (UEBA) y SIEM cloud, destaca en detección y respuesta ante amenazas avanzadas.</p>
+    </div>
+
+    <div class="tool-list">
+        <h3>8. <span class="tool-name">ArcSight</span></h3>
+        <p>Herramienta preferida por grandes corporaciones gracias a su capacidad para gestionar entornos cybersecurity complejos y altamente regulados.</p>
+    </div>
+
+    <div class="tool-list">
+        <h3>9. <span class="tool-name">FortiSIEM</span></h3>
+        <p>Integra seguridad de red con capacidades SIEM, ideal para entornos que utilizan soluciones Fortinet.</p>
+    </div>
+
+    <div class="tool-list">
+        <h3>10. <span class="tool-name">AlienVault (AT&T)</span></h3>
+        <p>Ofrece una plataforma unificada de seguridad con OSSIM (Open Source Security Information Management), popular en entornos que buscan equilibrio costo-beneficio.</p>
+    </div>
+
+    <hr>
+
+    <h2>Conclusión</h2>
+    <div class="highlight">
+        <p>La elección del SIEM adecuado depende de factores como el tamaño de la organización, requisitos de cumplimiento y madurez del equipo de seguridad. Soluciones como <strong>Splunk</strong> y <strong>IBM QRadar</strong> dominan el mercado empresarial, mientras opciones como <strong>ManageEngine Log360</strong> y <strong>SolarWinds</strong> ganan terreno en PYMES. La tendencia actual apunta hacia sistemas cloud-nativos con integración de IA, como <strong>Azure Sentinel</strong>, que simplifican la gestión y aceleran la respuesta ante incidentes. Independientemente de la herramienta seleccionada, una implementación bien planificada y mantenida es clave para maximizar su valor en la estrategia de ciberseguridad.</p>
+    </div>
+
+    <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; color: #666;">
+        <p><a href="./apuntes.html" style="color: #007bff; text-decoration: none;">← Volver a Apuntes</a></p>
+    </footer>
+</body>
+</html>

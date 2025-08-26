@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splunk: Plataforma Empresarial de Análisis de Datos y SIEM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #5c6bc0;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #5c6bc0;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .conclusion {
+            background-color: #d5f4e6;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .comparison {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #5c6bc0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Splunk: Plataforma Empresarial de Análisis de Datos y SIEM</h1>
+
+        <p>Splunk es una plataforma de análisis de datos líder en el mercado que ha evolucionado para convertirse en una solución SIEM (Security Information and Event Management) enterprise-grade. Conocida por su potente motor de búsqueda y análisis en tiempo real, Splunk procesa grandes volúmenes de datos de máquinas para extraer insights valiosos.</p>
+
+        <h2>¿Qué es Splunk?</h2>
+
+        <p>Splunk es una plataforma unificada que permite:</p>
+
+        <ul>
+            <li><strong>Recopilar datos de cualquier fuente:</strong> Logs, métricas, eventos de seguridad, datos de aplicaciones, etc.</li>
+            <li><strong>Indexar y buscar en tiempo real:</strong> Motor de búsqueda poderoso que permite consultas complejas</li>
+            <li><strong>Analizar y visualizar datos:</strong> Dashboards interactivos y reportes personalizados</li>
+            <li><strong>Detección de anomalías:</strong> Machine learning para identificar patrones y comportamientos inusuales</li>
+            <li><strong>Respuesta automatizada:</strong> Integración con SOAR para automatizar respuestas a incidentes</li>
+        </ul>
+
+        <h2>Arquitectura Técnica de Splunk</h2>
+
+        <h3>Componentes Principales</h3>
+
+        <ul>
+            <li><strong>Splunk Enterprise:</strong> El motor central que indexa, busca y analiza datos</li>
+            <li><strong>Splunk Universal Forwarder:</strong> Agente ligero para recopilar datos de endpoints</li>
+            <li><strong>Splunk Heavy Forwarder:</strong> Para procesamiento de datos más complejo antes del envío</li>
+            <li><strong>Splunk Indexer:</strong> Almacena y indexa los datos para búsquedas rápidas</li>
+            <li><strong>Splunk Search Head:</strong> Interfaz de usuario y motor de búsqueda</li>
+        </ul>
+
+        <h3>Arquitecturas de Despliegue</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Arquitectura</th>
+                    <th>Casos de Uso</th>
+                    <th>Características</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Single Instance</td>
+                    <td>Pruebas, POC, entornos pequeños</td>
+                    <td>Todos los roles en un servidor, fácil configuración</td>
+                </tr>
+                <tr>
+                    <td>Distributed Search</td>
+                    <td>Entornos medianos</td>
+                    <td>Múltiples indexers, search head centralizado</td>
+                </tr>
+                <tr>
+                    <td>Clustered Environment</td>
+                    <td>Enterprise, alta disponibilidad</td>
+                    <td>Indexers en cluster, search heads clusterizados</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Splunk como SIEM: Splunk Enterprise Security</h2>
+
+        <p>Splunk Enterprise Security (ES) es el módulo SIEM de Splunk que proporciona:</p>
+
+        <h3>Funcionalidades de Seguridad</h3>
+        <ul>
+            <li><strong>Correlation searches:</strong> Reglas que correlacionan eventos para detectar amenazas</li>
+            <li><strong>Risk analysis:</strong> Evaluación de riesgo basada en el comportamiento del usuario</li>
+            <li><strong>Asset management:</strong> Inventario y gestión de activos de red</li>
+            <li><strong>Identity management:</strong> Seguimiento de identidades y accesos</li>
+            <li><strong>Compliance monitoring:</strong> Dashboards para cumplimiento normativo</li>
+        </ul>
+
+        <h3>Content Framework</h3>
+        <ul>
+            <li><strong>Data models:</strong> Estructuras de datos normalizadas para análisis eficiente</li>
+            <li><strong>Common Information Model (CIM):</strong> Estándar para normalizar datos de seguridad</li>
+            <li><strong>Technology add-ons:</strong> Parsers específicos para diferentes fuentes de datos</li>
+        </ul>
+
+        <h2>El Lenguaje SPL (Search Processing Language)</h2>
+
+        <p>El SPL es el corazón de Splunk. Algunos ejemplos básicos:</p>
+
+        <div class="code">
+# Búsqueda básica de eventos de login fallidos
+index=security sourcetype=linux_secure "Failed password"
+
+# Búsqueda con filtros temporales
+index=security sourcetype=linux_secure "Failed password" earliest=-24h
+
+# Estadísticas de eventos por host
+index=security | stats count by host
+
+# Detección de escaneo de puertos
+index=firewall | stats dc(dest_port) as unique_ports by src_ip | where unique_ports > 10
+        </div>
+
+        <h2>Integración con Wazuh</h2>
+
+        <p>Splunk se integra perfectamente con <a href="wazuh.html">Wazuh</a> para crear una solución SIEM completa:</p>
+
+        <ul>
+            <li><strong>Reenvío de alertas:</strong> Wazuh puede enviar alertas a Splunk via syslog o API</li>
+            <li><strong>Dashboards unificados:</strong> Visualización consolidada de datos de seguridad</li>
+            <li><strong>Correlación avanzada:</strong> Splunk puede correlacionar alertas de Wazuh con otras fuentes</li>
+            <li><strong>Respuesta automatizada:</strong> Crear workflows que respondan a alertas de Wazuh</li>
+        </ul>
+
+        <div class="highlight">
+            <strong>Ejemplo de integración:</strong> Una alerta de Wazuh sobre un archivo modificado puede activar una búsqueda correlacionada en Splunk para identificar otros indicadores de compromiso relacionados.
+        </div>
+
+        <h2>Splunk vs Otras Soluciones SIEM</h2>
+
+        <div class="comparison">
+            <h3>Comparación con Wazuh</h3>
+            <ul>
+                <li><strong>Splunk:</strong> Solución comercial enterprise-grade, escalable, con amplio soporte</li>
+                <li><strong>Wazuh:</strong> Solución open source, más económica, requiere más configuración manual</li>
+                <li><strong>Caso de uso:</strong> Splunk para grandes empresas, Wazuh para organizaciones con recursos técnicos</li>
+            </ul>
+        </div>
+
+        <h2>Instalación y Configuración</h2>
+
+        <h3>Requisitos del Sistema</h3>
+        <ul>
+            <li><strong>Sistema operativo:</strong> Linux (preferido), Windows, macOS</li>
+            <li><strong>CPU:</strong> Mínimo 8 cores (recomendado 16+)</li>
+            <li><strong>RAM:</strong> Mínimo 16GB (recomendado 32GB+)</li>
+            <li><strong>Almacenamiento:</strong> SSD recomendado, capacidad basada en volumen de datos</li>
+        </ul>
+
+        <h3>Instalación Básica</h3>
+
+        <div class="code">
+# Descargar Splunk Enterprise
+wget https://download.splunk.com/products/splunk/releases/9.0.4/linux/splunk-9.0.4-...-Linux-x86_64.tgz
+
+# Extraer e instalar
+tar -xzf splunk-9.0.4-...-Linux-x86_64.tgz -C /opt
+cd /opt/splunk/bin
+
+# Iniciar Splunk
+./splunk start --accept-license
+
+# Acceder a la interfaz web
+# http://localhost:8000 (admin/changeme)
+        </div>
+
+        <h3>Configuración de Forwarder</h3>
+
+        <div class="code">
+# Instalar Universal Forwarder
+./splunk install app /path/to/splunkforwarder.rpm
+
+# Configurar servidor de destino
+./splunk add forward-server splunk-server:9997
+
+# Agregar datos para monitorizar
+./splunk add monitor /var/log
+        </div>
+
+        <h2>Casos de Uso Empresariales</h2>
+
+        <h3>Security Operations Center (SOC)</h3>
+        <ul>
+            <li><strong>Monitoreo 24/7:</strong> Alertas en tiempo real de múltiples fuentes</li>
+            <li><strong>Investigación forense:</strong> Análisis detallado de incidentes</li>
+            <li><strong>Threat hunting:</strong> Búsqueda proactiva de amenazas</li>
+        </ul>
+
+        <h3>DevOps y Troubleshooting</h3>
+        <ul>
+            <li><strong>Application monitoring:</strong> Seguimiento del rendimiento de aplicaciones</li>
+            <li><strong>Log analysis:</strong> Análisis de logs para debugging</li>
+            <li><strong>Infrastructure monitoring:</strong> Monitoreo de infraestructura cloud</li>
+        </ul>
+
+        <h3>Cumplimiento Normativo</h3>
+        <ul>
+            <li><strong>GDPR compliance:</strong> Tracking de acceso a datos personales</li>
+            <li><strong>PCI DSS monitoring:</strong> Monitoreo de transacciones financieras</li>
+            <li><strong>SOX reporting:</strong> Reportes para controles internos</li>
+        </ul>
+
+        <h2>Mejores Prácticas</h2>
+
+        <h3>Optimización de Rendimiento</h3>
+        <ul>
+            <li><strong>Indexación inteligente:</strong> Usar índices apropiados para diferentes tipos de datos</li>
+            <li><strong>Retention policies:</strong> Configurar políticas de retención de datos</li>
+            <li><strong>Search optimization:</strong> Escribir consultas eficientes</li>
+            <li><strong>Hardware sizing:</strong> Dimensionar correctamente la infraestructura</li>
+        </ul>
+
+        <h3>Seguridad</h3>
+        <ul>
+            <li><strong>Configurar SSL/TLS:</strong> Cifrar comunicaciones</li>
+            <li><strong>Autenticación:</strong> Integrar con LDAP/AD</li>
+            <li><strong>RBAC:</strong> Implementar control de acceso basado en roles</li>
+            <li><strong>Auditoría:</strong> Monitorear accesos y cambios</li>
+        </ul>
+
+        <h2>Precios y Licenciamiento</h2>
+
+        <p>Splunk utiliza un modelo de precios basado en el volumen de datos indexados por día:</p>
+
+        <ul>
+            <li><strong>Splunk Free:</strong> Hasta 500MB/día, funcionalidad completa</li>
+            <li><strong>Splunk Enterprise:</strong> Licencia por volumen de datos</li>
+            <li><strong>Splunk Cloud:</strong> Servicio gestionado en la nube</li>
+            <li><strong>Splunk Enterprise Security:</strong> Módulo SIEM adicional</li>
+        </ul>
+
+        <div class="conclusion">
+            <h2>Conclusión</h2>
+
+            <p>Splunk es una plataforma madura y robusta para análisis de datos y SIEM que se integra perfectamente con <a href="wazuh.html">Wazuh</a> para proporcionar una solución completa de ciberseguridad. Su principal fortaleza radica en su capacidad para procesar grandes volúmenes de datos en tiempo real y su amplio ecosistema de aplicaciones e integraciones.</p>
+
+            <h3>Ventajas Principales:</h3>
+            <ul>
+                <li><strong>Escalabilidad masiva:</strong> Maneja petabytes de datos</li>
+                <li><strong>Ecosistema amplio:</strong> Miles de aplicaciones y integraciones</li>
+                <li><strong>Soporte enterprise:</strong> Soporte 24/7 y servicios profesionales</li>
+                <li><strong>Machine learning:</strong> Capacidades avanzadas de análisis</li>
+            </ul>
+
+            <h3>Consideraciones:</h3>
+            <ul>
+                <li><strong>Costo elevado:</strong> Especialmente para grandes volúmenes de datos</li>
+                <li><strong>Complejidad:</strong> Requiere expertise para configuración avanzada</li>
+                <li><strong>Dependencia del vendor:</strong> Solución propietaria</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; background-color: #2c3e50; color: white; margin-top: 30px;">
+        <p>&copy; 2025 - Más contenido en <a href="../apuntes.html" style="color: #5c6bc0; text-decoration: none;">Apuntes</a></p>
+    </footer>
+</body>
+</html>

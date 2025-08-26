@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elastic SIEM: Solución Open Source de Security Information and Event Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #17a2b8;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #17a2b8;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .conclusion {
+            background-color: #d5f4e6;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .comparison {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .architecture {
+            background-color: #e8f4fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #17a2b8;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Elastic SIEM: Solución Open Source de Security Information and Event Management</h1>
+
+        <p>Elastic SIEM, parte del Elastic Stack (anteriormente conocido como ELK Stack), es una solución open source completa para la gestión de información y eventos de seguridad. Combina Elasticsearch para el almacenamiento y búsqueda, Logstash para la ingesta de datos, Kibana para la visualización, y Beats para la recolección de datos.</p>
+
+        <h2>¿Qué es Elastic SIEM?</h2>
+
+        <p>Elastic SIEM es una plataforma unificada que proporciona:</p>
+
+        <ul>
+            <li><strong>Recolección centralizada de logs:</strong> Agregación de datos de seguridad de múltiples fuentes</li>
+            <li><strong>Análisis en tiempo real:</strong> Procesamiento y correlación de eventos de seguridad</li>
+            <li><strong>Detección de amenazas:</strong> Machine learning y reglas predefinidas para identificar anomalías</li>
+            <li><strong>Investigación visual:</strong> Interfaces intuitivas para el análisis forense</li>
+            <li><strong>Escalabilidad horizontal:</strong> Arquitectura distribuida para manejar grandes volúmenes</li>
+        </ul>
+
+        <h2>Arquitectura del Elastic Stack</h2>
+
+        <div class="architecture">
+            <h3>Componentes Principales</h3>
+            <ul>
+                <li><strong>Elasticsearch:</strong> Motor de búsqueda y análisis distribuido</li>
+                <li><strong>Logstash:</strong> Pipeline de procesamiento de datos</li>
+                <li><strong>Kibana:</strong> Interfaz de visualización y gestión</li>
+                <li><strong>Beats:</strong> Agentes ligeros para recolección de datos</li>
+                <li><strong>Elastic SIEM:</strong> Capa específica de seguridad sobre Kibana</li>
+            </ul>
+        </div>
+
+        <h3>Flujo de Datos Típico</h3>
+
+        <ol>
+            <li><strong>Recolección:</strong> Beats/Filebeat recopilan logs de endpoints y servicios</li>
+            <li><strong>Procesamiento:</strong> Logstash parsea, enriquece y normaliza los datos</li>
+            <li><strong>Almacenamiento:</strong> Elasticsearch indexa y almacena los datos</li>
+            <li><strong>Análisis:</strong> Elastic SIEM correlaciona eventos y detecta amenazas</li>
+            <li><strong>Visualización:</strong> Kibana muestra dashboards y permite investigación</li>
+        </ol>
+
+        <h2>Funcionalidades de Elastic SIEM</h2>
+
+        <h3>Detección de Amenazas</h3>
+        <ul>
+            <li><strong>Reglas predefinidas:</strong> Más de 100 reglas de detección listas para usar</li>
+            <li><strong>Machine Learning:</strong> Detección de anomalías basada en comportamiento</li>
+            <li><strong>Correlación de eventos:</strong> Análisis de secuencias de eventos maliciosos</li>
+            <li><strong>Indicadores de compromiso (IoC):</strong> Integración con feeds de amenazas externas</li>
+        </ul>
+
+        <h3>Gestión de Casos</h3>
+        <ul>
+            <li><strong>Timeline de eventos:</strong> Visualización cronológica de actividades</li>
+            <li><strong>Gestión de casos:</strong> Workflow para investigación de incidentes</li>
+            <li><strong>Colaboración:</strong> Compartir hallazgos entre equipos</li>
+            <li><strong>Reportes automáticos:</strong> Generación de reportes de incidentes</li>
+        </ul>
+
+        <h3>Integraciones Nativas</h3>
+        <ul>
+            <li><strong>MITRE ATT&CK:</strong> Mapeo de tácticas y técnicas de amenazas</li>
+            <li><strong>Common Information Model (CIM):</strong> Estandarización de datos</li>
+            <li><strong>APIs RESTful:</strong> Integración con otras herramientas de seguridad</li>
+            <li><strong>Webhooks:</strong> Notificaciones automáticas a sistemas externos</li>
+        </ul>
+
+        <h2>Elastic SIEM vs Otras Soluciones</h2>
+
+        <div class="comparison">
+            <h3>Comparación con Splunk y Wazuh</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Elastic SIEM</th>
+                        <th>Splunk</th>
+                        <th>Wazuh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Licenciamiento</td>
+                        <td>Open Source (básico)</td>
+                        <td>Comercial</td>
+                        <td>Open Source</td>
+                    </tr>
+                    <tr>
+                        <td>Costo</td>
+                        <td>Gratuito + Cloud</td>
+                        <td>Elevado</td>
+                        <td>Gratuito</td>
+                    </tr>
+                    <tr>
+                        <td>Escalabilidad</td>
+                        <td>Excelente</td>
+                        <td>Excelente</td>
+                        <td>Buena</td>
+                    </tr>
+                    <tr>
+                        <td>Facilidad de uso</td>
+                        <td>Buena</td>
+                        <td>Buena</td>
+                        <td>Regular</td>
+                    </tr>
+                    <tr>
+                        <td>Ecosistema</td>
+                        <td>Amplio</td>
+                        <td>Muy amplio</td>
+                        <td>Creciente</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Instalación y Configuración</h2>
+
+        <h3>Requisitos del Sistema</h3>
+        <ul>
+            <li><strong>Java:</strong> JDK 8 o superior (para Elasticsearch)</li>
+            <li><strong>Memoria RAM:</strong> Mínimo 4GB (recomendado 8GB+)</li>
+            <li><strong>CPU:</strong> Mínimo 2 cores (recomendado 4+)</li>
+            <li><strong>Almacenamiento:</strong> SSD recomendado para mejor rendimiento</li>
+        </ul>
+
+        <h3>Instalación con Docker</h3>
+
+        <div class="code">
+# Crear red Docker
+docker network create elastic
+
+# Ejecutar Elasticsearch
+docker run -d --name elasticsearch --net elastic \
+  -p 9200:9200 -p 9300:9300 \
+  -e "discovery.type=single-node" \
+  -e "xpack.security.enabled=false" \
+  elasticsearch:8.8.0
+
+# Ejecutar Kibana
+docker run -d --name kibana --net elastic \
+  -p 5601:5601 \
+  -e "ELASTICSEARCH_HOSTS=http://elasticsearch:9200" \
+  kibana:8.8.0
+        </div>
+
+        <h3>Instalación desde Binarios</h3>
+
+        <div class="code">
+# Descargar e instalar Elasticsearch
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.8.0-linux-x86_64.tar.gz
+tar -xzf elasticsearch-8.8.0-linux-x86_64.tar.gz
+cd elasticsearch-8.8.0/
+
+# Iniciar Elasticsearch
+./bin/elasticsearch
+
+# Descargar e instalar Kibana
+wget https://artifacts.elastic.co/downloads/kibana/kibana-8.8.0-linux-x86_64.tar.gz
+tar -xzf kibana-8.8.0-linux-x86_64.tar.gz
+cd kibana-8.8.0/
+
+# Iniciar Kibana
+./bin/kibana
+        </div>
+
+        <h3>Configuración de Beats</h3>
+
+        <div class="code">
+# Instalar Filebeat
+curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.8.0-linux-x86_64.tar.gz
+tar xzvf filebeat-8.8.0-linux-x86_64.tar.gz
+cd filebeat-8.8.0-linux-x86_64/
+
+# Configurar para enviar a Elasticsearch
+cat > filebeat.yml << EOF
+filebeat.inputs:
+- type: log
+  paths:
+    - /var/log/*.log
+
+output.elasticsearch:
+  hosts: ["localhost:9200"]
+EOF
+
+# Iniciar Filebeat
+./filebeat -e
+        </div>
+
+        <h2>Configuración de Elastic SIEM</h2>
+
+        <h3>Habilitar el Módulo SIEM</h3>
+
+        <div class="code">
+# En Kibana, navegar a:
+# Management > Integrations > Elastic SIEM
+
+# O instalar desde la línea de comandos
+./kibana-setup.sh --enable-siem
+        </div>
+
+        <h3>Configuración de Reglas de Detección</h3>
+
+        <ol>
+            <li><strong>Acceder a Security:</strong> En Kibana, ir a Security > Detection rules</li>
+            <li><strong>Importar reglas:</strong> Cargar reglas predefinidas de MITRE ATT&CK</li>
+            <li><strong>Configurar excepciones:</strong> Crear excepciones para falsos positivos</li>
+            <li><strong>Personalizar reglas:</strong> Ajustar umbrales según el entorno</li>
+        </ol>
+
+        <h2>Integración con Wazuh</h2>
+
+        <p>Elastic SIEM se integra perfectamente con <a href="wazuh.html">Wazuh</a> para proporcionar una solución SIEM completa:</p>
+
+        <ul>
+            <li><strong>Reenvío de alertas:</strong> Wazuh puede enviar alertas a Elasticsearch via Logstash</li>
+            <li><strong>Visualización unificada:</strong> Dashboards que combinan datos de Wazuh y otros fuentes</li>
+            <li><strong>Correlación avanzada:</strong> Elastic puede correlacionar alertas de Wazuh con logs de red</li>
+            <li><strong>Machine Learning:</strong> Análisis de anomalías en datos de Wazuh</li>
+        </ul>
+
+        <div class="highlight">
+            <strong>Ejemplo de integración:</strong> Las alertas de Wazuh sobre intentos de login fallidos pueden ser enviadas a Elastic SIEM, que las correlaciona con otros eventos para detectar campañas de fuerza bruta coordinadas.
+        </div>
+
+        <h2>Casos de Uso Empresariales</h2>
+
+        <h3>Security Operations Center (SOC)</h3>
+        <ul>
+            <li><strong>Monitoreo 24/7:</strong> Alertas en tiempo real con dashboards personalizados</li>
+            <li><strong>Threat hunting:</strong> Búsqueda proactiva de indicadores de compromiso</li>
+            <li><strong>Investigación forense:</strong> Timeline detallada de incidentes</li>
+            <li><strong>Automatización:</strong> Respuestas automáticas a tipos específicos de alertas</li>
+        </ul>
+
+        <h3>Cumplimiento Normativo</h3>
+        <ul>
+            <li><strong>GDPR compliance:</strong> Tracking detallado de accesos a datos personales</li>
+            <li><strong>PCI DSS monitoring:</strong> Monitoreo de entornos de pago</li>
+            <li><strong>SOX reporting:</strong> Reportes automáticos para auditorías</li>
+            <li><strong>Personalización:</strong> Dashboards específicos por normativa</li>
+        </ul>
+
+        <h3>DevSecOps</h3>
+        <ul>
+            <li><strong>Application security:</strong> Monitoreo de logs de aplicaciones web</li>
+            <li><strong>Container security:</strong> Análisis de logs de Kubernetes y Docker</li>
+            <li><strong>Cloud security:</strong> Integración con AWS, Azure y GCP</li>
+        </ul>
+
+        <h2>Mejores Prácticas</h2>
+
+        <h3>Optimización de Rendimiento</h3>
+        <ul>
+            <li><strong>Index lifecycle management:</strong> Políticas automáticas de retención</li>
+            <li><strong>Shard sizing:</strong> Configuración apropiada de shards e índices</li>
+            <li><strong>Query optimization:</strong> Uso eficiente de filtros y agregaciones</li>
+            <li><strong>Hardware planning:</strong> Dimensionamiento correcto para el volumen de datos</li>
+        </ul>
+
+        <h3>Seguridad</h3>
+        <ul>
+            <li><strong>X-Pack Security:</strong> Autenticación, autorización y cifrado</li>
+            <li><strong>Network segmentation:</strong> Aislamiento de componentes</li>
+            <li><strong>Data encryption:</strong> Cifrado en reposo y en tránsito</li>
+            <li><strong>Access control:</strong> Control granular de permisos</li>
+        </ul>
+
+        <h3>Monitoreo y Alerting</h3>
+        <ul>
+            <li><strong>Stack monitoring:</strong> Monitoreo del rendimiento del Elastic Stack</li>
+            <li><strong>Alerting rules:</strong> Notificaciones automáticas de problemas</li>
+            <li><strong>Log aggregation:</strong> Centralización de logs del stack</li>
+        </ul>
+
+        <h2>Elastic Cloud vs Self-Managed</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Aspecto</th>
+                    <th>Elastic Cloud</th>
+                    <th>Self-Managed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mantenimiento</td>
+                    <td>Elastic lo gestiona</td>
+                    <td>Tu equipo lo gestiona</td>
+                </tr>
+                <tr>
+                    <td>Escalabilidad</td>
+                    <td>Automática</td>
+                    <td>Manual</td>
+                </tr>
+                <tr>
+                    <td>Costo</td>
+                    <td>Pago por uso</td>
+                    <td>Hardware + Soporte</td>
+                </tr>
+                <tr>
+                    <td>Personalización</td>
+                    <td>Limitada</td>
+                    <td>Completa</td>
+                </tr>
+                <tr>
+                    <td>Soporte</td>
+                    <td>24/7 Elastic</td>
+                    <td>Comunidad + Soporte</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="conclusion">
+            <h2>Conclusión</h2>
+
+            <p>Elastic SIEM es una solución open source potente y flexible que se integra perfectamente con <a href="wazuh.html">Wazuh</a> para crear un stack completo de ciberseguridad. Su arquitectura escalable, la integración nativa con machine learning, y su creciente ecosistema lo convierten en una opción atractiva para organizaciones que buscan una alternativa open source a soluciones comerciales como Splunk.</p>
+
+            <h3>Ventajas Principales:</h3>
+            <ul>
+                <li><strong>Open Source:</strong> Sin costos de licencias, personalizable completamente</li>
+                <li><strong>Escalabilidad masiva:</strong> Arquitectura distribuida probada en grandes entornos</li>
+                <li><strong>Elastic Cloud:</strong> Opción de servicio gestionado para reducir complejidad</li>
+                <li><strong>Machine Learning integrado:</strong> Detección de anomalías sin configuración adicional</li>
+                <li><strong>Ecosistema amplio:</strong> Miles de integraciones y aplicaciones disponibles</li>
+            </ul>
+
+            <h3>Consideraciones:</h3>
+            <ul>
+                <li><strong>Complejidad inicial:</strong> Curva de aprendizaje para configuración avanzada</li>
+                <li><strong>Recursos necesarios:</strong> Requiere hardware significativo para producción</li>
+                <li><strong>Gestión del ciclo de vida:</strong> Necesidad de expertise para optimización</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; background-color: #2c3e50; color: white; margin-top: 30px;">
+        <p>&copy; 2025 - Más contenido en <a href="../apuntes.html" style="color: #17a2b8; text-decoration: none;">Apuntes</a></p>
+    </footer>
+</body>
+</html>

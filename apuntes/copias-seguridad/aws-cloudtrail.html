@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS CloudTrail - Servicio de Auditoría y Monitoreo de AWS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AWS CloudTrail</h1>
+
+        <p>AWS CloudTrail es un servicio de AWS que permite la auditoría, el monitoreo y el cumplimiento operativo de la actividad de la cuenta de AWS en toda la infraestructura de nube de AWS.</p>
+
+        <h2>Características Principales</h2>
+        <ul>
+            <li><strong>Registro de API:</strong> Registra todas las llamadas a la API de AWS realizadas en una cuenta</li>
+            <li><strong>Monitoreo de actividad:</strong> Rastreo de acciones realizadas por usuarios, roles y servicios de AWS</li>
+            <li><strong>Eventos de datos:</strong> Captura de operaciones a nivel de objeto en S3, Lambda y DynamoDB</li>
+            <li><strong>Eventos de administración:</strong> Registro de operaciones de gestión de recursos AWS</li>
+            <li><strong>Eventos de Insights:</strong> Detección automática de actividad inusual en la cuenta</li>
+        </ul>
+
+        <h2>Tipos de Eventos</h2>
+        <ul>
+            <li><strong>Eventos de gestión:</strong> Operaciones que se realizan en recursos de la cuenta AWS</li>
+            <li><strong>Eventos de datos:</strong> Operaciones a nivel de recurso realizadas en o dentro de un recurso</li>
+            <li><strong>Eventos de Insights:</strong> Actividad inusual identificada por CloudTrail</li>
+            <li><strong>Eventos de configuración:</strong> Cambios en la configuración de recursos</li>
+        </ul>
+
+        <h2>Integración y Almacenamiento</h2>
+        <ul>
+            <li><strong>CloudWatch Logs:</strong> Envío de eventos a CloudWatch para análisis y alertas</li>
+            <li><strong>S3 Buckets:</strong> Almacenamiento persistente de archivos de log</li>
+            <li><strong>EventBridge:</strong> Procesamiento de eventos en tiempo real</li>
+            <li><strong>CloudWatch Alarms:</strong> Alertas automáticas basadas en patrones de eventos</li>
+        </ul>
+
+        <div class="highlight">
+            <strong>Importancia en Wazuh:</strong> Wazuh puede integrarse con AWS CloudTrail para recopilar y analizar logs de auditoría de AWS, proporcionando visibilidad completa de la actividad en entornos cloud, detección de amenazas y cumplimiento normativo en infraestructuras AWS.
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; background-color: #2c3e50; color: white; margin-top: 30px;">
+        <p>&copy; 2025 - Más contenido en <a href="../wazuh.html" style="color: #3498db; text-decoration: none;">Wazuh</a></p>
+    </footer>
+</body>
+</html>

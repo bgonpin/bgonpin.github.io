@@ -264,6 +264,44 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- New row for SIEM apunte -->
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-md-6">
+                            <div class="card h-100 apunte-card shadow-lg border-0" style="background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%); border-radius: 15px; transform: translateY(0); transition: all 0.3s ease;">
+                                <div class="card-body text-center">
+                                    <div class="apunte-icon mb-3">
+                                        <i class="fas fa-eye fa-2x" style="color: #6C5CE7;"></i>
+                                    </div>
+                                    <h5 class="card-title fw-bold">Apunte 3: SIEM (Security Information and Event Management)</h5>
+                                    <p class="card-text small">
+                                        Fecha actualización: 26-08-2025
+                                    </p>
+                                    <p class="card-text">
+                                        Artículo técnico completo sobre SIEM: tipos, características clave, implementación y principales herramientas del mercado como Splunk, IBM QRadar, LogRhythm y Azure Sentinel.
+                                    </p>
+                                    <a href="siem.html" class="btn btn-dark mt-2">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 apunte-card shadow-lg border-0" style="background: linear-gradient(135deg, #00B894 0%, #00CEC9 100%); border-radius: 15px; transform: translateY(0); transition: all 0.3s ease;">
+                                <div class="card-body text-center">
+                                    <div class="apunte-icon mb-3">
+                                        <i class="fas fa-shield-alt fa-2x" style="color: #00B894;"></i>
+                                    </div>
+                                    <h5 class="card-title fw-bold">Apunte 4: Wazuh - Guía Técnica Profunda</h5>
+                                    <p class="card-text small">
+                                        Fecha actualización: 26-08-2025
+                                    </p>
+                                    <p class="card-text">
+                                        Guía técnica completa sobre Wazuh, la plataforma unificada de seguridad open source. Arquitectura, componentes, implementación, escalabilidad y mejores prácticas para despliegues empresariales.
+                                    </p>
+                                    <a href="wazuh.html" class="btn btn-dark mt-2">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -326,7 +364,9 @@
                 // For now, we'll create basic data from current page structure
                 apuntesData = [
                     { archivo: "auditd-wazuh", titulo: "Apunte 1: Auditd con Wazuh", descripcion: "Integración de auditd con Wazuh para monitoreo avanzado de sistemas Linux.", ruta: "apuntes/auditd-wazuh.html" },
-                    { archivo: "copias-seguridad", titulo: "Apunte 2: Manual de Copias de Seguridad", descripcion: "Guía integral para la protección de datos en entornos empresariales y domésticos. Tipos de backup, políticas de seguridad y estrategias de recuperación.", ruta: "apuntes/copias-seguridad.html" }
+                    { archivo: "copias-seguridad", titulo: "Apunte 2: Manual de Copias de Seguridad", descripcion: "Guía integral para la protección de datos en entornos empresariales y domésticos. Tipos de backup, políticas de seguridad y estrategias de recuperación.", ruta: "apuntes/copias-seguridad.html" },
+                    { archivo: "siem", titulo: "Apunte 3: SIEM (Security Information and Event Management)", descripcion: "Artículo técnico completo sobre SIEM: tipos, características clave, implementación y principales herramientas del mercado como Splunk, IBM QRadar, LogRhythm y Azure Sentinel.", ruta: "apuntes/siem.html" },
+                    { archivo: "wazuh", titulo: "Apunte 4: Wazuh - Guía Técnica Profunda", descripcion: "Guía técnica completa sobre Wazuh, la plataforma unificada de seguridad open source. Arquitectura, componentes, implementación, escalabilidad y mejores prácticas para despliegues empresariales.", ruta: "apuntes/wazuh.html" }
                 ];
             } catch (error) {
                 console.error('Error loading apuntes data:', error);

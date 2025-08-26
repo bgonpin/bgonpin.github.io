@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wazuh: Guía Técnica Profunda de la Plataforma de Seguridad Open Source</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        .conclusion {
+            background-color: #d5f4e6;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .sources {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wazuh: Guía Técnica Profunda de la Plataforma de Seguridad Open Source</h1>
+
+        <p>¿Estás considerando implementar un <a href="copias-seguridad/siem.html">SIEM</a> de código abierto pero te preocupa la escalabilidad, los costos o la complejidad? Wazuh es una plataforma consolidada que podría ser la respuesta. En esta guía técnica profunda, desglosamos no solo sus características, sino su arquitectura, componentes clave y mejores prácticas para despliegues empresariales.</p>
+
+        <h2>¿Qué es Wazuh? Más que un simple HIDS</h2>
+
+        <p>Wazuh es una plataforma unificada de seguridad de código abierto que va mucho más allá de sus orígenes como HIDS. Su arquitectura modular permite:</p>
+
+        <ul>
+            <li><strong>Detección de intrusiones basada en host (<a href="copias-seguridad/hids.html">HIDS</a>) y red (<a href="copias-seguridad/nids.html">NIDS</a>):</strong> Analiza el comportamiento del sistema y el tráfico de red en busca de patrones maliciosos utilizando una potente engine de reglas.</li>
+            <li><strong>Monitoreo de integridad de archivos (<a href="copias-seguridad/fim.html">FIM</a>):</strong> Detecta cambios en archivos críticos (registro de Windows, /etc/, etc.) en tiempo real, comparándolos con líneas base de cumplimiento como <a href="copias-seguridad/pci-dss.html">PCI DSS</a> o CIS benchmarks.</li>
+            <li><strong>Análisis de registros (Log Analysis):</strong> Agrega y correlaciona logs de cualquier fuente (sistemas, aplicaciones, firewalls, <a href="copias-seguridad/aws-cloudtrail.html">AWS CloudTrail</a>, etc.) usando decodificadores y reglas personalizables.</li>
+            <li><strong>Detección de vulnerabilidades:</strong> Integra de forma nativa escaneos de vulnerabilidades utilizando las bases de datos de <a href="copias-seguridad/cve.html">CVE</a> (Common Vulnerabilities and Exposures), priorizando riesgos en función de los activos desplegados.</li>
+            <li><strong>Cumplimiento normativo:</strong> Genera reportes automáticos para normativas como <a href="copias-seguridad/pci-dss.html">PCI DSS</a>, GDPR, <a href="copias-seguridad/hipaa.html">HIPAA</a>, <a href="copias-seguridad/nist-800-53.html">NIST 800-53</a>, y CIS Critical Security Controls.</li>
+        </ul>
+
+        <h2>Arquitectura Técnica: Desglosando los Componentes Clave</h2>
+
+        <p>La potencia de Wazuh reside en su arquitectura escalable y distribuida. Comprender sus componentes es esencial para un despliegue correcto.</p>
+
+        <h3>1. Wazuh Manager: El cerebro del sistema</h3>
+        <ul>
+            <li><strong>Función:</strong> Recibe, decodifica y analiza todos los datos enviados por los agentes o mediante métodos agentless. Aquí reside el motor de reglas de detección.</li>
+            <li><strong>Componentes Clave:</strong>
+                <ul>
+                    <li><strong>analysisd:</strong> Procesa los eventos y los compara con las reglas de detección.</li>
+                    <li><strong>remoted:</strong> Gestiona la comunicación con los agentes.</li>
+                    <li><strong>wazuh-db:</strong> Base de datos interna para almacenar el estado de los agentes y datos de FIM.</li>
+                    <li><strong>wazuh-clusterd:</strong> Permite la agrupación en clúster de múltiples Managers para alta disponibilidad y escalabilidad.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>2. Wazuh Indexer: El almacén de datos escalable</h3>
+        <ul>
+            <li><strong>Función:</strong> Almacena y indexa todos los eventos generados por el Manager para su posterior búsqueda y análisis. Es una distribución de <a href="copias-seguridad/opensearch.html">OpenSearch</a> (o Elasticsearch en versiones antiguas).</li>
+            <li><strong>Características Técnicas:</strong> Se despliega en clúster para garantizar la resiliencia y el rendimiento. Los datos se dividen en índices e shards.</li>
+        </ul>
+
+        <h3>3. Wazuh Dashboard: La interfaz de usuario</h3>
+        <ul>
+            <li><strong>Función:</strong> Proporciona una interfaz web (basada en OpenSearch Dashboards o <a href="copias-seguridad/kibana.html">Kibana</a>) para visualizar y analizar los datos de seguridad. Permite crear dashboards personalizados, reportes y gestionar la configuración.</li>
+        </ul>
+
+        <h3>4. Wazuh Agent: El recolector de datos ligero</h3>
+        <ul>
+            <li><strong>Función:</strong> Se instala en los endpoints (Windows, Linux, macOS, AIX, Solaris) para recopilar logs, datos de inventario, eventos de FIM y detección de rootkits.</li>
+            <li><strong>Comunicación:</strong> Se comunica con el Manager de forma segura y cifrada mediante el protocolo TCP en el puerto 1514 por defecto. Es ligero y tiene un impacto mínimo en el sistema.</li>
+        </ul>
+
+        <h2>Tipos de Implementación: Del Laboratorio a la Empresa</h2>
+
+        <p>La elección de la arquitectura es crítica. La documentación oficial detalla varias opciones:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Escenario</th>
+                    <th>Arquitectura</th>
+                    <th>Componentes</th>
+                    <th>Notas Técnicas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pruebas/Lab</td>
+                    <td>All-in-One</td>
+                    <td>Manager, Indexer, Dashboard en 1 nodo</td>
+                    <td>Rápido despliegue. El cuello de botella es único. No apto para producción.</td>
+                </tr>
+                <tr>
+                    <td>Mediana Empresa</td>
+                    <td>Distribuida Básica</td>
+                    <td>1 Manager, 1 Indexer, 1 Dashboard en nodos separados</td>
+                    <td>Separa la carga. Mejor rendimiento. Punto único de fallo en el Manager.</td>
+                </tr>
+                <tr>
+                    <td>Grandes Entornos</td>
+                    <td>Clusterizada HA</td>
+                    <td>Múltiples Managers en clúster, Clúster de Indexers (3+ nodos), Dashboard separado</td>
+                    <td>Alta disponibilidad y escalabilidad horizontal. Requiere balanceador de carga (LB) para los agentes.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight">
+            <strong>Nota Técnica sobre el Clúster de Managers:</strong> En un clúster, los Managers se sincronizan entre sí. Si un agente no puede conectarse a su Manager principal, fallover automáticamente a otro nodo del clúster sin pérdida de datos, gracias al protocolo interno.
+        </div>
+
+        <h2>Guía de Implementación Práctica con OVA (Paso a Paso Técnico)</h2>
+
+        <p>La OVA oficial es la forma más rápida de evaluar todas las funcionalidades.</p>
+
+        <ol>
+            <li><strong>Descarga:</strong> Obtén la OVA desde el Portal de Virtual Machines de Wazuh. Está basada en CentOS y viene preconfigurada.</li>
+            <li><strong>Despliegue:</strong> Importa la .ova en tu hipervisor (VMware, VirtualBox, Proxmox). Atención: Por defecto, la red está en NAT. Cámbiala a Modo Bridge para obtener una IP accesible en tu red.</li>
+            <li><strong>Primer Acceso:</strong>
+                <ul>
+                    <li><strong>Consola:</strong> Accede via SSH/consola. Las credenciales por defecto suelen ser wazuh-user/wazuh. Ejecuta <code>ip a</code> para confirmar la IP.</li>
+                    <li><strong>Dashboard:</strong> Accede via HTTPS a <code>https://<IP_ASIGNADA></code>. Usa admin/admin y cambia la contraseña inmediatamente.</li>
+                </ul>
+            </li>
+            <li><strong>Despliegue de Agentes:</strong> Dentro del Dashboard, ve a Management > Agents > Deploy new agent. Selecciona el SO objetivo y Wazuh te generará un comando personalizado para instalar y registrar el agente automáticamente contra tu Manager.</li>
+        </ol>
+
+        <h2>Escalabilidad y Dimensionamiento Oficial (Hardware)</h2>
+
+        <p>La capacidad depende casi entirely del Wazuh Indexer (OpenSearch). La documentación oficial proporciona directrices claras:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nº de Agentes</th>
+                    <th>Arquitectura</th>
+                    <th>Wazuh Manager</th>
+                    <th>Wazuh Indexer (Cada Nodo)</th>
+                    <th>Disco (Indexer)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>< 100</td>
+                    <td>All-in-One</td>
+                    <td>2 CPU, 4 GB RAM (Incluido)</td>
+                    <td>50 GB</td>
+                    <td>50 GB</td>
+                </tr>
+                <tr>
+                    <td>100 - 500</td>
+                    <td>All-in-One</td>
+                    <td>4 CPU, 8 GB RAM (Incluido)</td>
+                    <td>100 GB</td>
+                    <td>100 GB</td>
+                </tr>
+                <tr>
+                    <td>500 - 2,000</td>
+                    <td>Separada</td>
+                    <td>4-6 CPU, 8-12 GB RAM</td>
+                    <td>8 CPU, 16 GB RAM</td>
+                    <td>200 GB SSD</td>
+                </tr>
+                <tr>
+                    <td>2,000 - 5,000</td>
+                    <td>Clusterizada</td>
+                    <td>8 CPU, 16 GB RAM (c/u)</td>
+                    <td>8-16 CPU, 32 GB RAM (c/u)</td>
+                    <td>500 GB SSD</td>
+                </tr>
+                <tr>
+                    <td>> 5,000</td>
+                    <td>Enterprise</td>
+                    <td>16 CPU, 32 GB RAM (c/u)</td>
+                    <td>16+ CPU, 64 GB RAM (c/u)</td>
+                    <td>1TB+ NVMe</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight">
+            <strong>Factor Crítico:</strong> La retención de datos. El dimensionamiento del disco del Indexer debe calcularse en base a los eventos por segundo (EPS) y los días de retención necesarios. Wazuh incluye herramientas de monitorización (wazuh-monitoring) para trackear el EPS y el crecimiento de los índices.
+        </div>
+
+        <h2>Integraciones y Ecosistema</h2>
+
+        <p>La potencia de Wazuh se extiende con sus integraciones oficiales:</p>
+
+        <ul>
+            <li><strong>Nube:</strong> <a href="copias-seguridad/aws.html">AWS</a> (<a href="copias-seguridad/aws-cloudtrail.html">CloudTrail</a>, <a href="copias-seguridad/aws-guardduty.html">GuardDuty</a>, <a href="copias-seguridad/aws-s3.html">S3</a>), <a href="copias-seguridad/azure.html">Azure</a> (Log Analytics), <a href="copias-seguridad/gcp.html">GCP</a> (Cloud Audit Logs).</li>
+            <li><strong>Herramientas de Seguridad:</strong> <a href="copias-seguridad/virustotal.html">VirusTotal</a>, <a href="copias-seguridad/yara.html">Yara</a>, Osquery, <a href="copias-seguridad/openscap.html">OpenSCAP</a>.</li>
+            <li><strong>Mensajería:</strong> <a href="copias-seguridad/slack.html">Slack</a>, <a href="copias-seguridad/microsoft-teams.html">Microsoft Teams</a>, <a href="copias-seguridad/pagerduty.html">PagerDuty</a> para alertas.</li>
+            <li><strong>Orquestación:</strong> <a href="copias-seguridad/thehive.html">TheHive</a>, <a href="copias-seguridad/splunk.html">Splunk</a>, <a href="copias-seguridad/elastic-siem.html">Elastic SIEM</a> para <a href="copias-seguridad/soar.html">SOAR</a>.</li>
+        </ul>
+
+        <div class="conclusion">
+            <h2>Conclusión Técnica</h2>
+
+            <p>Wazuh es una plataforma enterprise-grade que compite de igual a igual con soluciones comerciales. Su arquitectura moderna, escalabilidad horizontal y ritmo constante de desarrollo (con lanzamientos periódicos de nuevas versiones) lo convierten en una opción seria para cualquier organización.</p>
+
+            <h3>Ventajas Claras:</h3>
+            <ul>
+                <li><strong>Open Source y Sin Coste de Licencia:</strong> Ahorro significativo.</li>
+                <li><strong>Comunidad Activa y Soporte Comercial Opcional:</strong> Lo mejor de ambos mundos.</li>
+                <li><strong>Arquitectura Escalable y Resiliente:</strong> Crece con tus necesidades.</li>
+                <li><strong>Unificación de Funcionalidades:</strong> Consolida múltiples herramientas en una.</li>
+            </ul>
+
+            <h3>Consideraciones:</h3>
+            <ul>
+                <li><strong>Curva de Aprendizaje:</strong> Configurar reglas personalizadas y mantener el clúster requiere conocimientos técnicos.</li>
+                <li><strong>Recursos Propios:</strong> Necesitas dedicar recursos de infraestructura y personal para gestionarlo.</li>
+            </ul>
+
+            <p><strong>¿Vale la pena?</strong> Absolutamente. Para equipos con la capacidad técnica para desplegarlo y mantenerlo, Wazuh ofrece un control y una visibilidad sobre la seguridad difíciles de superar.</p>
+        </div>
+
+        <p>¿Te ha resultado útil esta guía técnica? Explora más tutoriales de implementación avanzada en nuestro blog y comparte tus dudas en los comentarios.</p>
+
+        <div class="sources">
+            <h3>📚 Fuentes Oficiales Consultadas:</h3>
+            <ul>
+                <li>Documentación Oficial de Wazuh</li>
+                <li>Wazuh Deployment Options</li>
+                <li>Hardware Requirements</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; background-color: #2c3e50; color: white; margin-top: 30px;">
+        <p>&copy; 2025 - Más contenido en <a href="apuntes.html" style="color: #3498db; text-decoration: none;">Apuntes</a></p>
+    </footer>
+</body>
+</html>

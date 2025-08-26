@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS GuardDuty - Servicio de Detección de Amenazas Inteligente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AWS GuardDuty</h1>
+
+        <p>AWS GuardDuty es un servicio de detección de amenazas inteligente que utiliza machine learning, análisis de anomalías y fuentes de inteligencia de amenazas para identificar automáticamente amenazas activas y comportamientos potencialmente no autorizados o maliciosos en entornos AWS.</p>
+
+        <h2>Características Principales</h2>
+        <ul>
+            <li><strong>Detección inteligente de amenazas:</strong> Utiliza machine learning para identificar comportamientos anómalos</li>
+            <li><strong>Análisis continuo:</strong> Monitorea continuamente VPC Flow Logs, CloudTrail y DNS logs</li>
+            <li><strong>Inteligencia de amenazas integrada:</strong> Acceso a bases de datos globales de amenazas</li>
+            <li><strong>Alertas priorizadas:</strong> Clasifica hallazgos por severidad y contexto</li>
+            <li><strong>Integración nativa:</strong> Funciona automáticamente con servicios AWS existentes</li>
+        </ul>
+
+        <h2>Tipos de Amenazas Detectadas</h2>
+        <ul>
+            <li><strong>Compromiso de credenciales:</strong> Uso no autorizado de credenciales IAM</li>
+            <li><strong>Actividad de reconocimiento:</strong> Escaneo de puertos y enumeración de servicios</li>
+            <li><strong>Instancias comprometidas:</strong> Servidores infectados con malware</li>
+            <li><strong>Acceso no autorizado:</strong> Intentos de acceso a recursos protegidos</li>
+            <li><strong>Exfiltración de datos:</strong> Transferencias inusuales de datos</li>
+        </ul>
+
+        <h2>Fuentes de Datos Analizadas</h2>
+        <ul>
+            <li><strong>VPC Flow Logs:</strong> Análisis de tráfico de red dentro de VPCs</li>
+            <li><strong>CloudTrail Events:</strong> Registro de actividad de API de AWS</li>
+            <li><strong>DNS Logs:</strong> Consultas DNS realizadas por instancias EC2</li>
+            <li><strong>EBS Volume Data:</strong> Análisis de volúmenes EBS adjuntos</li>
+            <li><strong>Runtime Monitoring:</strong> Detección de amenazas en tiempo de ejecución</li>
+        </ul>
+
+        <div class="highlight">
+            <strong>Importancia en Wazuh:</strong> GuardDuty puede integrarse con Wazuh para enriquecer las capacidades de detección de amenazas en entornos AWS, proporcionando una capa adicional de protección inteligente que complementa las funcionalidades nativas de Wazuh para análisis de logs y detección de anomalías.
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; background-color: #2c3e50; color: white; margin-top: 30px;">
+        <p>&copy; 2025 - Más contenido en <a href="../wazuh.html" style="color: #3498db; text-decoration: none;">Wazuh</a></p>
+    </footer>
+</body>
+</html>

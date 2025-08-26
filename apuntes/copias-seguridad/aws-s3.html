@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS S3 - Simple Storage Service</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AWS S3 - Simple Storage Service</h1>
+
+        <p>Amazon Simple Storage Service (Amazon S3) es un servicio de almacenamiento de objetos que ofrece escalabilidad, disponibilidad de datos, seguridad y rendimiento líderes del sector.</p>
+
+        <h2>Características Principales</h2>
+        <ul>
+            <li><strong>Almacenamiento de objetos:</strong> Almacena y recupera cualquier cantidad de datos desde cualquier ubicación</li>
+            <li><strong>Escalabilidad ilimitada:</strong> Crece automáticamente para manejar grandes volúmenes de datos</li>
+            <li><strong>Durabilidad del 99.999999999%:</strong> Diseñado para mantener datos seguros durante décadas</li>
+            <li><strong>Clases de almacenamiento:</strong> Múltiples opciones para optimizar costos y rendimiento</li>
+            <li><strong>Seguridad integrada:</strong> Cifrado, control de acceso y auditoría de acceso</li>
+        </ul>
+
+        <h2>Clases de Almacenamiento</h2>
+        <ul>
+            <li><strong>S3 Standard:</strong> Para datos de acceso frecuente con alta durabilidad</li>
+            <li><strong>S3 Intelligent-Tiering:</strong> Optimiza automáticamente costos moviendo datos</li>
+            <li><strong>S3 Standard-IA:</strong> Para datos de acceso poco frecuente</li>
+            <li><strong>S3 One Zone-IA:</strong> Para datos no críticos en una zona de disponibilidad</li>
+            <li><strong>S3 Glacier:</strong> Para archivado de largo plazo con bajo costo</li>
+        </ul>
+
+        <h2>Características de Seguridad</h2>
+        <ul>
+            <li><strong>Cifrado en reposo:</strong> SSE-S3, SSE-KMS, SSE-C para proteger datos</li>
+            <li><strong>Control de acceso:</strong> Bucket policies, IAM policies, Access Points</li>
+            <li><strong>Registro de acceso:</strong> Server Access Logging para auditoría</li>
+            <li><strong>Bloqueo de objetos:</strong> WORM (Write Once Read Many) para cumplimiento</li>
+            <li><strong>Versionado:</strong> Mantiene múltiples versiones de objetos</li>
+        </ul>
+
+        <div class="highlight">
+            <strong>Importancia en Wazuh:</strong> Wazuh puede integrarse con AWS S3 para almacenar y analizar logs de acceso, backups de configuración, y datos de auditoría. S3 puede servir como repositorio central para logs de Wazuh, proporcionando durabilidad, escalabilidad y análisis de costos optimizado para grandes volúmenes de datos de seguridad.
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; background-color: #2c3e50; color: white; margin-top: 30px;">
+        <p>&copy; 2025 - Más contenido en <a href="../wazuh.html" style="color: #3498db; text-decoration: none;">Wazuh</a></p>
+    </footer>
+</body>
+</html>

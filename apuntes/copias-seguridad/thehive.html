@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheHive: Plataforma Open Source para Security Incident Response</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #e74c3c;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .conclusion {
+            background-color: #d5f4e6;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .warning {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TheHive: Plataforma Open Source para Security Incident Response</h1>
+
+        <p>TheHive es una plataforma open source escalable y gratuita para Security Incident Response Teams (SIRT), Computer Security Incident Response Teams (CSIRT) y CERT. Diseñada para facilitar la colaboración, el análisis y la gestión de incidentes de seguridad de manera eficiente.</p>
+
+        <h2>¿Qué es TheHive?</h2>
+
+        <p>TheHive es una aplicación web escalable que ayuda a los equipos de respuesta a incidentes a:</p>
+
+        <ul>
+            <li><strong>Analizar y priorizar alertas:</strong> Recibe alertas de múltiples fuentes (SIEM, EDR, honeypots, etc.) y las prioriza según su criticidad.</li>
+            <li><strong>Investigar incidentes:</strong> Proporciona un entorno colaborativo para la investigación de incidentes con timeline, observables y tareas.</li>
+            <li><strong>Colaborar en tiempo real:</strong> Permite a múltiples analistas trabajar simultáneamente en el mismo caso.</li>
+            <li><strong>Generar reportes:</strong> Crea reportes automáticos y detallados para stakeholders y cumplimiento normativo.</li>
+            <li><strong>Integrarse con herramientas externas:</strong> Se conecta con MISP, Cortex, <a href="wazuh.html">Wazuh</a>, y otras herramientas del ecosistema de seguridad.</li>
+        </ul>
+
+        <h2>Arquitectura Técnica</h2>
+
+        <h3>Componentes Principales</h3>
+
+        <ul>
+            <li><strong>TheHive:</strong> La aplicación web principal construida en Scala y Play Framework.</li>
+            <li><strong>Cortex:</strong> Motor de análisis que ejecuta analyzers y responders para enriquecer y automatizar el procesamiento de observables.</li>
+            <li><strong>MISP:</strong> Plataforma para compartir indicadores de compromiso (IoC) entre organizaciones.</li>
+            <li><strong>Base de datos:</strong> Utiliza Elasticsearch para almacenar casos, observables y metadatos.</li>
+        </ul>
+
+        <h3>Flujo de Trabajo Típico</h3>
+
+        <ol>
+            <li><strong>Recepción de Alerta:</strong> TheHive recibe alertas desde sistemas como <a href="wazuh.html">Wazuh</a>, Suricata, o EDR.</li>
+            <li><strong>Creación de Caso:</strong> Se crea automáticamente un caso con un ID único y se asigna a un analista.</li>
+            <li><strong>Análisis y Enriquecimiento:</strong> Los observables se envían a Cortex para análisis automático.</li>
+            <li><strong>Investigación Colaborativa:</strong> Múltiples analistas pueden trabajar simultáneamente agregando tareas, comentarios y evidencia.</li>
+            <li><strong>Resolución y Reporte:</strong> El caso se cierra con un resumen detallado y lecciones aprendidas.</li>
+        </ul>
+
+        <h2>Características Clave</h2>
+
+        <h3>Gestión de Casos</h3>
+        <ul>
+            <li><strong>Templates personalizables:</strong> Define flujos de trabajo específicos para diferentes tipos de incidentes.</li>
+            <li><strong>Workflows configurables:</strong> Estados como New, Open, In Progress, Pending, Resolved, etc.</li>
+            <li><strong>Escalado automático:</strong> Alertas similares se pueden agrupar en un mismo caso.</li>
+        </ul>
+
+        <h3>Observables y Análisis</h3>
+        <ul>
+            <li><strong>Soporte múltiple de observables:</strong> IP, dominio, URL, hash, archivo, email, etc.</li>
+            <li><strong>Análisis automático:</strong> Integración con Cortex para análisis de malware, reputación, etc.</li>
+            <li><strong>Enriquecimiento de datos:</strong> Contexto adicional de fuentes externas como VirusTotal, OTX, etc.</li>
+        </ul>
+
+        <h3>Colaboración y Comunicación</h3>
+        <ul>
+            <li><strong>Comentarios en tiempo real:</strong> Comunicación entre miembros del equipo.</li>
+            <li><strong>Compartición de casos:</strong> Entre organizaciones a través de MISP.</li>
+            <li><strong>Integraciones con mensajería:</strong> Notificaciones a Slack, Mattermost, etc.</li>
+        </ul>
+
+        <h2>Instalación y Despliegue</h2>
+
+        <h3>Requisitos del Sistema</h3>
+        <ul>
+            <li><strong>Elasticsearch:</strong> Versión 7.x o 8.x</li>
+            <li><strong>Java:</strong> JDK 8 o superior</li>
+            <li><strong>Sistema operativo:</strong> Linux, Windows, macOS</li>
+            <li><strong>Memoria RAM:</strong> Mínimo 4GB (recomendado 8GB+)</li>
+        </ul>
+
+        <h3>Instalación con Docker</h3>
+
+        <div class="code">
+# Descargar e instalar Docker si no está disponible
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Ejecutar TheHive con Docker
+sudo docker run --name thehive \
+  -p 9000:9000 \
+  -d \
+  thehiveproject/thehive:latest
+        </div>
+
+        <h3>Instalación desde Binarios</h3>
+
+        <div class="code">
+# Descargar la última versión
+wget https://github.com/TheHive-Project/TheHive/releases/download/4.1.14/thehive_4.1.14-1_amd64.deb
+
+# Instalar el paquete
+sudo dpkg -i thehive_4.1.14-1_amd64.deb
+
+# Iniciar el servicio
+sudo systemctl start thehive
+sudo systemctl enable thehive
+        </div>
+
+        <h2>Integración con Wazuh</h2>
+
+        <p>TheHive se integra perfectamente con <a href="wazuh.html">Wazuh</a> para crear un flujo completo de detección y respuesta:</p>
+
+        <ul>
+            <li><strong>Alertas automáticas:</strong> Wazuh puede enviar alertas directamente a TheHive via webhook o API.</li>
+            <li><strong>Enriquecimiento de contexto:</strong> TheHive puede consultar información adicional sobre IPs, dominios o hashes detectados por Wazuh.</li>
+            <li><strong>Workflow coordinado:</strong> Los analistas pueden ver el contexto completo desde la detección inicial hasta la resolución.</li>
+        </ul>
+
+        <div class="highlight">
+            <strong>Ejemplo de integración:</strong> Una alerta de Wazuh sobre un archivo sospechoso puede crear automáticamente un caso en TheHive, que luego ejecuta análisis automáticos y notifica al equipo de respuesta.
+        </div>
+
+        <h2>Mejores Prácticas</h2>
+
+        <h3>Configuración Inicial</h3>
+        <ul>
+            <li><strong>Definir templates:</strong> Crea templates específicos para diferentes tipos de incidentes (phishing, malware, DDoS, etc.)</li>
+            <li><strong>Configurar usuarios y permisos:</strong> Establece roles apropiados (analyst, admin, read-only)</li>
+            <li><strong>Integrar con MISP:</strong> Para compartir IoC con otras organizaciones</li>
+        </ul>
+
+        <h3>Operaciones Diarias</h3>
+        <ul>
+            <li><strong>Revisar alertas diariamente:</strong> Priorizar y asignar casos nuevos</li>
+            <li><strong>Actualizar casos regularmente:</strong> Mantener timelines actualizadas</li>
+            <li><strong>Generar reportes semanales:</strong> Métricas de incidentes y lecciones aprendidas</li>
+        </ul>
+
+        <h2>Casos de Uso Comunes</h2>
+
+        <h3>Respuesta a Incidentes</h3>
+        <ul>
+            <li><strong>Detección de malware:</strong> Análisis de archivos sospechosos y contención</li>
+            <li><strong>Investigación de phishing:</strong> Análisis de emails maliciosos y campañas</li>
+            <li><strong>Análisis de brechas:</strong> Investigación post-compromiso y recuperación</li>
+        </ul>
+
+        <h3>Cumplimiento y Reportes</h3>
+        <ul>
+            <li><strong>Reportes regulatorios:</strong> Documentación para GDPR, PCI DSS, etc.</li>
+            <li><strong>Métricas de seguridad:</strong> MTTD, MTTR, número de incidentes por tipo</li>
+            <li><strong>Lecciones aprendidas:</strong> Mejora continua de procesos de seguridad</li>
+        </ul>
+
+        <div class="conclusion">
+            <h2>Conclusión</h2>
+
+            <p>TheHive es una herramienta esencial para cualquier equipo de respuesta a incidentes que busca mejorar su eficiencia y colaboración. Su integración nativa con <a href="wazuh.html">Wazuh</a> y otras herramientas de seguridad lo convierte en el centro de un ecosistema completo de ciberseguridad.</p>
+
+            <h3>Ventajas Principales:</h3>
+            <ul>
+                <li><strong>Open Source y Gratuito:</strong> Sin costos de licencia</li>
+                <li><strong>Escalable:</strong> Soporta desde equipos pequeños hasta grandes CSIRT</li>
+                <li><strong>Altamente Integrable:</strong> Conecta con múltiples herramientas de seguridad</li>
+                <li><strong>Interfaz intuitiva:</strong> Fácil de usar para analistas</li>
+            </ul>
+
+            <h3>Consideraciones:</h3>
+            <ul>
+                <li><strong>Curva de aprendizaje:</strong> Requiere familiarización con el workflow</li>
+                <li><strong>Recursos necesarios:</strong> Servidor dedicado recomendado para producción</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <strong>Nota Importante:</strong> TheHive maneja información sensible de incidentes. Asegúrate de implementar controles de acceso apropiados y cifrado de datos en producción.
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; background-color: #2c3e50; color: white; margin-top: 30px;">
+        <p>&copy; 2025 - Más contenido en <a href="../apuntes.html" style="color: #e74c3c; text-decoration: none;">Apuntes</a></p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integración de auditd con Wazuh - Guía Completa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, #3498db, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            color: #34495e;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin: 20px 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        pre::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #e74c3c, #f39c12, #27ae60);
+        }
+
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(116, 185, 255, 0.3);
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .command-block {
+            background: linear-gradient(135deg, #55a3ff, #003d82);
+            border-left: 5px solid #0066cc;
+        }
+
+        .config-block {
+            background: linear-gradient(135deg, #26d0ce, #1a2980);
+            border-left: 5px solid #00b894;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #fdcb6e, #e17055);
+            color: #2d3436;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #e17055;
+        }
+
+        .tip {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #6c5ce7;
+        }
+
+        .toc {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .toc h3 {
+            color: #2980b9;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .toc li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: #2c3e50;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: #3498db;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            pre {
+                padding: 15px;
+                font-size: 0.8em;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Integración de auditd con Wazuh</h1>
+        
+        <div class="intro">
+            <p><strong>Integra auditd con Wazuh</strong> para monitorear eventos de auditoría del sistema de forma centralizada. Esta integración te permitirá detectar actividades sospechosas, cambios no autorizados y cumplir con requisitos de compliance en tu infraestructura.</p>
+        </div>
+
+        <div class="toc">
+            <h3>📋 Tabla de Contenidos</h3>
+            <ul>
+                <li><a href="#configuracion-auditd">Configuración de auditd</a></li>
+                <li><a href="#configuracion-agente">Configuración del agente Wazuh</a></li>
+                <li><a href="#configuracion-manager">Configuración del Manager Wazuh</a></li>
+                <li><a href="#verificacion">Verificación y testing</a></li>
+                <li><a href="#casos-uso">Casos de uso comunes</a></li>
+            </ul>
+        </div>
+
+        <section id="configuracion-auditd" class="section">
+            <h2>⚙️ Configuración de auditd</h2>
+            
+            <h3>1. Instalar y configurar auditd</h3>
+            <pre class="command-block"><code># En sistemas basados en Red Hat/CentOS
+sudo yum install audit
+
+# En sistemas basados en Debian/Ubuntu
+sudo apt-get install auditd</code></pre>
+
+            <h3>2. Configurar reglas de auditoría</h3>
+            <p>Edita el archivo <span class="highlight">/etc/audit/rules.d/audit.rules</span>:</p>
+            
+            <pre class="config-block"><code># Eliminar todas las reglas previas
+-D
+
+# Configurar buffer
+-b 8192
+
+# Fallos de sistema
+-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change
+-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-change
+
+# Cambios en archivos de configuración importantes
+-w /etc/passwd -p wa -k identity
+-w /etc/group -p wa -k identity
+-w /etc/shadow -p wa -k identity
+-w /etc/sudoers -p wa -k identity
+
+# Monitoreo de comandos privilegiados
+-a always,exit -F path=/bin/su -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged
+-a always,exit -F path=/usr/bin/sudo -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged
+
+# Cambios en configuración de red
+-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale
+-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale
+
+# Hacer las reglas inmutables
+-e 2</code></pre>
+
+            <h3>3. Reiniciar el servicio auditd</h3>
+            <pre class="command-block"><code>sudo systemctl restart auditd
+sudo systemctl enable auditd</code></pre>
+        </section>
+
+        <section id="configuracion-agente" class="section">
+            <h2>📡 Configuración del agente Wazuh</h2>
+            
+            <h3>1. Configurar ossec.conf</h3>
+            <p>Edita <span class="highlight">/var/ossec/etc/ossec.conf</span> en el agente Wazuh:</p>
+            
+            <pre class="config-block"><code>&lt;ossec_config&gt;
+  &lt;localfile&gt;
+    &lt;log_format&gt;audit&lt;/log_format&gt;
+    &lt;location&gt;/var/log/audit/audit.log&lt;/location&gt;
+  &lt;/localfile&gt;
+&lt;/ossec_config&gt;</code></pre>
+
+            <h3>2. Permisos para el agente Wazuh</h3>
+            <pre class="command-block"><code># Agregar el usuario ossec al grupo audit
+sudo usermod -a -G audit ossec
+
+# Ajustar permisos del log de auditoría
+sudo chmod 640 /var/log/audit/audit.log
+sudo chown root:audit /var/log/audit/audit.log</code></pre>
+
+            <div class="warning">
+                <strong>⚠️ Importante:</strong> Asegúrate de que el usuario ossec tenga permisos de lectura sobre los logs de auditoría para que la integración funcione correctamente.
+            </div>
+        </section>
+
+        <section id="configuracion-manager" class="section">
+            <h2>🎯 Configuración del Manager Wazuh</h2>
+            
+            <h3>1. Reglas de decodificación</h3>
+            <p>El manager Wazuh incluye reglas predefinidas para auditd. Puedes crear reglas personalizadas en <span class="highlight">/var/ossec/etc/rules/local_rules.xml</span>:</p>
+            
+            <pre class="config-block"><code>&lt;group name="audit,"&gt;
+  &lt;rule id="100001" level="3"&gt;
+    &lt;if_sid&gt;80700&lt;/if_sid&gt;
+    &lt;field name="audit.type"&gt;USER_LOGIN&lt;/field&gt;
+    &lt;description&gt;User login attempt&lt;/description&gt;
+    &lt;group&gt;authentication_success,&lt;/group&gt;
+  &lt;/rule&gt;
+
+  &lt;rule id="100002" level="5"&gt;
+    &lt;if_sid&gt;80700&lt;/if_sid&gt;
+    &lt;field name="audit.type"&gt;USER_AUTH&lt;/field&gt;
+    &lt;field name="audit.res"&gt;failed&lt;/field&gt;
+    &lt;description&gt;User authentication failed&lt;/description&gt;
+    &lt;group&gt;authentication_failed,&lt;/group&gt;
+  &lt;/rule&gt;
+
+  &lt;rule id="100003" level="7"&gt;
+    &lt;if_sid&gt;80700&lt;/if_sid&gt;
+    &lt;field name="audit.type"&gt;SYSCALL&lt;/field&gt;
+    &lt;field name="audit.syscall"&gt;59&lt;/field&gt;
+    &lt;description&gt;Process execution detected&lt;/description&gt;
+    &lt;group&gt;execve,&lt;/group&gt;
+  &lt;/rule&gt;
+&lt;/group&gt;</code></pre>
+
+            <h3>2. Configuración de alertas</h3>
+            <p>En <span class="highlight">/var/ossec/etc/ossec.conf</span> del manager:</p>
+            
+            <pre class="config-block"><code>&lt;ossec_config&gt;
+  &lt;alerts&gt;
+    &lt;log_alert_level&gt;3&lt;/log_alert_level&gt;
+    &lt;email_alert_level&gt;7&lt;/email_alert_level&gt;
+  &lt;/alerts&gt;
+
+  &lt;email_alerts&gt;
+    &lt;email_to&gt;admin@empresa.com&lt;/email_to&gt;
+    &lt;subject&gt;Wazuh Audit Alert&lt;/subject&gt;
+    &lt;event_location&gt;audit&lt;/event_location&gt;
+    &lt;format&gt;full&lt;/format&gt;
+    &lt;level&gt;7&lt;/level&gt;
+    &lt;group&gt;audit&lt;/group&gt;
+  &lt;/email_alerts&gt;
+&lt;/ossec_config&gt;</code></pre>
+        </section>
+
+        <section id="verificacion" class="section">
+            <h2>🔍 Verificación y testing</h2>
+            
+            <h3>1. Verificar que auditd está funcionando</h3>
+            <pre class="command-block"><code># Verificar estado del servicio
+sudo systemctl status auditd
+
+# Ver eventos recientes
+sudo ausearch -ts recent
+
+# Generar evento de prueba
+sudo su - testuser</code></pre>
+
+            <h3>2. Verificar integración con Wazuh</h3>
+            <pre class="command-block"><code># En el manager, verificar logs
+tail -f /var/ossec/logs/alerts/alerts.log | grep audit
+
+# Ver estadísticas del agente
+/var/ossec/bin/agent_control -s -i AGENT_ID</code></pre>
+
+            <h3>3. Comandos útiles para debugging</h3>
+            <pre class="command-block"><code># Ver reglas de auditd activas
+sudo auditctl -l
+
+# Buscar eventos específicos
+sudo ausearch -k identity
+
+# Ver estadísticas de auditoría
+sudo auditctl -s
+
+# En Wazuh, test de reglas
+/var/ossec/bin/ossec-logtest</code></pre>
+
+            <div class="tip">
+                <strong>💡 Tip:</strong> Usa el comando <code>ossec-logtest</code> para probar cómo se procesan los eventos de auditd antes de ponerlos en producción.
+            </div>
+        </section>
+
+        <section id="casos-uso" class="section">
+            <h2>🎯 Casos de uso comunes</h2>
+            
+            <h3>Monitoreo de accesos root</h3>
+            <pre class="command-block"><code># Regla de auditd
+-a always,exit -F arch=b64 -F euid=0 -S execve -k root_commands</code></pre>
+            
+            <pre class="config-block"><code># Regla Wazuh personalizada
+&lt;rule id="100004" level="8"&gt;
+  &lt;if_sid&gt;80700&lt;/if_sid&gt;
+  &lt;field name="audit.key"&gt;root_commands&lt;/field&gt;
+  &lt;description&gt;Root command execution&lt;/description&gt;
+&lt;/rule&gt;</code></pre>
+
+            <h3>Monitoreo de cambios en archivos críticos</h3>
+            <pre class="command-block"><code># Regla de auditd
+-w /etc/ssh/sshd_config -p wa -k ssh_config</code></pre>
+            
+            <pre class="config-block"><code># Regla Wazuh
+&lt;rule id="100005" level="10"&gt;
+  &lt;if_sid&gt;80700&lt;/if_sid&gt;
+  &lt;field name="audit.key"&gt;ssh_config&lt;/field&gt;
+  &lt;description&gt;SSH configuration file modified&lt;/description&gt;
+&lt;/rule&gt;</code></pre>
+
+            <div class="warning">
+                <strong>🚨 Consideración importante:</strong> Ajusta los niveles de alerta según tus necesidades. Niveles muy bajos pueden generar demasiado ruido, mientras que niveles muy altos pueden hacer que pases por alto eventos importantes.
+            </div>
+        </section>
+
+        <div class="section">
+            <h2>✅ Conclusión</h2>
+            <p>Esta integración te proporciona <strong>visibilidad completa</strong> sobre las actividades del sistema, desde cambios en archivos críticos hasta ejecución de comandos privilegiados, todo centralizado en tu plataforma Wazuh. Con esta configuración podrás:</p>
+            
+            <ul style="padding-left: 20px; margin: 15px 0;">
+                <li>🔍 Detectar actividades sospechosas en tiempo real</li>
+                <li>📊 Generar reportes de compliance</li>
+                <li>🚨 Configurar alertas automáticas</li>
+                <li>📈 Analizar tendencias de seguridad</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>📝 Guía de integración auditd + Wazuh | 🛡️ Seguridad y Monitoreo</p>
+        </div>
+    </div>
+</body>
+</html>

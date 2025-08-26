@@ -113,62 +113,167 @@
 
     <div class="card">
         <div class="card-body">
-            <h2>⚙️ Configuración de auditd</h2>
-            <h3>Instalación</h3>
-            <pre><code># En sistemas basados en Red Hat/CentOS
-sudo yum install audit
+            <h2>🏗️ Arquitectura y Componentes</h2>
+            <p>El Linux Audit Framework está compuesto por varios componentes que trabajan en conjunto:</p>
+            <h3>Componentes Principales</h3>
+            <ul>
+                <li><strong>auditd:</strong> El demonio principal que recibe eventos del kernel y los escribe en disco</li>
+                <li><strong>auditctl:</strong> Herramienta para controlar el sistema de auditoría y gestionar reglas</li>
+                <li><strong>ausearch:</strong> Utilidad para buscar eventos específicos en los logs de auditoría</li>
+                <li><strong>aureport:</strong> Genera reportes resumidos y estadísticas de los eventos auditados</li>
+                <li><strong>audispd:</strong> Dispatcher de eventos que puede enviar eventos a otros programas</li>
+                <li><strong>auditspd:</strong> Plugins para procesamiento adicional de eventos</li>
+            </ul>
+
+            <h3>Flujo de Eventos</h3>
+            <ol>
+                <li><strong>Captura:</strong> El kernel detecta un evento basado en las reglas activas</li>
+                <li><strong>Envío:</strong> El kernel envía el evento a auditd a través de una cola</li>
+                <li><strong>Procesamiento:</strong> auditd procesa el evento (filtrado, formateo)</li>
+                <li><strong>Almacenamiento:</strong> El evento se escribe en el archivo de log</li>
+                <li><strong>Distribución:</strong> Si está configurado, el evento se envía a otros sistemas</li>
+            </ol>
+
+            <h3>Tipos de Reglas de Auditoría</h3>
+            <ul>
+                <li><strong>Reglas de control (-D, -e):</strong> Para gestionar el sistema de auditoría</li>
+                <li><strong>Reglas de archivo (-w):</strong> Para monitorear cambios en archivos y directorios</li>
+                <li><strong>Reglas de syscall (-a, -A):</strong> Para monitorear llamadas al sistema</li>
+                <li><strong>Reglas de usuario (-u):</strong> Para auditoría específica de usuarios</li>
+                <li><strong>Reglas de exit (-F):</strong> Para filtrar eventos basados en campos específicos</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>⚙️ Configuración Avanzada de auditd</h2>
+            <h3>Instalación y Configuración Inicial</h3>
+            <pre><code># En sistemas basados en Red Hat/CentOS/RHEL 7+
+sudo yum install audit audit-libs
+
+# En CentOS/RHEL 8+ y Fedora
+sudo dnf install audit audit-libs
 
 # En sistemas basados en Debian/Ubuntu
 sudo apt-get install auditd audispd-plugins
 
+# Verificar estado del kernel
+sudo auditctl -s
+
 # Iniciar y habilitar el servicio
 sudo systemctl start auditd
 sudo systemctl enable auditd</code></pre>
-            <h3>Archivos de Configuración Principales</h3>
-            <p>Los archivos principales incluyen <code>/etc/audit/auditd.conf</code> para configuración del demonio, <code>/etc/audit/audit.rules</code> para reglas permanentes, y <code>/etc/audit/rules.d/</code> para organización modular.</p>
-            <h3>Configuración Básica del Demonio</h3>
-            <pre><code># Ejemplo de /etc/audit/auditd.conf
+
+            <h3>Archivos de Configuración</h3>
+            <ul>
+                <li><code>/etc/audit/auditd.conf</code> - Configuración principal del demonio</li>
+                <li><code>/etc/audit/audit.rules</code> - Reglas de auditoría (deprecated en RHEL 8+)</li>
+                <li><code>/etc/audit/rules.d/</code> - Directorio para reglas modulares (recomendado)</li>
+                <li><code>/etc/audisp/</code> - Configuración del dispatcher</li>
+                <li><code>/etc/audisp/plugins.d/</code> - Plugins del dispatcher</li>
+            </ul>
+
+            <h3>Configuración Optimizada del Demonio</h3>
+            <pre><code># /etc/audit/auditd.conf optimizado
 log_file = /var/log/audit/audit.log
-log_format = RAW
+log_format = ENRICHED
 log_group = root
 priority_boost = 4
 flush = INCREMENTAL_ASYNC
 freq = 50
-num_logs = 5
-max_log_file = 50
+num_logs = 10
+max_log_file = 100
 max_log_file_action = ROTATE
 space_left = 75
-space_left_action = SYSLOG
+space_left_action = EMAIL
+action_mail_acct = root
 admin_space_left = 50
-admin_space_left_action = SUSPEND</code></pre>
-            <h3>Reglas de Auditoría Esenciales</h3>
-            <pre><code># Reglas básicas de seguridad en /etc/audit/rules.d/audit.rules
+admin_space_left_action = SUSPEND
+disk_full_action = SUSPEND
+disk_error_action = SUSPEND
+tcp_listen_port = 60
+tcp_max_per_addr = 1
+use_libwrap = yes
+tcp_client_ports = 1024-65535
+enable_krb5 = no
+krb5_principal = auditd</code></pre>
 
-# Auditar cambios en archivos de autenticación
+            <h3>Reglas de Auditoría por Cumplimiento</h3>
+            <h4>STIG Compliance (Security Technical Implementation Guide)</h4>
+            <pre><code># Reglas para cumplimiento STIG
+-w /etc/selinux/ -p wa -k MAC-policy
+-w /usr/share/selinux/ -p wa -k MAC-policy
+
+# Auditoría de módulos del kernel
+-w /etc/modprobe.d/ -p wa -k modules
+-w /etc/modules-load.d/ -p wa -k modules
+
+# Configuración de red crítica
+-w /etc/ipsec.d/ -p wa -k ipsec-config
+-w /etc/libreswan/ -p wa -k ipsec-config</code></pre>
+
+            <h4>PCI DSS Compliance</h4>
+            <pre><code># Reglas específicas para PCI DSS
+-w /var/log/audit/ -p wa -k audit-logs
+-w /etc/audit/ -p wa -k audit-config
+
+# Monitoreo de datos sensibles
+-w /etc/pci/ -p wa -k pci-config
+-w /var/log/pci/ -p wa -k pci-logs</code></pre>
+
+            <h4>HIPAA Compliance</h4>
+            <pre><code># Reglas para protección de datos médicos
+-w /var/log/hipaa/ -p wa -k hipaa-logs
+-w /etc/hipaa/ -p wa -k hipaa-config
+
+# Auditoría de acceso a registros médicos
+-a always,exit -F arch=b64 -S openat -F path=/var/medical -k hipaa-access</code></pre>
+
+            <h3>Reglas de Seguridad Esenciales</h3>
+            <pre><code># === REGLAS DE CONTROL ===
+-D  # Eliminar todas las reglas
+-e 2  # Habilitar auditoría
+
+# === IDENTIDAD Y AUTENTICACIÓN ===
 -w /etc/passwd -p wa -k identity
 -w /etc/group -p wa -k identity
 -w /etc/shadow -p wa -k identity
+-w /etc/gshadow -p wa -k identity
 -w /etc/sudoers -p wa -k identity
+-w /etc/sudoers.d/ -p wa -k identity
 
-# Auditar intentos de login
+# === LOGS DE AUTENTICACIÓN ===
 -w /var/log/lastlog -p wa -k logins
 -w /var/log/faillog -p wa -k logins
+-w /var/log/btmp -p wa -k logins
 
-# Auditar cambios en configuración de red
+# === CONFIGURACIÓN DEL SISTEMA ===
 -w /etc/hosts -p wa -k network
 -w /etc/network/ -p wa -k network
+-w /etc/netplan/ -p wa -k network
+-w /etc/sysconfig/network -p wa -k network
 
-# Auditar syscalls críticos
+# === SYSCALLS CRÍTICOS ===
 -a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change
+-a always,exit -F arch=b64 -S clock_settime -k time-change
 -a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -k perm_mod
+-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -k perm_mod
 -a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -k delete
 
-# Auditar ejecutables privilegiados
+# === EJECUTABLES PRIVILEGIADOS ===
 -w /bin/su -p x -k privileged
 -w /usr/bin/sudo -p x -k privileged
--w /usr/bin/ssh -p x -k privileged</code></pre>
-            <h3>Comandos de Gestión</h3>
-            <pre><code># Ver estado del sistema de auditoría
+-w /usr/bin/ssh -p x -k privileged
+-w /usr/bin/scp -p x -k privileged
+-w /usr/bin/sftp -p x -k privileged
+
+# === ACCESO A ARCHIVOS SENSIBLES ===
+-a always,exit -F arch=b64 -S openat -F path=/etc/passwd -k sensitive-files
+-a always,exit -F arch=b64 -S openat -F path=/etc/shadow -k sensitive-files</code></pre>
+
+            <h3>Gestión de Reglas</h3>
+            <pre><code># Ver estado del sistema
 sudo auditctl -s
 
 # Listar reglas activas
@@ -177,14 +282,325 @@ sudo auditctl -l
 # Agregar regla temporal
 sudo auditctl -w /etc/hosts -p wa -k network-config
 
-# Buscar eventos en logs
-sudo ausearch -k identity
-sudo ausearch -m USER_LOGIN
+# Eliminar regla temporal
+sudo auditctl -W /etc/hosts
 
-# Generar reportes
+# Cargar reglas desde archivo
+sudo auditctl -R /etc/audit/rules.d/custom.rules
+
+# Verificar sintaxis de reglas
+sudo auditctl -c /etc/audit/rules.d/audit.rules</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>🔍 Análisis y Búsqueda de Eventos</h2>
+            <h3>Campos de Eventos de Auditoría</h3>
+            <p>Cada evento de auditoría contiene múltiples campos que proporcionan información detallada:</p>
+            <ul>
+                <li><strong>type:</strong> Tipo de evento (SYSCALL, USER_LOGIN, etc.)</li>
+                <li><strong>pid:</strong> ID del proceso que generó el evento</li>
+                <li><strong>uid:</strong> ID del usuario que ejecutó la acción</li>
+                <li><strong>auid:</strong> ID de auditoría del usuario (persiste a través de sudo)</li>
+                <li><strong>comm:</strong> Nombre del comando ejecutado</li>
+                <li><strong>exe:</strong> Ruta completa del ejecutable</li>
+                <li><strong>key:</strong> Etiqueta personalizada asignada por reglas</li>
+                <li><strong>arch:</strong> Arquitectura (b64 para 64-bit, b32 para 32-bit)</li>
+            </ul>
+
+            <h3>Búsqueda con ausearch</h3>
+            <pre><code># Buscar por clave
+sudo ausearch -k identity
+
+# Buscar por tipo de evento
+sudo ausearch -m USER_LOGIN
+sudo ausearch -m SYSCALL
+
+# Buscar por usuario
+sudo ausearch -ui 1000
+sudo ausearch -ua 1000
+
+# Buscar por PID
+sudo ausearch -p 1234
+
+# Buscar por archivo
+sudo ausearch -f /etc/passwd
+
+# Buscar en un rango de tiempo
+sudo ausearch -ts today -te now
+sudo ausearch -ts yesterday -te today
+
+# Búsqueda combinada
+sudo ausearch -k identity -ui 1000 -ts today</code></pre>
+
+            <h3>Generación de Reportes con aureport</h3>
+            <pre><code># Reporte de autenticación
 sudo aureport --auth
-sudo aureport --file</code></pre>
-            <p>Las reglas de auditd pueden impactar el rendimiento del sistema. Es importante equilibrar la seguridad con el rendimiento, especialmente en sistemas de alta carga.</p>
+
+# Reporte de archivos
+sudo aureport --file
+
+# Reporte de usuarios
+sudo aureport --user
+
+# Reporte de comandos ejecutados
+sudo aureport --executable
+
+# Reporte de accesos denegados
+sudo aureport --failed
+
+# Reportes por fecha
+sudo aureport --start 01/01/2024 --end 12/31/2024
+
+# Reportes en tiempo real
+sudo aureport --input-logs</code></pre>
+
+            <h3>Análisis de Eventos en Tiempo Real</h3>
+            <pre><code># Monitoreo en tiempo real
+sudo tail -f /var/log/audit/audit.log
+
+# Usando aureport para análisis continuo
+sudo watch -n 5 'aureport --failed --since 05:00:00'
+
+# Análisis de patrones con awk
+sudo ausearch -k privileged | aureport --file --summary</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>⚡ Optimización y Rendimiento</h2>
+            <h3>Consideraciones de Rendimiento</h3>
+            <p>Las reglas de auditoría pueden impactar significativamente el rendimiento del sistema:</p>
+            <ul>
+                <li><strong>Reglas específicas vs genéricas:</strong> Las reglas específicas (-w /ruta/exacta) son más eficientes que las genéricas</li>
+                <li><strong>Syscalls frecuentes:</strong> Evitar auditar syscalls muy comunes como open() sin filtros</li>
+                <li><strong>Volumen de logs:</strong> Monitorear el crecimiento de /var/log/audit/</li>
+                <li><strong>Procesamiento en tiempo real:</strong> Considerar el impacto en sistemas de alta carga</li>
+            </ul>
+
+            <h3>Técnicas de Optimización</h3>
+            <pre><code># Reglas optimizadas para rendimiento
+-w /etc/ -p wa -k etc-modify
+
+# En lugar de múltiples reglas específicas:
+-w /etc/passwd -p wa -k identity
+-w /etc/group -p wa -k identity
+-w /etc/shadow -p wa -k identity
+
+# Usar filtros para reducir eventos
+-a always,exit -F arch=b64 -S openat -F path=/etc/passwd -k sensitive
+
+# Configuración de buffer
+sudo auditctl -b 8192  # Aumentar buffer del kernel</code></pre>
+
+            <h3>Monitoreo de Rendimiento</h3>
+            <pre><code># Ver estadísticas del sistema de auditoría
+sudo auditctl -s
+
+# Monitorear uso de CPU por auditd
+ps aux | grep auditd
+
+# Ver logs del sistema relacionados con auditoría
+sudo journalctl -u auditd
+
+# Monitoreo de espacio en disco
+sudo df -h /var/log/audit/
+
+# Análisis de rendimiento con perf
+sudo perf record -e audit:* -a sleep 10</code></pre>
+
+            <h3>Estrategias de Filtrado</h3>
+            <ul>
+                <li><strong>Filtros por usuario:</strong> -F uid!=0 para excluir root</li>
+                <li><strong>Filtros por proceso:</strong> -F exe=/usr/bin/sudo</li>
+                <li><strong>Filtros por resultado:</strong> -F success=1 para solo exitosos</li>
+                <li><strong>Filtros por tiempo:</strong> Limitar auditoría a horarios específicos</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>🔧 Solución de Problemas</h2>
+            <h3>Problemas Comunes y Soluciones</h3>
+            <h4>1. Reglas No Persisten Después del Reinicio</h4>
+            <pre><code># Problema: Reglas temporales se pierden
+sudo auditctl -l > /tmp/rules_backup.txt
+
+# Solución: Usar directorio rules.d/
+sudo cp /tmp/rules_backup.txt /etc/audit/rules.d/persistent.rules
+sudo systemctl restart auditd</code></pre>
+
+            <h4>2. Espacio en Disco Agotado</h4>
+            <pre><code># Verificar tamaño de logs
+sudo du -sh /var/log/audit/
+
+# Configurar rotación automática
+sudo vim /etc/audit/auditd.conf
+# max_log_file = 50
+# max_log_file_action = ROTATE
+
+# Limpiar logs antiguos
+sudo find /var/log/audit/ -name "audit.log.*" -type f -delete</code></pre>
+
+            <h4>3. Eventos No se Registran</h4>
+            <pre><code># Verificar si auditd está corriendo
+sudo systemctl status auditd
+
+# Verificar reglas activas
+sudo auditctl -l
+
+# Verificar permisos de archivos
+sudo ls -la /var/log/audit/
+
+# Revisar logs del sistema
+sudo journalctl -u auditd -f</code></pre>
+
+            <h4>4. Rendimiento Degradado</h4>
+            <pre><code># Identificar reglas problemáticas
+sudo auditctl -l | grep -i open
+
+# Optimizar reglas
+sudo auditctl -W /path/to/problematic/file
+
+# Ver estadísticas
+sudo auditctl -s</code></pre>
+
+            <h4>5. Errores de Configuración</h4>
+            <pre><code># Validar sintaxis de reglas
+sudo auditctl -c /etc/audit/rules.d/audit.rules
+
+# Ver logs de error
+sudo tail -f /var/log/messages | grep audit
+
+# Verificar configuración
+sudo auditd -f /etc/audit/auditd.conf</code></pre>
+
+            <h3>Herramientas de Diagnóstico</h3>
+            <pre><code># Análisis completo del sistema de auditoría
+sudo aureport --summary
+
+# Ver eventos por tipo
+sudo ausearch -m all | aureport --event --summary
+
+# Análisis de cobertura
+sudo auditctl -l | wc -l
+
+# Verificar integridad
+sudo rpm -V audit</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>🤝 Integración con Otras Herramientas</h2>
+            <h3>Integración con OSSEC/Wazuh</h3>
+            <pre><code># Configurar OSSEC para monitorear auditd
+# En /var/ossec/etc/ossec.conf
+<localfile>
+  <log_format>syslog</log_format>
+  <location>/var/log/audit/audit.log</location>
+</localfile>
+
+# Reiniciar OSSEC
+sudo systemctl restart wazuh-agent</code></pre>
+
+            <h3>Integración con Fail2Ban</h3>
+            <pre><code># Configurar jail para auditd
+# En /etc/fail2ban/jail.local
+[auditd]
+enabled = true
+logpath = /var/log/audit/audit.log
+banaction = iptables-multiport
+findtime = 600
+bantime = 3600
+maxretry = 3</code></pre>
+
+            <h3>Integración con rsyslog</h3>
+            <pre><code># Configurar envío remoto de logs
+# En /etc/rsyslog.conf
+*.* @@log-server.empresa.com:514;RSYSLOG_SyslogProtocol23Format
+
+# Configurar audisp-syslog
+# En /etc/audisp/plugins.d/syslog.conf
+active = yes
+direction = out
+path = /sbin/audisp-syslog
+type = always
+format = string</code></pre>
+
+            <h3>Automatización con Scripts</h3>
+            <pre><code>#!/bin/bash
+# Script de gestión de auditd
+
+# Función para backup de logs
+backup_audit_logs() {
+    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+    tar -czf /backup/audit_logs_$TIMESTAMP.tar.gz /var/log/audit/
+}
+
+# Función para análisis de eventos críticos
+analyze_critical_events() {
+    ausearch -k privileged -ts today | aureport --summary
+}
+
+# Función para limpieza de logs antiguos
+cleanup_old_logs() {
+    find /var/log/audit/ -name "*.log" -mtime +30 -delete
+}
+
+# Menú principal
+case "$1" in
+    backup) backup_audit_logs ;;
+    analyze) analyze_critical_events ;;
+    cleanup) cleanup_old_logs ;;
+    *) echo "Uso: $0 {backup|analyze|cleanup}" ;;
+esac</code></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>📚 Casos Prácticos y Ejemplos</h2>
+            <h3>Caso 1: Detección de Actividad Sospechosa</h3>
+            <pre><code># Buscar intentos de escalada de privilegios
+sudo ausearch -k privileged -ts yesterday | aureport --user --summary
+
+# Identificar accesos fuera de horario
+sudo ausearch -ts 22:00 -te 06:00 -m USER_LOGIN
+
+# Detectar modificaciones en archivos críticos
+sudo ausearch -k identity -ts today</code></pre>
+
+            <h3>Caso 2: Análisis Forense Post-Incidente</h3>
+            <pre><code># Reconstruir timeline de eventos
+sudo ausearch -ts "2024-01-01 00:00:00" -te "2024-01-01 23:59:59" | aureport --event
+
+# Identificar procesos comprometidos
+sudo ausearch -p 1234 -o /tmp/process_analysis.txt
+
+# Buscar conexiones de red relacionadas
+sudo ausearch -m SOCKADDR -ts today</code></pre>
+
+            <h3>Caso 3: Cumplimiento y Auditoría</h3>
+            <pre><code># Generar reporte mensual de accesos
+sudo aureport --auth --start 01/01/2024 --end 01/31/2024
+
+# Análisis de accesos por usuario
+sudo aureport --user --summary --start 01/01/2024
+
+# Reporte de modificaciones de archivos
+sudo aureport --file --summary --start 01/01/2024</code></pre>
+
+            <h3>Caso 4: Monitoreo de Aplicaciones Específicas</h3>
+            <pre><code># Auditar una aplicación específica
+sudo auditctl -w /usr/bin/myapp -p x -k myapp-exec
+sudo auditctl -a always,exit -F exe=/usr/bin/myapp -k myapp-activity
+
+# Buscar actividad de la aplicación
+sudo ausearch -k myapp-activity -ts today</code></pre>
         </div>
     </div>
 

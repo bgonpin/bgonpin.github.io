@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor Interactivo para Set-NetFirewallRule</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate & Amber -->
+    <!-- Application Structure Plan: The SPA is structured around a two-step "select and modify" workflow, which is the core function of the cmdlet. The main sections are: 1) A 'Selector de Regla' panel where the user chooses from a list of simulated firewall rules. This simulates the output of a Get-NetFirewallRule query. 2) An 'Opciones de Edición' panel that dynamically displays the editable properties of the selected rule. 3) A 'Comando Generado' section that provides a live preview of the PowerShell command. 4) A 'Estado de Reglas' chart to visualize the distribution of enabled vs. disabled rules, highlighting a key use case of this cmdlet. This structure offers a focused, task-oriented experience, making the abstract concept of modifying rules concrete and intuitive. -->
+    <!-- Visualization & Content Choices:
+        - Report Info: Rule Data -> Goal: Facilitate selection -> Viz/Presentation: A dynamic list of clickable rule cards. Interaction: Clicking a card populates the modification form and updates the command. Justification: More visual and user-friendly than a dropdown, making the process of "finding" a rule more explicit. Library/Method: HTML/CSS/JS.
+        - Report Info: Modifiable Parameters -> Goal: Allow modification -> Viz/Presentation: An interactive form with sliders and dropdowns. Interaction: Changing form values updates the live command and rule state. Justification: The most direct way to allow users to experiment with parameters. Library/Method: HTML/JS.
+        - Report Info: Enabled/Disabled Status -> Goal: Analyze & inform -> Viz/Presentation: A pie chart showing the count of enabled vs disabled rules. Interaction: Updates dynamically when a rule's status is toggled. Justification: A simple chart makes a common operation (enabling/disabling rules) tangible and its impact immediately visible. Library/Method: Chart.js (Canvas).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .rule-card {
+            transition: all 0.2s ease-in-out;
+        }
+        .rule-card.selected {
+            border-color: #f59e0b; /* amber-500 */
+            background-color: #fffbeb; /* amber-50 */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-slate-900">Editor Interactivo de `Set-NetFirewallRule`</h1>
+            <p class="mt-2 text-lg text-slate-600">Simula la modificación de reglas de firewall existentes de manera visual y práctica.</p>
+        </header>
+
+        <main class="grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Selector de Regla</h2>
+                <p class="mb-6 text-slate-600">Selecciona una de las siguientes reglas de ejemplo para comenzar a editarla. Esto simula el uso de `Get-NetFirewallRule` para identificar una regla.</p>
+                <div id="rule-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                    <!-- Rule cards will be injected here by JS -->
+                </div>
+
+                <div id="editor-panel" class="hidden">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Opciones de Edición</h2>
+                    <p class="mb-6 text-slate-600">Modifica los parámetros de la regla seleccionada. Los cambios se reflejarán en el comando de abajo.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="edit-action" class="block text-sm font-medium text-slate-700">Action</label>
+                            <select id="edit-action" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                                <option value="Allow">Allow</option>
+                                <option value="Block">Block</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="edit-direction" class="block text-sm font-medium text-slate-700">Direction</label>
+                            <select id="edit-direction" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                                <option value="Inbound">Inbound</option>
+                                <option value="Outbound">Outbound</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="edit-profile" class="block text-sm font-medium text-slate-700">Profile</label>
+                            <select id="edit-profile" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                                <option value="Domain">Domain</option>
+                                <option value="Private">Private</option>
+                                <option value="Public">Public</option>
+                                <option value="Any">Any</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center">
+                             <input id="edit-enabled" type="checkbox" class="h-4 w-4 text-amber-600 border-slate-300 rounded focus:ring-amber-500">
+                             <label for="edit-enabled" class="ml-2 block text-sm font-medium text-slate-700">Regla Habilitada</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="lg:col-span-1 space-y-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Comando Generado</h2>
+                     <p class="mb-4 text-slate-600">Este es el comando `Set-NetFirewallRule` que aplicará tus cambios. Primero identifica la regla por su nombre, y luego especifica los parámetros a modificar.</p>
+                     <div class="mt-2 p-4 bg-slate-900 text-white rounded-md font-mono text-sm overflow-x-auto relative">
+                        <code id="generated-command"></code>
+                        <button id="copy-button" class="absolute top-2 right-2 bg-slate-700 hover:bg-slate-600 text-white text-xs py-1 px-2 rounded">Copiar</button>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Análisis del Estado</h2>
+                     <p class="mb-4 text-slate-600">Este gráfico muestra la distribución de las reglas habilitadas y deshabilitadas, una de las operaciones más comunes con este cmdlet.</p>
+                    <div class="chart-container">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mockRules = [
+                { id: 1, name: 'Permitir HTTP (Inbound)', direction: 'Inbound', action: 'Allow', profile: 'Any', enabled: true },
+                { id: 2, name: 'Bloquear RDP Público', direction: 'Inbound', action: 'Block', profile: 'Public', enabled: true },
+                { id: 3, name: 'Comms de Servidor SQL', direction: 'Inbound', action: 'Allow', profile: 'Private', enabled: false },
+                { id: 4, name: 'Outbound HTTPS', direction: 'Outbound', action: 'Allow', profile: 'Any', enabled: true },
+                { id: 5, name: 'Servicios de Impresión', direction: 'Inbound', action: 'Allow', profile: 'Domain', enabled: true },
+            ];
+
+            const ruleList = document.getElementById('rule-list');
+            const editorPanel = document.getElementById('editor-panel');
+            const editAction = document.getElementById('edit-action');
+            const editDirection = document.getElementById('edit-direction');
+            const editProfile = document.getElementById('edit-profile');
+            const editEnabled = document.getElementById('edit-enabled');
+            const generatedCommand = document.getElementById('generated-command');
+            const copyButton = document.getElementById('copy-button');
+            let selectedRule = null;
+            let statusChart;
+
+            function renderRuleCards() {
+                ruleList.innerHTML = '';
+                mockRules.forEach(rule => {
+                    const card = document.createElement('div');
+                    card.className = 'rule-card p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-amber-400';
+                    card.dataset.id = rule.id;
+                    card.innerHTML = `
+                        <h4 class="font-bold text-lg text-slate-800">${rule.name}</h4>
+                        <p class="text-sm text-slate-600">Dir: ${rule.direction} | Acc: ${rule.action}</p>
+                        <p class="text-sm text-slate-600">Perfil: ${rule.profile}</p>
+                        <p class="text-sm font-semibold mt-2 ${rule.enabled ? 'text-green-600' : 'text-red-600'}">Estado: ${rule.enabled ? 'Habilitada' : 'Deshabilitada'}</p>
+                    `;
+                    ruleList.appendChild(card);
+                });
+            }
+
+            function updateCommand() {
+                if (!selectedRule) {
+                    generatedCommand.textContent = 'Selecciona una regla para empezar a editar.';
+                    return;
+                }
+
+                const newAction = editAction.value;
+                const newDirection = editDirection.value;
+                const newProfile = editProfile.value;
+                const newEnabled = editEnabled.checked;
+
+                let command = `Set-NetFirewallRule -DisplayName "${selectedRule.name}"`;
+
+                if (newAction !== selectedRule.action) {
+                    command += ` -Action ${newAction}`;
+                }
+                if (newDirection !== selectedRule.direction) {
+                    command += ` -Direction ${newDirection}`;
+                }
+                if (newProfile !== selectedRule.profile) {
+                    command += ` -Profile ${newProfile}`;
+                }
+                if (newEnabled !== selectedRule.enabled) {
+                    command += ` -Enabled ${newEnabled}`;
+                }
+
+                generatedCommand.textContent = command;
+            }
+
+            function updateStatusChart() {
+                const enabledCount = mockRules.filter(r => r.enabled).length;
+                const disabledCount = mockRules.length - enabledCount;
+
+                if (statusChart) {
+                    statusChart.data.datasets[0].data = [enabledCount, disabledCount];
+                    statusChart.update();
+                } else {
+                    const ctx = document.getElementById('statusChart').getContext('2d');
+                    statusChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Habilitadas', 'Deshabilitadas'],
+                            datasets: [{
+                                data: [enabledCount, disabledCount],
+                                backgroundColor: ['#22c55e', '#ef4444'],
+                                borderColor: '#ffffff',
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            const label = context.label || '';
+                                            const value = context.parsed || 0;
+                                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                            const percentage = total > 0 ? (value / total * 100).toFixed(2) : 0;
+                                            return `${label}: ${value} (${percentage}%)`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            ruleList.addEventListener('click', (e) => {
+                const card = e.target.closest('.rule-card');
+                if (!card) return;
+
+                document.querySelectorAll('.rule-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+
+                const ruleId = parseInt(card.dataset.id, 10);
+                selectedRule = mockRules.find(r => r.id === ruleId);
+                
+                if (selectedRule) {
+                    editorPanel.classList.remove('hidden');
+                    editAction.value = selectedRule.action;
+                    editDirection.value = selectedRule.direction;
+                    editProfile.value = selectedRule.profile;
+                    editEnabled.checked = selectedRule.enabled;
+                    updateCommand();
+                }
+            });
+
+            const editInputs = [editAction, editDirection, editProfile, editEnabled];
+            editInputs.forEach(input => input.addEventListener('change', updateCommand));
+
+            copyButton.addEventListener('click', () => {
+                const commandText = generatedCommand.textContent;
+                const textarea = document.createElement('textarea');
+                textarea.value = commandText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    copyButton.textContent = 'Copiado!';
+                    setTimeout(() => { copyButton.textContent = 'Copiar'; }, 2000);
+                } catch (err) {
+                    console.error('Error al copiar texto: ', err);
+                }
+                document.body.removeChild(textarea);
+            });
+
+            renderRuleCards();
+            updateStatusChart();
+        });
+    </script>
+
+    <footer class="mt-16 py-8 bg-slate-100 text-center">
+        <div class="container mx-auto px-4">
+            <a href="pildoras.html" class="text-amber-600 hover:text-amber-700 font-medium transition-colors duration-200">
+                ← Volver a Píldoras
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

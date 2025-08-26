@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorador Interactivo para Get-NetFirewallRule</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate & Amber -->
+    <!-- Application Structure Plan: The SPA is designed as a single-page interactive query tool. It's composed of three main sections: 1) A 'Filtros y Consultas' section with a control panel that lets users interactively select filtering criteria for the rules. 2) A 'Resultados de la Consulta' section that acts as a simulated, dynamic table displaying rules that match the selected filters. This hands-on approach directly connects user actions to their results. 3) An 'Análisis de Distribución' section with a responsive chart that visualizes the distribution of rules (e.g., by action or profile). This structure was chosen because Get-NetFirewallRule is primarily a query cmdlet, so a design focused on filtering, results, and analysis provides the most intuitive and practical user experience, unlike a linear document format. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Filtering Parameters -> Goal: Facilitate Exploration -> Viz/Presentation: An interactive form with dropdowns and inputs. Interaction: User changes form values, triggering a live filter on a JavaScript data set. Justification: Provides a hands-on, practical way to learn how different parameters work together to refine a search. Library/Method: HTML/JS.
+        - Report Info: Rule Data -> Goal: Display results -> Viz/Presentation: A dynamic HTML table. Interaction: The table content is updated instantly based on the active filters. Justification: Simulates the output of the PowerShell cmdlet, making the learning process concrete and easy to understand. Library/Method: HTML/JS.
+        - Report Info: Rule Distribution -> Goal: Inform & Analyze -> Viz/Presentation: A pie chart. Interaction: A dropdown changes the data category (e.g., by action, by profile) that the chart visualizes. Justification: A visual chart is excellent for quickly grasping the proportions of different rule types, which is a common analytical task after querying. Library/Method: Chart.js (Canvas).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .content-section {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .rule-table th, .rule-table td {
+            border: 1px solid #e2e8f0; /* slate-200 */
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-slate-900">Explorador de Reglas de Firewall</h1>
+            <p class="mt-2 text-lg text-slate-600">Interactúa con los filtros para ver cómo `Get-NetFirewallRule` te ayuda a encontrar reglas específicas.</p>
+        </header>
+
+        <main>
+            <section id="filter-section" class="content-section bg-white p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Filtros y Consultas</h2>
+                <p class="mb-6 text-slate-600">Usa las siguientes opciones para simular cómo filtrarías las reglas de firewall. Observa cómo los resultados y el gráfico se actualizan instantáneamente con cada cambio.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div>
+                        <label for="filter-direction" class="block text-sm font-medium text-slate-700">Direction</label>
+                        <select id="filter-direction" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                            <option value="Any">Cualquiera</option>
+                            <option value="Inbound">Inbound</option>
+                            <option value="Outbound">Outbound</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="filter-action" class="block text-sm font-medium text-slate-700">Action</label>
+                        <select id="filter-action" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                            <option value="Any">Cualquiera</option>
+                            <option value="Allow">Allow</option>
+                            <option value="Block">Block</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="filter-enabled" class="block text-sm font-medium text-slate-700">Enabled</label>
+                        <select id="filter-enabled" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                            <option value="Any">Cualquiera</option>
+                            <option value="True">True</option>
+                            <option value="False">False</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="filter-profile" class="block text-sm font-medium text-slate-700">Profile</label>
+                        <select id="filter-profile" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                            <option value="Any">Cualquiera</option>
+                            <option value="Domain">Domain</option>
+                            <option value="Private">Private</option>
+                            <option value="Public">Public</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="filter-protocol" class="block text-sm font-medium text-slate-700">Protocol</label>
+                        <input type="text" id="filter-protocol" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" placeholder="TCP, UDP, Any...">
+                    </div>
+                    <div>
+                        <label for="filter-port" class="block text-sm font-medium text-slate-700">Port</label>
+                        <input type="text" id="filter-port" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" placeholder="80, 443, 135-139...">
+                    </div>
+                </div>
+            </section>
+
+            <section id="results-section" class="content-section bg-white p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Resultados de la Consulta</h2>
+                <p class="mb-4 text-slate-600">Este es un conjunto de reglas de ejemplo que coinciden con tus filtros. La tabla se actualiza dinámicamente para mostrarte el resultado de tu búsqueda.</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full rule-table border-collapse">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-slate-500">DisplayName</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-slate-500">Direction</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-slate-500">Action</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-slate-500">Profile</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-slate-500">Protocol</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rule-results" class="bg-white">
+                            <!-- Rule rows will be injected here by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="analysis-section" class="content-section bg-white p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Análisis de Distribución</h2>
+                <p class="mb-4 text-slate-600">Este gráfico te ayuda a visualizar la distribución de las reglas filtradas. Selecciona una categoría para ver la proporción de reglas que la componen.</p>
+                <div class="flex items-center justify-center mb-4">
+                    <label for="chart-data-select" class="text-sm font-medium text-slate-700 mr-2">Ver reglas por:</label>
+                    <select id="chart-data-select" class="mt-1 block pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                        <option value="action">Acción (Allow vs. Block)</option>
+                        <option value="profile">Perfil (Domain, Private, Public)</option>
+                        <option value="direction">Dirección (Inbound vs. Outbound)</option>
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <canvas id="ruleChart"></canvas>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="bg-slate-100 py-6 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <a href="pildoras.html" class="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                Volver a Píldoras
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mockRules = [
+                { displayName: 'Permitir ICMP', direction: 'Inbound', action: 'Allow', enabled: true, profile: 'Any', protocol: 'ICMPv4', localPort: 'Any' },
+                { displayName: 'Bloquear RDP Público', direction: 'Inbound', action: 'Block', enabled: true, profile: 'Public', protocol: 'TCP', localPort: '3389' },
+                { displayName: 'Acceso a Archivos Privado', direction: 'Inbound', action: 'Allow', enabled: true, profile: 'Private', protocol: 'TCP', localPort: '445' },
+                { displayName: 'Allow Outbound HTTPS', direction: 'Outbound', action: 'Allow', enabled: true, profile: 'Any', protocol: 'TCP', localPort: 'Any', remotePort: '443' },
+                { displayName: 'Bloquear Tráfico DNS Saliente', direction: 'Outbound', action: 'Block', enabled: false, profile: 'Any', protocol: 'UDP', localPort: 'Any', remotePort: '53' },
+                { displayName: 'Regla de Depuración', direction: 'Inbound', action: 'Allow', enabled: false, profile: 'Private', protocol: 'TCP', localPort: '8080' },
+                { displayName: 'Domain Controller Comms', direction: 'Inbound', action: 'Allow', enabled: true, profile: 'Domain', protocol: 'TCP', localPort: '389' },
+                { displayName: 'Bloqueo General de Entrada', direction: 'Inbound', action: 'Block', enabled: true, profile: 'Public', protocol: 'Any', localPort: 'Any' },
+                { displayName: 'Allow SQL Server Access', direction: 'Inbound', action: 'Allow', enabled: true, profile: 'Private', protocol: 'TCP', localPort: '1433' },
+                { displayName: 'App HTTP Outbound', direction: 'Outbound', action: 'Allow', enabled: true, profile: 'Any', protocol: 'TCP', localPort: 'Any', remotePort: '80' },
+                { displayName: 'Allow Private PING', direction: 'Inbound', action: 'Allow', enabled: true, profile: 'Private', protocol: 'ICMPv4', localPort: 'Any' },
+                { displayName: 'Deny Public SMB', direction: 'Inbound', action: 'Block', enabled: true, profile: 'Public', protocol: 'TCP', localPort: '445' },
+            ];
+
+            const filterDirection = document.getElementById('filter-direction');
+            const filterAction = document.getElementById('filter-action');
+            const filterEnabled = document.getElementById('filter-enabled');
+            const filterProfile = document.getElementById('filter-profile');
+            const filterProtocol = document.getElementById('filter-protocol');
+            const filterPort = document.getElementById('filter-port');
+            const ruleResultsBody = document.getElementById('rule-results');
+            const chartDataSelect = document.getElementById('chart-data-select');
+            let ruleChart;
+
+            function renderTable(rules) {
+                ruleResultsBody.innerHTML = '';
+                if (rules.length === 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td colspan="5" class="py-4 text-center text-slate-500 italic">No se encontraron reglas con estos filtros.</td>`;
+                    ruleResultsBody.appendChild(row);
+                    return;
+                }
+                rules.forEach(rule => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-slate-50';
+                    row.innerHTML = `
+                        <td class="py-2 px-4 text-sm text-slate-700">${rule.displayName}</td>
+                        <td class="py-2 px-4 text-sm text-slate-700">${rule.direction}</td>
+                        <td class="py-2 px-4 text-sm text-slate-700">${rule.action}</td>
+                        <td class="py-2 px-4 text-sm text-slate-700">${rule.profile}</td>
+                        <td class="py-2 px-4 text-sm text-slate-700">${rule.protocol}</td>
+                    `;
+                    ruleResultsBody.appendChild(row);
+                });
+            }
+
+            function updateChart(rules) {
+                const category = chartDataSelect.value;
+                const counts = rules.reduce((acc, rule) => {
+                    const key = rule[category];
+                    acc[key] = (acc[key] || 0) + 1;
+                    return acc;
+                }, {});
+
+                const labels = Object.keys(counts);
+                const data = Object.values(counts);
+
+                if (ruleChart) {
+                    ruleChart.data.labels = labels;
+                    ruleChart.data.datasets[0].data = data;
+                    ruleChart.update();
+                } else {
+                    const ctx = document.getElementById('ruleChart').getContext('2d');
+                    ruleChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                data: data,
+                                backgroundColor: [
+                                    '#f59e0b', '#22c55e', '#ef4444', '#64748b' 
+                                ],
+                                borderColor: '#ffffff',
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            const label = context.label || '';
+                                            const value = context.parsed || 0;
+                                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                            const percentage = total > 0 ? (value / total * 100).toFixed(2) : 0;
+                                            return `${label}: ${value} (${percentage}%)`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            function applyFilters() {
+                const direction = filterDirection.value;
+                const action = filterAction.value;
+                const enabled = filterEnabled.value;
+                const profile = filterProfile.value;
+                const protocol = filterProtocol.value.toLowerCase();
+                const port = filterPort.value;
+
+                const filteredRules = mockRules.filter(rule => {
+                    const matchesDirection = direction === 'Any' || rule.direction === direction;
+                    const matchesAction = action === 'Any' || rule.action === action;
+                    const matchesEnabled = enabled === 'Any' || rule.enabled.toString() === enabled;
+                    const matchesProfile = profile === 'Any' || rule.profile === profile;
+                    const matchesProtocol = !protocol || rule.protocol.toLowerCase().includes(protocol);
+                    const matchesPort = !port || rule.localPort.includes(port) || (rule.remotePort && rule.remotePort.includes(port));
+                    
+                    return matchesDirection && matchesAction && matchesEnabled && matchesProfile && matchesProtocol && matchesPort;
+                });
+
+                renderTable(filteredRules);
+                updateChart(filteredRules);
+            }
+
+            document.querySelectorAll('select, input').forEach(element => {
+                element.addEventListener('change', applyFilters);
+                element.addEventListener('input', applyFilters);
+            });
+
+            applyFilters();
+        });
+    </script>
+</body>
+</html>

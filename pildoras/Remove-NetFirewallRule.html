@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Remove-NetFirewallRule</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate & Amber -->
+    <!-- Application Structure Plan: The SPA is designed as a single-page interactive simulation. It has three main sections: 1) A 'Reglas Disponibles' panel that lists mock firewall rules with checkboxes, simulating the result of a Get-NetFirewallRule query. 2) A 'Comando de Eliminación' section that generates the PowerShell command based on the selected rules. 3) A 'Panel de Control y Estado' that contains the core action button to 'remove' the rules and a status message display. This structure provides a clear, three-step workflow: select, generate command, and execute simulation, which directly mirrors the real-world use of the cmdlet. The visual feedback of rules disappearing from the list makes the destructive nature of the command easy to understand. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .rule-card-item {
+            transition: all 0.2s ease-in-out;
+        }
+        .rule-card-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .rule-card-item.selected {
+            border-color: #f59e0b; /* amber-500 */
+            background-color: #fffbeb; /* amber-50 */
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-slate-900">Simulador de `Remove-NetFirewallRule`</h1>
+            <p class="mt-2 text-lg text-slate-600">Practica la eliminación de reglas de firewall de forma segura y visual.</p>
+        </header>
+
+        <main class="grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Reglas Disponibles</h2>
+                <p class="mb-4 text-slate-600">Selecciona una o más reglas de la lista para ver el comando de eliminación que se generará.</p>
+                <div id="lista-reglas" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Cards de reglas se inyectarán aquí por JS -->
+                </div>
+                <div id="mensaje-estado" class="mt-4 p-4 rounded-md hidden"></div>
+            </div>
+            
+            <div class="lg:col-span-1 space-y-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Comando de Eliminación</h2>
+                     <p class="mb-4 text-slate-600">Este es el comando `Remove-NetFirewallRule` que se utilizaría para eliminar las reglas seleccionadas.</p>
+                     <div class="mt-2 p-4 bg-slate-900 text-white rounded-md font-mono text-sm overflow-x-auto relative">
+                        <code id="comando-generado">Selecciona una regla...</code>
+                        <button id="boton-copiar" class="absolute top-2 right-2 bg-slate-700 hover:bg-slate-600 text-white text-xs py-1 px-2 rounded">Copiar</button>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900 border-b pb-2">Panel de Control</h2>
+                    <button id="boton-eliminar" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors">
+                        Eliminar Reglas Seleccionadas
+                    </button>
+                    <p class="mt-4 text-slate-600 text-sm">Reglas restantes: <span id="reglas-restantes" class="font-bold text-lg text-slate-900"></span></p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let reglasMock = [
+                { id: 1, nombre: 'Permitir HTTP (Inbound)', grupo: 'Web Services', perfil: 'Any' },
+                { id: 2, nombre: 'Bloquear RDP Público', grupo: 'RDP Access', perfil: 'Public' },
+                { id: 3, nombre: 'Comms de Servidor SQL', grupo: 'SQL Services', perfil: 'Private' },
+                { id: 4, nombre: 'Outbound HTTPS', grupo: 'Web Services', perfil: 'Any' },
+                { id: 5, nombre: 'Servicios de Impresión', grupo: 'Print Services', perfil: 'Domain' },
+                { id: 6, nombre: 'Bloquear Tráfico Web Sospechoso', grupo: 'Security Rules', perfil: 'Any' },
+                { id: 7, nombre: 'Allow Ping para Diagnóstico', grupo: 'Diagnosis Tools', perfil: 'Private' },
+            ];
+
+            const listaReglasEl = document.getElementById('lista-reglas');
+            const comandoGeneradoEl = document.getElementById('comando-generado');
+            const botonEliminar = document.getElementById('boton-eliminar');
+            const botonCopiar = document.getElementById('boton-copiar');
+            const mensajeEstadoEl = document.getElementById('mensaje-estado');
+            const reglasRestantesEl = document.getElementById('reglas-restantes');
+
+            function renderizarListaReglas() {
+                listaReglasEl.innerHTML = '';
+                if (reglasMock.length === 0) {
+                    listaReglasEl.innerHTML = `<p class="italic text-center text-slate-500 col-span-2">Todas las reglas han sido eliminadas.</p>`;
+                    return;
+                }
+                reglasMock.forEach(regla => {
+                    const tarjeta = document.createElement('div');
+                    tarjeta.className = 'rule-card-item p-4 border border-slate-200 rounded-lg bg-white shadow-sm flex items-center space-x-4';
+                    tarjeta.innerHTML = `
+                        <input type="checkbox" id="regla-${regla.id}" data-nombre="${regla.nombre}" data-grupo="${regla.grupo}" class="h-5 w-5 text-amber-600 rounded focus:ring-amber-500">
+                        <label for="regla-${regla.id}" class="flex-1 cursor-pointer">
+                            <h4 class="font-bold text-lg text-slate-800">${regla.nombre}</h4>
+                            <p class="text-sm text-slate-600">Grupo: ${regla.grupo} | Perfil: ${regla.perfil}</p>
+                        </label>
+                    `;
+                    listaReglasEl.appendChild(tarjeta);
+                });
+            }
+
+            function actualizarComando() {
+                const checkboxesSeleccionados = document.querySelectorAll('#lista-reglas input[type="checkbox"]:checked');
+                const nombresSeleccionados = Array.from(checkboxesSeleccionados).map(cb => cb.dataset.nombre);
+                const gruposSeleccionados = Array.from(checkboxesSeleccionados).map(cb => cb.dataset.grupo);
+                
+                if (nombresSeleccionados.length === 0) {
+                    comandoGeneradoEl.textContent = 'Selecciona una regla para generar el comando.';
+                    return;
+                }
+
+                // Generar un comando conciso, usando -Group si todas las reglas pertenecen al mismo grupo
+                const gruposUnicos = [...new Set(gruposSeleccionados)];
+                let comando = '';
+                if (gruposUnicos.length === 1 && gruposUnicos[0]) {
+                    comando = `Remove-NetFirewallRule -Group "${gruposUnicos[0]}"`;
+                } else {
+                    const nombresConComillas = nombresSeleccionados.map(nombre => `"${nombre}"`).join(', ');
+                    comando = `Remove-NetFirewallRule -DisplayName ${nombresConComillas}`;
+                }
+                comandoGeneradoEl.textContent = comando;
+            }
+
+            function mostrarMensajeEstado(tipo, texto) {
+                mensajeEstadoEl.textContent = texto;
+                mensajeEstadoEl.classList.remove('hidden', 'bg-red-100', 'text-red-800', 'bg-green-100', 'text-green-800');
+                if (tipo === 'exito') {
+                    mensajeEstadoEl.classList.add('bg-green-100', 'text-green-800');
+                } else {
+                    mensajeEstadoEl.classList.add('bg-red-100', 'text-red-800');
+                }
+                setTimeout(() => {
+                    mensajeEstadoEl.classList.add('hidden');
+                }, 4000);
+            }
+
+            function actualizarContador() {
+                 reglasRestantesEl.textContent = reglasMock.length;
+            }
+
+            botonEliminar.addEventListener('click', () => {
+                const checkboxesSeleccionados = document.querySelectorAll('#lista-reglas input[type="checkbox"]:checked');
+                if (checkboxesSeleccionados.length === 0) {
+                    mostrarMensajeEstado('error', 'Por favor, selecciona al menos una regla para eliminar.');
+                    return;
+                }
+
+                const idsAEliminar = Array.from(checkboxesSeleccionados).map(cb => parseInt(cb.id.split('-')[1]));
+                const reglasEliminadas = reglasMock.filter(r => idsAEliminar.includes(r.id));
+                const nombresEliminados = reglasEliminadas.map(r => r.nombre).join(', ');
+
+                reglasMock = reglasMock.filter(r => !idsAEliminar.includes(r.id));
+                
+                renderizarListaReglas();
+                actualizarComando();
+                actualizarContador();
+                mostrarMensajeEstado('exito', `Simulación exitosa. Se eliminaron las siguientes reglas: ${nombresEliminados}.`);
+            });
+
+            listaReglasEl.addEventListener('change', actualizarComando);
+
+            botonCopiar.addEventListener('click', () => {
+                const commandText = comandoGeneradoEl.textContent;
+                const textarea = document.createElement('textarea');
+                textarea.value = commandText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    botonCopiar.textContent = 'Copiado!';
+                    setTimeout(() => { botonCopiar.textContent = 'Copiar'; }, 2000);
+                } catch (err) {
+                    console.error('Error al copiar texto: ', err);
+                }
+                document.body.removeChild(textarea);
+            });
+
+            renderizarListaReglas();
+            actualizarContador();
+        });
+    </script>
+
+    <footer class="mt-12 py-8 bg-slate-100 border-t border-slate-200">
+        <div class="container mx-auto px-4 text-center">
+            <a href="pildoras.html" class="text-slate-600 hover:text-slate-800 transition-colors duration-200">
+                Volver al índice de píldoras
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

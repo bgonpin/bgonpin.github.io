@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharming</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #bdc3c7;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #bdc3c7;
+            color: #7f8c8d;
+        }
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 20px; padding: 10px; background-color: #ecf0f1; border-radius: 5px;">
+            <a href="../phishing.html" style="color: #3498db; text-decoration: none; font-weight: bold;">← Volver al artículo principal de Phishing</a>
+        </div>
+        <h1>Pharming</h1>
+
+        <h2>Definición</h2>
+        <p>El pharming es una técnica de phishing que redirige a los usuarios de sitios web legítimos a páginas falsas sin que la víctima sea consciente. A diferencia del phishing tradicional que requiere interacción del usuario, el pharming manipula la resolución de DNS o infecta dispositivos para interceptar el tráfico web.</p>
+
+        <h2>Cómo Funciona</h2>
+        <p>El pharming opera a nivel de infraestructura de red, interceptando las conexiones antes de que lleguen al usuario:</p>
+        <ul>
+            <li><strong>Manipulación DNS:</strong> Altera los servidores DNS para redirigir dominios legítimos a IPs maliciosas.</li>
+            <li><strong>Malware local:</strong> Infecta dispositivos con software que modifica el archivo hosts o proxy settings.</li>
+            <li><strong>Ataques a routers:</strong> Compromete routers domésticos o corporativos para redirigir todo el tráfico.</li>
+            <li><strong>Envenenamiento de caché:</strong> Corrompe la caché DNS de proveedores de internet o resolvers locales.</li>
+        </ul>
+
+        <h2>Ejemplos Comunes</h2>
+        <div class="highlight">
+            <ul>
+                <li>Un usuario intenta acceder a su banco, pero es redirigido a un sitio falso sin darse cuenta.</li>
+                <li>Visitas a sitios de comercio electrónico que muestran páginas fraudulentas para robar datos de tarjetas.</li>
+                <li>Acceso a portales gubernamentales que llevan a sitios de phishing para obtener información personal.</li>
+                <li>Redirecciones automáticas en redes WiFi públicas comprometidas.</li>
+            </ul>
+        </div>
+
+        <h2>Medidas de Prevención</h2>
+        <ul>
+            <li>Utilizar conexiones HTTPS y verificar certificados SSL.</li>
+            <li>Configurar DNS seguros y utilizar servicios como DNSSEC.</li>
+            <li>Mantener actualizado el software antivirus y anti-malware.</li>
+            <li>Ser cauteloso en redes públicas y utilizar VPN cuando sea necesario.</li>
+        </ul>
+
+        <div class="footer">
+            <p>&copy; 2024 - <a href="../phishing.html">Volver a Phishing</a> | <a href="../apuntes.html">Volver a Apuntes</a></p>
+        </div>
+    </div>
+</body>
+</html>

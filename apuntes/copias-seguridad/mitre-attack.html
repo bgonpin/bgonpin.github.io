@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MITRE ATT&CK - Benito González Piñeiro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1, h2, h3 {
+      color: #1a5276;
+    }
+    h1 {
+      border-bottom: 2px solid #1a5276;
+      padding-bottom: 10px;
+    }
+    h2 {
+      border-bottom: 1px dashed #aaa;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+    code {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    pre {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .alert {
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+    .info {
+      background-color: #d1ecf1;
+      border: 1px solid #bee5eb;
+      color: #0c5460;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+    .technique-box {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 10px 0;
+    }
+    .technique-id {
+      font-weight: bold;
+      color: #1a5276;
+    }
+    .tactic-header {
+      background-color: #e9ecef;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 20px 0 10px 0;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>MITRE ATT&CK Framework</h1>
+
+  <p><strong>Fecha de actualización:</strong> 26-08-2025</p>
+
+  <p><strong>Resumen:</strong> El marco MITRE ATT&CK es un modelo global de conocimiento sobre tácticas y técnicas utilizadas por actores maliciosos durante un ciberataque. Desarrollado por MITRE Corporation, este framework proporciona una estructura común para describir el comportamiento de los adversarios y sirve como base para la detección, respuesta y mitigación de amenazas cibernéticas.</p>
+
+  <h2>1. Introducción</h2>
+
+  <p>MITRE ATT&CK (Adversarial Tactics, Techniques, and Common Knowledge) es un proyecto de código abierto que documenta tácticas, técnicas y procedimientos (TTPs) utilizados por actores maliciosos en entornos empresariales. Lanzado inicialmente en 2013, el framework ha evolucionado para cubrir múltiples plataformas incluyendo:</p>
+
+  <ul>
+    <li><strong>Enterprise</strong>: Windows, Linux, macOS, Network, Containers, Cloud</li>
+    <li><strong>Mobile</strong>: Android, iOS</li>
+    <li><strong>Industrial Control Systems (ICS)</strong></li>
+  </ul>
+
+  <h2>2. Estructura del Framework</h2>
+
+  <p>MITRE ATT&CK se organiza en tres niveles principales:</p>
+
+  <h3>2.1 Táctica (Tactic)</h3>
+  <p>Las tácticas representan el "por qué" o el objetivo estratégico del atacante. Cada táctica corresponde a una fase del ciclo de vida del ataque.</p>
+
+  <div class="tactic-header">Principales Tácticas en MITRE ATT&CK Enterprise</div>
+
+  <h3>2.2 Técnica (Technique)</h3>
+  <p>Las técnicas describen "cómo" se lleva a cabo una táctica. Cada técnica tiene un identificador único (ej. T1197, T1562.002).</p>
+
+  <div class="technique-box">
+    <div class="technique-id">T1197 - BITS Jobs</div>
+    <p><strong>Descripción:</strong> Uso del servicio Background Intelligent Transfer Service (BITS) para descargar y ejecutar código malicioso en segundo plano.</p>
+    <p><strong>Táctica:</strong> Command and Control</p>
+  </div>
+
+  <div class="technique-box">
+    <div class="technique-id">T1562.002 - Disable Windows Event Logging</div>
+    <p><strong>Descripción:</strong> Desactivación del registro de eventos de Windows para evitar la detección.</p>
+    <p><strong>Táctica:</strong> Defense Evasion</p>
+  </div>
+
+  <h3>2.3 Procedimiento (Procedure)</h3>
+  <p>Los procedimientos son implementaciones específicas de técnicas observadas en la práctica. Representan el "qué" específico que hace el atacante.</p>
+
+  <h2>3. Matrices de ATT&CK</h2>
+
+  <h3>3.1 Enterprise Matrix</h3>
+  <p>La matriz Enterprise es la más completa y cubre 14 tácticas principales:</p>
+
+  <ol>
+    <li><strong>Reconnaissance (Reconocimiento)</strong> - Recopilación de información sobre el objetivo</li>
+    <li><strong>Resource Development (Desarrollo de Recursos)</strong> - Establecimiento de infraestructura</li>
+    <li><strong>Initial Access (Acceso Inicial)</strong> - Entrada inicial al sistema</li>
+    <li><strong>Execution (Ejecución)</strong> - Ejecución de código malicioso</li>
+    <li><strong>Persistence (Persistencia)</strong> - Mantenimiento del acceso</li>
+    <li><strong>Privilege Escalation (Escalada de Privilegios)</strong> - Obtención de permisos superiores</li>
+    <li><strong>Defense Evasion (Evasión de Defensas)</strong> - Evasión de controles de seguridad</li>
+    <li><strong>Credential Access (Acceso a Credenciales)</strong> - Robo de credenciales</li>
+    <li><strong>Discovery (Descubrimiento)</strong> - Exploración del entorno</li>
+    <li><strong>Lateral Movement (Movimiento Lateral)</strong> - Navegación dentro de la red</li>
+    <li><strong>Collection (Recolección)</strong> - Recopilación de información valiosa</li>
+    <li><strong>Command and Control (Comando y Control)</strong> - Comunicación con sistemas comprometidos</li>
+    <li><strong>Exfiltration (Exfiltración)</strong> - Extracción de datos</li>
+    <li><strong>Impact (Impacto)</strong> - Manipulación, interrupción o destrucción de sistemas</li>
+  </ol>
+
+  <h3>3.2 Mobile Matrix</h3>
+  <p>Específica para dispositivos móviles con tácticas adaptadas:</p>
+
+  <ul>
+    <li><strong>Initial Access</strong></li>
+    <li><strong>Execution</strong></li>
+    <li><strong>Persistence</strong></li>
+    <li><strong>Credential Access</strong></li>
+    <li><strong>Discovery</strong></li>
+    <li><strong>Lateral Movement</strong></li>
+    <li><strong>Collection</strong></li>
+    <li><strong>Command and Control</strong></li>
+    <li><strong>Exfiltration</strong></li>
+    <li><strong>Impact</strong></li>
+  </ul>
+
+  <h2>4. Aplicaciones del Framework</h2>
+
+  <h3>4.1 Detección y Respuesta a Incidentes</h3>
+  <p>MITRE ATT&CK se utiliza para:</p>
+
+  <ul>
+    <li><strong>Mapeo de alertas</strong> a tácticas específicas</li>
+    <li><strong>Identificación de brechas</strong> en la cobertura de seguridad</li>
+    <li><strong>Priorización de amenazas</strong> basadas en tácticas observadas</li>
+    <li><strong>Desarrollo de reglas de detección</strong> para SIEM y EDR</li>
+  </ul>
+
+  <div class="info">Ejemplo: Una alerta de ejecución de PowerShell sospechoso puede mapearse a la táctica "Execution" con técnica T1059.001 (PowerShell).</div>
+
+  <h3>4.2 Evaluación de Seguridad (Red Team/Blue Team)</h3>
+  <p>Los equipos de seguridad utilizan ATT&CK para:</p>
+
+  <ul>
+    <li><strong>Simulación de ataques</strong> siguiendo tácticas reales</li>
+    <li><strong>Evaluación de controles</strong> de seguridad</li>
+    <li><strong>Mejora de la madurez</strong> del programa de seguridad</li>
+    <li><strong>Entrenamiento y concienciación</strong></li>
+  </ul>
+
+  <h3>4.3 Desarrollo de Productos de Seguridad</h3>
+  <p>Los fabricantes utilizan ATT&CK para:</p>
+
+  <ul>
+    <li><strong>Mapeo de capacidades</strong> de sus productos</li>
+    <li><strong>Validación de detección</strong> contra técnicas conocidas</li>
+    <li><strong>Comunicación clara</strong> de capacidades a clientes</li>
+    <li><strong>Investigación y desarrollo</strong> de nuevas características</li>
+  </ul>
+
+  <h2>5. Implementación Práctica</h2>
+
+  <h3>5.1 Mapeo de Detecciones</h3>
+  <p>Ejemplo de regla de correlación para SIEM:</p>
+
+  <pre><rule id="110004" level="7">
+  <if_sid>60101</if_sid>
+  <field name="win.eventdata.scriptBlockText" type="pcre2">(IEX|Invoke-Expression|DownloadString)</field>
+  <description>Suspicious PowerShell execution</description>
+  <mitre><id>T1059.001</id></mitre>
+</rule></pre>
+
+  <h3>5.2 Evaluación de Cobertura</h3>
+  <p>Proceso para evaluar la efectividad de controles:</p>
+
+  <ol>
+    <li>Identificar tácticas críticas para la organización</li>
+    <li>Mapear controles existentes a técnicas ATT&CK</li>
+    <li>Identificar brechas en la cobertura</li>
+    <li>Priorizar implementaciones basadas en riesgo</li>
+  </ol>
+
+  <h2>6. Herramientas y Recursos</h2>
+
+  <h3>6.1 Plataformas Oficiales</h3>
+
+  <ul>
+    <li><strong>MITRE ATT&CK Navigator</strong>: Herramienta web para visualización y análisis</li>
+    <li><strong>ATT&CK Workbench</strong>: Aplicación de escritorio para gestión local</li>
+    <li><strong>ATT&CK for Enterprise/Mobile</strong>: Documentación completa</li>
+  </ul>
+
+  <h3>6.2 Integraciones Comunes</h3>
+
+  <ul>
+    <li><strong>Splunk</strong>: Dashboards y alertas basadas en ATT&CK</li>
+    <li><strong>IBM QRadar</strong>: Mapeo automático de eventos</li>
+    <li><strong>CrowdStrike Falcon</strong>: Detecciones alineadas con ATT&CK</li>
+    <li><strong>Microsoft Defender</strong>: Integración nativa</li>
+  </ul>
+
+  <h2>7. Mejores Prácticas</h2>
+
+  <div class="alert">Recomendaciones para implementar MITRE ATT&CK en la organización:</div>
+
+  <h3>7.1 Comenzar con lo Básico</h3>
+
+  <ul>
+    <li>Enfocarse en tácticas de alto impacto: Initial Access, Privilege Escalation, Lateral Movement</li>
+    <li>Mapear controles existentes antes de implementar nuevos</li>
+    <li>Utilizar el framework como lenguaje común entre equipos</li>
+  </ul>
+
+  <h3>7.2 Medición de Éxito</h3>
+
+  <ul>
+    <li>Porcentaje de técnicas con controles de detección</li>
+    <li>Tiempo medio de detección (MTTD) por táctica</li>
+    <li>Reducción en tiempo de respuesta a incidentes</li>
+    <li>Madurez en la identificación de amenazas avanzadas</li>
+  </ul>
+
+  <h3>7.3 Mantenimiento Continuo</h3>
+
+  <ul>
+    <li>Revisar actualizaciones del framework trimestralmente</li>
+    <li>Adaptar el mapeo a cambios en el entorno</li>
+    <li>Incorporar nuevas técnicas observadas</li>
+    <li>Entrenar al equipo en nuevas tácticas</li>
+  </ul>
+
+  <h2>8. Limitaciones y Consideraciones</h2>
+
+  <h3>8.1 Limitaciones del Framework</h3>
+
+  <ul>
+    <li><strong>No es exhaustivo:</strong> No cubre todas las técnicas posibles</li>
+    <li><strong>Enfoque en Enterprise:</strong> Menos aplicable a otros entornos</li>
+    <li><strong>Sesgo hacia amenazas conocidas:</strong> Técnicas APT tienen mayor representación</li>
+  </ul>
+
+  <h3>8.2 Consideraciones de Implementación</h3>
+
+  <ul>
+    <li><strong>Complejidad:</strong> El framework es extenso y requiere dedicación</li>
+    <li><strong>Recursos necesarios:</strong> Requiere personal capacitado</li>
+    <li><strong>Evolución constante:</strong> Requiere mantenimiento continuo</li>
+  </ul>
+
+  <h2>9. Conclusiones</h2>
+
+  <p>MITRE ATT&CK representa un avance significativo en la comprensión y defensa contra amenazas cibernéticas. Al proporcionar un lenguaje común y una estructura organizada, facilita la comunicación entre equipos de seguridad, mejora la detección de amenazas y permite una respuesta más efectiva a incidentes.</p>
+
+  <p>La implementación exitosa requiere compromiso organizacional, capacitación continua y adaptación a las necesidades específicas de cada entorno. Cuando se utiliza correctamente, ATT&CK no solo mejora la seguridad técnica, sino que también fomenta una cultura de seguridad proactiva y consciente.</p>
+
+  <h2>10. Recursos Adicionales</h2>
+
+  <ul>
+    <li><strong>Documentación oficial:</strong> <a href="https://attack.mitre.org" target="_blank">https://attack.mitre.org</a></li>
+    <li><strong>MITRE ATT&CK Navigator:</strong> <a href="https://mitre-attack.github.io/attack-navigator" target="_blank">https://mitre-attack.github.io/attack-navigator</a></li>
+    <li><strong>ATT&CK Workbench:</strong> <a href="https://github.com/mitre-attack/attack-workbench" target="_blank">https://github.com/mitre-attack/attack-workbench</a></li>
+    <li><strong>Comunidad:</strong> <a href="https://attack.mitre.org/community" target="_blank">https://attack.mitre.org/community</a></li>
+  </ul>
+
+  <footer>
+    <p><a href="../detectar-técnicas-evasión-wahuh.html">← Volver a Detección de Evasión</a></p>
+  </footer>
+
+</body>
+</html>

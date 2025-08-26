@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapid7 - SIEM con Enfoque en UEBA y Cloud</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .highlight {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            margin: 20px 0;
+        }
+        .feature-box {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .tool-name {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .ueba-badge {
+            background-color: #e8eafd;
+            border: 1px solid #3f51b5;
+            padding: 8px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #1a237e;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rapid7 SIEM</h1>
+    <div class="ueba-badge">🧠 SIEM con Enfoque en UEBA y Detección de Amenazas Avanzadas</div>
+
+    <p><strong>Rapid7</strong> es una plataforma SIEM moderna que combina gestión de eventos de seguridad, análisis de comportamiento de usuarios y entidades (UEBA), y capacidades avanzadas de detección de amenazas. Conocida por su enfoque en la detección de amenazas persistentes avanzadas (APT) y su especialización en entornos cloud.</p>
+
+    <h2>Características Principales</h2>
+    <div class="feature-box">
+        <h3>User and Entity Behavior Analytics (UEBA)</h3>
+        <p>Motor avanzado de UEBA que utiliza machine learning para identificar comportamientos anómalos y amenazas internas.</p>
+    </div>
+
+    <div class="feature-box">
+        <h3>Detección de Amenazas Cloud-Nativa</h3>
+        <p>Capacidades especializadas para análisis de logs cloud y detección de amenazas en entornos AWS, Azure y GCP.</p>
+    </div>
+
+    <div class="feature-box">
+        <h3>InsightIDR</h3>
+        <p>Plataforma integrada que combina SIEM, UEBA y EDR para una visibilidad completa de la superficie de ataque.</p>
+    </div>
+
+    <div class="feature-box">
+        <h3>Integración con InsightVM</h3>
+        <p>Integración nativa con la plataforma de gestión de vulnerabilidades para correlación de eventos de seguridad con datos de vulnerabilidades.</p>
+    </div>
+
+    <h2>Capacidades Clave</h2>
+    <ul>
+        <li><strong>Análisis de comportamiento avanzado</strong>: Detección de anomalías en usuarios, entidades y dispositivos</li>
+        <li><strong>Correlación inteligente</strong>: Algoritmos de IA para conectar eventos aparentemente no relacionados</li>
+        <li><strong>Detección de APT</strong>: Especialización en amenazas persistentes avanzadas</li>
+        <li><strong>Análisis de logs cloud</strong>: Procesamiento optimizado para grandes volúmenes de logs cloud</li>
+        <li><strong>Respuesta guiada</strong>: Workflows automatizados para respuesta a incidentes</li>
+        <li><strong>Integración con SOAR</strong>: Automatización de procesos de respuesta a incidentes</li>
+    </ul>
+
+    <h2>Arquitectura</h2>
+    <p>Rapid7 se basa en una arquitectura cloud-native escalable:</p>
+    <ul>
+        <li><strong>InsightIDR Platform</strong>: Plataforma central cloud para análisis y correlación</li>
+        <li><strong>Event Collectors</strong>: Agentes ligeros y API collectors para múltiples fuentes</li>
+        <li><strong>UEBA Engine</strong>: Motor de machine learning para análisis de comportamiento</li>
+        <li><strong>Threat Detection Engine</strong>: Algoritmos avanzados para detección de amenazas</li>
+        <li><strong>Automation Engine</strong>: Motor de automatización para respuesta a incidentes</li>
+        <li><strong>Reporting Dashboard</strong>: Interfaz unificada para visualización y gestión</li>
+    </ul>
+
+    <h2>Integraciones</h2>
+    <p>Se integra con más de 400 fuentes de datos, incluyendo:</p>
+    <ul>
+        <li>Plataformas cloud (AWS, Azure, GCP, Office 365)</li>
+        <li>Sistemas operativos Windows, Linux y macOS</li>
+        <li>Aplicaciones enterprise (Active Directory, Exchange, SharePoint)</li>
+        <li>Dispositivos de red y seguridad</li>
+        <li>Endpoints y dispositivos IoT</li>
+        <li>Sistemas de gestión de identidades</li>
+    </ul>
+
+    <h2>Casos de Uso</h2>
+    <div class="highlight">
+        <h3>Detección de Amenazas Internas</h3>
+        <p>Identificación de usuarios comprometidos, uso no autorizado de credenciales y exfiltración de datos por insiders.</p>
+    </div>
+
+    <div class="highlight">
+        <h3>Monitoreo de Entornos Cloud</h3>
+        <p>Análisis de logs cloud para detectar configuraciones erróneas, accesos no autorizados y amenazas específicas de cloud.</p>
+    </div>
+
+    <div class="highlight">
+        <h3>Respuesta a Incidentes Automatizada</h3>
+        <p>Automatización de la recopilación de evidencias, contención y remediación de incidentes de seguridad.</p>
+    </div>
+
+    <h2>Módulos de InsightIDR</h2>
+    <ul>
+        <li><strong>Log Search</strong>: Búsqueda avanzada en grandes volúmenes de logs</li>
+        <li><strong>Alerts</strong>: Sistema de alertas inteligente con reducción de falsos positivos</li>
+        <li><strong>Investigations</strong>: Herramientas de investigación con timeline visual</li>
+        <li><strong>Attribution</strong>: Determinación de root cause y atribución de ataques</li>
+        <li><strong>Response</strong>: Automatización de acciones de respuesta</li>
+        <li><strong>Reporting</strong>: Reportes automatizados y dashboards personalizables</li>
+    </ul>
+
+    <h2>Características de UEBA</h2>
+    <ul>
+        <li>Análisis de comportamiento de usuarios y entidades</li>
+        <li>Detección de anomalías en patrones de acceso</li>
+        <li>Identificación de usuarios privilegiados comprometidos</li>
+        <li>Monitoreo de sesiones y actividades de red</li>
+        <li>Scoring de riesgo en tiempo real</li>
+        <li>Integración con gestión de identidades</li>
+    </ul>
+
+    <h2>Ventajas Competitivas</h2>
+    <ul>
+        <li><strong>Enfoque en UEBA</strong>: Especialización en detección de amenazas internas</li>
+        <li><strong>Cloud-nativo</strong>: Arquitectura optimizada para entornos cloud modernos</li>
+        <li><strong>Reducción de falsos positivos</strong>: Algoritmos avanzados que aprenden del entorno</li>
+        <li><strong>Integración InsightVM</strong>: Visibilidad completa de vulnerabilidades y amenazas</li>
+        <li><strong>Escalabilidad automática</strong>: Crece automáticamente con las necesidades del negocio</li>
+        <li><strong>Soporte global</strong>: Equipos de soporte técnico especializados</li>
+    </ul>
+
+    <h2>Comparación con Otras Soluciones SIEM</h2>
+    <table border="1" style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+        <tr style="background-color: #f8f9fa;">
+            <th style="padding: 10px; text-align: left;">Característica</th>
+            <th style="padding: 10px; text-align: left;">Rapid7 InsightIDR</th>
+            <th style="padding: 10px; text-align: left;">SIEM Tradicional</th>
+        </tr>
+        <tr>
+            <td style="padding: 10px;">UEBA</td>
+            <td style="padding: 10px;">⭐⭐⭐⭐⭐</td>
+            <td style="padding: 10px;">⭐⭐⭐</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px;">Cloud-Native</td>
+            <td style="padding: 10px;">⭐⭐⭐⭐⭐</td>
+            <td style="padding: 10px;">⭐⭐⭐</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px;">Machine Learning</td>
+            <td style="padding: 10px;">⭐⭐⭐⭐⭐</td>
+            <td style="padding: 10px;">⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px;">Facilidad de Uso</td>
+            <td style="padding: 10px;">⭐⭐⭐⭐⭐</td>
+            <td style="padding: 10px;">⭐⭐⭐</td>
+        </tr>
+    </table>
+
+    <h2>Consideraciones de Implementación</h2>
+    <p>Para una implementación exitosa de Rapid7 se recomienda:</p>
+    <ol>
+        <li>Evaluar la madurez del entorno cloud y planes de migración</li>
+        <li>Definir claramente los casos de uso de UEBA y detección de amenazas</li>
+        <li>Planificar la integración con sistemas de gestión de identidades</li>
+        <li>Capacitar al equipo en el uso de herramientas de investigación</li>
+        <li>Configurar políticas de alertas basadas en el perfil de riesgo</li>
+        <li>Establecer procesos de respuesta a incidentes automatizados</li>
+    </ol>
+
+    <h2>Conclusión</h2>
+    <div class="highlight">
+        <p><strong>Rapid7 InsightIDR</strong> representa la evolución del SIEM hacia plataformas de seguridad inteligentes que combinan capacidades tradicionales de gestión de eventos con análisis avanzado de comportamiento y automatización. Su especialización en UEBA y entornos cloud lo hace ideal para organizaciones que buscan una detección proactiva de amenazas tanto externas como internas, con una reducción significativa de falsos positivos y una mayor eficiencia operativa.</p>
+    </div>
+
+    <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; color: #666;">
+        <p><a href="./siem.html" style="color: #007bff; text-decoration: none;">← Volver a SIEM</a></p>
+    </footer>
+</body>
+</html>

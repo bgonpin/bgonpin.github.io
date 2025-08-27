@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botnets: Definición, Características, Impacto y Funcionamiento</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 25px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        strong {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .citation {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Botnets: Definición, Características, Impacto y Funcionamiento</h1>
+    
+    <h2>¿Qué es una botnet?</h2>
+    <p>Una botnet es una red de computadoras o dispositivos conectados a Internet que están bajo el control de un atacante y se utilizan para realizar actividades maliciosas contra una víctima objetivo. <span class="citation"></span> El término proviene de la combinación de "robot" y "network" (red), ya que cada dispositivo infectado actúa como un "robot" controlado remotamente. <span class="citation"></span> Estos dispositivos, infectados con malware, forman una infraestructura coordinada que permite a los ciberdelincuentes ejecutar ataques a gran escala sin ser detectados fácilmente. <span class="citation"></span></p>
+    
+    <h2>Características clave de las botnets</h2>
+    <ol>
+        <li><strong>Control centralizado mediante servidores C2 (Command and Control):</strong><br>
+        Las botnets operan bajo la dirección de servidores de comando y control (C2), que envían instrucciones a los dispositivos infectados. <span class="citation"></span></li>
+        <li><strong>Infección silenciosa:</strong><br>
+        Los dispositivos se infectan mediante malware, a menudo sin que el usuario note actividad sospechosa. <span class="citation"></span></li>
+        <li><strong>Escalabilidad y distribución geográfica:</strong><br>
+        Pueden abarcar miles de dispositivos en múltiples países, lo que dificulta su rastreo y neutralización. <span class="citation"></span></li>
+        <li><strong>Respuesta lenta o nula de servidores:</strong><br>
+        Durante ataques masivos, los servidores objetivo suelen responder lentamente o quedar inaccesibles debido al alto volumen de tráfico generado. <span class="citation"></span></li>
+    </ol>
+    
+    <h2>¿Cómo funcionan las botnets?</h2>
+    <ol>
+        <li><strong>Infección:</strong><br>
+        Los dispositivos son comprometidos mediante exploits, correos phishing o software malicioso. <span class="citation"></span></li>
+        <li><strong>Conexión al servidor C2:</strong><br>
+        Una vez infectados, los dispositivos se comunican con servidores de control remoto para recibir órdenes. <span class="citation"></span></li>
+        <li><strong>Ejecución de ataques:</strong><br>
+        Los atacantes utilizan la botnet para lanzar ataques DDoS (Denegación de Servicio Distribuido), robar datos, enviar spam o distribuir más malware. <span class="citation"></span></li>
+    </ol>
+    
+    <h2>Impacto en los sistemas</h2>
+    <ul>
+        <li><strong>Ataques DDoS:</strong><br>
+        Las botnets saturan servidores con tráfico masivo, interrumpiendo servicios críticos como bancos o sitios gubernamentales. <span class="citation"></span></li>
+        <li><strong>Robo de información:</strong><br>
+        Pueden extraer credenciales, datos financieros o información sensible desde dispositivos infectados. <span class="citation"></span></li>
+        <li><strong>Amenaza a infraestructuras críticas:</strong><br>
+        Su capacidad para explotar vulnerabilidades las convierte en un riesgo para sistemas esenciales como redes eléctricas o hospitales. <span class="citation"></span></li>
+        <li><strong>Disrupción de operaciones:</strong><br>
+        En sistemas legacy (antiguos) o críticos, los ataques de botnets pueden paralizar operaciones por horas o días, generando pérdidas millonarias. <span class="citation"></span></li>
+    </ul>
+    
+    <h2>Ejemplos de uso malicioso</h2>
+    <ul>
+        <li>Enviar correos spam a escala masiva. <span class="citation"></span></li>
+        <li>Minar criptomonedas sin el consentimiento del usuario (cryptojacking).</li>
+        <li>Realizar ataques de fuerza bruta para acceder a cuentas protegidas.</li>
+        <li>Difundir ransomware u otros tipos de malware. <span class="citation"></span></li>
+    </ul>
+    
+    <h2>Medidas de prevención y mitigación</h2>
+    <ul>
+        <li><strong>Filtrado de tráfico:</strong><br>
+        Implementar firewalls y sistemas de detección de intrusiones para identificar patrones sospechosos. <span class="citation"></span></li>
+        <li><strong>Balanceo de carga y límites de tasa:</strong><br>
+        Distribuir el tráfico y limitar solicitudes por segundo para evitar saturación. <span class="citation"></span></li>
+        <li><strong>Actualizaciones regulares:</strong><br>
+        Parchear vulnerabilidades en sistemas y dispositivos para reducir puntos de entrada. <span class="citation"></span></li>
+        <li><strong>Educación en ciberseguridad:</strong><br>
+        Capacitar a usuarios para reconocer phishing y evitar descargar archivos no verificados.</li>
+    </ul>
+    
+    <h2>Conclusión</h2>
+    <p>Las botnets representan una de las amenazas más persistentes en el ciberespacio, capaces de escalar ataques con mínima intervención humana. Su evolución constante exige estrategias proactivas de defensa, combinando tecnología avanzada y concienciación en seguridad. Ante la creciente interconexión de dispositivos (incluyendo IoT), fortalecer la resiliencia ante botnets es clave para proteger tanto a individuos como a infraestructuras críticas. <span class="citation"></span></p>
+    
+    <footer>
+        Artículo generado con fines educativos sobre ciberseguridad. Las referencias numéricas indican fuentes de información consultadas.
+        <br><br>
+        <a href="pildoras.html" style="text-align: center; display: block;">Volver a todas las píldoras</a>
+    </footer>
+</body>
+</html>

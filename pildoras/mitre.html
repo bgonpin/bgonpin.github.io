@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marco MITRE ATT&CK - Documentación Técnica</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+      :root {
+        --primary-bg: #1a1a1a;
+        --secondary-bg: #2d2d2d;
+        --accent-color: #2c5282;
+        --text-primary: #f8f9fa;
+        --text-secondary: #e2e8f0;
+        --border-color: #3a3a3a;
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+      
+      body {
+        font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+        background-color: var(--primary-bg);
+        color: var(--text-primary);
+        line-height: 1.6;
+        margin: 0;
+      }
+      
+      .header {
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        border-bottom: 2px solid var(--accent-color);
+        padding: 2rem 0;
+      }
+      
+      .document-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        text-align: center;
+        letter-spacing: -0.025em;
+      }
+      
+      .document-subtitle {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        font-weight: 400;
+      }
+      
+      .main-content {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+      }
+      
+      .section {
+        background-color: var(--secondary-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        margin-bottom: 2.5rem;
+        box-shadow: var(--card-shadow);
+      }
+      
+      .section-header {
+        background-color: rgba(44, 82, 130, 0.1);
+        border-bottom: 1px solid var(--border-color);
+        padding: 1.2rem 1.5rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      
+      .section-content {
+        padding: 1.8rem;
+      }
+      
+      .subsection-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 1.5rem 0 1rem 0;
+        border-left: 3px solid var(--accent-color);
+        padding-left: 1rem;
+      }
+      
+      .definition-box {
+        background: linear-gradient(135deg, rgba(44, 82, 130, 0.15) 0%, rgba(44, 82, 130, 0.05) 100%);
+        border-left: 4px solid var(--accent-color);
+        padding: 1.3rem;
+        margin: 1.2rem 0;
+        border-radius: 0 4px 4px 0;
+      }
+      
+      .hierarchy-item {
+        background-color: rgba(248, 249, 250, 0.05);
+        border-radius: 4px;
+        padding: 1.2rem;
+        margin-bottom: 1rem;
+        border-left: 3px solid var(--accent-color);
+      }
+      
+      .hierarchy-number {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 24px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-right: 0.8rem;
+      }
+      
+      .hierarchy-title {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+      
+      .example-box {
+        background-color: rgba(45, 45, 45, 0.8);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 1rem;
+        margin: 0.8rem 0;
+        font-style: italic;
+      }
+      
+      .application-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.2rem;
+        margin: 1.5rem 0;
+      }
+      
+      .application-card {
+        background: linear-gradient(135deg, rgba(44, 82, 130, 0.1) 0%, rgba(44, 82, 130, 0.05) 100%);
+        border: 1px solid rgba(44, 82, 130, 0.3);
+        border-radius: 4px;
+        padding: 1.3rem;
+      }
+      
+      .application-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #81c784;
+        margin-bottom: 0.7rem;
+      }
+      
+      .table-professional {
+        background-color: var(--secondary-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 1.5rem 0;
+      }
+      
+      .table-professional thead th {
+        background-color: var(--accent-color);
+        color: white;
+        font-weight: 600;
+        padding: 1rem;
+        border: none;
+      }
+      
+      .table-professional tbody td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        vertical-align: top;
+      }
+      
+      .table-professional tbody tr:last-child td {
+        border-bottom: none;
+      }
+      
+      .professional-note {
+        background-color: rgba(255, 193, 7, 0.1);
+        border: 1px solid rgba(255, 193, 7, 0.3);
+        border-radius: 4px;
+        padding: 1.2rem;
+        margin: 1.5rem 0;
+      }
+      
+      .professional-note strong {
+        color: #ffc107;
+      }
+      
+      .footer {
+        background-color: #0d1117;
+        border-top: 1px solid var(--border-color);
+        text-align: center;
+        padding: 1.5rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+      
+      ul, ol {
+        margin: 0.8rem 0;
+        padding-left: 1.5rem;
+      }
+      
+      li {
+        margin-bottom: 0.4rem;
+        color: var(--text-secondary);
+      }
+      
+      p {
+        margin-bottom: 1rem;
+        color: var(--text-secondary);
+      }
+      
+      strong {
+        color: var(--text-primary);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1 class="document-title">Marco MITRE ATT&CK</h1>
+        <p class="document-subtitle">
+          Taxonomía estructurada de tácticas, técnicas y procedimientos adversariales basada en observaciones del mundo real. 
+          Estándar de referencia para la caracterización y análisis de amenazas en ciberseguridad empresarial.
+        </p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="section">
+        <div class="section-header">1. Definición y Fundamentos</div>
+        <div class="section-content">
+          <p>
+            MITRE ATT&CK constituye un marco de conocimiento globalizado que sistematiza las tácticas, técnicas y procedimientos (TTPs) empleados por actores maliciosos en ciberataques documentados. Desarrollado por la corporación MITRE, representa el estándar de facto para la clasificación y análisis del comportamiento adversarial en el dominio cibernético.
+          </p>
+          
+          <div class="definition-box">
+            <strong>Denominación:</strong> ATT&CK es el acrónimo de <em>Adversarial Tactics, Techniques, and Common Knowledge</em>, estableciendo una ontología común para la descripción de actividades maliciosas en sistemas de información.
+          </div>
+          
+          <p>
+            El marco se fundamenta en inteligencia de amenazas de código abierto, informes de incidentes y análisis forense, proporcionando una base empírica para la comprensión del comportamiento adversarial y el desarrollo de capacidades defensivas.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">2. Arquitectura del Marco</div>
+        <div class="section-content">
+          <div class="subsection-title">Estructura Jerárquica</div>
+          <p>
+            El marco ATT&CK emplea una arquitectura de tres niveles que establece relaciones jerárquicas entre objetivos estratégicos, métodos operacionales e implementaciones específicas:
+          </p>
+          
+          <div class="hierarchy-item">
+            <div class="hierarchy-title">
+              <span class="hierarchy-number">1</span>Tácticas (Tactics)
+            </div>
+            <p>
+              Representan objetivos operacionales de alto nivel en la cadena de ataque. Definen el propósito estratégico de las acciones adversariales dentro del ciclo de vida del ataque. Se organizan secuencialmente desde el acceso inicial hasta el logro de objetivos finales.
+            </p>
+            <div class="example-box">
+              <strong>Ejemplos representativos:</strong> Acceso Inicial, Ejecución, Persistencia, Escalada de Privilegios, Evasión de Defensas, Acceso a Credenciales, Descubrimiento, Movimiento Lateral, Recopilación, Comando y Control, Exfiltración, Impacto.
+            </div>
+          </div>
+          
+          <div class="hierarchy-item">
+            <div class="hierarchy-title">
+              <span class="hierarchy-number">2</span>Técnicas (Techniques)
+            </div>
+            <p>
+              Constituyen métodos específicos utilizados para ejecutar una táctica determinada. Cada técnica describe un comportamiento adversarial particular, independientemente de la implementación tecnológica específica. Se identifican mediante códigos alfanuméricos únicos (formato T####).
+            </p>
+            <div class="example-box">
+              <strong>Caso de estudio:</strong> Técnica T1566 (Phishing) bajo la táctica de Acceso Inicial, que describe el uso de comunicaciones electrónicas fraudulentas para obtener acceso inicial a sistemas objetivo.
+            </div>
+          </div>
+          
+          <div class="hierarchy-item">
+            <div class="hierarchy-title">
+              <span class="hierarchy-number">3</span>Procedimientos (Procedures)
+            </div>
+            <p>
+              Representan implementaciones concretas de técnicas por actores específicos de amenazas. Incluyen detalles operacionales como herramientas empleadas, configuraciones específicas, vectores de entrega y metodologías de ejecución documentadas en incidentes reales.
+            </p>
+            <div class="example-box">
+              <strong>Implementación documentada:</strong> APT29 implementa T1566.001 (Spearphishing Attachment) mediante documentos de Microsoft Office con macros maliciosas que descargan y ejecutan Cobalt Strike Beacon para establecer comunicaciones de comando y control.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">3. Valor Estratégico para la Ciberseguridad</div>
+        <div class="section-content">
+          <p>
+            MITRE ATT&CK facilita la transición de modelos de seguridad reactivos basados en indicadores hacia enfoques proactivos fundamentados en el análisis del comportamiento adversarial. Esta metodología permite una comprensión sistemática de las capacidades y intenciones de los atacantes.
+          </p>
+          
+          <div class="application-grid">
+            <div class="application-card">
+              <div class="application-title">Desarrollo de Capacidades de Detección</div>
+              <p>Implementación de reglas de detección basadas en patrones de comportamiento adversarial, mejorando significativamente las tasas de detección verdadero positivo y reduciendo alertas espurias.</p>
+            </div>
+            
+            <div class="application-card">
+              <div class="application-title">Operaciones de Threat Hunting</div>
+              <p>Estructuración de actividades de caza de amenazas mediante hipótesis basadas en TTPs documentados, optimizando el uso de recursos analíticos y mejorando la eficiencia investigativa.</p>
+            </div>
+            
+            <div class="application-card">
+              <div class="application-title">Evaluación de Postura de Seguridad</div>
+              <p>Análisis cuantitativo de la cobertura defensiva mediante matrices de técnicas vs. controles, identificando brechas críticas en las capacidades de seguridad organizacional.</p>
+            </div>
+            
+            <div class="application-card">
+              <div class="application-title">Simulación y Validación</div>
+              <p>Diseño de ejercicios de adversario emulado (Red Team) basados en TTPs específicos de actores relevantes para la organización, validando la eficacia de controles implementados.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">4. Implementación Operacional</div>
+        <div class="section-content">
+          <div class="subsection-title">Integración en Funciones de Seguridad</div>
+          <p>
+            El marco ATT&CK se integra transversalmente en las funciones del programa de ciberseguridad organizacional, proporcionando un lenguaje común y metodologías estandarizadas:
+          </p>
+          
+          <div class="table-professional">
+            <table class="table table-dark mb-0">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Función de Seguridad</th>
+                  <th>Implementación Operacional</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Security Operations Center (SOC)</strong></td>
+                  <td>Desarrollo de playbooks de respuesta a incidentes estructurados según TTPs. Configuración de sistemas SIEM con reglas de correlación basadas en técnicas específicas. Establecimiento de KPIs de detección alineados con la cobertura de técnicas.</td>
+                </tr>
+                <tr>
+                  <td><strong>Threat Intelligence</strong></td>
+                  <td>Caracterización de actores de amenazas mediante mapeo de TTPs observados. Desarrollo de perfiles de amenaza contextualizado por sector e industria. Generación de indicadores de comportamiento (IOBs) complementarios a indicadores de compromiso tradicionales.</td>
+                </tr>
+                <tr>
+                  <td><strong>Vulnerability Management</strong></td>
+                  <td>Priorización de vulnerabilidades basada en su explotación documentada en técnicas ATT&CK. Desarrollo de métricas de exposición considerando TTPs aplicables a tecnologías específicas del entorno.</td>
+                </tr>
+                <tr>
+                  <td><strong>Security Architecture</strong></td>
+                  <td>Diseño de arquitecturas defensivas con controles específicos para mitigar técnicas relevantes. Evaluación de tecnologías de seguridad basada en cobertura de técnicas ATT&CK. Desarrollo de métricas de efectividad arquitectural.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="professional-note">
+            <strong>Consideración metodológica:</strong> La implementación exitosa de ATT&CK requiere un enfoque gradual que comience con la selección de técnicas relevantes para el contexto organizacional específico, seguido de la implementación de controles priorizados y la medición continua de efectividad mediante métricas cuantificables.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">5. Especificaciones Técnicas</div>
+        <div class="section-content">
+          <div class="subsection-title">Matriz Enterprise</div>
+          <p>
+            La matriz Enterprise de ATT&CK, orientada a entornos corporativos, comprende 14 tácticas principales que abarcan más de 200 técnicas documentadas. Cada técnica incluye subtécnicas específicas que detallan variaciones en la implementación, totalizando más de 400 procedimientos únicos catalogados.
+          </p>
+          
+          <div class="subsection-title">Metodología de Actualización</div>
+          <p>
+            MITRE mantiene un proceso de actualización continua basado en:
+          </p>
+          <ul>
+            <li>Análisis de informes de inteligencia de amenazas de fuentes abiertas</li>
+            <li>Colaboración con organizaciones de seguridad y agencias gubernamentales</li>
+            <li>Investigación académica en ciberseguridad y análisis forense</li>
+            <li>Retroalimentación de la comunidad de profesionales de seguridad</li>
+          </ul>
+          
+          <div class="professional-note">
+            <strong>Nota de versioning:</strong> El marco se actualiza aproximadamente cada 6 meses, incorporando nuevas técnicas identificadas y refinando las existentes basándose en observaciones empíricas adicionales. Las organizaciones deben establecer procesos para evaluar y adoptar actualizaciones de manera controlada.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p style="text-align: center;"><a href="./pildoras.html">← Volver al índice de píldoras</a></p>
+        <p>&copy; 2025 Benito González Piñeiro - Guía Marco MITRE ATT&CK/p>
+      
+    </footer>
+  </body>
+</html>

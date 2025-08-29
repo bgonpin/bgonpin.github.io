@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Instalar Servidor DHCP en Ubuntu 24.04</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.6; background: #f9f9f9; }
+    h1, h2 { color: #2c3e50; }
+    pre { background: #272822; color: #f8f8f2; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    code { font-family: monospace; }
+    .note { background: #eaf7ff; border-left: 4px solid #3498db; padding: 0.5rem 1rem; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Instalar y Configurar un Servidor DHCP en Ubuntu 24.04</h1>
+
+  <h2>1. Instalar el servidor DHCP</h2>
+  <pre><code>sudo apt update
+sudo apt install isc-dhcp-server -y
+</code></pre>
+
+  <h2>2. Configurar la interfaz de red</h2>
+  <p>Edita <code>/etc/default/isc-dhcp-server</code> y define la interfaz que atenderá DHCP:</p>
+  <pre><code>INTERFACESv4="ens33"</code></pre>
+  <div class="note">Reemplaza <code>ens33</code> por tu interfaz (puedes verlas con <code>ip a</code>).</div>
+
+  <h2>3. Configurar el rango DHCP</h2>
+  <p>Edita el archivo <code>/etc/dhcp/dhcpd.conf</code> y agrega:</p>
+  <pre><code>authoritative;
+
+subnet 192.168.10.0 netmask 255.255.255.0 {
+  range 192.168.10.100 192.168.10.200;
+  option routers 192.168.10.1;
+  option subnet-mask 255.255.255.0;
+  option domain-name-servers 8.8.8.8, 1.1.1.1;
+  option broadcast-address 192.168.10.255;
+  default-lease-time 600;
+  max-lease-time 7200;
+}
+</code></pre>
+
+  <h2>4. Reiniciar y habilitar el servicio</h2>
+  <pre><code>sudo systemctl restart isc-dhcp-server
+sudo systemctl enable isc-dhcp-server
+</code></pre>
+
+  <h2>5. Verificar estado</h2>
+  <pre><code>sudo systemctl status isc-dhcp-server
+journalctl -xeu isc-dhcp-server
+</code></pre>
+
+  <h2>6. Probar el servidor DHCP</h2>
+  <p>En un cliente de la misma red, configura para obtener IP automática y revisa:</p>
+  <pre><code>ip a</code></pre>
+
+  <p>Deberías recibir una IP dentro del rango <strong>192.168.10.100 - 192.168.10.200</strong>.</p>
+  <footer style="text-align: center; margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc;">
+        <p><a href="./pildoras.html">Volver a la página principal de píldoras</a></p>
+  </footer>
+</body>
+</html>

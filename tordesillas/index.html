@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EN OBRAS</title>
+    <title>Tordesillas</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -11,39 +11,336 @@
     <style>
         body {
             font-family: 'Times New Roman', serif;
-            background-color: #f8f9fa;
-            color: #212529;
+            background: linear-gradient(135deg, #0f0f23, #1a1a2e, #16213e);
+            color: #e0e0e0;
             text-align: center;
             padding: 50px;
         }
         .construction-message {
             font-size: 4rem;
             font-weight: bold;
-            color: #495057;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            color: #ff6b6b;
+            text-shadow: 2px 2px 4px #000;
             margin-top: 100px;
         }
         .border-formal {
-            border: 3px solid #6c757d;
+            border: 3px solid #00d4ff;
             padding: 30px;
-            border-radius: 5px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            background-color: rgba(26, 26, 46, 0.95);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+        }
+        .main-image-container {
+            margin-bottom: 20px;
+        }
+        .main-image {
+            max-width: 100%;
+            height: 400px;
+            object-fit: contain;
+            border: 3px solid #ffd93d;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 217, 61, 0.5);
+        }
+        .filmstrip {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px;
+            gap: 15px;
+            scrollbar-color: #00d4ff #1a1a2e;
+        }
+        .filmstrip img {
+            height: 200px;
+            flex-shrink: 0;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .filmstrip img:hover {
+            border-color: #00d4ff;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.7);
+        }
+        .navigation-buttons {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .navigation-buttons button {
+            margin: 0 15px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            border: none;
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .navigation-buttons button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.5);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="border-formal">
-                    <i class="bi bi-tools display-1 text-muted mb-4"></i>
-                    <h1 class="construction-message">EN OBRAS</h1>
+                    <h1 class="construction-message">Tordesillas</h1>
+                    <div class="mt-4">
+                        <div class="main-image-container">
+                            <img id="mainImage" src="MODIFICADAS/IMG_6290_1024.jpg" alt="Main Image" class="main-image">
+                        </div>
+                        <div class="filmstrip">
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" class="btn btn-primary" id="prevBtn">Anterior</button>
+                            <button type="button" class="btn btn-primary" id="nextBtn">Siguiente</button>
+                        </div>
+                    </div>
+                    <p class="mt-3"></p>
                 </div>
             </div>
         </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const imageFiles = [
+            "IMG_6290_1024.jpg",
+"IMG_6291_1024.jpg",
+"IMG_6292_1024.jpg",
+"IMG_6302_1024.jpg",
+"IMG_6303_1024.jpg",
+"IMG_6304_1024.jpg",
+"IMG_6305_1024.jpg",
+"IMG_6306_1024.jpg",
+"IMG_6307_1024.jpg",
+"IMG_6310_1024.jpg",
+"IMG_6311_1024.jpg",
+"IMG_6312 1_1024.jpg",
+"IMG_6312_1024.jpg",
+"IMG_6313_1024.jpg",
+"IMG_6314_1024.jpg",
+"IMG_6315_1024.jpg",
+"IMG_6316_1024.jpg",
+"IMG_6317_1024.jpg",
+"IMG_6318_1024.jpg",
+"IMG_6319_1024.jpg",
+"IMG_6320_1024.jpg",
+"IMG_6321_1024.jpg",
+"IMG_6323_1024.jpg",
+"IMG_6324_1024.jpg",
+"IMG_6326_1024.jpg",
+"IMG_6327_1024.jpg",
+"IMG_6328_1024.jpg",
+"IMG_6329_1024.jpg",
+"IMG_6330_1024.jpg",
+"IMG_6331_1024.jpg",
+"IMG_6333_1024.jpg",
+"IMG_6334_1024.jpg",
+"IMG_6335_1024.jpg",
+"IMG_6337_1024.jpg",
+"IMG_6338_1024.jpg",
+"IMG_6339_1024.jpg",
+"IMG_6340_1024.jpg",
+"IMG_6341_1024.jpg",
+"IMG_6344_1024.jpg",
+"IMG_6346_1024.jpg",
+"IMG_6347_1024.jpg",
+"IMG_6348_1024.jpg",
+"IMG_6349_1024.jpg",
+"IMG_6350_1024.jpg",
+"IMG_6351_1024.jpg",
+"IMG_6352_1024.jpg",
+"IMG_6353_1024.jpg",
+"IMG_6355_1024.jpg",
+"IMG_6361_1024.jpg",
+"IMG_6362_1024.jpg",
+"IMG_6363_1024.jpg",
+"IMG_6364_1024.jpg",
+"IMG_6365_1024.jpg",
+"IMG_6366_1024.jpg",
+"IMG_6367_1024.jpg",
+"IMG_6368_1024.jpg",
+"IMG_6369_1024.jpg",
+"IMG_6372_1024.jpg",
+"IMG_6373_1024.jpg",
+"IMG_6374_1024.jpg",
+"IMG_6379_1024.jpg",
+"IMG_6380_1024.jpg",
+"IMG_6384_1024.jpg",
+"IMG_6385_1024.jpg",
+"IMG_6386_1024.jpg",
+"IMG_6387_1024.jpg",
+"IMG_6388_1024.jpg",
+"IMG_6389_1024.jpg",
+"IMG_6390_1024.jpg",
+"IMG_6391_1024.jpg",
+"IMG_6392_1024.jpg",
+"IMG_6396_1024.jpg",
+"IMG_6397_1024.jpg",
+"IMG_6398_1024.jpg",
+"IMG_6399_1024.jpg",
+"IMG_6400_1024.jpg",
+"IMG_6401_1024.jpg",
+"IMG_6402_1024.jpg",
+"IMG_6403_1024.jpg",
+"IMG_6410_1024.jpg",
+"IMG_6411_1024.jpg",
+"IMG_6412_1024.jpg",
+"IMG_6413_1024.jpg",
+"IMG_6414_1024.jpg",
+"IMG_6415_1024.jpg",
+"IMG_6416_1024.jpg",
+"IMG_6417_1024.jpg",
+"IMG_6418_1024.jpg",
+"IMG_6419_1024.jpg",
+"IMG_6420_1024.jpg",
+"IMG_6421_1024.jpg",
+"IMG_6422_1024.jpg",
+"IMG_6428_1024.jpg",
+"IMG_6429_1024.jpg",
+"IMG_6430_1024.jpg",
+"IMG_6431_1024.jpg",
+"IMG_6432_1024.jpg",
+"IMG_6433_1024.jpg",
+"IMG_6434_1024.jpg",
+"IMG_6435_1024.jpg",
+"IMG_6436_1024.jpg",
+"IMG_6437_1024.jpg",
+"IMG_6438_1024.jpg",
+"IMG_6439_1024.jpg",
+"IMG_6440_1024.jpg",
+"IMG_6441_1024.jpg",
+"IMG_6442_1024.jpg",
+"IMG_6443_1024.jpg",
+"IMG_6447_1024.jpg",
+"IMG_6448_1024.jpg",
+"IMG_6449_1024.jpg",
+"IMG_6450_1024.jpg",
+"IMG_6451_1024.jpg",
+"IMG_6452_1024.jpg",
+"IMG_6453_1024.jpg",
+"IMG_6454_1024.jpg",
+"IMG_6455_1024.jpg",
+"IMG_6456_1024.jpg",
+"IMG_6457_1024.jpg",
+"IMG_6458_1024.jpg",
+"IMG_6459_1024.jpg",
+"IMG_6460_1024.jpg",
+"IMG_6461_1024.jpg",
+"IMG_6462_1024.jpg",
+"IMG_6463_1024.jpg",
+"IMG_6464_1024.jpg",
+"IMG_6465_1024.jpg",
+"IMG_6466_1024.jpg",
+"IMG_6467_1024.jpg",
+"IMG_6468_1024.jpg",
+"IMG_6469_1024.jpg",
+"IMG_6470_1024.jpg",
+"IMG_6471_1024.jpg",
+"IMG_6472_1024.jpg",
+"IMG_6475_1024.jpg",
+"IMG_6476_1024.jpg",
+"IMG_6477_1024.jpg",
+"IMG_6478_1024.jpg",
+"IMG_6479_1024.jpg",
+"IMG_6480_1024.jpg",
+"IMG_6481_1024.jpg",
+"IMG_6482_1024.jpg",
+"IMG_6483_1024.jpg",
+"IMG_6484_1024.jpg",
+"IMG_6485_1024.jpg",
+"IMG_6486_1024.jpg",
+"IMG_6487_1024.jpg",
+"IMG_6488_1024.jpg",
+"IMG_6490_1024.jpg",
+"IMG_6491_1024.jpg",
+"IMG_6492_1024.jpg",
+"IMG_6493_1024.jpg",
+"IMG_20250821_111312_1024.jpg",
+"IMG_20250821_111314_1024.jpg",
+"IMG_20250821_111825_1024.jpg",
+"IMG_20250821_111836_1024.jpg",
+"PXL_20250821_091837418_1024.jpg",
+"PXL_20250821_091854442_1024.jpg",
+"PXL_20250821_091857601_1024.jpg",
+"PXL_20250821_093353445_1024.jpg",
+"PXL_20250821_101030819_1024.jpg",
+"PXL_20250821_101047347_1024.jpg",
+"PXL_20250821_101139423.PANO_1024.jpg",
+"PXL_20250821_101156278.PANO_1024.jpg",
+"PXL_20250821_101302894.PANO_1024.jpg",
+"PXL_20250821_101723585.PANO_1024.jpg",
+"PXL_20250821_101803350.PANO_1024.jpg",
+"PXL_20250821_101803350.PANO~2_1024.jpg",
+"PXL_20250821_102122664_1024.jpg",
+"PXL_20250821_102300724_1024.jpg",
+"PXL_20250821_102834508_1024.jpg",
+"PXL_20250821_103159558_1024.jpg",
+"PXL_20250821_103255464.MP_1024.jpg",
+"PXL_20250821_103257208.MP_1024.jpg",
+"PXL_20250821_103257208.MP~2_1024.jpg",
+"PXL_20250821_111853507_1024.jpg",
+"PXL_20250821_112307053_1024.jpg",
+"PXL_20250821_112309210_1024.jpg",
+"PXL_20250830_171522587_1024.jpg",
+"PXL_20250830_172404148_1024.jpg",
+"PXL_20250830_172407359_1024.jpg",
+"PXL_20250830_172410914_1024.jpg",
+"PXL_20250830_172422369_1024.jpg",
+"PXL_20250830_172430299_1024.jpg",
+"PXL_20250830_172444850_1024.jpg",
+"PXL_20250830_172609354_1024.jpg",
+"PXL_20250830_173314241.MP_1024.jpg",
+"PXL_20250830_173337673_1024.jpg",
+"PXL_20250830_181650915_1024.jpg",
+"PXL_20250830_181708878_1024.jpg",
+"PXL_20250830_181738217_1024.jpg",
+"PXL_20250830_181739081_1024.jpg",
+"PXL_20250830_181740234_1024.jpg",
+"PXL_20250830_181916345_1024.jpg",
+"PXL_20250830_181952464_1024.jpg",
+"PXL_20250830_182210117_1024.jpg",
+"PXL_20250830_182605285_1024.jpg",
+"PXL_20250830_183221006_1024.jpg",
+"PXL_20250830_183223452_1024.jpg",
+"PXL_20250830_184023886.MP_1024.jpg"
+        ];
+
+        let currentIndex = 0;
+        const filmstrip = document.querySelector('.filmstrip');
+        const mainImage = document.getElementById('mainImage');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function updateMainImage() {
+            mainImage.src = `MODIFICADAS/${imageFiles[currentIndex]}`;
+            mainImage.alt = `Imagen ${currentIndex + 1}`;
+        }
+
+        for (let i = 0; i < imageFiles.length; i++) {
+            const img = document.createElement('img');
+            img.src = `MODIFICADAS/${imageFiles[i]}`;
+            img.alt = `Imagen ${i + 1}`;
+            img.addEventListener('click', function() {
+                currentIndex = i;
+                updateMainImage();
+            });
+            filmstrip.appendChild(img);
+        }
+
+        prevBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex - 1 + imageFiles.length) % imageFiles.length;
+            updateMainImage();
+        });
+
+        nextBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex + 1) % imageFiles.length;
+            updateMainImage();
+        });
+    </script>
 </body>
 </html>

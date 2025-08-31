@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Uso - Script 2_detectar_objetos_imageai_yolov3_hilos.py</title>
+    <style>
+        /* Base Dark Theme */
+        :root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2d2d2d;
+            --tertiary-bg: #3a3a3a;
+            --text-primary: #e6e6e6;
+            --text-secondary: #cccccc;
+            --text-muted: #999999;
+            --accent-primary: #4a9eff;
+            --accent-secondary: #66b3ff;
+            --border-color: #404040;
+            --highlight-bg: #2a2a4a;
+            --warning-bg: #3a2a2a;
+            --code-bg: #2a2a2a;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+            color: var(--text-primary);
+            background-color: var(--primary-bg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--accent-primary);
+            border-bottom: 3px solid var(--accent-primary);
+            padding-bottom: 15px;
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: var(--accent-secondary);
+            margin-top: 40px;
+            font-size: 1.8rem;
+            font-weight: 500;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        h3 {
+            color: var(--text-secondary);
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        h4 {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        code {
+            background-color: var(--code-bg);
+            color: var(--accent-secondary);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-secondary);
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .warning {
+            background-color: var(--warning-bg);
+            border-left: 4px solid #ff6b35;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 25px 0;
+            color: #ffab91;
+        }
+
+        .warning strong {
+            color: #ffab91;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background-color: var(--secondary-bg);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--tertiary-bg);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        tbody tr:hover {
+            background-color: var(--tertiary-bg);
+        }
+
+        /* Code Source Box */
+        .code-source-box {
+            background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--tertiary-bg) 100%);
+            border: 2px solid var(--accent-primary);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .code-source-box h3 {
+            color: var(--accent-primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .code-source-box p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .code-source-box a {
+            color: #ffffff;
+            background-color: var(--accent-primary);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(74, 158, 255, 0.3);
+        }
+
+        .code-source-box a:hover {
+            background-color: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            border-top: 2px solid var(--accent-primary);
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        footer p {
+            text-align: center;
+            margin: 0;
+        }
+
+        footer a {
+            color: var(--accent-primary);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 8px 10px;
+            }
+
+            pre {
+                font-size: 0.8rem;
+                padding: 12px;
+            }
+
+            .code-source-box {
+                padding: 15px;
+            }
+
+            .code-source-box a {
+                padding: 8px 16px;
+            }
+
+            ul, ol {
+                margin-left: 20px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            h4 {
+                font-size: 1.1rem;
+            }
+
+            pre {
+                font-size: 0.7rem;
+            }
+
+            th, td {
+                padding: 6px 8px;
+            }
+
+            .code-source-box {
+                padding: 12px;
+            }
+
+            .code-source-box h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555555;
+        }
+
+        /* Selection styling */
+        ::selection {
+            background: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        ::-moz-selection {
+            background: var(--accent-primary);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manual de Uso - Script 2_detectar_objetos_imageai_yolov3_hilos.py</h1>
+
+    <div class="code-source-box">
+        <h3>📁 Acceso al Código Fuente</h3>
+        <p>Descarga o accede directamente al archivo Python:</p>
+        <a href="../codigo/2_detectar_objetos_imageai_yolov3_hilos.py">Ver Código Python</a>
+    </div>
+
+    <h2>Descripción General</h2>
+    <p>El script <code>2_detectar_objetos_imageai_yolov3_hilos.py</code> es una herramienta de procesamiento paralelo que utiliza inteligencia artificial para detectar objetos en imágenes. Emplea el modelo YOLOv3 a través de la biblioteca ImageAI para identificar objetos comunes con alta precisión y almacenar los resultados en una base de datos MongoDB.</p>
+
+    <p>El script incorpora las siguientes funcionalidades principales:</p>
+    <ul>
+        <li>Detección de objetos usando YOLOv3 con ImageAI</li>
+        <li>Procesamiento paralelo para mayor eficiencia (máximo 3 procesos simultáneos)</li>
+        <li>Recuperación de imágenes no procesadas desde MongoDB</li>
+        <li>Almacenamiento de objetos detectados con coordenadas y probabilidades</li>
+        <li>Marcado de archivos procesados para evitar reprocesamiento</li>
+        <li>Gestión robusta de errores y casos excepcionales</li>
+    </ul>
+
+    <h2>Requisitos del Sistema</h2>
+    <h3>Dependencias de Python</h3>
+    <p>El script requiere las siguientes bibliotecas de Python:</p>
+    <ul>
+        <li><code>imageai</code> (versión compatible con YOLOv3)</li>
+        <li><code>pymongo</code></li>
+        <li><code>pytorch</code> (para soporte GPU)</li>
+    </ul>
+
+    <h3>Requisitos de Base de Datos</h3>
+    <ul>
+        <li>Instancia de MongoDB ejecutándose localmente (puerto 27017 por defecto)</li>
+        <li>Acceso de escritura a una base de datos llamada <code>album_2</code></li>
+        <li>Colección <code>imagenes</code> con documentos que contengan campos <code>ruta_completa</code> y <code>_id</code></li>
+    </ul>
+
+    <h3>Requisitos de Hardware</h3>
+    <ul>
+        <li>Para procesamiento CPU: Mínimo 4 núcleos recomendados</li>
+        <li>Para procesamiento GPU: Tarjeta NVIDIA con CUDA compatible (opcional para mejor rendimiento)</li>
+        <li>Memoria RAM: Mínimo 8GB recomendado para procesamiento paralelo</li>
+    </ul>
+
+    <h3>Requisitos de Modelos</h3>
+    <ul>
+        <li>Modelo YOLOv3 descargado y disponible en la ruta <code>/home/nito/Documentos/desarrollo/python/modelos/yolov3.pt</code></li>
+        <li>Las imágenes fuente deben existir en las rutas especificadas en MongoDB</li>
+    </ul>
+
+    <h2>Instalación y Configuración</h2>
+
+    <h3>Instalación de Dependencias</h3>
+    <p>Ejecute los siguientes comandos para instalar las bibliotecas requeridas:</p>
+    <pre><code>pip install imageai pymongo torch torchvision</code></pre>
+
+    <h3>Descarga del Modelo YOLOv3</h3>
+    <p>El modelo YOLOv3 debe estar disponible localmente. Puede descargarlo desde el sitio oficial de PyTorch o repositorios públicos. Asegúrese de colocar el archivo <code>yolov3.pt</code> en la ruta especificada en el script.</p>
+
+    <h3>Configuración del script</h3>
+    <p>Antes de ejecutar el script, es necesario modificar las siguientes configuraciones:</p>
+
+    <h4>Configuración de MongoDB</h4>
+    <pre><code>MONGO_URI = "mongodb://localhost:27017"  # URI de conexión a MongoDB
+DB_NAME = "album_2"  # Nombre de la base de datos
+COLLECTION_NAME = "imagenes"  # Nombre de la colección</code></pre>
+
+    <h4>Configuración de GPU</h4>
+    <pre><code>USE_GPU = True  # Habilitar uso de GPU si PyTorch tiene soporte CUDA</code></pre>
+
+    <h4>Ruta del Modelo</h4>
+    <pre><code>det.setModelPath("/home/nito/Documentos/desarrollo/python/modelos/yolov3.pt")</code></pre>
+
+    <div class="warning">
+        <strong>Advertencia:</strong> Asegúrese de que el modelo YOLOv3 existe en la ruta especificada antes de ejecutar el script.
+    </div>
+
+    <h2>Uso del Script</h2>
+
+    <h3>Ejecución Básica</h3>
+    <p>Para ejecutar el script, navegue al directorio donde se encuentra el archivo y ejecute:</p>
+    <pre><code>python 2_detectar_objetos_imageai_yolov3_hilos.py</code></pre>
+
+    <h3>Funcionamiento Automático</h3>
+    <p>El script automáticamente:</p>
+    <ol>
+        <li>Se conecta a MongoDB y recupera todos los documentos no procesados (donde <code>visto != True</code>)</li>
+        <li>Verifica que los archivos de imagen existen físicamente</li>
+        <li>Procesa las imágenes en paralelo usando hasta 3 procesos simultáneos</li>
+        <li>Detecta objetos en cada imagen con un umbral de probabilidad mínima del 30%</li>
+        <li>Almacena los resultados en MongoDB y marca los documentos como procesados</li>
+        <li>Proporciona un resumen final del procesamiento</li>
+    </ol>
+
+    <h3>Salidas del Script</h3>
+    <p>El script proporciona información detallada durante el procesamiento:</p>
+    <ul>
+        <li>Cantidad de archivos encontrados para procesar</li>
+        <li>Imágenes procesadas exitosamente</li>
+        <li>Imágenes saltadas (ya procesadas anteriormente)</li>
+        <li>Errores encontrados durante el procesamiento</li>
+        <li>Detalles de objetos detectados por imagen</li>
+    </ul>
+
+    <h3>Interrupción del Procesamiento</h3>
+    <p>El script procesa automáticamente todas las imágenes disponibles y finalizará cuando complete el procesamiento. No se requiere intervención manual durante la ejecución.</p>
+
+    <h2>Funcionalidades Detalladas</h2>
+
+    <h3>Detección de Objetos</h3>
+    <ul>
+        <li><strong>Modelo:</strong> YOLOv3 pre-entrenado con ImageAI</li>
+        <li><strong>Umbral de confianza:</strong> Mínimo 30% para considerar una detección válida</li>
+        <li><strong>Objetos detectables:</strong> 80 clases comunes (personas, vehículos, animales, objetos, etc.)</li>
+        <li><strong>Soporte multiformato:</strong> JPG, JPEG, PNG, GIF, BMP, TIFF, WEBP</li>
+    </ul>
+
+    <h3>Procesamiento Paralelo</h3>
+    <ul>
+        <li><strong>Máximo de procesos:</strong> 3 procesos simultáneos para optimizar el uso de recursos</li>
+        <li><strong>Manejo de memoria:</strong> Cada proceso crea su propia instancia del detector para evitar conflictos</li>
+        <li><strong>Gestión de errores:</strong> Los errores en un proceso no afectan el procesamiento de otros</li>
+    </ul>
+
+    <h3>Gestión de Base de Datos</h3>
+    <ul>
+        <li><strong>Selección de candidatos:</strong> Solo procesa documentos donde <code>visto != True</code></li>
+        <li><strong>Marcado de procesados:</strong> Actualiza <code>visto = True</code> después del procesamiento</li>
+        <li><strong>Almacenamiento estructurado:</strong> Objetos detectados se almacenan en array de objetos</li>
+        <li><strong>Actualización de timestamps:</strong> Registro de fecha y hora de procesamiento</li>
+    </ul>
+
+    <h3>Control de Calidad</h3>
+    <ul>
+        <li><strong>Verificación de existencia:</strong> Comprueba que las rutas de imagen existen antes del procesamiento</li>
+        <li><strong>Manejo de documentos incompletos:</strong> Salta documentos sin campos requeridos</li>
+        <li><strong>Prevención de reprocesamiento:</strong> Evita procesar imágenes ya analizadas</li>
+        <li><strong>Gestión de errores robusta:</strong> Manejo de excepciones para diferentes tipos de error</li>
+    </ul>
+
+    <h2>Estructura de Datos en MongoDB</h2>
+
+    <p>Cada documento procesado se actualiza con la siguiente información adicional:</p>
+
+    <h3>Campos de Control</h3>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td><code>visto</code></td>
+            <td>Boolean</td>
+            <td>Indicador de si la imagen ha sido procesada (True después del procesamiento)</td>
+        </tr>
+    </table>
+
+    <h3>Estructura de Objetos Detectados</h3>
+    <p>Los objetos detectados se almacenan en el campo <code>objetos_detectados</code> como un array de objetos:</p>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td><code>objeto_detectado</code></td>
+            <td>String</td>
+            <td>Nombre del objeto identificado (ej: "person", "car")</td>
+        </tr>
+        <tr>
+            <td><code>porcentaje</code></td>
+            <td>Float</td>
+            <td>Porcentaje de probabilidad de detección (0-100)</td>
+        </tr>
+        <tr>
+            <td><code>coordenadas</code></td>
+            <td>Array</td>
+            <td>Coordenadas del bounding box [x1, y1, x2, y2]</td>
+        </tr>
+    </table>
+
+    <h3>Campos de Procesamiento (Actualizados)</h3>
+    <ul>
+        <li><code>fecha_procesamiento_dia</code>: Día del procesamiento de detección</li>
+        <li><code>fecha_procesamiento_mes</code>: Mes del procesamiento de detección</li>
+        <li><code>fecha_procesamiento_anio</code>: Año del procesamiento de detección</li>
+        <li><code>fecha_procesamiento_hora</code>: Hora del procesamiento de detección</li>
+        <li><code>fecha_procesamiento_minuto</code>: Minuto del procesamiento de detección</li>
+    </ul>
+
+    <p><strong>Ejemplo de documento actualizado:</strong></p>
+    <pre><code>{
+  "_id": "hash_sha512_de_la_imagen",
+  "visto": true,
+  "objetos_detectados": [
+    {
+      "objeto_detectado": "car",
+      "porcentaje": 87.45,
+      "coordenadas": [150, 200, 350, 300]
+    },
+    {
+      "objeto_detectado": "person",
+      "porcentaje": 93.12,
+      "coordenadas": [100, 150, 200, 450]
+    }
+  ],
+  "fecha_procesamiento_anio": "2024",
+  "fecha_procesamiento_mes": "08",
+  "fecha_procesamiento_dia": "31",
+  "fecha_procesamiento_hora": "11",
+  "fecha_procesamiento_minuto": "09"
+}</code></pre>
+
+    <h2>Solución de Problemas</h2>
+
+    <h3>Errores Comunes</h3>
+
+    <h4>Error: "Modelo no encontrado"</h4>
+    <p><strong>Causa:</strong> El archivo de modelo YOLOv3 no existe en la ruta especificada.</p>
+    <p><strong>Solución:</strong> Verifique la ruta del modelo en el código y asegúrese de que el archivo existe.</p>
+
+    <h4>Error de conexión a MongoDB</h4>
+    <p><strong>Causa:</strong> MongoDB no está ejecutándose o la URI es incorrecta.</p>
+    <p><strong>Solución:</strong> Verifique que MongoDB esté ejecutándose en el puerto correcto y que la URI sea válida.</p>
+
+    <h4>Error: "Archivo no encontrado"</h4>
+    <p><strong>Causa:</strong> Una imagen referenciada en MongoDB no existe físicamente.</p>
+    <p><strong>Solución:</strong> El script automáticamente omite estos archivos y marca el error. Verifique las rutas en la base de datos.</p>
+
+    <h4>Documentos incompletos</h4>
+    <p><strong>Causa:</strong> Documentos en MongoDB sin campos <code>ruta_completa</code> o <code>_id</code>.</p>
+    <p><strong>Solución:</strong> Verifique la integridad de los documentos en la colección antes del procesamiento.</p>
+
+    <h4>Error de memoria CUDA</h4>
+    <p><strong>Causa:</strong> Problemas con la GPU o configuración de CUDA en PyTorch.</p>
+    <p><strong>Solución:</strong> Cambie <code>USE_GPU = False</code> para usar CPU en su lugar.</p>
+
+    <h4>Problemas de rendimiento</h4>
+    <p><strong>Causa:</strong> Imágenes muy grandes o muchos procesos simultáneos.</p>
+    <p><strong>Solución:</strong> Reduzca el número de procesos o procese en lotes más pequeños.</p>
+
+    <h3>Optimizaciones de Rendimiento</h3>
+    <ul>
+        <li><strong>Procesamiento batch:</strong> Procesar imágenes en lotes para mejor gestión de memoria</li>
+        <li><strong>Control de concurrencia:</strong> Ajustar max_workers según recursos disponibles</li>
+        <li><strong>Preprocesamiento:</strong> Verificar existencia de archivos antes del procesamiento masivo</li>
+        <li><strong>Monitoreo de memoria:</strong> Limitar resolución de imágenes si hay problemas de memoria</li>
+    </ul>
+
+    <h2>Consultas de Ejemplo en MongoDB</h2>
+
+    <h3>Buscar imágenes con objetos detectados</h3>
+    <pre><code>db.imagenes.find({
+    "objetos_detectados": { $exists: true, $ne: [] }
+})</code></pre>
+
+    <h3>Buscar imágenes con coche específico</h3>
+    <pre><code>db.imagenes.find({
+    "objetos_detectados.objeto_detectado": "car"
+})</code></pre>
+
+    <h3>Contar imágenes procesadas</h3>
+    <pre><code>db.imagenes.countDocuments({ "visto": true })</code></pre>
+
+    <h3>Buscar imágenes con alta confianza en detección</h3>
+    <pre><code>db.imagenes.find({
+    "objetos_detectados": {
+        $elemMatch: { "porcentaje": { $gt: 80 } }
+    }
+})</code></pre>
+
+    <h3>Buscar imágenes sin objetos detectados</h3>
+    <pre><code>db.imagenes.find({
+    "visto": true,
+    "$or": [
+        { "objetos_detectados": { $exists: false } },
+        { "objetos_detectados": [] }
+    ]
+})</code></pre>
+
+    <h3>Estadísticas de objetos más comunes</h3>
+    <pre><code>db.imagenes.aggregate([
+    { $unwind: "$objetos_detectados" },
+    { $group: { _id: "$objetos_detectados.objeto_detectado", count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: 10 }
+])</code></pre>
+
+    <h2>Información de Versión y Soporte</h2>
+    <p>Este script está optimizado para el proyecto Album Semántico y utiliza tecnología de visión computacional avanzada para análisis de imágenes.</p>
+
+    <p>Para soporte técnico o consultas adicionales, revise la documentación del proyecto o contacte al equipo de desarrollo.</p>
+
+    <hr>
+    <footer style="text-align: center;">
+        <p><a href="pildoras.html">Volver a Píldoras</a></p>
+    </footer>
+    <p><small>Manual generado automáticamente - Última actualización: 31 de agosto de 2025</small></p>
+</body>
+</html>

@@ -6,17 +6,19 @@
     <title>Tutorial: Cómo crear un Router casero con Linux</title>
     <style>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #3b82f6;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --dark-bg: #1f2937;
-            --light-bg: #f8fafc;
-            --code-bg: #111827;
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
+            --primary-color: #d4af37; /* Dorado oscuro formal */
+            --secondary-color: #8b4513; /* Marrón oscuro */
+            --accent-color: #b8860b; /* Dorado más oscuro */
+            --success-color: #228b22; /* Verde oliva */
+            --warning-color: #daa520; /* Dorado claro */
+            --danger-color: #8b0000; /* Rojo oscuro */
+            --dark-bg: #2c2c2c; /* Gris muy oscuro */
+            --light-bg: #4a4a4a; /* Gris oscuro claro */
+            --code-bg: #1a1a1a; /* Negro casi puro */
+            --text-primary: #f5f5dc; /* Beige claro académico */
+            --text-secondary: #c0c0c0; /* Gris plata */
+            --card-bg: #3a3a3a; /* Gris oscuro para tarjetas */
+            --border-color: #5a5a5a; /* Gris medio para bordes */
         }
 
         * {
@@ -26,63 +28,43 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
+            font-family: 'Times New Roman', serif; /* Más académico */
+            line-height: 1.8;
             color: var(--text-primary);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--dark-bg);
             min-height: 100vh;
+            margin: 0;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
+            background: var(--card-bg);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
             overflow: hidden;
             margin-top: 20px;
             margin-bottom: 20px;
+            border: 2px solid var(--border-color);
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            padding: 3rem 2rem;
+            background: var(--secondary-color);
+            color: var(--text-primary);
+            padding: 2rem 2rem;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-            50% { transform: scale(1.1) rotate(180deg); opacity: 0.1; }
+            border-bottom: 2px solid var(--primary-color);
         }
 
         .header h1 {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: relative;
-            z-index: 1;
         }
 
         .header p {
             font-size: 1.2rem;
             opacity: 0.9;
-            position: relative;
-            z-index: 1;
         }
 
         .content {
@@ -164,11 +146,12 @@
         }
 
         .intro-section {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            background: var(--light-bg);
             padding: 2rem;
-            border-radius: 15px;
+            border-radius: 10px;
             margin: 2rem 0;
-            border: 1px solid #bae6fd;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .benefits-grid {
@@ -179,12 +162,13 @@
         }
 
         .benefit-card {
-            background: white;
+            background: var(--card-bg);
             padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             border-left: 4px solid var(--success-color);
             transition: transform 0.3s ease;
+            border: 1px solid var(--border-color);
         }
 
         .benefit-card:hover {
@@ -197,11 +181,12 @@
         }
 
         .hardware-requirements {
-            background: #fef3c7;
-            border: 2px solid #f59e0b;
-            border-radius: 12px;
+            background: var(--light-bg);
+            border: 2px solid var(--warning-color);
+            border-radius: 10px;
             padding: 1.5rem;
             margin: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .hardware-requirements h4 {
@@ -234,23 +219,26 @@
         }
 
         code {
-            background: #f1f5f9;
-            color: #334155;
+            background: var(--code-bg);
+            color: var(--text-primary);
             padding: 0.2rem 0.4rem;
             border-radius: 4px;
             font-family: 'Fira Code', monospace;
+            border: 1px solid var(--border-color);
         }
 
         .command-block {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            color: #e2e8f0;
+            background: var(--card-bg);
+            color: var(--text-primary);
             padding: 1.5rem;
-            border-radius: 12px;
+            border-radius: 10px;
             margin: 1rem 0;
-            border-left: 4px solid #3b82f6;
+            border-left: 4px solid var(--success-color);
             font-family: 'Fira Code', monospace;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
         }
 
         .command-block::before {
@@ -261,16 +249,16 @@
         }
 
         .file-config {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
+            background: var(--light-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
             margin: 1rem 0;
             overflow: hidden;
         }
 
         .file-header {
             background: var(--dark-bg);
-            color: white;
+            color: var(--text-primary);
             padding: 0.8rem 1.5rem;
             font-family: 'Fira Code', monospace;
             font-size: 0.9rem;
@@ -278,12 +266,13 @@
 
         .file-content {
             padding: 1.5rem;
-            background: #fefefe;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
         }
 
         .note-box {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
+            background: var(--light-bg);
+            border: 1px solid var(--warning-color);
             border-radius: 8px;
             padding: 1rem;
             margin: 1rem 0;
@@ -296,8 +285,8 @@
         }
 
         .warning-box {
-            background: #fee2e2;
-            border: 1px solid #ef4444;
+            background: var(--light-bg);
+            border: 1px solid var(--danger-color);
             border-radius: 8px;
             padding: 1rem;
             margin: 1rem 0;
@@ -310,22 +299,24 @@
         }
 
         .network-diagram {
-            background: #f0f9ff;
-            border: 2px solid #3b82f6;
-            border-radius: 15px;
+            background: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
             padding: 2rem;
             margin: 2rem 0;
             text-align: center;
-            font-family: monospace;
+            font-family: 'Times New Roman', serif;
             white-space: pre-line;
             line-height: 1.8;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .checklist {
-            background: #ecfdf5;
-            border-radius: 12px;
+            background: var(--card-bg);
+            border-radius: 10px;
             padding: 1.5rem;
             margin: 1.5rem 0;
+            border-left: 4px solid var(--success-color);
         }
 
         .checklist ul {
@@ -339,10 +330,11 @@
         }
 
         .checklist li::before {
-            content: '✅';
+            content: '✓';
             position: absolute;
             left: 0;
             font-size: 1.2rem;
+            color: var(--success-color);
         }
 
         ul, ol {
@@ -361,7 +353,7 @@
             width: 40px;
             height: 40px;
             background: var(--primary-color);
-            color: white;
+            color: var(--dark-bg);
             border-radius: 50%;
             font-weight: bold;
             margin-right: 1rem;
@@ -369,10 +361,12 @@
         }
 
         .maintenance-section {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            border-radius: 15px;
+            background: var(--light-bg);
+            border-radius: 10px;
             padding: 2rem;
             margin: 2rem 0;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         @media (max-width: 768px) {
@@ -823,43 +817,34 @@ sudo apt install unbound -y
 sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf</div>
 
                 <div class="file-config">
-                    <div class="file-header">/etc/unbound/unbound.conf.d/pi-hole.conf</div>
-                    <div class="file-content">
-                        <pre data-language="conf">server:
-  interface: 127.0.0.1
-  interface: ::1
-  access-control: 127.0.0.0/8 allow</pre>
-                    </div>
                 </div>
-            </section>
-        </div>
 
-        <footer style="text-align: center; padding: 2rem; background: var(--dark-bg); color: white; margin-top: 2rem;">
-            <p>Regresa a <a href="./proyectos.html" style="color: var(--accent-color); text-decoration: none;">Proyectos</a></p>
-        </footer>
+                <!-- Footer -->
+                <footer style="text-align: center; padding: 2rem; background-color: var(--light-bg); margin-top: 2rem; border-top: 1px solid var(--accent-color);">
+                    <a href="proyectos.html" style="color: var(--primary-color); text-decoration: none; font-size: 1.1rem;">Retornar a Proyectos</a>
+                </footer>
 
-        <button class="back-to-top" id="backToTop">↑</button>
-    </div>
+                </div> <!-- Closes .content -->
+
+    </div> <!-- Closes .container -->
+
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const backToTopBtn = document.getElementById('backToTop');
-            
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
-            });
-            
-            backToTopBtn.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        });
+        window.onscroll = function() {
+            const button = document.querySelector('.back-to-top');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                button.classList.add('visible');
+            } else {
+                button.classList.remove('visible');
+            }
+        };
+
+        function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
     </script>
+
 </body>
 </html>

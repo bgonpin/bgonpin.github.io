@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Cómo crear un Router casero con Linux</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-bg: #1f2937;
+            --light-bg: #f8fafc;
+            --code-bg: #111827;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.1) rotate(180deg); opacity: 0.1; }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .toc {
+            background: var(--light-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .toc h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .toc ul {
+            list-style: none;
+            columns: 2;
+            column-gap: 2rem;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+            break-inside: avoid;
+        }
+
+        .toc a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .toc a:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateX(10px);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent-color);
+            position: relative;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            position: relative;
+        }
+
+        h3::before {
+            content: '▶';
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+            font-size: 0.8em;
+        }
+
+        h4 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 1px solid #bae6fd;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--success-color);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-card h4 {
+            color: var(--success-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .hardware-requirements {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .hardware-requirements h4 {
+            color: var(--warning-color);
+            margin-bottom: 1rem;
+        }
+
+        pre {
+            background: var(--code-bg);
+            color: #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            position: relative;
+            border: 1px solid #374151;
+        }
+
+        pre::before {
+            content: attr(data-language);
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: var(--accent-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        code {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .command-block {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border-left: 4px solid #3b82f6;
+            font-family: 'Fira Code', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .command-block::before {
+            content: '$';
+            color: var(--success-color);
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+
+        .file-config {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .file-header {
+            background: var(--dark-bg);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .file-content {
+            padding: 1.5rem;
+            background: #fefefe;
+        }
+
+        .note-box {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .note-box::before {
+            content: '💡 Nota: ';
+            font-weight: bold;
+            color: var(--warning-color);
+        }
+
+        .warning-box {
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .warning-box::before {
+            content: '⚠️ Importante: ';
+            font-weight: bold;
+            color: var(--danger-color);
+        }
+
+        .network-diagram {
+            background: #f0f9ff;
+            border: 2px solid #3b82f6;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-family: monospace;
+            white-space: pre-line;
+            line-height: 1.8;
+        }
+
+        .checklist {
+            background: #ecfdf5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .checklist ul {
+            list-style: none;
+        }
+
+        .checklist li {
+            margin: 0.8rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .checklist li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .step-counter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .maintenance-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 2rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .toc ul {
+                columns: 1;
+            }
+            
+            pre {
+                font-size: 0.85rem;
+            }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Tutorial: Router casero con Linux</h1>
+            <p>Construye tu propio router profesional con Debian, firewall, VPN y bloqueador de anuncios</p>
+        </header>
+
+        <div class="content">
+            <!-- Tabla de Contenidos -->
+            <div class="toc">
+                <h2>📋 Tabla de Contenidos</h2>
+                <ul>
+                    <li><a href="#introduccion">Introducción</a></li>
+                    <li><a href="#requisitos">Requisitos de Hardware</a></li>
+                    <li><a href="#instalacion">Instalación base</a></li>
+                    <li><a href="#interfaces">Configuración de red</a></li>
+                    <li><a href="#ipv6">IPv6 y radvd</a></li>
+                    <li><a href="#forwarding">Reenvío de paquetes</a></li>
+                    <li><a href="#firewall">Firewall y NAT</a></li>
+                    <li><a href="#wireguard">VPN WireGuard</a></li>
+                    <li><a href="#servicios">Servicios adicionales</a></li>
+                    <li><a href="#wifi">Configuración WiFi</a></li>
+                    <li><a href="#verificacion">Verificación y testing</a></li>
+                    <li><a href="#esquema">Esquema de red</a></li>
+                    <li><a href="#mantenimiento">Mantenimiento</a></li>
+                </ul>
+            </div>
+
+            <!-- Introducción -->
+            <section id="introduccion">
+                <h2><span class="step-counter">1</span>Introducción</h2>
+                <div class="intro-section">
+                    <p>Este tutorial te guiará paso a paso para crear tu propio router usando un MiniPC con Debian. Obtendrás un router personalizable con funciones avanzadas como firewall, VPN, bloqueador de anuncios y soporte completo para IPv4 e IPv6.</p>
+                </div>
+
+                <h3>¿Por qué crear un router propio?</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <h4>🚀 Mayor rendimiento</h4>
+                        <p>Superior a routers comerciales con hardware dedicado</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>🎛️ Control total</h4>
+                        <p>Configuración completa sobre todos los aspectos</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>🔧 Flexibilidad</h4>
+                        <p>Añade servicios y funciones según necesites</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>🔒 Mejor seguridad</h4>
+                        <p>Firewall personalizado y actualizaciones constantes</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>🛡️ Privacidad</h4>
+                        <p>Control completo sobre DNS y tráfico</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>💰 Coste-efectivo</h4>
+                        <p>Hardware económico con prestaciones superiores</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Requisitos de Hardware -->
+            <section id="requisitos">
+                <h2><span class="step-counter">2</span>Requisitos de Hardware</h2>
+                
+                <div class="hardware-requirements">
+                    <h4>Hardware mínimo recomendado:</h4>
+                    <ul>
+                        <li><strong>CPU:</strong> Intel Celeron o superior (4 núcleos recomendado)</li>
+                        <li><strong>RAM:</strong> 4 GB mínimo</li>
+                        <li><strong>Almacenamiento:</strong> SSD de 64 GB o más</li>
+                        <li><strong>Interfaces de red:</strong> Mínimo 2 puertos Ethernet</li>
+                    </ul>
+                </div>
+
+                <h3>Identificar interfaces de red</h3>
+                <div class="command-block">ip link show</div>
+                
+                <div class="file-config">
+                    <div class="file-header">Ejemplo de salida:</div>
+                    <div class="file-content">
+                        <pre data-language="output">enp2s0 → WAN (hacia ISP)
+enp3s0 → LAN (hacia red interna)</pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Instalación base -->
+            <section id="instalacion">
+                <h2><span class="step-counter">3</span>Instalación base de Debian</h2>
+                
+                <ol>
+                    <li><strong>Descarga Debian</strong> desde <a href="https://www.debian.org/" target="_blank">debian.org</a></li>
+                    <li><strong>Instala Debian</strong> en tu MiniPC</li>
+                    <li><strong>Actualiza el sistema:</strong></li>
+                </ol>
+
+                <div class="command-block">sudo apt update && sudo apt upgrade -y</div>
+
+                <p><strong>Instala paquetes necesarios:</strong></p>
+                <div class="command-block">sudo apt install systemd-networkd nftables radvd wireguard-tools curl wget -y</div>
+            </section>
+
+            <!-- Configuración de interfaces -->
+            <section id="interfaces">
+                <h2><span class="step-counter">4</span>Configuración de interfaces de red</h2>
+
+                <h3>Habilitar systemd-networkd</h3>
+                <div class="command-block">sudo systemctl enable systemd-networkd
+sudo systemctl disable networking
+sudo systemctl disable dhcpcd</div>
+
+                <h3>Configurar interfaz WAN (enp2s0)</h3>
+                <div class="file-config">
+                    <div class="file-header">/etc/systemd/network/05-enp2s0.network</div>
+                    <div class="file-content">
+                        <pre data-language="ini">[Match]
+Name=enp2s0
+
+[Network]
+DHCP=no
+DNS=8.8.8.8 8.8.4.4 2001:4860:4860::8888 2001:4860:4860::8844 1.1.1.1 1.0.0.1 2606:4700:4700::1111 2606:4700:4700::1001
+IPv6PrivacyExtensions=yes
+Gateway=192.168.1.1
+Address=192.168.1.15/24</pre>
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    Cambia la IP <code>192.168.1.15/24</code> y gateway <code>192.168.1.1</code> según tu configuración de ISP.
+                </div>
+
+                <h3>Configurar interfaz LAN (enp3s0)</h3>
+                <div class="file-config">
+                    <div class="file-header">/etc/systemd/network/05-enp3s0.network</div>
+                    <div class="file-content">
+                        <pre data-language="ini">[Match]
+Name=enp3s0
+
+[Network]
+DHCP=no
+IPv6PrivacyExtensions=yes
+Address=192.168.10.1/24</pre>
+                    </div>
+                </div>
+
+                <h3>Reiniciar servicios de red</h3>
+                <div class="command-block">sudo systemctl restart systemd-networkd
+sudo systemctl start systemd-networkd</div>
+            </section>
+
+            <!-- IPv6 -->
+            <section id="ipv6">
+                <h2><span class="step-counter">5</span>Configurar IPv6 con radvd</h2>
+
+                <h3>Instalar radvd</h3>
+                <div class="command-block">sudo apt install radvd -y</div>
+
+                <h3>Configurar radvd</h3>
+                <div class="file-config">
+                    <div class="file-header">/etc/radvd.conf</div>
+                    <div class="file-content">
+                        <pre data-language="conf">interface enp3s0 {
+    AdvSendAdvert on;
+    prefix 2a0c:5a81::/64 {
+        AdvOnLink on;
+        AdvPreferredLifetime 86400;
+    };
+    RDNSS fe80::1ac0:4dff:fe13:f3cb {
+    };
+};</pre>
+                    </div>
+                </div>
+
+                <h3>Habilitar radvd</h3>
+                <div class="command-block">sudo systemctl enable radvd
+sudo systemctl start radvd</div>
+            </section>
+
+            <!-- Forwarding -->
+            <section id="forwarding">
+                <h2><span class="step-counter">6</span>Activar reenvío de paquetes</h2>
+
+                <p>Edita <code>/etc/sysctl.conf</code> y añade/descomenta:</p>
+                <div class="file-config">
+                    <div class="file-header">/etc/sysctl.conf</div>
+                    <div class="file-content">
+                        <pre data-language="conf">net.ipv4.ip_forward=1
+net.ipv6.conf.all.forwarding=1</pre>
+                    </div>
+                </div>
+
+                <p>Aplicar cambios:</p>
+                <div class="command-block">sudo sysctl -p</div>
+            </section>
+
+            <!-- Firewall -->
+            <section id="firewall">
+                <h2><span class="step-counter">7</span>Configurar Firewall y NAT con nftables</h2>
+
+                <div class="file-config">
+                    <div class="file-header">/etc/nftables.conf</div>
+                    <div class="file-content">
+                        <pre data-language="bash">flush ruleset
+
+define DEV_PRIVATE = enp3s0
+define DEV_WORLD = enp2s0
+define DEV_WG0 = wg0
+define NET_PRIVATE = 192.168.10.0/24
+define NET_WORLD = 192.168.1.0/24
+define NET_WG0 = 10.8.0.0/24
+define TORRENT_PORTS = 51415
+
+##############
+# IPv4 rules #
+##############
+table ip filter {
+    chain inbound_world {
+        udp dport 51821 counter accept
+        udp dport $TORRENT_PORTS counter accept
+        tcp dport $TORRENT_PORTS counter accept
+        counter drop
+    }
+    
+    chain inbound_private {
+        icmp type echo-request limit rate 10/second counter accept
+        udp dport {53, 67, 123, 20002, 5335, 5353, 42202, 51821} counter accept
+        tcp dport 0-65535 counter accept
+        counter drop
+    }
+    
+    chain input {
+        type filter hook input priority filter; policy drop;
+        ct state {established, related} accept
+        ct state invalid drop
+        iifname vmap { lo : accept, $DEV_WORLD : jump inbound_world, $DEV_PRIVATE : jump inbound_private, $DEV_WG0 : jump inbound_private }
+        counter drop
+    }
+    
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+        ct state {established, related} accept
+        ct state invalid drop
+        iifname $DEV_PRIVATE counter accept
+        iifname { $DEV_WG0, $DEV_PRIVATE } oifname $DEV_WORLD counter accept
+        counter drop
+    }
+    
+    chain output {
+        type filter hook output priority filter; policy accept;
+    }
+}
+
+table ip nat {
+    chain prerouting {
+        type nat hook prerouting priority dstnat; policy accept;
+        iifname $DEV_WORLD tcp dport $TORRENT_PORTS dnat ip to 192.168.10.33:$TORRENT_PORTS
+        iifname $DEV_WORLD udp dport $TORRENT_PORTS dnat ip to 192.168.10.33:$TORRENT_PORTS
+    }
+    
+    chain postrouting {
+        type nat hook postrouting priority srcnat; policy accept;
+        iifname { $DEV_WG0, $DEV_PRIVATE } oifname $DEV_WORLD masquerade
+    }
+}
+
+##############
+# IPv6 rules #
+##############
+table ip6 filter {
+    chain rfc4890 {
+        ip6 nexthdr ipv6-icmp icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem, echo-request, echo-reply } accept
+        ip6 nexthdr ipv6-icmp icmpv6 type { nd-neighbor-solicit, nd-neighbor-advert, nd-router-advert, nd-router-solicit } ip6 hoplimit 255 accept
+        return
+    }
+    
+    chain inbound_world {
+        udp dport 51821 accept
+        udp dport 546 accept
+        udp dport 547 accept
+        udp dport $TORRENT_PORTS accept
+        tcp dport $TORRENT_PORTS accept
+        jump rfc4890
+        drop
+    }
+    
+    chain inbound_private {
+        udp dport 0-65535 accept
+        tcp dport 0-65535 accept
+        jump rfc4890
+        drop
+    }
+    
+    chain input {
+        type filter hook input priority filter; policy drop;
+        ct state {established, related} accept
+        iifname vmap { lo : accept, $DEV_WORLD : jump inbound_world, $DEV_PRIVATE : jump inbound_private, $DEV_WG0 : jump inbound_private }
+        drop
+    }
+    
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+        ct state {established, related} accept
+        iifname $DEV_PRIVATE accept
+        iifname { $DEV_WG0, $DEV_PRIVATE } oifname $DEV_WORLD accept
+    }
+    
+    chain output {
+        type filter hook output priority filter; policy accept;
+        jump rfc4890
+    }
+}
+
+table ip6 nat {
+    chain prerouting {
+        type nat hook prerouting priority dstnat; policy accept;
+    }
+    
+    chain postrouting {
+        type nat hook postrouting priority srcnat; policy accept;
+        iifname { $DEV_WG0, $DEV_PRIVATE } oifname $DEV_WORLD masquerade
+    }
+}</pre>
+                    </div>
+                </div>
+
+                <h3>Habilitar nftables</h3>
+                <div class="command-block">sudo systemctl enable nftables
+sudo systemctl start nftables</div>
+            </section>
+
+            <!-- WireGuard -->
+            <section id="wireguard">
+                <h2><span class="step-counter">8</span>Configurar WireGuard VPN</h2>
+
+                <h3>Generar claves</h3>
+                <div class="command-block"># Generar clave privada del servidor
+wg genkey > /etc/wireguard/server_private.key
+
+# Generar clave pública del servidor
+wg pubkey < /etc/wireguard/server_private.key > /etc/wireguard/server_public.key
+
+# Generar claves del cliente
+wg genkey > /etc/wireguard/client_private.key
+wg pubkey < /etc/wireguard/client_private.key > /etc/wireguard/client_public.key</div>
+
+                <h3>Configurar servidor WireGuard</h3>
+                <div class="file-config">
+                    <div class="file-header">/etc/wireguard/wg0.conf</div>
+                    <div class="file-content">
+                        <pre data-language="ini">[Interface]
+Address = 10.8.0.1/24
+ListenPort = 51821
+PrivateKey = CONTENIDO_DE_server_private.key
+
+[Peer]
+PublicKey = CONTENIDO_DE_client_public.key
+AllowedIPs = 10.8.0.2/32</pre>
+                    </div>
+                </div>
+
+                <h3>Habilitar WireGuard</h3>
+                <div class="command-block">sudo systemctl enable wg-quick@wg0
+sudo systemctl start wg-quick@wg0</div>
+            </section>
+
+            <!-- Servicios adicionales -->
+            <section id="servicios">
+                <h2><span class="step-counter">9</span>Servicios adicionales</h2>
+
+                <h3>Pi-hole (Bloqueador de anuncios)</h3>
+                <div class="command-block"># Descargar e instalar Pi-hole
+curl -sSL https://install.pi-hole.net | bash</div>
+
+                <div class="note-box">
+                    Durante la instalación:
+                    <ul>
+                        <li>Selecciona la interfaz LAN (enp3s0)</li>
+                        <li>Configura la IP estática: 192.168.10.1</li>
+                        <li>Elige Google DNS como upstream inicialmente</li>
+                    </ul>
+                </div>
+
+                <h3>Unbound (DNS recursivo)</h3>
+                <div class="command-block"># Instalar Unbound
+sudo apt install unbound -y
+
+# Configurar Unbound como upstream para Pi-hole
+sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf</div>
+
+                <div class="file-config">
+                    <div class="file-header">/etc/unbound/unbound.conf.d/pi-hole.conf</div>
+                    <div class="file-content">
+                        <pre data-language="conf">server:
+  interface: 127.0.0.1
+  interface: ::1
+  access-control: 127.0.0.0/8 allow</pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer style="text-align: center; padding: 2rem; background: var(--dark-bg); color: white; margin-top: 2rem;">
+            <p>Regresa a <a href="./proyectos.html" style="color: var(--accent-color); text-decoration: none;">Proyectos</a></p>
+        </footer>
+
+        <button class="back-to-top" id="backToTop">↑</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

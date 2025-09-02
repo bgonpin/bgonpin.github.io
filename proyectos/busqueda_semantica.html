@@ -216,6 +216,60 @@
             font-size: 0.9em;
             color: #cccccc;
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            padding-top: 20px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 2px solid #555;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 10000;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
     </style>
 </head>
 <body>
@@ -516,6 +570,52 @@ Mostrar información detallada de la imagen con hash específico<br>
         <p style="margin-top: 15px; font-size: 0.9em; color: #bdc3c7;">
             🏗️ Desarrollado como herramienta de investigación en procesamiento de lenguaje natural aplicado a bases de datos de imágenes
         </p>
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modalImage" alt="Imagen ampliada">
+            <div id="caption"></div>
+        </div>
     </div>
+
+    <script>
+        // Función para abrir el modal con la imagen
+        function openModal(event) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const caption = document.getElementById('caption');
+
+            modal.style.display = 'block';
+            modalImg.src = event.target.src;
+            caption.innerHTML = event.target.alt;
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Agregar event listeners a las imágenes de la galería
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryImages = document.querySelectorAll('.gallery-item img');
+
+            galleryImages.forEach(img => {
+                // Solo las imágenes de capturas de pantalla (que contienen "semantica" en el path)
+                if (img.src.includes('semantica') || img.src.includes('Seleccion_')) {
+                    img.style.cursor = 'pointer';
+                    img.addEventListener('click', openModal);
+                }
+            });
+
+            // Event listener para cerrar el modal
+            document.querySelector('.close').addEventListener('click', closeModal);
+
+            // Cerrar modal al hacer click fuera de la imagen
+            document.getElementById('imageModal').addEventListener('click', function(event) {
+                if (event.target === this) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

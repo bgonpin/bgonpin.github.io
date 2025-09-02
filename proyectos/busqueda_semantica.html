@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Sistema de Consulta de Imágenes con IA</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #121212;
+        }
+
+        .container {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+            margin: 20px 0;
+            border: 1px solid #333;
+        }
+
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #b0b0b0;
+            border-bottom: 2px solid #555;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            color: #cccccc;
+            margin-top: 30px;
+        }
+
+        .highlight {
+            background-color: #2c2c2c;
+            padding: 20px;
+            border-left: 5px solid #555;
+            margin: 20px 0;
+        }
+
+        .warning {
+            background-color: #3a2a1a;
+            border: 1px solid #5a3a2a;
+            color: #e6d7d7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .example {
+            background-color: #252525;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            color: #ffffff;
+            border: 1px solid #444;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s;
+            color: #e0e0e0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .requirements {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .req-item {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #252525;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            color: #e0e0e0;
+        }
+
+        .step {
+            background-color: #252525;
+            border: 2px solid #444;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            counter-increment: step-counter;
+            position: relative;
+        }
+
+        .step:before {
+            content: counter(step-counter);
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background-color: #555;
+            color: #ffffff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        code {
+            background-color: #333;
+            color: #ffaa00;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .future-features {
+            background-color: #1a2a1a;
+            border: 1px solid #2a3a2a;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #e0e0e0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #0d0d0d;
+            color: #b0b0b0;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .beta-badge {
+            background-color: #4a4a0a;
+            color: #ffff99;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8em;
+            border: 1px solid #555;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .gallery-item {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            color: #e0e0e0;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255,255,255,0.1);
+        }
+
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖼️ Sistema de Consulta de Imágenes con IA</h1>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <span class="beta-badge">VERSIÓN BETA</span>
+        </div>
+
+        <div class="highlight">
+            <p><strong>Una aplicación innovadora que permite realizar consultas en lenguaje natural sobre una base de datos de imágenes MongoDB, utilizando modelos de lenguaje avanzados para convertir texto plano en consultas de base de datos optimizadas.</strong></p>
+        </div>
+
+        <h2>📋 Requisitos Mínimos del Sistema</h2>
+        <div class="requirements">
+            <h3>🖥️ Hardware Recomendado</h3>
+
+            <div class="req-item">
+                <span style="margin-right: 15px;">🎮</span>
+                <div>
+                    <strong>Tarjeta Gráfica:</strong> Compatible con CUDA
+                    <div style="color: #aaaaaa; font-size: 0.9em;">Necesaria para acelerar el procesamiento de IA</div>
+                </div>
+            </div>
+
+            <div class="req-item">
+                <span style="margin-right: 15px;">🧠</span>
+                <div>
+                    <strong>Modelo de IA:</strong> Ollama gemma3:4b
+                    <div style="color: #aaaaaa; font-size: 0.9em;">Modelo de lenguaje optimizado para tareas de consulta</div>
+                </div>
+            </div>
+
+            <div class="req-item">
+                <span style="margin-right: 15px;">📏</span>
+                <div>
+                    <strong>Ventana de Contexto:</strong> 40,000 tokens
+                    <div style="color: #aaaaaa; font-size: 0.9em;">Longitud máxima del contexto que puede procesar el modelo</div>
+                </div>
+            </div>
+
+            <div class="req-item">
+                <span style="margin-right: 15px;">💾</span>
+                <div>
+                    <strong>Memoria VRAM:</strong> 24 GB mínimo
+                    <div style="color: #aaaaaa; font-size: 0.9em;">Memoria dedicada de la tarjeta gráfica</div>
+                </div>
+            </div>
+
+            <div class="req-item">
+                <span style="margin-right: 15px;">🧵</span>
+                <div>
+                    <strong>Memoria RAM:</strong> 32 GB mínimo
+                    <div style="color: #aaaaaa; font-size: 0.9em;">Memoria del sistema para operaciones generales</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> El sistema requiere una configuración de hardware especializada para funcionar correctamente. Asegúrese de tener todos los componentes antes de proceder con la instalación.
+        </div>
+
+        <h2>🚀 Características Principales</h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🗣️</div>
+                <h4>Consultas en Lenguaje Natural</h4>
+                <p>Pregunta en español o inglés sobre tus imágenes usando frases naturales como "¿Cuántas fotos tengo tomadas en 2024?"</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h4>Detección Inteligente de Tipo de Consulta</h4>
+                <p>El sistema identifica automáticamente si deseas contar elementos, listar resultados o buscar información específica.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h4>Limpieza Automática de JSON</h4>
+                <p>Función avanzada que corrige automáticamente errores comunes en el JSON generado por IA.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h4>Interfaz Gráfica Moderna</h4>
+                <p>Interfaz intuitiva desarrollada en PyQt6 con funciones avanzadas de gestión de texto.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h4>Formateo Inteligente de Respuestas</h4>
+                <p>Las respuestas se adaptan al contexto: conteos concisos, listas organizadas, búsquedas detalladas.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💾</div>
+                <h4>Guardado Automático de Sesiones</h4>
+                <p>Todas las consultas se guardan automáticamente en archivos de texto organizados por fecha.</p>
+            </div>
+        </div>
+
+        <h2>📝 Esquema de la Base de Datos</h2>
+        <div class="highlight">
+            <p>El sistema trabaja con una base de datos MongoDB llamada "album_2" con una colección "imagenes" que contiene información detallada sobre cada imagen:</p>
+        </div>
+
+        <div style="background-color: #252525; padding: 20px; border-radius: 5px; margin: 20px 0; border: 1px solid #444; color: #e0e0e0;">
+            <h4>Campos principales de cada documento de imagen:</h4>
+            <ul>
+                <li><code>nombre_archivo</code>: Nombre del archivo de la imagen</li>
+                <li><code>ruta_completa</code>: Ubicación completa del archivo</li>
+                <li><code>ancho/alto</code>: Dimensiones de la imagen en píxeles</li>
+                <li><code>fecha_creacion_*</code>: Información temporal de creación (día, mes, año, hora, minuto)</li>
+                <li><code>objetos_detectados</code>: Array de objetos identificados por IA con porcentaje de confianza</li>
+                <li><code>descripcion</code>: Descripción textual generada por IA</li>
+                <li><code>visto/descrito</code>: Marcadores booleanos para gestión de estado</li>
+                <li><code>hash_sha512</code>: Hash para verificación de integridad</li>
+            </ul>
+        </div>
+
+        <h2>🔧 Instalación y Configuración</h2>
+        <div class="step">
+            <h4>1. Instalar Dependencias Python</h4>
+            <div class="example">
+pip install pymongo langchain langchain-community langchain-ollama pyqt6
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>2. Instalar y Configurar Ollama</h4>
+            <p>Descargue e instale Ollama desde <a href="https://ollama.ai" target="_blank">ollama.ai</a></p>
+            <div class="example">
+# Descargar el modelo gemma3:4b con contexto extendido
+ollama pull gemma3:4b
+            </div>
+            <p>⚠️ Asegúrese de que el modelo esté configurado con una ventana de contexto de 40,000 tokens.</p>
+        </div>
+
+        <div class="step">
+            <h4>3. Configurar MongoDB</h4>
+            <p>Inicie el servicio MongoDB localmente en el puerto 27017 y asegúrese de tener la base de datos "album_2" con la colección "imagenes" poblada con datos de imágenes procesadas.</p>
+        </div>
+
+        <div class="step">
+            <h4>4. Ejecutar la Aplicación</h4>
+            <div class="example">
+python 1-busqueda_2_gemma3_4b_40K_mejorada_v1_interfaz_qt.py
+            </div>
+            <p><a href="../codigo/1-busqueda_2_gemma3:4b_40K mejorada v1 interfaz qt.py" target="_blank">📁 Descargar código fuente</a></p>
+        </div>
+
+        <h2>💡 Tipos de Consultas Soportadas</h2>
+
+        <h3>1. Consultas de Conteo</h3>
+        <div class="example">
+¿Cuántas imágenes tienen un ancho mayor a 1000 píxeles?<br>
+¿Cuántas fotos tengo tomadas en el mes de enero?<br>
+¿Cuántas imágenes contienen personas?<br>
+        </div>
+
+        <h3>2. Consultas de Listado</h3>
+        <div class="example">
+Muestra todas las imágenes tomadas en 2024<br>
+Lista las fotos más recientes ordenadas por fecha<br>
+Dime qué imágenes tienen objetos detectados<br>
+        </div>
+
+        <h3>3. Consultas de Búsqueda Específica</h3>
+        <div class="example">
+Encuéntrame la imagen llamada "foto001.jpg"<br>
+Busca imágenes con una descripción que contenga "playa"<br>
+Mostrar información detallada de la imagen con hash específico<br>
+        </div>
+
+        <h2>🎨 Funcionalidades de la Interfaz</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; margin: 20px 0;">
+
+            <div class="feature-card">
+                <h4>🖱️ Campo de Consulta</h4>
+                <p>Área de entrada de texto donde puedes escribir tus preguntas en lenguaje natural.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>🔍 Botón Buscar</h4>
+                <p>Ejecuta la consulta actual y muestra los resultados formateados.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>💾 Auto-guardado</h4>
+                <p>Activa/desactiva el guardado automático de consultas y respuestas en archivos.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>📂 Historial</h4>
+                <p>Muestra los últimos archivos guardados y su ubicación en el sistema.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>🗑️ Opciones de Limpieza</h4>
+                <p>Menú avanzado para limpiar resultados, mantener encabezados, o eliminar consultas específicas.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>📋 Menú Contextual</h4>
+                <p>Click derecho en el área de resultados para copiar, filtrar solo consultas/resultados, etc.</p>
+            </div>
+        </div>
+
+        <h2>⌨️ Atajos de Teclado</h2>
+        <div style="background-color: #252525; color: #e0e0e0; padding: 20px; border-radius: 5px; margin: 20px 0; border: 1px solid #444;">
+            <ul>
+                <li><code>Ctrl+L</code>: Limpiar el área de resultados</li>
+                <li><code>Ctrl+H</code>: Mostrar historial de consultas</li>
+                <li><code>Ctrl+S</code>: Activar/desactivar auto-guardado</li>
+                <li><code>Ctrl+Q</code>: Salir de la aplicación</li>
+            </ul>
+        </div>
+
+        <h2>📁 Sistema de Archivos de Logs</h2>
+        <div class="highlight">
+            <p>Todas las consultas se guardan automáticamente en la carpeta <code>consultas_imagenes/</code> con el siguiente formato:</p>
+        </div>
+
+        <div style="background-color: #252525; color: #e0e0e0; padding: 20px; border-radius: 5px; margin: 20px 0; border: 1px solid #444;">
+            <h4>Estructura de archivos:</h4>
+            <ul>
+                <li><code>consulta_YYYYMMDD_HHMMSS.txt</code>: Consultas individuales con pipeline MongoDB</li>
+                <li><code>sesion_completa_YYYYMMDD_HHMMSS.txt</code>: Resumen completo de todas las consultas en una sesión</li>
+            </ul>
+        </div>
+
+        <h2>🔬 Notas sobre Versiones Beta y Desarrollo</h2>
+<p style="background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 5px; margin: 20px 0;">
+© 2025 - Sistema desarrollado en Python como herramienta experimental de investigación en procesamiento de lenguaje natural aplicado a consultas de base de datos de imágenes. Versión beta con funcionalidades avanzadas en evolución constante.
+</p>
+
+                <li><strong>🖼️ Visor de Imágenes Integrado:</strong> Visualización directa de resultados con navegación intuitiva</li>
+                <li><strong>📈 Análisis Estadístico:</strong> Gráficos y métricas avanzadas sobre el conjunto de datos</li>
+                <li><strong>🔍 Filtros Avanzados:</strong> Criterios de búsqueda más complejos y personalizables</li>
+                <li><strong>🌐 Interfaz Web:</strong> Versión accesible desde navegador web</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <strong>💡 Nota sobre Versión Beta:</strong> Esta es una versión beta del sistema. Algunas funciones podrían estar sujetas a cambios y puede contener errores menores. Se recomienda hacer pruebas exhaustivas antes del uso en producción.
+        </div>
+
+        <h2>❓ Solución de Problemas</h2>
+        <div style="background-color: #252525; color: #e0e0e0; padding: 20px; border-radius: 5px; margin: 20px 0; border: 1px solid #444;">
+            <h4>Problemas comunes y soluciones:</h4>
+            <ul>
+                <li><strong>Error de conexión MongoDB:</strong> Verificar que MongoDB esté ejecutándose en el puerto 27017</li>
+                <li><strong>Error de modelo Ollama:</strong> Ejecutar <code>ollama pull gemma3:4b</code> para actualizar el modelo</li>
+                <li><strong>Resultados inesperados:</strong> Verificar el esquema de datos en MongoDB coincide con lo esperado</li>
+                <li><strong>Memoria insuficiente:</strong> Reducir el tamaño del contexto o aumentar la RAM del sistema</li>
+            </ul>
+        </div>
+
+        <h2>📸 Capturas de Pantalla</h2>
+        <div class="highlight">
+            <p>Visualiza el funcionamiento de la aplicación a través de estas capturas de pantalla que muestran diferentes aspectos del sistema de consulta semántica.</p>
+        </div>
+
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="../imagenes/semantica/Selección_014.png" alt="Captura de pantalla del sistema 1">
+                <p>Interfaz principal de consulta</p>
+            </div>
+            <div class="gallery-item">
+                <img src="../imagenes/semantica/Selección_015.png" alt="Captura de pantalla del sistema 2">
+                <p>Resultado de búsqueda de imágenes</p>
+            </div>
+            <div class="gallery-item">
+                <img src="../imagenes/semantica/Selección_016.png" alt="Captura de pantalla del sistema 3">
+                <p>Procesamiento de consultas complejas</p>
+            </div>
+            <div class="gallery-item">
+                <img src="../imagenes/semantica/Selección_017.png" alt="Captura de pantalla del sistema 4">
+                <p>Resultado de consulta</p>
+            </div>
+            <div class="gallery-item">
+                <img src="../imagenes/semantica/Selección_018.png" alt="Captura de pantalla del sistema 5">
+                <p>Resultado de consulta</p>
+            </div>
+            <div class="gallery-item">
+                <img src="../imagenes/semantica/Selección_019.png" alt="Captura de pantalla del sistema 6">
+                <p>Menú de opciones</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h3>📚 Documentación Técnica</h3>
+        <p>Para soporte técnico, reportes de bugs o consultas avanzadas, consulte la documentación completa del proyecto en el repositorio GitHub.</p>
+        <p style="margin-top: 15px;">
+            <a href="proyectos.html" style="color: #bdc3c7; text-decoration: underline;">⬅️ Volver a Lista de Proyectos</a>
+        </p>
+        <p style="margin-top: 15px; font-size: 0.9em; color: #bdc3c7;">
+            🏗️ Desarrollado como herramienta de investigación en procesamiento de lenguaje natural aplicado a bases de datos de imágenes
+        </p>
+    </div>
+</body>
+</html>

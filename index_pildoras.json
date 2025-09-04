@@ -1507,6 +1507,28 @@
       ],
       "fechaActualizacion": null,
       "ruta": "pildoras/zeek.html"
+    },
+    {
+      "archivo": "empleo_etiquetar_imagenes",
+      "titulo": "Píldora 65: Tutorial del Script etiquetar.py",
+      "descripcion": "El script etiquetar.py es una aplicación de escritorio desarrollada con PyQt5 que permite visualizar y etiquetar imágenes almacenadas en una base de datos MongoDB.",
+      "palabrasClave": [
+        "para",
+        "etiquetar",
+        "imágenes",
+        "script",
+        "mongodb",
+        "pyqt5",
+        "aplicación",
+        "escritorio",
+        "visualizar",
+        "etiquetas",
+        "personas",
+        "py",
+        "etiquetar_imagenes"
+      ],
+      "fechaActualizacion": "04-09-2025",
+      "ruta": "pildoras/empleo_etiquetar_imagenes.html"
     }
   ],
   "keywords": {
@@ -7787,6 +7809,6 @@
     "created": "2025-08-25T20:42:54.086Z",
     "description": "Índice de archivos HTML en la carpeta pildoras para búsquedas por palabras clave",
     "version": "1.0",
-    "totalFiles": 52
+    "totalFiles": 53
   }
 }

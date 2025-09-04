@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial del Script etiquetar.py</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2, h3 { color: #333; }
+        p { line-height: 1.6; }
+        code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
+        pre { background-color: #f4f4f4; padding: 10px; border-radius: 4px; overflow-x: auto; }
+        .section { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Tutorial del Script etiquetar.py</h1>
+
+    <div class="section">
+        <h2>¿Qué hace el script?</h2>
+        <p>El script <code>etiquetar.py</code> es una aplicación de escritorio desarrollada con PyQt5 que permite visualizar y etiquetar imágenes almacenadas en una base de datos MongoDB. Específicamente, se utiliza para:</p>
+        <ul>
+            <li>Mostrar imágenes una por una desde una colección de la base de datos.</li>
+            <li>Etiquetar imágenes con nombres de personas (por ejemplo, para identificar individuos en fotos).</li>
+            <li>Navegar entre imágenes utilizando botones de navegación.</li>
+            <li>Agregar o eliminar etiquetas de personas para cada imagen.</li>
+            <li>Eliminar imágenes permanentemente si se requiere.</li>
+        </ul>
+        <p>La aplicación es útil para tareas de organización y catalogación de imágenes, especialmente en contextos donde se necesita clasificar o indexar contenido visual con metadatos como nombres de personas.</p>
+    </div>
+
+    <div class="section">
+        <h2>¿Cómo funciona?</h2>
+        <p>El script se ejecuta desde la línea de comandos con <code>python3 etiquetar.py</code> y abre una ventana gráfica azul oscura (tema personalizado). A continuación, se explica paso a paso cómo opera la aplicación:</p>
+
+        <h3>1. Conexión a la base de datos</h3>
+        <p>Al iniciar, el script se conecta a una base de datos MongoDB local (localhost, puerto 27017). Se conecta a la base de datos llamada 'album' y a la colección 'imagenes_2'. Si no encuentra imágenes en la base de datos, muestra un mensaje de error y se cierra.</p>
+        <pre><code># Ejemplo de conexión
+self.client = MongoClient('localhost', 27017)
+self.db = self.client['album']
+self.collection = self.db['imagenes_2']</code></pre>
+
+        <h3>2. Carga de imágenes</h3>
+        <p>El script consulta todas las imágenes de la colección. Cada imagen debe tener al menos un campo 'ruta' (ubicación del archivo de imagen) y opcionalmente 'personas' (lista de nombres de personas ya etiquetadas).</p>
+        <p>Al cargar cada imagen, la dimensión se ajusta a un ancho de 515 píxeles manteniendo la proporción de aspecto.</p>
+
+        <h3>3. Interfaz de usuario</h3>
+        <p>La ventana principal tiene:</p>
+        <ul>
+            <li><strong>Panel izquierdo:</strong> Muestra la imagen actual. La imagen se escala automáticamente para encajar en el espacio disponible.</li>
+            <li><strong>Panel derecho:</strong> Contiene controles para navegación, lista de personas etiquetadas, y opciones para agregar o eliminar etiquetas.</li>
+        </ul>
+        <p>Botones principales:</p>
+        <ul>
+            <li>"Anterior" / "Siguiente": Navegar entre imágenes.</li>
+            <li>"Eliminar Imagen": Borra la imagen del sistema de archivos y la base de datos.</li>
+            <li>"Eliminar Seleccionada": Quita una persona de la lista de etiquetas.</li>
+            <li>"Añadir Seleccionada": Agrega una persona seleccionada del menú desplegable.</li>
+            <li>"Añadir Manual": Permite ingresar manualmente una nueva etiqueta.</li>
+        </ul>
+
+        <h3>4. Etiquetado de imágenes</h3>
+        <p>Para etiquetar una imagen:</p>
+        <ol>
+            <li>Selecciona una persona del menú desplegable (con todos los nombres únicos disponibles) y haz clic en "Añadir Seleccionada".</li>
+            <li>O ingresa manualmente un nombre y haz clic en "Añadir Manual".</li>
+            <li>Las etiquetas se guardan automáticamente en la base de datos MongoDB.</li>
+        </ol>
+        <p>El menú desplegable se actualiza dinámicamente con nuevas personas agregadas.</p>
+
+        <h3>5. Navegación y control</h3>
+        <p>Usa los botones "Anterior" y "Siguiente" para moverte por las imágenes. Si intentas ir más allá de la primera o última imagen, se muestra un mensaje informativo.</p>
+        <p>Para eliminar una imagen:</p>
+        <ol>
+            <li>Haz clic en "Eliminar Imagen".</li>
+            <li>Confirma la acción en el cuadro de diálogo.</li>
+            <li>El archivo se borra del disco y el registro de la base de datos se elimina.</li>
+        </ol>
+
+        <h3>6. Cierre de la aplicación</h3>
+        <p>Cierra la ventana para salir. Ningún cambio queda pendiente de guardar, ya que los etiquetados se actualizan en tiempo real en la base de datos.</p>
+    </div>
+
+    <div class="section">
+        <h2>Requisitos y configuración</h2>
+        <h3>Dependencias</h3>
+        <ul>
+            <li>Python 3.x</li>
+            <li>PyQt5: Para la interfaz gráfica.</li>
+            <li>pymongo: Para la conexión a MongoDB.</li>
+            <li>MongoDB: Instalado y ejecutándose localmente.</li>
+        </ul>
+        <p>Instala las dependencias con <code>pip install PyQt5 pymongo</code>.</p>
+
+        <h3>Estructura de la base de datos</h3>
+        <p>La colección 'imagenes_2' debe contener documentos con la siguiente estructura aproximada:</p>
+        <pre><code>{
+    "_id": ObjectId,
+    "ruta": "/ruta/a/la/imagen.jpg",
+    "nombre": "nombrerelativo.jpg",
+    "personas": ["Persona1", "Persona2"]
+}</code></pre>
+        <p>El campo 'personas' es una lista de strings con los nombres. Si no existe, se crea automáticamente al agregar la primera etiqueta.</p>
+
+        <h3>Errores comunes</h3>
+        <ul>
+            <li>"ModuleNotFoundError: No module named 'PyQt5'": Instala PyQt5.</li>
+            <li>"No images found in database.": Verifica que hay documentos en la colección y que MongoDB esté ejecutándose.</li>
+            <li>Imagen no se muestra: Asegúrate de que la ruta al archivo sea correcta.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Ejemplos de uso</h2>
+        <p>Ejecuta el script:</p>
+        <pre><code>python3 etiquetar.py</code></pre>
+        <p>En la interfaz:</p>
+        <ul>
+            <li>Navega a una imagen sin etiquetas.</li>
+            <li>Ingresa "Juan" en el campo manual y añade.</li>
+            <li>Agrega más personas si es necesario.</li>
+            <li>Guarda cambios automáticamente y navega a la siguiente imagen.</li>
+        </ul>
+    </div>
+
+    <p>Este tutorial cubre los aspectos básicos. Para más detalles, revisa el código fuente comentado.</p>
+
+    <footer style="text-align: center;">
+        <p><a href="pildoras.html">Volver a Píldoras</a></p>
+    </footer>
+</body>
+</html>

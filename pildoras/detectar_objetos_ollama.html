@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual - Detector de Objetos con Ollama</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2e3440, #3b4252);
+            color: #eceff4;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #434c5e;
+        }
+
+        .content {
+            background: #2e3440;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            border: 1px solid #434c5e;
+        }
+
+        h1, h2, h3 {
+            color: #eceff4;
+            border-bottom: 2px solid #5e81ac;
+            padding-bottom: 5px;
+        }
+
+        h1 {
+            color: #eceff4;
+            border-bottom: none;
+        }
+
+        .code {
+            background-color: #3b4252;
+            color: #eceff4;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #5e81ac;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .terminal {
+            background-color: #2e3440;
+            color: #88c0d0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .warning {
+            background-color: #3b4252;
+            border: 1px solid #bf616a;
+            color: #d08770;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .info {
+            background-color: #3b4252;
+            border: 1px solid #5e81ac;
+            color: #88c0d0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #2e3440;
+            border: 1px solid #434c5e;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #434c5e;
+            color: #eceff4;
+        }
+
+        th {
+            background-color: #3b4252;
+            font-weight: bold;
+            color: #eceff4;
+        }
+
+        tr:nth-child(even) {
+            background-color: #3b4252;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #88c0d0;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #5e81ac;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #81a1c1;
+        }
+
+        .highlight {
+            background-color: #434c5e;
+            color: #eceff4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🖼️ Detector de Objetos en Imágenes</h1>
+        <p>Manual de Usuario - Versión con Menú Interactivo</p>
+    </div>
+
+    <div class="content">
+        <h2>📋 Descripción General</h2>
+        <p>
+            Este script es una herramienta avanzada de procesamiento de imágenes que utiliza inteligencia artificial
+            (a través de <span class="highlight">Ollama</span>) para detectar automáticamente objetos en imágenes almacenadas
+            en una base de datos <span class="highlight">MongoDB</span>. Cuenta con una interfaz de usuario interactiva
+            basada en menús con colores para facilitar su uso.
+        </p>
+
+        <p>
+            <strong>📁 Código Fuente:</strong> El script en Python está disponible para descarga y revisión:
+            <a href="../codigo/detectar_objetos_ollama.py" target="_blank" style="color: #5e81ac; text-decoration: underline;">detectar_objetos_ollama.py</a>
+        </p>
+
+        <h2>🎯 Funcionalidades Principales</h2>
+        <ul>
+            <li><strong>Detección de Objetos:</strong> Análisis automático de imágenes usando modelos de IA</li>
+            <li><strong>Filtro por Tamaño:</strong> Procesar solo imágenes menores a un tamaño específico en KB</li>
+            <li><strong>Filtro por Extensión:</strong> Procesar solo imágenes de un tipo de archivo determinado</li>
+            <li><strong>Interfaz Colorida:</strong> Menús interactivos con colores usando la librería Colorama</li>
+            <li><strong>Progreso en Tiempo Real:</strong> Indicador de progreso en una sola línea durante el procesamiento</li>
+            <li><strong>Control de Interrupciones:</strong> Posibilidad de detener la ejecución en cualquier momento</li>
+        </ul>
+
+        <h2>⚙️ Requisitos del Sistema</h2>
+        <h3>Software Requerido</h3>
+        <ul>
+            <li><strong>Python 3.7+</strong></li>
+            <li><strong>MongoDB</strong> ejecutándose en localhost:27017</li>
+            <li><strong>Ollama</strong> con modelo gemma3:4b instalado</li>
+        </ul>
+
+        <h3>Librerías Python</h3>
+        <div class="code">
+pip install ollama pymongo colorama
+        </div>
+
+        <h3>Estructura de Base de Datos</h3>
+        <p>El script requiere una base de datos MongoDB con:</p>
+        <ul>
+            <li><strong>Base de datos:</strong> album</li>
+            <li><strong>Colección:</strong> imagenes_2</li>
+            <li><strong>Campos requeridos por documento:</strong></li>
+            <ul>
+                <li><code>ruta</code>: Ruta completa al archivo de imagen</li>
+                <li><code>peso</code>: Tamaño del archivo en KB</li>
+                <li><code>objeto_procesado</code>: Booleano (opcional, se crea automáticamente)</li>
+            </ul>
+        </ul>
+
+        <h2>🚀 Cómo Usar el Script</h2>
+
+        <h3>Instalación de Dependencias</h3>
+        <div class="terminal">
+$ pip install ollama pymongo colorama<br>
+$ ollama pull gemma3:4b
+        </div>
+
+        <h3>Ejecución</h3>
+        <div class="terminal">
+$ python detectar_objetos_ollama con_menu.py
+        </div>
+
+        <h2>📱 Interfaz de Usuario</h2>
+
+        <h3>Menú Principal</h3>
+        <div class="code">
+==================================================<br>
+      DETECTOR DE OBJETOS EN IMÁGENES<br>
+==================================================<br>
+<br>
+Selecciona una opción:<br>
+1. Detectar objetos por tamaño (KB)<br>
+2. Detectar objetos por extensión<br>
+q. Salir<br>
+<br>
+Presiona 'q' en cualquier momento para salir
+        </div>
+
+        <h3>Opciones Disponibles</h3>
+
+        <table>
+            <tr>
+                <th>Opción</th>
+                <th>Descripción</th>
+                <th>Comportamiento</th>
+            </tr>
+            <tr>
+                <td><strong>1. Por Tamaño</strong></td>
+                <td>Filtra imágenes por tamaño máximo en KB</td>
+                <td>Solo procesa imágenes menores al límite especificado</td>
+            </tr>
+            <tr>
+                <td><strong>2. Por Extensión</strong></td>
+                <td>Filtra imágenes por tipo de archivo</td>
+                <td>Solo procesa imágenes con la extensión especificada</td>
+            </tr>
+            <tr>
+                <td><strong>q. Salir</strong></td>
+                <td>Cierra la aplicación</td>
+                <td>Termina la ejecución del programa</td>
+            </tr>
+        </table>
+
+        <h2>🔧 Ejemplos de Uso</h2>
+
+        <h3>Ejemplo 1: Procesar Imágenes Pequeñas</h3>
+        <div class="info">
+            <strong>Escenario:</strong> Procesar solo imágenes menores a 200KB<br>
+            <strong>Selección:</strong> Opción 1<br>
+            <strong>Entrada:</strong> 200<br>
+            <strong>Resultado:</strong> Solo se procesarán imágenes de menos de 200KB
+        </div>
+
+        <h3>Ejemplo 2: Procesar Solo JPG</h3>
+        <div class="info">
+            <strong>Escenario:</strong> Procesar solo imágenes JPG<br>
+            <strong>Selección:</strong> Opción 2<br>
+            <strong>Entrada:</strong> jpg<br>
+            <strong>Resultado:</strong> Solo se procesarán archivos con extensión .jpg
+        </div>
+
+        <h2>⚡ Cómo Funciona el Script</h2>
+
+        <ol>
+            <li><strong>Inicio:</strong> El script verifica las conexiones a MongoDB y Ollama</li>
+            <li><strong>Búsqueda:</strong> Consulta la base de datos por imágenes no procesadas</li>
+            <li><strong>Filtrado:</strong> Aplica el filtro seleccionado (tamaño o extensión)</li>
+            <li><strong>Procesamiento:</strong> Para cada imagen:
+                <ul>
+                    <li>Codifica la imagen en base64</li>
+                    <li>Envía a Ollama para análisis con el modelo gemma3:4b</li>
+                    <li>Extrae la lista de objetos detectados</li>
+                    <li>Actualiza la base de datos con los resultados</li>
+                </ul>
+            </li>
+            <li><strong>Reporte:</strong> Muestra estadísticas finales del procesamiento</li>
+        </ol>
+
+        <img src="../imagenes/detectar_objetos_ollama.png" alt="Muestra del script en proceso de detección de objetos" style="max-width:100%; height:auto; display:block; margin:20px auto;">
+
+        <h2>📊 Formato de Resultados</h2>
+
+        <h3>Estructura en MongoDB</h3>
+        <p>Cada documento procesado se actualiza con:</p>
+        <div class="code">
+{
+    "_id": ObjectId("..."),
+    "ruta": "/ruta/a/la/imagen.jpg",
+    "peso": 150.5,
+    "objeto_procesado": true,
+    "objetos": ["mesa", "silla", "computadora", "taza"]
+}
+        </div>
+
+        <h2>🔍 Detalles Técnicos</h2>
+
+        <h3>Modelo de IA</h3>
+        <ul>
+            <li><strong>Proveedor:</strong> Ollama</li>
+            <li><strong>Modelo:</strong> gemma3:4b</li>
+            <li><strong>Idioma:</strong> Español (configurable)</li>
+            <li><strong>Timeout:</strong> 40 segundos por imagen</li>
+        </ul>
+
+        <h3>Configuraciones</h3>
+        <ul>
+            <li><strong>Conexión MongoDB:</strong> localhost:27017</li>
+            <li><strong>Base de datos:</strong> album</li>
+            <li><strong>Colección:</strong> imagenes_2</li>
+            <li><strong>Límite de tamaño predeterminado:</strong> 512KB</li>
+        </ul>
+
+        <h2>🚨 Manejo de Errores</h2>
+
+        <div class="warning">
+            <strong>Errores Comunes:</strong>
+        </div>
+
+        <ul>
+            <li><strong>"Error al conectar a MongoDB":</strong> Asegúrese de que MongoDB esté ejecutándose</li>
+            <li><strong>"Modelo no encontrado":</strong> Ejecute <code>ollama pull gemma3:4b</code></li>
+            <li><strong>"Imagen no encontrada":</strong> Verifique que las rutas en la BD sean correctas</li>
+            <li><strong>Timeout:</strong> Imágenes muy complejas pueden exceder el límite de 40s</li>
+        </ul>
+
+        <h2>🎨 Características de la Interfaz</h2>
+
+        <ul>
+            <li><strong>Colores:</strong> Usa la librería Colorama para interfaz colorida</li>
+            <li><strong>Navegación:</strong> Menús claros con opciones numeradas</li>
+            <li><strong>Progreso:</strong> Indicador en una sola línea durante procesamiento</li>
+            <li><strong>Interrupciones:</strong> Soporte para Ctrl+C y 'q' en cualquier momento</li>
+        </ul>
+
+        <h2>📝 Notas Importantes</h2>
+
+        <div class="warning">
+            <ol>
+                <li>El script marca automáticamente las imágenes como procesadas, incluso si hay errores</li>
+                <li>Las imágenes se procesan en el orden que devuelve MongoDB</li>
+                <li>El progreso se muestra actualizado en tiempo real en una sola línea</li>
+                <li>Presiona 'q' en cualquier momento para cancelar operaciones</li>
+            </ol>
+        </div>
+
+        <h2>🔮 Mejoras Futuras</h2>
+        <ul>
+            <li>Soporte para múltiples modelos de Ollama</li>
+            <li>Configuración personalizable de timeouts</li>
+            <li>Exportación de resultados a diferentes formatos</li>
+            <li>Interfaz gráfica (GUI)</li>
+            <li>Procesamiento en paralelo para múltiples imágenes</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>Manual generado automáticamente - Detector de Objetos con Ollama v2.0</p>
+        <p>Para más información, consulte el código fuente o contacte al desarrollador</p>
+        <p><a href="pildoras.html">Volver a Píldoras</a></p>
+    </div>
+</body>
+</html>

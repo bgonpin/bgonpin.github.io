@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Añadir una Ruta Estática en Windows</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #444;
+        }
+        h1, h2 {
+            color: #4a9eff;
+            font-weight: 600;
+        }
+        code {
+            background-color: #404040;
+            color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #555;
+        }
+        .note {
+            background-color: #2a3a3a;
+            border-left: 5px solid #5a7d7d;
+            padding: 10px;
+            margin: 15px 0;
+            color: #d0e0e0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        footer a {
+            color: #4a9eff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #70b2ff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Tutorial: Cómo Añadir una Ruta Estática Permanente en Windows</h1>
+    <p>Este tutorial te guiará a través del proceso para agregar una ruta estática en tu sistema operativo Windows, garantizando que persista incluso después de reiniciar tu equipo.</p>
+    
+    <div class="note">
+        <strong>Importante:</strong> Debes ejecutar el Símbolo del sistema o PowerShell con permisos de administrador para poder modificar la tabla de enrutamiento del sistema.
+    </div>
+
+    <h2>Paso 1: Abrir el Símbolo del sistema (CMD) como Administrador</h2>
+    <p>Haz clic en el botón de inicio de Windows y busca "CMD" o "Símbolo del sistema". Haz clic derecho sobre el resultado y selecciona <strong>"Ejecutar como administrador"</strong>.</p>
+    
+    <h2>Paso 2: Usar el comando <code>route</code></h2>
+    <p>El comando principal para añadir una ruta estática es <code>route</code>. Para que la ruta sea permanente, debes incluir el parámetro <code>-p</code>.</p>
+    
+    <p>La sintaxis general del comando es la siguiente:</p>
+    <pre><code>route -p add [destino] MASK [máscara_de_subred] [puerta_de_enlace]</code></pre>
+
+    <h2>Ejemplo Práctico</h2>
+    <p>En este ejemplo, vamos a configurar una ruta para que el tráfico destinado a la red <code>10.0.0.0/24</code> sea dirigido a través de la puerta de enlace <code>192.168.1.12</code>. La máscara de subred <code>/24</code> se traduce en <code>255.255.255.0</code>.</p>
+    <p>Introduce el siguiente comando en la ventana del Símbolo del sistema y presiona Enter:</p>
+    <pre><code>route -p add 10.0.0.0 MASK 255.255.255.0 192.168.1.12</code></pre>
+    
+    <ul>
+        <li><strong><code>10.0.0.0</code>:</strong> La red de destino.</li>
+        <li><strong><code>255.255.255.0</code>:</strong> La máscara de subred de la red de destino.</li>
+        <li><strong><code>192.168.1.12</code>:</strong> La dirección IP de la puerta de enlace (el router o dispositivo que conoce el camino a la red de destino).</li>
+    </ul>
+
+    <h2>Paso 3: Verificar que la ruta se haya añadido</h2>
+    <p>Puedes confirmar que la ruta se agregó correctamente a la tabla de enrutamiento persistente. Para ello, ejecuta el siguiente comando:</p>
+    <pre><code>route print</code></pre>
+    <p>Busca en la sección "Rutas persistentes" y deberías ver una entrada para la red <code>10.0.0.0</code>.</p>
+    
+    <h2>Información Adicional</h2>
+    <p>Para eliminar una ruta estática que ya no necesitas, utiliza el siguiente comando, reemplazando la red de destino y la puerta de enlace con los valores correctos:</p>
+    <pre><code>route delete 10.0.0.0 MASK 255.255.255.0 192.168.1.12</code></pre>
+</div>
+
+<footer>
+    <a href="./pildoras.html">Volver a Píldoras</a>
+</footer>
+
+</body>
+</html>

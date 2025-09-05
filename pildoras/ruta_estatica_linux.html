@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Añadir una Ruta Estática en Ubuntu Linux</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #444;
+        }
+        h1, h2 {
+            color: #4a9eff;
+            font-weight: 600;
+        }
+        code {
+            background-color: #404040;
+            color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #555;
+        }
+        .note {
+            background-color: #2a3a3a;
+            border-left: 5px solid #5a7d7d;
+            padding: 10px;
+            margin: 15px 0;
+            color: #d0e0e0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        footer a {
+            color: #4a9eff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #70b2ff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Tutorial: Cómo Añadir una Ruta Estática Permanente en Ubuntu Linux</h1>
+    <p>Este tutorial te guiará a través del proceso para agregar una ruta estática en tu sistema Ubuntu Linux, garantizando que persista incluso después de reiniciar tu equipo.</p>
+
+    <div class="note">
+        <strong>Importante:</strong> Debes ejecutar los comandos con permisos de administrador usando <code>sudo</code> para poder modificar la tabla de enrutamiento del sistema.
+    </div>
+
+    <h2>Paso 1: Verificar la configuración de red actual</h2>
+    <p>Antes de añadir una ruta estática, es útil verificar la configuración actual de red y las rutas existentes:</p>
+    <pre><code>ip route show</code></pre>
+
+    <h2>Paso 2: Añadir una ruta estática temporal</h2>
+    <p>Para añadir una ruta estática que funcionará inmediatamente pero se perderá al reiniciar, usa el comando <code>ip route add</code>:</p>
+
+    <p>La sintaxis general del comando es la siguiente:</p>
+    <pre><code>sudo ip route add [destino/cidr] via [puerta_de_enlace]</code></pre>
+
+    <h2>Ejemplo Práctico</h2>
+    <p>En este ejemplo, vamos a configurar una ruta para que el tráfico destinado a la red <code>10.0.0.0/24</code> sea dirigido a través de la puerta de enlace <code>192.168.1.12</code>:</p>
+    <p>Ejecuta el siguiente comando:</p>
+    <pre><code>sudo ip route add 10.0.0.0/24 via 192.168.1.12</code></pre>
+
+    <ul>
+        <li><strong><code>10.0.0.0/24</code>:</strong> La red de destino con notación CIDR.</li>
+        <li><strong><code>192.168.1.12</code>:</strong> La dirección IP de la puerta de enlace (el router o dispositivo que conoce el camino a la red de destino).</li>
+    </ul>
+
+    <h2>Paso 3: Verificar que la ruta se haya añadido</h2>
+    <p>Puedes confirmar que la ruta se agregó correctamente ejecutando:</p>
+    <pre><code>ip route show</code></pre>
+    <p>Deberías ver una entrada similar a: <code>10.0.0.0/24 via 192.168.1.12 dev [interface] </code></p>
+
+    <h2>Paso 4: Hacer la ruta permanente (Netplan)</h2>
+    <p>Para que la ruta persista después de reinicios, necesitamos añadirla a la configuración de Netplan. Ubuntu moderno usa Netplan para la configuración de red.</p>
+
+    <p>1. Abre el archivo de configuración de Netplan (generalmente está en <code>/etc/netplan/</code>):</p>
+    <pre><code>sudo nano /etc/netplan/01-netcfg.yaml</code></pre>
+
+    <p>2. Añade la ruta estática en la sección de routes de tu interfaz de red. Un ejemplo de configuración sería:</p>
+    <pre><code>network:
+  version: 2
+  ethernets:
+    enp0s3:  # Cambia esto por tu interfaz de red
+      dhcp4: true
+      routes:
+        - to: 10.0.0.0/24
+          via: 192.168.1.12</code></pre>
+
+    <p>3. Guarda el archivo y aplica los cambios:</p>
+    <pre><code>sudo netplan apply</code></pre>
+
+    <h2>Información Adicional</h2>
+    <p>Para eliminar una ruta estática temporal, utiliza:</p>
+    <pre><code>sudo ip route delete 10.0.0.0/24 via 192.168.1.12</code></pre>
+
+    <p>Para eliminar una ruta permanente, edita el archivo de Netplan y elimina la entrada de routes correspondiente, luego ejecuta <code>sudo netplan apply</code>.</p>
+
+    <h2>Comandos alternativos (método tradicional)</h2>
+    <p>Si prefieres usar el método tradicional, puedes usar el comando <code>route</code>:</p>
+    <pre><code>sudo route add -net 10.0.0.0 netmask 255.255.255.0 gw 192.168.1.12</code></pre>
+
+    <p>Sin embargo, Netplan es el método recomendado para Ubuntu moderno.</p>
+</div>
+
+<footer>
+    <a href="./pildoras.html">Volver a Píldoras</a>
+</footer>
+
+</body>
+</html>

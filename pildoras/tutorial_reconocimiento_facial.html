@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Sistema de Reconocimiento Facial con Python</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            margin: 40px;
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        h1, h2, h3 {
+            color: #f0f6fc;
+            font-weight: normal;
+        }
+        code {
+            background-color: #161b22;
+            color: #f0f6fc;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            display: block;
+            white-space: pre-wrap;
+            margin: 15px 0;
+            border: 1px solid #21262d;
+            box-sizing: border-box;
+        }
+        .section {
+            background-color: #161b22;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #21262d;
+        }
+        .highlight {
+            background-color: #0d4429;
+            padding: 15px;
+            border-left: 5px solid #238636;
+            margin: 15px 0;
+            color: #f0f6fc;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        .code-container {
+            background-color: #161b22;
+            color: #c9d1d9;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+            border: 1px solid #21262d;
+        }
+        footer {
+            color: #8b949e;
+        }
+    </style>
+</head>
+<body>
+    <h1>🖥️ Tutorial: Sistema de Reconocimiento Facial con Python</h1>
+
+    <div class="section">
+        <h2>📋 Descripción del Sistema</h2>
+        <p>Este tutorial explica cómo utilizar el script <strong>1-reconocimento_facial.py</strong>, un sistema completo de reconocimiento facial desarrollado en Python que implementa dos algoritmos avanzados:</p>
+
+        <ul>
+            <li><strong>LBPH (Local Binary Pattern Histograms)</strong>: Algoritmo rápido y eficiente para datasets más pequeños</li>
+            <li><strong>SVM con características HOG</strong>: Algoritmo más preciso para datasets grandes con mayor precisión</li>
+        </ul>
+
+        <div class="highlight">
+            <strong>Características principales:</strong>
+            <ul>
+                <li>☆ Entrenamiento automático desde carpetas organizadas</li>
+                <li>☆ Reconocimiento en imágenes estáticas y tiempo real con webcam</li>
+                <li>☆ Extracción automática de rostros reconocidos</li>
+                <li>☆ Parámetros optimizados para reducir falsos positivos</li>
+                <li>☆ Redimensionamiento automático de imágenes grandes</li>
+                <li>☆ Menú interactivo fácil de usar</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>⚙️ Requisitos Previos</h2>
+
+        <h3>Instalación de Dependencias</h3>
+        <p>Antes de ejecutar el script, necesitas instalar las siguientes librerías de Python:</p>
+
+        <code>pip install opencv-python opencv-contrib-python scikit-learn numpy joblib</code>
+
+        <h3>Estructura del Dataset</h3>
+        <p>El sistema espera que las imágenes de entrenamiento estén organizadas de la siguiente manera:</p>
+
+        <code>
+rostros_dataset/
+├── Persona1/
+│   ├── foto1.jpg
+│   ├── foto2.jpg
+│   └── foto3.jpg
+├── Persona2/
+│   ├── foto1.jpg
+│   └── foto2.jpg
+└── PersonaN/
+    ├── foto1.jpg
+    └── foto2.jpg
+        </code>
+
+        <div class="highlight">
+            <strong>💡 Recomendaciones para un buen dataset:</strong>
+            <ul>
+                <li>Usa al menos 10-15 fotos por persona para mejores resultados</li>
+                <li>Incluye fotos con diferentes ángulos, iluminación y expresiones</li>
+                <li>Formato preferido: JPG o PNG</li>
+                <li>Resolución mínima: 100x100 píxeles</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🚀 Cómo Usar el Sistema</h2>
+
+        <h3>Paso 1: Ejecutar el Script</h3>
+        <code>python 1-reconocimento_facial.py</code>
+
+        <h3>Paso 2: Menú Principal</h3>
+        <p>Después de ejecutar el script, verás el siguiente menú:</p>
+
+        <code>
+🤖 Sistema de Reconocimiento Facial
+========================================
+✨ MEJORADO: Parámetros optimizados para reducir falsos positivos
+
+Opciones:
+1. Entrenar modelos
+2. Reconocer rostros en imagen
+3. Reconocimiento en tiempo real (webcam)
+4. Configurar umbrales
+5. Salir
+        </code>
+
+        <h3>Paso 3: Entrenar el Sistema (Opción 1)</h3>
+        <p>Esta es la primera etapa. El sistema:</p>
+        <ul>
+            <li>Carga todas las imágenes del dataset</li>
+            <li>Extrae rostros automáticamente usando el detector de cascada Haar</li>
+            <li>Entrena ambos modelos (LBPH y SVM) simultáneamente</li>
+            <li>Guarda los modelos en archivos (modelo_lbph.yml, modelo_svm.pkl, etc.)</li>
+        </ul>
+
+        <h3>Paso 4: Reconocimiento en Imágenes (Opción 2)</h3>
+        <ul>
+            <li>Ingresa la ruta completa de la imagen a analizar</li>
+            <li>Selecciona el algoritmo (lbph o svm)</li>
+            <li>El sistema marcará los rostros detectados con rectángulos verdes</li>
+            <li>Los rostros reconocidos se extraen automáticamente a la carpeta <code>rostros_extraidos_inferidos/</code></li>
+            <li>Se mostrará una ventana con el resultado y métricas de confianza</li>
+        </ul>
+
+        <h3>Paso 5: Reconocimiento en Tiempo Real (Opción 3)</h3>
+        <ul>
+            <li>Requiere una webcam conectada</li>
+            <li>Selecciona el algoritmo de reconocimiento</li>
+            <li>Apunta la cámara a las personas a reconocer</li>
+            <li>Presiona 'q' para salir</li>
+            <li>Presiona 's' para guardar rostros manualmente</li>
+            <li>Los rostros se guardan automáticamente cada 30 segundos</li>
+        </ul>
+
+        <h3>Paso 6: Configurar Parámetros (Opción 4)</h3>
+        <p>Permite revisar los parámetros actuales optimizados para reducir falsos positivos:</p>
+        <ul>
+            <li>Tamaño mínimo del rostro: 50 píxeles</li>
+            <li>Umbral de confianza LBPH: 80</li>
+            <li>Umbral de probabilidad SVM: 0.6</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>📊 Algoritmos Disponibles</h2>
+
+        <h3>Local Binary Pattern Histograms (LBPH)</h3>
+        <p>Rápido y eficiente para datasets pequeños. Funciona comparando texturas locales de los rostros.</p>
+
+        <h3>SVM con Características HOG</h3>
+        <p>Más preciso para datasets grandes. Combina descriptores HOG (Histogram of Oriented Gradients) con Support Vector Machines.</p>
+
+        <div class="highlight">
+            <strong>Cuándo usar cada algoritmo:</strong>
+            <ul>
+                <li><strong>LBPH</strong>: Datasets pequeños, velocidad prioritaria</li>
+                <li><strong>SVM+HOG</strong>: Datasets grandes, máxima precisión requerida</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📁 Archivos Generados</h2>
+        <p>Durante el uso del sistema, se generan varios archivos:</p>
+
+        <ul>
+            <li><code>modelo_lbph.yml</code> - Modelo LBPH entrenado</li>
+            <li><code>modelo_svm.pkl</code> - Modelo SVM entrenado</li>
+            <li><code>label_encoder.pkl</code> - Codificador de etiquetas</li>
+            <li><code>personas.pkl</code> - Lista de nombres de personas</li>
+            <li><code>rostros_extraidos_inferidos/</code> - Carpeta con rostros extraídos durante el reconocimiento</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🔧 Solución de Problemas</h2>
+
+        <h3>Error: "No se encontraron modelos entrenados"</h3>
+        <p><strong>Solución:</strong> Ejecuta primero la opción 1 para entrenar el sistema.</p>
+
+        <h3>Error: "No se encontraron rostros en el dataset"</h3>
+        <p><strong>Solución:</strong> Verifica que las imágenes contengan rostros visibles y bien iluminados.</p>
+
+        <h3>Pocos reconocimientos o muchos falsos positivos</h3>
+        <p><strong>Solución:</strong> Ajusta los umbrales en la opción 4, o agrega más fotos al dataset.</p>
+    </div>
+
+    <div class="section">
+        <h2>📜 Código Completo del Script</h2>
+        <p>A continuación se muestra el código completo del sistema de reconocimiento facial:</p>
+
+        <div class="code-container">
+            <code>
+'''
+
+
+Características principales:
+
+Dos algoritmos de reconocimiento:
+
+LBPH (Local Binary Pattern Histograms): Rápido y eficiente
+SVM con características HOG: Más preciso para datasets grandes
+
+
+Funcionalidades:
+
+Entrenamiento automático desde carpetas organizadas
+Detección y reconocimiento en imágenes estáticas
+Reconocimiento en tiempo real con webcam
+Interfaz de menú fácil de usar
+Extracción automática de rostros reconocidos a archivos con nombre del identificado
+Redimensionamiento automático de imágenes grandes (máximo 512px ancho) para mejor visualización
+
+
+Estructura del dataset:
+rostros_dataset/
+├── persona1/
+│   ├── foto1.jpg
+│   └── foto2.jpg
+├── persona2/
+│   ├── foto1.jpg
+│   └── foto2.jpg
+└── ...
+
+
+Dependencias necesarias:
+
+pip install opencv-python opencv-contrib-python scikit-learn numpy joblib
+Cómo usar:
+
+Preparar dataset: Crea carpetas con nombres de personas y coloca sus fotos dentro
+Entrenar: Ejecuta el script y selecciona la opción 1
+Reconocer: Usa las opciones 2 o 3 para reconocimiento en imágenes o tiempo real
+
+El sistema guarda automáticamente los modelos entrenados y puede reconocer rostros con métricas de confianza
+
+
+'''
+
+
+
+import cv2
+import numpy as np
+import os
+import pickle
+import time
+from sklearn.svm import SVC
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import joblib
+
+class FaceRecognitionTrainer:
+    def __init__(self, dataset_path="rostros_dataset"):
+        self.dataset_path = dataset_path
+        self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+        self.recognizer = cv2.face.LBPHFaceRecognizer_create()
+        self.label_encoder = LabelEncoder()
+        self.svm_model = SVC(kernel='rbf', probability=True, random_state=42)
+
+    def create_dataset_structure(self):
+        """Crea la estructura de carpetas para el dataset"""
+        if not os.path.exists(self.dataset_path):
+            os.makedirs(self.dataset_path)
+            print(f"Carpeta {self.dataset_path} creada.")
+            print("Por favor, crea subcarpetas con los nombres de las personas")
+            print("y coloca las imágenes de cada persona en su respectiva carpeta.")
+
+    def extract_faces_from_image(self, image_path, target_size=(100, 100)):
+        """Extrae rostros de una imagen"""
+        image = cv2.imread(image_path)
+        if image is None:
+            return []
+
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        faces = self.face_cascade.detectMultiScale(
+            gray,
+            scaleFactor=1.1,
+            minNeighbors=5,
+            minSize=(30, 30)
+        )
+
+        face_images = []
+        for (x, y, w, h) in faces:
+            face = gray[y:y+h, x:x+w]
+            face_resized = cv2.resize(face, target_size)
+            face_images.append(face_resized)
+
+        return face_images
+
+    def load_training_data(self):
+        """Carga las imágenes de entrenamiento desde el dataset"""
+        faces = []
+        labels = []
+        person_names = []
+
+        print("Cargando imágenes de entrenamiento...")
+
+        for person_name in os.listdir(self.dataset_path):
+            person_path = os.path.join(self.dataset_path, person_name)
+            if not os.path.isdir(person_path):
+                continue
+
+            person_names.append(person_name)
+            print(f"Procesando imágenes de: {person_name}")
+
+            for image_name in os.listdir(person_path):
+                if image_name.lower().endswith(('.png', '.jpg', '.jpeg')):
+                    image_path = os.path.join(person_path, image_name)
+                    face_images = self.extract_faces_from_image(image_path)
+
+                    for face in face_images:
+                        faces.append(face)
+                        labels.append(person_name)
+
+        if len(faces) == 0:
+            raise ValueError("No se encontraron rostros en el dataset")
+
+        print(f"Se cargaron {len(faces)} rostros de {len(set(labels))} personas")
+        return faces, labels, person_names
+
+    def train_lbph_model(self, faces, labels):
+        """Entrena el modelo LBPH (Local Binary Pattern Histograms)"""
+        print("Entrenando modelo LBPH...")
+
+        # Codificar labels
+        encoded_labels = self.label_encoder.fit_transform(labels)
+
+        # Entrenar el reconocedor LBPH
+        self.recognizer.train(faces, np.array(encoded_labels))
+
+        print("Modelo LBPH entrenado exitosamente")
+
+    def train_svm_model(self, faces, labels):
+        """Entrena un modelo SVM usando características HOG"""
+        print("Entrenando modelo SVM con características HOG...")
+
+        # Extraer características HOG
+        hog = cv2.HOGDescriptor()
+        features = []
+
+        for face in faces:
+            # Redimensionar para HOG
+            face_resized = cv2.resize(face, (64, 128))
+            hog_features = hog.compute(face_resized)
+            features.append(hog_features.flatten())
+
+        features = np.array(features)
+        encoded_labels = self.label_encoder.fit_transform(labels)
+
+        # Dividir datos en entrenamiento y prueba
+        X_train, X_test, y_train, y_test = train_test_split(
+            features, encoded_labels, test_size=0.2, random_state=42
+        )
+
+        # Entrenar SVM
+        self.svm_model.fit(X_train, y_train)
+
+        # Evaluar modelo
+        y_pred = self.svm_model.predict(X_test)
+        accuracy = accuracy_score(y_test, y_pred)
+        print(f"Precisión del modelo SVM: {accuracy:.2f}")
+
+    def save_models(self):
+        """Guarda los modelos entrenados"""
+        print("Guardando modelos...")
+
+        # Guardar modelo LBPH
+        self.recognizer.save('modelo_lbph.yml')
+
+        # Guardar modelo SVM y encoder
+        joblib.dump(self.svm_model, 'modelo_svm.pkl')
+        joblib.dump(self.label_encoder, 'label_encoder.pkl')
+
+        # Guardar nombres de personas
+        with open('personas.pkl', 'wb') as f:
+            pickle.dump(self.label_encoder.classes_, f)
+
+        print("Modelos guardados exitosamente")
+
+    def train_complete_system(self):
+        """Entrena el sistema completo de reconocimiento facial"""
+        try:
+            # Crear estructura de dataset
+            self.create_dataset_structure()
+
+            # Verificar que existan imágenes
+            if not any(os.path.isdir(os.path.join(self.dataset_path, item))
+                      for item in os.listdir(self.dataset_path)):
+                print("⚠️  No se encontraron carpetas de personas en el dataset.")
+                print("Crea carpetas con nombres de personas y coloca sus imágenes dentro.")
+                return False
+
+            # Cargar datos de entrenamiento
+            faces, labels, person_names = self.load_training_data()
+
+            # Entrenar ambos modelos
+            self.train_lbph_model(faces, labels)
+            self.train_svm_model(faces, labels)
+
+            # Guardar modelos
+            self.save_models()
+
+            print("\n✅ Entrenamiento completado exitosamente!")
+            print(f"📊 Resumen:")
+            print(f"   - Personas entrenadas: {len(person_names)}")
+            print(f"   - Total de rostros: {len(faces)}")
+            print(f"   - Modelos guardados: LBPH y SVM")
+
+            return True
+
+        except Exception as e:
+            print(f"❌ Error durante el entrenamiento: {str(e)}")
+            return False
+
+class FaceRecognizer:
+    def __init__(self):
+        self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+        # Ajustes para reducir falsos positivos
+        self.MIN_FACE_SIZE = 50  # Tamaño mínimo del rostro en píxeles
+        self.LBPH_CONFIDENCE_THRESHOLD = 80  # Umbral de confianza para LBPH (menor = más estricto)
+        self.SVM_PROBABILITY_THRESHOLD = 0.6  # Umbral de probabilidad para SVM (mayor = más estricto)
+        # Parámetros más estrictos para detección facial
+        self.DETECTION_SCALE_FACTOR = 1.2  # Mayor escala = menos falsos positivos
+        self.DETECTION_MIN_NEIGHBORS = 8  # Mayor vecino mínimo = más estricto
+        self.load_models()
+
+    def load_models(self):
+        """Carga los modelos entrenados"""
+        try:
+            # Cargar modelo LBPH
+            self.recognizer = cv2.face.LBPHFaceRecognizer_create()
+            self.recognizer.read('modelo_lbph.yml')
+
+            # Cargar modelo SVM y encoder
+            self.svm_model = joblib.load('modelo_svm.pkl')
+            self.label_encoder = joblib.load('label_encoder.pkl')
+
+            # Cargar nombres de personas
+            with open('personas.pkl', 'rb') as f:
+                self.person_names = pickle.load(f)
+
+            print("Modelos cargados exitosamente")
+
+        except FileNotFoundError:
+            print("❌ No se encontraron modelos entrenados. Ejecuta primero el entrenamiento.")
+
+    def recognize_faces_in_image(self, image_path, method='lbph'):
+        """Reconoce rostros en una imagen con parámetros optimizados para reducir falsos positivos"""
+        image = cv2.imread(image_path)
+        if image is None:
+            print("No se pudo cargar la imagen")
+            return None
+
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        faces = self.face_cascade.detectMultiScale(
+            gray,
+            scaleFactor=self.DETECTION_SCALE_FACTOR,
+            minNeighbors=self.DETECTION_MIN_NEIGHBORS,
+            minSize=(self.MIN_FACE_SIZE, self.MIN_FACE_SIZE)
+        )
+
+        # Crear directorio para rostros extraídos si no existe
+        output_dir = "rostros_extraidos_inferidos"
+        os.makedirs(output_dir, exist_ok=True)
+
+        recognized_faces = 0
+        face_counter = {}  # Contador para cada persona
+
+        for (x, y, w, h) in faces:
+            # Verificar tamaño mínimo del rostro
+            if w < self.MIN_FACE_SIZE or h < self.MIN_FACE_SIZE:
+                continue
+
+            face = gray[y:y+h, x:x+w]
+
+            if method == 'lbph':
+                # Usar modelo LBPH con control de confianza
+                face_resized = cv2.resize(face, (100, 100))
+                label, confidence = self.recognizer.predict(face_resized)
+
+                # Rechazar si confianza es baja (valores altos indican baja confianza en LBPH)
+                if confidence > self.LBPH_CONFIDENCE_THRESHOLD:
+                    continue
+
+                person_name = self.label_encoder.inverse_transform([label])[0]
+                confidence_text = f"{confidence:.1f}"
+
+            elif method == 'svm':
+                # Usar modelo SVM con control de probabilidad
+                face_resized = cv2.resize(face, (64, 128))
+                hog = cv2.HOGDescriptor()
+                features = hog.compute(face_resized).flatten().reshape(1, -1)
+
+                prediction = self.svm_model.predict(features)[0]
+                person_name = self.label_encoder.inverse_transform([prediction])[0]
+                probability = self.svm_model.predict_proba(features)[0].max()
+
+                # Rechazar si probabilidad es baja
+                if probability < self.SVM_PROBABILITY_THRESHOLD:
+                    continue
+
+                confidence_text = f"{probability:.2f}"
+
+            # Inicializar contador para nueva persona
+            if person_name not in face_counter:
+                face_counter[person_name] = 0
+
+            face_counter[person_name] += 1
+
+            # Extraer rostro de la imagen original (imagen a color)
+            face_color = image[y:y+h, x:x+w]
+
+            # Crear nombre de archivo con nombre del reconocido, contador y timestamp
+            timestamp = int(time.time())
+            filename = f"{person_name}_{face_counter[person_name]}_{timestamp}.jpg"
+            output_path = os.path.join(output_dir, filename)
+
+            # Guardar el rostro extraído
+            cv2.imwrite(output_path, face_color)
+            print(f"✓ Rostro guardado: {output_path}")
+
+            # Dibujar rectángulo y nombre
+            cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            cv2.putText(image, f"{person_name} ({confidence_text}) - Guardado",
+                       (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+            recognized_faces += 1
+
+        print(f"Se reconocieron {recognized_faces} rostros válidos en la imagen")
+        if recognized_faces > 0:
+            print(f"💾 Rostros extraídos guardados en carpeta '{output_dir}'")
+
+        # Redimensionar la imagen para visualización si es muy grande
+        display_image = image.copy()
+        height, width = display_image.shape[:2]
+
+        # Limitar ancho máximo a 512 píxeles manteniendo relación de aspecto
+        max_width = 512
+        if width > max_width:
+            ratio = max_width / width
+            new_width = int(width * ratio)
+            new_height = int(height * ratio)
+            display_image = cv2.resize(display_image, (new_width, new_height))
+            print(f"Imagen redimensionada para visualización: {new_width}x{new_height}")
+
+        return display_image
+
+    def recognize_from_webcam(self, method='lbph'):
+        """Reconocimiento en tiempo real desde la webcam con parámetros optimizados para reducir falsos positivos"""
+        cap = cv2.VideoCapture(0)
+
+        print("Presiona 'q' para salir")
+        print("Algoritmo:", method.upper())
+        print("Parámetros anti-falsos-positivos activados")
+        print("Presiona 's' para guardar rostros reconocidos manualmente")
+
+        # Crear directorio para rostros extraídos si no existe
+        output_dir = "rostros_extraidos_inferidos"
+        os.makedirs(output_dir, exist_ok=True)
+
+        recognized_faces = 0
+        face_counter = {}  # Contador para cada persona
+        last_save_time = 0  # Para controlar frecuencia de guardado automático
+
+        while True:
+            ret, frame = cap.read()
+            if not ret:
+                break
+
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+            # Usar parámetros estrictos para detección
+            faces = self.face_cascade.detectMultiScale(
+                gray,
+                scaleFactor=self.DETECTION_SCALE_FACTOR,
+                minNeighbors=self.DETECTION_MIN_NEIGHBORS,
+                minSize=(self.MIN_FACE_SIZE, self.MIN_FACE_SIZE)
+            )
+
+            current_recognized = 0
+            for (x, y, w, h) in faces:
+                # Verificar tamaño mínimo adicional
+                if w < self.MIN_FACE_SIZE or h < self.MIN_FACE_SIZE:
+                    continue
+
+                face = gray[y:y+h, x:x+w]
+
+                if method == 'lbph':
+                    # Usar modelo LBPH con control de confianza
+                    face_resized = cv2.resize(face, (100, 100))
+                    label, confidence = self.recognizer.predict(face_resized)
+
+                    # Rechazar si confianza es baja
+                    if confidence > self.LBPH_CONFIDENCE_THRESHOLD:
+                        # Dibujar rectángulo rojo para rostro detectado pero no reconocido
+                        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
+                        cv2.putText(frame, f"Desconocido ({confidence:.1f})",
+                                   (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
+                        continue
+
+                    person_name = self.label_encoder.inverse_transform([label])[0]
+                    confidence_text = f"{confidence:.1f}"
+
+                elif method == 'svm':
+                    # Usar modelo SVM con control de probabilidad
+                    face_resized = cv2.resize(face, (64, 128))
+                    hog = cv2.HOGDescriptor()
+                    features = hog.compute(face_resized).flatten().reshape(1, -1)
+
+                    prediction = self.svm_model.predict(features)[0]
+                    person_name = self.label_encoder.inverse_transform([prediction])[0]
+                    probability = self.svm_model.predict_proba(features)[0].max()
+
+                    # Rechazar si probabilidad es baja
+                    if probability < self.SVM_PROBABILITY_THRESHOLD:
+                        # Dibujar rectángulo rojo para rostro detectado pero no reconocido
+                        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
+                        cv2.putText(frame, f"Desconocido ({probability:.2f})",
+                                   (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
+                        continue
+
+                    confidence_text = f"{probability:.2f}"
+
+                # Inicializar contador para nueva persona si no existe
+                if person_name not in face_counter:
+                    face_counter[person_name] = 0
+
+                # Dibujar rectángulo verde y nombre para reconocimiento exitoso
+                cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+                cv2.putText(frame, f"{person_name} ({confidence_text})",
+                           (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+                current_recognized += 1
+                recognized_faces += 1
+
+                # Preparar extracción (solo si se presiona 's' o automáticamente cada 30 segundos)
+                current_time = time.time()
+                if current_time - last_save_time > 30:  # Guardado automático cada 30 segundos
+                    face_counter[person_name] += 1
+                    # Extraer rostro de la imagen original (imagen a color)
+                    face_color = frame[y:y+h, x:x+w]
+
+                    # Crear nombre de archivo con nombre del reconocido, contador y timestamp
+                    timestamp = int(current_time)
+                    filename = f"{person_name}_webcam_{face_counter[person_name]}_{timestamp}.jpg"
+                    output_path = os.path.join(output_dir, filename)
+
+                    # Guardar el rostro extraído
+                    cv2.imwrite(output_path, face_color)
+                    print(f"\n✓ Rostro guardado: {output_path}")
+                    last_save_time = current_time
+
+            cv2.imshow('Reconocimiento Facial', frame)
+            print(f"\rRostros reconocidos en este frame: {current_recognized}", end='', flush=True)
+
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord('q'):
+                break
+            elif key == ord('s'):
+                # Guardado manual por cada rostro reconocido
+                for person_name in list(face_counter.keys())[:current_recognized]:  # Guardar solo rostros actuales
+                    faces_in_frame = self.face_cascade.detectMultiScale(
+                        cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY),
+                        scaleFactor=self.DETECTION_SCALE_FACTOR,
+                        minNeighbors=self.DETECTION_MIN_NEIGHBORS,
+                        minSize=(self.MIN_FACE_SIZE, self.MIN_FACE_SIZE)
+                    )
+
+                    for i, (x, y, w, h) in enumerate(faces_in_frame):
+                        if i >= current_recognized:  # Solo rostros reconocidos en este frame
+                            break
+                        face_color = frame[y:y+h, x:x+w]
+                        face_counter[person_name] += 1
+                        timestamp = int(time.time())
+                        filename = f"{person_name}_manual_{face_counter[person_name]}_{timestamp}.jpg"
+                        output_path = os.path.join(output_dir, filename)
+                        cv2.imwrite(output_path, face_color)
+                        print(f"\n✓ Rostro guardado manualmente: {output_path}")
+                last_save_time = time.time()
+
+        print("\n")
+        if recognized_faces > 0:
+            print(f"💾 Rostros extraídos guardados en carpeta '{output_dir}'")
+        cap.release()
+        cv2.destroyAllWindows()
+
+def main():
+    print("🤖 Sistema de Reconocimiento Facial")
+    print("=" * 40)
+    print("✨ MEJORADO: Parámetros optimizados para reducir falsos positivos")
+    print("   - Umbrales de confianza estrictos")
+    print("   - Detección facial más precisa")
+    print("   - Rechazo automático de detecciones poco confiables")
+
+    while True:
+        print("\nOpciones:")
+        print("1. Entrenar modelos")
+        print("2. Reconocer rostros en imagen")
+        print("3. Reconocimiento en tiempo real (webcam)")
+        print("4. Configurar umbrales")
+        print("5. Salir")
+
+        choice = input("\nSelecciona una opción: ")
+
+        if choice == '1':
+            trainer = FaceRecognitionTrainer()
+            trainer.train_complete_system()
+
+        elif choice == '2':
+            recognizer = FaceRecognizer()
+            image_path = input("Ingresa la ruta de la imagen: ")
+            method = input("Método (lbph/svm) [lbph]: ").lower() or 'lbph'
+
+            result = recognizer.recognize_faces_in_image(image_path, method)
+            if result is not None:
+                cv2.imshow('Resultado', result)
+                print("Presiona cualquier tecla para continuar...")
+                cv2.waitKey(0)
+                cv2.destroyAllWindows()
+
+        elif choice == '3':
+            recognizer = FaceRecognizer()
+            method = input("Método (lbph/svm) [lbph]: ").lower() or 'lbph'
+            recognizer.recognize_from_webcam(method)
+
+        elif choice == '4':
+            # Crear un reconocedor temporal para mostrar configuración
+            temp_recognizer = FaceRecognizer()
+
+            print("\n⚙️  Configuración actual de parámetros anti-falsos-positivos:")
+            print(f"   - Tamaño mínimo del rostro: {temp_recognizer.MIN_FACE_SIZE} píxeles")
+            print(f"   - Umbral de confianza LBPH: {temp_recognizer.LBPH_CONFIDENCE_THRESHOLD}")
+            print(f"   - Umbral de probabilidad SVM: {temp_recognizer.SVM_PROBABILITY_THRESHOLD}")
+            print(f"   - Factor de escala de detección: {temp_recognizer.DETECTION_SCALE_FACTOR}")
+            print(f"   - Vecinos mínimos de detección: {temp_recognizer.DETECTION_MIN_NEIGHBORS}")
+
+            print("\n💡 Recomendaciones:")
+            print("   - Para más precisión: Aumentar los umbrales")
+            print("   - Para más detecciones: Reducir los umbrales")
+            print("   - Valores bajos de LBPH indican mejor confianza")
+            print("   - Valores altos de SVM indican mejor confianza")
+            print("\n📝 Nota: Estos parámetros están optimizados para reducir falsos positivos")
+            print("     Considera ajustar si tienes muchos falsos negativos")
+
+        elif choice == '5':
+            print("¡Hasta luego!")
+            break
+
+        else:
+            print("Opción no válida")
+
+if __name__ == "__main__":
+    main()
+            </code>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🎯 Conclusión</h2>
+        <p>Este sistema de reconocimiento facial ofrece una solución completa y avanzada para identificar personas mediante algoritmos de machine learning. Con su interfaz fácil de usar y capacidades tanto para análisis de imágenes estáticas como en tiempo real, resulta ideal para una variedad de aplicaciones práctica.</p>
+
+        <div class="highlight">
+            <strong>Próximos pasos sugeridos:</strong>
+            <ul>
+                <li>Expandir el dataset para mejorar la precisión</li>
+                <li>Implementar reconocimiento en video streams</li>
+                <li>Añadir métricas de evaluación más detalladas</li>
+                <li>Integrar con otros sistemas o APIs</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 40px; color: #666;">
+        <p><a href="pildoras.html">Volver a Píldoras</a></p>
+        <p>Tutorial creado para el script <strong>1-reconocimento_facial.py</strong></p>
+        <p>Desarrollado con Python, OpenCV y scikit-learn</p>
+    </footer>
+</body>
+</html>

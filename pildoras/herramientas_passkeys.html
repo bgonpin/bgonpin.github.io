@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herramientas y Bibliotecas para Passkeys</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      color: #f7f7f7;
+      background-color: #1a1a1a;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #4a90e2;
+      border-bottom: 2px solid #5ba3f5;
+      padding-bottom: 10px;
+    }
+    h2 {
+      color: #5ba3f5;
+      margin-top: 25px;
+    }
+    h3 {
+      color: #7bb7fc;
+      margin-top: 20px;
+    }
+    ul, ol {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    code {
+      background-color: #3c3c3c;
+      color: #f7f7f7;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    pre {
+      background-color: #2d2d2d;
+      color: #f7f7f7;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+    pre code {
+      background: none;
+      color: #f7f7f7;
+      padding: 0;
+      font-family: monospace;
+    }
+    a {
+      color: #7bb7fc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #9cdcfe;
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid #444;
+      margin: 25px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Herramientas y Bibliotecas para Implementar Passkeys en Diferentes Plataformas</h1>
+  <hr>
+
+  <h2>1. Desarrollo Web (Frontend)</h2>
+  
+  <h3>APIs Nativas</h3>
+  <ul>
+    <li><strong>WebAuthn API</strong> (Navegadores modernos):  
+      Soporte nativo en Chrome, Firefox, Safari y Edge mediante métodos como:  
+      <pre><code>navigator.credentials.create() // Registro
+navigator.credentials.get()    // Autenticación</code></pre>
+    </li>
+  </ul>
+
+  <h3>Bibliotecas de Ayuda</h3>
+  <ul>
+    <li><a href="https://simplewebauthn.dev/" target="_blank"><strong>SimpleWebAuthn</strong></a>:  
+      <ul>
+        <li><strong>Cliente</strong>: Simplifica la interacción con WebAuthn API.</li>
+        <li><strong>Servidor</strong>: Ofrece paquetes para Node.js (<code>@simplewebauthn/server</code>) y otros lenguajes.</li>
+        <li>Ideal para integración rápida con frameworks como React, Vue o Angular.</li>
+      </ul>
+    </li>
+    <li><a href="https://github.com/duo-labs/webauthn4js" target="_blank"><strong>webauthn4js</strong></a>:  
+      Biblioteca ligera para manejar flujos de registro/autenticación en aplicaciones web.</li>
+    <li><a href="https://developer.1password.com/docs/passkeys" target="_blank"><strong>Passkey SDK de 1Password</strong></a>:  
+      Herramientas para integrar passkeys con el gestor de contraseñas 1Password.</li>
+  </ul>
+
+  <h2>2. Android</h2>
+  
+  <h3>APIs Nativas</h3>
+  <ul>
+    <li><strong>Credential Manager API</strong> (Android 14+):  
+      <ul>
+        <li>Reemplaza a <code>BiometricPrompt</code> para passkeys.</li>
+        <li>Soporta registro y autenticación mediante:  
+          <pre><code>credentialManager.createCredential()
+credentialManager.getCredential()</code></pre>
+        </li>
+        <li>Requiere <code>androidx.credentials:credentials</code> y <code>androidx.credentials:play-services-auth</code>.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Bibliotecas de Soporte</h3>
+  <ul>
+    <li><strong>AndroidX Credentials</strong>:  
+      Paquetes oficiales para manejar passkeys y credenciales federadas.  
+      Documentación: <a href="https://developer.android.com/training/sign-in/passkeys" target="_blank">Android Developers - Passkeys</a></li>
+  </ul>
+
+  <h2>3. iOS/macOS</h2>
+  
+  <h3>APIs Nativas</h3>
+  <ul>
+    <li><strong>Authentication Services Framework</strong>:  
+      <ul>
+        <li>Usa <code>ASAuthorizationPlatformPublicKeyCredentialProvider</code> para passkeys.</li>
+        <li>Integrado en Safari y aplicaciones nativas desde <strong>iOS 16+/macOS Ventura</strong>.</li>
+        <li>Ejemplo de registro:  
+          <pre><code>let provider = ASAuthorizationPlatformPublicKeyCredentialProvider(
+  relyingPartyIdentifier: "example.com"
+)</code></pre>
+        </li>
+      </ul>
+    </li>
+    <li><strong>LocalAuthentication Framework</strong>:  
+      Para validar biometría antes de acceder a la clave privada.</li>
+  </ul>
+
+  <h3>Herramientas Adicionales</h3>
+  <ul>
+    <li><a href="https://developer.apple.com/passkeys/" target="_blank"><strong>Apple Passkeys Documentation</strong></a>:  
+      Guía oficial para integración en apps y sitios web.</li>
+  </ul>
+
+  <h2>4. Backend (Servidor)</h2>
+  
+  <h3>Bibliotecas por Lenguaje</h3>
+  <ul>
+    <li><strong>Node.js</strong>:  
+      <ul>
+        <li><code>@simplewebauthn/server</code>: Validación robusta de credenciales.</li>
+        <li><code>@peculiar/webauthn</code>: Implementación completa de WebAuthn para servidores.</li>
+      </ul>
+    </li>
+    <li><strong>Python</strong>:  
+      <ul>
+        <li><a href="https://pypi.org/project/fido2/" target="_blank"><strong>fido2</strong></a>: Biblioteca oficial de la FIDO Alliance.</li>
+      </ul>
+    </li>
+    <li><strong>Java/Kotlin</strong>:  
+      <ul>
+        <li><a href="https://webauthn4j.org/" target="_blank"><strong>WebAuthn4J</strong></a>: Framework para Spring Boot y aplicaciones JVM.</li>
+      </ul>
+    </li>
+    <li><strong>.NET</strong>:  
+      <ul>
+        <li><a href="https://github.com/abergs/webauthn-net" target="_blank"><strong>WebAuthn</strong></a>: Soporte para ASP.NET Core.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>5. Plataformas Multiplataforma</h2>
+  
+  <h3>Frameworks Híbridos</h3>
+  <ul>
+    <li><strong>React Native</strong>:  
+      <ul>
+        <li><a href="https://github.com/cedarcode/react-native-passkeys" target="_blank"><strong>react-native-passkeys</strong></a>:  
+          Permite usar passkeys en apps móviles con acceso a APIs nativas de iOS/Android.</li>
+      </ul>
+    </li>
+    <li><strong>Flutter</strong>:  
+      <ul>
+        <li><a href="https://pub.dev/packages/flutter_passkeys" target="_blank"><strong>flutter_passkeys</strong></a>:  
+          Plugin para integrar passkeys en aplicaciones Flutter.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>6. Herramientas de Pruebas y Validación</h2>
+  <ul>
+    <li><a href="https://fidoalliance.org/certification/functional-certification/" target="_blank"><strong>FIDO Conformance Test Tool</strong></a>:  
+      Herramienta oficial de la FIDO Alliance para validar la conformidad.</li>
+    <li><strong>Chrome DevTools</strong>:  
+      Soporte integrado para depurar flujos WebAuthn en la pestaña <strong>"Security"</strong>.</li>
+    <li><a href="https://webauthn.io/" target="_blank"><strong>WebAuthn Tester</strong></a>:  
+      Sitio web para probar flujos de passkeys en entornos de desarrollo.</li>
+  </ul>
+
+  <h2>7. Integraciones con Servicios en la Nube</h2>
+  <ul>
+    <li><strong>Firebase Authentication</strong>:  
+      Soporte experimental para passkeys (2024) mediante el SDK de Firebase Auth.</li>
+    <li><strong>AWS Cognito</strong>:  
+      Integración con WebAuthn para autenticación sin contraseña en aplicaciones serverless.</li>
+    <li><strong>Auth0</strong>:  
+      Soporta passkeys como método de autenticación en su plataforma de identidad.</li>
+  </ul>
+
+  <h2>Recomendaciones Clave</h2>
+  <ol>
+    <li><strong>Para web</strong>: Usa <code>SimpleWebAuthn</code> para acelerar el desarrollo.</li>
+    <li><strong>Para móviles</strong>:  
+      <ul>
+        <li>Android: Prioriza <code>Credential Manager API</code> (Android 14+).</li>
+        <li>iOS: Implementa <code>ASAuthorizationPlatformPublicKeyCredentialProvider</code>.</li>
+      </ul>
+    </li>
+    <li><strong>Backend</strong>: Elige bibliotecas según tu stack (ej.: <code>fido2</code> para Python, <code>WebAuthn4J</code> para Java).</li>
+    <li><strong>Pruebas</strong>: Valida con <code>webauthn.io</code> y Chrome DevTools antes de lanzar a producción.</li>
+  </ol>
+
+  <h2>Ejemplo de Flujo Básico (Node.js + SimpleWebAuthn)</h2>
+  <pre><code>// Servidor: Registrar una passkey
+import { generateRegistrationOptions } from '@simplewebauthn/server';
+
+const options = generateRegistrationOptions({
+  rpID: 'example.com',
+  userID: 'user123',
+  userName: 'usuario@ejemplo.com',
+});
+
+// Cliente: Enviar opciones al navegador
+res.json(options);
+
+// Servidor: Validar registro
+import { verifyRegistrationResponse } from '@simplewebauthn/server';
+
+const verification = await verifyRegistrationResponse({
+  response: attestationResponse,
+  expectedChallenge: challenge,
+  expectedRPID: 'example.com',
+  expectedOrigin: 'https://example.com',
+});</code></pre>
+
+  <h2>Conclusión</h2>
+  <p>La adopción de passkeys está respaldada por herramientas maduras y estandarizadas, con soporte nativo en sistemas operativos modernos y bibliotecas que simplifican su integración. Al priorizar estándares como <strong>WebAuthn</strong> y herramientas como <strong>SimpleWebAuthn</strong>, los desarrolladores pueden implementar autenticación sin contraseña de forma segura y escalable, eliminando los riesgos asociados a las contraseñas tradicionales.</p>
+
+  <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #444; color: #f7f7f7;">
+    <p><a href="pildoras.html" style="color: #7bb7fc;">Volver a Pildoras</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passkeys: La Evolución Técnica</title>
+    <style>
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: #1a1a1a;
+            color: #e8e8e8;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5em;
+            border-bottom: 2px solid #444444;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        h2 {
+            color: #cccccc;
+            font-size: 1.8em;
+            border-bottom: 1px solid #555555;
+            padding-bottom: 10px;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #bbbbbb;
+            font-size: 1.3em;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            text-indent: 15px;
+        }
+
+        body > h1:first-child {
+            margin-top: 0;
+        }
+
+        body > h2:first-of-type {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+                font-size: 0.9em;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #444444;
+            color: #aaaaaa;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #cccccc;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Passkeys: La Evolución Técnica Hacia una Autenticación Más Segura y Eficiente</h1>
+
+    <h2>Introducción</h2>
+    <p>Las passkeys representan un avance significativo en el campo de la autenticación digital, ofreciendo una alternativa robusta frente a las contraseñas tradicionales. Este artículo explora técnicamente cómo funcionan las passkeys, sus ventajas de seguridad y su impacto en la experiencia del usuario, basándose en estándares modernos de autenticación.</p>
+
+    <h2>Arquitectura Técnica y Estándares Subyacentes</h2>
+    <p>Las passkeys son claves digitales que reemplazan las contraseñas tradicionales para inicios de sesión seguros, basadas en el estándar FIDO2. Este protocolo utiliza criptografía avanzada para generar pares de claves pública-privada, donde la clave privada permanece almacenada de forma segura en el dispositivo del usuario y nunca se transmite a través de la red.</p>
+
+    <p>El enfoque de passkeys proporciona un modelo de seguridad mejorado en comparación con la autenticación tradicional y la autenticación multifactor (MFA), eliminando puntos débiles inherentes a los sistemas basados en contraseñas. Este sistema opera mediante protocolos de autenticación sin contraseña (passwordless) certificados por la FIDO Alliance, organización líder en estándares de autenticación abierta.</p>
+
+    <h2>Ventajas de Seguridad Técnicas</h2>
+
+    <h3>Resistencia a Ataques de Fuerza Bruta y Suplantación</h3>
+    <p>A diferencia de las contraseñas tradicionales, las passkeys son resistentes a los intentos de adivinación, ya que los usuarios suelen elegir contraseñas relativamente cortas y fáciles de adivinar. El sistema elimina completamente la posibilidad de que los atacantes adivinen credenciales válidas mediante ataques de diccionario.</p>
+
+    <h3>Protección Contra Phishing</h3>
+    <p>Las passkeys ofrecen una protección superior contra phishing y sitios web maliciosos en comparación con las contraseñas tradicionales. Esto se debe a que cada passkey está vinculada criptográficamente al dominio específico del sitio web, impidiendo que funcione en sitios fraudulentos incluso si un usuario es engañado para visitarlos.</p>
+
+    <h3>Almacenamiento Seguro con Autenticación Biométrica</h3>
+    <p>El sistema utiliza autenticación biométrica (huellas dactilares o reconocimiento facial) para desbloquear la clave privada almacenada en el dispositivo. Este mecanismo asegura que incluso si un dispositivo es físicamente comprometido, la clave privada permanece inaccesible sin la verificación biométrica correspondiente.</p>
+
+    <h2>Experiencia de Usuario y Adopción Técnica</h2>
+
+    <h3>Eliminación de la Memorización de Credenciales</h3>
+    <p>Al eliminar la necesidad de memorizar contraseñas y reducir la fricción del usuario, se espera que las passkeys reemplacen a las contraseñas tradicionales más rápido de lo que podríamos esperar. Este cambio representa una mejora significativa en la usabilidad sin sacrificar seguridad.</p>
+
+    <h3>Sincronización Multiplataforma</h3>
+    <p>Las passkeys permiten inicios de sesión más rápidos y fáciles, pudiendo compartirse de forma segura entre todos los dispositivos de un usuario. Los principales proveedores de sistemas operativos (Apple, Google y Microsoft) han implementado soluciones de sincronización de passkeys que operan dentro de sus ecosistemas, manteniendo la seguridad mediante cifrado de extremo a extremo.</p>
+
+    <h3>Mayor Seguridad con Mejor Experiencia de Usuario</h3>
+    <p>Contrario a la creencia tradicional de que mayor seguridad implica mayor complejidad, las passkeys ofrecen un nivel de seguridad más alto y una mejor experiencia de usuario en comparación con las contraseñas tradicionales. Esta combinación única está impulsando su adopción acelerada por parte de empresas y usuarios finales.</p>
+
+    <h2>Conclusión Técnica</h2>
+    <p>Las passkeys representan una evolución natural en la autenticación digital, abordando muchas de las vulnerabilidades que aquejan a los sistemas basados en contraseñas. Al combinar criptografía avanzada, estándares abiertos (FIDO2) y autenticación biométrica, ofrecen un equilibrio óptimo entre seguridad robusta y usabilidad. Con el creciente soporte de las principales empresas tecnológicas y la creciente conciencia sobre sus beneficios, es probable que las passkeys se conviertan en el método de autenticación predominante en los próximos años, marcando el fin de la era de las contraseñas tradicionales.</p>
+
+    <footer>
+        <a href="../pildoras/pildoras.html" style="display: block; margin-top: 20px;">Píldoras de Conocimiento</a>
+    </footer>
+</body>
+</html>

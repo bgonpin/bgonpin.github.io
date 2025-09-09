@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huella Digital - Información y Prevención</title>
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #4a4a4a;
+            --accent-color: #8b0000;
+            --light-color: #f5f5f5;
+            --dark-color: #0f0f0f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--light-color);
+            background-color: var(--dark-color);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-color);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        h2 {
+            color: var(--light-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+            font-weight: bold;
+        }
+
+        h3 {
+            color: var(--light-color);
+            margin: 1.5rem 0 1rem;
+            font-weight: normal;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background-color: #333;
+            padding: 1rem;
+            border-left: 4px solid #ffa500;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .consequence-box {
+            background-color: #400000;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .tip-box {
+            background-color: #003300;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid #4a8a48;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--secondary-color);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-content a {
+            display: block;
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Huella Digital</h1>
+        <p class="subtitle">Comprende qué es, cómo se genera y cómo proteger tu información en línea</p>
+    </header>
+    
+    <div class="container">
+        <section id="que-es">
+            <h2>¿Qué es la Huella Digital?</h2>
+            <p>La huella digital es el rastro de información que dejamos al utilizar internet. Incluye todo tipo de actividades en línea, desde las búsquedas que realizamos, los sitios web que visitamos, las publicaciones en redes sociales, hasta las compras en línea y los correos electrónicos que enviamos.</p>
+            
+            <div class="highlight">
+                <p>Tu huella digital es como una sombra en internet: siempre está presente, incluso cuando no eres consciente de ella.</p>
+            </div>
+            
+            <p>Existen dos tipos principales de huella digital:</p>
+            <ul>
+                <li><strong>Huella digital activa:</strong> Información que compartes intencionalmente (publicaciones en redes sociales, comentarios en blogs, etc.)</li>
+                <li><strong>Huella digital pasiva:</strong> Información recopilada sin tu conocimiento explícito (datos de ubicación, historial de navegación, etc.)</li>
+            </ul>
+        </section>
+        
+        <section id="como-se-genera">
+            <h2>¿Cómo se Genera la Huella Digital?</h2>
+            <p>Tu huella digital se crea de múltiples formas cada vez que interactúas con dispositivos conectados a internet:</p>
+            
+            <h3>1. Actividades en redes sociales</h3>
+            <p>Cada like, comentario, compartir o publicación contribuye a tu huella digital. Incluso las fotos etiquetadas y la información de perfil forman parte de este rastro.</p>
+            
+            <h3>2. Navegación web</h3>
+            <p>Los sitios web utilizan cookies y otras tecnologías para rastrear tus visitas, búsquedas y comportamientos en línea.</p>
+            
+            <h3>3. Transacciones en línea</h3>
+            <p>Compras, suscripciones, operaciones bancarias y cualquier transacción económica deja un rastro digital.</p>
+            
+            <h3>4. Dispositivos conectados</h3>
+            <p>Smartphones, wearables, asistentes de voz y dispositivos IoT (Internet de las cosas) recopilan constantemente datos sobre tus hábitos.</p>
+            
+            <h3>5. Registros en servicios</h3>
+            <p>Al crear cuentas en plataformas, aplicaciones o servicios, proporcionas información que se almacena y puede ser utilizada.</p>
+        </section>
+        
+        <section id="consecuencias">
+            <h2>Consecuencias de la Huella Digital</h2>
+            <p>Tu huella digital puede tener impactos significativos en diferentes aspectos de tu vida:</p>
+            
+            <div class="consequence-box">
+                <h3>Privacidad</h3>
+                <p>La recopilación extensiva de datos personales puede resultar en la pérdida de privacidad y el uso indebido de información sensible.</p>
+            </div>
+            
+            <div class="consequence-box">
+                <h3>Seguridad</h3>
+                <p>Una huella digital amplia aumenta el riesgo de robo de identidad, phishing y otros ciberdelitos.</p>
+            </div>
+            
+            <div class="consequence-box">
+                <h3>Reputación</h3>
+                <p>Employers, instituciones educativas y otras organizaciones often revisan las huellas digitales para evaluar a candidatos.</p>
+            </div>
+            
+            <div class="consequence-box">
+                <h3>Discriminación algorítmica</h3>
+                <p>Los datos recopilados pueden llevar a decisiones automatizadas que afecten tu acceso a servicios, empleo o créditos.</p>
+            </div>
+        </section>
+        
+        <section id="minimizar-impacto">
+            <h2>¿Cómo Minimizar el Impacto de tu Huella Digital?</h2>
+            <p>Aunque es imposible eliminar completamente tu huella digital, puedes tomar medidas para gestionarla y reducir su impacto:</p>
+            
+            <div class="tip-box">
+                <h3>1. Revisa y ajusta configuraciones de privacidad</h3>
+                <p>Configura las opciones de privacidad en redes sociales y otros servicios para limitar quién puede ver tu información.</p>
+            </div>
+            
+            <div class="tip-box">
+                <h3>2. Sé consciente de lo que compartes</h3>
+                <p>Piensa dos veces antes de publicar información personal, fotos o opiniones que podrían afectarte en el futuro.</p>
+            </div>
+            
+            <div class="tip-box">
+                <h3>3. Utiliza navegadores y motores de búsqueda centrados en la privacidad</h3>
+                <p>Considera usar navegadores como Firefox o Brave y motores de búsqueda como DuckDuckGo que priorizan la privacidad.</p>
+            </div>
+            
+            <div class="tip-box">
+                <h3>4. Limita el rastreo</h3>
+                <p>Usa extensiones de navegador que bloqueen trackers y considera rechazar cookies no esenciales cuando visites sitios web.</p>
+            </div>
+            
+            <div class="tip-box">
+                <h3>5. Contraseñas seguras y autenticación de dos factores</h3>
+                <p>Utiliza contraseñas únicas y robustas para cada servicio y activa la autenticación de dos factores cuando esté disponible.</p>
+            </div>
+            
+            <div class="tip-box">
+                <h3>6. Borrado periódico</h3>
+                <p>Revisa y elimina periódicamente cuentas antiguas que ya no uses y solicita la eliminación de datos personales cuando sea posible.</p>
+            </div>
+            
+            <div class="tip-box">
+                <h3>7. Educación continua</h3>
+                <p>Mantente informado sobre las mejores prácticas de privacidad digital y nuevas amenazas a la seguridad en línea.</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 - Concienciación sobre Huella Digital</p>
+            <p>Este sitio es solo con fines educativos. Protege tu información personal en línea.</p>
+            <p><a href="pildoras.html">Volver a Píldoras</a></p>
+        </div>
+    </footer>
+</body>
+</html>

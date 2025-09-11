@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Completo de Picasa 3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #4a9eff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            color: #4a9eff;
+            font-size: 1.8em;
+            margin: 40px 0 20px 0;
+            padding: 15px 0;
+            border-bottom: 2px solid #333;
+            position: relative;
+        }
+
+        h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 60px;
+            height: 2px;
+            background-color: #4a9eff;
+        }
+
+        h3 {
+            color: #66b3ff;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
+            padding-left: 15px;
+            border-left: 4px solid #4a9eff;
+        }
+
+        h4 {
+            color: #99ccff;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #2d2d2d, #1f1f1f);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            background-color: #242424;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #1e3a5f, #2d4a73);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #4a9eff;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #5f2d1e, #734a2d);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #ff8c42;
+            color: #ffcc99;
+        }
+
+        .tip {
+            background: linear-gradient(135deg, #1e5f2d, #2d7342);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #42ff8c;
+            color: #ccffdd;
+        }
+
+        code {
+            background-color: #333;
+            color: #ff6b6b;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            background-color: #1e1e1e;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            color: #f8f8f2;
+        }
+
+        .navigation {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #404040;
+        }
+
+        .navigation h3 {
+            color: #4a9eff;
+            margin-bottom: 15px;
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .navigation ul {
+            columns: 2;
+            column-gap: 30px;
+            margin-left: 0;
+        }
+
+        .navigation li {
+            break-inside: avoid;
+            margin-bottom: 5px;
+        }
+
+        .navigation a {
+            color: #66b3ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        em {
+            color: #99ccff;
+            font-style: italic;
+        }
+
+        .keyboard-shortcut {
+            background-color: #333;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #555;
+            font-family: monospace;
+            font-size: 0.9em;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #2d2d2d, #1f1f1f);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #404040;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 158, 255, 0.1);
+        }
+
+        .footer {
+            background-color: #1f1f1f;
+            padding: 30px;
+            margin-top: 50px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            text-align: center;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .navigation ul {
+                columns: 1;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection color */
+        ::selection {
+            background-color: #4a9eff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tutorial Completo de Picasa 3</h1>
+        
+        <div class="navigation">
+            <h3>Índice de Contenidos</h3>
+            <ul>
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#instalacion">Instalación y Configuración</a></li>
+                <li><a href="#interfaz">Interfaz Principal</a></li>
+                <li><a href="#organizacion">Organización de Fotos</a></li>
+                <li><a href="#edicion">Edición de Fotos</a></li>
+                <li><a href="#funciones-avanzadas">Funciones Avanzadas</a></li>
+                <li><a href="#compartir">Compartir y Exportar</a></li>
+                <li><a href="#gestion">Gestión de la Biblioteca</a></li>
+                <li><a href="#consejos">Consejos y Trucos</a></li>
+                <li><a href="#problemas">Solución de Problemas</a></li>
+                <li><a href="#alternativas">Alternativas Modernas</a></li>
+            </ul>
+        </div>
+
+        <div class="intro" id="introduccion">
+            <h2>Introducción</h2>
+            <p>Picasa 3 fue el organizador y editor de fotos gratuito de Google, diseñado para ayudarte a organizar, editar y compartir tus fotografías digitales de manera sencilla. Aunque Google descontinuó el desarrollo en 2016, muchos usuarios continúan utilizándolo por su interfaz intuitiva y funcionalidades completas.</p>
+            
+            <div class="warning">
+                <strong>Nota Importante:</strong> Picasa 3 ya no recibe actualizaciones de seguridad ni nuevas funcionalidades. Se recomienda considerar alternativas modernas para uso a largo plazo.
+            </div>
+        </div>
+
+        <div class="section" id="instalacion">
+            <h2>Instalación y Configuración Inicial</h2>
+            
+            <h3>Requisitos del Sistema</h3>
+            <ul>
+                <li>Windows XP/Vista/7/8/10 (funciona en versiones posteriores con compatibilidad)</li>
+                <li>128 MB de RAM mínimo</li>
+                <li>100 MB de espacio libre en disco</li>
+                <li>Tarjeta gráfica compatible</li>
+            </ul>
+
+            <h3>Primer Inicio</h3>
+            <ol>
+                <li>Al abrir Picasa por primera vez, la aplicación escaneará automáticamente tu computadora buscando imágenes</li>
+                <li>Selecciona las carpetas que deseas incluir en la biblioteca</li>
+                <li>El proceso de importación puede tomar varios minutos dependiendo de la cantidad de fotos</li>
+            </ol>
+        </div>
+
+        <div class="section" id="interfaz">
+            <h2>Interfaz Principal</h2>
+            <p>La interfaz de Picasa 3 se divide en cuatro áreas principales:</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Panel Izquierdo - Navegación</h4>
+                    <ul>
+                        <li><strong>Carpetas</strong>: Muestra la estructura de carpetas de tu computadora</li>
+                        <li><strong>Álbumes</strong>: Álbumes creados por ti</li>
+                        <li><strong>Proyectos</strong>: Collages, presentaciones y películas creadas</li>
+                        <li><strong>Subidas</strong>: Fotos subidas a servicios web</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Panel Central - Visualización</h4>
+                    <ul>
+                        <li>Muestra las miniaturas de las fotos en la carpeta seleccionada</li>
+                        <li>Permite cambiar el tamaño de las miniaturas con el deslizador inferior</li>
+                        <li>Vista de cuadrícula personalizable</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Panel Derecho - Información</h4>
+                    <ul>
+                        <li>Datos EXIF de la foto seleccionada</li>
+                        <li>Historial de ediciones</li>
+                        <li>Palabras clave y etiquetas</li>
+                        <li>Información de ubicación</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Barra de Herramientas Superior</h4>
+                    <ul>
+                        <li>Botones de acceso rápido a funciones principales</li>
+                        <li>Herramientas de importación y exportación</li>
+                        <li>Opciones de visualización</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="organizacion">
+            <h2>Organización de Fotos</h2>
+
+            <h3>Importar Fotos</h3>
+            <h4>Desde cámara o tarjeta de memoria:</h4>
+            <ol>
+                <li>Conecta el dispositivo</li>
+                <li>Ve a <code>Archivo > Importar desde...</code></li>
+                <li>Selecciona las fotos a importar</li>
+                <li>Elige la carpeta de destino</li>
+            </ol>
+
+            <h4>Desde carpetas del ordenador:</h4>
+            <ol>
+                <li>Ve a <code>Archivo > Agregar carpeta a Picasa</code></li>
+                <li>Navega hasta la carpeta deseada</li>
+                <li>Selecciona si quieres escanear subcarpetas</li>
+            </ol>
+
+            <h3>Crear Álbumes</h3>
+            <ol>
+                <li>Haz clic en "Álbumes" en el panel izquierdo</li>
+                <li>Clic derecho > "Nuevo álbum"</li>
+                <li>Asigna un nombre al álbum</li>
+                <li>Arrastra fotos desde las carpetas al álbum</li>
+            </ol>
+
+            <h3>Etiquetado y Palabras Clave</h3>
+            <ol>
+                <li>Selecciona una o varias fotos</li>
+                <li>En el panel derecho, añade palabras clave en el campo correspondiente</li>
+                <li>Las etiquetas ayudan a buscar fotos posteriormente</li>
+            </ol>
+
+            <div class="highlight">
+                <h4>Reconocimiento Facial</h4>
+                <ol>
+                    <li>Ve a <code>Ver > Personas</code></li>
+                    <li>Picasa detectará caras automáticamente</li>
+                    <li>Haz clic en "Agregar nombre" para etiquetar personas</li>
+                    <li>Confirma o rechaza las sugerencias automáticas</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="section" id="edicion">
+            <h2>Edición de Fotos</h2>
+
+            <h3>Herramientas Básicas</h3>
+            <p><strong>Doble clic</strong> en una foto para abrir el editor</p>
+
+            <h4>Panel izquierdo - Edición Básica:</h4>
+            <ul>
+                <li><strong>Recortar</strong>: Selecciona área y aplica</li>
+                <li><strong>Enderezar</strong>: Arrastra el deslizador para rotar</li>
+                <li><strong>Eliminar ojos rojos</strong>: Clic en los ojos afectados</li>
+                <li><strong>Me siento afortunado</strong>: Mejora automática</li>
+            </ul>
+
+            <h4>Ajustes:</h4>
+            <ul>
+                <li><strong>Resaltar</strong>: Ilumina áreas oscuras</li>
+                <li><strong>Sombras</strong>: Oscurece áreas muy claras</li>
+                <li><strong>Temperatura de color</strong>: Ajusta tonos fríos/cálidos</li>
+                <li><strong>Saturación</strong>: Intensidad del color</li>
+            </ul>
+
+            <h3>Efectos Creativos</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <ul>
+                        <li><strong>Enfocar</strong>: Mejora la nitidez</li>
+                        <li><strong>Suavizar</strong>: Reduce imperfecciones</li>
+                        <li><strong>Sepia</strong>: Efecto vintage en tonos marrones</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <ul>
+                        <li><strong>Blanco y negro</strong>: Conversión monocromática</li>
+                        <li><strong>Calentar</strong>: Añade tonos cálidos</li>
+                        <li><strong>Película granulada</strong>: Efecto de película antigua</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <ul>
+                        <li><strong>Brillo</strong>: Añade resplandor suave</li>
+                        <li><strong>Contraste filtrado</strong>: Mejora el contraste selectivamente</li>
+                        <li><strong>Saturación filtrada</strong>: Realza colores específicos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Texto y Efectos Avanzados</h3>
+            <ol>
+                <li>Selecciona la herramienta "Texto"</li>
+                <li>Haz clic donde quieras añadir texto</li>
+                <li>Escribe el texto y ajusta fuente, tamaño y color</li>
+                <li>Aplica efectos como sombra o contorno</li>
+            </ol>
+        </div>
+
+        <div class="section" id="funciones-avanzadas">
+            <h2>Funciones Avanzadas</h2>
+
+            <h3>Crear Collages</h3>
+            <ol>
+                <li>Selecciona varias fotos (mantén Ctrl y clic)</li>
+                <li>Ve a <code>Crear > Collage de fotos</code></li>
+                <li>Elige un estilo de collage</li>
+                <li>Ajusta el tamaño y posición de las fotos</li>
+                <li>Guarda el collage</li>
+            </ol>
+
+            <h3>Presentaciones de Diapositivas</h3>
+            <ol>
+                <li>Selecciona las fotos para la presentación</li>
+                <li>Clic en "Crear presentación"</li>
+                <li>Elige música de fondo (opcional)</li>
+                <li>Configura transiciones y duración</li>
+                <li>Exporta como video o ejecuta directamente</li>
+            </ol>
+
+            <h3>Crear Películas</h3>
+            <ol>
+                <li>Ve a <code>Crear > Película</code></li>
+                <li>Selecciona fotos y videos</li>
+                <li>Añade música y transiciones</li>
+                <li>Ajusta la duración de cada elemento</li>
+                <li>Exporta en formato de video</li>
+            </ol>
+        </div>
+
+        <div class="section" id="compartir">
+            <h2>Compartir y Exportar</h2>
+
+            <div class="warning">
+                <h4>Compartir en Línea (Función Limitada)</h4>
+                <p>Muchos servicios de Google asociados ya no están disponibles, pero puedes:</p>
+                <ol>
+                    <li>Seleccionar fotos a compartir</li>
+                    <li>Usar el botón "Subir" para servicios compatibles</li>
+                    <li>Configurar álbumes web (funcionalidad limitada)</li>
+                </ol>
+            </div>
+
+            <h3>Exportar Fotos</h3>
+            <ol>
+                <li>Selecciona las fotos a exportar</li>
+                <li>Ve a <code>Archivo > Exportar imagen a carpeta</code></li>
+                <li>Configura opciones:
+                    <ul>
+                        <li>Calidad de imagen</li>
+                        <li>Tamaño de redimensionamiento</li>
+                        <li>Formato de archivo</li>
+                        <li>Carpeta de destino</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Grabar en CD/DVD</h3>
+            <ol>
+                <li>Selecciona fotos para grabar</li>
+                <li>Ve a <code>Crear > Grabar disco de regalo</code></li>
+                <li>Inserta un CD/DVD en blanco</li>
+                <li>Sigue las instrucciones para completar la grabación</li>
+            </ol>
+        </div>
+
+        <div class="section" id="gestion">
+            <h2>Gestión de la Biblioteca</h2>
+
+            <h3>Opciones de Vista</h3>
+            <ul>
+                <li><strong>Vista en miniatura</strong>: Ajusta tamaño con deslizador</li>
+                <li><strong>Vista cronológica</strong>: Organiza por fechas</li>
+                <li><strong>Vista de carpetas</strong>: Estructura tradicional de archivos</li>
+            </ul>
+
+            <h3>Búsqueda Avanzada</h3>
+            <p>Usa la barra de búsqueda superior para buscar por:</p>
+            <ul>
+                <li>Nombres de archivo</li>
+                <li>Palabras clave</li>
+                <li>Fechas</li>
+                <li>Nombres de personas etiquetadas</li>
+                <li>Ubicaciones</li>
+            </ul>
+
+            <h3>Sincronización y Respaldo</h3>
+            <ol>
+                <li>Ve a <code>Herramientas > Opciones</code></li>
+                <li>Configura carpetas vigiladas</li>
+                <li>Establece preferencias de escaneo automático</li>
+                <li>Configura opciones de respaldo</li>
+            </ol>
+        </div>
+
+        <div class="section" id="consejos">
+            <h2>Consejos y Trucos</h2>
+
+            <h3>Atajos de Teclado Útiles</h3>
+            <div class="code-block">
+                <span class="keyboard-shortcut">Ctrl + I</span>: Importar fotos<br>
+                <span class="keyboard-shortcut">F11</span>: Modo pantalla completa<br>
+                <span class="keyboard-shortcut">Ctrl + E</span>: Exportar imagen<br>
+                <span class="keyboard-shortcut">Ctrl + +/-</span>: Zoom in/out<br>
+                <span class="keyboard-shortcut">Espacio</span>: Vista rápida de la foto<br>
+                <span class="keyboard-shortcut">Delete</span>: Mover a papelera<br>
+                <span class="keyboard-shortcut">Ctrl + Z</span>: Deshacer última acción
+            </div>
+
+            <div class="tip">
+                <h4>Optimización del Rendimiento</h4>
+                <ol>
+                    <li>Limita las carpetas escaneadas a las esenciales</li>
+                    <li>Usa <code>Herramientas > Administrador de carpetas</code> para excluir carpetas innecesarias</li>
+                    <li>Cierra otros programas pesados mientras usas Picasa</li>
+                    <li>Considera usar modo "Solo mostrar archivos añadidos a Picasa" para carpetas grandes</li>
+                </ol>
+            </div>
+
+            <h3>Mantenimiento de la Biblioteca</h3>
+            <ol>
+                <li>Ejecuta periódicamente <code>Herramientas > Detector de archivos movidos</code></li>
+                <li>Usa <code>Ver > Ocultar fotos duplicadas</code> para limpiar la biblioteca</li>
+                <li>Organiza regularmente con etiquetas y álbumes</li>
+                <li>Realiza copias de seguridad de la base de datos de Picasa</li>
+            </ol>
+        </div>
+
+        <div class="section" id="problemas">
+            <h2>Solución de Problemas Comunes</h2>
+
+            <h3>Picasa No Encuentra Mis Fotos</h3>
+            <ul>
+                <li>Verifica que las carpetas estén incluidas en <code>Herramientas > Administrador de carpetas</code></li>
+                <li>Asegúrate de que los formatos de archivo sean compatibles (JPG, PNG, BMP, GIF, TIFF)</li>
+                <li>Ejecuta un nuevo escaneo completo</li>
+            </ul>
+
+            <h3>Fotos Aparecen Duplicadas</h3>
+            <ul>
+                <li>Usa <code>Ver > Ocultar fotos duplicadas</code></li>
+                <li>Revisa si las fotos están en múltiples ubicaciones</li>
+                <li>Considera mover archivos duplicados a una sola ubicación</li>
+            </ul>
+
+            <h3>Rendimiento Lento</h3>
+            <ul>
+                <li>Reduce el número de carpetas vigiladas</li>
+                <li>Cierra otros programas</li>
+                <li>Considera actualizar hardware si es muy antiguo</li>
+                <li>Limpia archivos temporales del sistema</li>
+            </ul>
+
+            <h3>Problemas de Edición</h3>
+            <ul>
+                <li>Verifica que tengas permisos de escritura en la carpeta de fotos</li>
+                <li>Las ediciones se guardan en archivos .picasa.ini</li>
+                <li>Para revertir todas las ediciones, elimina estos archivos</li>
+            </ul>
+        </div>
+
+        <div class="section" id="alternativas">
+            <h2>Alternativas Modernas</h2>
+            <p>Dado que Picasa 3 ya no recibe actualizaciones, considera estas alternativas:</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Alternativas Gratuitas</h4>
+                    <ul>
+                        <li><strong>Google Fotos</strong>: Sucesor en línea de Picasa</li>
+                        <li><strong>IrfanView</strong>: Visor y editor ligero</li>
+                        <li><strong>GIMP</strong>: Editor avanzado gratuito</li>
+                        <li><strong>Paint.NET</strong>: Editor intermedio para Windows</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Alternativas de Pago</h4>
+                    <ul>
+                        <li><strong>Adobe Lightroom</strong>: Estándar profesional</li>
+                        <li><strong>Luminar</strong>: Editor con IA</li>
+                        <li><strong>ON1 Photo RAW</strong>: Suite completa de edición</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <h2>Conclusión</h2>
+            <p>Picasa 3 sigue siendo una herramienta valiosa para la organización y edición básica de fotos. Su interfaz intuitiva y funciones completas lo hacen ideal para usuarios domésticos y aficionados a la fotografía. Aunque ya no recibe actualizaciones, con el conocimiento adecuado puedes aprovechar al máximo sus capacidades.</p>
+            
+            <p>Recuerda hacer copias de seguridad regulares de tu biblioteca de fotos y considera migrar gradualmente a alternativas modernas que reciban soporte continuo y nuevas funcionalidades.</p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Tutorial de Picasa 3. Este documento tiene fines educativos. Picasa es marca registrada de Google Inc.</p>
+            <p><em>Documento generado con fines informativos para usuarios que continúan utilizando Picasa 3. <a href="pildoras.html" style="color: #4a9eff; text-decoration: none;">[Pildoras]</a></em></p>
+        </div>
+    </div>
+</body>
+</html>

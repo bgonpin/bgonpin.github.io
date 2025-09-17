@@ -23,15 +23,24 @@
 <body class="bg-dark text-light">
     <div class="container my-5">
         <h1 class="display-4 fw-bold text-center mb-5">Manual de Empleo del Proyecto Traductor de Textos</h1>
-    <p>Este proyecto consiste en dos scripts de Python que permiten extraer texto de un archivo, segmentarlo en frases y almacenarlo en MongoDB, y posteriormente traducirlo del español al inglés utilizando el servicio Ollama.</p>
+    <p>Este proyecto consiste en scripts de Python que permiten extraer texto de un archivo, segmentarlo en frases y almacenarlo en MongoDB, y posteriormente traducirlo del español al inglés utilizando el servicio Ollama. Está disponible tanto en versión de línea de comandos (CLI) como con interfaz gráfica de usuario (GUI).</p>
 
     <h2>Descripción del Proyecto</h2>
-    <p>El proyecto está compuesto por dos scripts principales:</p>
+    <p>El proyecto cuenta con las siguientes versiones:</p>
+
+    <h3>Versiones CLI (Línea de Comandos)</h3>
     <ul>
         <li><strong>1-extraer_texto_a mongodb.py</strong>: Extrae y segmenta texto de un archivo (por defecto 'el_quijote.txt'), y lo almacena en MongoDB.</li>
         <li><strong>2-traducir_desde_mongodb.py</strong>: Lee el texto almacenado en MongoDB, lo traduce del español al inglés usando Ollama, y guarda las traducciones en una nueva colección.</li>
     </ul>
-    <p class="highlight">El orden de ejecución es importante: Primero se debe ejecutar el script de extracción, seguido del script de traducción.</p>
+
+    <h3>Versiones GUI (Interfaz Gráfica)</h3>
+    <ul>
+        <li><strong>1-extraer_texto_a mongodb_con_gui.py</strong>: Versión con interfaz gráfica que permite seleccionar archivos de texto dinámicamente y procesarlos con barra de progreso.</li>
+        <li><strong>2-traducir_desde_mongodb_con_gui.py</strong>: Interfaz avanzada para seleccionar y traducir múltiples colecciones de MongoDB, con registro de actividad detallado.</li>
+    </ul>
+
+    <p class="highlight">El orden de ejecución es importante: Primero se debe ejecutar el script de extracción, seguido del script de traducción. Este orden aplica tanto para versiones CLI como GUI.</p>
 
     <h2>Explicación Detallada de Cada Script</h2>
 
@@ -59,26 +68,83 @@
         <li>Muestra el progreso en consola, incluyendo el texto original, la traducción generada y cualquier error encontrado.</li>
     </ul>
 
+    <h3>Script GUI 1: 1-extraer_texto_a mongodb_con_gui.py</h3>
+    <p>Esta aplicación con interfaz gráfica permite una experiencia más intuitiva para extraer texto a MongoDB:</p>
+    <ul>
+        <li>Interfaz gráfica construida con PySide6 para selección manual de archivos de texto.</li>
+        <li>Selección de archivos mediante un diálogo de archivos nativo del sistema operativo.</li>
+        <li>Procesamiento en segundo plano usando hilos para evitar bloqueo de la interfaz.</li>
+        <li>Barra de progreso visual que muestra el porcentaje de procesamiento completado.</li>
+        <li>Botón de cancelación para interrumpir el proceso en cualquier momento.</li>
+        <li>Manejo de errores con mensajes informativos al usuario.</li>
+        <li>Tema oscuro profesional para mayor comodidad visual.</li>
+        <li>Muestra el nombre del archivo seleccionado y mensajes de estado en tiempo real.</li>
+    </ul>
+
+    <h3>Script GUI 2: 2-traducir_desde_mongodb_con_gui.py</h3>
+    <p>Interfaz avanzada para traducción masiva y gestión de colecciones:</p>
+    <ul>
+        <li>Detección automática de todas las colecciones originales disponibles en MongoDB.</li>
+        <li>Selección múltiple de colecciones para traducción simultánea.</li>
+        <li>Splitter interfaz dividida: panel lateral para selección, panel derecho para controles y progreso.</li>
+        <li>Registro de actividad detallado con colores diferenciados por tipo de mensaje (éxito, error, información, etc.).</li>
+        <li>Limpieza automática de colecciones destino antes de iniciar nuevas traducciones.</li>
+        <li>Procesamiento en hilos separados para mantener la interfaz responsiva durante operaciones largas.</li>
+        <li>Progreso global y por colección, con manejo inteligente de errores por línea.</li>
+        <li>Tema oscuro completo aplicado a toda la aplicación usando paleta de colores Qt.</li>
+        <li>Manejo de conexión a MongoDB con verificación inicial y mensajes de diagnóstico.</li>
+        <li>Opción de seleccionar todo o limpiar selección de colecciones de forma rápida.</li>
+    </ul>
+
     <h2>Requisitos Previos</h2>
+    <h3>Requisitos General</h3>
     <ul>
         <li>Python 3.x instalado.</li>
         <li>MongoDB corriendo localmente en mongodb://localhost:27017/.</li>
-        <li>Librería <strong>PyMongo</strong> instalada: <code>pip install pymongo</code></li>
-        <li>Librería <strong>Requests</strong> instalada: <code>pip install requests</code></li>
         <li>Ollama ejecutándose en http://localhost:11434 con el modelo 'gemma3:4b' disponible.</li>
         <li>Archivo de texto de entrada (ej. 'el_quijote.txt') en el directorio del proyecto.</li>
     </ul>
 
+    <h3>Dependencias para Versión CLI</h3>
+    <ul>
+        <li>Librería <strong>PyMongo</strong> instalada: <code>pip install pymongo</code></li>
+        <li>Librería <strong>Requests</strong> instalada: <code>pip install requests</code></li>
+    </ul>
+
+    <h3>Dependencias para Versión GUI</h3>
+    <ul>
+        <li>Todas las dependencias de la versión CLI.</li>
+        <li><strong>PySide6</strong>: <code>pip install PySide6</code> (cuando se elige Qt6) ó <strong>PyQt6</strong>: <code>pip install PyQt6</code> (alternativa Qt6)</li>
+        <li>Nota: En caso de problemas con PySide6/PyQt6, se puede usar <strong>PyQt5</strong>: <code>pip install PyQt5</code>, pero se requiere ajustar el código importando <code>PyQt5.QtWidgets</code> en lugar de <code>PySide6.QtWidgets</code>.</li>
+    </ul>
+
     <h2>Cómo Ejecutar el Proyecto</h2>
+
+    <h3>Ejecución con Versión CLI</h3>
     <ol>
         <li>Asegúrate de que MongoDB esté corriendo.</li>
         <li>Verifica que Ollama esté ejecutándose con el modelo correcto.</li>
-        <li>Ejecuta el primer script:</li>
+        <li>Ejecuta el primer script de extracción:</li>
         <pre><code>python 1-extraer_texto_a mongodb.py</code></pre>
-        <li>Ejecuta el segundo script:</li>
+        <li>Ejecuta el segundo script de traducción:</li>
         <pre><code>python 2-traducir_desde_mongodb.py</code></pre>
     </ol>
-    <p>Nota: El script de extracción segmenta el texto conservando saltos de línea y puntos. El script de traducción salta líneas vacías o irrelevantes.</p>
+
+    <h3>Ejecución con Versión GUI</h3>
+    <ol>
+        <li>Asegúrate de que estén cumplidos todos los requisitos previos (incluyendo PySide6).</li>
+        <li>Ejecuta la aplicación de extracción GUI:</li>
+        <pre><code>python 1-extraer_texto_a mongodb_con_gui.py</code></pre>
+        <li>Clic en "Seleccionar archivo" y elige el archivo de texto deseado.</li>
+        <li>Clic en "Procesar" y observa la barra de progreso.</li>
+        <li>Ejecuta la aplicación de traducción GUI:</li>
+        <pre><code>python 2-traducir_desde_mongodb_con_gui.py</code></pre>
+        <li>Selecciona las colecciones que deseas traducir usando el checkbox o "Seleccionar Todo".</li>
+        <li>Clic en "Iniciar Traducción" y observa el registro de actividad y progreso.</li>
+        <li>La interfaz GUI permite cancelar operaciones en cualquier momento.</li>
+    </ol>
+
+    <p class="highlight">Nota importante: El orden de ejecución es crítico. Siempre ejecuta primero la extracción antes de la traducción, ya sea en versión CLI o GUI. Los scripts segmentan el texto conservando saltos de línea y puntos, mientras que los scripts de traducción procesan líneas vacías eficientemente.</p>
 
     <h2>Configuración de MongoDB</h2>
     <ul>
@@ -277,19 +343,47 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"Error al traducir o guardar la línea {linea_numero}: {e}</code></pre>
 
-    <h2>Solución de Problemas</h2>
+    <h2>Código de las Versiones GUI</h2>
+    <p>Los archivos de las versiones GUI están disponibles en los archivos Python correspondientes del proyecto:</p>
     <ul>
-        <li>Si MongoDB no se conecta, verifica que esté corriendo en el puerto por defecto.</li>
-        <li>Si Ollama falla, asegúrate de que el modelo esté descargado y el servidor esté activo.</li>
-        <li>Verifica que las dependencias de Python estén instaladas.</li>
+        <li><strong>1-extraer_texto_a mongodb_con_gui.py</strong>: Contiene la clase <code>MainWindow</code> y <code>WorkerThread</code> para la extracción con interfaz gráfica.</li>
+        <li><strong>2-traducir_desde_mongodb_con_gui.py</strong>: Incluye las clases <code>TraductionWorker</code> y <code>TradutorApp</code> para la traducción masiva con GUI avanzada.</li>
+    </ul>
+    <p>Los códigos GUI implementan manejo de hilos para mantener la responsividad de la interfaz, barras de progreso visuales, registro de actividad con colores diferenciados, y manejo robusto de errores.</p>
+
+    <h2>Solución de Problemas</h2>
+
+    <h3>Problemas Generales</h3>
+    <ul>
+        <li><strong>MongoDB no se conecta</strong>: Verifica que esté corriendo en el puerto por defecto (27017). En algunas versiones de MongoDB, puede requerir instalación específica o ajustes de configuración.</li>
+        <li><strong>Ollama falla</strong>: Asegúrate de que el modelo 'gemma3:4b' esté descargado y el servidor esté activo en http://localhost:11434. Ejecuta <code>ollama list</code> para verificar modelos disponibles.</li>
+        <li><strong>Dependencias faltantes</strong>: Instala todas las dependencias con pip. Verifica versiones compatibles de bibliotecas.</li>
+        <li><strong>Codificación de archivos</strong>: Asegúrate de que los archivos de texto estén en UTF-8 para evitar problemas de caracteres especiales.</li>
+    </ul>
+
+    <h3>Problemas Específicos de GUI</h3>
+    <ul>
+        <li><strong>PySide6 no se encuentra</strong>: Instala con <code>pip install PySide6</code>. Si hay conflictos, considera usar PyQt6 o PyQt5, ajustando las importaciones.</li>
+        <li><strong>La interfaz no responde</strong>: Las operaciones se ejecutan en hilos separados. Si se congela completamente, reinicia la aplicación.</li>
+        <li><strong>Error de Qt plugins</strong>: Puede requerir instalación de bibliotecas adicionales en Linux (sudo apt install qt6-base-dev).</li>
+        <li><strong>Archivo no encontrado</strong>: En la aplicación GUI de extracción, usa el diálogo de archivos para seleccionar archivos válidos.</li>
+        <li><strong>Colecciones no aparecen en GUI de traducción</strong>: Las colecciones deben existir en la base de datos 'traducciones' y no tener sufijo '_traducido_al_ingles'.</li>
+    </ul>
+
+    <h3>Errores Comunes</h3>
+    <ul>
+        <li><strong>"Connection refused"</strong>: Verifica que MongoDB y Ollama estén ejecutándose.</li>
+        <li><strong>"Module not found"</strong>: Instala el módulo faltante con pip.</li>
+        <li><strong>Traducciones vacías</strong>: Puede ser normal para líneas con solo saltos de línea. Revisa el registro de actividad en la GUI.</li>
+        <li><strong>Proceso cancelado inesperadamente</strong>: En GUI, usa los botones de cancelación apropiadamente.</li>
     </ul>
 
     <h2>Contacto</h2>
     <p>Para más información o soporte, visita <a href="https://bgonpin.github.io/" target="_blank" class="text-light">bgonpin.github.io</a>.</p>
+    </div>  <!-- End of container -->
 
     <footer class="text-center mt-5">
-        <p><a href="pildoras.html" class="text-light">Ir a Píldoras</a></p>
+        <a href="pildoras.html" class="text-light">Ir a Pildoras</a>
     </footer>
-    </div>  <!-- End of container -->
 </body>
 </html>

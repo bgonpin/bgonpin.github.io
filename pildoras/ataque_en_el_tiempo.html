@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ataque de Tiempo en Ciberseguridad</title>
+    <!-- Highlight.js for Python syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1a1a1a;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c1810, #1a0e08);
+            color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: center;
+            border: 1px solid #3a3a3a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 2.2em;
+            font-weight: 300;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            color: #ffffff;
+            border-bottom: 2px solid #4a9eff;
+            padding-bottom: 8px;
+            margin-top: 30px;
+            font-weight: 400;
+        }
+
+        h3 {
+            color: #87ceeb;
+            margin-top: 25px;
+            font-weight: 500;
+        }
+
+        .content-section {
+            background-color: #2d2d2d;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #404040;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            margin-bottom: 25px;
+        }
+
+        .code-block {
+            background-color: #1e1e1e;
+            border-left: 4px solid #4a9eff;
+            padding: 18px;
+            overflow-x: auto;
+            margin: 18px 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        pre {
+            margin: 18px 0;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background-color: #1e1e1e;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #f8f8f2;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #2d1810, #1a0e08);
+            border-left: 4px solid #ffcc02;
+            padding: 18px;
+            margin: 18px 0;
+            border-radius: 4px;
+            border: 1px solid #3a3a3a;
+            color: #ffe066;
+        }
+
+        .warning strong {
+            color: #ffcc02;
+        }
+
+        .phase-box {
+            background: linear-gradient(135deg, #1a1a1d, #2a2a30);
+            border-radius: 6px;
+            padding: 18px;
+            margin: 12px 0;
+            border: 1px solid #404040;
+            border-left: 4px solid #87ceeb;
+        }
+
+        .phase-title {
+            font-weight: 600;
+            color: #87ceeb;
+            font-size: 1.1em;
+        }
+
+        .phase-box p {
+            margin-top: 8px;
+            color: #cccccc;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #888888;
+            font-size: 0.9em;
+            border-top: 1px solid #404040;
+            padding-top: 20px;
+        }
+
+        ul, ol {
+            color: #cccccc;
+        }
+
+        p {
+            color: #cccccc;
+            margin-bottom: 16px;
+        }
+
+        /* Mejorar la apariencia de los links */
+        a {
+            color: #87ceeb;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #4a9eff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ataque de Tiempo en Ciberseguridad</h1>
+        <p>Análisis de vulnerabilidades mediante el análisis de tiempos de ejecución</p>
+    </header>
+
+    <div class="content-section">
+        <h2>¿Qué es un Ataque de Tiempo?</h2>
+        <p>Un ataque de tiempo (timing attack) es un tipo de ataque de canal lateral que explota las diferencias en los tiempos de ejecución de algoritmos para obtener información sobre datos sensibles. Estos ataques se basan en el principio de que las operaciones realizadas por un sistema pueden tomar tiempos ligeramente diferentes dependiendo de los datos que se estén procesando.</p>
+        
+        <p>Los ataques de tiempo son particularmente peligrosos porque:</p>
+        <ul>
+            <li>Pueden ser realizados de forma remota</li>
+            <li>No dejan rastro en los registros tradicionales</li>
+            <li>Pueden eludir mecanismos de seguridad tradicionales</li>
+            <li>Son aplicables a diversos contextos (contraseñas, claves criptográficas, etc.)</li>
+        </ul>
+    </div>
+
+    <div class="content-section">
+        <h2>Fases de un Ataque de Tiempo</h2>
+        
+        <div class="phase-box">
+            <div class="phase-title">Fase 1: Identificación del Vector</div>
+            <p>El atacante identifica una operación que muestra un comportamiento temporal variable dependiendo de los datos de entrada. Ejemplos comunes incluyen: comparación de cadenas, operaciones criptográficas, o acceso a memoria caché.</p>
+        </div>
+        
+        <div class="phase-box">
+            <div class="phase-title">Fase 2: Medición y Recopilación de Datos</div>
+            <p>El atacante envía múltiples solicitudes cuidadosamente elaboradas y mide con precisión los tiempos de respuesta. Esta fase requiere numerosas mediciones para reducir el ruido estadístico.</p>
+        </div>
+        
+        <div class="phase-box">
+            <div class="phase-title">Fase 3: Análisis Estadístico</div>
+            <p>Utilizando técnicas estadísticas, el atacante analiza las diferencias temporales para inferir información sobre los datos secretos. Métodos comunes incluyen el análisis de correlación o pruebas de hipótesis.</p>
+        </div>
+        
+        <div class="phase-box">
+            <div class="phase-title">Fase 4: Extracción de Información</div>
+            <p>Basándose en el análisis, el atacante reconstruye gradualmente la información sensible, como contraseñas o claves criptográficas.</p>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2>Ejemplo en Python: Ataque a Comparación de Cadenas</h2>
+        <p>Un ejemplo clásico de vulnerabilidad a ataques de tiempo es la comparación de cadenas que finaliza en cuanto encuentra una discrepancia. La siguiente función vulnerable compara dos cadenas carácter por carácter:</p>
+        
+        <pre><code class="language-python"># Función vulnerable a ataques de tiempo
+def comparar_cadenas_vulnerable(str1, str2):
+    if len(str1) != len(str2):
+        return False
+    for i in range(len(str1)):
+        if str1[i] != str2[i]:
+            return False
+    return True</code></pre>
+        
+        <p>Un atacante puede explotar esta vulnerabilidad midiendo los tiempos de respuesta para diferentes intentos. A continuación se muestra una simulación de este tipo de ataque:</p>
+        
+        <pre><code class="language-python">import time
+import string
+import statistics
+
+# Simulación de un servicio vulnerable
+class ServicioAutenticacion:
+    def __init__(self, password_real):
+        self.password_real = password_real
+
+    def verificar_password_vulnerable(self, password_intento):
+        # Simulamos una comparación vulnerable con un pequeño retraso por carácter
+        if len(password_intento) != len(self.password_real):
+            return False
+
+        for i in range(len(self.password_real)):
+            if password_intento[i] != self.password_real[i]:
+                return False
+            time.sleep(0.001)  # Pequeña pausa para simular procesamiento por carácter
+        return True
+
+# Implementación del ataque
+def ataque_timing(password_length, caracteres_posibles):
+    servicio = ServicioAutenticacion("secreto123")  # Password que queremos adivinar
+    password_adivinado = ['a'] * password_length  # Empezamos con un valor cualquiera
+
+    for posicion in range(password_length):
+        tiempos = {}
+
+        for caracter in caracteres_posibles:
+            password_test = password_adivinado.copy()
+            password_test[posicion] = caracter
+            password_test_str = ''.join(password_test)
+
+            # Medimos el tiempo múltiples veces para mayor precisión
+            mediciones = []
+            for _ in range(10):  # Realizamos 10 mediciones por carácter
+                inicio = time.time()
+                servicio.verificar_password_vulnerable(password_test_str)
+                fin = time.time()
+                mediciones.append(fin - inicio)
+
+            # Usamos la mediana para reducir el efecto de valores atípicos
+            tiempos[caracter] = statistics.median(mediciones)
+
+        # El carácter con el tiempo más largo es probablemente el correcto
+        caracter_correcto = max(tiempos, key=tiempos.get)
+        password_adivinado[posicion] = caracter_correcto
+        print(f"Posición {posicion}: probablemente '{caracter_correcto}' (tiempo: {tiempos[caracter_correcto]:.4f}s)")
+
+    return ''.join(password_adivinado)
+
+# Caracteres a probar (podrían ser todos los caracteres imprimibles)
+caracteres_prueba = string.ascii_lowercase + string.digits
+
+print("Iniciando ataque de tiempo...")
+password_adivinado = ataque_timing(9, caracteres_prueba)
+print(f"Password probable: {password_adivinado}")</code></pre>
+        
+        <div class="warning">
+            <p><strong>Nota:</strong> Este código es una simulación con fines educativos. En la práctica, los ataques de tiempo requieren muchas más iteraciones y técnicas estadísticas más sofisticadas para filtrar el ruido ambiental.</p>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2>Contramedidas y Prevención</h2>
+        <p>Para protegerse contra los ataques de tiempo, se recomienda:</p>
+        
+        <h3>1. Usar comparaciones de tiempo constante</h3>
+        <p>Implementar algoritmos que tomen el mismo tiempo independientemente de los datos de entrada:</p>
+        
+        <pre><code class="language-python"># Comparación segura contra ataques de tiempo
+def comparar_cadenas_segura(str1, str2):
+    if len(str1) != len(str2):
+        return False
+
+    resultado = 0
+    for x, y in zip(str1, str2):
+        resultado |= ord(x) ^ ord(y)
+    return resultado == 0</code></pre>
+        
+        <h3>2. Introducir retardos aleatorios</h3>
+        <p>Añadir un retardo aleatorio puede dificultar los ataques, aunque no es una solución completa:</p>
+        
+        <pre><code class="language-python">import random
+
+def comparar_con_retardo(str1, str2):
+    resultado = comparar_cadenas_segura(str1, str2)
+    time.sleep(random.uniform(0.001, 0.005))  # Retardo aleatorio
+    return resultado</code></pre>
+        
+        <h3>3. Limitación de intentos</h3>
+        <p>Implementar límites en el número de intentos fallidos y mecanismos de bloqueo temporal.</p>
+        
+        <h3>4. Usar librerías criptográficas probadas</h3>
+        <p>Evitar implementaciones personalizadas de algoritmos sensibles y usar librerías bien establecidas que ya incorporan protecciones contra ataques de tiempo.</p>
+    </div>
+
+    <footer>
+        <p>Trabajo sobre Ciberseguridad - Ataque de Tiempo</p>
+        <p><a href="pildoras.html">🔙 Volver a Píldoras</a></p>
+        <p>© 2023 - Para fines educativos</p>
+    </footer>
+
+    <script>hljs.highlightAll();</script>
+
+</body>
+</html>

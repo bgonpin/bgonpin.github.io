@@ -8,39 +8,191 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            margin: 20px;
-            background-color: #121212;
             color: #e0e0e0;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1a1a1a;
         }
-        h1, h2, h3 {
+
+        h1 {
             color: #ffffff;
+            font-size: 2.2em;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
-        code {
-            background-color: #2d2d2d;
-            padding: 2px 4px;
-            border-radius: 4px;
-            color: #f8f8f2;
+
+        h2 {
+            color: #ffffff;
+            border-bottom: 2px solid #4a9eff;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            font-weight: 400;
+            font-size: 1.8em;
         }
-        pre {
-            background-color: #2d2d2d;
-            padding: 10px;
-            border-radius: 4px;
-            overflow-x: auto;
-            color: #f8f8f2;
+
+        h3 {
+            color: #87ceeb;
+            margin-top: 28px;
+            font-weight: 500;
+            font-size: 1.3em;
+            border-left: 3px solid #4a9eff;
+            padding-left: 12px;
         }
-        ul, ol {
-            color: #e0e0e0;
-        }
+
         p {
-            color: #e0e0e0;
+            color: #cccccc;
+            margin-bottom: 16px;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background-color: #1e1e1e;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #f8f8f2;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: #1e1e1e;
+            border-left: 4px solid #4a9eff;
+            padding: 18px;
+            overflow-x: auto;
+            margin: 18px 0;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        pre code {
+            padding: 0;
+            background: none;
+        }
+
+        .section-highlight {
+            background: linear-gradient(135deg, #1a1a1d, #2a2a30);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 1px solid #404040;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .requirement-list {
+            background-color: #1e1e1e;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+            border-left: 4px solid #87ceeb;
+        }
+
+        .requirement-list li {
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .requirement-list li:before {
+            content: "▶";
+            color: #4a9eff;
+            position: absolute;
+            left: 0;
+        }
+
+        .code-example {
+            background-color: #1e1e1e;
+            border-left: 4px solid #4a9eff;
+            padding: 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #2d1810, #1a0e08);
+            border-left: 4px solid #ffcc02;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+            border: 1px solid #3a3a3a;
+            color: #ffe066;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #888888;
+            font-size: 0.9em;
+            border-top: 1px solid #404040;
+            padding-top: 25px;
+        }
+
+        footer a {
+            color: #87ceeb;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #4a9eff;
+        }
+
+        .header-decoration {
+            background: linear-gradient(45deg, #4a9eff, #87ceeb);
+            height: 3px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #cccccc;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
         }
     </style>
+    <!-- Highlight.js for Python syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
 </head>
 <body>
 
+    <div class="header-decoration"></div>
     <h1>Manual de Empleo: Detector de Imágenes JPG Corruptas</h1>
-
-    <p>Este manual describe el uso del script de Python <code>detectar_jpg_corrupto.py</code>, una aplicación gráfica para detectar archivos JPG corruptos en una carpeta o archivo específico.</p>
+    <p class="subtitle">Este manual describe el uso del script de Python <code>detectar_jpg_corrupto.py</code>, una aplicación gráfica para detectar archivos JPG corruptos en una carpeta o archivo específico.</p>
 
     <h2>Descripción</h2>
     <p>El script utiliza una interfaz gráfica construida con PySide6 para escanear archivos JPG. Realiza verificaciones de corruptibilidad verificando el cabezal del archivo, el tamaño y utilizando la biblioteca PIL (Pillow) para intentar abrir y verificar las imágenes.</p>
@@ -82,8 +234,8 @@ pip install PySide6 Pillow
     </ul>
 
     <h2>Código Fuente</h2>
-    <p>A continuación, se incluye el código completo del script:</p>
-    <pre><code>
+    <p>A continuación, se incluye el código completo del script con resaltado de sintaxis:</p>
+    <pre><code class="language-python">
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -363,9 +515,13 @@ if __name__ == "__main__":
     <h2>Autor y Licencia</h2>
     <p>Este script fue creado con fines educativos. No se incluye ninguna licencia específica; utiliza bajo tu propio riesgo.</p>
 
-    <footer style="text-align: center; margin-top: 40px; padding: 10px; border-top: 1px solid #555;">
-        <a href="pildoras/pildoras.html" style="color: #ffffff; text-decoration: none;">Acceder a Píldoras</a>
+    <footer>
+        <p>Trabajo sobre Ciberseguridad - Manual de JPG</p>
+        <p><a href="pildoras/pildoras.html">🔙 Volver a Píldoras</a></p>
+        <p>© 2023 - Para fines educativos</p>
     </footer>
+
+    <script>hljs.highlightAll();</script>
 
 </body>
 </html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Empleo del Proyecto Traductor de Textos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #212529; color: #f8f9fa; margin: 0; padding: 20px; }
+        h1, h2, h3 { color: #ffffff; font-weight: 600; }
+        pre { background-color: #495057; color: #f8f9fa; padding: 15px; border: none; border-radius: 0.375rem; overflow-x: auto; margin-bottom: 20px; font-size: 0.875rem; }
+        code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; color: #f8f9fa; }
+        ul, ol { margin-bottom: 20px; }
+        .highlight { background-color: #495057; padding: 10px; border-radius: 0.375rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .card { background-color: #343a40; border: 1px solid #495057; border-radius: 0.375rem; margin-bottom: 20px; }
+        .card-body { padding: 20px; }
+    </style>
+</head>
+<body class="bg-dark text-light">
+    <div class="container my-5">
+        <h1 class="display-4 fw-bold text-center mb-5">Manual de Empleo del Proyecto Traductor de Textos</h1>
+    <p>Este proyecto consiste en dos scripts de Python que permiten extraer texto de un archivo, segmentarlo en frases y almacenarlo en MongoDB, y posteriormente traducirlo del español al inglés utilizando el servicio Ollama.</p>
+
+    <h2>Descripción del Proyecto</h2>
+    <p>El proyecto está compuesto por dos scripts principales:</p>
+    <ul>
+        <li><strong>1-extraer_texto_a mongodb.py</strong>: Extrae y segmenta texto de un archivo (por defecto 'el_quijote.txt'), y lo almacena en MongoDB.</li>
+        <li><strong>2-traducir_desde_mongodb.py</strong>: Lee el texto almacenado en MongoDB, lo traduce del español al inglés usando Ollama, y guarda las traducciones en una nueva colección.</li>
+    </ul>
+    <p class="highlight">El orden de ejecución es importante: Primero se debe ejecutar el script de extracción, seguido del script de traducción.</p>
+
+    <h2>Explicación Detallada de Cada Script</h2>
+
+    <h3>Script 1: 1-extraer_texto_a mongodb.py</h3>
+    <p>Este script se encarga de leer un archivo de texto y prepararlo para su procesamiento posterior. Específicamente:</p>
+    <ul>
+        <li>Lee el contenido completo del archivo 'el_quijote.txt' (o el archivo especificado).</li>
+        <li>Segmenta el texto en frases individuales separadas por puntos (.) y saltos de línea (\n).</li>
+        <li>Conserva tanto el texto de las frases como los saltos de línea como segmentos independientes.</li>
+        <li>Conecta a una base de datos MongoDB local y crea una colección nombrada según el archivo de entrada (sin extensión).</li>
+        <li>Limpia la colección existente para evitar duplicados antes de insertar nuevos datos.</li>
+        <li>Almacena cada segmento como un documento con estructura {_id: número_entero, linea: texto}.</li>
+        <li>Muestra en consola cada segmento numerado para seguimiento.</li>
+    </ul>
+
+    <h3>Script 2: 2-traducir_desde_mongodb.py</h3>
+    <p>Este script toma los datos preparados por el script anterior y los traduce usando inteligencia artificial. Realiza los siguientes pasos:</p>
+    <ul>
+        <li>Conecta a la misma base de datos MongoDB y lee todos los documentos de la colección creada anteriormente.</li>
+        <li>Para cada línea de texto, verifica si contiene contenido traducible (no está vacía o solo contiene saltos de línea).</li>
+        <li>Utiliza el servicio Ollama con el modelo 'gemma3:4b' para traducir cada línea del español al inglés.</li>
+        <li>Maneja errores de traducción de forma individual, evitando que se detenga el proceso completo.</li>
+        <li>Crea una nueva colección en MongoDB con las traducciones, manteniendo la misma estructura de documentos.</li>
+        <li>Para líneas irrelevantes (vacías o solo saltos de línea), guarda el contenido original sin traducir.</li>
+        <li>Muestra el progreso en consola, incluyendo el texto original, la traducción generada y cualquier error encontrado.</li>
+    </ul>
+
+    <h2>Requisitos Previos</h2>
+    <ul>
+        <li>Python 3.x instalado.</li>
+        <li>MongoDB corriendo localmente en mongodb://localhost:27017/.</li>
+        <li>Librería <strong>PyMongo</strong> instalada: <code>pip install pymongo</code></li>
+        <li>Librería <strong>Requests</strong> instalada: <code>pip install requests</code></li>
+        <li>Ollama ejecutándose en http://localhost:11434 con el modelo 'gemma3:4b' disponible.</li>
+        <li>Archivo de texto de entrada (ej. 'el_quijote.txt') en el directorio del proyecto.</li>
+    </ul>
+
+    <h2>Cómo Ejecutar el Proyecto</h2>
+    <ol>
+        <li>Asegúrate de que MongoDB esté corriendo.</li>
+        <li>Verifica que Ollama esté ejecutándose con el modelo correcto.</li>
+        <li>Ejecuta el primer script:</li>
+        <pre><code>python 1-extraer_texto_a mongodb.py</code></pre>
+        <li>Ejecuta el segundo script:</li>
+        <pre><code>python 2-traducir_desde_mongodb.py</code></pre>
+    </ol>
+    <p>Nota: El script de extracción segmenta el texto conservando saltos de línea y puntos. El script de traducción salta líneas vacías o irrelevantes.</p>
+
+    <h2>Configuración de MongoDB</h2>
+    <ul>
+        <li><strong>Base de datos</strong>: traducciones</li>
+        <li><strong>Colección origen</strong>: el_quijote (ajustable en COLECCION_NAME)</li>
+        <li><strong>Colección destino</strong>: el_quijote_traducido_al_ingles</li>
+        <li><strong>Estructura de documentos</strong>: {"_id": int, "linea": str}</li>
+    </ul>
+
+    <h2>Código del Script de Extracción</h2>
+    <pre><code class="language-python">"""
+Este script extrae texto de un archivo, lo segmenta en frases separadas por puntos,
+y almacena cada frase en una colección de MongoDB.
+
+El script lee un archivo de texto (por defecto 'el_quijote.txt'),
+segmenta el contenido respetando los saltos de línea y los puntos finales,
+y luego conecta a una base de datos MongoDB local para almacenar cada segmento
+como un documento separado en una colección nombrada según el archivo.
+
+Uso:
+    python 1-extraer_texto_a mongodb.py
+
+Dependencias:
+    - pymongo: Para la conexión y operaciones con MongoDB
+    - El archivo de texto especificado debe existir en el mismo directorio
+
+Colección MongoDB:
+    - Base de datos: traducciones
+    - Colección: [nombre_del_archivo_sin_extensión]
+    - Documentos: {"_id": int, "linea": str}
+"""
+
+import pymongo
+import os
+
+def segmentar_frases(ruta_archivo: str):
+    """
+    Lee un archivo de texto y lo segmenta en frases por '.'.
+    Respeta los saltos de línea (\n) como segmentos aparte.
+    """
+    frases = []
+
+    with open(ruta_archivo, "r", encoding="utf-8") as f:
+        contenido = f.read()
+
+    frase_actual = ""
+    for caracter in contenido:
+        frase_actual += caracter
+        if caracter == ".":  # fin de frase
+            frases.append(frase_actual.strip("\n"))
+            frase_actual = ""
+        elif caracter == "\n":  # salto de línea
+            if frase_actual.strip("\n"):
+                frases.append(frase_actual.strip("\n"))
+            frases.append("\n")  # se guarda salto explícitamente
+            frase_actual = ""
+
+    # Si queda texto sin punto al final
+    if frase_actual.strip():
+        frases.append(frase_actual)
+
+    return frases
+
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    ruta = "el_quijote.txt"
+    resultado = segmentar_frases(ruta)
+
+    # Conectar a MongoDB
+    client = pymongo.MongoClient()
+    db = client.traducciones
+    base = os.path.basename(ruta)
+    coleccion_nombre = os.path.splitext(base)[0]
+    coleccion = db[coleccion_nombre]
+
+    # Limpiar la colección antes de insertar (opcional, para evitar duplicados)
+    coleccion.delete_many({})
+
+    for i, frase in enumerate(resultado, 1):
+        coleccion.insert_one({"_id": i, "linea": frase})
+        print(f"{i}: {frase}")  # Opcional, para ver en consola</code></pre>
+
+    <h2>Código del Script de Traducción</h2>
+    <pre><code class="language-python">"""
+Este script traduce texto almacenado en una colección de MongoDB utilizando el servicio Ollama.
+
+Lee documentos de una colección origen, traduce cada línea del español al inglés
+mediante llamadas a la API de Ollama, y almacena las traducciones en una nueva colección.
+
+El script maneja errores durante la traducción y salta líneas vacías o irrelevantes
+para optimizar el proceso.
+
+Uso:
+    python 2-traducir_desde_mongodb.py
+
+Dependencias:
+    - requests: Para realizar peticiones HTTP a la API de Ollama
+    - pymongo: Para la conexión y operaciones con MongoDB
+    - Ollama: Debe estar ejecutándose localmente en https://localhost:11434
+    - Modelo Ollama: 'gemma3:4b' (o similar, ajustar en el código si es necesario)
+
+Configuración de MongoDB:
+    - URL: mongodb://localhost:27017/
+    - Base de datos: traducciones
+    - Colección origen: el_quijote (ajustable en COLECCION_NAME)
+    - Colección destino: [COLECCION_NAME]_traducido_al_ingles
+
+Estructura de documentos:
+    - Origen: {"_id": int, "linea": str}
+    - Destino: {"_id": int, "linea": str} (con traducción o contenido original si no traducible)
+"""
+
+import requests
+import json  # Ya no es necesario aquí, pero se mantiene por si acaso
+from pymongo import MongoClient
+
+# Constantes para idiomas
+IDIOMA_EN = "en"
+IDIOMA_ES = "es"
+
+# Direcciones de traducción
+DIRECCION_EN_ES = (IDIOMA_EN, IDIOMA_ES)
+DIRECCION_ES_EN = (IDIOMA_ES, IDIOMA_EN)
+
+# Constantes para MongoDB
+DATABASE_NAME = "traducciones"
+COLECCION_NAME = "el_quijote"  # Puedes cambiar esto por el nombre de tu colección
+
+def traducir_con_ollama(texto: str, idioma_origen: str, idioma_destino: str) -> str:
+    """
+    Traduce un texto usando Ollama.
+    :param texto: Texto de entrada a traducir
+    :param idioma_origen: Idioma de origen (ej: 'en' para inglés, 'es' para español)
+    :param idioma_destino: Idioma de destino (ej: 'es' para español, 'en' para inglés)
+    :return: Traducción como cadena
+    """
+    url = "http://localhost:11434/api/generate"
+
+    # Crear prompt dinámico basado en los idiomas
+    if idioma_origen == IDIOMA_ES and idioma_destino == IDIOMA_EN:
+        prompt = f"Translate the following text from Spanish to English. Provide only the English translation, without explanations or additional modifications:\n\n{texto}"
+    elif idioma_origen == IDIOMA_EN and idioma_destino == IDIOMA_ES:
+        prompt = f"Traduce el siguiente texto del inglés al español. Proporciona únicamente la traducción al español, sin explicaciones ni modificaciones adicionales:\n\n{texto}"
+    else:
+        raise ValueError(f"Dirección de traducción no soportada: {idioma_origen} -> {idioma_destino}")
+
+    payload = {
+        "model": "gemma3:4b",   # Cambia por el modelo que tengas disponible (ej: "mistral")
+        "prompt": prompt,
+        "stream": False      # False para obtener la salida completa de una vez
+    }
+
+    response = requests.post(url, json=payload)
+
+    if response.status_code == 200:
+        data = response.json()
+        return data.get("response", "").strip()
+    else:
+        raise Exception(f"Error en la petición: {response.status_code}, {response.text}")
+
+
+# Ejemplo de uso con MongoDB
+if __name__ == "__main__":
+    # Conectar a MongoDB
+    client = MongoClient("mongodb://localhost:27017/")  # Cambia la URL si es necesario
+    db = client[DATABASE_NAME]
+    collection_origen = db[COLECCION_NAME]
+    collection_traducida = db[f"{COLECCION_NAME}_traducido_al_ingles"]
+
+    # Leer documentos de la colección original
+    documentos = collection_origen.find()  # Puedes agregar filtros si es necesario
+
+    for documento in documentos:
+        linea_numero = documento["_id"]
+        linea_texto = documento["linea"]
+
+        # Saltar líneas vacías o que solo contienen saltos de línea para evitar traducciones innecesarias
+        if not linea_texto.strip() or linea_texto.strip() == "\n":
+            print(f"Línea {linea_numero}: {repr(linea_texto)} (saltada, no traducible)")
+            # Guardar el contenido original en la nueva colección
+            collection_traducida.insert_one({"_id": linea_numero, "linea": linea_texto})
+            print(f"Contenido original guardado para la línea {linea_numero}")
+            continue
+
+        # Traducir la línea del español al inglés
+        try:
+            traduccion = traducir_con_ollama(linea_texto, *DIRECCION_ES_EN)
+            print(f"Línea {linea_numero}: {linea_texto}")
+            print(f"Traducción: {traduccion}")
+            print("---")
+
+            # Guardar la traducción en la nueva colección
+            collection_traducida.insert_one({"_id": linea_numero, "linea": traduccion})
+            print(f"Traducción guardada para la línea {linea_numero}")
+        except Exception as e:
+            print(f"Error al traducir o guardar la línea {linea_numero}: {e}</code></pre>
+
+    <h2>Solución de Problemas</h2>
+    <ul>
+        <li>Si MongoDB no se conecta, verifica que esté corriendo en el puerto por defecto.</li>
+        <li>Si Ollama falla, asegúrate de que el modelo esté descargado y el servidor esté activo.</li>
+        <li>Verifica que las dependencias de Python estén instaladas.</li>
+    </ul>
+
+    <h2>Contacto</h2>
+    <p>Para más información o soporte, visita <a href="https://bgonpin.github.io/" target="_blank" class="text-light">bgonpin.github.io</a>.</p>
+
+    <footer class="text-center mt-5">
+        <p><a href="pildoras.html" class="text-light">Ir a Píldoras</a></p>
+    </footer>
+    </div>  <!-- End of container -->
+</body>
+</html>

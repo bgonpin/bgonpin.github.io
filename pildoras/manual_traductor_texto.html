@@ -23,25 +23,56 @@
 <body class="bg-dark text-light">
     <div class="container my-5">
         <h1 class="display-4 fw-bold text-center mb-5">Manual de Empleo del Proyecto Traductor de Textos</h1>
-    <p>Este proyecto consiste en scripts de Python que permiten extraer texto de un archivo, segmentarlo en frases y almacenarlo en MongoDB, y posteriormente traducirlo del español al inglés utilizando el servicio Ollama. Está disponible tanto en versión de línea de comandos (CLI) como con interfaz gráfica de usuario (GUI).</p>
 
-    <h2>Descripción del Proyecto</h2>
-    <p>El proyecto cuenta con las siguientes versiones:</p>
+        <div class="alert alert-success mb-4" role="alert">
+            <h4 class="alert-heading">🎯 Aplicación Unificada Recomendada</h4>
+            <p class="mb-0">Utilice <strong>traductor_documentos.py</strong> para una experiencia completa integrada con tres pestañas.</p>
+        </div>
 
-    <h3>Versiones CLI (Línea de Comandos)</h3>
+    <p>Este proyecto comprende un sistema completo de traducción automática que extrae texto de archivos, los segmenta en frases, los almacena en MongoDB y los traduce entre múltiples idiomas usando IA local. El proyecto ha evolucionado hacia una <strong>aplicación unificada</strong> que integra todo el proceso en una interfaz gráfica intuitiva.</p>
+
+    <h2>Estado Actual del Proyecto</h2>
+
+    <h3>🏆 Aplicación Principal - traductor_documentos.py</h3>
     <ul>
-        <li><strong>1-extraer_texto_a mongodb.py</strong>: Extrae y segmenta texto de un archivo (por defecto 'el_quijote.txt'), y lo almacena en MongoDB.</li>
-        <li><strong>2-traducir_desde_mongodb.py</strong>: Lee el texto almacenado en MongoDB, lo traduce del español al inglés usando Ollama, y guarda las traducciones en una nueva colección.</li>
+        <li><strong>Aplicación Completa Unificada</strong>: Una sola interfaz con tres pestañas que integra extracción, traducción y composición.</li>
+        <li><strong>Soporte Multiidioma</strong>: Traducción entre español, inglés y francés usando modelos Ollama avanzados.</li>
+        <li><strong>Procesamiento Asíncrono</strong>: Arquitectura con hilos para mantener la interfaz responsiva.</li>
+        <li><strong>Tema Oscuro Profesional</strong>: Interfaz moderna aplicada consistentemente.</li>
+        <li><strong>Formatos Avanzados</strong>: Generación automática de archivos .txt y PDF con formato tipográfico.</li>
+        <li><strong>Manejo de Errores Robusto</strong>: Sistema de recuperación y cancelación de operaciones.</li>
     </ul>
 
-    <h3>Versiones GUI (Interfaz Gráfica)</h3>
+    <h3>🔧 Scripts de Desarrollo y Debugging</h3>
+    <p>Los scripts individuales representan la evolución modular del proyecto:</p>
+
+    <h4>Versiones CLI (Línea de Comandos)</h4>
     <ul>
-        <li><strong>1-extraer_texto_a mongodb_con_gui.py</strong>: Versión con interfaz gráfica que permite seleccionar archivos de texto dinámicamente y procesarlos con barra de progreso.</li>
-        <li><strong>2-traducir_desde_mongodb_con_gui.py</strong>: Interfaz avanzada para seleccionar y traducir múltiples colecciones de MongoDB, con registro de actividad detallado.</li>
-        <li><strong>3-componer.py</strong>: Script para componer texto desde colecciones traducidas con interfaz GUI, genera archivos de texto y PDF.</li>
+        <li><strong>debugeo/1-extraer_texto_a mongodb.py</strong>: Versión básica CLI para extracción de texto.</li>
+        <li><strong>debugeo/2-traducir_desde_mongodb.py</strong>: Versión básica CLI para traducción.</li>
     </ul>
 
-    <p class="highlight">El orden de ejecución recomendado es: Primero el script de extracción, luego el de traducción, y finalmente el de composición para generar los archivos finales. Este orden aplica tanto para versiones CLI como GUI.</p>
+    <h4>Versiones GUI Modulares</h4>
+    <ul>
+        <li><strong>debugeo/1-extraer_texto_a mongodb_con_gui.py</strong>: GUI básica para extracción con barra de progreso.</li>
+        <li><strong>debugeo/2-traducir_desde_mongodb_con_gui.py</strong>: GUI avanzada para traducción masiva.</li>
+        <li><strong>debugeo/3-componer.py</strong>: GUI para composición de archivos finales.</li>
+    </ul>
+
+    <p class="highlight"><strong>Evolución del Proyecto</strong>: Los scripts en la carpeta <code>debugeo/</code> representan el desarrollo modular original que ha sido consolidado en la aplicación unificada <code>traductor_documentos.py</code>. Estos scripts siguen siendo funcionales para desarrollo específico y compatibilidad.</p>
+
+    <h3>Arquitectura Evolutiva</h3>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Del Desarrollo Modular a la Integración Completa</h5>
+            <p>El proyecto evolucionó desde scripts separados hacia una <strong>aplicación unificada</strong> que mantiene todas las funcionalidades pero ofrece una experiencia más intuitiva:</p>
+            <ol>
+                <li><strong>Fase 1</strong>: Scripts CLI separados para funciones específicas</li>
+                <li><strong>Fase 2</strong>: Interfaces GUI individuales por cada función</li>
+                <li><strong>Fase 3</strong>: <strong>Aplicación integrada con múltiples pestañas</strong> ⭐</li>
+            </ol>
+        </div>
+    </div>
 
     <h2>Explicación Detallada de Cada Script</h2>
 
@@ -129,44 +160,70 @@
         <li>Librería <strong>Requests</strong> instalada: <code>pip install requests</code></li>
     </ul>
 
-    <h3>Dependencias para Versión GUI</h3>
+    <h3>Dependencias para Versión GUI Unificada</h3>
     <ul>
         <li>Todas las dependencias de la versión CLI.</li>
-        <li><strong>PySide6</strong>: <code>pip install PySide6</code> (cuando se elige Qt6) ó <strong>PyQt6</strong>: <code>pip install PyQt6</code> (alternativa Qt6)</li>
-        <li><strong>ReportLab</strong> instalado (requerido para exportar a PDF en script 3-componer.py): <code>pip install reportlab</code></li>
-        <li><strong>PyPDF2</strong> instalado (requerido para soporte de PDF en 1-extraer_texto_a mongodb_con_gui.py): <code>pip install PyPDF2</code></li>
-        <li>Nota: En caso de problemas con PySide6/PyQt6, se puede usar <strong>PyQt5</strong>: <code>pip install PyQt5</code>, pero se requiere ajustar el código importando <code>PyQt5.QtWidgets</code> en lugar de <code>PySide6.QtWidgets</code>.</li>
+        <li><strong>PySide6</strong>: <code>pip install PySide6</code> (recomendado) ó <strong>PyQt6</strong>: <code>pip install PyQt6</code></li>
+        <li><strong>ReportLab</strong> (para generación PDF): <code>pip install reportlab</code></li>
+        <li><strong>PyPDF2</strong> (para lectura PDF): <code>pip install PyPDF2</code></li>
+        <li><strong>Instalación completa recomendada</strong>: <code>pip install pymongo requests PySide6 PyPDF2 reportlab</code></li>
     </ul>
 
+    <div class="alert alert-info">
+        <h5>⚠️ Nota sobre dependencias</h5>
+        <p><strong>Para la aplicación unificada</strong>: Solo necesitas la instalación completa una vez. Para los scripts individuales de <code>debugeo/</code>, las dependencias varían según la funcionalidad específica.</p>
+    </div>
+
     <h2>Cómo Ejecutar el Proyecto</h2>
+
+    <h3>🏆 Aplicación Unificada Recomendada (Opción Más Simple)</h3>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Ejecución con traductor_documentos.py</h5>
+            <p class="card-text">La aplicación más sencilla y completa para usar el proyecto.</p>
+            <ol>
+                <li><strong>Instala dependencias</strong>: <code>pip install pymongo requests PySide6 PyPDF2 reportlab</code></li>
+                <li><strong>Ejecuta la aplicación</strong>:</li>
+                <pre><code>python traductor_documentos.py</code></pre>
+                <li><strong>Flujo de uso típico</strong>:
+                    <br>• <em>Pestaña 1 - Extraer</em>: Selecciona archivo .txt o .pdf
+                    <br>• <em>Pestaña 2 - Traducir</em>: Elige idiomas y colecciones
+                    <br>• <em>Pestaña 3 - Componer</em>: Genera archivos finales .txt y .pdf
+                </li>
+            </ol>
+            <div class="alert alert-info">
+                <strong>✅ Ventajas</strong>: Una sola aplicación para todo el proceso, interfaz intuitiva con tres pestañas, proceso completo con barras de progreso individuales.
+            </div>
+        </div>
+    </div>
 
     <h3>Ejecución con Versión CLI</h3>
     <ol>
         <li>Asegúrate de que MongoDB esté corriendo.</li>
         <li>Verifica que Ollama esté ejecutándose con el modelo correcto.</li>
         <li>Ejecuta el primer script de extracción:</li>
-        <pre><code>python 1-extraer_texto_a mongodb.py</code></pre>
+        <pre><code>python debugeo/1-extraer_texto_a mongodb.py</code></pre>
         <li>Ejecuta el segundo script de traducción:</li>
-        <pre><code>python 2-traducir_desde_mongodb.py</code></pre>
+        <pre><code>python debugeo/2-traducir_desde_mongodb.py</code></pre>
     </ol>
 
-    <h3>Ejecución con Versión GUI</h3>
+    <h3>Ejecución con Scripts GUI Independientes</h3>
     <ol>
         <li>Asegúrate de que estén cumplidos todos los requisitos previos (incluyendo PySide6).</li>
         <li>Ejecuta la aplicación de extracción GUI:</li>
-        <pre><code>python 1-extraer_texto_a mongodb_con_gui.py</code></pre>
+        <pre><code>python debugeo/1-extraer_texto_a mongodb_con_gui.py</code></pre>
         <li>Clic en "Seleccionar archivo" y elige el archivo de texto deseado.</li>
         <li>Clic en "Procesar" y observa la barra de progreso.</li>
         <li>Ejecuta la aplicación de traducción GUI:</li>
-        <pre><code>python 2-traducir_desde_mongodb_con_gui.py</code></pre>
+        <pre><code>python debugeo/2-traducir_desde_mongodb_con_gui.py</code></pre>
         <li>Selecciona las colecciones que deseas traducir usando el checkbox o "Seleccionar Todo".</li>
         <li>Clic en "Iniciar Traducción" y observa el registro de actividad y progreso.</li>
         <li>La interfaz GUI permite cancelar operaciones en cualquier momento.</li>
         <li>Ejecuta la aplicación de composición GUI:</li>
-        <pre><code>python 3-componer.py
+        <pre><code>python debugeo/3-componer.py
 
 # Para modo de diagnóstico/prueba (consola):
-python 3-componer.py --test</code></pre>
+python debugeo/3-componer.py --test</code></pre>
         <li>Clic en "Actualizar Lista" para obtener las colecciones traducidas.</li>
         <li>Selecciona las colecciones a procesar usando checkboxes.</li>
         <li>Opcionalmente, marca "Exportar también a PDF" para generar PDF además de texto.</li>
@@ -174,977 +231,537 @@ python 3-componer.py --test</code></pre>
         <li>El modo --test permite verificar conexiones y contenido sin interfaz gráfica.</li>
     </ol>
 
+    <div class="alert alert-warning">
+        <h4>ℹ️ Sobre los Scripts en la Carpeta debugeo/</h4>
+        <p>Los archivos en <code>debugeo/</code> son versiones individuales que precedieron a la aplicación unificada. Son útiles para desarrollo específico pero requieren ejecutar múltiples scripts por separado. Se mantienen por compatibilidad y debugging avanzado.</p>
+    </div>
+
     <p class="highlight">Nota importante: El orden de ejecución es crítico. Siempre ejecuta primero la extracción antes de la traducción, ya sea en versión CLI o GUI. Los scripts segmentan el texto conservando saltos de línea y puntos, mientras que los scripts de traducción procesan líneas vacías eficientemente.</p>
 
     <h2>Configuración de MongoDB</h2>
     <ul>
-        <li><strong>Base de datos</strong>: traducciones</li>
-        <li><strong>Colección origen</strong>: el_quijote (ajustable en COLECCION_NAME)</li>
-        <li><strong>Colección destino</strong>: el_quijote_traducido_al_ingles</li>
+        <li><strong>Base de datos</strong>: traducciones (con variaciones: 'traducciones', 'traducir', 'translations')</li>
+        <li><strong>Colección origen</strong>: el_quijote (ajustable en COLECCION_NAME para CLI) / dinámica para GUI</li>
+        <li><strong>Colección destino</strong>: [colección_original]_traducido_al_ingles</li>
         <li><strong>Estructura de documentos</strong>: {"_id": int, "linea": str}</li>
     </ul>
 
-    <h2>Código del Script de Extracción</h2>
-    <pre><code class="language-python">"""
-Este script extrae texto de un archivo, lo segmenta en frases separadas por puntos,
-y almacena cada frase en una colección de MongoDB.
+    <div class="highlight">
+    <strong>Nota sobre bases de datos:</strong> Los scripts detectan automáticamente varias variaciones del nombre de base de datos ('traducciones', 'traducir', 'translations') para mayor compatibilidad.
+    </div>
 
-El script lee un archivo de texto (por defecto 'el_quijote.txt'),
-segmenta el contenido respetando los saltos de línea y los puntos finales,
-y luego conecta a una base de datos MongoDB local para almacenar cada segmento
-como un documento separado en una colección nombrada según el archivo.
+    <h2>Código de la Aplicación Unificada - traductor_documentos.py</h2>
 
-Uso:
-    python 1-extraer_texto_a mongodb.py
+    <div class="alert alert-info mb-4">
+        <h4>📋 Arquitectura de la Aplicación Unificada</h4>
+        <p>La aplicación <code>traductor_documentos.py</code> integra tres componentes principales en una sola interfaz:</p>
+    </div>
 
-Dependencias:
-    - pymongo: Para la conexión y operaciones con MongoDB
-    - El archivo de texto especificado debe existir en el mismo directorio
+    <h3>🏗️ Componentes Principales</h3>
 
-Colección MongoDB:
-    - Base de datos: traducciones
-    - Colección: [nombre_del_archivo_sin_extensión]
-    - Documentos: {"_id": int, "linea": str}
-"""
+    <h4>1. Pestaña de Extracción (ExtractionWorker)</h4>
+    <ul>
+        <li><strong>Funcionalidad</strong>: Lee archivos .txt y .pdf, los segmenta por líneas y los almacena en MongoDB</li>
+        <li><strong>Soporte multi-formato</strong>: Compatible con texto plano (.txt) y archivos PDF (.pdf)</li>
+        <li><strong>Procesamiento en hilos</strong>: Mantiene la interfaz responsiva durante operaciones largas</li>
+        <li><strong>Barra de progreso</strong>: Seguimiento visual del procesamiento en tiempo real</li>
+        <li><strong>Validación inteligente</strong>: Verificación de tipos de archivo y conexiones</li>
+    </ul>
 
-import pymongo
-import os
+    <h4>2. Pestaña de Traducción (TranslationWorker)</h4>
+    <ul>
+        <li><strong>IA Avanzada</strong>: Utiliza Ollama con modelos como 'gemma3:4b' para traducciones de calidad</li>
+        <li><strong>Soporte multiidioma</strong>: Español ↔ Inglés ↔ Francés con prompts optimizados</li>
+        <li><strong>Manejo robusto de errores</strong>: Continúa procesamiento ante fallos individuales por línea</li>
+        <li><strong>Procesamiento por lotes</strong>: Traduce múltiples colecciones simultáneamente</li>
+        <li><strong>Registro detallado</strong>: Seguimiento de cada traducción con estadísticas en tiempo real</li>
+        <li><strong>Cancelación segura</strong>: Posibilidad de detener procesos largos sin perder datos</li>
+    </ul>
 
-def segmentar_frases(ruta_archivo: str):
-    """
-    Lee un archivo de texto y lo segmenta en frases por saltos de línea.
-    """
-    with open(ruta_archivo, "r", encoding="utf-8") as f:
-        contenido = f.read()
+    <h4>3. Pestaña de Composición (CompositionWorker)</h4>
+    <ul>
+        <li><strong>Reconstrucción inteligente</strong>: Junta textos traducidos respetando estructura original</li>
+        <li><strong>Formatos múltiples</strong>: Genera archivos .txt y .pdf automáticamente</li>
+        <li><strong>PDF profesional</strong>: Crea documentos con formato tipográfico usando ReportLab</li>
+        <li><strong>Preservación de contenido</strong>: Mantiene saltos de línea y estructura del documento original</li>
+        <li><strong>Procesamiento masivo</strong>: Maneja múltiples colecciones traducidas simultáneamente</li>
+    </ul>
 
-    frases = contenido.split('\n')
+    <h3>🎨 Características Técnicas Avanzadas</h3>
 
-    return frases
+    <h4>Arquitectura con Hilos (QThread)</h4>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Procesamiento Asíncrono</h5>
+            <ul class="mb-0">
+                <li>Cada operación crítica se ejecuta en hilos separados</li>
+                <li>Interfaz permanece responsiva durante operaciones largas</li>
+                <li>Cantidad controlada de hilos para optimizar rendimiento</li>
+                <li>Comunicación segura entre hilos usando señales Qt</li>
+            </ul>
+        </div>
+    </div>
 
+    <h4>Tema Oscuro Profesional</h4>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Interfaz Moderna y Consistente</h5>
+            <ul class="mb-0">
+                <li>Paleta de colores oscura aplicada globalmente</li>
+                <li>Estilos consistentes para todos los widgets PySide6</li>
+                <li>Animaciones sutiles y transiciones suaves</li>
+                <li>Optimización visual para uso prolongado</li>
+            </ul>
+        </div>
+    </div>
 
-# Ejemplo de uso
-if __name__ == "__main__":
-    ruta = "el_quijote.txt"
-    resultado = segmentar_frases(ruta)
+    <h4>Gestión Completa de Conexiones</h4>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Bases de Datos y Servicios Externos</h5>
+            <ul class="mb-0">
+                <li><strong>MongoDB</strong>: Conexión automática con detección de bases de datos variantes</li>
+                <li><strong>Ollama</strong>: Verificación de conectividad y modelos disponibles</li>
+                <li><strong>Control de errores</strong>: Manejo específico para cada tipo de conexión</li>
+                <li><strong>Recuperación automática</strong>: Intentos de reconexión ante fallos temporales</li>
+            </ul>
+        </div>
+    </div>
 
-    # Conectar a MongoDB
-    client = pymongo.MongoClient()
-    db = client.traducciones
-    base = os.path.basename(ruta)
-    coleccion_nombre = os.path.splitext(base)[0]
-    coleccion = db[coleccion_nombre]
+    <h3>🚀 Ejecución Simplificada</h3>
 
-    # Limpiar la colección antes de insertar (opcional, para evitar duplicados)
-    coleccion.delete_many({})
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Comando Principal</h5>
+            <pre><code>python traductor_documentos.py</code></pre>
 
-    for i, frase in enumerate(resultado, 1):
-        coleccion.insert_one({"_id": i, "linea": frase})
-        print(f"{i}: {frase}")  # Opcional, para ver en consola</code></pre>
+            <h6 class="mt-3">Flujo de Uso Típico:</h6>
+            <ol>
+                <li><strong>Iniciar aplicación</strong>: Se abre interfaz con tres pestañas</li>
+                <li><strong>Pestaña 1 - Extraer</strong>: Seleccionar archivo (.txt o .pdf) y procesar</li>
+                <li><strong>Pestaña 2 - Traducir</strong>: Elegir colecciones e idiomas de destino</li>
+                <li><strong>Pestaña 3 - Componer</strong>: Generar archivos finales (.txt y .pdf)</li>
+            </ol>
+        </div>
+    </div>
 
-    <h2>Código del Script de Traducción</h2>
-    <pre><code class="language-python">"""
-Este script traduce texto almacenado en una colección de MongoDB utilizando el servicio Ollama.
+    <h3>⚙️ Configuración Global</h3>
 
-Lee documentos de una colección origen, traduce cada línea del español al inglés
-mediante llamadas a la API de Ollama, y almacena las traducciones en una nueva colección.
-
-El script maneja errores durante la traducción y salta líneas vacías o irrelevantes
-para optimizar el proceso.
-
-Uso:
-    python 2-traducir_desde_mongodb.py
-
-Dependencias:
-    - requests: Para realizar peticiones HTTP a la API de Ollama
-    - pymongo: Para la conexión y operaciones con MongoDB
-    - Ollama: Debe estar ejecutándose localmente en https://localhost:11434
-    - Modelo Ollama: 'gemma3:4b' (o similar, ajustar en el código si es necesario)
-
-Configuración de MongoDB:
-    - URL: mongodb://localhost:27017/
-    - Base de datos: traducciones
-    - Colección origen: el_quijote (ajustable en COLECCION_NAME)
-    - Colección destino: [COLECCION_NAME]_traducido_al_ingles
-
-Estructura de documentos:
-    - Origen: {"_id": int, "linea": str}
-    - Destino: {"_id": int, "linea": str} (con traducción o contenido original si no traducible)
-"""
-
-import requests
-import json  # Ya no es necesario aquí, pero se mantiene por si acaso
-from pymongo import MongoClient
-
-# Constantes para idiomas
-IDIOMA_EN = "en"
-IDIOMA_ES = "es"
-
-# Direcciones de traducción
-DIRECCION_EN_ES = (IDIOMA_EN, IDIOMA_ES)
-DIRECCION_ES_EN = (IDIOMA_ES, IDIOMA_EN)
-
-# Constantes para MongoDB
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Constantes Principales</h5>
+            <pre><code class="language-python"># Configuración principal
 DATABASE_NAME = "traducciones"
-COLECCION_NAME = "el_quijote"  # Puedes cambiar esto por el nombre de tu colección
+OLLAMA_URL = "http://localhost:11434/api/generate"
+MODEL_NAME = "gemma3:4b"
 
+# Idiomas soportados
+IDIOMA_CODES = ["es", "en", "fr"]
+IDIOMA_NAMES = {
+    "es": "Español",
+    "en": "English",
+    "fr": "Français"
+}
+
+# Configuración MongoDB
+MONGO_TIMEOUT = 5000
+CONNECTION_RETRIES = 3</code></pre>
+        </div>
+    </div>
+
+    <h3>🛡️ Sistema de Manejo de Errores</h3>
+    <ul>
+        <li><strong>Validación de conexiones</strong>: Verificación previa de MongoDB y Ollama</li>
+        <li><strong>Recuperación automática</strong>: Continúa procesamiento ante errores individuales</li>
+        <li><strong>Mensajes informativos</strong>: Descripciones claras de problemas encontrados</li>
+        <li><strong>Registro detallado</strong>: Seguimiento completo de operaciones y errores</li>
+        <li><strong>Cancelación segura</strong>: Posibilidad de detener procesos sin corromper datos</li>
+    </ul>
+
+
+
+    <h2>Solución de Problemas</h2>
+
+    <h3>Problemas Generales</h3>
+    <ul>
+        <li><strong>MongoDB no se conecta</strong>: Verifica que esté corriendo en el puerto por defecto (27017). En algunas versiones de MongoDB, puede requerir instalación específica o ajustes de configuración.</li>
+        <li><strong>Ollama falla</strong>: Asegúrate de que el modelo 'gemma3:4b' esté descargado y el servidor esté activo en http://localhost:11434. Ejecuta <code>ollama list</code> para verificar modelos disponibles.</li>
+        <li><strong>Dependencias faltantes</strong>: Instala todas las dependencias con pip. Verifica versiones compatibles de bibliotecas.</li>
+        <li><strong>Codificación de archivos</strong>: Asegúrate de que los archivos de texto estén en UTF-8 para evitar problemas de caracteres especiales.</li>
+    </ul>
+
+    <h3>Problemas Específicos de GUI</h3>
+    <ul>
+        <li><strong>PySide6 no se encuentra</strong>: Instala con <code>pip install PySide6</code>. Si hay conflictos, considera usar PyQt6 o PyQt5, ajustando las importaciones.</li>
+        <li><strong>La interfaz no responde</strong>: Las operaciones se ejecutan en hilos separados. Si se congela completamente, reinicia la aplicación.</li>
+        <li><strong>Error de Qt plugins</strong>: Puede requerir instalación de bibliotecas adicionales en Linux (sudo apt install qt6-base-dev).</li>
+        <li><strong>Archivo no encontrado</strong>: En la aplicación GUI de extracción, usa el diálogo de archivos para seleccionar archivos válidos.</li>
+        <li><strong>Colecciones no aparecen en GUI de traducción</strong>: Las colecciones deben existir en la base de datos 'traducciones' y no tener sufijo '_traducido_al_ingles'.</li>
+        <li><strong>Colecciones no aparecen en composición</strong>: Las colecciones deben contener '_traducido_' en el nombre para ser detectadas por la interfaz de composición.</li>
+    </ul>
+
+    <h3>Errores Comunes</h3>
+    <ul>
+        <li><strong>"Connection refused"</strong>: Verifica que MongoDB y Ollama estén ejecutándose.</li>
+        <li><strong>"Module not found"</strong>: Instala el módulo faltante con pip.</li>
+        <li><strong>Traducciones vacías</strong>: Puede ser normal para líneas con solo saltos de línea. Registra el registro de actividad en la GUI.</li>
+        <li><strong>Proceso cancelado inesperadamente</strong>: En GUI, usa los botones de cancelación apropiadamente.</li>
+    </ul>
+
+    <h2>Código Completo del Archivo traductor_documentos.py</h2>
+
+    <div class="alert alert-info mb-4">
+        <h4>📄 Código Python Formateado</h4>
+        <p>Abajo se presenta el código completo del archivo <code>traductor_documentos.py</code>, incluyendo la explicación detallada de su funcionalidad.</p>
+    </div>
+
+    <pre><code class="language-python">"""
+Traductor Completo: Extraer, Traducir y Componer en una sola interfaz GUI con PySide6.
+
+Este script integra las funcionalidades de:
+1. Extraer texto de archivos PDF/TXT y almacenarlo en MongoDB
+2. Traducir colecciones de MongoDB utilizando Ollama
+3. Componer archivos finales (TXT y PDF) desde las traducciones
+
+Uso:
+    python traductor_completo_gui.py
+
+Dependencias:
+    - pymongo: Para MongoDB
+    - PySide6: Para la interfaz GUI
+    - PyPDF2: Para leer PDFs
+    - requests: Para API de Ollama
+    - reportlab: Para generar PDFs
+    - Ollama: Debe estar corriendo localmente en http://localhost:11434
+"""
+import sys
+import os
+from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel,
+                               QProgressBar, QTextEdit, QMessageBox, QFileDialog, QGroupBox,
+                               QListWidget, QListWidgetItem, QComboBox, QCheckBox, QSplitter, QTabWidget, QLineEdit)
+from PySide6.QtGui import QPalette, QColor, QFont
+from PySide6.QtCore import QThread, Signal, QObject
+import pymongo
+import PyPDF2
+import requests
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_JUSTIFY
+from reportlab.lib.units import inch
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
+
+
+# Constantes
+DATABASE_NAME = "traducciones"
+OLLAMA_URL = "http://localhost:11434/api/generate"
+MODEL_NAME = "gemma3:4b"
+
+IDIOMA_CODES = ["es", "en", "fr"]
+IDIOMA_NAMES = {
+    "es": "Español",
+    "en": "English",
+    "fr": "Français"
+}
+
+IDIOMA_NAMES_PROMPT = {
+    "es": "español",
+    "en": "inglés",
+    "fr": "francés"
+}
+
+# Funciones auxiliares
 def traducir_con_ollama(texto: str, idioma_origen: str, idioma_destino: str) -> str:
-    """
-    Traduce un texto usando Ollama.
-    :param texto: Texto de entrada a traducir
-    :param idioma_origen: Idioma de origen (ej: 'en' para inglés, 'es' para español)
-    :param idioma_destino: Idioma de destino (ej: 'es' para español, 'en' para inglés)
-    :return: Traducción como cadena
-    """
-    url = "http://localhost:11434/api/generate"
+    """Traduce texto usando Ollama."""
+    nombre_origen = IDIOMA_NAMES_PROMPT[idioma_origen]
+    nombre_destino = IDIOMA_NAMES_PROMPT[idioma_destino]
 
-    # Crear prompt dinámico basado en los idiomas
-    if idioma_origen == IDIOMA_ES and idioma_destino == IDIOMA_EN:
-        prompt = f"Translate the following text from Spanish to English. Provide only the English translation, without explanations or additional modifications:\n\n{texto}"
-    elif idioma_origen == IDIOMA_EN and idioma_destino == IDIOMA_ES:
-        prompt = f"Traduce el siguiente texto del inglés al español. Proporciona únicamente la traducción al español, sin explicaciones ni modificaciones adicionales:\n\n{texto}"
-    else:
-        raise ValueError(f"Dirección de traducción no soportada: {idioma_origen} -> {idioma_destino}")
+    prompt = ""
+    if idioma_origen == "es":
+        prompt = f"Translate the following text from Spanish to {nombre_destino}. Provide only the {nombre_destino} translation, without explanations or additional modifications:\\n\\n{texto}"
+    elif idioma_origen == "en":
+        prompt = f"Translate the following text from English to {nombre_destino}. Provide only the {nombre_destino} translation, without explanations or additional modifications:\\n\\n{texto}"
+    elif idioma_origen == "fr":
+        prompt = f"Translate the following text from French to {nombre_destino}. Provide only the {nombre_destino} translation, without explanations or additional modifications:\\n\\n{texto}"
 
     payload = {
-        "model": "gemma3:4b",   # Cambia por el modelo que tengas disponible (ej: "mistral")
+        "model": MODEL_NAME,
         "prompt": prompt,
-        "stream": False      # False para obtener la salida completa de una vez
+        "stream": False
     }
 
-    response = requests.post(url, json=payload)
-
+    response = requests.post(OLLAMA_URL, json=payload)
     if response.status_code == 200:
         data = response.json()
         return data.get("response", "").strip()
     else:
-        raise Exception(f"Error en la petición: {response.status_code}, {response.text}")
-
-
-# Ejemplo de uso con MongoDB
-if __name__ == "__main__":
-    # Conectar a MongoDB
-    client = MongoClient("mongodb://localhost:27017/")  # Cambia la URL si es necesario
-    db = client[DATABASE_NAME]
-    collection_origen = db[COLECCION_NAME]
-    collection_traducida = db[f"{COLECCION_NAME}_traducido_al_ingles"]
-
-    # Leer documentos de la colección original
-    documentos = collection_origen.find()  # Puedes agregar filtros si es necesario
-
-    for documento in documentos:
-        linea_numero = documento["_id"]
-        linea_texto = documento["linea"]
-
-        # Saltar líneas vacías o que solo contienen saltos de línea para evitar traducciones innecesarias
-        if not linea_texto.strip() or linea_texto.strip() == "\n":
-            print(f"Línea {linea_numero}: {repr(linea_texto)} (saltada, no traducible)")
-            # Guardar el contenido original en la nueva colección
-            collection_traducida.insert_one({"_id": linea_numero, "linea": linea_texto})
-            print(f"Contenido original guardado para la línea {linea_numero}")
-            continue
-
-        # Traducir la línea del español al inglés
-        try:
-            traduccion = traducir_con_ollama(linea_texto, *DIRECCION_ES_EN)
-            print(f"Línea {linea_numero}: {linea_texto}")
-            print(f"Traducción: {traduccion}")
-            print("---")
-
-            # Guardar la traducción en la nueva colección
-            collection_traducida.insert_one({"_id": linea_numero, "linea": traduccion})
-            print(f"Traducción guardada para la línea {linea_numero}")
-        except Exception as e:
-            print(f"Error al traducir o guardar la línea {linea_numero}: {e}</code></pre>
-
-    <h2>Código de la Versión GUI de Extracción (1-extraer_texto_a mongodb_con_gui.py)</h2>
-    <pre><code class="language-python">"""
-Este script extrae texto de un archivo de texto o PDF, lo segmenta en líneas separadas por saltos de línea,
-y almacena cada línea en una colección de MongoDB.
-Interfaz GUI con PySide6.
-
-El script lee un archivo de texto o PDF seleccionado por el usuario,
-segmenta el contenido en líneas separadas por saltos de línea,
-y luego conecta a una base de datos MongoDB local para almacenar cada segmento
-como un documento separado en una colección nombrada según el archivo.
-
-Uso:
-    python 1-extraer_texto_a mongodb_con_gui.py
-
-Dependencias:
-    - pymongo: Para la conexión y operaciones con MongoDB
-    - PySide6: Para la interfaz gráfica
-    - PyPDF2: Para extraer texto de archivos PDF
-    - El archivo especificado debe existir
-
-Colección MongoDB:
-    - Base de datos: traducciones
-    - Colección: [nombre_del_archivo_sin_extensión]
-    - Documentos: {"_id": int, "linea": str}
-"""
-
-import sys
-import os
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QProgressBar, QFileDialog, QMessageBox
-from PySide6.QtGui import QPalette, QColor
-from PySide6.QtCore import QThread, Signal
-import pymongo
-import PyPDF2
-
-
-class WorkerThread(QThread):
-    """
-    Hilo de trabajo para procesar el archivo sin bloquear la GUI.
-    """
-    progress = Signal(int)
-    finished_signal = Signal(bool, str)
-
-    def __init__(self, ruta_archivo):
-        super().__init__()
-        self.ruta_archivo = ruta_archivo
-        self.is_cancelled = False
-
-    def run(self):
-        try:
-            resultado = self.segmentar_frases(self.ruta_archivo)
-
-            # Conectar a MongoDB
-            client = pymongo.MongoClient()
-            db = client.traducciones
-            base = os.path.basename(self.ruta_archivo)
-            coleccion_nombre = os.path.splitext(base)[0]
-            coleccion = db[coleccion_nombre]
-
-            # Limpiar la colección antes de insertar
-            coleccion.delete_many({})
-
-            total = len(resultado)
-            for i, frase in enumerate(resultado, 1):
-                if self.is_cancelled:
-                    self.finished_signal.emit(False, "Operación cancelada por el usuario.")
-                    return
-
-                coleccion.insert_one({"_id": i, "linea": frase})
-                self.progress.emit(int((i / total) * 100))
-
-            self.finished_signal.emit(True, f"Proceso completado. {total} líneas insertadas en '{coleccion_nombre}'.")
-        except Exception as e:
-            self.finished_signal.emit(False, f"Error: {str(e)}")
-
-    def cancel(self):
-        self.is_cancelled = True
-
-    def segmentar_frases(self, ruta_archivo: str):
-        """
-        Lee un archivo de texto o PDF y lo segmenta en líneas por saltos de línea.
-        """
-        frases = []
-        contenido = ""
-
-        ext = os.path.splitext(ruta_archivo)[1].lower()
-        if ext == ".txt":
-            with open(ruta_archivo, "r", encoding="utf-8") as f:
-                contenido = f.read()
-        elif ext == ".pdf":
-            with open(ruta_archivo, "rb") as f:
-                pdf_reader = PyPDF2.PdfReader(f)
-                for page in pdf_reader.pages:
-                    contenido += page.extract_text() + "\n"
-        else:
-            raise ValueError("Formato de archivo no soportado. Solo .txt y .pdf.")
-
-        frases = contenido.split('\n')
-
-        return frases
-
-
-class MainWindow(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("Extractor de Texto a MongoDB")
-        self.setGeometry(300, 300, 500, 250)
-        self.setStyleSheet("""
-            QWidget {
-                background-color: #2b2b2b;
-                color: #ffffff;
-                font-family: Arial, sans-serif;
-            }
-            QPushButton {
-                background-color: #404040;
-                color: #ffffff;
-                border: 1px solid #606060;
-                padding: 8px;
-                border-radius: 4px;
-            }
-            QPushButton:hover {
-                background-color: #505050;
-            }
-            QPushButton:pressed {
-                background-color: #303030;
-            }
-            QLabel {
-                color: #ffffff;
-                font-size: 12px;
-            }
-            QProgressBar {
-                background-color: #404040;
-                border: 1px solid #606060;
-                border-radius: 4px;
-                text-align: center;
-            }
-            QProgressBar::chunk {
-                background-color: #4CAF50;
-            }
-        """)
-
-        # Widgets
-        self.label_archivo = QLabel("Seleccionar archivo de texto o PDF:")
-        self.btn_seleccionar = QPushButton("Seleccionar archivo")
-        self.btn_seleccionar.clicked.connect(self.seleccionar_archivo)
-
-        self.label_progreso = QLabel("Progreso:")
-        self.progress_bar = QProgressBar()
-        self.progress_bar.setRange(0, 100)
-        self.progress_bar.setValue(0)
-
-        self.btn_procesar = QPushButton("Procesar")
-        self.btn_procesar.clicked.connect(self.procesar_archivo)
-        self.btn_procesar.setEnabled(False)
-
-        self.btn_cancelar = QPushButton("Cancelar")
-        self.btn_cancelar.clicked.connect(self.cancelar_proceso)
-        self.btn_cancelar.setEnabled(False)
-
-        self.status_label = QLabel("Seleccione un archivo y presione 'Procesar' para iniciar.")
-
-        # Layout
-        layout = QVBoxLayout()
-        layout.addWidget(self.label_archivo)
-        layout.addWidget(self.btn_seleccionar)
-
-        layout_h = QHBoxLayout()
-        layout_h.addWidget(self.btn_procesar)
-        layout_h.addWidget(self.btn_cancelar)
-        layout.addLayout(layout_h)
-
-        layout.addWidget(self.label_progreso)
-        layout.addWidget(self.progress_bar)
-        layout.addWidget(self.status_label)
-
-        self.setLayout(layout)
-
-        self.ruta_archivo = None
-        self.worker = None
-
-    def seleccionar_archivo(self):
-        self.ruta_archivo, _ = QFileDialog.getOpenFileName(self, "Seleccionar archivo", "", "Archivos de texto y PDF (*.txt *.pdf)")
-        if self.ruta_archivo:
-            self.btn_procesar.setEnabled(True)
-            self.status_label.setText(f"Archivo seleccionado: {os.path.basename(self.ruta_archivo)}")
-        else:
-            self.btn_procesar.setEnabled(False)
-            self.status_label.setText("Ningún archivo seleccionado.")
-
-    def procesar_archivo(self):
-        if not self.ruta_archivo:
-            QMessageBox.warning(self, "Advertencia", "Por favor, seleccione un archivo primero.")
-            return
-
-        self.btn_procesar.setEnabled(False)
-        self.btn_cancelar.setEnabled(True)
-        self.progress_bar.setValue(0)
-        self.status_label.setText("Procesando...")
-
-        self.worker = WorkerThread(self.ruta_archivo)
-        self.worker.progress.connect(self.progress_bar.setValue)
-        self.worker.finished_signal.connect(self.proceso_finalizado)
-        self.worker.start()
-
-    def cancelar_proceso(self):
-        if self.worker and self.worker.isRunning():
-            self.worker.cancel()
-            self.btn_cancelar.setText("Cancelando...")
-            self.btn_cancelar.setEnabled(False)
-
-    def proceso_finalizado(self, success, message):
-        self.btn_procesar.setEnabled(True)
-        self.btn_cancelar.setEnabled(False)
-        self.btn_cancelar.setText("Cancelar")
-        self.status_label.setText(message)
-        if success:
-            QMessageBox.information(self, "Éxito", message)
-            self.progress_bar.setValue(100)
-        else:
-            QMessageBox.warning(self, "Error", message)
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
-</code></pre>
-
-    <h2>Código de la Versión GUI de Traducción (2-traducir_desde_mongodb_con_gui.py)</h2>
-    <p>La versión GUI avanzada para traducción masiva incluye características adicionales como:</p>
-    <ul>
-        <li>Detección automática de colecciones disponibles</li>
-        <li>Selección múltiple con checkboxes</li>
-        <li>Registro coloreado de actividad</li>
-        <li>Panel dividido para mejor organización</li>
-        <li>Progreso por colección individual</li>
-        <li>Botones "Seleccionar Todo" y "Limpiar Selección"</li>
-    </ul>
-    <p>El código completo está disponible en el archivo del proyecto. Aqui va una visión general de la estructura:</p>
-    <pre><code class="language-python">"""
-Aplicación GUI para traducción masiva de contenido MongoDB.
-Versión avanzada con múltiples características.
-
-Características principales:
-- Detección automática de bases de datos 'traduciones' o 'traducciones'
-- Lista automática de colecciones disponibles
-- Selección múltiple con interface de checkboxes
-- Procesamiento paralelo con hilos separados
-- Registro de actividad con colores diferenciados
-- Progreso individual por colección
-- Manejo robusto de errores por línea
-- Tema oscuro completo
-- Botones de selección rápida (Seleccionar Todo, Limpiar)
-
-Uso:
-    python 2-traducir_desde_mongodb_con_gui.py
-
-Dependencias:
-    - pymongo: Para conexión MongoDB
-    - PySide6: Para interfaz gráfica
-    - requests: Para llamadas a Ollama API
-"""
-
-import sys
-from PySide6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
-                            QSplitter, QListWidget, QCheckBox, QPushButton, QLabel,
-                            QProgressBar, QTextEdit, QMessageBox, QScrollArea,
-                            QFrame, QSizePolicy)
-from PySide6.QtGui import QFont, QColor, QTextCursor, QPalette
-from PySide6.QtCore import QThread, Signal, Qt
-from pymongo import MongoClient
-import requests
-import time
-
-
-class TraductionWorker(QThread):
-    progress = Signal(int)
-    log = Signal(str, str)  # message, color
-    collection_finished = Signal(str, bool)
-    finished_all = Signal(bool)
-
-    def __init__(self, collections, db_name):
-        super().__init__()
-        self.collections = collections
-        self.db_name = db_name
-        self.client = None
-        self.is_cancelled = False
-
-    def cancel(self):
-        self.is_cancelled = True
-
-    def translate_with_ollama(self, text):
-        """Función para traducir usando Ollama"""
-        if not text.strip():
-            return text
-
-        payload = {
-            "model": "gemma3:4b",
-            "prompt": f"Translate the following text from Spanish to English: {text}",
-            "stream": False
-        }
-
-        try:
-            response = requests.post("http://localhost:11434/api/generate",
-                                   json=payload, timeout=30)
-            if response.status_code == 200:
-                return response.json().get("response", "").strip()
-            else:
-                return f"[Error {response.status_code}]"
-        except Exception as e:
-            return f"[Error: {str(e)}]"
-
-    def run(self):
-        try:
-            self.client = MongoClient('mongodb://localhost:27017/', serverSelectionTimeoutMS=5000)
-            db = self.client[self.db_name]
-
-            total_collections = len(self.collections)
-            for idx, coll_name in enumerate(self.collections):
-                if self.is_cancelled:
-                    self.log.emit("Operación cancelada.", "orange")
-                    return
-
-                self.log.emit(f"Procesando colección: {coll_name}", "blue")
-
-                collection_src = db[coll_name]
-                # Crear colección destino
-                dest_name = f"{coll_name}_traducido_al_ingles"
-                collection_dest = db[dest_name]
-
-                # Obtener documentos
-                documents = list(collection_src.find().sort('_id'))
-
-                if not documents:
-                    self.log.emit(f"Colección {coll_name} está vacía", "orange")
-                    continue
-
-                total_docs = len(documents)
-                success_count = 0
-
-                for doc in documents:
-                    if self.is_cancelled:
-                        break
-
-                    doc_id = doc['_id']
-                    line_text = doc.get('linea', '')
-
-                    # Verificar si ya existe traducción
-                    existing = collection_dest.find_one({'_id': doc_id})
-                    if existing:
-                        continue
-
-                    translation = self.translate_with_ollama(line_text)
-
-                    # Guardar en destino
-                    collection_dest.insert_one({
-                        '_id': doc_id,
-                        'linea': translation
-                    })
-
-                    success_count += 1
-
-                if success_count > 0:
-                    self.log.emit(f"Colección {coll_name}: {success_count} líneas traducidas", "green")
-                else:
-                    self.log.emit(f"Colección {coll_name}: No se tradujeron nuevas líneas", "orange")
-
-                collection_progress = int((idx + 1) / total_collections * 100)
-                self.progress.emit(collection_progress)
-
-            if not self.is_cancelled:
-                self.log.emit("Todas las traducciones completadas.", "green")
-            self.finished_all.emit(not self.is_cancelled)
-
-        except Exception as e:
-            self.log.emit(f"Error general: {str(e)}", "red")
-            self.finished_all.emit(False)
-        finally:
-            if self.client:
-                self.client.close()
-
-
-class TradutorApp(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("Traductor Masivo MongoDB")
-        self.setGeometry(200, 200, 900, 600)
-        self.collections = []
-        self.worker = None
-
-        # Aplicar tema oscuro
-        self.setStyleSheet("""
-            QWidget {
-                background-color: #2b2b2b;
-                color: #ffffff;
-                font-family: Arial, sans-serif;
-            }
-            QPushButton {
-                background-color: #404040;
-                color: #ffffff;
-                border: 1px solid #606060;
-                padding: 8px;
-                border-radius: 4px;
-            }
-            QPushButton:hover { background-color: #505050; }
-            QPushButton:disabled { background-color: #303030; color: #666; }
-            QLabel, QListWidget, QCheckBox {
-                color: #ffffff;
-            }
-            QListWidget {
-                background-color: #404040;
-                border: 1px solid #606060;
-                border-radius: 4px;
-            }
-            QListWidget::item:hover { background-color: #505050; }
-            QListWidget::item:selected { background-color: #4CAF50; }
-            QProgressBar {
-                background-color: #404040;
-                border: 1px solid #606060;
-                border-radius: 4px;
-                text-align: center;
-            }
-            QProgressBar::chunk { background-color: #4CAF50; }
-            QTextEdit {
-                background-color: #404040;
-                color: #ffffff;
-                border: 1px solid #606060;
-                border-radius: 4px;
-                font-family: 'Courier New', monospace;
-            }
-        """)
-
-        self.init_ui()
-
-    def init_ui(self):
-        # Layout principal
-        main_layout = QHBoxLayout()
-
-        # Panel izquierdo - Colecciones
-        left_panel = QWidget()
-        left_layout = QVBoxLayout()
-
-        lbl_collections = QLabel("Colecciones Disponibles:")
-        lbl_collections.setFont(QFont("Arial", 10, QFont.Bold))
-        left_layout.addWidget(lbl_collections)
-
-        self.list_collections = QListWidget()
-        left_layout.addWidget(self.list_collections)
-
-        btn_layout = QHBoxLayout()
-        self.btn_select_all = QPushButton("Seleccionar Todo")
-        self.btn_select_all.clicked.connect(self.select_all_collections)
-        btn_layout.addWidget(self.btn_select_all)
-
-        self.btn_clear_selection = QPushButton("Limpiar Selección")
-        self.btn_clear_selection.clicked.connect(self.clear_selection)
-        btn_layout.addWidget(self.btn_clear_selection)
-
-        left_layout.addLayout(btn_layout)
-
-        left_panel.setLayout(left_layout)
-
-        # Panel derecho - Controles
-        right_panel = QWidget()
-        right_layout = QVBoxLayout()
-
-        self.btn_update_list = QPushButton("Actualizar Lista")
-        self.btn_update_list.clicked.connect(self.update_collections_list)
-        right_layout.addWidget(self.btn_update_list)
-
-        self.btn_translate = QPushButton("Iniciar Traducción")
-        self.btn_translate.clicked.connect(self.start_translation)
-        self.btn_translate.setEnabled(False)
-        right_layout.addWidget(self.btn_translate)
-
-        self.btn_cancel = QPushButton("Cancelar")
-        self.btn_cancel.clicked.connect(self.cancel_translation)
-        self.btn_cancel.setEnabled(False)
-        right_layout.addWidget(self.btn_cancel)
-
-        lbl_progress = QLabel("Progreso:")
-        right_layout.addWidget(lbl_progress)
-        self.progress_bar = QProgressBar()
-        self.progress_bar.setRange(0, 100)
-        right_layout.addWidget(self.progress_bar)
-
-        lbl_log = QLabel("Registro de Actividad:")
-        right_layout.addWidget(lbl_log)
-        self.text_log = QTextEdit()
-        self.text_log.setReadOnly(True)
-        right_layout.addWidget(self.text_log)
-
-        right_panel.setLayout(right_layout)
-
-        # Splitter para dividir la ventana
-        splitter = QSplitter(Qt.Horizontal)
-        splitter.addWidget(left_panel)
-        splitter.addWidget(right_panel)
-        splitter.setSizes([300, 600])
-
-        main_layout.addWidget(splitter)
-        self.setLayout(main_layout)
-
-    def update_collections_list(self):
-        """Actualizar lista de colecciones disponibles"""
-        try:
-            client = MongoClient('mongodb://localhost:27017/', serverSelectionTimeoutMS=5000)
-
-            # Buscar base de datos correcta
-            dbs = ['traduencias', 'traducciones', 'translations']
-            db = None
-            for db_name in dbs:
-                if db_name in client.list_database_names():
-                    db = client[db_name]
-                    self.db_name = db_name
-                    break
-
-            if not db:
-                QMessageBox.warning(self, "Error", "No se encontró base de datos de traducciones")
-                if client:
-                    client.close()
-                return
-
-            collections = db.list_collection_names()
-            # Filtrar solo colecciones que no estén ya traducidas
-            available_collections = [coll for coll in collections
-                                   if not coll.endswith('_traducido_al_ingles')]
-
-            self.list_collections.clear()
-            for coll in sorted(available_collections):
-                item = QListWidget.QListWidgetItem()
-                item.setText(coll)
-
-                # Checkbox como widget
-                checkbox = QCheckBox()
-                self.list_collections.setItemWidget(item, checkbox)
-                self.list_collections.addItem(item)
-
-            self.text_log.append(f"Lista actualizada desde BD '{self.db_name}'. {len(available_collections)} colecciones disponibles.")
-            self.btn_translate.setEnabled(len(available_collections) > 0)
-
-            client.close()
-
-        except Exception as e:
-            QMessageBox.critical(self, "Error", f"Error conectando a MongoDB:\n{str(e)}")
-            self.text_log.append(f"Error de conexión: {str(e)}")
-
-    def select_all_collections(self):
-        """Seleccionar todas las colecciones"""
-        for i in range(self.list_collections.count()):
-            item = self.list_collections.item(i)
-            checkbox = self.list_collections.itemWidget(item)
-            if checkbox:
-                checkbox.setChecked(True)
-
-    def clear_selection(self):
-        """Limpiar selección"""
-        for i in range(self.list_collections.count()):
-            item = self.list_collections.item(i)
-            checkbox = self.list_collections.itemWidget(item)
-            if checkbox:
-                checkbox.setChecked(False)
-
-    def start_translation(self):
-        """Iniciar proceso de traducción"""
-        selected_collections = []
-        for i in range(self.list_collections.count()):
-            item = self.list_collections.item(i)
-            checkbox = self.list_collections.itemWidget(item)
-            if checkbox and checkbox.isChecked():
-                selected_collections.append(item.text())
-
-        if not selected_collections:
-            QMessageBox.information(self, "Información", "Seleccione al menos una colección para traducir.")
-            return
-
-        # Deshabilitar controles
-        self.btn_translate.setEnabled(False)
-        self.btn_cancel.setEnabled(True)
-        self.btn_update_list.setEnabled(False)
-        self.progress_bar.setValue(0)
-        self.text_log.clear()
-        self.text_log.append("Iniciando traducción...")
-
-        # Mostrar colecciones seleccionadas
-        self.text_log.append(f"Colecciones a procesar: {', '.join(selected_collections)}")
-
-        # Iniciar worker
-        self.worker = TraductionWorker(selected_collections, self.db_name)
-        self.worker.progress.connect(self.progress_bar.setValue)
-        self.worker.log.connect(self.append_log_message)
-        self.worker.finished_all.connect(self.translation_finished)
-        self.worker.start()
-
-    def cancel_translation(self):
-        """Cancelar traducción en curso"""
-        if self.worker and self.worker.isRunning():
-            self.worker.cancel()
-            self.btn_cancel.setText("Cancelando...")
-            self.btn_cancel.setEnabled(False)
-
-    def append_log_message(self, message, color):
-        """Agregar mensaje al log con color"""
-        # Mover cursor al final
-        cursor = self.text_log.textCursor()
-        cursor.movePosition(QTextCursor.End)
-
-        # Definir colores
-        color_map = {
-            'green': '#4CAF50',
-            'red': '#F44336',
-            'orange': '#FF9800',
-            'blue': '#2196F3'
-        }
-
-        # Aplicar formato
-        format = cursor.charFormat()
-        if color in color_map:
-            format.setForeground(QColor(color_map[color]))
-        else:
-            format.setForeground(QColor('white'))
-
-        cursor.setCharFormat(format)
-        cursor.insertText(message + '\n')
-        cursor.setCharFormat(cursor.document().defaultCharFormat())
-
-    def translation_finished(self, success):
-        """Manejar finalización de traducción"""
-        self.btn_translate.setEnabled(True)
-        self.btn_cancel.setEnabled(False)
-        self.btn_cancel.setText("Cancelar")
-        self.btn_update_list.setEnabled(True)
-
-        if success:
-            QMessageBox.information(self, "Éxito", "Traducción completada exitosamente.")
-        else:
-            QMessageBox.warning(self, "Advertencia", "Traducción completada con errores.")
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = TradutorApp()
-    window.show()
-    window.update_collections_list()  # Cargar colecciones al iniciar
-    sys.exit(app.exec())
-</code></pre>
-
-    <h2>Código de la Versión GUI de Composición (3-componer.py)</h2>
-    <pre><code class="language-python">"""
-Script para componer texto desde colecciones MongoDB traducidas.
-Interfaz GUI con PySide6.
-
-Este script extrae datos de colecciones de MongoDB que contienen "_traducido_" en su nombre,
-lee el campo "linea" de cada documento y genera archivos de texto con el contenido.
-
-Uso:
-    python 3-componer.py
-
-Dependencias:
-    - pymongo: Para la conexión y operaciones con MongoDB
-    - PySide6: Para la interfaz gráfica
-    - reportlab: Para generar archivos PDF (opcional)
-"""
-
-import sys
-import os
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QProgressBar, QListWidget, QTextEdit, QMessageBox, QCheckBox
-from PySide6.QtGui import QPalette, QColor
-from PySide6.QtCore import QThread, Signal
-from pymongo import MongoClient
-from reportlab.lib.pagesizes import letter
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import SimpleDocTemplate, Paragraph
-
-
-class WorkerThread(QThread):
-    """
-    Hilo de trabajo para procesar las colecciones sin bloquear la GUI.
-    """
+        raise Exception(f"Error en petición Ollama: {response.status_code}")
+
+def segmentar_frases(ruta_archivo: str):
+    """Segmenta archivo PDF o TXT en líneas."""
+    frases = []
+    contenido = ""
+
+    ext = os.path.splitext(ruta_archivo)[1].lower()
+    if ext == ".txt":
+        with open(ruta_archivo, "r", encoding="utf-8") as f:
+            contenido = f.read()
+    elif ext == ".pdf":
+        with open(ruta_archivo, "rb") as f:
+            pdf_reader = PyPDF2.PdfReader(f)
+            for page in pdf_reader.pages:
+                contenido += (page.extract_text() or "") + "\\n"
+    else:
+        raise ValueError("Formato no soportado. Solo .txt y .pdf.")
+
+    frases = contenido.split('\\n')
+    return frases
+
+# Hilos de trabajo
+class ExtractionWorker(QObject):
     progress = Signal(int)
     log = Signal(str)
-    finished_signal = Signal(bool, str)
+    finished = Signal(bool, str)
 
-    def __init__(self, collections, db_name='traducciones', export_pdf=False):
+    def __init__(self, file_path):
         super().__init__()
-        self.collections = collections
-        self.db_name = db_name
-        self.export_pdf = export_pdf
-        self.is_cancelled = False
+        self.file_path = file_path
+        self.cancelled = False
 
     def run(self):
         try:
-            # Conectar a MongoDB
-            client = MongoClient('mongodb://localhost:27017/')
+            frases = segmentar_frases(self.file_path)
 
-            # Buscar la base de datos correcta
-            dbs = client.list_database_names()
-            possible_dbs = ['traduces', 'traducciones', 'translations']
-            target_db = None
-            for db_name in possible_dbs:
-                if db_name in dbs:
-                    target_db = db_name
-                    break
+            client = pymongo.MongoClient()
+            db = client[DATABASE_NAME]
+            base = os.path.basename(self.file_path)
+            coleccion_nombre = os.path.splitext(base)[0]
+            coleccion = db[coleccion_nombre]
+            coleccion.delete_many({})
 
-            if not target_db:
-                raise Exception("No se encontró ninguna base de datos de traducciones")
+            total = len(frases)
+            for i, frase in enumerate(frases, 1):
+                if self.cancelled:
+                    client.close()
+                    self.finished.emit(False, "Extracción cancelada.")
+                    return
+                coleccion.insert_one({"_id": i, "linea": frase})
+                self.progress.emit(int((i / total) * 100))
+                self.log.emit(f"Línea {i} procesada.")
 
-            db = client[target_db]
+            client.close()
+            self.finished.emit(True, f"Extracción completada. {total} líneas guardadas en '{coleccion_nombre}'.")
+        except Exception as e:
+            self.finished.emit(False, f"Error extracción: {str(e)}")
 
+    def cancel(self):
+        self.cancelled = True
+
+class TranslationWorker(QObject):
+    progress = Signal(int)
+    log = Signal(str)
+    finished = Signal(bool, str)
+
+    def __init__(self, collections, source_lang, target_lang):
+        super().__init__()
+        self.collections = collections
+        self.source_lang = source_lang
+        self.target_lang = target_lang
+        self.cancelled = False
+
+    def run(self):
+        try:
+            client = pymongo.MongoClient()
+            db = client[DATABASE_NAME]
+            total_collections = len(self.collections)
+            processed = 0
+
+            for collection_name in self.collections:
+                if self.cancelled:
+                    client.close()
+                    self.finished.emit(False, "Traducción cancelada.")
+                    return
+
+                self.log.emit(f"Traduciendo colección: {collection_name}")
+                collection_origen = db[collection_name]
+                collection_destino = db[f"{collection_name}_traducido_a_{self.target_lang}"]
+                collection_destino.drop()
+
+                total_docs = collection_origen.count_documents({})
+                processed_docs = 0
+
+                for documento in collection_origen.find():
+                    if self.cancelled:
+                        client.close()
+                        self.finished.emit(False, "Traducción cancelada.")
+                        return
+
+                    linea_numero = documento["_id"]
+                    linea_texto = documento["linea"]
+
+                    if not linea_texto.strip():
+                        collection_destino.insert_one({"_id": linea_numero, "linea": linea_texto})
+                        processed_docs += 1
+                        self.log.emit(f"Línea {linea_numero}: SKIP (vacía)")
+                    else:
+                        traduccion = traducir_con_ollama(linea_texto, self.source_lang, self.target_lang)
+                        collection_destino.insert_one({"_id": linea_numero, "linea": traduccion})
+                        processed_docs += 1
+                        # Truncate long translations for display
+                        display_traduccion = traduccion[:80] + "..." if len(traduccion) > 80 else traduccion
+                        self.log.emit(f"Línea {linea_numero}: '{display_traduccion}'")
+
+                    collection_progress = int((processed_docs / total_docs) * 100) if total_docs > 0 else 100
+                    overall_progress = int(((processed + collection_progress / 100) / total_collections) * 100)
+                    self.progress.emit(overall_progress)
+
+                processed += 1
+                self.log.emit(f"Finalizada colección {collection_name}")
+
+            client.close()
+            self.finished.emit(True, "Traducción completada.")
+        except Exception as e:
+            self.finished.emit(False, f"Error traducción: {str(e)}")
+
+    def cancel(self):
+        self.cancelled = True
+
+class CompositionWorker(QObject):
+    progress = Signal(int)
+    log = Signal(str)
+    finished = Signal(bool, str)
+
+    def __init__(self, collections, save_dir, export_pdf):
+        super().__init__()
+        self.collections = collections
+        self.save_dir = save_dir
+        self.export_pdf = export_pdf
+        self.cancelled = False
+
+    def run(self):
+        try:
+            client = pymongo.MongoClient()
+            db = client[DATABASE_NAME]
             total = len(self.collections)
+
             for i, coll_name in enumerate(self.collections, 1):
-                if self.is_cancelled:
-                    self.log.emit("Operación cancelada por el usuario.")
-                    self.finished_signal.emit(False, "Operación cancelada por el usuario.")
+                if self.cancelled:
+                    client.close()
+                    self.finished.emit(False, "Composición cancelada.")
                     return
 
                 self.log.emit(f"Procesando colección: {coll_name}")
                 collection = db[coll_name]
+                all_docs = list(collection.find(sort=[("_id", 1)]))
 
-                # Obtener todos los documentos ordenados por _id
-                documents = collection.find().sort('_id')
-
-                # Crear nombre de archivo de salida
-                output_file = f"{coll_name.replace('_traducido_al_ingles', '')}.txt"
-                line_count = 0
-                with open(output_file, 'w', encoding='utf-8') as f:
-                    for doc in documents:
-                        if self.is_cancelled:
-                            self.log.emit("Operación cancelada por el usuario.")
-                            self.finished_signal.emit(False, "Operación cancelada por el usuario.")
-                            return
-
-                        if 'linea' in doc:
-                            linea_content = str(doc['linea'])
-                            if linea_content.strip():  # Solo contenido no vacío
-                                f.write(linea_content + '\n')
-                                line_count += 1
-                            else:  # Línea vacía
-                                f.write('\n')
-
-                self.log.emit(f"Archivo de texto '{output_file}' creado con {line_count} líneas.")
+                output_file = os.path.join(self.save_dir, f"{coll_name}.txt")
+                try:
+                    with open(output_file, 'w', encoding='utf-8') as f:
+                        for doc in all_docs:
+                            if self.cancelled:
+                                client.close()
+                                self.finished.emit(False, "Composición cancelada.")
+                                return
+                            if 'linea' in doc:
+                                linea_content = str(doc['linea'])
+                                f.write(linea_content + '\\n')
+                    self.log.emit(f"Archivo TXT creado: {output_file}")
+                except Exception as e:
+                    self.log.emit(f"Error creando TXT '{output_file}': {str(e)}")
+                    # continue to try PDF creation (or next collection)
 
                 if self.export_pdf:
-                    self.log.emit(f"Generando PDF para {coll_name}...")
                     try:
-                        pdf_file = f"{coll_name.replace('_traducido_al_ingles', '')}.pdf"
-                        doc = SimpleDocTemplate(pdf_file, pagesize=letter)
+                        pdf_file = os.path.join(self.save_dir, f"{coll_name}.pdf")
+
+                        # Crear un estilo personalizado con justificación (no sobrescribimos el stylesheet global)
                         styles = getSampleStyleSheet()
+                        body_style = ParagraphStyle(
+                            'CustomBody',
+                            parent=styles['BodyText'],
+                            fontName="Helvetica",
+                            fontSize=12,
+                            alignment=TA_JUSTIFY,
+                            leading=14
+                        )
+
+                        # Función para dibujar el número de página en el footer
+                        def draw_page_number(canvas, doc):
+                            try:
+                                canvas.setFont('Helvetica', 10)
+                                page_num = canvas.getPageNumber()
+                                text = f"Página {page_num}"
+                                canvas.drawRightString(letter[0] - 0.5 * inch, 0.75 * inch, text)
+                            except Exception as e:
+                                # Logger del hilo (no arrojar excepción a ReportLab)
+                                self.log.emit(f"Error en draw_page_number: {str(e)}")
+
+                        # Crear el documento con SimpleDocTemplate (callbacks se pasan a build)
+                        pdf_template = SimpleDocTemplate(
+                            pdf_file,
+                            pagesize=letter,
+                            leftMargin=0.5*inch,
+                            rightMargin=0.5*inch,
+                            topMargin=0.75*inch,
+                            bottomMargin=1*inch
+                        )
+
                         story = []
 
-                        # Leer líneas del archivo de texto generado
-                        with open(output_file, 'r', encoding='utf-8') as f:
-                            content_lines = f.readlines()
+                        # Add some space at the top
+                        story.append(Spacer(1, 0.25*inch))
 
-                        for line in content_lines:
-                            line = line.strip()
-                            if line:  # Líneas con contenido
-                                p = Paragraph(line, styles["Normal"])
-                                story.append(p)
-                            else:  # Líneas vacías
-                                story.append(Paragraph("", styles["Normal"]))
+                        num_paragraphs = 0
+                        for doc in all_docs:
+                            if 'linea' in doc:
+                                linea_content = str(doc['linea']).strip()
+                                if linea_content:
+                                    p = Paragraph(linea_content, body_style)
+                                    story.append(p)
+                                    story.append(Spacer(1, 0.1*inch))
+                                    num_paragraphs += 1
 
-                        if story:
-                            doc.build(story)
-                            self.log.emit(f"Archivo PDF '{pdf_file}' creado.")
+                        if num_paragraphs == 0:
+                            # Agregar mensaje por defecto si no hay contenido
+                            p = Paragraph("No hay contenido disponible.", body_style)
+                            story.append(p)
+
+                        self.log.emit(f"Preparado PDF con {num_paragraphs} párrafos.")
+                        self.log.emit(f"Generando PDF - export_pdf: {self.export_pdf}, len(story): {len(story)}")
+
+                        # Aquí pasamos los callbacks a build (corrección clave)
+                        pdf_template.build(story, onFirstPage=draw_page_number, onLaterPages=draw_page_number)
+
+                        # Verificar que el archivo exista y tenga tamaño
+                        if os.path.exists(pdf_file) and os.path.getsize(pdf_file) > 0:
+                            self.log.emit(f"Archivo PDF creado: {pdf_file}")
                         else:
-                            self.log.emit("No hay contenido para generar el PDF.")
+                            self.log.emit(f"PDF creado pero está vacío o no existe: {pdf_file}")
+
                     except Exception as e:
-                        self.log.emit(f"Error generando PDF: {str(e)}")
+                        self.log.emit(f"Error generando PDF para '{coll_name}': {str(e)}")
 
                 self.progress.emit(int((i / total) * 100))
 
-            self.log.emit("Procesamiento completado exitosamente.")
-            self.finished_signal.emit(True, f"Se procesaron {total} colecciones exitosamente.")
-        except Exception as e:
-            self.log.emit(f"Error: {str(e)}")
-            self.finished_signal.emit(False, f"Error: {str(e)}")
-        finally:
             client.close()
+            self.finished.emit(True, "Composición completada.")
+        except Exception as e:
+            self.finished.emit(False, f"Error composición: {str(e)}")
 
     def cancel(self):
-        self.is_cancelled = True
+        self.cancelled = True
 
-
+# Main Window
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Componer Texto desde MongoDB")
-        self.setGeometry(300, 300, 600, 400)
+        self.setWindowTitle("Traductor Completo - Extraer, Traducir y Componer")
+        self.setGeometry(100, 100, 900, 700)
+        self.apply_dark_theme()
+        self.setup_ui()
+        self.connect_signals()
+        self.load_collections()
+
+    def apply_dark_theme(self):
         self.setStyleSheet("""
             QWidget {
                 background-color: #2b2b2b;
@@ -1197,7 +814,14 @@ class MainWindow(QWidget):
             QProgressBar::chunk {
                 background-color: #4CAF50;
             }
-            QCheckBox {
+            QComboBox {
+                background-color: #404040;
+                color: #ffffff;
+                border: 1px solid #606060;
+                border-radius: 4px;
+                padding: 4px;
+            }
+            QLineEdit, QCheckBox {
                 color: #ffffff;
                 font-size: 12px;
             }
@@ -1210,282 +834,463 @@ class MainWindow(QWidget):
             QCheckBox::indicator:checked {
                 background-color: #4CAF50;
             }
+            QGroupBox {
+                color: #ffffff;
+                font-weight: bold;
+                border: 2px solid #606060;
+                border-radius: 5px;
+                margin-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
         """)
 
-        # Widgets
-        self.label_colecciones = QLabel("Colecciones traducidas disponibles:")
-        self.list_colecciones = QListWidget()
-        self.list_colecciones.setSelectionMode(QListWidget.SelectionMode.MultiSelection)
+    def setup_ui(self):
+        main_layout = QVBoxLayout()
 
-        self.btn_actualizar = QPushButton("Actualizar Lista")
-        self.btn_actualizar.clicked.connect(self.actualizar_lista)
+        # Tabs
+        self.tab_widget = QTabWidget()
+        self.tab_widget.addTab(self.setup_extraction_tab(), "1. Extraer Texto")
+        self.tab_widget.addTab(self.setup_translation_tab(), "2. Traducir")
+        self.tab_widget.addTab(self.setup_composition_tab(), "3. Componer Archivos TXT y PDF")
 
-        self.btn_procesar = QPushButton("Procesar Seleccionadas")
-        self.btn_procesar.clicked.connect(self.procesar_colecciones)
-        self.btn_procesar.setEnabled(False)
+        main_layout.addWidget(self.tab_widget)
 
-        self.btn_cancelar = QPushButton("Cancelar")
-        self.btn_cancelar.clicked.connect(self.cancelar_proceso)
-        self.btn_cancelar.setEnabled(False)
+        # Global progress and log
+        self.progress_group = QGroupBox("Progreso Global")
+        progress_layout = QVBoxLayout()
+        self.global_progress = QProgressBar()
+        self.global_progress.setRange(0, 100)
+        self.global_progress.setValue(0)
+        progress_layout.addWidget(self.global_progress)
 
-        self.checkbox_pdf = QCheckBox("Exportar también a PDF")
-        self.checkbox_pdf.setChecked(False)
+        self.log_group = QGroupBox("Registro de Actividad")
+        log_layout = QVBoxLayout()
+        self.log_text = QTextEdit()
+        log_layout.addWidget(self.log_text)
 
-        self.label_log = QLabel("Registro de procesamiento:")
-        self.text_log = QTextEdit()
-        self.text_log.setReadOnly(True)
+        main_layout.addWidget(self.progress_group)
+        main_layout.addWidget(self.log_group)
 
-        self.label_progreso = QLabel("Progreso:")
-        self.progress_bar = QProgressBar()
-        self.progress_bar.setRange(0, 100)
-        self.progress_bar.setValue(0)
-
-        # Layout
-        layout = QVBoxLayout()
-
-        layout_h_colecciones = QHBoxLayout()
-        layout_h_colecciones.addWidget(self.label_colecciones)
-        layout_h_colecciones.addWidget(self.btn_actualizar)
-        layout.addLayout(layout_h_colecciones)
-        layout.addWidget(self.list_colecciones)
-
-        layout_h_botones = QHBoxLayout()
-        layout_h_botones.addWidget(self.btn_procesar)
-        layout_h_botones.addWidget(self.btn_cancelar)
-        layout_h_botones.addWidget(self.checkbox_pdf)
-        layout.addLayout(layout_h_botones)
-
-        layout.addWidget(self.label_log)
-        layout.addWidget(self.text_log)
-
-        layout.addWidget(self.label_progreso)
-        layout.addWidget(self.progress_bar)
-
-        self.setLayout(layout)
+        self.setLayout(main_layout)
 
         self.worker = None
-        self.actualizar_lista()  # Cargar colecciones al iniciar
+        self.thread = None
 
-    def actualizar_lista(self):
+    def setup_extraction_tab(self):
+        tab = QWidget()
+        layout = QVBoxLayout()
+
+        # File selection
+        file_group = QGroupBox("Seleccionar Archivo")
+        file_layout = QVBoxLayout()
+        self.extraction_file_label = QLabel("Archivo seleccionado: Ninguno")
+        self.select_file_btn = QPushButton("Seleccionar Archivo (TXT/PDF)")
+        file_layout.addWidget(self.extraction_file_label)
+        file_layout.addWidget(self.select_file_btn)
+        file_group.setLayout(file_layout)
+
+        # Controls
+        controls_group = QGroupBox("Controles")
+        controls_layout = QVBoxLayout()
+        self.extract_btn = QPushButton("Extraer Texto")
+        self.extract_btn.setEnabled(False)
+        controls_layout.addWidget(self.extract_btn)
+        controls_group.setLayout(controls_layout)
+
+        layout.addWidget(file_group)
+        layout.addWidget(controls_group)
+        layout.addStretch()
+
+        tab.setLayout(layout)
+        return tab
+
+    def setup_translation_tab(self):
+        tab = QWidget()
+        layout = QVBoxLayout()
+
+        # Collections
+        collections_group = QGroupBox("Colecciones por Traducir")
+        collections_layout = QVBoxLayout()
+        self.translation_list = QListWidget()
+        self.translation_list.setSelectionMode(QListWidget.MultiSelection)
+        self.refresh_btn = QPushButton("Actualizar Colecciones")
+        collections_layout.addWidget(self.translation_list)
+        collections_layout.addWidget(self.refresh_btn)
+        collections_group.setLayout(collections_layout)
+
+        # Language selection
+        language_group = QGroupBox("Idiomas")
+        language_layout = QVBoxLayout()
+        source_layout = QHBoxLayout()
+        source_layout.addWidget(QLabel("Desde:"))
+        self.source_combo = QComboBox()
+        self.source_combo.addItems([f"{code} - {name}" for code, name in IDIOMA_NAMES.items()])
+        self.source_combo.setCurrentIndex(0)
+        source_layout.addWidget(self.source_combo)
+
+        target_layout = QHBoxLayout()
+        target_layout.addWidget(QLabel("Hasta:"))
+        self.target_combo = QComboBox()
+        self.target_combo.addItems([f"{code} - {name}" for code, name in IDIOMA_NAMES.items()])
+        self.target_combo.setCurrentIndex(1)
+        target_layout.addWidget(self.target_combo)
+
+        language_layout.addLayout(source_layout)
+        language_layout.addLayout(target_layout)
+        language_group.setLayout(language_layout)
+
+        # Controls
+        controls_group = QGroupBox("Controles")
+        controls_layout = QVBoxLayout()
+        self.translate_btn = QPushButton("Traducir Seleccionadas")
+        self.translate_btn.setEnabled(False)
+        self.translate_cancel_btn = QPushButton("Cancelar")
+        self.translate_cancel_btn.setEnabled(False)
+        controls_layout.addWidget(self.translate_btn)
+        controls_layout.addWidget(self.translate_cancel_btn)
+        controls_group.setLayout(controls_layout)
+
+        # Translation Progress and Log
+        progress_group = QGroupBox("Progreso de Traducción")
+        progress_layout = QVBoxLayout()
+        self.translation_progress = QProgressBar()
+        self.translation_progress.setRange(0, 100)
+        self.translation_progress.setValue(0)
+        progress_layout.addWidget(self.translation_progress)
+
+        translation_log_label = QLabel("Registro de Traducción:")
+        self.translation_log = QTextEdit()
+        self.translation_log.setMaximumHeight(300)
+        self.translation_log.setFont(QFont("Monospace", 9))
+        self.translation_log.setReadOnly(True)
+        progress_layout.addWidget(translation_log_label)
+        progress_layout.addWidget(self.translation_log)
+
+        progress_group.setLayout(progress_layout)
+
+        layout.addWidget(collections_group)
+        layout.addWidget(language_group)
+        layout.addWidget(controls_group)
+        layout.addWidget(progress_group)
+
+        tab.setLayout(layout)
+        return tab
+
+    def setup_composition_tab(self):
+        tab = QWidget()
+        layout = QVBoxLayout()
+
+        # Collections
+        collections_group = QGroupBox("Colecciones Traducidas")
+        collections_layout = QVBoxLayout()
+        self.composition_list = QListWidget()
+        self.composition_list.setSelectionMode(QListWidget.MultiSelection)
+        self.refresh_translation_btn = QPushButton("Actualizar Colecciones Traducidas")
+        collections_layout.addWidget(self.composition_list)
+        collections_layout.addWidget(self.refresh_translation_btn)
+        collections_group.setLayout(collections_layout)
+
+        # Controls
+        controls_group = QGroupBox("Controles")
+        controls_layout = QVBoxLayout()
+        self.compose_btn = QPushButton("Componer Archivos TXT y PDF")
+        self.compose_btn.setEnabled(False)
+        controls_layout.addWidget(self.compose_btn)
+        controls_group.setLayout(controls_layout)
+
+        layout.addWidget(collections_group)
+        layout.addWidget(controls_group)
+        layout.addStretch()
+
+        tab.setLayout(layout)
+        return tab
+
+    def connect_signals(self):
+        # Extraction
+        self.select_file_btn.clicked.connect(self.select_file)
+        self.extract_btn.clicked.connect(self.start_extraction)
+
+        # Translation
+        self.refresh_btn.clicked.connect(self.load_collections)
+        self.translate_btn.clicked.connect(self.start_translation)
+        self.translate_cancel_btn.clicked.connect(self.cancel_translation)
+
+        # Composition
+        self.refresh_translation_btn.clicked.connect(self.load_translated_collections)
+        self.compose_btn.clicked.connect(self.start_composition)
+
+    def select_file(self):
+        file_path, _ = QFileDialog.getOpenFileName(self, "Seleccionar archivo", "", "Archivos de texto (*.txt);;PDF (*.pdf)")
+        if file_path:
+            self.extraction_file_path = file_path
+            self.extraction_file_label.setText(f"Archivo seleccionado: {os.path.basename(file_path)}")
+            self.extract_btn.setEnabled(True)
+            self.log("Archivo seleccionado: " + os.path.basename(file_path))
+        else:
+            self.extract_btn.setEnabled(False)
+            self.extraction_file_label.setText("Archivo seleccionado: Ninguno")
+
+    def load_collections(self):
         try:
-            client = MongoClient('mongodb://localhost:27017/')
-            dbs = client.list_database_names()
-
-            # Buscar la base de datos correcta
-            possible_dbs = ['traduces', 'traducciones', 'translations']
-            target_db = None
-            for db_name in possible_dbs:
-                if db_name in dbs:
-                    target_db = db_name
-                    break
-
-            if not target_db:
-                raise Exception("No se encontró ninguna base de datos de traducciones")
-
-            db = client[target_db]
+            client = pymongo.MongoClient()
+            db = client[DATABASE_NAME]
             collections = db.list_collection_names()
+
+            # Filter original collections (no translated ones)
+            known_suffixes = [f"_traducido_a_{lang}" for lang in IDIOMA_CODES]
+            original_collections = [coll for coll in collections if not any(coll.endswith(suf) for suf in known_suffixes)]
+
+            self.translation_list.clear()
+            for coll in sorted(original_collections):
+                item = QListWidgetItem(coll)
+                self.translation_list.addItem(item)
+
+            if original_collections:
+                self.translate_btn.setEnabled(True)
+            else:
+                self.translate_btn.setEnabled(False)
+
+            client.close()
+            self.log(f"Colecciones cargadas: {len(original_collections)} originales")
+        except Exception as e:
+            QMessageBox.warning(self, "Error", f"No se pudo cargar colecciones: {str(e)}")
+
+    def load_translated_collections(self):
+        try:
+            client = pymongo.MongoClient()
+            db = client[DATABASE_NAME]
+            collections = db.list_collection_names()
+
+            # Filter translated collections
             translated_collections = [coll for coll in collections if '_traducido_' in coll]
 
-            self.list_colecciones.clear()
-            if translated_collections:
-                for coll in sorted(translated_collections):
-                    self.list_colecciones.addItem(coll)
-                self.btn_procesar.setEnabled(True)
-                self.text_log.append(f"Lista actualizada desde BD '{target_db}'. {len(translated_collections)} colecciones disponibles.")
-            else:
-                self.list_colecciones.addItem("No se encontraron colecciones para procesar")
-                self.btn_procesar.setEnabled(False)
-                self.text_log.append(f"BD '{target_db}' conectada, pero no hay colecciones con '_traducido_'.")
-                client.close()
-        except Exception as e:
-            QMessageBox.warning(self, "Error", f"No se pudo conectar a MongoDB:\n{str(e)}")
-            self.btn_procesar.setEnabled(False)
-            self.text_log.append(f"Error al conectar a MongoDB: {str(e)}")
-            if 'client' in locals():
-                client.close()
+            self.composition_list.clear()
+            for coll in sorted(translated_collections):
+                item = QListWidgetItem(coll)
+                self.composition_list.addItem(item)
 
-    def procesar_colecciones(self):
-        selected_items = self.list_colecciones.selectedItems()
+            if translated_collections:
+                self.compose_btn.setEnabled(True)
+            else:
+                self.compose_btn.setEnabled(False)
+
+            client.close()
+            self.log(f"Colecciones traducidas cargadas: {len(translated_collections)}")
+        except Exception as e:
+            QMessageBox.warning(self, "Error", f"No se pudo cargar colecciones traducidas: {str(e)}")
+
+    def check_ollama_connection(self):
+        """Simple check for Ollama connection"""
+        try:
+            payload = {
+                "model": MODEL_NAME,
+                "prompt": "Hello",
+                "stream": False
+            }
+            response = requests.post(OLLAMA_URL, json=payload, timeout=5)
+            return response.status_code == 200
+        except:
+            return False
+
+    def start_extraction(self):
+        if not hasattr(self, 'extraction_file_path'):
+            QMessageBox.warning(self, "Error", "Seleccione un archivo primero.")
+            return
+
+        # Check if thread is running
+        if self.thread and self.thread.isRunning():
+            return
+
+        self.worker = ExtractionWorker(self.extraction_file_path)
+        self.worker.progress.connect(self.global_progress.setValue)
+        self.worker.log.connect(self.log)
+        self.worker.finished.connect(self.on_worker_finished)
+
+        from PySide6.QtCore import QThread
+        self.thread = QThread()
+        self.worker.moveToThread(self.thread)
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.thread.quit)
+
+        self.extract_btn.setText("Extrayendo...")
+        self.extract_btn.setEnabled(False)
+        self.thread.start()
+
+    def start_translation(self):
+        selected_items = self.translation_list.selectedItems()
         if not selected_items:
-            QMessageBox.information(self, "Información", "Seleccione al menos una colección para procesar.")
+            QMessageBox.warning(self, "Error", "Seleccione al menos una colección.")
+            return
+
+        if not self.check_ollama_connection():
+            QMessageBox.warning(self, "Error", "No se puede conectar a Ollama. Asegúrese de que esté ejecutándose.")
             return
 
         collections = [item.text() for item in selected_items]
+        source_idx = self.source_combo.currentIndex()
+        target_idx = self.target_combo.currentIndex()
+        source_lang = IDIOMA_CODES[source_idx]
+        target_lang = IDIOMA_CODES[target_idx]
 
-        self.btn_procesar.setEnabled(False)
-        self.btn_cancelar.setEnabled(True)
-        self.btn_actualizar.setEnabled(False)
-        self.checkbox_pdf.setEnabled(False)
-        self.progress_bar.setValue(0)
-        self.text_log.clear()
-        self.text_log.append("Iniciando procesamiento...")
+        if source_lang == target_lang:
+            QMessageBox.warning(self, "Error", "Los idiomas deben ser diferentes.")
+            return
 
-        self.worker = WorkerThread(collections, export_pdf=self.checkbox_pdf.isChecked())
-        self.worker.progress.connect(self.progress_bar.setValue)
-        self.worker.log.connect(self.text_log.append)
-        self.worker.finished_signal.connect(self.proceso_finalizado)
-        self.worker.start()
+        # Check if thread is running
+        if self.thread and self.thread.isRunning():
+            return
 
-    def cancelar_proceso(self):
-        if self.worker and self.worker.isRunning():
+        self.worker = TranslationWorker(collections, source_lang, target_lang)
+        self.worker.progress.connect(self.global_progress.setValue)
+        self.worker.progress.connect(self.translation_progress.setValue)
+        self.worker.log.connect(self.log)
+        self.worker.log.connect(self.log_translation)
+        self.worker.finished.connect(self.on_worker_finished)
+
+        from PySide6.QtCore import QThread
+        self.thread = QThread()
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.thread.quit)
+
+        # Clear translation log and reset progress
+        self.translation_log.clear()
+        self.translation_progress.setValue(0)
+
+        self.translate_btn.setText("Traduciendo...")
+        self.translate_btn.setEnabled(False)
+        self.translate_cancel_btn.setText("Cancelar")
+        self.translate_cancel_btn.setEnabled(True)
+        self.thread.start()
+
+    def cancel_translation(self):
+        if self.worker and isinstance(self.worker, TranslationWorker) and self.thread and self.thread.isRunning():
             self.worker.cancel()
-            self.btn_cancelar.setText("Cancelando...")
-            self.btn_cancelar.setEnabled(False)
+            self.translate_cancel_btn.setText("Cancelando...")
+            self.translate_cancel_btn.setEnabled(False)
+            self.log("Progreso de traducción cancelado por el usuario.")
 
-    def proceso_finalizado(self, success, message):
-        self.btn_procesar.setEnabled(True)
-        self.btn_cancelar.setEnabled(False)
-        self.btn_cancelar.setText("Cancelar")
-        self.btn_actualizar.setEnabled(True)
-        self.checkbox_pdf.setEnabled(True)
+    def start_composition(self):
+        selected_items = self.composition_list.selectedItems()
+        if not selected_items:
+            QMessageBox.warning(self, "Error", "Seleccione al menos una colección.")
+            return
+
+        collections = [item.text() for item in selected_items]
+        save_dir = QFileDialog.getExistingDirectory(self, "Seleccionar directorio para guardar archivos")
+        if not save_dir:
+            save_dir = os.getcwd()
+
+        # Check if thread is running
+        if self.thread and self.thread.isRunning():
+            return
+
+        self.worker = CompositionWorker(collections, save_dir, True)
+        self.worker.progress.connect(self.global_progress.setValue)
+        self.worker.log.connect(self.log)
+        self.worker.finished.connect(self.on_worker_finished)
+
+        from PySide6.QtCore import QThread
+        self.thread = QThread()
+        self.worker.moveToThread(self.thread)
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.thread.quit)
+
+        self.compose_btn.setText("Componiendo...")
+        self.compose_btn.setEnabled(False)
+        self.thread.start()
+
+    def on_worker_finished(self, success, message):
+        self.global_progress.setValue(100 if success else 0)
+        self.log(message)
+
+        # Reset buttons
+        self.extract_btn.setText("Extraer Texto")
+        self.extract_btn.setEnabled(True)
+        self.translate_btn.setText("Traducir Seleccionadas")
+        self.translate_btn.setEnabled(True)
+        self.translate_cancel_btn.setText("Cancelar")
+        self.translate_cancel_btn.setEnabled(False)
+        self.compose_btn.setText("Componer Archivos")
+        self.compose_btn.setEnabled(True)
+
+        if self.thread:
+            self.thread.quit()
+            self.thread.wait()
 
         if success:
             QMessageBox.information(self, "Éxito", message)
-            self.progress_bar.setValue(100)
         else:
             QMessageBox.warning(self, "Error", message)
 
+        # Refresh collections if needed
+        self.load_collections()
+        self.load_translated_collections()
 
-# Modo de prueba para depuración
-def test_mode():
-    """Versión de consola para testing"""
-    try:
-        print("=== MODO DE PRUEBA ===")
-        print("Conectando a MongoDB...")
+        # Reset worker and thread
+        self.worker = None
+        self.thread = None
 
-        # Verificar conexión básica
-        client = MongoClient('mongodb://localhost:27017/', serverSelectionTimeoutMS=5000)
-        print(f"Cliente conectado: {client}")
+    def log(self, message):
+        self.log_text.append(message)
+        # Auto-scroll to bottom
+        scrollbar = self.log_text.verticalScrollBar()
+        scrollbar.setValue(scrollbar.maximum())
 
-        # Listar bases de datos disponibles
-        dbs = client.list_database_names()
-        print(f"Bases de datos disponibles: {dbs}")
-
-        # Buscar variaciones del nombre de la base de datos
-        possible_dbs = ['traduces', 'traducciones', 'translations']
-        target_db = None
-        for db_name in possible_dbs:
-            if db_name in dbs:
-                target_db = db_name
-                break
-
-        if not target_db:
-            print("¡ADVERTENCIA! No se encontró ninguna base de datos de traducciones.")
-            print("Bases de datos encontradas:", [db for db in dbs if db != 'admin' and db != 'config' and db != 'local'])
-            client.close()
-            return
-
-        print(f"✅ Base de datos encontrada: '{target_db}'")
-
-        # Usar la base de datos encontrada
-        db = client[target_db]
-        print(f"Base de datos conectada: {db}")
-
-        # Obtener todas las colecciones
-        collections = db.list_collection_names()
-        print(f"Colecciones encontradas: {collections}")
-
-        # Filtrar colecciones que contienen "_traducido_"
-        translated_collections = [coll for coll in collections if '_traducido_' in coll]
-        print(f"Colecciones traducidas: {translated_collections}")
-
-        if not translated_collections:
-            print("No se encontraron colecciones con '_traducido_' en el nombre.")
-            print("Colecciones disponibles:", collections)
-            client.close()
-            return
-
-        print(f"\n=== Encontradas {len(translated_collections)} colecciones para procesar ===")
-
-        # Mostrar contenido de las primeras 2 colecciones para ejemplo
-        for coll_name in translated_collections[:2]:
-            print(f"\n=== Inspeccionando colección: {coll_name} ===")
-            collection = db[coll_name]
-
-            # Contar documentos
-            doc_count = collection.count_documents({})
-            print(f"Número de documentos: {doc_count}")
-
-            if doc_count == 0:
-                print("¡ADVERTENCIA! La colección está vacía.")
-                continue
-
-            print(f"\n📄 Patrón de contenido (primeros 5 documentos):")
-            total_content_lines = 0
-            for i, doc in enumerate(collection.find().limit(5)):
-                print(f"  Documento {i+1}: ID={doc.get('_id', 'N/A')}")
-                if 'linea' in doc:
-                    content = str(doc['linea']).strip()
-                    if content:
-                        total_content_lines += 1
-                        print(f"    Contenido: '{content[:70]}{'...' if len(content) > 70 else ''}'")
-                    else:
-                        print("    Contenido vacío o solo espacios")
-                else:
-                    print("    ¡Campo 'linea' no encontrado!")
-
-            print(f"\n📊 Resumen colección '{coll_name}':")
-            print(f"  - Total documentos: {doc_count}")
-            print(f"  - Contenido aproximado: ~{total_content_lines} líneas (basado en primeros 5 docs)")
-
-        client.close()
-        print("\n=== PRUEBA COMPLETADA ===")
-
-    except Exception as e:
-        print(f"Error en modo de prueba: {e}")
-        print(f"Tipo de error: {type(e)}")
-        print("Sugerencias:")
-        print("  1. Asegúrate de que MongoDB esté ejecutándose")
-        print("  2. Verifica que la base de datos 'traducciones' existe")
-        print("  3. Comprueba que hay colecciones con '_traducido_' en el nombre")
-        print("  4. Asegúrate de que los documentos tienen el campo 'linea'")
-
+    def log_translation(self, message):
+        self.translation_log.append(message)
+        # Auto-scroll to bottom
+        scrollbar = self.translation_log.verticalScrollBar()
+        scrollbar.setValue(scrollbar.maximum())
 
 if __name__ == "__main__":
-    import sys
-    if len(sys.argv) > 1 and sys.argv[1] == "--test":
-        test_mode()
-    else:
-        app = QApplication(sys.argv)
-        window = MainWindow()
-        window.show()
-        sys.exit(app.exec())
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())
 </code></pre>
 
-    <h2>Solución de Problemas</h2>
+    <div class="alert alert-success mt-4">
+        <h4>📋 Explicación de la Funcionalidad</h4>
+        <p>El código anterior representa una aplicación completa de traducción automática:
 
-    <h3>Problemas Generales</h3>
-    <ul>
-        <li><strong>MongoDB no se conecta</strong>: Verifica que esté corriendo en el puerto por defecto (27017). En algunas versiones de MongoDB, puede requerir instalación específica o ajustes de configuración.</li>
-        <li><strong>Ollama falla</strong>: Asegúrate de que el modelo 'gemma3:4b' esté descargado y el servidor esté activo en http://localhost:11434. Ejecuta <code>ollama list</code> para verificar modelos disponibles.</li>
-        <li><strong>Dependencias faltantes</strong>: Instala todas las dependencias con pip. Verifica versiones compatibles de bibliotecas.</li>
-        <li><strong>Codificación de archivos</strong>: Asegúrate de que los archivos de texto estén en UTF-8 para evitar problemas de caracteres especiales.</li>
-    </ul>
+        <h5>1. Arquitectura General</h5>
+        <ul>
+            <li><strong>Interfaz Unificada</strong>: Integra tres pestañas en una sola aplicación</li>
+            <li><strong>Procesamiento Asíncrono</strong>: Usa QThread para mantener la responsividad de la GUI</li>
+            <li><strong>Tema Oscuro</strong>: Aplicado globalmente con estilos CSS personalizados</li>
+        </ul>
 
-    <h3>Problemas Específicos de GUI</h3>
-    <ul>
-        <li><strong>PySide6 no se encuentra</strong>: Instala con <code>pip install PySide6</code>. Si hay conflictos, considera usar PyQt6 o PyQt5, ajustando las importaciones.</li>
-        <li><strong>La interfaz no responde</strong>: Las operaciones se ejecutan en hilos separados. Si se congela completamente, reinicia la aplicación.</li>
-        <li><strong>Error de Qt plugins</strong>: Puede requerir instalación de bibliotecas adicionales en Linux (sudo apt install qt6-base-dev).</li>
-        <li><strong>Archivo no encontrado</strong>: En la aplicación GUI de extracción, usa el diálogo de archivos para seleccionar archivos válidos.</li>
-        <li><strong>Colecciones no aparecen en GUI de traducción</strong>: Las colecciones deben existir en la base de datos 'traducciones' y no tener sufijo '_traducido_al_ingles'.</li>
-        <li><strong>Colecciones no aparecen en composición</strong>: Las colecciones deben contener '_traducido_' en el nombre para ser detectadas por la interfaz de composición.</li>
-    </ul>
+        <h5>2. Funciones Core</h5>
+        <ul>
+            <li><strong>segmentar_frases()</strong>: Procesa archivos .txt y .pdf, extrayendo contenido por líneas</li>
+            <li><strong>traducir_con_ollama()</strong>: Interfaz con servicio Ollama para traducciones</li>
+        </ul>
 
-    <h3>Errores Comunes</h3>
-    <ul>
-        <li><strong>"Connection refused"</strong>: Verifica que MongoDB y Ollama estén ejecutándose.</li>
-        <li><strong>"Module not found"</strong>: Instala el módulo faltante con pip.</li>
-        <li><strong>Traducciones vacías</strong>: Puede ser normal para líneas con solo saltos de línea. Revisa el registro de actividad en la GUI.</li>
-        <li><strong>Proceso cancelado inesperadamente</strong>: En GUI, usa los botones de cancelación apropiadamente.</li>
-    </ul>
+        <h5>3. Worker Classes</h5>
+        <ul>
+            <li><strong>ExtractionWorker</strong>: Extrae texto de archivos y lo almacena en MongoDB</li>
+            <li><strong>TranslationWorker</strong>: Traduce colecciones de MongoDB usando IA</li>
+            <li><strong>CompositionWorker</strong>: Genera archivos .txt y .pdf finales</li>
+        </ul>
+
+        <h5>4. Soporte Multiidioma</h5>
+        <p>Soporta español, inglés y francés con prompts optimizados por idioma de origen.</p>
+
+        <h5>5. Generación de PDFs</h5>
+        <p>Usa ReportLab para crear documentos justificados con números de página automáticos.</p>
+
+        <p>Esta aplicación es el resultado final de la evolución del proyecto, consolidando módulos separados en una experiencia coherente.</p>
+    </div>
 
     <h2>Contacto</h2>
     <p>Para más información o soporte, visita <a href="https://bgonpin.github.io/" target="_blank" class="text-light">bgonpin.github.io</a>.</p>
     </div>  <!-- End of container -->
-    <footer class="text-center mt-4">
-        <a href="./pildoras.html" class="text-light">Volver a Píldoras</a> |
-        <a href="https://github.com/bgonpin/TRADUCTOR_ARCHIVOS" class="text-light" target="_blank">Proyecto en GitHub</a>
+    <footer class="text-center py-3 bg-dark text-light mt-4">
+        <a href="./pildoras.html" class="text-light">Ir a Píldoras</a> | <a href="https://github.com/bgonpin/TRADUCTOR_ARCHIVOS" class="text-light" target="_blank">Ver en GitHub</a>
     </footer>
 </body>
 </html>

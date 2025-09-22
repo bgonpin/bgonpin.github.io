@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Generador de Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1a1a1a;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .container {
+            background: #2d3748;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: #e0e0e0;
+        }
+
+        h2 {
+            color: #cbd5e0;
+            border-bottom: 3px solid #4a5568;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #e2e8f0;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background-color: #34495e;
+            border-left: 4px solid #4a5568;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            color: #e0e0e0;
+        }
+
+        .code-block {
+            background-color: #1a202c;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        pre {
+            background-color: #2d3748;
+            border: 1px solid #4a5568;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+            color: #e0e0e0;
+        }
+
+        .file-list {
+            background-color: #34495e;
+            border: 1px solid #4a5568;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #e0e0e0;
+        }
+
+        .file-list h4 {
+            margin-top: 0;
+            color: #cbd5e0;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter) ". ";
+            font-weight: bold;
+            color: #4a5568;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            color: #e0e0e0;
+        }
+
+        th, td {
+            border: 1px solid #4a5568;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            font-weight: bold;
+            color: #cbd5e0;
+        }
+
+        .requirements {
+            background-color: #4a5568;
+            border-left: 4px solid #718096;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            color: #e0e0e0;
+        }
+
+        .note {
+            background-color: #2d3748;
+            border-left: 4px solid #718096;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            color: #e0e0e0;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: #e0e0e0;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #e0e0e0;
+        }
+
+        a {
+            color: #63b3ed;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            border-radius: 10px;
+            border-top: 1px solid #4a5568;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📚 Manual de Usuario</h1>
+        <p>Generador de Test Automático con IA</p>
+    </header>
+
+    <div class="container">
+        <h2>🖥️ Introducción</h2>
+        <p>El <strong>Generador de Test</strong> es una aplicación innovadora que utiliza inteligencia artificial para crear preguntas de opción múltiple automáticamente a partir de documentos PDF. El sistema extrae texto de PDFs, genera preguntas relevantes sobre el contenido y las almacena en una base de datos MongoDB para su posterior uso en cuestionarios interactivos.</p>
+
+        <div class="highlight">
+            <strong>Características principales:</strong>
+            <ul>
+                <li>🔍 Extracción automática de texto desde PDFs</li>
+                <li>🤖 Generación de preguntas con modelos de IA (Ollama)</li>
+                <li>💾 Almacenamiento en MongoDB</li>
+                <li>🎯 Interfaz gráfica intuitiva con PySide6</li>
+                <li>🧠 Múltiples modelos de IA configurables</li>
+            </ul>
+        </div>
+
+        <h2>📁 Estructura del Proyecto</h2>
+        <div class="file-list">
+            <h4>Archivos principales:</h4>
+            <ul>
+                <li><code>launcher.py</code> - Interfaz gráfica principal para lanzar aplicaciones</li>
+                <li><code>1-alimentar.py</code> - Aplicación para procesar PDFs y generar preguntas</li>
+                <li><code>2-cuestionario.py</code> - Aplicación interactiva para realizar cuestionarios</li>
+                <li><code>modelos.dat</code> - Lista de modelos de Ollama disponibles</li>
+                <li><code>README.md</code> - Documentación detallada del proyecto</li>
+            </ul>
+        </div>
+
+        <h2>⚙️ Requisitos del Sistema</h2>
+        <div class="requirements">
+            <h3>Hardware Mínimo</h3>
+            <ul>
+                <li><strong>Sistema Operativo:</strong> Windows, macOS o Linux</li>
+                <li><strong>Memoria RAM:</strong> 4GB mínimo recomendado</li>
+                <li><strong>Espacio en Disco:</strong> 10GB para modelos de Ollama</li>
+                <li><strong>Procesador:</strong> Compatible con modelos de IA</li>
+            </ul>
+
+            <h3>Software Requerido</h3>
+            <ul>
+                <li><strong>Python:</strong> Versión 3.7 o superior</li>
+                <li><strong>MongoDB:</strong> Base de datos local o remota</li>
+                <li><strong>Ollama:</strong> Plataforma de IA con modelos instalados</li>
+            </ul>
+
+            <h3>Bibliotecas de Python</h3>
+            <ul>
+                <li>PyPDF2</li>
+                <li>requests</li>
+                <li>pymongo</li>
+                <li>PySide6</li>
+            </ul>
+        </div>
+
+        <h2>🚀 Instalación</h2>
+        <h3>1. Instalar MongoDB</h3>
+        <p class="note">Configure MongoDB en su sistema antes de continuar.</p>
+
+        <h4>Linux (Ubuntu/Debian):</h4>
+        <pre><code>sudo apt update
+sudo apt install mongodb
+sudo systemctl start mongodb
+sudo systemctl enable mongodb</code></pre>
+
+        <h4>Windows:</h4>
+        <p>Descargue e instale desde el sitio oficial de MongoDB: <a href="https://www.mongodb.com/try/download/community">mongodb.com</a></p>
+
+        <h4>macOS:</h4>
+        <pre><code>brew install mongodb/brew/mongodb-community
+brew services start mongodb/brew/mongodb-community</code></pre>
+
+        <h3>2. Instalar Ollama</h3>
+        <p>Acceda a <a href="https://ollama.ai">ollama.ai</a> para descargar e instalar la plataforma.</p>
+
+        <p>Después de instalar, descargue los modelos necesarios:</p>
+        <pre><code>ollama pull llama3.1:8b
+ollama pull phi3:3.8b
+ollama pull gemma3:4b_40K</code></pre>
+
+        <h3>3. Configurar Entorno Python</h3>
+        <pre><code>python -m venv generador_test_env
+source generador_test_env/bin/activate  # Windows: generador_test_env\Scripts\activate
+
+pip install PyPDF2 requests pymongo PySide6</code></pre>
+
+        <h2>🎮 Uso de la Aplicación</h2>
+
+        <h3>Launcher Principal</h3>
+        <p>Para facilitar el uso, se incluye un launcher con GUI:</p>
+        <pre><code>python launcher.py</code></pre>
+
+        <p>Seleccione la aplicación deseada:</p>
+        <ul>
+            <li><strong>🚀 Alimentar Base de Datos</strong> - Procesar PDFs y generar preguntas</li>
+            <li><strong>📝 Cuestionario Interactivo</strong> - Realizar tests con preguntas almacenadas</li>
+        </ul>
+
+        <h3>Generador de Preguntas (1-alimentar.py)</h3>
+        <div class="step-list">
+            <li>Ejecute la aplicación desde el launcher o directamente:</li>
+        </div>
+        <pre><code>python 1-alimentar.py</code></pre>
+        <div class="step-list">
+            <li>Seleccione un archivo PDF usando el botón "Seleccionar"</li>
+            <li>Configure los parámetros:</li>
+            <ul>
+                <li><strong>Modelo Ollama:</strong> Elija entre los modelos disponibles</li>
+                <li><strong>Preguntas por fragmento:</strong> Número de preguntas por sección (recomendado: 3)</li>
+                <li><strong>Tamaño del fragmento:</strong> Carácteres por sección (recomendado: 2000)</li>
+            </ul>
+            <li>Presione "Generar Preguntas"</li>
+            <li>Espere a que el proceso termine (ver progreso en la barra y logs)</li>
+        </ul>
+
+        <div class="note">
+            <strong>Nota:</strong> El sistema divide el PDF en fragmentos para asegurar preguntas contextuales. Cada fragmento genera preguntas específicas sobre su contenido.
+        </div>
+
+        <h3>Cuestionario Interactivo (2-cuestionario.py)</h3>
+        <div class="step-list">
+            <li>Ejecute la aplicación desde el launcher o directamente:</li>
+        </div>
+        <pre><code>python 2-cuestionario.py</code></pre>
+        <div class="step-list">
+            <li>Presione "Cargar Colecciones" para ver las bases de preguntas disponibles</li>
+            <li>Seleccione una colección del menú desplegable</li>
+            <li>Responda cada pregunta seleccionando una opción y presionando "Responder"</li>
+            <li>Revise sus resultados al finalizar</li>
+        </ul>
+
+        <h2>📊 Detalles Técnicos</h2>
+
+        <h3>Procesamiento de PDFs</h3>
+        <p>El sistema utiliza PyPDF2 para extraer texto. Algunos PDFs pueden no contener texto extraíble si están basados únicamente en imágenes.</p>
+
+        <h3>Generación de Preguntas con IA</h3>
+        <p>Las preguntas se generan mediante un prompt estructurado enviando a Ollama:</p>
+        <ul>
+            <li>Cada fragmento genera exactamente 3 opciones por pregunta</li>
+            <li>Una respuesta es correcta, las demás distractores plausibles</li>
+            <li>Preguntas específicas al contenido, no generales</li>
+        </ul>
+
+        <h3>Almacenamiento en MongoDB</h3>
+        <table>
+            <tr>
+                <th>Base de Datos</th>
+                <th>Colección</th>
+                <th>Documentos</th>
+            </tr>
+            <tr>
+                <td>preguntas</td>
+                <td>[nombre_pdf]</td>
+                <td>pregunta, opciones[], correct_index, _id</td>
+            </tr>
+        </table>
+
+        <h3>Modelos Disponibles</h3>
+        <p>Modelos preconfigurados en <code>modelos.dat</code>:</p>
+        <ul>
+            <li><strong>llama3.1:8b</strong> - Modelo predeterminado, equilibrado</li>
+            <li><strong>phi3:3.8b</strong> - Modelo ligero</li>
+            <li><strong>gemma3:4b_40K</strong> - Modelo especializado en contenido largo</li>
+        </ul>
+
+        <h2>🔧 Solución de Problemas</h2>
+        <table>
+            <tr>
+                <th>Problema</th>
+                <th>Causa</th>
+                <th>Solución</th>
+            </tr>
+            <tr>
+                <td>Error de conexión con MongoDB</td>
+                <td>Base de datos no está ejecutándose</td>
+                <td>Verificar que MongoDB esté activo en localhost:27017</td>
+            </tr>
+            <tr>
+                <td>Error de conexión con Ollama</td>
+                <td>Servicio Ollama no iniciado o modelo no descargado</td>
+                <td>Ejecutar <code>ollama serve</code> y descargar modelo requerido</td>
+            </tr>
+            <tr>
+                <td>PDF sin texto extraíble</td>
+                <td>Documento basado en imágenes</td>
+                <td>Usar PDFs con texto incrustado o convertir a texto</td>
+            </tr>
+            <tr>
+                <td>preguntas sin sentido</td>
+                <td>Fragmento muy pequeño o contenido complejo</td>
+                <td>Ajustar tamaño de fragmento o revisar contenido del PDF</td>
+            </tr>
+        </table>
+
+        <h2>🤝 Contribución</h2>
+        <ol>
+            <li>Realice un fork del repositorio</li>
+            <li>Cree una rama para su característica (<code>git checkout -b feature/nueva-funcionalidad</code>)</li>
+            <li>Realice commits de sus cambios (<code>git commit -am 'Añade nueva funcionalidad'</code>)</li>
+            <li>Envíe los cambios (<code>git push origin feature/nueva-funcionalidad</code>)</li>
+            <li>Cree un Pull Request</li>
+        </ol>
+
+        <h2>📄 Licencia</h2>
+        <p>Este proyecto está bajo la Licencia MIT. Consulte el archivo <code>LICENSE</code> para más detalles.</p>
+
+        <h2>📞 Soporte</h2>
+        <p>Para soporte técnico o reportar problemas, cree un issue en el repositorio de GitHub del proyecto.</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Generador de Test con IA. Desarrollado con ❤️ para la educación.</p>
+        <p><a href="./pildoras.html">Píldoras</a> | <a href="https://github.com/bgonpin/GENERADOR_TEST">Repositorio en GitHub</a></p>
+    </footer>
+</body>
+</html>

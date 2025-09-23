@@ -303,7 +303,7 @@ loadGallery();
 function showRandomImage() {
     const index = Math.floor(Math.random() * imageFiles.length);
     const imageFile = imageFiles[index];
-    document.getElementById('randomImage').src = encodeURI('../../MODIFICADAS/' + imageFile);
+    document.getElementById('randomImage').src = encodeURI('./' + imageFile);
 }
 
 showRandomImage();
@@ -322,7 +322,7 @@ function loadGallery() {
 
         group.forEach(imageFile => {
             const img = document.createElement('img');
-            img.src = encodeURI('../../MODIFICADAS/' + imageFile);
+            img.src = encodeURI('./' + imageFile);
             img.className = 'img-thumbnail m-2';
             img.style.width = '150px';
             img.style.height = '150px';
@@ -353,13 +353,13 @@ function loadGallery() {
 
 function updateModal() {
     const imageFile = imageFiles[currentIndex];
-    const imageSrc = encodeURI('../../MODIFICADAS/' + imageFile);
+    const imageSrc = encodeURI('./' + imageFile);
     document.getElementById('modalImage').src = imageSrc;
     const imageName = imageFile.replace('_1024.jpg', '');
     const descriptionFile = imageName + '.txt';
     const modalDesc = document.getElementById('modalDescription');
     modalDesc.textContent = 'Cargando descripción...';
-    fetch(encodeURI('../../MODIFICADAS/' + descriptionFile))
+    fetch(encodeURI('./' + descriptionFile))
         .then(response => response.text())
         .then(text => {
             modalDesc.textContent = text;

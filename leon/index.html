@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEÓN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+body {
+    background-color: #1a1a1a;
+    color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+#carouselExampleIndicators {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+#gallery .card {
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #2a2a2a;
+    border: 1px solid #444;
+}
+#gallery .card:hover {
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+}
+
+#gallery img {
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+#gallery img:hover {
+    transform: scale(1.1);
+}
+
+.card-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+
+.modal-content {
+    background-color: #2d2d2d;
+    color: #f8f9fa;
+    border-radius: 15px;
+    border: 1px solid #555;
+}
+
+.modal-header {
+    border-bottom: 1px solid #555;
+}
+
+.modal-body {
+    background-color: #2d2d2d;
+}
+
+.modal-body p {
+    color: #ffffff;
+}
+
+.modal-footer {
+    border-top: 1px solid #555;
+}
+
+.modal-body img {
+    max-height: 70vh;
+    width: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+    transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    transform: scale(1.05);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 50px;
+    height: 50px;
+    filter: invert(1);
+}
+
+.carousel-indicators button {
+    background-color: #666;
+}
+.carousel-indicators .active {
+    background-color: #f8f9fa;
+}
+
+.carousel-control-prev {
+    left: -50px;
+}
+
+.carousel-control-next {
+    right: -50px;
+}
+
+@media (max-width: 768px) {
+    #gallery .col-md-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    #gallery .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center my-4">LEÓN</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <img id="randomImage" src="" alt="Imagen aleatoria" class="img-fluid" style="max-height: 400px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.4);">
+            </div>
+        </div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators" id="indicators"></div>
+            <div class="carousel-inner" id="gallery"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <p class="mb-0" style="color: #cccccc; font-size: 14px;">By Nitisimo</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para ver imagen en grande -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">León: Lucía y Antía</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="d-flex justify-content-between mb-3">
+                        <button id="prevBtn" class="btn btn-secondary">&larr; Anterior</button>
+                        <button id="nextBtn" class="btn btn-secondary">Siguiente &rarr;</button>
+                    </div>
+                    <img id="modalImage" src="" alt="" class="img-fluid">
+                    <p id="modalDescription" class="mt-3"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+const imageFiles = [
+"20250903_130417805_iOS_1024.jpg",
+"20250903_130419621_iOS_1024.jpg",
+"20250903_130422436_iOS_1024.jpg",
+"20250903_130423213_iOS_1024.jpg",
+"20250903_130427082_iOS_1024.jpg",
+"20250903_130431317_iOS_1024.jpg",
+"20250903_130438981_iOS_1024.jpg",
+"20250903_130447511_iOS_1024.jpg",
+"20250903_130456612_iOS_1024.jpg",
+"20250903_130501479_iOS_1024.jpg",
+"20250903_130524797_iOS_1024.jpg",
+"20250903_130527709_iOS_1024.jpg",
+"20250903_130956789_iOS_1024.jpg",
+"20250903_130957294_iOS_1024.jpg",
+"20250903_130958738_iOS_1024.jpg",
+"20250903_131001530_iOS_1024.jpg",
+"20250903_131002058_iOS_1024.jpg",
+"20250903_131002533_iOS_1024.jpg",
+"IMG_0089 2025-09-03 13_17_09_1024.jpg",
+"IMG_0090 2025-09-03 13_17_09_1024.jpg",
+"IMG_0091 2025-09-03 13_17_10_1024.jpg",
+"IMG_0092 2025-09-03 13_17_11_1024.jpg",
+"IMG_0093 2025-09-03 13_20_41_1024.jpg",
+"IMG_0094 2025-09-03 13_20_47_1024.jpg",
+"IMG_0095 2025-09-03 13_20_55_1024.jpg",
+"IMG_0096 2025-09-03 13_21_24_1024.jpg",
+"IMG_0097 2025-09-03 13_21_38_1024.jpg",
+"IMG_0098 2025-09-03 13_21_43_1024.jpg",
+"IMG_0100 2025-09-03 13_22_06_1024.jpg",
+"IMG_0101 2025-09-03 13_22_19_1024.jpg",
+"IMG_0102 2025-09-03 13_22_26_1024.jpg",
+"IMG_0103 2025-09-03 13_23_16_1024.jpg",
+"IMG_0104 2025-09-03 13_23_23_1024.jpg",
+"IMG_0105 2025-09-03 13_24_07_1024.jpg",
+"IMG_0106 2025-09-03 13_24_30_1024.jpg",
+"IMG_4357 2025-09-03 13_16_15_1024.jpg",
+"IMG_4358 2025-09-03 13_16_16_1024.jpg",
+"IMG_4360 2025-09-03 13_16_17_1024.jpg",
+"IMG_4361 2025-09-03 13_16_18_1024.jpg",
+"IMG_4362 2025-09-03 13_16_19_1024.jpg",
+"IMG_4363 2025-09-03 13_16_22_1024.jpg",
+"IMG_4364 2025-09-03 13_16_23_1024.jpg",
+"IMG_4365 2025-09-03 13_16_25_1024.jpg",
+"IMG_4366 2025-09-03 13_16_25_1024.jpg",
+"IMG_4367 2025-09-03 13_16_26_1024.jpg",
+"IMG_4368 2025-09-03 13_16_27_1024.jpg",
+"IMG_4369 2025-09-03 13_16_30_1024.jpg",
+"IMG_4370 2025-09-03 13_16_31_1024.jpg",
+"IMG_4371 2025-09-03 13_16_31_1024.jpg",
+"IMG_4372 2025-09-03 13_16_32_1024.jpg",
+"IMG_4373 2025-09-03 13_16_33_1024.jpg",
+"IMG_4374 2025-09-03 13_16_34_1024.jpg",
+"IMG_4375 2025-09-03 13_16_35_1024.jpg",
+"IMG_4376 2025-09-03 13_16_39_1024.jpg",
+"IMG_4377 2025-09-03 13_16_39_1024.jpg",
+"IMG_4378 2025-09-03 13_16_40_1024.jpg",
+"IMG_4379 2025-09-03 13_16_40_1024.jpg",
+"IMG_4380 2025-09-03 13_16_42_1024.jpg",
+"IMG_4381 2025-09-03 13_16_43_1024.jpg",
+"IMG_4382 2025-09-03 13_16_46_1024.jpg",
+"IMG_4383 2025-09-03 13_16_55_1024.jpg",
+"IMG_4384 2025-09-03 13_16_56_1024.jpg",
+"IMG_4385 2025-09-03 13_16_57_1024.jpg",
+"IMG_4386 2025-09-03 13_16_58_1024.jpg",
+"IMG_4387 2025-09-03 13_16_59_1024.jpg",
+"IMG_4388 2025-09-03 13_17_00_1024.jpg",
+"IMG_4392 2025-09-03 13_17_05_1024.jpg",
+"IMG_4393 2025-09-03 13_17_06_1024.jpg",
+"IMG_4394 2025-09-03 13_17_06_1024.jpg",
+"IMG_4395 2025-09-03 13_17_07_1024.jpg",
+"IMG_4396 2025-09-03 13_17_08_1024.jpg",
+"IMG_4397 2025-09-03 13_21_52_1024.jpg",
+"IMG_4398 2025-09-03 13_21_59_1024.jpg",
+"IMG_4399 2025-09-03 13_22_20_1024.jpg",
+"IMG_4400 2025-09-03 13_22_25_1024.jpg",
+"IMG_4401 2025-09-03 13_22_29_1024.jpg",
+"IMG_4402 2025-09-03 13_22_32_1024.jpg",
+"IMG_4403 2025-09-03 13_22_37_1024.jpg",
+"IMG_4404 2025-09-03 13_22_40_1024.jpg",
+"IMG_4405 2025-09-03 13_22_42_1024.jpg",
+"IMG_4406 2025-09-03 13_22_58_1024.jpg",
+"IMG_4407 2025-09-03 13_23_17_1024.jpg",
+"IMG_4408 2025-09-03 13_23_18_1024.jpg",
+"IMG_4409 2025-09-03 13_23_25_1024.jpg",
+"IMG_4410 2025-09-03 13_23_34_1024.jpg",
+"IMG_4411 2025-09-03 13_24_48_1024.jpg",
+"IMG_4412 2025-09-03 13_24_54_1024.jpg",
+"IMG_6879_1024.jpg",
+"IMG_6880_1024.jpg",
+"IMG_6881_1024.jpg",
+"IMG_6882_1024.jpg",
+"IMG_6883_1024.jpg",
+"IMG_6884_1024.jpg",
+"IMG_6885_1024.jpg",
+"IMG_6886_1024.jpg",
+"IMG_6887_1024.jpg",
+"IMG_6888_1024.jpg",
+"IMG_6889_1024.jpg",
+"IMG_6890_1024.jpg",
+"IMG_6891_1024.jpg"
+];
+
+let currentIndex = 0;
+
+const groupSize = 6; // Imágenes por slide del carrusel
+const groups = [];
+for (let i = 0; i < imageFiles.length; i += groupSize) {
+    groups.push(imageFiles.slice(i, i + groupSize));
+}
+
+loadGallery();
+
+function showRandomImage() {
+    const index = Math.floor(Math.random() * imageFiles.length);
+    const imageFile = imageFiles[index];
+    document.getElementById('randomImage').src = encodeURI('../../MODIFICADAS/' + imageFile);
+}
+
+showRandomImage();
+setInterval(showRandomImage, 3000);
+
+function loadGallery() {
+    const indicators = document.getElementById('indicators');
+    const gallery = document.getElementById('gallery');
+
+    groups.forEach((group, groupIndex) => {
+        const carouselItem = document.createElement('div');
+        carouselItem.className = `carousel-item ${groupIndex === 0 ? 'active' : ''}`;
+
+        const container = document.createElement('div');
+        container.className = 'd-flex flex-wrap justify-content-center';
+
+        group.forEach(imageFile => {
+            const img = document.createElement('img');
+            img.src = encodeURI('../../MODIFICADAS/' + imageFile);
+            img.className = 'img-thumbnail m-2';
+            img.style.width = '150px';
+            img.style.height = '150px';
+            img.style.objectFit = 'cover';
+            img.alt = 'imagen';
+            img.addEventListener('click', function() {
+                currentIndex = imageFiles.indexOf(imageFile);
+                updateModal();
+                const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+                modal.show();
+            });
+            container.appendChild(img);
+        });
+
+        carouselItem.appendChild(container);
+        gallery.appendChild(carouselItem);
+
+        const indicator = document.createElement('button');
+        indicator.type = 'button';
+        indicator.setAttribute('data-bs-target', '#carouselExampleIndicators');
+        indicator.setAttribute('data-bs-slide-to', groupIndex.toString());
+        indicator.className = groupIndex === 0 ? 'active' : '';
+        indicator.setAttribute('aria-current', groupIndex === 0 ? 'true' : 'false');
+        indicator.setAttribute('aria-label', `Slide ${groupIndex + 1}`);
+        indicators.appendChild(indicator);
+    });
+}
+
+function updateModal() {
+    const imageFile = imageFiles[currentIndex];
+    const imageSrc = encodeURI('../../MODIFICADAS/' + imageFile);
+    document.getElementById('modalImage').src = imageSrc;
+    const imageName = imageFile.replace('_1024.jpg', '');
+    const descriptionFile = imageName + '.txt';
+    const modalDesc = document.getElementById('modalDescription');
+    modalDesc.textContent = 'Cargando descripción...';
+    fetch(encodeURI('../../MODIFICADAS/' + descriptionFile))
+        .then(response => response.text())
+        .then(text => {
+            modalDesc.textContent = text;
+        })
+        .catch(error => {
+            modalDesc.textContent = 'Descripción no disponible';
+            console.error('Error loading description for ' + imageFile, error);
+        });
+}
+
+document.getElementById('prevBtn').addEventListener('click', function() {
+    currentIndex = (currentIndex - 1 + imageFiles.length) % imageFiles.length;
+    updateModal();
+});
+
+document.getElementById('nextBtn').addEventListener('click', function() {
+    currentIndex = (currentIndex + 1) % imageFiles.length;
+    updateModal();
+});
+    </script>
+</body>
+</html>

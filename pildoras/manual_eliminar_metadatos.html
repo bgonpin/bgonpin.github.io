@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario: Eliminar Metadatos de Imágenes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        h1, h2, h3 {
+            color: #66b3ff;
+        }
+        code {
+            background-color: #2a2a2a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #ffffff;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .highlight {
+            background-color: #2a2a2a;
+            color: #ffc107;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+        }
+        .image-ext {
+            display: inline-block;
+            background-color: #3a3a3a;
+            color: #ffffff;
+            padding: 2px 5px;
+            margin: 2px;
+            border-radius: 3px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</head>
+<body>
+    <h1>Manual de Usuario: Eliminar Metadatos de Imágenes</h1>
+
+    <div class="section">
+        <h2>Introducción</h2>
+        <p>Este script es una aplicación gráfica desarrollada en Python que permite eliminar los metadatos EXIF de imágenes. Los metadatos EXIF contienen información como la fecha de captura, ubicación GPS, configuración de la cámara y otros datos sensibles que pueden comprometer la privacidad.</p>
+        <p>La aplicación cuenta con una interfaz intuitiva que permite procesar:</p>
+        <ul>
+            <li>Un directorio completo con múltiples imágenes</li>
+            <li>Un archivo de imagen individual</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Requisitos del Sistema</h2>
+        <h3>Requisitos Mínimos</h3>
+        <ul>
+            <li>Sistema Operativo: Windows, macOS o Linux</li>
+            <li>Python 3.6 o superior instalado</li>
+            <li>Asistente de memoria: 256 MB mínimo</li>
+        </ul>
+
+        <h3>Dependencias</h3>
+        <p>El script requiere las siguientes librerías de Python:</p>
+        <ul>
+            <li><code>PySide6</code> (para la interfaz gráfica)</li>
+            <li><code>Pillow (PIL)</code> (para el procesamiento de imágenes)</li>
+        </ul>
+
+        <h3>Imágenes Soportadas</h3>
+        <p>Formatos de imagen admitidos:</p>
+        <div class="image-ext">.jpg</div>
+        <div class="image-ext">.jpeg</div>
+        <div class="image-ext">.png</div>
+        <div class="image-ext">.bmp</div>
+        <div class="image-ext">.tiff</div>
+        <div class="image-ext">.tif</div>
+    </div>
+
+    <div class="section">
+        <h2>Instalación</h2>
+        <ol>
+            <li>Asegúrese de tener Python 3 instalado en su sistema.</li>
+            <li>Instale las dependencias ejecutando el siguiente comando en la terminal:</li>
+        </ol>
+        <pre><code>pip install PySide6 Pillow</code></pre>
+        <ol start="3">
+            <li>Descargue o copie el archivo <code>eliminar_metadatos_imagen.py</code> a una carpeta en su equipo.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Ejecución del Programa</h2>
+        <p>Para ejecutar la aplicación:</p>
+        <ol>
+            <li>Abra una terminal o línea de comandos.</li>
+            <li>Navegue a la carpeta donde se encuentra el archivo <code>eliminar_metadatos_imagen.py</code>.</li>
+            <li>Ejecute el comando:</li>
+        </ol>
+        <pre><code>python eliminar_metadatos_imagen.py</code></pre>
+        <p>Si está utilizando Python 3 explícitamente, use:</p>
+        <pre><code>python3 eliminar_metadatos_imagen.py</code></pre>
+        <p>Se abrirá una ventana gráfica con la interfaz de usuario.</p>
+    </div>
+
+    <div class="section">
+        <h2>Interfaz de Usuario</h2>
+        <p>La aplicación consta de los siguientes elementos:</p>
+        <ul>
+            <li><strong>Campo "Directorio":</strong> Para especificar la ruta de una carpeta con imágenes.</li>
+            <li><strong>Campo "Imagen":</strong> Para especificar la ruta de un archivo de imagen individual.</li>
+            <li><strong>Botón "Examinar":</strong> Permite seleccionar el directorio mediante un explorador de archivos.</li>
+            <li><strong>Botón "Examinar Archivo":</strong> Permite seleccionar una imagen específica.</li>
+            <li><strong>Área de Log:</strong> Muestra información detallada sobre el procesamiento, incluyendo metadatos encontrados y progreso.</li>
+            <li><strong>Barra de Progreso:</strong> Indica el porcentaje de completitud del proceso.</li>
+            <li><strong>Botón "Eliminar Metadatos de Directorio":</strong> Inicia el procesamiento de todas las imágenes en el directorio seleccionado.</li>
+            <li><strong>Botón "Eliminar Metadatos de Imagen":</strong> Inicia el procesamiento de la imagen individual seleccionada.</li>
+            <li><strong>Botón "Limpiar":</strong> Borra el contenido del área de log.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Uso del Programa</h2>
+        <h3>Procesar un Directorio Completo</h3>
+        <ol>
+            <li>Haga clic en el botón "Examinar" junto al campo "Directorio".</li>
+            <li>Seleccione la carpeta que contiene las imágenes a procesar.</li>
+            <li>Haga clic en "Eliminar Metadatos de Directorio".</li>
+            <li>Observe el progreso en la barra y los logs.</li>
+        </ol>
+
+        <h3>Procesar una Imagen Individual</h3>
+        <ol>
+            <li>Haga clic en el botón "Examinar Archivo" junto al campo "Imagen".</li>
+            <li>Seleccione el archivo de imagen deseado.</li>
+            <li>Haga clic en "Eliminar Metadatos de Imagen".</li>
+            <li>Revise los logs para ver qué metadatos se han eliminado.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Información del Proceso</h2>
+        <p>Durante el procesamiento, el programa:</p>
+        <ul>
+            <li>Lee cada imagen y extrae la información EXIF presente.</li>
+            <li>Muestra en el log los metadatos encontrados (truncados si son muy largos).</li>
+            <li>Elimina todos los metadatos EXIF de la imagen.</li>
+            <li>Sobrescribe el archivo original sin los metadatos.</li>
+        </ul>
+        <p><strong>Nota:</strong> El proceso modifica directamente los archivos originales. No se crean copias de respaldo automáticas.</p>
+    </div>
+
+    <div class="section highlight">
+        <h2>Advertencias Importantes</h2>
+        <ul>
+            <li><strong>Copia de Seguridad:</strong> Antes de procesar imágenes importantes, cree una copia de respaldo de sus archivos.</li>
+            <li><strong>Procesamiento Destructivo:</strong> Una vez eliminados, los metadatos no se pueden recuperar. Los archivos se modifican in situ.</li>
+            <li><strong>Imágenes Grandes:</strong> Para directorios con muchas imágenes, el proceso puede tomar tiempo considerable.</li>
+            <li><strong>Permisos:</strong> Asegúrese de tener permisos de escritura en el directorio o archivo seleccionado.</li>
+            <li><strong>Archivos No Validos:</strong> Solo se procesan archivos con extensiones de imagen válidas. Otros archivos en el directorio son ignorados.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Solución de Problemas</h2>
+        <h3>Errores Comunes</h3>
+        <ul>
+            <li><strong>"Directorio no existe":</strong> Verifique que la ruta del directorio sea correcta.</li>
+            <li><strong>"Archivo no existe":</strong> Verifique que el archivo seleccionado esté disponible y accesible.</li>
+            <li><strong>"Error de permisos":</strong> Ejecute el programa con permisos administrativos si es necesario.</li>
+            <li><strong>"Módulo no encontrado":</strong> Verifique que las dependencias estén correctamente instaladas.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Licencia y Derechos de Autor</h2>
+        <p>Este script es software de código abierto distribuido bajo la licencia MIT. Puede ser modificado y distribuido libremente, siempre que se mantenga la atribución original.</p>
+    </div>
+
+    <div class="section">
+        <h2>Contacto y Soporte</h2>
+        <p>Para reportar errores o solicitar mejoras, consulte la documentación del proyecto o contacte al desarrollador.</p>
+        <p><em>Versión del manual: 1.0</em></p>
+        <p><em>Última actualización: Septiembre 2025</em></p>
+    </div>
+
+    <div class="section">
+        <h2>Código Fuente</h2>
+        <p>A continuación se proporciona el código completo del script en Python:</p>
+        <button onclick="copyCode()">Copiar Código</button>
+        <pre><code class="language-python" id="python-code">import os
+import sys
+from PySide6.QtWidgets import (
+    QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
+    QPushButton, QFileDialog, QTextEdit, QProgressBar
+)
+from PySide6.QtCore import Qt, QThread, Signal
+from PIL import Image, ExifTags
+
+
+class RemoveMetadataThread(QThread):
+    progress = Signal(int)
+    log = Signal(str)
+
+    def __init__(self, files, directory_name="directorios"):
+        super().__init__()
+        self.files = files
+        self.directory_name = directory_name
+
+    def run(self):
+        total_files = len(self.files)
+
+        if total_files == 0:
+            self.log.emit("No se encontraron imágenes.")
+            return
+
+        self.log.emit(f"Encontradas {total_files} imágenes en {self.directory_name}. Procesando...")
+
+        for i, filepath in enumerate(self.files):
+            filename = os.path.basename(filepath)
+            try:
+                self.log.emit(f"Procesando: {filename}")
+                with Image.open(filepath) as img:
+                    # Extraer metadatos EXIF
+                    exif_data = {}
+                    exif = img._getexif()
+                    if exif:
+                        for tag, value in exif.items():
+                            tag_name = ExifTags.TAGS.get(tag, tag)
+                            exif_data[tag_name] = value
+
+                    if exif_data:
+                        self.log.emit("Metadatos encontrados:")
+                        for k, v in exif_data.items():
+                            v_str = str(v)
+                            if len(v_str) > 50:
+                                v_str = v_str[:50] + "..."
+                            self.log.emit(f"  {k}: {v_str}")
+                    else:
+                        self.log.emit("Sin metadatos EXIF encontrados.")
+
+                    # Eliminar metadatos
+                    img.save(filepath, exif=b'')
+                    self.log.emit("Metadatos eliminados.")
+                self.log.emit("-" * 40)
+            except Exception as e:
+                self.log.emit(f"Error procesando {filename}: {str(e)}")
+                self.log.emit("-" * 40)
+            self.progress.emit(int((i + 1) / total_files * 100))
+
+        self.log.emit("Proceso completado.")
+
+
+class MetadataRemoverApp(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Eliminar Metadatos de Imágenes")
+        self.setGeometry(300, 300, 600, 400)
+
+        layout = QVBoxLayout()
+
+        # Etiqueta y campo para el directorio
+        dir_layout = QHBoxLayout()
+        dir_layout.addWidget(QLabel("Directorio:"))
+        self.dir_edit = QLineEdit()
+        dir_layout.addWidget(self.dir_edit)
+        browse_btn = QPushButton("Examinar")
+        browse_btn.clicked.connect(self.browse_directory)
+        dir_layout.addWidget(browse_btn)
+        layout.addLayout(dir_layout)
+
+        # Etiqueta y campo para imagen suelta
+        file_layout = QHBoxLayout()
+        file_layout.addWidget(QLabel("Imagen:"))
+        self.file_edit = QLineEdit()
+        file_layout.addWidget(self.file_edit)
+        browse_file_btn = QPushButton("Examinar Archivo")
+        browse_file_btn.clicked.connect(self.browse_file)
+        file_layout.addWidget(browse_file_btn)
+        layout.addLayout(file_layout)
+
+        # Área de log
+        self.log_text = QTextEdit()
+        self.log_text.setReadOnly(True)
+        layout.addWidget(self.log_text)
+
+        # Barra de progreso
+        self.progress_bar = QProgressBar()
+        layout.addWidget(self.progress_bar)
+
+        # Botones
+        btn_layout = QHBoxLayout()
+        self.process_btn = QPushButton("Eliminar Metadatos de Directorio")
+        self.process_btn.clicked.connect(self.remove_metadata_directory)
+        btn_layout.addWidget(self.process_btn)
+        self.process_file_btn = QPushButton("Eliminar Metadatos de Imagen")
+        self.process_file_btn.clicked.connect(self.remove_metadata_file)
+        btn_layout.addWidget(self.process_file_btn)
+        self.clear_btn = QPushButton("Limpiar")
+        self.clear_btn.clicked.connect(self.clear_log)
+        btn_layout.addWidget(self.clear_btn)
+        layout.addLayout(btn_layout)
+
+        self.setLayout(layout)
+
+        # Hilo para procesamiento
+        self.thread = None
+
+    def browse_directory(self):
+        directory = QFileDialog.getExistingDirectory(self, "Seleccionar Directorio")
+        if directory:
+            self.dir_edit.setText(directory)
+
+    def browse_file(self):
+        file_path, _ = QFileDialog.getOpenFileName(self, "Seleccionar Imagen", "", "Imágenes (*.jpg *.jpeg *.png *.bmp *.tiff *.tif)")
+        if file_path:
+            self.file_edit.setText(file_path)
+
+    def remove_metadata_directory(self):
+        directory = self.dir_edit.text().strip()
+        if not directory:
+            self.log_text.append("Por favor, selecciona un directorio.")
+            return
+
+        if not os.path.isdir(directory):
+            self.log_text.append(f"El directorio '{directory}' no existe.")
+            return
+
+        image_extensions = {'.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.tif'}
+        files = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.splitext(f)[1].lower() in image_extensions]
+
+        self.process_btn.setEnabled(False)
+        self.process_file_btn.setEnabled(False)
+        self.log_text.clear()
+        self.progress_bar.setValue(0)
+
+        self.thread = RemoveMetadataThread(files, os.path.basename(directory))
+        self.thread.progress.connect(self.progress_bar.setValue)
+        self.thread.log.connect(self.log_text.append)
+        self.thread.finished.connect(self.enable_buttons)
+        self.thread.start()
+
+    def remove_metadata_file(self):
+        file_path = self.file_edit.text().strip()
+        if not file_path:
+            self.log_text.append("Por favor, selecciona una imagen.")
+            return
+
+        if not os.path.isfile(file_path):
+            self.log_text.append(f"El archivo '{file_path}' no existe.")
+            return
+
+        image_extensions = {'.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.tif'}
+        if os.path.splitext(file_path)[1].lower() not in image_extensions:
+            self.log_text.append(f"El archivo '{file_path}' no es una imagen soportada.")
+            return
+
+        self.process_btn.setEnabled(False)
+        self.process_file_btn.setEnabled(False)
+        self.log_text.clear()
+        self.progress_bar.setValue(0)
+
+        self.thread = RemoveMetadataThread([file_path], "imagen suelta")
+        self.thread.progress.connect(self.progress_bar.setValue)
+        self.thread.log.connect(self.log_text.append)
+        self.thread.finished.connect(self.enable_buttons)
+        self.thread.start()
+
+    def clear_log(self):
+        self.log_text.clear()
+
+    def enable_buttons(self):
+        self.process_btn.setEnabled(True)
+        self.process_file_btn.setEnabled(True)
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = MetadataRemoverApp()
+    window.show()
+    sys.exit(app.exec())
+</code></pre>
+    </div>
+
+    <footer style="text-align: center; margin-top: 20px; padding: 20px; border-top: 1px solid #444; color: #cccccc;">
+        <p><a href="pildoras.html" style="color: #66b3ff;">Volver a Pildoras</a></p>
+    </footer>
+
+    <script>
+        function copyCode() {
+            const codeElement = document.getElementById('python-code');
+            const text = codeElement.textContent || codeElement.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Código copiado al portapapeles');
+            }, function(err) {
+                console.error('Error al copiar: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metadatos en Imágenes: Riesgos y Protección</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: normal;
+        }
+
+        .intro {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            font-size: 1.1rem;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2c3e50;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #34495e;
+            margin: 20px 0 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        ul, ol {
+            padding-left: 30px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .risk-box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #f9f9f9;
+        }
+
+        .solution-box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #f9f9f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border: 1px solid #000;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #000;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .warning {
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            section, .intro {
+                padding: 15px;
+            }
+
+            th, td {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Metadatos en Imágenes: La Información Invisible que Compromete tu Seguridad</h1>
+            <p class="subtitle">Descubre los riesgos de ciberseguridad asociados a los metadatos EXIF y aprende a proteger tu privacidad</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="intro">
+            <p>Los archivos de imagen que manejamos diariamente contienen mucha más información de la que apreciamos a simple vista. Esta "información sobre la información", conocida como metadatos, puede convertirse en una <strong>grave vulnerabilidad de ciberseguridad</strong> si no se gestiona adecuadamente. En este artículo exploraremos los riesgos asociados y cómo protegerte eficazmente.</p>
+        </div>
+        
+        <section>
+            <h2>¿Qué son los metadatos y qué información contienen?</h2>
+            <p>Los metadatos son <strong>datos incorporados en los archivos</strong> que describen sus características y origen. En las imágenes, especialmente en formatos como JPEG, TIFF o RAW, se almacenan bajo el estándar <strong>EXIF (Exchangeable Image File Format)</strong>.</p>
+            
+            <p>Esta información incluye:</p>
+            <ul>
+                <li><strong>Datos técnicos</strong>: modelo de cámara o smartphone, configuración de la toma (velocidad de obturación, apertura, ISO)</li>
+                <li><strong>Datos de autoría</strong>: autor, copyright, software de edición utilizado</li>
+                <li><strong>Datos temporales y geográficos</strong>: fecha y hora exactas de captura, y <strong>coordenadas GPS</strong> si la geolocalización está activada</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Riesgos de Ciberseguridad Asociados a los Metadatos</h2>
+            
+            <div class="risk-box">
+                <h3>Exposición de Información Sensible</h3>
+                <p>La información geolocalizadora puede revelar <strong>patrones de movimiento, domicilios o lugares de trabajo</strong>, datos explotables para robos, acoso o ingeniería social. El caso más conocido ocurrió en 2012 cuando una foto publicada por la revista Vice reveló mediante sus metadatos la <strong>ubicación exacta de John McAfee</strong>, entonces fugitivo, lo que condujo a su captura.</p>
+            </div>
+            
+            <div class="risk-box">
+                <h3>Ataques de Ingeniería Social</h3>
+                <p>Los metadatos proporcionan a los atacantes información detallada para personalizar ataques de phishing. Conocer el <strong>modelo de cámara o software</strong> usado permite crear mensajes falsos muy convincentes, como correos supuestamente del "soporte técnico" del dispositivo, incitando a hacer clic en enlaces maliciosos.</p>
+            </div>
+            
+            <div class="risk-box">
+                <h3>Canal de Exfiltración de Datos</h3>
+                <p>Técnicas avanzadas de esteganografía permiten <strong>ocultar información maliciosa o confidencial</strong> dentro de los metadatos. Herramientas como <strong>Metathief</strong> demuestran cómo se pueden extraer secretos corporativos escondiendo datos en campos como "Comentarios" de archivos PDF o imágenes que parecen inocentes.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Cómo Mitigar la Exposición de Metadatos</h2>
+            
+            <h3>Para Usuarios Individuales</h3>
+            <div class="solution-box">
+                <ul>
+                    <li><strong>Eliminación antes de compartir</strong>: Utiliza herramientas como <strong>EXIFTool</strong> (avanzada) o <strong>Exifcleaner</strong> (para varios formatos). En móviles, apps como <strong>Scrambled Exif</strong> (Android) o <strong>MetaX</strong> (iOS) eliminan estos datos fácilmente.</li>
+                    <li><strong>Desactivar la geolocalización</strong>: Accede a los ajustes de tu cámara o smartphone y <strong>desactiva la opción de guardar ubicación</strong> en las fotos.</li>
+                    <li><strong>Cuidado con la nube</strong>: Servicios como Google Drive o Dropbox <strong>preservan los metadatos</strong> por defecto. Elimínalos antes de subir los archivos.</li>
+                </ul>
+            </div>
+            
+            <h3>Para Organizaciones</h3>
+            <div class="solution-box">
+                <ul>
+                    <li><strong>Políticas de limpieza</strong>: Establece protocolos obligatorios para <strong>eliminar metadatos</strong> de todos los documentos e imágenes antes de su distribución externa.</li>
+                    <li><strong>Herramientas empresariales</strong>: Implementa soluciones de <strong>Prevención de Pérdida de Datos (DLP)</strong> que puedan escanear y limpiar metadatos automáticamente en los flujos de trabajo.</li>
+                    <li><strong>Concienciación y formación</strong>: Capacita a los empleados sobre los <strong>riesgos de compartir archivos sin revisar</strong> y el uso correcto de las herramientas de limpieza.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section>
+            <h2>¿Cómo Tratan los Metadatos las Redes Sociales?</h2>
+            <p>Las principales plataformas sociales, conscientes del riesgo, suelen <strong>eliminar o reescribir la mayoría de los metadatos</strong> EXIF por defecto como medida de protección de la privacidad de sus usuarios.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Plataforma</th>
+                        <th>Tratamiento de Metadatos EXIF</th>
+                        <th>Consideraciones Adicionales</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Facebook</strong></td>
+                        <td><strong>Elimina los metadatos</strong> técnicos y de geolocalización de la imagen subida.</td>
+                        <td>Recolecta información sobre el contenido para mejorar sus servicios, según su política de privacidad.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Twitter (X)</strong></td>
+                        <td><strong>Elimina los metadatos</strong> de las imágenes tanto en la versión web como móvil.</td>
+                        <td>La política de privacidad indica que obtienen datos de localización del usuario por otros medios.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Instagram</strong></td>
+                        <td><strong>Evita el acceso público</strong> a los metadatos EXIF originales al no permitir la descarga directa de imágenes en su versión de escritorio.</td>
+                        <td>Como parte de Meta (Facebook), es probable que aplique un tratamiento similar al de su plataforma hermana.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="warning">
+                <p><strong>⛔️ Importante</strong>: Esta eliminación ocurre generalmente en las visualizaciones públicas o al descargar la imagen desde la plataforma. La empresa <strong>podría conservar internamente</strong> parte de esa metadata, como indica la política de privacidad de Facebook. Además, plataformas como <strong>Flickr o Tumblr</strong>, orientadas a fotógrafos, sí pueden preservar los metadatos EXIF técnicos. Servicios de almacenamiento en la nube como <strong>Google Drive o Dropbox no alteran</strong> los archivos, por lo que los metadatos permanecen accesibles para quien tenga el enlace.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Conclusión</h2>
+            <p>Gestionar los metadatos ya no es una opción técnica, sino una <strong>necesidad de seguridad crítica</strong>. Para una protección integral, adopta una <strong>doble estrategia</strong>: eliminar sistemáticamente los metadatos antes de compartir cualquier archivo y mantener desactivada la geolocalización en la cámara. Comprender y controlar esta información oculta es fundamental para proteger tu privacidad y seguridad en el entorno digital.</p>
+        </section>
+        
+        <footer>
+            <p>Artículo informativo sobre metadatos y ciberseguridad | © Nito 2025</p>
+            <p><a href="./pildoras.html">Volver a las Píldoras</a></p>
+        </footer>
+    </div>
+</body>
+</html>

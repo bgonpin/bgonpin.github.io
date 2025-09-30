@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📋 SOC OLLAMA - Documentación Completa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #1a1a1a;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .header .version {
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .section {
+            background: #2d2d2d;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            border: 1px solid #404040;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 25px;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .section:nth-child(2) .section-header {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+        }
+
+        .section:nth-child(3) .section-header {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+        }
+
+        .section:nth-child(4) .section-header {
+            background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+        }
+
+        .section:nth-child(5) .section-header {
+            background: linear-gradient(135deg, #607D8B, #455A64);
+        }
+
+        .section-content {
+            padding: 30px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: #3a3a3a;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #4CAF50;
+            border: 1px solid #505050;
+        }
+
+        .info-card h3 {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info-card p {
+            color: #b0b0b0;
+            margin-bottom: 10px;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            background: rgba(76, 175, 80, 0.1);
+            margin: 8px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li::before {
+            content: "✅";
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .warning {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid #FF9800;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .error {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .success {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .requirements-list {
+            background: #3a3a3a;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px solid #505050;
+        }
+
+        .requirements-list h4 {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+
+        .requirements-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .requirements-list li {
+            margin: 8px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #505050;
+            color: #b0b0b0;
+        }
+
+        .requirements-list li:last-child {
+            border-bottom: none;
+        }
+
+        .architecture-diagram {
+            background: #3a3a3a;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid #505050;
+        }
+
+        .architecture-diagram pre {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #e0e0e0;
+        }
+
+        .nav-links {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-links a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                position: static;
+                transform: none;
+                margin: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navegación -->
+        <nav class="nav-links">
+            <a href="#instalacion">📦 Instalación</a>
+            <a href="#caracteristicas">✨ Características</a>
+            <a href="#elementos">🏗️ Elementos</a>
+            <a href="#empleo">📖 Empleo</a>
+            <a href="#arquitectura">🏛️ Arquitectura</a>
+        </nav>
+
+        <!-- Header -->
+        <header class="header">
+            <h1>🔍 SOC OLLAMA</h1>
+            <p class="subtitle">Sistema Avanzado de Análisis de Logs con Inteligencia Artificial</p>
+            <div class="version">Versión 1.0</div>
+        </header>
+
+        <!-- Sección 1: Instalación -->
+        <section class="section" id="instalacion">
+            <div class="section-header">
+                📦 Instalación del Proyecto
+            </div>
+            <div class="section-content">
+                <h2>Prerrequisitos del Sistema</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🖥️ Requisitos de Software</h3>
+                        <p><strong>Python:</strong> 3.8 o superior</p>
+                        <p><strong>Sistema Operativo:</strong> Linux, macOS o Windows</p>
+                        <p><strong>Ollama:</strong> Ejecutándose en puerto 11434</p>
+                        <p><strong>MongoDB:</strong> Ejecutándose en puerto 27017</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🔧 Dependencias Principales</h3>
+                        <div class="requirements-list">
+                            <h4>Dependencias Core:</h4>
+                            <ul>
+                                <li><code>requests>=2.28.0</code> - Comunicación HTTP con Ollama API</li>
+                                <li><code>PyYAML>=6.0</code> - Manejo de configuración YAML</li>
+                                <li><code>pymongo>=4.3.0</code> - Integración con MongoDB</li>
+                                <li><code>PySide6>=6.4.0</code> - Framework para interfaz gráfica</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>🚀 Proceso de Instalación</h2>
+
+                <h3>Paso 1: Instalación de Ollama</h3>
+                <div class="code-block">
+# Instalar Ollama (Ubuntu/Debian)<br>
+curl -fsSL https://ollama.ai/install.sh | sh<br>
+<br>
+# Descargar modelo de IA requerido<br>
+ollama pull mistral:latest
+                </div>
+
+                <h3>Paso 2: Instalación de MongoDB</h3>
+                <div class="code-block">
+# Ubuntu/Debian<br>
+sudo apt-get install mongodb<br>
+sudo systemctl start mongodb<br>
+<br>
+# Verificar estado<br>
+sudo systemctl status mongodb
+                </div>
+
+                <h3>Paso 3: Instalación de Python y Dependencias</h3>
+                <div class="code-block">
+# Instalar Python 3.8+ (si no está instalado)<br>
+sudo apt-get install python3 python3-pip<br>
+<br>
+# Instalar dependencias del proyecto<br>
+pip install -r requirements.txt<br>
+<br>
+# Verificar instalación<br>
+python3 -c "import requests, yaml, pymongo, PySide6; print('✅ Todas las dependencias instaladas correctamente')"
+                </div>
+
+                <h3>Paso 4: Configuración Inicial</h3>
+                <div class="code-block">
+# Editar archivo de configuración<br>
+nano config.yml<br>
+<br>
+# Archivo config.yml básico:<br>
+log_sources:<br>
+  mode: "auto"<br>
+  paths: []<br>
+<br>
+model:<br>
+  name: "mistral:latest"<br>
+  timeout: 120<br>
+<br>
+anomaly_detection:<br>
+  batch_size: 10<br>
+  cooldown_seconds: 15<br>
+<br>
+output:<br>
+  alerts_dir: "./alerts"<br>
+  mongodb:<br>
+    host: "localhost"<br>
+    port: 27017<br>
+    database: "soc_logs"<br>
+    collection: "log_anomalies"
+                </div>
+
+                <div class="success">
+                    <strong>✅ Instalación Completa:</strong> El sistema SOC OLLAMA está listo para usar. Puede iniciar la interfaz gráfica con <code>python gui_log_analyzer.py</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 2: Características -->
+        <section class="section" id="caracteristicas">
+            <div class="section-header">
+                ✨ Características del Sistema
+            </div>
+            <div class="section-content">
+                <h2>Funcionalidades Principales</h2>
+
+                <h3>🔍 Análisis Inteligente de Logs</h3>
+                <ul class="feature-list">
+                    <li><strong>Detección con IA:</strong> Utiliza modelos de Ollama para identificar anomalías de seguridad y actividades sospechosas</li>
+                    <li><strong>Procesamiento Multi-Fuente:</strong> Escanea automáticamente /var/log y subdirectorios para cobertura completa</li>
+                    <li><strong>Monitoreo en Tiempo Real:</strong> Análisis continuo con períodos de cooldown configurables</li>
+                    <li><strong>Procesamiento por Lotes:</strong> Procesamiento eficiente de grandes volúmenes de logs con tamaños de lote personalizables</li>
+                </ul>
+
+                <h3>🎨 Interfaz de Usuario Avanzada</h3>
+                <ul class="feature-list">
+                    <li><strong>GUI PySide6:</strong> Interfaz gráfica moderna y responsiva con tema oscuro elegante</li>
+                    <li><strong>Panel de Tiempo Real:</strong> Monitoreo de logs en vivo y visualización de anomalías</li>
+                    <li><strong>Navegador de Datos Históricos:</strong> Capacidades avanzadas de filtrado y búsqueda de anomalías pasadas</li>
+                    <li><strong>Panel de Estadísticas:</strong> Métricas completas e indicadores de rendimiento del sistema</li>
+                </ul>
+
+                <h3>💾 Gestión Avanzada de Datos</h3>
+                <ul class="feature-list">
+                    <li><strong>Integración MongoDB:</strong> Almacenamiento escalable para logs y anomalías con consultas avanzadas</li>
+                    <li><strong>Formateo de Alertas:</strong> Reportes de alertas profesionales con formato de caja Unicode</li>
+                    <li><strong>Exportación JSON:</strong> Exportación estructurada de datos para integración con otras herramientas de seguridad</li>
+                    <li><strong>Deduplicación:</strong> Deduplicación de logs basada en SHA512 para evitar procesamiento redundante</li>
+                </ul>
+
+                <h3>🔧 Configuración y Personalización</h3>
+                <ul class="feature-list">
+                    <li><strong>Configuración YAML:</strong> Archivo de configuración fácil de modificar</li>
+                    <li><strong>Múltiples Fuentes de Logs:</strong> Soporte para auth.log, syslog, kern.log y archivos personalizados</li>
+                    <li><strong>Modelos de IA Personalizables:</strong> Soporte para diferentes modelos de Ollama</li>
+                    <li><strong>Arquitectura Extensible:</strong> Diseño basado en módulos para fácil adición de características</li>
+                </ul>
+
+                <h2>🛡️ Capacidades de Seguridad</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🔐 Detección de Amenazas</h3>
+                        <p>• Intentos de autenticación fallidos</p>
+                        <p>• Ataques de fuerza bruta</p>
+                        <p>• Actividades sospechosas de red</p>
+                        <p>• Anomalías del sistema</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📊 Monitoreo Continuo</h3>
+                        <p>• Análisis en tiempo real</p>
+                        <p>• Alertas automáticas</p>
+                        <p>• Seguimiento de métricas</p>
+                        <p>• Reportes detallados</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 3: Elementos del Proyecto -->
+        <section class="section" id="elementos">
+            <div class="section-header">
+                🏗️ Elementos y Componentes
+            </div>
+            <div class="section-content">
+                <h2>Estructura del Proyecto</h2>
+
+                <h3>📁 Archivos Principales</h3>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🔧 Archivos Core</h3>
+                        <p><strong>gui_log_analyzer.py</strong> - Aplicación GUI principal del sistema</p>
+                        <p><strong>realtime_log_analyzer.py</strong> - Interfaz de línea de comandos</p>
+                        <p><strong>log_file_scanner.py</strong> - Utilidad de descubrimiento de logs</p>
+                        <p><strong>alert_formatter.py</strong> - Formateo y visualización de alertas</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>⚙️ Archivos de Configuración</h3>
+                        <p><strong>config.yml</strong> - Configuración principal del sistema</p>
+                        <p><strong>prompt_template.txt</strong> - Plantilla de prompt para IA</p>
+                        <p><strong>requirements.txt</strong> - Dependencias de Python</p>
+                        <p><strong>README.md</strong> - Documentación del proyecto</p>
+                    </div>
+                </div>
+
+                <h3>🏛️ Arquitectura del Sistema</h3>
+                <div class="architecture-diagram">
+                    <pre>
+┌─────────────────────────────────────────────────────────────────┐
+│                    Sistema SOC OLLAMA                          │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐             │
+│  │   Interfaz  │  │   Línea de  │  │   Pruebas   │             │
+│  │   Gráfica   │  │   Comando   │  │   y Utils   │             │
+│  └─────────────┘  └─────────────┘  └─────────────┘             │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐             │
+│  │  Formateo   │  │   MongoDB   │  │   Ollama    │             │
+│  │   de        │  │   Handler   │  │     IA      │             │
+│  │  Alertas    │  └─────────────┘  └─────────────┘             │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐             │
+│  │  Escáner    │  │  Detección  │  │   Tiempo    │             │
+│  │   de Logs   │  │  de Patrones│  │    Real     │             │
+│  └─────────────┘  └─────────────┘  └─────────────┘             │
+├─────────────────────────────────────────────────────────────────┤
+│                   Fuentes de Logs del Sistema                  │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐             │
+│  │ /var/log/   │  │  Logs de    │  │   Logs      │             │
+│  │  auth.log   │  │  Servicios  │  │ Personaliz. │             │
+│  └─────────────┘  └─────────────┘  └─────────────┘             │
+└─────────────────────────────────────────────────────────────────┘
+                    </pre>
+                </div>
+
+                <h3>🔧 Componentes Clave</h3>
+
+                <h4>1. MongoDBHandler</h4>
+                <div class="code-block">
+class MongoDBHandler:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"""Manejador de conexiones MongoDB"""<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, config):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Configuración de conexión<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.config = config<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.client = None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.db = None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.collection = None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.connected = False<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def connect(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"""Conectar a MongoDB con configuración flexible"""<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def save_log_line(self, log_line, anomaly_data=None):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"""Guardar línea de log con hash SHA512 como _id"""<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def save_anomalies_batch(self, anomalies_list):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"""Guardar múltiples anomalías en MongoDB"""<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def load_anomalies(self, limit=100, filters=None, sort_by="timestamp", sort_order=-1):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"""Cargar anomalías históricas con filtros avanzados"""
+                </div>
+
+                <h4>2. LogAnalyzerThread</h4>
+                <div class="code-block">
+class LogAnalyzerThread(QThread):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"""Hilo separado para el análisis de logs"""<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super().__init__()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.running = False<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.mongodb = None<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def run(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"""Ciclo principal de análisis de logs"""<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 1. Escanear logs en busca de anomalías<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 2. Procesar líneas sospechosas en lotes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 3. Enviar a Ollama para análisis con IA<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 4. Guardar resultados en MongoDB<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 5. Emitir señales para actualización de GUI<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def scan_logs_for_anomalies(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"""Escanea todos los logs procesando línea a línea eficientemente"""
+                </div>
+
+                <h4>3. MainWindow (Interfaz Gráfica)</h4>
+                <div class="code-block">
+class MainWindow(QMainWindow):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"""Ventana principal de la aplicación"""<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super().__init__()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.analyzer_thread = None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.setup_ui()           # Configurar interfaz<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.setup_dark_theme()   # Aplicar tema oscuro<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def setup_ui(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"""Configurar la interfaz de usuario completa"""<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# - Menú de aplicación<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# - Barra de herramientas con controles<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# - Área de pestañas (Análisis, Anomalías, Configuración, Estadísticas)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# - Panel de información en tiempo real<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# - Lista de anomalías detectadas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# - Área de detalle de anomalías
+                </div>
+
+                <h3>📂 Estructura de Directorios</h3>
+                <div class="code-block">
+soc-ollama/<br>
+├── 📄 gui_log_analyzer.py      # Aplicación GUI principal<br>
+├── 📄 realtime_log_analyzer.py  # Interfaz de línea de comandos<br>
+├── 📄 log_file_scanner.py       # Utilidad de descubrimiento de logs<br>
+├── 📄 alert_formatter.py        # Formateo de alertas<br>
+├── 📄 test_alert_formatter.py   # Pruebas y validación<br>
+├── ⚙️ config.yml                # Configuración del sistema<br>
+├── 📋 prompt_template.txt       # Plantilla de prompt para IA<br>
+├── 📦 requirements.txt          # Dependencias de Python<br>
+├── 📖 README.md                 # Documentación del proyecto<br>
+├── 🐚 install_soc_ollama.sh     # Script de instalación Linux<br>
+├── 🪟 install_soc_ollama_windows.ps1 # Script de instalación Windows<br>
+└── 📁 alerts/                   # Directorio de alertas generadas
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 4: Empleo del Proyecto -->
+        <section class="section" id="empleo">
+            <div class="section-header">
+                📖 Empleo y Uso del Sistema
+            </div>
+            <div class="section-content">
+                <h2>Modos de Operación</h2>
+
+                <h3>🖥️ Interfaz Gráfica (Recomendada)</h3>
+                <div class="code-block">
+# Iniciar aplicación GUI<br>
+python gui_log_analyzer.py<br>
+<br>
+# La interfaz proporciona:<br>
+# ✅ Monitoreo de logs en tiempo real<br>
+# ✅ Navegador interactivo de anomalías<br>
+# ✅ Filtrado y búsqueda avanzada<br>
+# ✅ Panel de estadísticas y métricas<br>
+# ✅ Gestión de configuración integrada
+                </div>
+
+                <h3>💻 Interfaz de Línea de Comandos</h3>
+                <div class="code-block">
+# Uso básico<br>
+python realtime_log_analyzer.py<br>
+<br>
+# Con opciones específicas<br>
+python realtime_log_analyzer.py --gui  # Forzar modo GUI<br>
+python realtime_log_analyzer.py --help # Ver opciones disponibles
+                </div>
+
+                <h3>🔧 Utilidades Especializadas</h3>
+                <div class="code-block">
+# Escanear y listar archivos de log disponibles<br>
+python log_file_scanner.py<br>
+<br>
+# Probar formateador de alertas<br>
+python test_alert_formatter.py<br>
+<br>
+# Verificar configuración del sistema<br>
+python -c "import config; print('Sistema configurado correctamente')"
+                </div>
+
+                <h2>⚙️ Configuración Avanzada</h2>
+
+                <h3>Configuración de Fuentes de Logs</h3>
+                <div class="code-block">
+# Modo automático (recomendado)<br>
+log_sources:<br>
+&nbsp;&nbsp;mode: "auto"    # Descubrimiento automático en /var/log/<br>
+&nbsp;&nbsp;paths: []       # Dejar vacío para modo automático<br>
+<br>
+# Modo manual para fuentes específicas<br>
+log_sources:<br>
+&nbsp;&nbsp;mode: "manual"<br>
+&nbsp;&nbsp;paths:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- "/var/log/auth.log"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- "/var/log/syslog"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- "/var/log/apache2/access.log"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- "/ruta/custom/aplicacion.log"
+                </div>
+
+                <h3>Configuración de Modelos de IA</h3>
+                <div class="code-block">
+# Modelo por defecto<br>
+model:<br>
+&nbsp;&nbsp;name: "mistral:latest"<br>
+&nbsp;&nbsp;timeout: 120<br>
+<br>
+# Otros modelos disponibles<br>
+model:<br>
+&nbsp;&nbsp;name: "llama2:13b"      # Modelo más grande<br>
+&nbsp;&nbsp;timeout: 180            # Mayor timeout<br>
+<br>
+model:<br>
+&nbsp;&nbsp;name: "codellama:13b"   # Especializado en código<br>
+&nbsp;&nbsp;timeout: 200
+                </div>
+
+                <h3>Configuración de MongoDB</h3>
+                <div class="code-block">
+# Configuración básica<br>
+mongodb:<br>
+&nbsp;&nbsp;host: "localhost"<br>
+&nbsp;&nbsp;port: 27017<br>
+&nbsp;&nbsp;database: "soc_logs"<br>
+&nbsp;&nbsp;collection: "log_anomalies"<br>
+<br>
+# Con autenticación (producción)<br>
+mongodb:<br>
+&nbsp;&nbsp;host: "mongodb.empresa.com"<br>
+&nbsp;&nbsp;port: 27017<br>
+&nbsp;&nbsp;database: "soc_logs_prod"<br>
+&nbsp;&nbsp;collection: "log_anomalies"<br>
+&nbsp;&nbsp;username: "usuario_soc"<br>
+&nbsp;&nbsp;password: "contraseña_segura"
+                </div>
+
+                <h2>📊 Interpretación de Resultados</h2>
+
+                <h3>Tipos de Anomalías Detectadas</h3>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🔐 Seguridad</h3>
+                        <p>• Failed password for (intentos de login fallidos)</p>
+                        <p>• Authentication failure (fallos de autenticación)</p>
+                        <p>• SYN flood (ataques de denegación de servicio)</p>
+                        <p>• Port scan (escaneo de puertos)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>⚠️ Errores Críticos</h3>
+                        <p>• Segmentation fault (fallos de segmentación)</p>
+                        <p>• Out of memory (memoria insuficiente)</p>
+                        <p>• Kernel panic (pánico del kernel)</p>
+                        <p>• Service crashed (servicios caídos)</p>
+                    </div>
+                </div>
+
+                <h3>Niveles de Severidad</h3>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🔴 CRÍTICA</h3>
+                        <p>Requiere atención inmediata</p>
+                        <p>Posible compromiso del sistema</p>
+                        <p>Acción correctiva urgente</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🟠 ALTA</h3>
+                        <p>Investigación requerida</p>
+                        <p>Posible amenaza de seguridad</p>
+                        <p>Monitoreo continuo necesario</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🟡 MEDIA</h3>
+                        <p>Análisis recomendado</p>
+                        <p>Comportamiento inusual</p>
+                        <p>Seguimiento sugerido</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🔵 BAJA</h3>
+                        <p>Información</p>
+                        <p>Actividad normal del sistema</p>
+                        <p>Sin acción requerida</p>
+                    </div>
+                </div>
+
+                <h2>🛠️ Mantenimiento y Monitoreo</h2>
+
+                <h3>Comandos de Mantenimiento</h3>
+                <div class="code-block">
+# Verificar estado de servicios<br>
+sudo systemctl status mongodb ollama<br>
+<br>
+# Ver logs del sistema SOC OLLAMA<br>
+tail -f /var/log/syslog | grep soc-ollama<br>
+<br>
+# Backup de base de datos MongoDB<br>
+mongodump --db soc_logs --out /backup/soc_logs_$(date +%Y%m%d)<br>
+<br>
+# Restaurar backup<br>
+mongorestore --db soc_logs /backup/soc_logs_2024XXXX/
+                </div>
+
+                <h3>Monitoreo de Rendimiento</h3>
+                <div class="code-block">
+# Uso de recursos del proceso<br>
+ps aux | grep gui_log_analyzer.py<br>
+<br>
+# Espacio en disco usado por MongoDB<br>
+du -sh /var/lib/mongodb/<br>
+<br>
+# Logs generados por el sistema<br>
+ls -la alerts/ | wc -l  # Número de alertas
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Notas Importantes:</strong>
+                    <ul>
+                        <li>Ejecutar como usuario con permisos de lectura en /var/log/</li>
+                        <li>MongoDB debe estar ejecutándose antes de iniciar el análisis</li>
+                        <li>Ollama debe estar disponible en localhost:11434</li>
+                        <li>Configurar límites apropiados según recursos del sistema</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 5: Arquitectura Técnica -->
+        <section class="section" id="arquitectura">
+            <div class="section-header">
+                🏛️ Arquitectura Técnica Detallada
+            </div>
+            <div class="section-content">
+                <h2>Flujo de Trabajo del Sistema</h2>
+
+                <h3>1. 🚀 Inicialización del Sistema</h3>
+                <div class="code-block">
+MainWindow.__init__():<br>
+    ├── Crear hilo de análisis (LogAnalyzerThread)<br>
+    ├── Inicializar MongoDBHandler con configuración<br>
+    ├── Configurar interfaz gráfica con pestañas<br>
+    ├── Cargar configuración desde config.yml<br>
+    ├── Establecer conexiones de señales/slots<br>
+    └── Aplicar tema oscuro personalizado
+                </div>
+
+                <h3>2. 🔍 Proceso de Análisis de Logs</h3>
+                <div class="code-block">
+LogAnalyzerThread.run():<br>
+    ├── Bucle principal de análisis continuo<br>
+    ├── Escanear archivos de log línea por línea<br>
+    ├── Detectar patrones de anomalías conocidos<br>
+    ├── Procesar líneas sospechosas en lotes<br>
+    ├── Enviar lotes a Ollama para análisis con IA<br>
+    ├── Parsear respuestas JSON de Ollama<br>
+    ├── Guardar anomalías en MongoDB y archivos<br>
+    └── Emitir señales para actualización de GUI
+                </div>
+
+                <h3>3. 💾 Gestión de Datos</h3>
+                <div class="code-block">
+MongoDBHandler:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── Conexión segura con configuración flexible<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── Almacenamiento con hash SHA512 como _id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── Consultas avanzadas con filtros múltiples<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── Estadísticas agregadas por severidad/prioridad<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── Valores únicos para filtros dinámicos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── Manejo robusto de errores de conexión
+                </div>
+
+                <h3>4. 🎨 Interfaz de Usuario</h3>
+                <div class="code-block">
+Interfaz Gráfica (PySide6):<br>
+    ├── QMainWindow con diseño responsivo<br>
+    ├── QTabWidget con 4 pestañas principales:<br>
+    │   ├── Análisis: Información del sistema y logs en tiempo real<br>
+    │   ├── Anomalías: Lista y detalles de anomalías detectadas<br>
+    │   ├── Configuración: Editor de config.yml integrado<br>
+    │   └── Estadísticas: Métricas y gráficos de rendimiento<br>
+    ├── QListWidget con colores por severidad<br>
+    ├── QTextEdit para logs y detalles formateados<br>
+    └── QTimer para actualizaciones periódicas
+                </div>
+
+                <h2>🔄 Flujo de Datos Completo</h2>
+                <div class="architecture-diagram">
+                    <pre>
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ Fuentes de Logs │───▶│  Escáner de     │───▶│   Análisis     │
+│                 │    │  Logs           │    │   con IA       │
+│ /var/log/*      │    │                 │    │                 │
+│ auth.log        │    │ - Patrón matching│    │ - Ollama API   │
+│ syslog          │    │ - Línea por línea│    │ - Modelo Mistral│
+│ Aplicaciones    │    │ - Deduplicación │    │ - JSON Parsing │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   MongoDB       │◀───│   Formateo     │◀───│   Interfaz     │
+│                 │    │   de Alertas   │    │   Gráfica      │
+│ Almacenamiento  │    │                 │    │                 │
+│ Consultas       │    │ - Unicode boxes │    │ - Tiempo Real  │
+│ Estadísticas    │    │ - Colores       │    │ - Filtros      │
+│ Filtros         │    │ - Detalles      │    │ - Estadísticas │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                </pre>
+                </div>
+
+                <h2>🛡️ Estrategias de Seguridad Implementadas</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🔐 Autenticación y Autorización</h3>
+                        <p>• Hash SHA512 para identificación única de logs</p>
+                        <p>• Validación de fuentes de datos</p>
+                        <p>• Sanitización de entradas</p>
+                        <p>• Manejo seguro de credenciales</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🛡️ Protección de Datos</h3>
+                        <p>• Encriptación de comunicaciones</p>
+                        <p>• Validación de respuestas de IA</p>
+                        <p>• Backup automático de datos críticos</p>
+                        <p>• Logs de auditoría del sistema</p>
+                    </div>
+                </div>
+
+                <h2>📈 Métricas y Monitoreo</h2>
+                <div class="code-block">
+# Métricas principales monitoreadas:<br>
+- Número de ciclos de análisis completados<br>
+- Anomalías detectadas por severidad<br>
+- Tiempo de respuesta de Ollama<br>
+- Uso de recursos del sistema<br>
+- Espacio de almacenamiento utilizado<br>
+- Tasa de falsos positivos/negativos<br>
+- Tiempo de actividad del sistema<br>
+- Número de archivos de log procesados
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <h3>🔍 SOC OLLAMA - Sistema Avanzado de Análisis de Logs</h3>
+            <p>Desarrollado con ❤️ para la comunidad de ciberseguridad</p>
+            <p>Versión 1.0 | Compatible con Python 3.8+ | Tecnologías: PySide6, Ollama, MongoDB</p>
+            <p>SOC Nito 2025. Licencia MIT</p>
+            <p><a href="../proyectos/proyectos.html" style="color: #4CAF50; text-decoration: none;">← Volver a Proyectos</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Funcionalidad básica de navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Agregar efecto de aparición al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar todas las secciones
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
